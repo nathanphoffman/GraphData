@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Vite / tooling caches
+.vite/
+.cache/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Python (data scripts)
+__pycache__/
+*.pyc
+.venv/
+
+# LibreOffice lock and temp files (spreadsheets edited alongside the project)
+.~lock.*
+*.tmp
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

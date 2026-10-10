@@ -1,0 +1,22 @@
+{
+  "note": "TIOBE ratings (%) from the December 2019 snapshot of tiobe.com/tiobe-index. The spreadsheet has no 2019 TIOBE column and its other years are September values. Replace with September 2019 values if found. Zig was not listed.",
+  "ratings": {
+    "Python": 10.308,
+    "Java": 17.253,
+    "JavaScript": 2.09,
+    "C++": 6.196,
+    "C": 16.086,
+    "C#": 4.801,
+    "TypeScript": 0.281,
+    "Go": 0.995,
+    "Rust": 0.37,
+    "PHP": 2.048,
+    "Kotlin": 0.377,
+    "Assembly": 1.067,
+    "Swift": 1.49,
+    "Ruby": 1.314,
+    "R": 0.995,
+    "Lua": 0.304,
+    "Dart": 0.812
+  }
+}
