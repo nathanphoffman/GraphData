@@ -4,6 +4,7 @@ import EconomicSystemsMap from "./economic-systems-map/EconomicSystemsMap";
 import NeuronIntelligence from "./neuron-intelligence/NeuronIntelligence";
 import RuleOfAuthorship from "./rule-of-authorship/RuleOfAuthorship";
 import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
+import DndSales from "./dnd-sales/DndSales";
 
 export interface ChartEntry {
   /** URL slug, e.g. #/chart/language-outlook */
@@ -51,6 +52,13 @@ export const charts: ChartEntry[] = [
     description:
       "A two-axis map of economic systems (orientation vs. size of power) with a band of historical stability, the U.S. 1865-present, and where well-known figures sit.",
     component: EconomicSystemsMap,
+  },
+  {
+    id: "dnd-sales",
+    title: "DND Sales over Time",
+    description:
+      "Estimated lifetime Player's Handbook sales for each edition of D&D, from OD&D to the 2024 (5.5e) rules, with confidence ranges and sources.",
+    component: DndSales,
   },
 ];
 

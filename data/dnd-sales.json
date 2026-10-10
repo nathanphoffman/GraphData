@@ -1,0 +1,64 @@
+{
+ "title": "D&D Sales over Time",
+ "unit": "Estimated lifetime Player's Handbook copies sold, all channels, millions",
+ "asOf": "October 2026",
+ "editions": [
+  {
+   "id": "odnd", "name": "OD&D", "year": 1974, "low": 0.05, "best": 0.1, "high": 0.15, "confidence": "guess",
+   "note": "Tiny hobbyist print runs of the 1974 boxed set; no hard data found, so this is a rough guess.",
+   "sources": []
+  },
+  {
+   "id": "basic", "name": "Basic D&D", "year": 1977, "low": 3, "best": 5, "high": 8, "confidence": "medium",
+   "note": "Not a PHB; this is all Basic sets combined (Holmes, Moldvay, Mentzer, Black Box). Ben Riggs' TSR data has Basic at 500-700K/yr in the early 1980s, and it outsold the AD&D PHB+DMG combined for four years. 'Tens of millions' claims online are unsourced.",
+   "sources": ["enworld-basic-600k"]
+  },
+  {
+   "id": "1e", "name": "AD&D 1e", "year": 1978, "low": 0.4, "best": 1.0, "high": 2.0, "confidence": "low",
+   "note": "Riggs: PHB+DMG 'just above 750,000' combined in his TSR figures. Forum estimates put the PHB alone at 1.5M and a reader claims nearly 2M, both unsourced.",
+   "sources": ["alphastream", "enworld-5e-phb-thread"]
+  },
+  {
+   "id": "2e", "name": "AD&D 2e", "year": 1989, "low": 0.75, "best": 1.0, "high": 1.5, "confidence": "low",
+   "note": "Ryan Dancey (via forums): TSR sold 289,000 2e PHBs in 1998 alone. A YouTuber estimate cited on ENWorld says 750K lifetime.",
+   "sources": ["enworld-dancey", "enworld-5e-phb-thread"]
+  },
+  {
+   "id": "3e", "name": "3e", "year": 2000, "low": 0.5, "best": 0.7, "high": 1.0, "confidence": "medium",
+   "note": "WotC: the three core books passed 1M combined within about two years (roughly 300K each); Dancey: 300K PHBs in the first 30 days. Acaeum estimate of 150-200K PHBs/yr across the 3e era.",
+   "sources": ["enworld-dancey"]
+  },
+  {
+   "id": "3.5e", "name": "3.5e", "year": 2003, "low": 0.3, "best": 0.6, "high": 1.0, "confidence": "low",
+   "note": "Older recollection puts 3.5 at roughly 250-350K overall, but the 5e PHB sold 10x the 3.5 PHB in big-box channels alone, which implies hobby-store sales made up much of it.",
+   "sources": ["enworld-5e-lifetime"]
+  },
+  {
+   "id": "4e", "name": "4e", "year": 2008, "low": 0.2, "best": 0.4, "high": 0.8, "confidence": "low",
+   "note": "WotC court filings say 'hundreds of thousands'. Forum guesses range from 200K to under 800K. WotC never released totals.",
+   "sources": ["enworld-4e-court", "enworld-5e-phb-thread"]
+  },
+  {
+   "id": "5e", "name": "5e (2014)", "year": 2014, "low": 1.6, "best": 4.0, "high": 6.0, "confidence": "medium",
+   "note": "Floor: 1.56-1.6M PHBs through BookScan alone (US big-box/Amazon, mid-2023). BookScan is estimated at 23-34% to 85% of total depending on who you ask, so the true figure is higher; Teos Abadia's math implies 4.5-6M. Best guess is 4M for the 2014 book.",
+   "sources": ["alphastream", "enworld-5e-lifetime", "enworld-teos"]
+  },
+  {
+   "id": "5.5e", "name": "5.5e (2024)", "year": 2024, "low": 0.8, "best": 2.0, "high": 3.5, "confidence": "low",
+   "note": "In progress. BookScan saw only 3,773 US copies in launch week, but BookScan misses most hobby stores. WotC says the English PHB sold in one month what the 2014 PHB took nearly two years to sell, and 'strongest-ever start for D&D books' (Hasbro, Q3 2025). No lifetime numbers published; this is a guess.",
+   "sources": ["icv2-3773", "enworld-2024-core", "wotc-polygon"]
+  }
+ ],
+ "sources": {
+  "alphastream": {"label": "Alphastream: How D&D Sells (BookScan + Ben Riggs)", "url": "https://alphastream.org/index.php/2023/09/25/how-dd-sells-and-what-it-means-for-the-hobby/"},
+  "enworld-5e-lifetime": {"label": "ENWorld: 5E lifetime sales in North American big box stores", "url": "https://www.enworld.org/threads/5e-lifetime-sales-in-north-american-big-box-stores-revealed.698946/"},
+  "enworld-basic-600k": {"label": "ENWorld: Basic D&D was selling 600,000+/year", "url": "https://www.enworld.org/threads/basic-d-d-was-selling-600-000-year-at-one-point.689740/"},
+  "enworld-teos": {"label": "ENWorld: Teos Abadia estimates D&D revenue", "url": "https://www.enworld.org/threads/estimating-d-d%E2%80%99s-revenue-teos-abadia-crunches-the-numbers.700417/"},
+  "enworld-2024-core": {"label": "ENWorld: 2024 core rulebooks 'strongest-ever' start", "url": "https://www.enworld.org/posts/9785168/"},
+  "enworld-5e-phb-thread": {"label": "ENWorld: 2024 PHB fastest-selling (edition comparison estimates)", "url": "https://www.enworld.org/threads/2024-player%E2%80%99s-handbook-is-%E2%80%98fastest-selling-d-d-book-ever%E2%80%99.706875/page-22"},
+  "enworld-dancey": {"label": "ENWorld: Ryan Dancey figures for 2e and 3e PHBs", "url": "https://www.enworld.org/goto/post?id=7654091"},
+  "enworld-4e-court": {"label": "ENWorld: 4e court document sales statements", "url": "https://www.enworld.org/goto/post?id=4534902"},
+  "icv2-3773": {"label": "ICv2: Rolling for Initiative, 3,773 copies sold", "url": "https://icv2.com/articles/columns/view/57905/rolling-initiative-3-773-copies-sold"},
+  "wotc-polygon": {"label": "ICv2: 2024 PHB becomes fastest-selling D&D product ever", "url": "https://icv2.com/articles/news/view/57876/2024-players-handbook-becomes-fastest-selling-dungeons-dragons-product-ever"}
+ }
+}
