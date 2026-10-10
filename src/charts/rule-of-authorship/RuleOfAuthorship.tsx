@@ -1,4 +1,5 @@
 import data from "../../../data/rule-of-authorship.json";
+import "./styles.css";
 import type { Owner, RuleOfAuthorshipData, Segment } from "./types";
 import { OWNER_LABELS } from "./style";
 

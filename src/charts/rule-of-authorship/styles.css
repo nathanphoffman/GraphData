@@ -1,0 +1,235 @@
+/* Rule of authorship */
+.authorship {
+  --a-bg: #f5f2e8;
+  --a-ink-soft: #5a5142;
+  --a-rule: #c9c2ae;
+  --a-stamp: #a23b2e;
+  --arneson: #4b5e3a;
+  --arneson-bg: #e3e8d8;
+  --gygax: #395270;
+  --gygax-bg: #dce3ea;
+  --joint: #7a6a40;
+  --joint-bg: #ede6d2;
+  --disputed: #a23b2e;
+  --disputed-bg: #f3ded9;
+  max-width: 760px;
+  margin: 0 auto;
+  font-family: Iowan Old Style, "Palatino Linotype", Palatino, Georgia, serif;
+  line-height: 1.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  .authorship {
+    --a-bg: #262320;
+    --a-ink-soft: #b8af9c;
+    --a-rule: #45403a;
+    --a-stamp: #e08776;
+    --arneson: #8fb374;
+    --arneson-bg: #2c3324;
+    --gygax: #86a9cc;
+    --gygax-bg: #26333f;
+    --joint: #c9ae6e;
+    --joint-bg: #3a331f;
+    --disputed: #e08776;
+    --disputed-bg: #3a2420;
+  }
+}
+
+.auth-owner-arneson { --owner: var(--arneson); --owner-bg: var(--arneson-bg); }
+.auth-owner-gygax { --owner: var(--gygax); --owner-bg: var(--gygax-bg); }
+.auth-owner-joint { --owner: var(--joint); --owner-bg: var(--joint-bg); }
+.auth-owner-disputed { --owner: var(--disputed); --owner-bg: var(--disputed-bg); }
+
+.auth-masthead {
+  border-top: 3px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+  padding: 14px 0;
+  margin-bottom: 8px;
+}
+
+.auth-kicker {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--a-ink-soft);
+}
+
+.auth-headline {
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 8px 0 4px;
+}
+
+.auth-subhead {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--a-ink-soft);
+  margin: 0;
+}
+
+.auth-case-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--a-ink-soft);
+  padding: 12px 0 24px;
+  border-bottom: 1px solid var(--a-rule);
+  margin-bottom: 24px;
+}
+
+.auth-case-strip strong {
+  color: var(--fg);
+}
+
+.auth-caveat {
+  background: var(--a-bg);
+  border: 1px solid var(--a-rule);
+  border-left: 4px solid var(--a-stamp);
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  font-size: 14.5px;
+  color: var(--a-ink-soft);
+}
+
+.auth-caveat strong {
+  color: var(--fg);
+}
+
+.auth-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.auth-pill,
+.auth-tag {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 3px;
+  white-space: nowrap;
+  background: var(--owner-bg);
+  color: var(--owner);
+}
+
+.auth-pill {
+  font-size: 11px;
+  padding: 5px 10px;
+}
+
+.auth-tag {
+  font-size: 10.5px;
+  padding: 2px 7px;
+}
+
+.authorship h2 {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--a-ink-soft);
+  border-bottom: 1px solid var(--a-rule);
+  padding-bottom: 8px;
+  margin: 48px 0 20px;
+}
+
+.authorship h2 span {
+  color: var(--a-stamp);
+}
+
+.auth-table-wrap {
+  overflow-x: auto;
+}
+
+.auth-summary {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.auth-summary th {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--a-ink-soft);
+  border-bottom: 1px solid var(--fg);
+  padding: 6px 8px;
+}
+
+.auth-summary td {
+  padding: 8px;
+  border-bottom: 1px solid var(--a-rule);
+  vertical-align: top;
+}
+
+.auth-rule {
+  border-left: 3px solid var(--owner, var(--a-rule));
+  padding: 2px 0 2px 20px;
+  margin-bottom: 28px;
+}
+
+.auth-rule-neutral {
+  border-left-color: var(--a-ink-soft);
+}
+
+.auth-rule p {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.auth-rule p:last-child {
+  margin-bottom: 0;
+}
+
+.auth-rule-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.auth-rule-name {
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.auth-rule .auth-verdict {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: var(--a-ink-soft);
+}
+
+.auth-exhibit {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 12.5px;
+  background: var(--a-bg);
+  border: 1px solid var(--a-rule);
+  padding: 10px 14px;
+  margin: 10px 0;
+  color: var(--a-ink-soft);
+}
+
+.auth-cite {
+  color: var(--a-stamp);
+  font-weight: 700;
+}
+
+.auth-footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--a-rule);
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--a-ink-soft);
+}

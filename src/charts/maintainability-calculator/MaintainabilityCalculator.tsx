@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./styles.css";
 import data from "../../../data/maintainability-calculator.json";
 import type { MaintainabilityData, Tier } from "./types";
 import { TIERS } from "./style";

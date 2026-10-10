@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import "./styles.css";
 import { scaleLinear } from "d3-scale";
 import data from "../../../data/language-outlook.json";
 import type { LanguageOutlookData } from "./types";

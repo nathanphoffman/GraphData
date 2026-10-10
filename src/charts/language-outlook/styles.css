@@ -1,0 +1,47 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 8px 0;
+}
+
+.legend label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.swatch.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #4c4c4c;
+  display: inline-block;
+}
+
+.swatch.line {
+  width: 18px;
+  height: 0;
+  border-top: 2px solid;
+  display: inline-block;
+}
+
+.chart-surface {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--chart-bg);
+  border-radius: 6px;
+}
+
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: #222;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+}

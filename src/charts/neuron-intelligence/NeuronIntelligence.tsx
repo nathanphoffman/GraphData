@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import "./styles.css";
 import data from "../../../data/neuron-intelligence.json";
 import type { Exponents, NeuronIntelligenceData, SortKey } from "./types";
 import { DEFAULT_EXPONENTS, PLAUSIBLE_X, formatNeurons, scoreAnimals, sortAnimals } from "./calculate";

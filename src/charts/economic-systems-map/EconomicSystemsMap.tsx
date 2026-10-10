@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import "./styles.css";
 import data from "../../../data/economic-systems-map.json";
 import views from "../../../data/economic-systems-views.json";
 import combosData from "../../../data/economic-systems-combos.json";

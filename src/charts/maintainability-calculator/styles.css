@@ -1,0 +1,84 @@
+/* Maintainability calculator */
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 520px) {
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calc label {
+  display: block;
+  font-weight: 600;
+}
+
+.calc input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+  padding: 8px 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.calc input[type="range"] {
+  width: 100%;
+}
+
+.calc-row,
+.calc-ticks {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.calc-ticks {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+.calc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc th,
+.calc td {
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.calc th {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.calc td.role {
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.calc-scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
