@@ -150,7 +150,7 @@ export default function EconomicSystemsMap() {
         {/* Legend and footnote */}
         {!showExamples &&
           model.groups.map((group, i) => {
-            const x = GRID_X0 + 260 + i * 170;
+            const x = GRID_X0 + 30 + i * 195;
             const y = GRID_Y0 + GRID_H + 28;
             return (
               <g key={group.id}>

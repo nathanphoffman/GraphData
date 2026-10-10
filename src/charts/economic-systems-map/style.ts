@@ -2,6 +2,8 @@
 
 export const GROUP_COLORS: Record<string, string> = {
   presidents: "#1b2a6b",
+  senate: "#00796b",
+  "other-us": "#c2185b",
   thinkers: "#6a1b9a",
   leaders: "#c25e00",
 };
