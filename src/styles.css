@@ -526,3 +526,21 @@ h1 {
   background: linear-gradient(90deg, #3a6fd8, #7eb8f7);
   transition: width 0.3s;
 }
+
+/* Economic systems map */
+.map-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.map-surface {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #fff;
+  border-radius: 6px;
+}

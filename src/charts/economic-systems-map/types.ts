@@ -1,0 +1,54 @@
+/** Shape of data/economic-systems-map.json. Positions are in "cell units": x 0-4, y 0-3 (0 = bottom). */
+export type Point = [number, number];
+
+export interface Cell {
+  name: string;
+  /** 0 = Communal ... 3 = Market. */
+  col: number;
+  /** 0 = Large (top) ... 2 = Small (bottom). */
+  row: number;
+  /** Authoritarian historical example. */
+  auth: string;
+  /** Democratic historical example. */
+  dem: string;
+}
+
+export interface Figure {
+  name: string;
+  group: string;
+  x: number;
+  y: number;
+}
+
+export interface Group {
+  id: string;
+  label: string;
+}
+
+export interface EconomicSystemsData {
+  title: string;
+  columns: string[];
+  rows: string[];
+  cells: Cell[];
+  stability: { label: string; from: Point; to: Point; halfWidth: number };
+  overlay: { label: string; sublabel: string; polygon: Point[]; labelAt: Point };
+  groups: Group[];
+  figures: Figure[];
+  footnote: string;
+  examplesFootnote: string;
+}
+
+/** An axis-aligned box in SVG pixels, given by its center. */
+export interface Box {
+  cx: number;
+  cy: number;
+  w: number;
+  h: number;
+}
+
+export interface PlacedLabel {
+  figure: Figure;
+  dotX: number;
+  dotY: number;
+  box: Box;
+}

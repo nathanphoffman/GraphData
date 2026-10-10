@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import LanguageOutlook from "./language-outlook/LanguageOutlook";
+import EconomicSystemsMap from "./economic-systems-map/EconomicSystemsMap";
 import NeuronIntelligence from "./neuron-intelligence/NeuronIntelligence";
 import RuleOfAuthorship from "./rule-of-authorship/RuleOfAuthorship";
 import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
@@ -33,7 +34,7 @@ export const charts: ChartEntry[] = [
   },
   {
     id: "rule-of-authorship",
-    title: "Rule of Authorship",
+    title: "True Authors of DND",
     description: "Who wrote which rules of Dungeons & Dragons, Arneson or Gygax, based on the Arneson v. Gygax case file.",
     component: RuleOfAuthorship,
   },
@@ -43,6 +44,13 @@ export const charts: ChartEntry[] = [
     description:
       "Ranks animals by neuron count against body weight, with adjustable exponents: Neurons^x / Weight^w, then Score^k.",
     component: NeuronIntelligence,
+  },
+  {
+    id: "economic-systems-map",
+    title: "Economic Systems Map",
+    description:
+      "A two-axis map of economic systems (orientation vs. size of power) with a line of stability, the U.S. 1865-present, and where well-known figures sit.",
+    component: EconomicSystemsMap,
   },
 ];
 
