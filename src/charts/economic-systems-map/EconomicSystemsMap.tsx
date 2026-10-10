@@ -1,33 +1,15 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import "./styles.css";
 import data from "../../../data/economic-systems-map.json";
 import views from "../../../data/economic-systems-views.json";
 import combosData from "../../../data/economic-systems-combos.json";
 import type { Combo, EconomicSystemsCombosData, EconomicSystemsData, EconomicSystemsViewsData } from "./types";
-import { COLORS, GROUP_COLORS } from "./style";
-import { CELL_H, CELL_W, GRID_LEFT, GRID_TOP, HEADER_COL_W, HEADER_ROW_H } from "./style";
-import { GRID_H, GRID_W, GRID_X0, GRID_Y0, cellNameWidth, placeLabels, toX, toY } from "./layout";
+import MapSvg from "./MapSvg";
+import ViewsPanel from "./ViewsPanel";
 
 const model = data as EconomicSystemsData;
 const viewsModel = views as EconomicSystemsViewsData;
 const combos = (combosData as unknown as EconomicSystemsCombosData).combos;
-
-function ViewsList({ views }: { views: Record<string, string> }) {
-  return (
-    <dl className="views-list">
-      {viewsModel.categories.map((category) => (
-        <div key={category}>
-          <dt>{category}</dt>
-          <dd>{views[category]}</dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
-const W = GRID_X0 + GRID_W + 8;
-const H = GRID_Y0 + GRID_H + 70;
-const FONT = "system-ui, -apple-system, Segoe UI, sans-serif";
 
 export default function EconomicSystemsMap() {
   const [showExamples, setShowExamples] = useState(false);
@@ -39,10 +21,8 @@ export default function EconomicSystemsMap() {
     setSelected(name);
     setPartner(null);
   };
-  const labels = useMemo(() => placeLabels(model, model.figures), []);
 
   const selectedCell = model.cells.find((cell) => cell.name === selected);
-  const selectedViews = selected ? viewsModel.cells[selected] : undefined;
   const neighbors = selectedCell
     ? model.cells.filter(
         (cell) => Math.abs(cell.col - selectedCell.col) + Math.abs(cell.row - selectedCell.row) === 1,
@@ -57,23 +37,6 @@ export default function EconomicSystemsMap() {
     selectedCell && partnerCell
       ? { col: (selectedCell.col + partnerCell.col) / 2, row: (selectedCell.row + partnerCell.row) / 2 }
       : selectedCell;
-
-  const { stability, overlay } = model;
-  const [x1, y1] = stability.from;
-  const [x2, y2] = stability.to;
-  const hw = stability.halfWidth;
-  const band = [
-    [x1, y1 - hw],
-    [x2, y2 - hw],
-    [x2, y2 + hw],
-    [x1, y1 + hw],
-  ]
-    .map(([x, y]) => `${toX(x)},${toY(y)}`)
-    .join(" ");
-  const angle = (Math.atan2(toY(y2) - toY(y1), toX(x2) - toX(x1)) * 180) / Math.PI;
-  const labelBoxW = stability.label.length * 7.6 + 16;
-  const labelX = 1.0;
-  const labelY = y1 + ((y2 - y1) * (labelX - x1)) / (x2 - x1);
 
   return (
     <div>
@@ -90,215 +53,17 @@ export default function EconomicSystemsMap() {
         Show historical examples instead of figures
       </label>
 
-      <svg className="map-surface" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={model.title} fontFamily={FONT}>
-        <text x={GRID_X0} y={34} fontSize={22} fontWeight={700} fill="#222">
-          {model.title}
-        </text>
+      <MapSvg model={model} showExamples={showExamples} highlight={highlight} onSelect={select} />
 
-        {/* Layer 0: headers and cells */}
-        <rect x={GRID_LEFT} y={GRID_TOP} width={HEADER_COL_W} height={HEADER_ROW_H} fill={COLORS.header} stroke={COLORS.border} />
-        <text x={GRID_LEFT + HEADER_COL_W / 2} y={GRID_TOP + 26} textAnchor="middle" fontSize={14} fontWeight={700} fill={COLORS.headerText}>
-          Size
-        </text>
-        {model.columns.map((name, c) => (
-          <g key={name}>
-            <rect x={GRID_X0 + c * CELL_W} y={GRID_TOP} width={CELL_W} height={HEADER_ROW_H} fill={COLORS.header} stroke={COLORS.border} />
-            <text x={GRID_X0 + (c + 0.5) * CELL_W} y={GRID_TOP + 26} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.headerText}>
-              {name}
-            </text>
-          </g>
-        ))}
-        {model.rows.map((name, r) => (
-          <g key={name}>
-            <rect x={GRID_LEFT} y={GRID_Y0 + r * CELL_H} width={HEADER_COL_W} height={CELL_H} fill={COLORS.header} stroke={COLORS.border} />
-            <text x={GRID_LEFT + HEADER_COL_W / 2} y={GRID_Y0 + (r + 0.5) * CELL_H + 5} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.headerText}>
-              {name}
-            </text>
-          </g>
-        ))}
-        {model.cells.map((cell) => (
-          <rect
-            key={cell.name}
-            x={GRID_X0 + cell.col * CELL_W}
-            y={GRID_Y0 + cell.row * CELL_H}
-            width={CELL_W}
-            height={CELL_H}
-            fill={(cell.col + cell.row) % 2 === 0 ? COLORS.cellLight : COLORS.cellDark}
-            stroke={COLORS.border}
-            strokeWidth={2}
-            className="map-cell"
-            role="button"
-            tabIndex={0}
-            aria-label={`${cell.name}: show common views`}
-            onClick={() => select(cell.name)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                select(cell.name);
-              }
-            }}
-          />
-        ))}
-
-        {/* Everything above the cells ignores clicks so they reach the cell underneath. */}
-        <g pointerEvents="none">
-        {highlight && (
-          <rect
-            x={GRID_X0 + highlight.col * CELL_W + 2}
-            y={GRID_Y0 + highlight.row * CELL_H + 2}
-            width={CELL_W - 4}
-            height={CELL_H - 4}
-            fill="none"
-            stroke={COLORS.header}
-            strokeWidth={3.5}
-          />
-        )}
-        {/* Layer 1: line of stability, clipped to the grid because the band can run past it */}
-        <clipPath id="grid-clip">
-          <rect x={GRID_X0} y={GRID_Y0} width={GRID_W} height={GRID_H} />
-        </clipPath>
-        <g clipPath="url(#grid-clip)">
-        <polygon points={band} fill={COLORS.stability} fillOpacity={0.13} />
-        <line x1={toX(x1)} y1={toY(y1 - hw)} x2={toX(x2)} y2={toY(y2 - hw)} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
-        <line x1={toX(x1)} y1={toY(y1 + hw)} x2={toX(x2)} y2={toY(y2 + hw)} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
-        <line x1={toX(x1)} y1={toY(y1)} x2={toX(x2)} y2={toY(y2)} stroke={COLORS.stability} strokeWidth={1} strokeOpacity={0.35} />
-        </g>
-        <g transform={`translate(${toX(labelX)} ${toY(labelY)}) rotate(${angle})`}>
-          <rect x={-labelBoxW / 2} y={-11} width={labelBoxW} height={22} rx={6} fill="#fff" fillOpacity={0.9} />
-          <text textAnchor="middle" y={5} fontSize={13} fontWeight={700} fill={COLORS.stability}>
-            {stability.label}
-          </text>
-        </g>
-
-        {/* Layer 2: U.S. overlay */}
-        <polygon
-          points={overlay.polygon.map(([x, y]) => `${toX(x)},${toY(y)}`).join(" ")}
-          fill={COLORS.overlay}
-          fillOpacity={0.1}
-          stroke={COLORS.overlay}
-          strokeWidth={2.2}
-          strokeDasharray="8 5"
+      {selectedCell ? (
+        <ViewsPanel
+          model={model}
+          viewsModel={viewsModel}
+          selectedCell={selectedCell}
+          neighbors={neighbors}
+          activeCombo={activeCombo}
+          onPickPartner={setPartner}
         />
-        <text x={toX(overlay.labelAt[0])} y={toY(overlay.labelAt[1]) - 2} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.overlay}>
-          {overlay.label}
-        </text>
-        <text x={toX(overlay.labelAt[0])} y={toY(overlay.labelAt[1]) + 14} textAnchor="middle" fontSize={11} fill={COLORS.overlay}>
-          {overlay.sublabel}
-        </text>
-
-        {/* Layer 3: cell names (and examples) */}
-        {model.cells.map((cell) => {
-          const cx = toX(cell.col + 0.5);
-          const top = GRID_Y0 + cell.row * CELL_H;
-          const w = cellNameWidth(cell.name);
-          return (
-            <g key={cell.name}>
-              <rect x={cx - w / 2} y={top + 5} width={w} height={24} rx={5} fill="#fff" fillOpacity={0.75} />
-              <text x={cx} y={top + 23} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.cellName}>
-                {cell.name}
-              </text>
-              {showExamples && (
-                <>
-                  <text x={cx} y={top + 50} textAnchor="middle" fontSize={13}>
-                    <tspan fontWeight={700} fill={COLORS.auth}>Auth: </tspan>
-                    <tspan fill="#333">{cell.auth}</tspan>
-                  </text>
-                  <text x={cx} y={top + 70} textAnchor="middle" fontSize={13}>
-                    <tspan fontWeight={700} fill={COLORS.dem}>Dem: </tspan>
-                    <tspan fill="#333">{cell.dem}</tspan>
-                  </text>
-                </>
-              )}
-            </g>
-          );
-        })}
-
-        {/* Layer 4: figures */}
-        {!showExamples &&
-          labels.map(({ figure, dotX, dotY, box }) => {
-            const color = GROUP_COLORS[figure.group];
-            // Thin leader line from the dot to the nearest edge of its label box.
-            const lx = Math.min(Math.max(dotX, box.cx - box.w / 2), box.cx + box.w / 2);
-            const ly = Math.min(Math.max(dotY, box.cy - box.h / 2), box.cy + box.h / 2);
-            const showLine = Math.hypot(lx - dotX, ly - dotY) > 8;
-            return (
-              <g key={figure.name}>
-                {showLine && <line x1={dotX} y1={dotY} x2={lx} y2={ly} stroke={color} strokeWidth={1} strokeOpacity={0.7} />}
-                <circle cx={dotX} cy={dotY} r={6} fill={color} stroke="#fff" strokeWidth={1.5} />
-                <rect x={box.cx - box.w / 2} y={box.cy - box.h / 2} width={box.w} height={box.h} rx={3} fill="#fff" fillOpacity={0.8} />
-                <text x={box.cx} y={box.cy + 4} textAnchor="middle" fontSize={11} fontWeight={700} fill={color}>
-                  {figure.name}
-                </text>
-              </g>
-            );
-          })}
-
-        </g>
-
-        {/* Legend and footnote */}
-        {!showExamples &&
-          model.groups.map((group, i) => {
-            const x = GRID_X0 + 10 + i * 168;
-            const y = GRID_Y0 + GRID_H + 28;
-            return (
-              <g key={group.id}>
-                <circle cx={x} cy={y} r={6} fill={GROUP_COLORS[group.id]} />
-                <text x={x + 12} y={y + 4} fontSize={13} fill="#333">
-                  {group.label}
-                </text>
-              </g>
-            );
-          })}
-        <text x={GRID_X0} y={GRID_Y0 + GRID_H + 58} fontSize={11} fontStyle="italic" fill={COLORS.muted}>
-          {model.footnote}
-          {showExamples ? ` ${model.examplesFootnote}` : ""}
-        </text>
-      </svg>
-
-      {selectedCell && selectedViews ? (
-        <section className="panel views" aria-live="polite">
-          {activeCombo ? (
-            <>
-              <p className="views-crumb">
-                <button type="button" className="link-button" onClick={() => setPartner(null)}>
-                  &larr; Back to {selectedCell.name}
-                </button>
-              </p>
-              <h2>{activeCombo.name}</h2>
-              <p className="muted">
-                {activeCombo.cells[0]} + {activeCombo.cells[1]}. {activeCombo.summary}
-              </p>
-              <ViewsList views={activeCombo.views} />
-              <p className="views-note">
-                A blend of the two systems, not a position anyone necessarily holds. Go back to pick a different
-                neighbor.
-              </p>
-            </>
-          ) : (
-            <>
-              <h2>{selectedCell.name}</h2>
-              <p className="muted">
-                {model.rows[selectedCell.row]} · {model.columns[selectedCell.col]}. {selectedViews.summary}
-              </p>
-              <ViewsList views={selectedViews.views} />
-              <p className="views-examples">
-                <strong>Historical examples:</strong> <span style={{ color: COLORS.auth }}>Auth:</span>{" "}
-                {selectedCell.auth} · <span style={{ color: COLORS.dem }}>Dem:</span> {selectedCell.dem}
-              </p>
-              <p className="views-note">
-                Views commonly held by supporters of this system, as a summary and not a position.
-              </p>
-              <div className="views-combo">
-                <strong>Combo with:</strong>
-                {neighbors.map((cell) => (
-                  <button key={cell.name} type="button" className="combo-button" onClick={() => setPartner(cell.name)}>
-                    {cell.name}
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
-        </section>
       ) : (
         <p className="muted">Click a cell to see the common views of that system by topic.</p>
       )}
