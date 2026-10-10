@@ -15,3 +15,10 @@ export interface LanguageOutlookData {
   lines: string[];
   languages: LanguageRecord[];
 }
+
+/** Hover tooltip position (screen px) and text. */
+export interface Tooltip {
+  x: number;
+  y: number;
+  text: string;
+}
