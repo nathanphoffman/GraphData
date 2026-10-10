@@ -6,7 +6,9 @@ Usage (from the GraphData folder):
     python3 scripts/build-language-data.py [path/to/Programming\\ Languages.ods]
 
 Needs LibreOffice (soffice) on the PATH to read the .ods file.
-The 2019 TIOBE ratings come from data/sources/tiobe-2019.json.
+TIOBE ratings come from data/sources/tiobe-september.json (September of every year, 2019-2026).
+Languages missing there (TypeScript, Zig) fall back to the spreadsheet's TIOBE columns and, for 2019,
+data/sources/tiobe-2019.json.
 """
 import csv
 import json
@@ -19,6 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_ODS = ROOT.parent / "Programming Languages.ods"
 OUT = ROOT / "data" / "language-outlook.json"
 TIOBE_2019 = ROOT / "data" / "sources" / "tiobe-2019.json"
+TIOBE_SEPT = ROOT / "data" / "sources" / "tiobe-september.json"
 
 YEARS = list(range(2019, 2027))
 RECENT, PRIOR = (2023, 2026), (2019, 2022)  # inclusive windows
@@ -63,6 +66,7 @@ def main() -> None:
     if not ods.exists():
         sys.exit(f"Spreadsheet not found: {ods}")
     tiobe_2019 = json.loads(TIOBE_2019.read_text())["ratings"]
+    tiobe_sept = json.loads(TIOBE_SEPT.read_text())["ratings"]
 
     with tempfile.TemporaryDirectory() as tmp:
         rows = list(csv.reader(export_csv(ods, Path(tmp)).open(encoding="utf-8")))
@@ -77,6 +81,9 @@ def main() -> None:
         values = {f"Year {y}": rnd(num(row[col[f"Year {y}"]])) for y in YEARS}
         tiobe = {str(y): num(row[col[f"{y} TIndex"]]) for y in range(2020, 2027)}
         tiobe["2019"] = tiobe_2019.get(name)
+        for year, rating in tiobe_sept.get(name, {}).items():
+            if rating is not None:
+                tiobe[year] = rating
         languages.append({"name": name, "values": values, "tiobe": tiobe})
 
     for lang in languages:
