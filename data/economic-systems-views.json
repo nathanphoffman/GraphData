@@ -1,5 +1,14 @@
 {
-  "categories": ["Healthcare", "Poverty & welfare", "Employment & labor", "Taxes", "Business & markets", "Property & land"],
+  "categories": [
+    "Healthcare",
+    "Poverty & welfare",
+    "Employment & labor",
+    "Taxes",
+    "Business & markets",
+    "Property & land",
+    "Education",
+    "Environment & energy"
+  ],
   "cells": {
     "State Commune": {
       "summary": "The state owns nearly everything and plans the economy on behalf of the whole community.",
@@ -9,18 +18,22 @@
         "Employment & labor": "Everyone is expected to work, with jobs assigned by the plan. Unemployment is meant to be eliminated.",
         "Taxes": "Personal taxes matter little because the state already owns production and collects the surplus directly.",
         "Business & markets": "Private business is abolished or tightly limited. Production is planned instead of driven by prices.",
-        "Property & land": "Land, factories and resources are collectively owned. Only personal belongings stay private."
+        "Property & land": "Land, factories and resources are collectively owned. Only personal belongings stay private.",
+        "Education": "Free, state-run schooling with a standard curriculum. Education prepares citizens to serve the collective good and the plan.",
+        "Environment & energy": "The state plans energy and resource use for the common good. Nature is a collective resource managed centrally."
       }
     },
     "Social Ownership": {
-      "summary": "Major industries and utilities are publicly or worker owned, while some markets remain for everything else.",
+      "summary": "Major industries are owned by the public or by workers, directly or through shares, while markets remain for everything else.",
       "views": {
         "Healthcare": "A single-payer or fully public system. Hospitals and drug pricing are under public control.",
         "Poverty & welfare": "Strong guarantees for income, housing and food. Public ownership of key resources is meant to remove the causes of poverty.",
         "Employment & labor": "Strong unions, worker seats on company boards, and often a job guarantee. Workplaces should be run democratically.",
         "Taxes": "High progressive income and wealth taxes fund public ownership and services.",
-        "Business & markets": "Banks, energy, transport and big industry are publicly owned or run as co-ops. Small business is allowed.",
-        "Property & land": "Land and major assets are held in common or by public bodies. Personal and small-scale property stays private."
+        "Business & markets": "Banks, energy, transport and big industry are publicly owned, run as co-ops, or partly owned through public share holdings. Small business is allowed.",
+        "Property & land": "Land and major assets are held in common, by public bodies, or through shares such as a national wealth fund paying everyone a dividend. Personal and small-scale property stays private.",
+        "Education": "Free public education through university, run democratically. Public goals come before private profit.",
+        "Environment & energy": "Public ownership of utilities and energy lets society direct the shift to clean energy. Climate action is a public project."
       }
     },
     "New Deal Liberalism": {
@@ -28,10 +41,12 @@
       "views": {
         "Healthcare": "Government-backed coverage such as Medicare, Medicaid or a public option, with the aim of covering everyone.",
         "Poverty & welfare": "A strong safety net: Social Security, unemployment insurance, food and housing aid. Government is the backstop.",
-        "Employment & labor": "Minimum wage, union rights and public jobs programs, especially during downturns.",
+        "Employment & labor": "Minimum wage, union rights and public jobs programs in downturns (like the WPA and CCC). A permanent job guarantee was proposed by FDR but never enacted.",
         "Taxes": "Progressive taxes, with higher rates on top earners and corporations, to fund programs.",
         "Business & markets": "Markets are kept but tightly regulated: banks, monopolies, worker and consumer safety, plus large public investment.",
-        "Property & land": "Private property is protected but regulated for public benefit, such as zoning and eminent domain for public projects."
+        "Property & land": "Private property is protected but regulated for public benefit, such as zoning and eminent domain for public projects.",
+        "Education": "Strong public schools funded by government, with federal aid, grants and loans to widen access to college.",
+        "Environment & energy": "Government regulation and public investment, such as clean-air rules, conservation and green subsidies."
       }
     },
     "Corporate Capitalism": {
@@ -42,7 +57,9 @@
         "Employment & labor": "Jobs come from corporate investment. Employers hold most bargaining power and unions are weak.",
         "Taxes": "Low corporate taxes with targeted breaks, subsidies and, in a crisis, bailouts for big firms.",
         "Business & markets": "Large firms help shape the rules through lobbying and close ties to government. Mergers and consolidation are common.",
-        "Property & land": "Strong protection for corporate property and intellectual property. Assets tend to be concentrated in few hands."
+        "Property & land": "Strong protection for corporate property and intellectual property. Assets tend to be concentrated in few hands.",
+        "Education": "Public and private schools shaped by what large employers need. Training is tied to industry demand.",
+        "Environment & energy": "Big energy and resource firms lead. Rules are negotiated with industry and favor market-based fixes that big firms can absorb."
       }
     },
     "Guild System": {
@@ -53,7 +70,9 @@
         "Employment & labor": "Work is organized by trade. The guild sets training, apprenticeships, wages and quality standards.",
         "Taxes": "Members pay dues to the guild for pensions and benefits, alongside modest state taxes.",
         "Business & markets": "Industries govern themselves. Guilds limit competition and protect craft standards.",
-        "Property & land": "Tools and workshops are owned by members. Property is tied to a trade and a community."
+        "Property & land": "Tools and workshops are owned by members. Property is tied to a trade and a community.",
+        "Education": "Learning a trade through apprenticeships run by the guild, with the guild certifying skill.",
+        "Environment & energy": "Each industry sets its own standards and manages shared resources like fisheries and forests through its association."
       }
     },
     "Nordic Model": {
@@ -64,7 +83,9 @@
         "Employment & labor": "High union membership and collective bargaining. 'Flexicurity' means firms can hire and fire easily while workers get strong benefits and retraining.",
         "Taxes": "High broad-based income and sales taxes, accepted in return for extensive public services.",
         "Business & markets": "Free trade and competition under strong rules. Private firms thrive, with some state ownership in key sectors.",
-        "Property & land": "Private property is protected, with strong environmental rules and some public ownership of utilities and land."
+        "Property & land": "Private property is protected, with strong environmental rules and some public ownership of utilities and land.",
+        "Education": "Free public schools and universities, well-regarded teachers, strong vocational routes and equal opportunity.",
+        "Environment & energy": "Ambitious climate policy: carbon taxes, strong environmental standards and heavy public and private green investment."
       }
     },
     "Social Market": {
@@ -75,7 +96,9 @@
         "Employment & labor": "Works councils, worker representation on boards, collective bargaining and apprenticeship systems.",
         "Taxes": "Moderate to high taxes and mandatory social insurance contributions.",
         "Business & markets": "'As much market as possible, as much state as necessary.' The state enforces competition and doesn't run the economy.",
-        "Property & land": "Private property is strongly protected, but it comes with social obligations."
+        "Property & land": "Private property is strongly protected, but it comes with social obligations.",
+        "Education": "A dual system of school plus paid apprenticeship, with the state and employers sharing training and low-cost public universities.",
+        "Environment & energy": "State-set environmental rules combined with market tools, such as emissions trading and strong industry standards."
       }
     },
     "Regulated Capitalism": {
@@ -86,7 +109,9 @@
         "Employment & labor": "A flexible labor market with minimum standards and anti-discrimination rules. Unions are present but less central.",
         "Taxes": "Moderate taxes, with simple codes and lower rates on investment and business.",
         "Business & markets": "Free enterprise with rules: antitrust, consumer protection, and environmental and financial regulation.",
-        "Property & land": "Strong private property rights, regulated for safety, zoning and the environment."
+        "Property & land": "Strong private property rights, regulated for safety, zoning and the environment.",
+        "Education": "A mix of public, private and charter schools with choice and testing standards. Families pay for much of college, helped by loans and aid.",
+        "Environment & energy": "Environmental regulation and standards, plus market tools like cap-and-trade and incentives so business adapts."
       }
     },
     "Mutualism": {
@@ -97,7 +122,9 @@
         "Employment & labor": "Worker-owned co-ops, or people working for themselves. The idea is no bosses, with fair exchange of labor.",
         "Taxes": "Little or no taxation. Contributions are voluntary and there is no central state to collect them.",
         "Business & markets": "Co-ops, credit unions and mutual banks. Exchange is allowed but profit from ownership alone is not.",
-        "Property & land": "Possession by use is respected. Land and capital held by absentee owners are not."
+        "Property & land": "Possession by use is respected. Land and capital held by absentee owners are not.",
+        "Education": "Community-run schools, tutoring co-ops and skill-sharing. People learn by doing.",
+        "Environment & energy": "Local, community-managed resources used at a small, sustainable scale, with commons managed by the people who use them."
       }
     },
     "Left Libertarianism": {
@@ -108,7 +135,9 @@
         "Employment & labor": "Worker freedom, co-ops and unions without state control. Opposed to bosses who hold power over workers.",
         "Taxes": "Few taxes, but charges on land and natural resources that share gains from the commons.",
         "Business & markets": "Free markets with no corporate privileges or monopolies. Small and cooperative firms are favored.",
-        "Property & land": "Self-ownership, with natural resources like land and water held in common or subject to conditions."
+        "Property & land": "Self-ownership, with natural resources like land and water held in common or subject to conditions.",
+        "Education": "Voluntary, parent- and community-run or free schools. Opposed to state-run indoctrination, but education should be open to all.",
+        "Environment & energy": "Natural resources belong to everyone, so those who pollute or deplete them owe the community, for example through resource or carbon dividends."
       }
     },
     "Classical Liberalism": {
@@ -119,7 +148,9 @@
         "Employment & labor": "Free contract between worker and employer, with minimal labor regulation.",
         "Taxes": "Low, simple and broad taxes, and limited government.",
         "Business & markets": "Free trade and open competition. The state enforces contracts and keeps rules few and clear.",
-        "Property & land": "Central to liberty and prosperity, and strongly protected by law."
+        "Property & land": "Central to liberty and prosperity, and strongly protected by law.",
+        "Education": "Parents choose among mostly private or church schools. The state's role is limited, perhaps funding basic schooling for the poor.",
+        "Environment & energy": "Property rights and courts handle pollution as harm to others. Regulation is limited."
       }
     },
     "Right Libertarianism": {
@@ -130,7 +161,9 @@
         "Employment & labor": "No minimum wage or mandates. Contracts are free and union membership is voluntary.",
         "Taxes": "Taxation is seen as coercion, so taxes should be minimal or abolished.",
         "Business & markets": "Fully free markets, with no licensing or antitrust, and private provision of roads, courts and schools.",
-        "Property & land": "Absolute private property rights. Ownership comes from homesteading and voluntary exchange."
+        "Property & land": "Absolute private property rights. Ownership comes from homesteading and voluntary exchange.",
+        "Education": "Fully private schools, with vouchers at most. No compulsory state curriculum.",
+        "Environment & energy": "Private ownership protects the environment. Pollution is treated as trespass and settled in court, with no environmental agency."
       }
     }
   }

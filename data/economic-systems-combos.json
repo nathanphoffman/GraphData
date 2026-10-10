@@ -1,0 +1,310 @@
+{
+  "combos": [
+    {
+      "cells": [
+        "State Commune",
+        "Social Ownership"
+      ],
+      "name": "Planned Public Economy",
+      "summary": "The state plans most of the economy, but ownership is shared with workers and public bodies instead of being fully centralized.",
+      "views": {
+        "Healthcare": "Universal, free and publicly run, with local and worker-run clinics alongside state hospitals.",
+        "Poverty & welfare": "Guaranteed basics for everyone, with public and worker-owned enterprises providing housing and food.",
+        "Employment & labor": "Jobs planned or guaranteed by the public sector, with workers given a real voice in management.",
+        "Taxes": "Little personal taxation. Public enterprises fund services directly, with high taxes on any private wealth.",
+        "Business & markets": "Core industries are planned and run with worker councils, and small private business is allowed at the edges.",
+        "Property & land": "Land and industry are owned collectively, with use rights and shares held by workers and communities.",
+        "Education": "Free and public through university, with workplaces and communities co-running training.",
+        "Environment & energy": "Central planning of energy and resources, with local communities having a say in how projects are run."
+      }
+    },
+    {
+      "cells": [
+        "Social Ownership",
+        "New Deal Liberalism"
+      ],
+      "name": "Mixed Public Economy",
+      "summary": "Key industries and utilities are public or worker owned, while the rest of the economy is private but actively regulated.",
+      "views": {
+        "Healthcare": "A public option or single-payer system funded by government, with private providers inside strict rules.",
+        "Poverty & welfare": "A robust safety net plus public housing and jobs programs.",
+        "Employment & labor": "Strong unions and worker boards, plus minimum wages and public jobs in downturns.",
+        "Taxes": "High progressive taxes on income and wealth fund public ownership and programs.",
+        "Business & markets": "Public ownership of utilities and finance, with strong regulation of the remaining private firms.",
+        "Property & land": "A mix of public and private ownership: public control of essential assets and strict rules on private ones.",
+        "Education": "Free public schooling and affordable or free college funded by government.",
+        "Environment & energy": "Public investment and ownership of clean energy, backed by tough regulation."
+      }
+    },
+    {
+      "cells": [
+        "New Deal Liberalism",
+        "Corporate Capitalism"
+      ],
+      "name": "Managed Capitalism",
+      "summary": "Large corporations drive the economy, but government steers them through regulation, subsidies and public investment.",
+      "views": {
+        "Healthcare": "Private insurers and providers backed by government programs and mandates.",
+        "Poverty & welfare": "A safety net that supports workers and consumers so big business can keep growing, mostly linked to work.",
+        "Employment & labor": "Big employers dominate, with government setting minimum standards and backing negotiation with unions.",
+        "Taxes": "A progressive tax code with many breaks and credits tied to business investment.",
+        "Business & markets": "Government and large firms cooperate on strategy, with rules to limit excesses and bailouts to prevent collapse.",
+        "Property & land": "Strong corporate property rights, with government rules on use, antitrust and public interest.",
+        "Education": "Public schools plus employer-linked training and government-funded university research.",
+        "Environment & energy": "Regulation and subsidies guide large industries toward cleaner energy."
+      }
+    },
+    {
+      "cells": [
+        "Guild System",
+        "Nordic Model"
+      ],
+      "name": "Social Partnership",
+      "summary": "Unions, employer associations and the state bargain together over wages, benefits and economic policy.",
+      "views": {
+        "Healthcare": "Universal tax-funded care, with unions and associations helping plan and run it.",
+        "Poverty & welfare": "Generous benefits, partly administered by union-linked funds.",
+        "Employment & labor": "Industry-wide collective agreements set pay and conditions, with very high union membership.",
+        "Taxes": "High broad-based taxes plus contributions to joint funds run by unions and employers.",
+        "Business & markets": "Open markets, with firms organized in employer associations that bargain with unions.",
+        "Property & land": "Private property, with a strong worker and trade association role in how firms are run.",
+        "Education": "Free public schooling with apprenticeship and vocational training run jointly with the trades.",
+        "Environment & energy": "Industry and union agreements work alongside government climate targets."
+      }
+    },
+    {
+      "cells": [
+        "Nordic Model",
+        "Social Market"
+      ],
+      "name": "Coordinated Market Economy",
+      "summary": "Competitive private markets sit inside a network of strong social insurance, worker representation and long-term coordination.",
+      "views": {
+        "Healthcare": "Universal coverage through public or tightly regulated insurance.",
+        "Poverty & welfare": "Broad social insurance plus a strong safety net for those left out.",
+        "Employment & labor": "Collective bargaining, works councils and board seats for workers, with strong training.",
+        "Taxes": "High taxes and contributions funding social insurance.",
+        "Business & markets": "Competitive markets under strong rules, with long-term financing and cooperation between firms, banks and unions.",
+        "Property & land": "Private property with social obligations, plus some public ownership of key utilities.",
+        "Education": "Free or cheap schooling and university, with strong vocational and apprenticeship routes.",
+        "Environment & energy": "Ambitious climate policy using carbon pricing and strong industry standards."
+      }
+    },
+    {
+      "cells": [
+        "Social Market",
+        "Regulated Capitalism"
+      ],
+      "name": "Regulated Social Market",
+      "summary": "A market economy with clear rules and social insurance, but a lighter touch and lower taxes than the European welfare model.",
+      "views": {
+        "Healthcare": "Insurance-based care with regulation to ensure broad coverage and some competition.",
+        "Poverty & welfare": "Social insurance for workers plus a targeted safety net with work requirements.",
+        "Employment & labor": "Flexible markets with minimum standards, works councils and a moderate union role.",
+        "Taxes": "Moderate taxes and social contributions.",
+        "Business & markets": "Competition enforced by antitrust and consumer rules, with a light touch on everything else.",
+        "Property & land": "Strong private rights, with limited social obligations through zoning and environmental rules.",
+        "Education": "Public schools with choice, plus apprenticeships and subsidized college.",
+        "Environment & energy": "Market tools such as cap-and-trade and incentives, set within government standards."
+      }
+    },
+    {
+      "cells": [
+        "Mutualism",
+        "Left Libertarianism"
+      ],
+      "name": "Cooperative Commons",
+      "summary": "Voluntary cooperation: co-ops and mutual aid societies running on shared resources, with no central state.",
+      "views": {
+        "Healthcare": "Community clinics and mutual aid funds, with voluntary cooperation instead of state mandates.",
+        "Poverty & welfare": "Shared resources and land dividends, plus mutual aid networks.",
+        "Employment & labor": "Worker co-ops and self-employment, with no bosses and no state-run labor system.",
+        "Taxes": "Few or none, with voluntary contributions and charges for use of shared resources.",
+        "Business & markets": "Co-ops, credit unions and fair exchange, with no corporate privileges.",
+        "Property & land": "Use-based possession of land and tools, with natural resources held in common.",
+        "Education": "Community-run, voluntary and free schools and skill-sharing.",
+        "Environment & energy": "Local commons management, with polluters accountable to the community."
+      }
+    },
+    {
+      "cells": [
+        "Left Libertarianism",
+        "Classical Liberalism"
+      ],
+      "name": "Liberal Commons",
+      "summary": "Free markets and civil liberties, with natural resources like land shared by everyone.",
+      "views": {
+        "Healthcare": "Mostly voluntary and private, with mutual aid and some shared funding from resource dividends.",
+        "Poverty & welfare": "Growth plus a basic dividend from shared resources, instead of a large welfare state.",
+        "Employment & labor": "Free contracts with strong worker freedom and no state-granted corporate privilege.",
+        "Taxes": "Low, simple taxes, with land and resource charges as the main source.",
+        "Business & markets": "Free trade and open competition, with anti-monopoly rules and no special privileges.",
+        "Property & land": "Strong private property in goods, with land and natural resources taxed or shared.",
+        "Education": "Parent- and community-led choice among private schools, with open access.",
+        "Environment & energy": "Resource charges and clear property rights make polluters pay for what they use."
+      }
+    },
+    {
+      "cells": [
+        "Classical Liberalism",
+        "Right Libertarianism"
+      ],
+      "name": "Minimal-State Liberalism",
+      "summary": "A very small state limited to protecting rights and contracts, with nearly everything else left to private choice.",
+      "views": {
+        "Healthcare": "Private payment and charity, with government staying out apart from basic public health.",
+        "Poverty & welfare": "Charity and growth, with at most very limited relief.",
+        "Employment & labor": "Free contracts and few labor rules.",
+        "Taxes": "Very low, flat or minimal taxes.",
+        "Business & markets": "Free trade and competition with few regulations, and courts enforcing contracts.",
+        "Property & land": "Strong, nearly absolute private property rights.",
+        "Education": "Mostly private schools and vouchers, with minimal state involvement.",
+        "Environment & energy": "Property rights and court cases handle pollution, with little regulation."
+      }
+    },
+    {
+      "cells": [
+        "State Commune",
+        "Guild System"
+      ],
+      "name": "State-Guild Corporatism",
+      "summary": "The state organizes each industry into official associations that run production under its direction.",
+      "views": {
+        "Healthcare": "A state-run national service administered through trade or industry funds.",
+        "Poverty & welfare": "State-guaranteed basics delivered through workplace and trade organizations.",
+        "Employment & labor": "Workers belong to state-recognized trade bodies that set pay and conditions under national plans.",
+        "Taxes": "Dues and contributions to state-controlled bodies, plus direct state revenue.",
+        "Business & markets": "Industries organized into official associations under a national plan.",
+        "Property & land": "Collective ownership managed by trade bodies under state direction.",
+        "Education": "State schooling plus compulsory trade training run by the industry bodies.",
+        "Environment & energy": "National plans, with industry bodies responsible for resource use in their trade."
+      }
+    },
+    {
+      "cells": [
+        "Guild System",
+        "Mutualism"
+      ],
+      "name": "Cooperative Guilds",
+      "summary": "Trades and crafts organize themselves into member-owned guilds and co-ops that look after their own.",
+      "views": {
+        "Healthcare": "Guild and co-op benefit funds and community clinics.",
+        "Poverty & welfare": "Mutual aid within the guild and community.",
+        "Employment & labor": "Member-owned workshops and co-ops, with apprenticeships and shared standards.",
+        "Taxes": "Member dues and local contributions, with little or no central taxation.",
+        "Business & markets": "Guilds and co-ops set standards and trade fairly with each other.",
+        "Property & land": "Tools and workshops owned by members, and land used by the people who work it.",
+        "Education": "Apprenticeship and skill-sharing within the trade and community.",
+        "Environment & energy": "Trade-managed local resources and small-scale sustainable production."
+      }
+    },
+    {
+      "cells": [
+        "Social Ownership",
+        "Nordic Model"
+      ],
+      "name": "Democratic Socialism",
+      "summary": "A strong welfare state and public ownership of key industries, kept in check by elections and open markets.",
+      "views": {
+        "Healthcare": "Universal, tax-funded, publicly run care.",
+        "Poverty & welfare": "Generous benefits and guarantees, with public housing and strong support.",
+        "Employment & labor": "Strong unions, worker boards and sometimes job guarantees.",
+        "Taxes": "High progressive taxes on income and wealth.",
+        "Business & markets": "Open markets plus public or worker ownership in key sectors and utilities.",
+        "Property & land": "Private property remains, alongside large public and collective stakes in major industries.",
+        "Education": "Free public schools and universities.",
+        "Environment & energy": "Public ownership and heavy investment in clean energy, plus strong standards."
+      }
+    },
+    {
+      "cells": [
+        "Nordic Model",
+        "Left Libertarianism"
+      ],
+      "name": "Libertarian Social Democracy",
+      "summary": "Nordic-style social programs, delivered in decentralized, voluntary and cooperative ways instead of through large bureaucracies.",
+      "views": {
+        "Healthcare": "Universal coverage, but locally run and co-op provided, with patient control.",
+        "Poverty & welfare": "A basic income or dividend from shared resources replaces many separate benefit programs.",
+        "Employment & labor": "Strong unions and co-ops with minimal government job regulation.",
+        "Taxes": "High but simple taxes, focused on land, resources and wealth rather than many levies.",
+        "Business & markets": "Open markets with strong anti-monopoly rules and support for co-ops.",
+        "Property & land": "Private property for goods, with shared ownership of land and natural resources.",
+        "Education": "Public funding with local, parent- and community-run schools.",
+        "Environment & energy": "Resource taxes and dividends make polluters pay, backed by strong standards."
+      }
+    },
+    {
+      "cells": [
+        "New Deal Liberalism",
+        "Social Market"
+      ],
+      "name": "Progressive Mixed Economy",
+      "summary": "Competitive markets with a strong regulatory state, broad social insurance and room for public investment.",
+      "views": {
+        "Healthcare": "Regulated insurance with a public option or mandate so everyone is covered.",
+        "Poverty & welfare": "Social insurance plus a safety net and public programs for those in need.",
+        "Employment & labor": "Minimum wage, union rights and worker representation in firms.",
+        "Taxes": "Progressive taxes alongside social insurance contributions.",
+        "Business & markets": "Competitive markets with antitrust and a strong regulatory framework.",
+        "Property & land": "Private property protected, with social obligations and regulation for public benefit.",
+        "Education": "Public schools and subsidized college, with apprenticeship routes.",
+        "Environment & energy": "Regulation and public investment, with market tools like carbon pricing."
+      }
+    },
+    {
+      "cells": [
+        "Social Market",
+        "Classical Liberalism"
+      ],
+      "name": "Ordoliberalism",
+      "summary": "A free market with strong rules that guard competition, and a limited but real social safety net.",
+      "views": {
+        "Healthcare": "Regulated insurance with competition, and limited public support for those who can't pay.",
+        "Poverty & welfare": "A minimal safety net, with insurance-based support for workers.",
+        "Employment & labor": "Free contracts with basic standards and some worker representation.",
+        "Taxes": "Moderate, simple tax systems with a focus on stability.",
+        "Business & markets": "Strong antitrust and competition rules, with the state keeping the 'rules of the game' fair.",
+        "Property & land": "Strong property rights with limited social obligations.",
+        "Education": "Public schools with choice, plus apprenticeships.",
+        "Environment & energy": "Rules and prices (taxes or trading) set by the state, with markets doing the work."
+      }
+    },
+    {
+      "cells": [
+        "Corporate Capitalism",
+        "Regulated Capitalism"
+      ],
+      "name": "Regulated Corporate Capitalism",
+      "summary": "Large firms dominate the economy, with rules that limit abuse but largely leave them in charge.",
+      "views": {
+        "Healthcare": "Large insurers and hospital systems operating under regulation and standards.",
+        "Poverty & welfare": "Limited targeted help tied to work, with growth expected to do most of the lifting.",
+        "Employment & labor": "Large employers set the terms, with minimum standards and legal protections for workers.",
+        "Taxes": "Moderate taxes with breaks and credits for big business.",
+        "Business & markets": "Large firms operate under antitrust, consumer and financial rules, with close ties to regulators.",
+        "Property & land": "Strong corporate and intellectual property rights, with regulation on use.",
+        "Education": "Public and private schools, with strong employer influence on training and research.",
+        "Environment & energy": "Regulations negotiated with industry, plus market incentives and subsidies."
+      }
+    },
+    {
+      "cells": [
+        "Regulated Capitalism",
+        "Right Libertarianism"
+      ],
+      "name": "Deregulated Capitalism",
+      "summary": "Free enterprise as the main rule, with only a few basic regulations and low taxes.",
+      "views": {
+        "Healthcare": "A mostly private market with light regulation and little public insurance.",
+        "Poverty & welfare": "Charity and a thin safety net with strong work incentives.",
+        "Employment & labor": "Flexible labor markets with few mandates and weak unions.",
+        "Taxes": "Low taxes, especially on investment and business.",
+        "Business & markets": "Competition with only light regulation, and rules removed where possible.",
+        "Property & land": "Strong property rights with limited zoning and environmental restrictions.",
+        "Education": "School choice, vouchers and private options with limited public control.",
+        "Environment & energy": "Fewer rules, with market incentives and courts handling harm."
+      }
+    }
+  ]
+}

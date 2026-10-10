@@ -63,3 +63,16 @@ export interface EconomicSystemsViewsData {
   categories: string[];
   cells: Record<string, CellViews>;
 }
+
+/** Shape of data/economic-systems-combos.json: one blend per pair of orthogonally adjacent cells. */
+export interface Combo {
+  /** The two cell names being blended. */
+  cells: [string, string];
+  name: string;
+  summary: string;
+  views: Record<string, string>;
+}
+
+export interface EconomicSystemsCombosData {
+  combos: Combo[];
+}

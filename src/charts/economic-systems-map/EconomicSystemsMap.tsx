@@ -1,13 +1,28 @@
 import { useMemo, useState } from "react";
 import data from "../../../data/economic-systems-map.json";
 import views from "../../../data/economic-systems-views.json";
-import type { EconomicSystemsData, EconomicSystemsViewsData } from "./types";
+import combosData from "../../../data/economic-systems-combos.json";
+import type { Combo, EconomicSystemsCombosData, EconomicSystemsData, EconomicSystemsViewsData } from "./types";
 import { COLORS, GROUP_COLORS } from "./style";
 import { CELL_H, CELL_W, GRID_LEFT, GRID_TOP, HEADER_COL_W, HEADER_ROW_H } from "./style";
 import { GRID_H, GRID_W, GRID_X0, GRID_Y0, cellNameWidth, placeLabels, toX, toY } from "./layout";
 
 const model = data as EconomicSystemsData;
 const viewsModel = views as EconomicSystemsViewsData;
+const combos = (combosData as unknown as EconomicSystemsCombosData).combos;
+
+function ViewsList({ views }: { views: Record<string, string> }) {
+  return (
+    <dl className="views-list">
+      {viewsModel.categories.map((category) => (
+        <div key={category}>
+          <dt>{category}</dt>
+          <dd>{views[category]}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 const W = GRID_X0 + GRID_W + 8;
 const H = GRID_Y0 + GRID_H + 70;
@@ -16,10 +31,24 @@ const FONT = "system-ui, -apple-system, Segoe UI, sans-serif";
 export default function EconomicSystemsMap() {
   const [showExamples, setShowExamples] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  /** The adjacent cell chosen under "Combo with", if any. */
+  const [partner, setPartner] = useState<string | null>(null);
+
+  const select = (name: string) => {
+    setSelected(name);
+    setPartner(null);
+  };
   const labels = useMemo(() => placeLabels(model, model.figures), []);
 
   const selectedCell = model.cells.find((cell) => cell.name === selected);
   const selectedViews = selected ? viewsModel.cells[selected] : undefined;
+  const neighbors = selectedCell
+    ? model.cells.filter(
+        (cell) => Math.abs(cell.col - selectedCell.col) + Math.abs(cell.row - selectedCell.row) === 1,
+      )
+    : [];
+  const activeCombo: Combo | undefined =
+    selected && partner ? combos.find((c) => c.cells.includes(selected) && c.cells.includes(partner)) : undefined;
 
   const { stability, overlay } = model;
   const [x1, y1] = stability.from;
@@ -84,11 +113,11 @@ export default function EconomicSystemsMap() {
             role="button"
             tabIndex={0}
             aria-label={`${cell.name}: show common views`}
-            onClick={() => setSelected(cell.name)}
+            onClick={() => select(cell.name)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                setSelected(cell.name);
+                select(cell.name);
               }
             }}
           />
@@ -206,23 +235,47 @@ export default function EconomicSystemsMap() {
 
       {selectedCell && selectedViews ? (
         <section className="panel views" aria-live="polite">
-          <h2>{selectedCell.name}</h2>
-          <p className="muted">
-            {model.rows[selectedCell.row]} · {model.columns[selectedCell.col]}. {selectedViews.summary}
-          </p>
-          <dl className="views-list">
-            {viewsModel.categories.map((category) => (
-              <div key={category}>
-                <dt>{category}</dt>
-                <dd>{selectedViews.views[category]}</dd>
+          {activeCombo ? (
+            <>
+              <p className="views-crumb">
+                <button type="button" className="link-button" onClick={() => setPartner(null)}>
+                  &larr; Back to {selectedCell.name}
+                </button>
+              </p>
+              <h2>{activeCombo.name}</h2>
+              <p className="muted">
+                {activeCombo.cells[0]} + {activeCombo.cells[1]}. {activeCombo.summary}
+              </p>
+              <ViewsList views={activeCombo.views} />
+              <p className="views-note">
+                A blend of the two systems, not a position anyone necessarily holds. Go back to pick a different
+                neighbor.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2>{selectedCell.name}</h2>
+              <p className="muted">
+                {model.rows[selectedCell.row]} · {model.columns[selectedCell.col]}. {selectedViews.summary}
+              </p>
+              <ViewsList views={selectedViews.views} />
+              <p className="views-examples">
+                <strong>Historical examples:</strong> <span style={{ color: COLORS.auth }}>Auth:</span>{" "}
+                {selectedCell.auth} · <span style={{ color: COLORS.dem }}>Dem:</span> {selectedCell.dem}
+              </p>
+              <p className="views-note">
+                Views commonly held by supporters of this system, as a summary and not a position.
+              </p>
+              <div className="views-combo">
+                <strong>Combo with:</strong>
+                {neighbors.map((cell) => (
+                  <button key={cell.name} type="button" className="combo-button" onClick={() => setPartner(cell.name)}>
+                    {cell.name}
+                  </button>
+                ))}
               </div>
-            ))}
-          </dl>
-          <p className="views-examples">
-            <strong>Historical examples:</strong> <span style={{ color: COLORS.auth }}>Auth:</span> {selectedCell.auth} ·{" "}
-            <span style={{ color: COLORS.dem }}>Dem:</span> {selectedCell.dem}
-          </p>
-          <p className="views-note">Views commonly held by supporters of this system, as a summary and not a position.</p>
+            </>
+          )}
         </section>
       ) : (
         <p className="muted">Click a cell to see the common views of that system by topic.</p>

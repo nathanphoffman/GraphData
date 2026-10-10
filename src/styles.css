@@ -586,3 +586,43 @@ h1 {
   font-size: 12px;
   color: var(--muted);
 }
+
+.views-combo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+  font-size: 14px;
+}
+
+.combo-button {
+  font: inherit;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--link);
+  background: transparent;
+  color: var(--link);
+  cursor: pointer;
+}
+
+.combo-button:hover {
+  background: color-mix(in srgb, var(--link) 12%, transparent);
+}
+
+.link-button {
+  font: inherit;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--link);
+  cursor: pointer;
+}
+
+.views-crumb {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
