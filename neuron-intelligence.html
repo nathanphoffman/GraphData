@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuron Intelligence Explorer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e0e0e0; padding: 20px; }
+  h1 { text-align: center; color: #7eb8f7; margin-bottom: 6px; font-size: 1.4em; }
+  .subtitle { text-align: center; color: #888; font-size: 0.85em; margin-bottom: 20px; }
+  .slider-container { background: #1a1d27; border-radius: 12px; padding: 16px 24px; margin-bottom: 20px; }
+  .slider-row { display: flex; align-items: center; gap: 16px; }
+  label { color: #aaa; font-size: 0.9em; white-space: nowrap; }
+  input[type=range] { flex: 1; accent-color: #7eb8f7; height: 6px; }
+  .exponent-display { font-size: 1.6em; font-weight: bold; color: #7eb8f7; min-width: 40px; text-align: right; }
+  .formula { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 8px; }
+  .formula span { color: #7eb8f7; font-weight: bold; }
+  table { width: 100%; border-collapse: collapse; background: #1a1d27; border-radius: 12px; overflow: hidden; }
+  th { background: #232635; color: #7eb8f7; padding: 10px 14px; font-size: 0.82em; text-align: left; cursor: pointer; user-select: none; }
+  th:hover { background: #2a2f45; }
+  td { padding: 9px 14px; font-size: 0.84em; border-bottom: 1px solid #232635; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #20243a; }
+  .rank { font-weight: bold; color: #7eb8f7; }
+  .bar-cell { width: 180px; }
+  .bar-bg { background: #2a2f45; border-radius: 4px; height: 10px; width: 100%; }
+  .bar-fill { background: linear-gradient(90deg, #3a6fd8, #7eb8f7); border-radius: 4px; height: 10px; transition: width 0.3s; }
+  .score { color: #c8e6ff; font-family: monospace; font-size: 0.8em; }
+  .animal-name { font-weight: 600; }
+  .warning { color: #f7a07e; font-size: 0.78em; text-align: center; margin-top: 10px; display: none; }
+</style>
+</head>
+<body>
+
+<h1>Neuron Intelligence Explorer</h1>
+<div class="subtitle">Formula: Neurons<sup>x</sup> / Weight<sup>0.75</sup></div>
+
+  <div class="slider-container">
+  <div class="slider-row">
+    <label>Neuron Exponent (x):</label>
+    <input type="range" id="expSlider" min="0.5" max="3.0" step="0.05" value="1.5">
+    <div class="exponent-display" id="expVal">1.50</div>
+  </div>
+  <div class="formula">Stage 1: Score = Neurons<sup><span id="expFormula">1.50</span></sup> / Weight<sup><span id="wFormula">1.00</span></sup></div>
+  <div class="slider-row" style="margin-top:12px">
+    <label>Weight Exponent (w):</label>
+    <input type="range" id="wSlider" min="0.25" max="1.5" step="0.05" value="1.0">
+    <div class="exponent-display" id="wVal">1.00</div>
+  </div>
+  <div class="warning" id="warning">⚠ Exponent outside plausible range (1.0–2.0) — ranking likely degrades</div>
+  <div class="slider-row" style="margin-top:12px">
+    <label>Functional Exponent (k):</label>
+    <input type="range" id="kSlider" min="0.5" max="3.0" step="0.05" value="2.0">
+    <div class="exponent-display" id="kVal">2.00</div>
+  </div>
+  <div class="formula">Stage 2: Intelligence ∝ Score<sup><span id="kFormula">2.00</span></sup></div>
+</div>
+
+<table id="dataTable">
+  <thead>
+    <tr>
+      <th onclick="sortBy('rank')">#</th>
+      <th onclick="sortBy('name')">Animal</th>
+      <th onclick="sortBy('neurons')">Neurons (B)</th>
+      <th onclick="sortBy('weight')">Weight (kg)</th>
+      <th class="bar-cell">Relative Score</th>
+      <th onclick="sortBy('score')">Score</th>
+      <th onclick="sortBy('humanFrac')">% of Human</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+const animals = [
+  { name: "Human",           neurons: 86,       weight: 70      },
+  { name: "Chimpanzee",      neurons: 28,       weight: 45      },
+  { name: "Gorilla",         neurons: 33,       weight: 160     },
+  { name: "Dolphin",         neurons: 37,       weight: 150     },
+  { name: "Elephant",        neurons: 257,      weight: 4800    },
+  { name: "Orca",            neurons: 37,       weight: 3500    },
+  { name: "Crow",            neurons: 1.5,      weight: 0.4     },
+  { name: "Parrot (Grey)",   neurons: 1.6,      weight: 0.4     },
+  { name: "Pigeon",          neurons: 0.31,     weight: 0.35    },
+  { name: "Cat",             neurons: 0.76,     weight: 4       },
+  { name: "Dog",             neurons: 2.25,     weight: 15      },
+  { name: "Rat",             neurons: 0.2,      weight: 0.3     },
+  { name: "Mouse",           neurons: 0.071,    weight: 0.02    },
+  { name: "Octopus",         neurons: 0.5,      weight: 3       },
+  { name: "Honeybee",        neurons: 0.001,    weight: 0.0001  },
+  { name: "Rhesus Macaque",  neurons: 6.4,      weight: 7       },
+  { name: "Pig",             neurons: 2.2,      weight: 110     },
+  { name: "Sheep",           neurons: 1.0,      weight: 70      },
+  { name: "Horse",           neurons: 6.8,      weight: 500     },
+  { name: "Sperm Whale",     neurons: 200,      weight: 35000   },
+  { name: "Cow",             neurons: 3.0,      weight: 600     },
+  { name: "Cheetah",         neurons: 1.0,      weight: 50      },
+  { name: "Lion",            neurons: 4.0,      weight: 180     },
+  { name: "Wolf",            neurons: 2.0,      weight: 40      },
+  { name: "Raccoon",         neurons: 0.44,     weight: 5       },
+  { name: "Squirrel",        neurons: 0.056,    weight: 0.5     },
+  { name: "Rabbit",          neurons: 0.071,    weight: 2       },
+  { name: "Salmon",          neurons: 0.011,    weight: 4       },
+  { name: "Crocodile",       neurons: 0.08,     weight: 450     },
+  { name: "Frog",            neurons: 0.016,    weight: 0.05    },
+  { name: "Hamster",         neurons: 0.071,    weight: 0.12    },
+  { name: "Housefly",        neurons: 0.0001,   weight: 0.000012 },
+  { name: "Oyster",          neurons: 0.00000001, weight: 0.05   },
+];
+
+let currentSort = 'score';
+let sortAsc = false;
+
+function compute(x) {
+  return animals.map(a => ({
+    ...a,
+    score: Math.pow(a.neurons * 1e9, x) / Math.pow(a.weight, parseFloat(document.getElementById('wSlider').value))
+  }));
+}
+
+function sortData(data) {
+  return [...data].sort((a, b) => {
+    let va = a[currentSort], vb = b[currentSort];
+    if (currentSort === 'name') return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    return sortAsc ? va - vb : vb - va;
+  });
+}
+
+function render(x) {
+  const data = compute(x);
+  const humanScore = data.find(a => a.name === "Human").score;
+  const k = parseFloat(document.getElementById('kSlider').value);
+  const humanFinal = Math.pow(humanScore, k);
+  const sorted = sortData(data.map(a => {
+    const final = Math.pow(a.score, k);
+    return { ...a, humanFrac: final / humanFinal * 100 };
+  }));
+  const maxScore = Math.max(...sorted.map(d => d.score));
+
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+
+  sorted.forEach((d, i) => {
+    const pct = (d.score / maxScore * 100).toFixed(1);
+    const scoreStr = d.score.toExponential(2);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="rank">${i + 1}</td>
+      <td class="animal-name">${d.name}</td>
+      <td>${d.neurons < 0.001 ? d.neurons.toExponential(1) : d.neurons}</td>
+      <td>${d.weight}</td>
+      <td class="bar-cell">
+        <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+      </td>
+      <td class="score">${scoreStr}</td>
+      <td class="score">${d.humanFrac.toFixed(2)}%</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  const warn = document.getElementById('warning');
+  warn.style.display = (x < 1.0 || x > 2.0) ? 'block' : 'none';
+}
+
+function sortBy(col) {
+  if (currentSort === col) sortAsc = !sortAsc;
+  else { currentSort = col; sortAsc = col === 'name'; }
+  render(parseFloat(document.getElementById('expSlider').value));
+}
+
+document.getElementById('wSlider').addEventListener('input', e => {
+  const w = parseFloat(e.target.value);
+  document.getElementById('wVal').textContent = w.toFixed(2);
+  document.getElementById('wFormula').textContent = w.toFixed(2);
+  render(parseFloat(document.getElementById('expSlider').value));
+});
+
+document.getElementById('kSlider').addEventListener('input', e => {
+  const k = parseFloat(e.target.value);
+  document.getElementById('kVal').textContent = k.toFixed(2);
+  document.getElementById('kFormula').textContent = k.toFixed(2);
+  render(parseFloat(document.getElementById('expSlider').value));
+});
+
+document.getElementById('expSlider').addEventListener('input', e => {
+  const x = parseFloat(e.target.value);
+  document.getElementById('expVal').textContent = x.toFixed(2);
+  document.getElementById('expFormula').textContent = x.toFixed(2);
+  render(x);
+});
+
+render(1.5);
+</script>
+</body>
+</html>

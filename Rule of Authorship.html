@@ -1,0 +1,470 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>Rule of Authorship</title>
+<style>
+:root{
+  --bg:#EAE6DA;
+  --surface:#F5F2E8;
+  --surface-2:#DFDACB;
+  --ink:#241F19;
+  --ink-soft:#5A5142;
+  --rule:#C9C2AE;
+  --arneson:#4B5E3A;
+  --arneson-bg:#E3E8D8;
+  --gygax:#395270;
+  --gygax-bg:#DCE3EA;
+  --joint:#7A6A40;
+  --joint-bg:#EDE6D2;
+  --disputed:#A23B2E;
+  --disputed-bg:#F3DED9;
+  --stamp:#A23B2E;
+  --serif: Iowan Old Style, "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --mono: "Courier New", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1C1A16;
+    --surface:#262320;
+    --surface-2:#302C27;
+    --ink:#EDE7DA;
+    --ink-soft:#B8AF9C;
+    --rule:#45403A;
+    --arneson:#8FB374;
+    --arneson-bg:#2C3324;
+    --gygax:#86A9CC;
+    --gygax-bg:#26333F;
+    --joint:#C9AE6E;
+    --joint-bg:#3A331F;
+    --disputed:#E08776;
+    --disputed-bg:#3A2420;
+    --stamp:#E08776;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1C1A16;
+  --surface:#262320;
+  --surface-2:#302C27;
+  --ink:#EDE7DA;
+  --ink-soft:#B8AF9C;
+  --rule:#45403A;
+  --arneson:#8FB374;
+  --arneson-bg:#2C3324;
+  --gygax:#86A9CC;
+  --gygax-bg:#26333F;
+  --joint:#C9AE6E;
+  --joint-bg:#3A331F;
+  --disputed:#E08776;
+  --disputed-bg:#3A2420;
+  --stamp:#E08776;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--serif);
+  line-height:1.55;
+}
+.wrap{
+  max-width:760px;
+  margin:0 auto;
+  padding:64px 24px 120px;
+}
+
+/* Masthead */
+.masthead{
+  border-top:3px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+  padding:18px 0 14px;
+  margin-bottom:8px;
+}
+.masthead .kicker{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  display:flex;
+  justify-content:space-between;
+}
+h1{
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:clamp(30px,5vw,42px);
+  letter-spacing:-0.01em;
+  text-wrap:balance;
+  margin:10px 0 4px;
+}
+.subhead{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--ink-soft);
+  margin-bottom:0;
+}
+
+/* Case strip */
+.case-strip{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-soft);
+  padding:12px 0 28px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:28px;
+}
+.case-strip b{color:var(--ink);font-weight:700;}
+
+/* Caveat box */
+.caveat{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:4px solid var(--stamp);
+  padding:16px 20px;
+  margin:0 0 36px;
+  font-size:14.5px;
+  color:var(--ink-soft);
+}
+.caveat strong{color:var(--ink);}
+
+/* Legend */
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0 0 40px;
+}
+.pill{
+  font-family:var(--sans);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  padding:5px 10px;
+  border-radius:3px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+}
+.pill.arneson{background:var(--arneson-bg);color:var(--arneson);}
+.pill.gygax{background:var(--gygax-bg);color:var(--gygax);}
+.pill.joint{background:var(--joint-bg);color:var(--joint);}
+.pill.disputed{background:var(--disputed-bg);color:var(--disputed);}
+
+/* Section headers */
+h2{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  border-bottom:1px solid var(--rule);
+  padding-bottom:8px;
+  margin:56px 0 20px;
+}
+h2 span{color:var(--stamp);}
+
+/* Rule entry */
+.rule{
+  border-left:3px solid var(--rule);
+  padding:2px 0 2px 20px;
+  margin-bottom:30px;
+}
+.rule.arneson{border-left-color:var(--arneson);}
+.rule.gygax{border-left-color:var(--gygax);}
+.rule.joint{border-left-color:var(--joint);}
+.rule.disputed{border-left-color:var(--disputed);}
+
+.rule-head{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:6px;
+}
+.rule-name{
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:19px;
+}
+.verdict{
+  font-family:var(--sans);
+  font-size:13px;
+  color:var(--ink-soft);
+  margin:0 0 10px;
+}
+.rule p{
+  margin:0 0 10px;
+  font-size:15px;
+}
+.rule p:last-child{margin-bottom:0;}
+
+/* Exhibit / quote */
+.exhibit{
+  font-family:var(--mono);
+  font-size:12.5px;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  padding:10px 14px;
+  margin:10px 0;
+  color:var(--ink-soft);
+}
+.exhibit .cite{
+  color:var(--stamp);
+  font-weight:700;
+}
+.exhibit q{quotes:"\201C" "\201D";}
+
+/* verdict table */
+.summary-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13.5px;
+  margin-bottom:8px;
+}
+.summary-table th{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-align:left;
+  color:var(--ink-soft);
+  border-bottom:1px solid var(--ink);
+  padding:6px 8px;
+}
+.summary-table td{
+  padding:8px;
+  border-bottom:1px solid var(--rule);
+  vertical-align:top;
+}
+.summary-table tr:last-child td{border-bottom:none;}
+.tbl-wrap{overflow-x:auto; margin-bottom:40px;}
+.tag{
+  font-family:var(--sans);
+  font-size:10.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  padding:2px 7px;
+  border-radius:3px;
+  white-space:nowrap;
+  display:inline-block;
+}
+.tag.arneson{background:var(--arneson-bg);color:var(--arneson);}
+.tag.gygax{background:var(--gygax-bg);color:var(--gygax);}
+.tag.joint{background:var(--joint-bg);color:var(--joint);}
+.tag.disputed{background:var(--disputed-bg);color:var(--disputed);}
+
+footer{
+  margin-top:60px;
+  padding-top:20px;
+  border-top:1px solid var(--rule);
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-soft);
+}
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="kicker"><span>Civ. No. 4-79-109 &middot; D. Minn.</span><span>Compiled 2026</span></div>
+    <h1>Who Wrote Dungeons &amp; Dragons</h1>
+    <p class="subhead">A rule-by-rule attribution, built from the Arneson v. Gygax case file, the Dalluhn Manuscript forensic analysis, and the three 1974 OD&amp;D booklets.</p>
+  </div>
+
+  <div class="case-strip">
+    <span>Sources: <b>854-page case file</b> (pleadings, interrogatories, exhibits, two Arneson depositions)</span>
+    <span><b>Dalluhn Manuscript</b> analysis (Jon Peterson, 2015)</span>
+    <span>Books I&ndash;III, <b>OD&amp;D</b> (1974)</span>
+  </div>
+
+  <div class="caveat">
+    <strong>The case never went to trial.</strong> Arneson v. Gygax was dismissed by stipulation in March 1981 &mdash; no judge or jury ever ruled on who invented what. Everything below is drawn from sworn but self-interested claims (interrogatory answers, depositions, pleadings) on both sides, weighed against the one source with no stake in the outcome: Jon Peterson's textual forensics on the Dalluhn Manuscript, a rediscovered 1973 transitional draft of D&amp;D that sits between Arneson's Blackmoor notes and the published game. Where the two sides agree, or where Peterson's independent lineage-tracing corroborates a claim, confidence is marked higher.
+  </div>
+
+  <div class="legend">
+    <span class="pill arneson">Arneson</span>
+    <span class="pill gygax">Gygax</span>
+    <span class="pill joint">Joint / Chainmail-rooted</span>
+    <span class="pill disputed">Disputed</span>
+  </div>
+
+  <h2>Verdict at a glance</h2>
+  <div class="tbl-wrap">
+  <table class="summary-table">
+    <tr><th>Rule / element</th><th>Leans toward</th><th>Confidence</th></tr>
+    <tr><td>Dungeon as a leveled, depth = danger environment</td><td><span class="tag arneson">Arneson</span></td><td>Moderate&ndash;high</td></tr>
+    <tr><td>Wilderness / outdoor adventuring as a setting</td><td><span class="tag arneson">Arneson</span></td><td>Moderate</td></tr>
+    <tr><td>Experience points &amp; character leveling</td><td><span class="tag arneson">Arneson</span></td><td>High</td></tr>
+    <tr><td>Character abilities (the six stats)</td><td><span class="tag joint">Joint</span> &mdash; Arneson-seeded</td><td>High</td></tr>
+    <tr><td>Hit points / hit dice as damage tracking</td><td><span class="tag joint">Joint</span> &mdash; converged independently</td><td>Moderate</td></tr>
+    <tr><td>Armor Class &amp; the Attack Matrix (to-hit tables)</td><td><span class="tag gygax">Gygax</span> (via Chainmail)</td><td>High</td></tr>
+    <tr><td>Saving throws</td><td><span class="tag joint">Joint</span></td><td>Moderate</td></tr>
+    <tr><td>Alignment (Law / Neutral / Chaos)</td><td><span class="tag gygax">Gygax</span> (via Chainmail)</td><td>High</td></tr>
+    <tr><td>Vancian spell memorization</td><td><span class="tag gygax">Gygax</span></td><td>Moderate&ndash;high</td></tr>
+    <tr><td>Core spell lists &amp; magic items</td><td><span class="tag gygax">Gygax</span></td><td>Moderate&ndash;high</td></tr>
+    <tr><td>Monster bestiary (base list)</td><td><span class="tag gygax">Gygax</span> (via Chainmail)</td><td>High</td></tr>
+    <tr><td>Individual monster lore (roc, giants, dragons, dervishes)</td><td><span class="tag arneson">Arneson</span></td><td>High</td></tr>
+    <tr><td>Economics: investments, wages, taxation, prices</td><td><span class="tag arneson">Arneson</span></td><td>High</td></tr>
+    <tr><td>Naval combat</td><td><span class="tag arneson">Arneson</span></td><td>High</td></tr>
+    <tr><td>Aerial combat</td><td><span class="tag arneson">Arneson</span> (concept) / <span class="tag gygax">Gygax</span> (text)</td><td>High</td></tr>
+    <tr><td>"Dungeon Master" as a referee role</td><td><span class="tag disputed">Disputed</span></td><td>Low&ndash;moderate</td></tr>
+    <tr><td>Cleric class origin</td><td><span class="tag arneson">Arneson</span> (in-play origin)</td><td>Moderate</td></tr>
+    <tr><td>Actual prose of the three 1974 booklets</td><td><span class="tag gygax">Gygax</span></td><td>Very high</td></tr>
+    <tr><td>"Blackmoor" (Supplement II)</td><td><span class="tag arneson">Arneson</span></td><td>Very high</td></tr>
+    <tr><td>"Greyhawk" (Supplement I)</td><td><span class="tag gygax">Gygax</span> &amp; Kuntz</td><td>Very high</td></tr>
+    <tr><td>AD&amp;D Monster Manual / Players Handbook</td><td><span class="tag disputed">Disputed</span></td><td>&mdash;</td></tr>
+  </table>
+  </div>
+
+  <h2><span>01</span> &nbsp;Character system</h2>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Dungeon depth as difficulty</span><span class="pill arneson">Arneson</span></div>
+    <p class="verdict">The idea that deeper dungeon levels hold tougher monsters and richer treasure &mdash; the "megadungeon" premise itself &mdash; is Arneson's, and it's not seriously contested.</p>
+    <p>Arneson's Blackmoor dungeon predates any Gygax-run dungeon by roughly a year. In his sworn interrogatory answer he states this plainly, and nothing in TSR's counter-filings disputes the specific point (they dispute his overall credit, not this detail).</p>
+    <div class="exhibit"><span class="cite">Arneson Interrog. Answer No. 6</span> &mdash; <q>the dungeon-as-leveled-setting concept (deeper levels = more dangerous monsters/richer treasure)</q> claimed as his contribution.</div>
+  </div>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Wilderness adventuring</span><span class="pill arneson">Arneson</span></div>
+    <p class="verdict">Arneson claims he introduced taking the game outdoors, beyond the dungeon crawl.</p>
+    <div class="exhibit"><span class="cite">Arneson Interrog. Answer No. 6</span> &mdash; <q>Plaintiff also introduced the concept of having the setting of the game outdoors.</q></div>
+  </div>
+
+  <div class="rule joint">
+    <div class="rule-head"><span class="rule-name">The six character abilities</span><span class="pill joint">Joint / Arneson-seeded</span></div>
+    <p class="verdict">Traceable lineage: Arneson's 1972 Blackmoor character sheet ("Wizard Gaylord") had Brains, Looks, Health, Strength, Courage, and more &mdash; a personality-trait hodgepodge. The Dalluhn Manuscript shows a narrowed six: Intelligence, Cunning, Strength, Health, Appearance, Ego. Published OD&amp;D lands on the familiar six, with Cunning renamed Wisdom and Health renamed Constitution, and Dexterity added new.</p>
+    <p>This is Jon Peterson's strongest documented lineage in the whole analysis &mdash; the concept and early evolution trace to Blackmoor, but the final six-stat system and naming was fixed during the Gygax-led drafting stage.</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.5</span> &mdash; <q>Dalluhn thus does appear to be a missing link between early Blackmoor and OD&amp;D&hellip; 'Cunning' was the prime requisite for Clerics, per 'Wisdom' in OD&amp;D.</q></div>
+  </div>
+
+  <div class="rule disputed">
+    <div class="rule-head"><span class="rule-name">"Dungeon Master" as a role</span><span class="pill disputed">Disputed</span></div>
+    <p class="verdict">Arneson claims credit for creating the referee-as-Dungeon-Master concept in his interrogatory answers. No corroborating exhibit or independent source in the record confirms or refutes this specifically &mdash; treat it as an assertion, not established fact.</p>
+    <div class="exhibit"><span class="cite">Arneson Interrog. Answer No. 6</span> &mdash; claims creation of "the 'Dungeon Master' as central referee figure who designs the dungeon and narrates play."</div>
+  </div>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Cleric class</span><span class="pill arneson">Arneson (origin)</span></div>
+    <p class="verdict">Under oath, Arneson tied his separately-published "Blackmoor" supplement to new cleric material "beyond what appeared in original D&amp;D," confirming clerics were live and evolving in his own campaign material independent of Gygax's editing. This lines up with the broader, well-documented history that the cleric class was born mid-session in actual Blackmoor play (in response to a vampire-type NPC) before it was ever written up for publication &mdash; though that specific incident isn't itself recounted in the case file text reviewed here.</p>
+    <div class="exhibit"><span class="cite">Arneson Dep. II, p.821</span> &mdash; testifies his "Blackmoor" supplement added clerics as a class beyond the original D&amp;D treatment.</div>
+  </div>
+
+  <h2><span>02</span> &nbsp;Combat &amp; damage</h2>
+
+  <div class="rule gygax">
+    <div class="rule-head"><span class="rule-name">Armor Class &amp; the Attack Matrix</span><span class="pill gygax">Gygax, via Chainmail</span></div>
+    <p class="verdict">The to-hit tables descend directly from Chainmail's Appendix B combat tables &mdash; a Gygax/Jeff Perren wargame that predates any contact with Arneson. The Dalluhn Manuscript's combat tables are shown to be slight renumbered modifications of the Chainmail originals.</p>
+    <p>Interestingly, when TSR's attorneys asked Arneson under oath whether Armor Class came from Chainmail, he said no &mdash; but that's a claim that AC was an original D&amp;D idea, not a claim that he personally invented it. The textual evidence (Dalluhn Tables 30&ndash;31) says otherwise: it's Chainmail's ranged/melee tables with armor class renumbered.</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.1</span> &mdash; <q>Tables 30 and 31&hellip; are slight modifications of the ranged and melee combat tables from second edition Chainmail Appendix B to incorporate renumbered armor class.</q></div>
+    <div class="exhibit"><span class="cite">Arneson Dep. I, p.786&ndash;789</span> &mdash; asked if Armor Classes came from Chainmail: <q>If you're referring to Armor Classes, no.</q></div>
+  </div>
+
+  <div class="rule joint">
+    <div class="rule-head"><span class="rule-name">"Hit dice" as a damage concept</span><span class="pill joint">Joint / converging</span></div>
+    <p class="verdict">Arneson's most consistently repeated claim across the record &mdash; his Reply to TSR's counterclaims, and both depositions &mdash; is that he reworked Chainmail's flat combat table into a dice-rolled hit-point system. But this one softens under the Dalluhn evidence.</p>
+    <p>Chainmail already had a "hits to kill" concept for monsters &mdash; a lycanthrope "takes four simultaneous hits&hellip; to kill," an ogre "six" &mdash; but that's a fixed threshold, not a randomized pool. The dice-rolled version &mdash; roll a die to see how many hit points a blow does, tracked as a shrinking pool &mdash; shows up independently on both sides by 1973: in Arneson's Blackmoor notes ("take from 1&ndash;6 hits") and separately in Gygax's own 1973 draft pages (the Mornard Fragments, written and corrected in Gygax's hand, with no Arneson involvement in that document). That makes this look like parallel convergence between the two camps rather than a clean, one-directional handoff from Arneson to Gygax.</p>
+    <div class="exhibit"><span class="cite">Arneson Reply to Counterclaims &para;VIII</span> &mdash; <q>even the 'fantasy combat table' was substantially altered and changed by Plaintiff's introduction of the concept of 'hit dice.'</q></div>
+    <div class="exhibit"><span class="cite">Mornard Fragment B</span> (Gygax's 1973 draft) &mdash; <q>a die is rolled to determine how many hit points the man/monster receives (usually 1-6, but as high as 2-12 if fighting opponents with the ability to fight at double hits).</q></div>
+  </div>
+
+  <div class="rule joint">
+    <div class="rule-head"><span class="rule-name">Saving throws</span><span class="pill joint">Joint</span></div>
+    <p class="verdict">Arneson claims this originated with him and D&amp;D jointly. But the Mornard Fragments &mdash; Gygax's own 1973 draft pages, independent of Arneson &mdash; already specify a d20 saving throw before the Dalluhn Manuscript's variant (3d6) exists. The concept was in motion on Gygax's side of the drafting process regardless of Arneson's input.</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.7</span> &mdash; <q>the saving throw table at the end of Fragment D explicitly states that "saving throws are with a 20-sided die."</q></div>
+  </div>
+
+  <h2><span>03</span> &nbsp;Magic</h2>
+
+  <div class="rule gygax">
+    <div class="rule-head"><span class="rule-name">Vancian spell memorization</span><span class="pill gygax">Gygax</span></div>
+    <p class="verdict">The published OD&amp;D system &mdash; memorize spells in advance, forget them when cast &mdash; doesn't match either transitional stage. Blackmoor's original magic was reagent-based (spells prepared from material components); the Dalluhn Manuscript shows a third, in-between system (a flat daily allowance per tier, cast freely). Full Vancian memorization only appears at the very end, which points to it being fixed late in Gygax's editing pass, not carried over from Arneson's Blackmoor rules.</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.4</span> &mdash; <q>Spellcasting in the Dalluhn Manuscript is neither Vancian like OD&amp;D&hellip; nor reagent-based like Blackmoor.</q></div>
+  </div>
+
+  <div class="rule gygax">
+    <div class="rule-head"><span class="rule-name">Spell lists &amp; magic items (the bulk of them)</span><span class="pill gygax">Gygax</span></div>
+    <p class="verdict">Both grow substantially between the Dalluhn stage and final publication &mdash; 26 more Magic-User spells appear in OD&amp;D than in Dalluhn, virtually all just appended to the existing tier structure. The percentile item tables show heavy, visible hand-editing in Gygax's own Mornard Fragments as he tuned drop rates and slotted in new items (Bag of Holding, Displacer Cloak, etc.).</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.4</span> &mdash; lists 26 OD&amp;D Magic-User spells absent from Dalluhn, added late in development.</div>
+  </div>
+
+  <h2><span>04</span> &nbsp;Monsters &amp; treasure</h2>
+
+  <div class="rule gygax">
+    <div class="rule-head"><span class="rule-name">The bestiary as a structure</span><span class="pill gygax">Gygax, via Chainmail</span></div>
+    <p class="verdict">The base monster list, and the practice of building it outward from Chainmail's second-edition creatures, is Gygax's framework &mdash; Chainmail had sixteen monsters before Arneson was ever involved, and the OD&amp;D list grows from that same root, sequentially, as traced through the Mornard Fragments' edit history.</p>
+  </div>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Specific monster lore &amp; behavior</span><span class="pill arneson">Arneson</span></div>
+    <p class="verdict">Within that Gygax-built structure, several individual entries trace directly to Arneson's Blackmoor play notes: the roc's text is a near-verbatim graft of his 1972 Loch Gloomen material; giants' cave-dweller/castle-dweller split, dragon hit-die ranges, "true trolls," brigands, and the dervish "wagon train" economics all echo his notes closely enough &mdash; including a copy-paste error that misattributes dervish loot rules to orcs &mdash; that Peterson treats this as some of the strongest evidence in the whole document.</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.2</span> &mdash; <q>the Dalluhn roc text&hellip; provides some of the most compelling evidence for identifying the Dalluhn Manuscript as a transitional manuscript drawing equally on Gygax and Arneson's work.</q></div>
+  </div>
+
+  <h2><span>05</span> &nbsp;World &amp; economics</h2>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Investments, wages, prices, taxation</span><span class="pill arneson">Arneson</span></div>
+    <p class="verdict">This is the cleanest attribution in the entire analysis. Arneson's 1972 Blackmoor price list for draft horses, carts, rafts, merchant ships, and galleys survives into the Dalluhn Manuscript at nearly identical values, and from there into OD&amp;D's construction and equipment tables. The 1% wealth tax on experience points, worded almost identically across all three stages, traces the same path.</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.8</span> &mdash; <q>the prices of draft horses (30), small carts/wagons (80), wagons (160), rafts (40), merchant ships (5000) and galleys (20000) correspond too closely to be coincidental.</q></div>
+  </div>
+
+  <h2><span>06</span> &nbsp;Naval &amp; aerial combat</h2>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Naval combat</span><span class="pill arneson">Arneson</span></div>
+    <p class="verdict">Arneson co-authored "Don't Give Up the Ship," a 1972 naval miniatures ruleset, confirmed under oath as his own work with two co-authors. That's a direct, named precedent for the naval combat section of Book III, and Peterson separately notes the naval monsters' damage-phrasing pattern points to a late Arneson contribution that never got folded into the main monster list &mdash; visible today as an inconsistency between the naval section and the core bestiary.</p>
+    <div class="exhibit"><span class="cite">Arneson Dep. II, p.669&ndash;670</span> &mdash; confirms authorship of "Don't Give Up the Ship" (1972).</div>
+  </div>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Aerial combat</span><span class="pill arneson">Arneson (concept)</span></div>
+    <p class="verdict">The clearest split-credit case in the whole record: Arneson designed the aerial rules as their own standalone game, "Battle in the Skies." Gygax's own 1973&ndash;74 letters to Arneson, entered as exhibits, reference him rewriting "air and sea rules" for inclusion &mdash; meaning Gygax took Arneson's separate game and condensed it into a section of Book III himself. Concept: Arneson. Final text: Gygax.</p>
+    <div class="exhibit"><span class="cite">Dalluhn analysis &sect;4.12</span> &mdash; <q>We know that Dave Arneson originally designed the aerial rules as an independent game called "Battle in the Skies," which Gygax condensed into a section of U&amp;WA.</q></div>
+  </div>
+
+  <h2><span>07</span> &nbsp;The books themselves</h2>
+
+  <div class="rule gygax">
+    <div class="rule-head"><span class="rule-name">The prose, draft to draft</span><span class="pill gygax">Gygax</span></div>
+    <p class="verdict">Not seriously in dispute. Arneson himself testified he wrote none of the actual sentences that appear in the three published booklets &mdash; he sent ideas, concepts, and corrections by phone and letter; Gygax did every draft, every edit, and the final typing in Lake Geneva, alone.</p>
+    <div class="exhibit"><span class="cite">Arneson Dep. I, p.776</span> &mdash; <q>there isn't a single sentence in any of these three booklets that you actually wrote yourself</q> &mdash; confirmed by Arneson.</div>
+  </div>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">Four monster illustrations</span><span class="pill arneson">Arneson</span></div>
+    <p class="verdict">A small, concrete, undisputed exception to the above: Arneson personally drew the Hydra, Lizard, Giant Beetle, and Purple Worm illustrations that appear in Book II, and both sides agree they're his unaltered artwork.</p>
+  </div>
+
+  <div class="rule arneson">
+    <div class="rule-head"><span class="rule-name">"Blackmoor," Supplement II</span><span class="pill arneson">Arneson</span></div>
+    <p class="verdict">Uncontested. Arneson personally wrote and typed this supplement &mdash; the Temple of the Frog scenario, a revised combat system, a giant-insect list &mdash; and took TSR stock in place of a royalty on it.</p>
+  </div>
+
+  <div class="rule gygax">
+    <div class="rule-head"><span class="rule-name">"Greyhawk," Supplement I</span><span class="pill gygax">Gygax &amp; Kuntz</span></div>
+    <p class="verdict">Prepared in Lake Geneva by Gygax and Robert Kuntz. Arneson testified he had no part in it and received no royalty.</p>
+  </div>
+
+  <div class="rule disputed">
+    <div class="rule-head"><span class="rule-name">AD&amp;D Monster Manual &amp; Players Handbook (1977&ndash;78)</span><span class="pill disputed">Disputed</span></div>
+    <p class="verdict">This is what the lawsuit actually turned on, and it's the one item the case file doesn't settle. TSR's position: independently created by Gygax (roughly 1000&ndash;1200 of his hours per book) plus named staff, entirely after the 1975 royalty agreement, owing Arneson nothing. Arneson's position: these were "copied in substantial part and wholly derived" from the game he co-authored, republished under Gygax's name alone to cut him out. The case settled by stipulated dismissal before either claim was tested at trial.</p>
+  </div>
+
+  <h2>Bottom line</h2>
+  <div class="rule joint" style="border-left-color:var(--ink-soft)">
+    <p>Strip away the litigation posturing on both sides and a consistent shape emerges. <strong>Arneson</strong> supplied the world: the dungeon as a place with depth and danger, the wilderness beyond it, the economy that runs underneath it, naval and aerial combat, and a fair amount of specific monster behavior lifted near-verbatim from his own Blackmoor notes. <strong>Gygax</strong> supplied the engine: the Chainmail-descended combat and armor class math, the alignment framework, the Vancian magic system, the bulk of the spell and magic-item lists, and &mdash; almost without exception &mdash; every sentence of actual published text, having drafted, edited, and typed all three booklets himself in Lake Geneva. Both names belong on the cover; neither side's sworn "solely mine" claims survive contact with the Dalluhn Manuscript's independent paper trail.</p>
+  </div>
+
+  <footer>
+    Sources: Arneson v. Gygax, Civ. No. 4-79-109 (D. Minn.), case file pp. 1&ndash;855 &middot; Jon Peterson, "The Dalluhn Manuscript: A Pre-Publication Edition of Dungeons &amp; Dragons" (2015) &middot; OD&amp;D Books I&ndash;III (1974)
+  </footer>
+
+</div>
+
+</body></html>

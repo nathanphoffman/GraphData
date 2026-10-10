@@ -1,0 +1,234 @@
+{
+  "title": "Who Wrote Dungeons & Dragons",
+  "kicker": ["Civ. No. 4-79-109 · D. Minn.", "Compiled 2026"],
+  "subhead": "A rule-by-rule attribution, built from the Arneson v. Gygax case file, the Dalluhn Manuscript forensic analysis, and the three 1974 OD&D booklets.",
+  "caseStrip": [
+    [{ "text": "Sources: " }, { "text": "854-page case file", "strong": true }, { "text": " (pleadings, interrogatories, exhibits, two Arneson depositions)" }],
+    [{ "text": "Dalluhn Manuscript", "strong": true }, { "text": " analysis (Jon Peterson, 2015)" }],
+    [{ "text": "Books I–III, " }, { "text": "OD&D", "strong": true }, { "text": " (1974)" }]
+  ],
+  "caveat": [
+    { "text": "The case never went to trial.", "strong": true },
+    { "text": " Arneson v. Gygax was dismissed by stipulation in March 1981 — no judge or jury ever ruled on who invented what. Everything below is drawn from sworn but self-interested claims (interrogatory answers, depositions, pleadings) on both sides, weighed against the one source with no stake in the outcome: Jon Peterson's textual forensics on the Dalluhn Manuscript, a rediscovered 1973 transitional draft of D&D that sits between Arneson's Blackmoor notes and the published game. Where the two sides agree, or where Peterson's independent lineage-tracing corroborates a claim, confidence is marked higher." }
+  ],
+  "summary": [
+    { "element": "Dungeon as a leveled, depth = danger environment", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Moderate–high" },
+    { "element": "Wilderness / outdoor adventuring as a setting", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Moderate" },
+    { "element": "Experience points & character leveling", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
+    { "element": "Character abilities (the six stats)", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — Arneson-seeded" }], "confidence": "High" },
+    { "element": "Hit points / hit dice as damage tracking", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — converged independently" }], "confidence": "Moderate" },
+    { "element": "Armor Class & the Attack Matrix (to-hit tables)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (via Chainmail)" }], "confidence": "High" },
+    { "element": "Saving throws", "leans": [{ "text": "Joint", "owner": "joint" }], "confidence": "Moderate" },
+    { "element": "Alignment (Law / Neutral / Chaos)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (via Chainmail)" }], "confidence": "High" },
+    { "element": "Vancian spell memorization", "leans": [{ "text": "Gygax", "owner": "gygax" }], "confidence": "Moderate–high" },
+    { "element": "Core spell lists & magic items", "leans": [{ "text": "Gygax", "owner": "gygax" }], "confidence": "Moderate–high" },
+    { "element": "Monster bestiary (base list)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (via Chainmail)" }], "confidence": "High" },
+    { "element": "Individual monster lore (roc, giants, dragons, dervishes)", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
+    { "element": "Economics: investments, wages, taxation, prices", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
+    { "element": "Naval combat", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
+    { "element": "Aerial combat", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " (concept) / " }, { "text": "Gygax", "owner": "gygax" }, { "text": " (text)" }], "confidence": "High" },
+    { "element": "“Dungeon Master” as a referee role", "leans": [{ "text": "Disputed", "owner": "disputed" }], "confidence": "Low–moderate" },
+    { "element": "Cleric class origin", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " (in-play origin)" }], "confidence": "Moderate" },
+    { "element": "Actual prose of the three 1974 booklets", "leans": [{ "text": "Gygax", "owner": "gygax" }], "confidence": "Very high" },
+    { "element": "“Blackmoor” (Supplement II)", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Very high" },
+    { "element": "“Greyhawk” (Supplement I)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & Kuntz" }], "confidence": "Very high" },
+    { "element": "AD&D Monster Manual / Players Handbook", "leans": [{ "text": "Disputed", "owner": "disputed" }], "confidence": "—" }
+  ],
+  "sections": [
+    {
+      "number": "01",
+      "title": "Character system",
+      "rules": [
+        {
+          "name": "Dungeon depth as difficulty",
+          "owner": "arneson",
+          "label": "Arneson",
+          "verdict": "The idea that deeper dungeon levels hold tougher monsters and richer treasure — the “megadungeon” premise itself — is Arneson's, and it's not seriously contested.",
+          "body": ["Arneson's Blackmoor dungeon predates any Gygax-run dungeon by roughly a year. In his sworn interrogatory answer he states this plainly, and nothing in TSR's counter-filings disputes the specific point (they dispute his overall credit, not this detail)."],
+          "exhibits": [{ "cite": "Arneson Interrog. Answer No. 6", "text": "“the dungeon-as-leveled-setting concept (deeper levels = more dangerous monsters/richer treasure)” claimed as his contribution." }]
+        },
+        {
+          "name": "Wilderness adventuring",
+          "owner": "arneson",
+          "label": "Arneson",
+          "verdict": "Arneson claims he introduced taking the game outdoors, beyond the dungeon crawl.",
+          "exhibits": [{ "cite": "Arneson Interrog. Answer No. 6", "text": "“Plaintiff also introduced the concept of having the setting of the game outdoors.”" }]
+        },
+        {
+          "name": "The six character abilities",
+          "owner": "joint",
+          "label": "Joint / Arneson-seeded",
+          "verdict": "Traceable lineage: Arneson's 1972 Blackmoor character sheet (“Wizard Gaylord”) had Brains, Looks, Health, Strength, Courage, and more — a personality-trait hodgepodge. The Dalluhn Manuscript shows a narrowed six: Intelligence, Cunning, Strength, Health, Appearance, Ego. Published OD&D lands on the familiar six, with Cunning renamed Wisdom and Health renamed Constitution, and Dexterity added new.",
+          "body": ["This is Jon Peterson's strongest documented lineage in the whole analysis — the concept and early evolution trace to Blackmoor, but the final six-stat system and naming was fixed during the Gygax-led drafting stage."],
+          "exhibits": [{ "cite": "Dalluhn analysis §4.5", "text": "“Dalluhn thus does appear to be a missing link between early Blackmoor and OD&D… 'Cunning' was the prime requisite for Clerics, per 'Wisdom' in OD&D.”" }]
+        },
+        {
+          "name": "“Dungeon Master” as a role",
+          "owner": "disputed",
+          "label": "Disputed",
+          "verdict": "Arneson claims credit for creating the referee-as-Dungeon-Master concept in his interrogatory answers. No corroborating exhibit or independent source in the record confirms or refutes this specifically — treat it as an assertion, not established fact.",
+          "exhibits": [{ "cite": "Arneson Interrog. Answer No. 6", "text": "claims creation of “the 'Dungeon Master' as central referee figure who designs the dungeon and narrates play.”" }]
+        },
+        {
+          "name": "Cleric class",
+          "owner": "arneson",
+          "label": "Arneson (origin)",
+          "verdict": "Under oath, Arneson tied his separately-published “Blackmoor” supplement to new cleric material “beyond what appeared in original D&D,” confirming clerics were live and evolving in his own campaign material independent of Gygax's editing. This lines up with the broader, well-documented history that the cleric class was born mid-session in actual Blackmoor play (in response to a vampire-type NPC) before it was ever written up for publication — though that specific incident isn't itself recounted in the case file text reviewed here.",
+          "exhibits": [{ "cite": "Arneson Dep. II, p.821", "text": "testifies his “Blackmoor” supplement added clerics as a class beyond the original D&D treatment." }]
+        }
+      ]
+    },
+    {
+      "number": "02",
+      "title": "Combat & damage",
+      "rules": [
+        {
+          "name": "Armor Class & the Attack Matrix",
+          "owner": "gygax",
+          "label": "Gygax, via Chainmail",
+          "verdict": "The to-hit tables descend directly from Chainmail's Appendix B combat tables — a Gygax/Jeff Perren wargame that predates any contact with Arneson. The Dalluhn Manuscript's combat tables are shown to be slight renumbered modifications of the Chainmail originals.",
+          "body": ["Interestingly, when TSR's attorneys asked Arneson under oath whether Armor Class came from Chainmail, he said no — but that's a claim that AC was an original D&D idea, not a claim that he personally invented it. The textual evidence (Dalluhn Tables 30–31) says otherwise: it's Chainmail's ranged/melee tables with armor class renumbered."],
+          "exhibits": [
+            { "cite": "Dalluhn analysis §4.1", "text": "“Tables 30 and 31… are slight modifications of the ranged and melee combat tables from second edition Chainmail Appendix B to incorporate renumbered armor class.”" },
+            { "cite": "Arneson Dep. I, p.786–789", "text": "asked if Armor Classes came from Chainmail: “If you're referring to Armor Classes, no.”" }
+          ]
+        },
+        {
+          "name": "“Hit dice” as a damage concept",
+          "owner": "joint",
+          "label": "Joint / converging",
+          "verdict": "Arneson's most consistently repeated claim across the record — his Reply to TSR's counterclaims, and both depositions — is that he reworked Chainmail's flat combat table into a dice-rolled hit-point system. But this one softens under the Dalluhn evidence.",
+          "body": ["Chainmail already had a “hits to kill” concept for monsters — a lycanthrope “takes four simultaneous hits… to kill,” an ogre “six” — but that's a fixed threshold, not a randomized pool. The dice-rolled version — roll a die to see how many hit points a blow does, tracked as a shrinking pool — shows up independently on both sides by 1973: in Arneson's Blackmoor notes (“take from 1–6 hits”) and separately in Gygax's own 1973 draft pages (the Mornard Fragments, written and corrected in Gygax's hand, with no Arneson involvement in that document). That makes this look like parallel convergence between the two camps rather than a clean, one-directional handoff from Arneson to Gygax."],
+          "exhibits": [
+            { "cite": "Arneson Reply to Counterclaims ¶VIII", "text": "“even the 'fantasy combat table' was substantially altered and changed by Plaintiff's introduction of the concept of 'hit dice.'”" },
+            { "cite": "Mornard Fragment B (Gygax's 1973 draft)", "text": "“a die is rolled to determine how many hit points the man/monster receives (usually 1-6, but as high as 2-12 if fighting opponents with the ability to fight at double hits).”" }
+          ]
+        },
+        {
+          "name": "Saving throws",
+          "owner": "joint",
+          "label": "Joint",
+          "verdict": "Arneson claims this originated with him and D&D jointly. But the Mornard Fragments — Gygax's own 1973 draft pages, independent of Arneson — already specify a d20 saving throw before the Dalluhn Manuscript's variant (3d6) exists. The concept was in motion on Gygax's side of the drafting process regardless of Arneson's input.",
+          "exhibits": [{ "cite": "Dalluhn analysis §4.7", "text": "“the saving throw table at the end of Fragment D explicitly states that \"saving throws are with a 20-sided die.\"”" }]
+        }
+      ]
+    },
+    {
+      "number": "03",
+      "title": "Magic",
+      "rules": [
+        {
+          "name": "Vancian spell memorization",
+          "owner": "gygax",
+          "label": "Gygax",
+          "verdict": "The published OD&D system — memorize spells in advance, forget them when cast — doesn't match either transitional stage. Blackmoor's original magic was reagent-based (spells prepared from material components); the Dalluhn Manuscript shows a third, in-between system (a flat daily allowance per tier, cast freely). Full Vancian memorization only appears at the very end, which points to it being fixed late in Gygax's editing pass, not carried over from Arneson's Blackmoor rules.",
+          "exhibits": [{ "cite": "Dalluhn analysis §4.4", "text": "“Spellcasting in the Dalluhn Manuscript is neither Vancian like OD&D… nor reagent-based like Blackmoor.”" }]
+        },
+        {
+          "name": "Spell lists & magic items (the bulk of them)",
+          "owner": "gygax",
+          "label": "Gygax",
+          "verdict": "Both grow substantially between the Dalluhn stage and final publication — 26 more Magic-User spells appear in OD&D than in Dalluhn, virtually all just appended to the existing tier structure. The percentile item tables show heavy, visible hand-editing in Gygax's own Mornard Fragments as he tuned drop rates and slotted in new items (Bag of Holding, Displacer Cloak, etc.).",
+          "exhibits": [{ "cite": "Dalluhn analysis §4.4", "text": "lists 26 OD&D Magic-User spells absent from Dalluhn, added late in development." }]
+        }
+      ]
+    },
+    {
+      "number": "04",
+      "title": "Monsters & treasure",
+      "rules": [
+        {
+          "name": "The bestiary as a structure",
+          "owner": "gygax",
+          "label": "Gygax, via Chainmail",
+          "verdict": "The base monster list, and the practice of building it outward from Chainmail's second-edition creatures, is Gygax's framework — Chainmail had sixteen monsters before Arneson was ever involved, and the OD&D list grows from that same root, sequentially, as traced through the Mornard Fragments' edit history."
+        },
+        {
+          "name": "Specific monster lore & behavior",
+          "owner": "arneson",
+          "label": "Arneson",
+          "verdict": "Within that Gygax-built structure, several individual entries trace directly to Arneson's Blackmoor play notes: the roc's text is a near-verbatim graft of his 1972 Loch Gloomen material; giants' cave-dweller/castle-dweller split, dragon hit-die ranges, “true trolls,” brigands, and the dervish “wagon train” economics all echo his notes closely enough — including a copy-paste error that misattributes dervish loot rules to orcs — that Peterson treats this as some of the strongest evidence in the whole document.",
+          "exhibits": [{ "cite": "Dalluhn analysis §4.2", "text": "“the Dalluhn roc text… provides some of the most compelling evidence for identifying the Dalluhn Manuscript as a transitional manuscript drawing equally on Gygax and Arneson's work.”" }]
+        }
+      ]
+    },
+    {
+      "number": "05",
+      "title": "World & economics",
+      "rules": [
+        {
+          "name": "Investments, wages, prices, taxation",
+          "owner": "arneson",
+          "label": "Arneson",
+          "verdict": "This is the cleanest attribution in the entire analysis. Arneson's 1972 Blackmoor price list for draft horses, carts, rafts, merchant ships, and galleys survives into the Dalluhn Manuscript at nearly identical values, and from there into OD&D's construction and equipment tables. The 1% wealth tax on experience points, worded almost identically across all three stages, traces the same path.",
+          "exhibits": [{ "cite": "Dalluhn analysis §4.8", "text": "“the prices of draft horses (30), small carts/wagons (80), wagons (160), rafts (40), merchant ships (5000) and galleys (20000) correspond too closely to be coincidental.”" }]
+        }
+      ]
+    },
+    {
+      "number": "06",
+      "title": "Naval & aerial combat",
+      "rules": [
+        {
+          "name": "Naval combat",
+          "owner": "arneson",
+          "label": "Arneson",
+          "verdict": "Arneson co-authored “Don't Give Up the Ship,” a 1972 naval miniatures ruleset, confirmed under oath as his own work with two co-authors. That's a direct, named precedent for the naval combat section of Book III, and Peterson separately notes the naval monsters' damage-phrasing pattern points to a late Arneson contribution that never got folded into the main monster list — visible today as an inconsistency between the naval section and the core bestiary.",
+          "exhibits": [{ "cite": "Arneson Dep. II, p.669–670", "text": "confirms authorship of “Don't Give Up the Ship” (1972)." }]
+        },
+        {
+          "name": "Aerial combat",
+          "owner": "arneson",
+          "label": "Arneson (concept)",
+          "verdict": "The clearest split-credit case in the whole record: Arneson designed the aerial rules as their own standalone game, “Battle in the Skies.” Gygax's own 1973–74 letters to Arneson, entered as exhibits, reference him rewriting “air and sea rules” for inclusion — meaning Gygax took Arneson's separate game and condensed it into a section of Book III himself. Concept: Arneson. Final text: Gygax.",
+          "exhibits": [{ "cite": "Dalluhn analysis §4.12", "text": "“We know that Dave Arneson originally designed the aerial rules as an independent game called \"Battle in the Skies,\" which Gygax condensed into a section of U&WA.”" }]
+        }
+      ]
+    },
+    {
+      "number": "07",
+      "title": "The books themselves",
+      "rules": [
+        {
+          "name": "The prose, draft to draft",
+          "owner": "gygax",
+          "label": "Gygax",
+          "verdict": "Not seriously in dispute. Arneson himself testified he wrote none of the actual sentences that appear in the three published booklets — he sent ideas, concepts, and corrections by phone and letter; Gygax did every draft, every edit, and the final typing in Lake Geneva, alone.",
+          "exhibits": [{ "cite": "Arneson Dep. I, p.776", "text": "“there isn't a single sentence in any of these three booklets that you actually wrote yourself” — confirmed by Arneson." }]
+        },
+        {
+          "name": "Four monster illustrations",
+          "owner": "arneson",
+          "label": "Arneson",
+          "verdict": "A small, concrete, undisputed exception to the above: Arneson personally drew the Hydra, Lizard, Giant Beetle, and Purple Worm illustrations that appear in Book II, and both sides agree they're his unaltered artwork."
+        },
+        {
+          "name": "“Blackmoor,” Supplement II",
+          "owner": "arneson",
+          "label": "Arneson",
+          "verdict": "Uncontested. Arneson personally wrote and typed this supplement — the Temple of the Frog scenario, a revised combat system, a giant-insect list — and took TSR stock in place of a royalty on it."
+        },
+        {
+          "name": "“Greyhawk,” Supplement I",
+          "owner": "gygax",
+          "label": "Gygax & Kuntz",
+          "verdict": "Prepared in Lake Geneva by Gygax and Robert Kuntz. Arneson testified he had no part in it and received no royalty."
+        },
+        {
+          "name": "AD&D Monster Manual & Players Handbook (1977–78)",
+          "owner": "disputed",
+          "label": "Disputed",
+          "verdict": "This is what the lawsuit actually turned on, and it's the one item the case file doesn't settle. TSR's position: independently created by Gygax (roughly 1000–1200 of his hours per book) plus named staff, entirely after the 1975 royalty agreement, owing Arneson nothing. Arneson's position: these were “copied in substantial part and wholly derived” from the game he co-authored, republished under Gygax's name alone to cut him out. The case settled by stipulated dismissal before either claim was tested at trial."
+        }
+      ]
+    }
+  ],
+  "bottomLine": [
+    { "text": "Strip away the litigation posturing on both sides and a consistent shape emerges. " },
+    { "text": "Arneson", "strong": true },
+    { "text": " supplied the world: the dungeon as a place with depth and danger, the wilderness beyond it, the economy that runs underneath it, naval and aerial combat, and a fair amount of specific monster behavior lifted near-verbatim from his own Blackmoor notes. " },
+    { "text": "Gygax", "strong": true },
+    { "text": " supplied the engine: the Chainmail-descended combat and armor class math, the alignment framework, the Vancian magic system, the bulk of the spell and magic-item lists, and — almost without exception — every sentence of actual published text, having drafted, edited, and typed all three booklets himself in Lake Geneva. Both names belong on the cover; neither side's sworn “solely mine” claims survive contact with the Dalluhn Manuscript's independent paper trail." }
+  ],
+  "footer": "Sources: Arneson v. Gygax, Civ. No. 4-79-109 (D. Minn.), case file pp. 1–855 · Jon Peterson, “The Dalluhn Manuscript: A Pre-Publication Edition of Dungeons & Dragons” (2015) · OD&D Books I–III (1974)"
+}
