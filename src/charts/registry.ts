@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import LanguageOutlook from "./language-outlook/LanguageOutlook";
+import NeuronIntelligence from "./neuron-intelligence/NeuronIntelligence";
 import RuleOfAuthorship from "./rule-of-authorship/RuleOfAuthorship";
 import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
 
@@ -35,6 +36,13 @@ export const charts: ChartEntry[] = [
     title: "Rule of Authorship",
     description: "Who wrote which rules of Dungeons & Dragons, Arneson or Gygax, based on the Arneson v. Gygax case file.",
     component: RuleOfAuthorship,
+  },
+  {
+    id: "neuron-intelligence",
+    title: "Neuron Intelligence Explorer",
+    description:
+      "Ranks animals by neuron count against body weight, with adjustable exponents: Neurons^x / Weight^w, then Score^k.",
+    component: NeuronIntelligence,
   },
 ];
 

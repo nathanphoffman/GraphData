@@ -1,0 +1,170 @@
+{
+  "title": "Neuron Intelligence Explorer",
+  "animals": [
+    {
+      "name": "Human",
+      "neuronsBillions": 86.0,
+      "weightKg": 70.0
+    },
+    {
+      "name": "Chimpanzee",
+      "neuronsBillions": 28.0,
+      "weightKg": 45.0
+    },
+    {
+      "name": "Gorilla",
+      "neuronsBillions": 33.0,
+      "weightKg": 160.0
+    },
+    {
+      "name": "Dolphin",
+      "neuronsBillions": 37.0,
+      "weightKg": 150.0
+    },
+    {
+      "name": "Elephant",
+      "neuronsBillions": 257.0,
+      "weightKg": 4800.0
+    },
+    {
+      "name": "Orca",
+      "neuronsBillions": 37.0,
+      "weightKg": 3500.0
+    },
+    {
+      "name": "Crow",
+      "neuronsBillions": 1.5,
+      "weightKg": 0.4
+    },
+    {
+      "name": "Parrot (Grey)",
+      "neuronsBillions": 1.6,
+      "weightKg": 0.4
+    },
+    {
+      "name": "Pigeon",
+      "neuronsBillions": 0.31,
+      "weightKg": 0.35
+    },
+    {
+      "name": "Cat",
+      "neuronsBillions": 0.76,
+      "weightKg": 4.0
+    },
+    {
+      "name": "Dog",
+      "neuronsBillions": 2.25,
+      "weightKg": 15.0
+    },
+    {
+      "name": "Rat",
+      "neuronsBillions": 0.2,
+      "weightKg": 0.3
+    },
+    {
+      "name": "Mouse",
+      "neuronsBillions": 0.071,
+      "weightKg": 0.02
+    },
+    {
+      "name": "Octopus",
+      "neuronsBillions": 0.5,
+      "weightKg": 3.0
+    },
+    {
+      "name": "Honeybee",
+      "neuronsBillions": 0.001,
+      "weightKg": 0.0001
+    },
+    {
+      "name": "Rhesus Macaque",
+      "neuronsBillions": 6.4,
+      "weightKg": 7.0
+    },
+    {
+      "name": "Pig",
+      "neuronsBillions": 2.2,
+      "weightKg": 110.0
+    },
+    {
+      "name": "Sheep",
+      "neuronsBillions": 1.0,
+      "weightKg": 70.0
+    },
+    {
+      "name": "Horse",
+      "neuronsBillions": 6.8,
+      "weightKg": 500.0
+    },
+    {
+      "name": "Sperm Whale",
+      "neuronsBillions": 200.0,
+      "weightKg": 35000.0
+    },
+    {
+      "name": "Cow",
+      "neuronsBillions": 3.0,
+      "weightKg": 600.0
+    },
+    {
+      "name": "Cheetah",
+      "neuronsBillions": 1.0,
+      "weightKg": 50.0
+    },
+    {
+      "name": "Lion",
+      "neuronsBillions": 4.0,
+      "weightKg": 180.0
+    },
+    {
+      "name": "Wolf",
+      "neuronsBillions": 2.0,
+      "weightKg": 40.0
+    },
+    {
+      "name": "Raccoon",
+      "neuronsBillions": 0.44,
+      "weightKg": 5.0
+    },
+    {
+      "name": "Squirrel",
+      "neuronsBillions": 0.056,
+      "weightKg": 0.5
+    },
+    {
+      "name": "Rabbit",
+      "neuronsBillions": 0.071,
+      "weightKg": 2.0
+    },
+    {
+      "name": "Salmon",
+      "neuronsBillions": 0.011,
+      "weightKg": 4.0
+    },
+    {
+      "name": "Crocodile",
+      "neuronsBillions": 0.08,
+      "weightKg": 450.0
+    },
+    {
+      "name": "Frog",
+      "neuronsBillions": 0.016,
+      "weightKg": 0.05
+    },
+    {
+      "name": "Hamster",
+      "neuronsBillions": 0.071,
+      "weightKg": 0.12
+    },
+    {
+      "name": "Housefly",
+      "neuronsBillions": 0.0001,
+      "weightKg": 1.2e-05
+    },
+    {
+      "name": "Oyster",
+      "neuronsBillions": 1e-08,
+      "weightKg": 0.05
+    }
+  ]
+}
