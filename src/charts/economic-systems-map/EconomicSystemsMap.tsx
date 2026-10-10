@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import data from "../../../data/economic-systems-map.json";
-import type { EconomicSystemsData } from "./types";
+import views from "../../../data/economic-systems-views.json";
+import type { EconomicSystemsData, EconomicSystemsViewsData } from "./types";
 import { COLORS, GROUP_COLORS } from "./style";
 import { CELL_H, CELL_W, GRID_LEFT, GRID_TOP, HEADER_COL_W, HEADER_ROW_H } from "./style";
 import { GRID_H, GRID_W, GRID_X0, GRID_Y0, cellNameWidth, placeLabels, toX, toY } from "./layout";
 
 const model = data as EconomicSystemsData;
+const viewsModel = views as EconomicSystemsViewsData;
 
 const W = GRID_X0 + GRID_W + 8;
 const H = GRID_Y0 + GRID_H + 70;
@@ -13,7 +15,11 @@ const FONT = "system-ui, -apple-system, Segoe UI, sans-serif";
 
 export default function EconomicSystemsMap() {
   const [showExamples, setShowExamples] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
   const labels = useMemo(() => placeLabels(model, model.figures), []);
+
+  const selectedCell = model.cells.find((cell) => cell.name === selected);
+  const selectedViews = selected ? viewsModel.cells[selected] : undefined;
 
   const { stability, overlay } = model;
   const [x1, y1] = stability.from;
@@ -74,14 +80,43 @@ export default function EconomicSystemsMap() {
             fill={(cell.col + cell.row) % 2 === 0 ? COLORS.cellLight : COLORS.cellDark}
             stroke={COLORS.border}
             strokeWidth={2}
+            className="map-cell"
+            role="button"
+            tabIndex={0}
+            aria-label={`${cell.name}: show common views`}
+            onClick={() => setSelected(cell.name)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelected(cell.name);
+              }
+            }}
           />
         ))}
 
-        {/* Layer 1: line of stability */}
+        {/* Everything above the cells ignores clicks so they reach the cell underneath. */}
+        <g pointerEvents="none">
+        {selectedCell && (
+          <rect
+            x={GRID_X0 + selectedCell.col * CELL_W + 2}
+            y={GRID_Y0 + selectedCell.row * CELL_H + 2}
+            width={CELL_W - 4}
+            height={CELL_H - 4}
+            fill="none"
+            stroke={COLORS.header}
+            strokeWidth={3.5}
+          />
+        )}
+        {/* Layer 1: line of stability, clipped to the grid because the band can run past it */}
+        <clipPath id="grid-clip">
+          <rect x={GRID_X0} y={GRID_Y0} width={GRID_W} height={GRID_H} />
+        </clipPath>
+        <g clipPath="url(#grid-clip)">
         <polygon points={band} fill={COLORS.stability} fillOpacity={0.13} />
         <line x1={toX(x1)} y1={toY(y1 - hw)} x2={toX(x2)} y2={toY(y2 - hw)} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
         <line x1={toX(x1)} y1={toY(y1 + hw)} x2={toX(x2)} y2={toY(y2 + hw)} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
         <line x1={toX(x1)} y1={toY(y1)} x2={toX(x2)} y2={toY(y2)} stroke={COLORS.stability} strokeWidth={1} strokeOpacity={0.35} />
+        </g>
         <g transform={`translate(${toX(labelX)} ${toY(labelY)}) rotate(${angle})`}>
           <rect x={-50} y={-11} width={100} height={22} rx={6} fill="#fff" fillOpacity={0.9} />
           <text textAnchor="middle" y={5} fontSize={13} fontWeight={700} fill={COLORS.stability}>
@@ -147,6 +182,8 @@ export default function EconomicSystemsMap() {
             );
           })}
 
+        </g>
+
         {/* Legend and footnote */}
         {!showExamples &&
           model.groups.map((group, i) => {
@@ -166,6 +203,30 @@ export default function EconomicSystemsMap() {
           {showExamples ? ` ${model.examplesFootnote}` : ""}
         </text>
       </svg>
+
+      {selectedCell && selectedViews ? (
+        <section className="panel views" aria-live="polite">
+          <h2>{selectedCell.name}</h2>
+          <p className="muted">
+            {model.rows[selectedCell.row]} · {model.columns[selectedCell.col]}. {selectedViews.summary}
+          </p>
+          <dl className="views-list">
+            {viewsModel.categories.map((category) => (
+              <div key={category}>
+                <dt>{category}</dt>
+                <dd>{selectedViews.views[category]}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="views-examples">
+            <strong>Historical examples:</strong> <span style={{ color: COLORS.auth }}>Auth:</span> {selectedCell.auth} ·{" "}
+            <span style={{ color: COLORS.dem }}>Dem:</span> {selectedCell.dem}
+          </p>
+          <p className="views-note">Views commonly held by supporters of this system, as a summary and not a position.</p>
+        </section>
+      ) : (
+        <p className="muted">Click a cell to see the common views of that system by topic.</p>
+      )}
     </div>
   );
 }

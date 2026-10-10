@@ -107,7 +107,7 @@
       4,
       2.5
     ],
-    "halfWidth": 0.45
+    "halfWidth": 0.8
   },
   "overlay": {
     "label": "U.S.",
@@ -154,7 +154,7 @@
     },
     {
       "id": "leaders",
-      "label": "Leaders & politicians"
+      "label": "Other World Leaders"
     },
     {
       "id": "thinkers",
@@ -220,7 +220,7 @@
       "name": "Trump",
       "group": "presidents",
       "x": 3.35,
-      "y": 2.2
+      "y": 2.4
     },
     {
       "name": "AOC",
@@ -231,8 +231,8 @@
     {
       "name": "Sanders",
       "group": "senate",
-      "x": 1.7,
-      "y": 2.12
+      "x": 1.8,
+      "y": 1.8
     },
     {
       "name": "Warren",
@@ -291,8 +291,8 @@
     {
       "name": "Pope Leo XIII",
       "group": "leaders",
-      "x": 0.3,
-      "y": 1.2
+      "x": 1.85,
+      "y": 1.05
     },
     {
       "name": "Kropotkin",
@@ -345,13 +345,13 @@
     {
       "name": "Castro",
       "group": "leaders",
-      "x": 0.55,
-      "y": 2.05
+      "x": 0.6,
+      "y": 2.65
     },
     {
       "name": "Xi Jinping",
       "group": "leaders",
-      "x": 1.8,
+      "x": 2.35,
       "y": 2.5
     },
     {
@@ -431,6 +431,30 @@
       "group": "other-us",
       "x": 1.5,
       "y": 2.3
+    },
+    {
+      "name": "Allende",
+      "group": "leaders",
+      "x": 1.7,
+      "y": 2.45
+    },
+    {
+      "name": "Deng Xiaoping",
+      "group": "leaders",
+      "x": 3.05,
+      "y": 2.65
+    },
+    {
+      "name": "Lee Kuan Yew",
+      "group": "leaders",
+      "x": 3.75,
+      "y": 2.05
+    },
+    {
+      "name": "Arizmendiarrieta",
+      "group": "leaders",
+      "x": 0.4,
+      "y": 1.2
     }
   ],
   "footnote": "Figures placed by stated economic views (not governance style); placements approximate and contestable.",

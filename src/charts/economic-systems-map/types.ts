@@ -52,3 +52,14 @@ export interface PlacedLabel {
   dotY: number;
   box: Box;
 }
+
+/** Shape of data/economic-systems-views.json: common views per cell, by policy category. */
+export interface CellViews {
+  summary: string;
+  views: Record<string, string>;
+}
+
+export interface EconomicSystemsViewsData {
+  categories: string[];
+  cells: Record<string, CellViews>;
+}

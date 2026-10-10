@@ -1,0 +1,137 @@
+{
+  "categories": ["Healthcare", "Poverty & welfare", "Employment & labor", "Taxes", "Business & markets", "Property & land"],
+  "cells": {
+    "State Commune": {
+      "summary": "The state owns nearly everything and plans the economy on behalf of the whole community.",
+      "views": {
+        "Healthcare": "Free, universal and run by the state. Health is a right provided by the community, not something sold.",
+        "Poverty & welfare": "Poverty is seen as a product of private ownership. The state guarantees food, housing and basic needs for everyone.",
+        "Employment & labor": "Everyone is expected to work, with jobs assigned by the plan. Unemployment is meant to be eliminated.",
+        "Taxes": "Personal taxes matter little because the state already owns production and collects the surplus directly.",
+        "Business & markets": "Private business is abolished or tightly limited. Production is planned instead of driven by prices.",
+        "Property & land": "Land, factories and resources are collectively owned. Only personal belongings stay private."
+      }
+    },
+    "Social Ownership": {
+      "summary": "Major industries and utilities are publicly or worker owned, while some markets remain for everything else.",
+      "views": {
+        "Healthcare": "A single-payer or fully public system. Hospitals and drug pricing are under public control.",
+        "Poverty & welfare": "Strong guarantees for income, housing and food. Public ownership of key resources is meant to remove the causes of poverty.",
+        "Employment & labor": "Strong unions, worker seats on company boards, and often a job guarantee. Workplaces should be run democratically.",
+        "Taxes": "High progressive income and wealth taxes fund public ownership and services.",
+        "Business & markets": "Banks, energy, transport and big industry are publicly owned or run as co-ops. Small business is allowed.",
+        "Property & land": "Land and major assets are held in common or by public bodies. Personal and small-scale property stays private."
+      }
+    },
+    "New Deal Liberalism": {
+      "summary": "Capitalism stays, but an active national government regulates it and cushions people from its downsides.",
+      "views": {
+        "Healthcare": "Government-backed coverage such as Medicare, Medicaid or a public option, with the aim of covering everyone.",
+        "Poverty & welfare": "A strong safety net: Social Security, unemployment insurance, food and housing aid. Government is the backstop.",
+        "Employment & labor": "Minimum wage, union rights and public jobs programs, especially during downturns.",
+        "Taxes": "Progressive taxes, with higher rates on top earners and corporations, to fund programs.",
+        "Business & markets": "Markets are kept but tightly regulated: banks, monopolies, worker and consumer safety, plus large public investment.",
+        "Property & land": "Private property is protected but regulated for public benefit, such as zoning and eminent domain for public projects."
+      }
+    },
+    "Corporate Capitalism": {
+      "summary": "Large corporations and government are closely intertwined, and policy tends to favor big firms.",
+      "views": {
+        "Healthcare": "Mostly large private insurers, hospital chains and drug makers, supported by government subsidies and protections.",
+        "Poverty & welfare": "Left mainly to growth, charity and work-linked help. The belief is that a thriving big business sector lifts everyone.",
+        "Employment & labor": "Jobs come from corporate investment. Employers hold most bargaining power and unions are weak.",
+        "Taxes": "Low corporate taxes with targeted breaks, subsidies and, in a crisis, bailouts for big firms.",
+        "Business & markets": "Large firms help shape the rules through lobbying and close ties to government. Mergers and consolidation are common.",
+        "Property & land": "Strong protection for corporate property and intellectual property. Assets tend to be concentrated in few hands."
+      }
+    },
+    "Guild System": {
+      "summary": "Each trade or industry organizes itself into an association that sets standards, pay and who can join.",
+      "views": {
+        "Healthcare": "Run through guild or trade benefit funds. Each association looks after its own members.",
+        "Poverty & welfare": "Mutual aid within the guild or community, plus church and charity. The guild is the safety net.",
+        "Employment & labor": "Work is organized by trade. The guild sets training, apprenticeships, wages and quality standards.",
+        "Taxes": "Members pay dues to the guild for pensions and benefits, alongside modest state taxes.",
+        "Business & markets": "Industries govern themselves. Guilds limit competition and protect craft standards.",
+        "Property & land": "Tools and workshops are owned by members. Property is tied to a trade and a community."
+      }
+    },
+    "Nordic Model": {
+      "summary": "Open markets and strong private business, paired with high taxes and an extensive public welfare state.",
+      "views": {
+        "Healthcare": "Universal, tax-funded care that is free or cheap at the point of use.",
+        "Poverty & welfare": "Generous benefits, childcare and housing support, with the goal of low poverty and high mobility.",
+        "Employment & labor": "High union membership and collective bargaining. 'Flexicurity' means firms can hire and fire easily while workers get strong benefits and retraining.",
+        "Taxes": "High broad-based income and sales taxes, accepted in return for extensive public services.",
+        "Business & markets": "Free trade and competition under strong rules. Private firms thrive, with some state ownership in key sectors.",
+        "Property & land": "Private property is protected, with strong environmental rules and some public ownership of utilities and land."
+      }
+    },
+    "Social Market": {
+      "summary": "A competitive market economy where the state sets fair rules and provides social insurance.",
+      "views": {
+        "Healthcare": "Mandatory insurance, often through private or nonprofit funds, regulated so that everyone is covered.",
+        "Poverty & welfare": "Social insurance tied to employment, plus a safety net for those who fall through.",
+        "Employment & labor": "Works councils, worker representation on boards, collective bargaining and apprenticeship systems.",
+        "Taxes": "Moderate to high taxes and mandatory social insurance contributions.",
+        "Business & markets": "'As much market as possible, as much state as necessary.' The state enforces competition and doesn't run the economy.",
+        "Property & land": "Private property is strongly protected, but it comes with social obligations."
+      }
+    },
+    "Regulated Capitalism": {
+      "summary": "Free enterprise as the engine of the economy, with rules to prevent abuse and a limited safety net.",
+      "views": {
+        "Healthcare": "A mix of private insurance and limited public programs, with competition and safety regulation.",
+        "Poverty & welfare": "A targeted safety net for those in need, designed to keep incentives to work, supported by charity.",
+        "Employment & labor": "A flexible labor market with minimum standards and anti-discrimination rules. Unions are present but less central.",
+        "Taxes": "Moderate taxes, with simple codes and lower rates on investment and business.",
+        "Business & markets": "Free enterprise with rules: antitrust, consumer protection, and environmental and financial regulation.",
+        "Property & land": "Strong private property rights, regulated for safety, zoning and the environment."
+      }
+    },
+    "Mutualism": {
+      "summary": "Small, self-governing communities and co-ops trade fairly with each other, with little or no central state.",
+      "views": {
+        "Healthcare": "Mutual aid societies, community clinics and cooperatives funded by their members.",
+        "Poverty & welfare": "Handled by mutual aid, local sharing and cooperatives rather than the state.",
+        "Employment & labor": "Worker-owned co-ops, or people working for themselves. The idea is no bosses, with fair exchange of labor.",
+        "Taxes": "Little or no taxation. Contributions are voluntary and there is no central state to collect them.",
+        "Business & markets": "Co-ops, credit unions and mutual banks. Exchange is allowed but profit from ownership alone is not.",
+        "Property & land": "Possession by use is respected. Land and capital held by absentee owners are not."
+      }
+    },
+    "Left Libertarianism": {
+      "summary": "Strong individual freedom, combined with the idea that natural resources belong to everyone.",
+      "views": {
+        "Healthcare": "Voluntary mutual aid and co-op clinics, with opposition to both state mandates and corporate monopolies.",
+        "Poverty & welfare": "Shared ownership of land and resources, such as a land-value dividend or a basic income, instead of a large welfare bureaucracy.",
+        "Employment & labor": "Worker freedom, co-ops and unions without state control. Opposed to bosses who hold power over workers.",
+        "Taxes": "Few taxes, but charges on land and natural resources that share gains from the commons.",
+        "Business & markets": "Free markets with no corporate privileges or monopolies. Small and cooperative firms are favored.",
+        "Property & land": "Self-ownership, with natural resources like land and water held in common or subject to conditions."
+      }
+    },
+    "Classical Liberalism": {
+      "summary": "Limited government, free trade and the rule of law, with strong protection of individual rights.",
+      "views": {
+        "Healthcare": "Mostly private and paid voluntarily. The state's role is limited to public health and helping the very poor.",
+        "Poverty & welfare": "Charity, family and community, with markets and growth lifting people up. Limited state relief.",
+        "Employment & labor": "Free contract between worker and employer, with minimal labor regulation.",
+        "Taxes": "Low, simple and broad taxes, and limited government.",
+        "Business & markets": "Free trade and open competition. The state enforces contracts and keeps rules few and clear.",
+        "Property & land": "Central to liberty and prosperity, and strongly protected by law."
+      }
+    },
+    "Right Libertarianism": {
+      "summary": "Minimal or no government. Voluntary exchange and private property cover as much of life as possible.",
+      "views": {
+        "Healthcare": "A fully private market, with individuals paying and charity helping the poor. Deregulate insurers, doctors and drugs.",
+        "Poverty & welfare": "Voluntary charity and economic growth, with no compulsory welfare.",
+        "Employment & labor": "No minimum wage or mandates. Contracts are free and union membership is voluntary.",
+        "Taxes": "Taxation is seen as coercion, so taxes should be minimal or abolished.",
+        "Business & markets": "Fully free markets, with no licensing or antitrust, and private provision of roads, courts and schools.",
+        "Property & land": "Absolute private property rights. Ownership comes from homesteading and voluntary exchange."
+      }
+    }
+  }
+}
