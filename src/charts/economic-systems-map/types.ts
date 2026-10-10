@@ -34,6 +34,7 @@ export interface EconomicSystemsData {
   overlay: { label: string; sublabel: string; polygon: Point[]; labelAt: Point };
   groups: Group[];
   figures: Figure[];
+  theory: { heading: string; paragraphs: string[]; caveat: string };
   footnote: string;
   examplesFootnote: string;
 }

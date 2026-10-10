@@ -50,6 +50,13 @@ export default function EconomicSystemsMap() {
   const activeCombo: Combo | undefined =
     selected && partner ? combos.find((c) => c.cells.includes(selected) && c.cells.includes(partner)) : undefined;
 
+  // The outline sits on the selected cell, or centered between both cells while a combo is shown.
+  const partnerCell = activeCombo ? model.cells.find((cell) => cell.name === partner) : undefined;
+  const highlight =
+    selectedCell && partnerCell
+      ? { col: (selectedCell.col + partnerCell.col) / 2, row: (selectedCell.row + partnerCell.row) / 2 }
+      : selectedCell;
+
   const { stability, overlay } = model;
   const [x1, y1] = stability.from;
   const [x2, y2] = stability.to;
@@ -69,6 +76,14 @@ export default function EconomicSystemsMap() {
 
   return (
     <div>
+      <section className="theory">
+        <h2>{model.theory.heading}</h2>
+        {model.theory.paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+        <p className="views-note">{model.theory.caveat}</p>
+      </section>
+
       <label className="map-toggle">
         <input type="checkbox" checked={showExamples} onChange={(e) => setShowExamples(e.target.checked)} />
         Show historical examples instead of figures
@@ -126,10 +141,10 @@ export default function EconomicSystemsMap() {
 
         {/* Everything above the cells ignores clicks so they reach the cell underneath. */}
         <g pointerEvents="none">
-        {selectedCell && (
+        {highlight && (
           <rect
-            x={GRID_X0 + selectedCell.col * CELL_W + 2}
-            y={GRID_Y0 + selectedCell.row * CELL_H + 2}
+            x={GRID_X0 + highlight.col * CELL_W + 2}
+            y={GRID_Y0 + highlight.row * CELL_H + 2}
             width={CELL_W - 4}
             height={CELL_H - 4}
             fill="none"
@@ -201,8 +216,13 @@ export default function EconomicSystemsMap() {
         {!showExamples &&
           labels.map(({ figure, dotX, dotY, box }) => {
             const color = GROUP_COLORS[figure.group];
+            // Thin leader line from the dot to the nearest edge of its label box.
+            const lx = Math.min(Math.max(dotX, box.cx - box.w / 2), box.cx + box.w / 2);
+            const ly = Math.min(Math.max(dotY, box.cy - box.h / 2), box.cy + box.h / 2);
+            const showLine = Math.hypot(lx - dotX, ly - dotY) > 8;
             return (
               <g key={figure.name}>
+                {showLine && <line x1={dotX} y1={dotY} x2={lx} y2={ly} stroke={color} strokeWidth={1} strokeOpacity={0.7} />}
                 <circle cx={dotX} cy={dotY} r={6} fill={color} stroke="#fff" strokeWidth={1.5} />
                 <rect x={box.cx - box.w / 2} y={box.cy - box.h / 2} width={box.w} height={box.h} rx={3} fill="#fff" fillOpacity={0.8} />
                 <text x={box.cx} y={box.cy + 4} textAnchor="middle" fontSize={11} fontWeight={700} fill={color}>
@@ -217,7 +237,7 @@ export default function EconomicSystemsMap() {
         {/* Legend and footnote */}
         {!showExamples &&
           model.groups.map((group, i) => {
-            const x = GRID_X0 + 30 + i * 195;
+            const x = GRID_X0 + 10 + i * 168;
             const y = GRID_Y0 + GRID_H + 28;
             return (
               <g key={group.id}>

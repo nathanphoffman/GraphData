@@ -6,6 +6,7 @@ export const GROUP_COLORS: Record<string, string> = {
   "other-us": "#c2185b",
   thinkers: "#6a1b9a",
   leaders: "#c25e00",
+  business: "#6d4c41",
 };
 
 export const COLORS = {

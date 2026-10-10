@@ -157,6 +157,10 @@
       "label": "Other World Leaders"
     },
     {
+      "id": "business",
+      "label": "Business leaders"
+    },
+    {
       "id": "thinkers",
       "label": "Thinkers"
     }
@@ -455,8 +459,112 @@
       "group": "leaders",
       "x": 0.4,
       "y": 1.2
+    },
+    {
+      "name": "MLK Jr.",
+      "group": "other-us",
+      "x": 1.25,
+      "y": 1.7
+    },
+    {
+      "name": "JFK",
+      "group": "presidents",
+      "x": 2.1,
+      "y": 2.08
+    },
+    {
+      "name": "LBJ",
+      "group": "presidents",
+      "x": 2.7,
+      "y": 2.62
+    },
+    {
+      "name": "Hamilton",
+      "group": "other-us",
+      "x": 3.05,
+      "y": 2.38
+    },
+    {
+      "name": "Washington",
+      "group": "presidents",
+      "x": 2.15,
+      "y": 0.68
+    },
+    {
+      "name": "Andrew Jackson",
+      "group": "presidents",
+      "x": 2.55,
+      "y": 0.5
+    },
+    {
+      "name": "Nixon",
+      "group": "presidents",
+      "x": 2.65,
+      "y": 1.5
+    },
+    {
+      "name": "Rockefeller",
+      "group": "business",
+      "x": 3.62,
+      "y": 2.72
+    },
+    {
+      "name": "Carnegie",
+      "group": "business",
+      "x": 3.2,
+      "y": 2.28
+    },
+    {
+      "name": "Musk",
+      "group": "business",
+      "x": 3.55,
+      "y": 2.22
+    },
+    {
+      "name": "Churchill",
+      "group": "leaders",
+      "x": 3.2,
+      "y": 1.7
+    },
+    {
+      "name": "Mandela",
+      "group": "leaders",
+      "x": 2.6,
+      "y": 1.05
+    },
+    {
+      "name": "Gorbachev",
+      "group": "leaders",
+      "x": 1.65,
+      "y": 2.05
+    },
+    {
+      "name": "Warren Buffett",
+      "group": "business",
+      "x": 3.7,
+      "y": 1.5
+    },
+    {
+      "name": "Bill Gates",
+      "group": "business",
+      "x": 3.0,
+      "y": 1.58
+    },
+    {
+      "name": "Andrew Yang",
+      "group": "other-us",
+      "x": 2.05,
+      "y": 0.95
     }
   ],
   "footnote": "Figures placed by stated economic views (not governance style); placements approximate and contestable.",
-  "examplesFootnote": "* = theoretical or weak fit."
+  "examplesFootnote": "* = theoretical or weak fit.",
+  "theory": {
+    "heading": "The theory of historical stability",
+    "paragraphs": [
+      "Big systems need money to hold together: prices let millions of strangers coordinate. Small systems don't, because people can coordinate through trust and direct relationships.",
+      "So the stable band runs from small and communal (bottom left) to large and market-based (top right). On the line, how a system coordinates matches how big it is, which is why durable economies tend to sit on or near it. Off the line, large communal systems lack prices and small market systems lack control."
+    ],
+    "caveat": "An interpretive theory, not a proven law. Placements are approximate."
+  }
 }
