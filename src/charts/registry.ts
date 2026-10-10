@@ -49,7 +49,7 @@ export const charts: ChartEntry[] = [
     id: "economic-systems-map",
     title: "Economic Systems Map",
     description:
-      "A two-axis map of economic systems (orientation vs. size of power) with a line of stability, the U.S. 1865-present, and where well-known figures sit.",
+      "A two-axis map of economic systems (orientation vs. size of power) with a band of historical stability, the U.S. 1865-present, and where well-known figures sit.",
     component: EconomicSystemsMap,
   },
 ];

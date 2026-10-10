@@ -63,6 +63,7 @@ export default function EconomicSystemsMap() {
     .map(([x, y]) => `${toX(x)},${toY(y)}`)
     .join(" ");
   const angle = (Math.atan2(toY(y2) - toY(y1), toX(x2) - toX(x1)) * 180) / Math.PI;
+  const labelBoxW = stability.label.length * 7.6 + 16;
   const labelX = 1.0;
   const labelY = y1 + ((y2 - y1) * (labelX - x1)) / (x2 - x1);
 
@@ -147,7 +148,7 @@ export default function EconomicSystemsMap() {
         <line x1={toX(x1)} y1={toY(y1)} x2={toX(x2)} y2={toY(y2)} stroke={COLORS.stability} strokeWidth={1} strokeOpacity={0.35} />
         </g>
         <g transform={`translate(${toX(labelX)} ${toY(labelY)}) rotate(${angle})`}>
-          <rect x={-50} y={-11} width={100} height={22} rx={6} fill="#fff" fillOpacity={0.9} />
+          <rect x={-labelBoxW / 2} y={-11} width={labelBoxW} height={22} rx={6} fill="#fff" fillOpacity={0.9} />
           <text textAnchor="middle" y={5} fontSize={13} fontWeight={700} fill={COLORS.stability}>
             {stability.label}
           </text>
