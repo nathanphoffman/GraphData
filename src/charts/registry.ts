@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import LanguageOutlook from "./language-outlook/LanguageOutlook";
+import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
 
 export interface ChartEntry {
   /** URL slug, e.g. #/chart/language-outlook */
@@ -20,6 +21,13 @@ export const charts: ChartEntry[] = [
     description:
       "Programming language popularity weighted by developer opinion, 2019-2026, with 4-year trend lines and a 10-year projection.",
     component: LanguageOutlook,
+  },
+  {
+    id: "maintainability-calculator",
+    title: "Maintainability Calculator",
+    description:
+      "How hard a codebase is to maintain, by line count, team size, code quality, AI involvement and developer skill level.",
+    component: MaintainabilityCalculator,
   },
 ];
 

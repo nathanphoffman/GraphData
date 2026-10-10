@@ -1,0 +1,218 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maintainability Calculator</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --text: #1b1f24; --muted: #5d6673; --border: #dde1e6;
+    --accent: #3b5bdb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151a; --panel: #1b2027; --text: #e6e9ee; --muted: #9aa4b2; --border: #2d343e;
+      --accent: #7491ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  label { display: block; font-weight: 600; margin-bottom: 6px; }
+  input[type=number] { width: 100%; padding: 10px 12px; font-size: 1.1rem; border-radius: 8px;
+         border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .aival { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .ticks { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.8rem; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 520px) { .grid2 { grid-template-columns: 1fr; } }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { padding: 10px 8px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+  td.role { font-weight: 600; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; }
+  .scale { display: flex; flex-wrap: wrap; gap: 6px; }
+  .legend { color: var(--muted); font-size: 0.85rem; margin-top: 10px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Maintainability Calculator</h1>
+  <p class="sub">Limit = n<sup>n</sup> × √team, where n = role base + AI level + (quality − 0.75).</p>
+
+  <div class="panel grid2">
+    <div>
+      <label for="loc">Application line count</label>
+      <input id="loc" type="number" min="0" step="1" value="10000">
+    </div>
+    <div>
+      <label for="team">Team members</label>
+      <input id="team" type="number" min="1" step="1" value="1">
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <label for="q">Code Quality Letter Grade</label>
+      <span class="aival" id="qLabel"></span>
+    </div>
+    <input id="q" type="range" min="0" max="100" step="1" value="75">
+    <div class="ticks"><span>F− 0% (−0.75)</span><span>C 75% (±0)</span><span>A+ 100% (+0.25)</span></div>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <label for="ai">AI involvement</label>
+      <span class="aival" id="aiLabel"></span>
+    </div>
+    <input id="ai" type="range" min="0" max="1" step="0.1" value="0">
+    <div class="ticks"><span>0 No AI</span><span>0.5 AI‑Written</span><span>1 Full Vibe AI</span></div>
+  </div>
+
+  <div class="panel table-wrap">
+    <table>
+      <thead>
+        <tr><th>Role</th><th>n</th><th>Very Stable</th><th>Normal</th><th>Unstable</th><th>Difficulty</th></tr>
+      </thead>
+      <tbody id="out"></tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <div class="scale" id="scale"></div>
+    <p class="legend">
+      Each line count is placed on a logarithmic position between Very Stable (−1), Stable (0, n<sup>n</sup>) and Unstable (+1).
+      Normal spans −0.1 to +0.1. Below −1 is Trivial; above +1 is Impossible.
+      All line counts are multiplied by √(team members), reflecting diminishing returns from added people.
+    </p>
+  </div>
+</main>
+
+<script>
+  const roles = [
+    ["Clueless", 1], ["Newbie", 2], ["Student", 3], ["Graduate", 4],
+    ["Intern", 4.5], ["Junior", 5], ["Mid", 5.5], ["Senior / Architect", 6]
+  ];
+
+  // [name, upper position bound, background, text color]
+  const tiers = [
+    ["Trivial",       -1,       "#2b8a3e", "#fff"],
+    ["Very Easy",     -0.67,    "#40a05a", "#fff"],
+    ["Easy",          -0.33,    "#82c91e", "#1b1f24"],
+    ["Slightly Easy", -0.1,     "#c0eb75", "#1b1f24"],
+    ["Normal",         0.1,     "#4dabf7", "#1b1f24"],
+    ["Slightly Hard",  0.33,    "#ffd43b", "#1b1f24"],
+    ["Hard",           0.67,    "#ff922b", "#1b1f24"],
+    ["Very Hard",      1,       "#f03e3e", "#fff"],
+    ["Impossible",     Infinity,"#862e2e", "#fff"]
+  ];
+
+  const f = x => x <= 0 ? 1 : Math.pow(x, x); // 0^0 treated as 1
+
+  // Log-scale distances below and above Stable.
+  function spans(n) {
+    const mid = f(n), hi = f(n + 1);
+    const up = Math.log(hi / mid);
+    let down = Math.log(mid / f(n - 1));
+    if (!(down > 0.05)) down = up; // guard for n near 1, where (n-1)^(n-1) ≈ n^n
+    return { mid, hi, lo: mid / Math.exp(down), up, down };
+  }
+
+  function position(L, n) {
+    if (L <= 0) return -Infinity;
+    const s = spans(n);
+    const d = Math.log(L / s.mid);
+    return d <= 0 ? d / s.down : d / s.up;
+  }
+
+  function tierFor(p) {
+    for (const t of tiers) {
+      if (t[0] === "Normal" ? p <= t[1] : (t[1] < 0 ? p < t[1] : p <= t[1])) return t;
+    }
+    return tiers[tiers.length - 1];
+  }
+
+  function fmt(v) {
+    if (v < 1) return "&lt;1";
+    for (const [d, s] of [[1e9, "B"], [1e6, "M"], [1e3, "K"]]) {
+      if (v >= d) {
+        const q = v / d;
+        return (q >= 100 ? q.toFixed(0) : q >= 10 ? q.toFixed(1) : q.toFixed(2)) + s;
+      }
+    }
+    return Math.round(v).toString();
+  }
+
+  function aiName(a) {
+    if (a === 0) return "No AI";
+    if (a < 0.5) return "Pair AI";
+    if (a < 1) return "AI‑Written";
+    return "Full Vibe AI";
+  }
+
+  // Standard school grading in tens; 50 and below is F−.
+  function letterGrade(pct) {
+    if (pct <= 50) return "F−";
+    if (pct < 60) return "F";
+    const letter = pct >= 90 ? "A" : pct >= 80 ? "B" : pct >= 70 ? "C" : "D";
+    const r = pct % 10;
+    if (pct === 100 || r >= 7) return letter + "+";
+    if (r <= 2) return letter + "−";
+    return letter;
+  }
+
+  function badge(t) {
+    return `<span class="badge" style="background:${t[2]};color:${t[3]}">${t[0]}</span>`;
+  }
+
+  const locEl = document.getElementById("loc");
+  const aiEl = document.getElementById("ai");
+  const qEl = document.getElementById("q");
+  const teamEl = document.getElementById("team");
+  document.getElementById("scale").innerHTML = tiers.map(badge).join("");
+
+  function render() {
+    const L = Math.max(0, Number(locEl.value) || 0);
+    const a = Math.round(Number(aiEl.value) * 10) / 10;
+    const q = Math.min(100, Math.max(0, Number(qEl.value) || 0)) / 100;
+    const people = Math.max(1, Math.floor(Number(teamEl.value) || 1));
+    const mult = Math.sqrt(people);
+    const qMod = q - 0.75;
+
+    document.getElementById("aiLabel").textContent = a.toFixed(1) + " (" + aiName(a) + ")";
+    const pct = Math.round(q * 100);
+    document.getElementById("qLabel").textContent =
+      letterGrade(pct) + " · " + pct + "% (" + (qMod >= 0 ? "+" : "−") + Math.abs(qMod).toFixed(2) + ")";
+
+    document.getElementById("out").innerHTML = roles.map(([name, base]) => {
+      const n = base + a + qMod;
+      const s = spans(n);
+      const t = tierFor(position(L / mult, n));
+      return `<tr>
+        <td class="role">${name}</td>
+        <td>${n.toFixed(2)}</td>
+        <td>${fmt(s.lo * mult)}</td>
+        <td>${fmt(s.mid * mult)}</td>
+        <td>${fmt(s.hi * mult)}</td>
+        <td>${badge(t)}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  locEl.addEventListener("input", render);
+  aiEl.addEventListener("input", render);
+  qEl.addEventListener("input", render);
+  teamEl.addEventListener("input", render);
+  render();
+</script>
+</body>
+</html>
+
+</body></html>
