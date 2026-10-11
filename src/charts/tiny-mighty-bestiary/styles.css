@@ -3,11 +3,14 @@
   --b-card: #fbf8f1;
   --b-ink: #2a2433;
   --b-soft: #6b6378;
-  --b-easy: #2f9e6b;
-  --b-fair: #3b82c4;
-  --b-hard: #d99a1e;
-  --b-brutal: #e0642b;
-  --b-deadly: #c72a4a;
+  --b-beast: #3f9d52;
+  --b-humanoid: #2f7fc4;
+  --b-undead: #7b8794;
+  --b-giant: #c27a2c;
+  --b-monstrosity: #d1493f;
+  --b-ooze: #b3a517;
+  --b-aberration: #b53fb0;
+  --b-dragon: #d12b5c;
   --b-power: #7c4dcc;
 }
 
@@ -16,11 +19,14 @@
     --b-card: #25212e;
     --b-ink: #ece8f4;
     --b-soft: #a59cb8;
-    --b-easy: #4cc790;
-    --b-fair: #62a8ee;
-    --b-hard: #f2b83f;
-    --b-brutal: #ff8650;
-    --b-deadly: #ff5f7e;
+    --b-beast: #5fcb74;
+    --b-humanoid: #5aa8ee;
+    --b-undead: #aab4c0;
+    --b-giant: #f0a04b;
+    --b-monstrosity: #ff7468;
+    --b-ooze: #dcd04a;
+    --b-aberration: #e176dc;
+    --b-dragon: #ff6b93;
     --b-power: #a88af0;
   }
 }
@@ -50,7 +56,7 @@
 }
 
 .bestiary-card {
-  --accent: var(--b-fair);
+  --accent: var(--b-beast);
   background: var(--b-card);
   color: var(--b-ink);
   border-radius: 10px;
@@ -65,11 +71,37 @@
   box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
-.bestiary-easy { --accent: var(--b-easy); }
-.bestiary-fair { --accent: var(--b-fair); }
-.bestiary-hard { --accent: var(--b-hard); }
-.bestiary-brutal { --accent: var(--b-brutal); }
-.bestiary-deadly { --accent: var(--b-deadly); }
+.bestiary-type-beast { --accent: var(--b-beast); }
+.bestiary-type-humanoid { --accent: var(--b-humanoid); }
+.bestiary-type-undead { --accent: var(--b-undead); }
+.bestiary-type-giant { --accent: var(--b-giant); }
+.bestiary-type-monstrosity { --accent: var(--b-monstrosity); }
+.bestiary-type-ooze { --accent: var(--b-ooze); }
+.bestiary-type-aberration { --accent: var(--b-aberration); }
+.bestiary-type-dragon { --accent: var(--b-dragon); }
+
+.bestiary-key {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 0 0 16px;
+  padding: 0;
+  font-size: 14px;
+}
+
+.bestiary-key li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bestiary-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--accent);
+}
 
 .bestiary-card p {
   margin: 8px 0;
@@ -145,3 +177,11 @@
   border-top: 1px dashed var(--b-soft);
   padding-top: 8px;
 }
+
+.bestiary-adv,
+.bestiary-dis {
+  font-weight: 800;
+}
+
+.bestiary-adv { color: var(--b-beast); }
+.bestiary-dis { color: var(--b-dragon); }

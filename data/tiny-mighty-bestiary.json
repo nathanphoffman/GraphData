@@ -2,72 +2,215 @@
   "title": "Tiny Mighty RPG Bestiary",
   "rulesVersion": "Tiny Mighty RPG 1.09",
   "tiers": [
-    { "difficulty": 0.25, "turns": 1, "defense": 3, "defenseDice": "d6-1", "health": 7, "healthDice": "2d6", "bonus": 0, "bonusDice": "d6-4" },
-    { "difficulty": 0.5, "turns": 1, "defense": 4, "defenseDice": "d6", "health": 11, "healthDice": "3d6", "bonus": 1, "bonusDice": "d6-3" },
-    { "difficulty": 1, "turns": 1, "defense": 5, "defenseDice": "d6+1", "health": 14, "healthDice": "4d6", "bonus": 2, "bonusDice": "d6-2" },
-    { "difficulty": 2, "turns": 2, "defense": 6, "defenseDice": "d6+2", "health": 18, "healthDice": "5d6", "bonus": 2, "bonusDice": "d6-2" },
-    { "difficulty": 3, "turns": 2, "defense": 7, "defenseDice": "d6+3", "health": 21, "healthDice": "6d6", "bonus": 3, "bonusDice": "d6-1" },
-    { "difficulty": 4, "turns": 3, "defense": 7, "defenseDice": "d6+3", "health": 28, "healthDice": "8d6", "bonus": 4, "bonusDice": "d6" }
+    {
+      "difficulty": 0.25,
+      "turns": 1,
+      "defense": 3,
+      "defenseDice": "d6-1",
+      "health": 7,
+      "healthDice": "2d6",
+      "bonus": 0,
+      "bonusDice": "d6-4"
+    },
+    {
+      "difficulty": 0.5,
+      "turns": 1,
+      "defense": 4,
+      "defenseDice": "d6",
+      "health": 11,
+      "healthDice": "3d6",
+      "bonus": 1,
+      "bonusDice": "d6-3"
+    },
+    {
+      "difficulty": 1,
+      "turns": 1,
+      "defense": 5,
+      "defenseDice": "d6+1",
+      "health": 14,
+      "healthDice": "4d6",
+      "bonus": 2,
+      "bonusDice": "d6-2"
+    },
+    {
+      "difficulty": 2,
+      "turns": 2,
+      "defense": 6,
+      "defenseDice": "d6+2",
+      "health": 18,
+      "healthDice": "5d6",
+      "bonus": 2,
+      "bonusDice": "d6-2"
+    },
+    {
+      "difficulty": 3,
+      "turns": 2,
+      "defense": 7,
+      "defenseDice": "d6+3",
+      "health": 21,
+      "healthDice": "6d6",
+      "bonus": 3,
+      "bonusDice": "d6-1"
+    },
+    {
+      "difficulty": 4,
+      "turns": 3,
+      "defense": 7,
+      "defenseDice": "d6+3",
+      "health": 28,
+      "healthDice": "8d6",
+      "bonus": 4,
+      "bonusDice": "d6"
+    }
   ],
   "powerTypes": {
-    "multi": { "label": "Multi-target", "dice": "3d6, one die per target" },
-    "direct": { "label": "Direct-target", "dice": "2d6 to 1 target" },
-    "area": { "label": "Area of effect", "dice": "1d6 to 1 pencil radius, 6s explode" },
-    "heal": { "label": "Healing", "dice": "2d6, can target self" }
+    "multi": {
+      "label": "Multi-target",
+      "dice": "3d6, one die per target"
+    },
+    "direct": {
+      "label": "Direct-target",
+      "dice": "2d6 to 1 target"
+    },
+    "area": {
+      "label": "Area of effect",
+      "dice": "1d6 to 1 pencil radius, 6s explode"
+    },
+    "heal": {
+      "label": "Healing",
+      "dice": "2d6, can target self"
+    },
+    "utility": {
+      "label": "Utility",
+      "dice": "no damage, GM approves the effect"
+    }
   },
   "creatures": [
     {
       "id": "giant-rat",
       "name": "Giant Rat",
+      "type": "beast",
       "tier": 0.25,
       "flying": false,
       "description": "A dog-sized sewer scavenger that swarms anything that looks like dinner.",
       "attack": "Gnaw",
-      "skills": "Disadvantage on Charm checks. Advantage on Senses (smell).",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "-"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "smell"
+        }
+      ],
       "powers": [],
-      "tactics": "Comes in packs. Use 1 rat per player for an easy fight."
+      "tactics": "Comes in packs. Use 1 rat per player for an easy fight.",
+      "aliases": [
+        "rat",
+        "dire rat",
+        "vermin",
+        "swarm"
+      ]
     },
     {
       "id": "goblin",
       "name": "Goblin",
+      "type": "humanoid",
       "tier": 0.5,
       "flying": false,
       "description": "A sneaky, cackling raider with a rusty knife and a talent for ambush.",
       "attack": "Rusty knife",
-      "skills": "Advantage on Charm checks to hide.",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide"
+        }
+      ],
       "powers": [],
-      "tactics": "Hides first, then jumps the weakest looking player. Flees at half health."
+      "tactics": "Hides first, then jumps the weakest looking player. Flees at half health.",
+      "aliases": [
+        "kobold",
+        "imp",
+        "gremlin"
+      ]
     },
     {
       "id": "skeleton",
       "name": "Skeleton",
+      "type": "undead",
       "tier": 1,
       "flying": false,
       "description": "Animated bones with a notched sword and no will of its own.",
       "attack": "Notched sword",
-      "skills": "Disadvantage on Wits and Charm checks.",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
       "powers": [],
-      "tactics": "Marches straight at the nearest player. Never retreats."
+      "tactics": "Marches straight at the nearest player. Never retreats.",
+      "aliases": [
+        "undead",
+        "zombie",
+        "skeleton warrior"
+      ]
     },
     {
       "id": "orc",
       "name": "Orc Warrior",
+      "type": "humanoid",
       "tier": 1,
       "flying": false,
       "description": "A scarred brute in mismatched armor who loves a straight fight.",
       "attack": "Cleaver",
-      "skills": "Advantage on Physique (threats). Disadvantage on Wits.",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+",
+          "note": "threats"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
       "powers": [],
-      "tactics": "Charges the biggest threat. Gets in the way of its friends."
+      "tactics": "Charges the biggest threat. Gets in the way of its friends.",
+      "aliases": [
+        "half-orc",
+        "hobgoblin",
+        "bugbear",
+        "gnoll"
+      ]
     },
     {
       "id": "giant-spider",
       "name": "Giant Spider",
+      "type": "beast",
       "tier": 1,
       "flying": false,
       "description": "A wall-crawling ambusher that wraps its prey in silk and bites from above.",
       "attack": "Fangs",
-      "skills": "Advantage on Charm checks to hide and Physique checks to climb.",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide"
+        },
+        {
+          "skill": "Physique",
+          "mod": "+",
+          "note": "climb"
+        }
+      ],
       "powers": [
         {
           "name": "Venom Bite",
@@ -76,27 +219,63 @@
           "text": "Direct-target 2d6 damage, ignores defense. The target is poisoned (disadvantage) until it rests."
         }
       ],
-      "tactics": "Drops from the ceiling. Saves its venom for a player in light armor."
+      "tactics": "Drops from the ceiling. Saves its venom for a player in light armor.",
+      "aliases": [
+        "drider",
+        "phase spider",
+        "arachnid"
+      ]
     },
     {
       "id": "ogre",
       "name": "Ogre",
+      "type": "giant",
       "tier": 2,
       "flying": false,
       "description": "A lumbering giant with a club made from a small tree.",
       "attack": "Tree club",
-      "skills": "Advantage on Physique (athletics, fists). Disadvantage on Wits and Senses.",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+",
+          "note": "athletics, fists"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Senses",
+          "mod": "-"
+        }
+      ],
       "powers": [],
-      "tactics": "Swings at whoever is closest. Easy to trick, hard to survive."
+      "tactics": "Swings at whoever is closest. Easy to trick, hard to survive.",
+      "aliases": [
+        "giant",
+        "hill giant",
+        "ettin"
+      ]
     },
     {
       "id": "ghost",
       "name": "Restless Ghost",
+      "type": "undead",
       "tier": 2,
       "flying": true,
       "description": "A pale shape drifting through the walls of the house it died in.",
       "attack": "Cold touch",
-      "skills": "Advantage on Charm checks to hide and frighten. Disadvantage on Physique checks.",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide, frighten"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
       "powers": [
         {
           "name": "Chilling Wail",
@@ -105,16 +284,38 @@
           "text": "Direct-target 2d6 damage, ignores defense. Passes through walls to reach its target."
         }
       ],
-      "tactics": "Appears, wails, vanishes into a wall. Weapons without magic or silver roll with disadvantage."
+      "tactics": "Appears, wails, vanishes into a wall. Weapons without magic or silver roll with disadvantage.",
+      "aliases": [
+        "specter",
+        "spectre",
+        "spirit",
+        "banshee",
+        "wraith",
+        "poltergeist"
+      ]
     },
     {
       "id": "troll",
       "name": "Cave Troll",
+      "type": "giant",
       "tier": 3,
       "flying": false,
       "description": "A hulking, warty monster whose wounds close faster than they open.",
       "attack": "Claws & fists",
-      "skills": "Advantage on Physique. Disadvantage on Charm and Wits.",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
       "powers": [
         {
           "name": "Regenerate",
@@ -123,16 +324,31 @@
           "text": "Heals itself for 2d6. Fire or acid in the same turn stops it."
         }
       ],
-      "tactics": "Fights until hurt, regenerates, fights again. Best solved with fire."
+      "tactics": "Fights until hurt, regenerates, fights again. Best solved with fire.",
+      "aliases": [
+        "hill troll",
+        "regeneration",
+        "ogre"
+      ]
     },
     {
       "id": "dragon",
       "name": "Dragon",
+      "type": "dragon",
       "tier": 4,
       "flying": true,
       "description": "An ancient scaled tyrant sitting on a mountain of coin.",
       "attack": "Bite & claws",
-      "skills": "Advantage on all Charm checks. Advantage on Senses.",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        }
+      ],
       "powers": [
         {
           "name": "Fire Breath",
@@ -147,7 +363,345 @@
           "text": "Direct-target 2d6 damage, ignores defense. The target is knocked prone."
         }
       ],
-      "tactics": "Opens with Fire Breath on a group, then picks off stragglers from the air. Offers a deal if losing."
+      "tactics": "Opens with Fire Breath on a group, then picks off stragglers from the air. Offers a deal if losing.",
+      "aliases": [
+        "wyrm",
+        "red dragon",
+        "drake",
+        "wyvern"
+      ]
+    },
+    {
+      "id": "hootclaw",
+      "name": "Hootclaw",
+      "type": "monstrosity",
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "owlbear",
+        "owl bear",
+        "bear",
+        "owl",
+        "monstrosity"
+      ],
+      "description": "A shaggy, feathered bear-thing with a beak like a hatchet and a terrible temper.",
+      "attack": "Beak & claws",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "sight in the dark"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Grabs one player and refuses to let go. Will chase anything that runs."
+    },
+    {
+      "id": "chest-lurker",
+      "name": "Chest Lurker",
+      "type": "monstrosity",
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "mimic",
+        "treasure chest",
+        "doppelganger chest",
+        "shapeshifter"
+      ],
+      "description": "A fat wooden chest that is, regrettably, mostly teeth and glue.",
+      "attack": "Slam",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide as an object"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Sticky Gulp",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. Anyone touching it is stuck until they win a Physique challenge."
+        }
+      ],
+      "tactics": "Waits to be opened. Players that loot first get gulped first."
+    },
+    {
+      "id": "jelly-block",
+      "name": "Jelly Block",
+      "type": "ooze",
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "gelatinous cube",
+        "cube",
+        "ooze",
+        "slime",
+        "jelly"
+      ],
+      "description": "A see-through wobbling cube that scours dungeon corridors clean, with bones and coins floating inside.",
+      "attack": "Slap",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "-"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "skillNote": "Players have disadvantage to spot it.",
+      "powers": [
+        {
+          "name": "Swallow",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense, and the target is carried inside it until freed."
+        }
+      ],
+      "tactics": "Slides down corridors and fills them. Loot is visible inside it."
+    },
+    {
+      "id": "ore-muncher",
+      "name": "Ore Muncher",
+      "type": "monstrosity",
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "rust monster",
+        "rust",
+        "metal eater",
+        "armor eater"
+      ],
+      "description": "A pink, armored bug-lizard with feathery antennae that adores iron.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "smells metal"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Rust Touch",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. A metal weapon or armor it touches crumbles; that item no longer gives its bonus."
+        }
+      ],
+      "tactics": "Ignores players and goes for the sword. Wooden and bone gear is safe."
+    },
+    {
+      "id": "blink-cat",
+      "name": "Blink Cat",
+      "type": "beast",
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "displacer beast",
+        "displacer",
+        "panther",
+        "big cat",
+        "illusion"
+      ],
+      "description": "A six-legged black cat that always seems to be standing a step to the left of where it actually is.",
+      "attack": "Tentacle lash",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide"
+        }
+      ],
+      "skillNote": "Attacks against it have disadvantage until it is hit once.",
+      "powers": [
+        {
+          "name": "Phase Shift",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Once per rest it turns the first hit against it into a miss."
+        }
+      ],
+      "tactics": "Circles the party and attacks whoever is alone. Flees if its illusion is broken twice."
+    },
+    {
+      "id": "stone-gazer",
+      "name": "Stone Gazer",
+      "type": "monstrosity",
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "medusa",
+        "gorgon",
+        "basilisk",
+        "snake",
+        "petrify",
+        "snake hair"
+      ],
+      "description": "A hissing woman with a head of living snakes whose eyes turn warriors into statues.",
+      "attack": "Dagger",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "-",
+          "note": "vs. anyone with a mirror"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Stone Gaze",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. A player dropped to 0 by it is turned to stone, not unconscious, until cured."
+        }
+      ],
+      "tactics": "Hides in a statue garden. Players who look away or use a mirror roll to avoid the gaze."
+    },
+    {
+      "id": "brain-drinker",
+      "name": "Brain Drinker",
+      "type": "aberration",
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "mind flayer",
+        "illithid",
+        "squid head",
+        "tentacle",
+        "psion",
+        "psychic"
+      ],
+      "description": "A purple-skinned thing with a squid for a face and a taste for thoughts.",
+      "attack": "Tentacle slap",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Mind Blast",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Stunned players have disadvantage next turn."
+        },
+        {
+          "name": "Skull Tap",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. Only works on a stunned or grabbed target."
+        }
+      ],
+      "tactics": "Blasts the group, then drinks the dazed. Keeps thralls to take hits for it."
+    },
+    {
+      "id": "eye-tyrant",
+      "name": "Eye Tyrant",
+      "type": "aberration",
+      "tier": 3,
+      "flying": true,
+      "aliases": [
+        "beholder",
+        "floating eye",
+        "evil eye",
+        "eye",
+        "orb",
+        "gazer",
+        "spectator"
+      ],
+      "description": "A floating, toothy orb with one huge eye, a dozen eye-stalks and an unshakable belief that it is better than you.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Eye Rays",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. The GM picks a different effect per ray (burn, freeze, sleep, push)."
+        },
+        {
+          "name": "Null Gaze",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Its central eye switches off all magic and powers in its line of sight until it looks away."
+        }
+      ],
+      "tactics": "Hovers out of reach and treats the party as insects. Keep it from facing the caster."
+    }
+  ],
+  "creatureTypes": [
+    {
+      "id": "beast",
+      "label": "Beast"
+    },
+    {
+      "id": "humanoid",
+      "label": "Humanoid"
+    },
+    {
+      "id": "undead",
+      "label": "Undead"
+    },
+    {
+      "id": "giant",
+      "label": "Giant"
+    },
+    {
+      "id": "monstrosity",
+      "label": "Monstrosity"
+    },
+    {
+      "id": "ooze",
+      "label": "Ooze"
+    },
+    {
+      "id": "aberration",
+      "label": "Aberration"
+    },
+    {
+      "id": "dragon",
+      "label": "Dragon"
     }
   ]
 }

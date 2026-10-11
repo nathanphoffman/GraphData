@@ -20,21 +20,14 @@ function sign(n: number) {
   return n >= 0 ? `+${n}` : `${n}`;
 }
 
-/** Color band for the card, from easy (green) to deadly (red). */
-function dangerOf(difficulty: number) {
-  if (difficulty < 1) return "easy";
-  if (difficulty < 2) return "fair";
-  if (difficulty < 3) return "hard";
-  if (difficulty < 4) return "brutal";
-  return "deadly";
-}
-
 function matches(creature: Creature, query: string) {
   const text = [
     creature.name,
+    ...creature.aliases,
     creature.description,
     creature.attack,
-    creature.skills,
+    ...creature.skills.map((s) => `${s.skill} ${s.mod === "+" ? "advantage" : "disadvantage"} ${s.note ?? ""}`),
+    creature.skillNote ?? "",
     creature.tactics,
     creature.flying ? "flying" : "",
     ...creature.powers.flatMap((p) => [p.name, p.text, model.powerTypes[p.type].label]),
@@ -53,7 +46,7 @@ function CreatureCard({ creature }: { creature: Creature }) {
   const difficulty = difficultyOf(creature);
 
   return (
-    <article className={`bestiary-card bestiary-${dangerOf(difficulty)}`}>
+    <article className={`bestiary-card bestiary-type-${creature.type}`}>
       <header className="bestiary-head">
         <h2>{creature.name}</h2>
         <span className="bestiary-difficulty">Difficulty {difficulty}</span>
@@ -83,7 +76,16 @@ function CreatureCard({ creature }: { creature: Creature }) {
         <strong>Attack:</strong> {creature.attack}, 2d6 {sign(tier.bonus)} minus the target's defense.
       </p>
       <p>
-        <strong>Skills:</strong> {creature.skills} Other checks use {sign(tier.bonus)}.
+        <strong>Skills:</strong>{" "}
+        {creature.skills.map((s, i) => (
+          <span key={s.skill}>
+            {i > 0 && ", "}
+            {s.skill}
+            <span className={s.mod === "+" ? "bestiary-adv" : "bestiary-dis"}>{s.mod === "+" ? "+" : "\u2212"}</span>
+            {s.note && ` (${s.note})`}
+          </span>
+        ))}
+        . Others {sign(tier.bonus)}. {creature.skillNote}
       </p>
       {creature.flying && (
         <p>
@@ -116,10 +118,18 @@ export default function TinyMightyBestiary() {
         of players plus the levels they have gained. Each 1-use power adds 0.5 difficulty. Enemies die at 0 health and
         power damage ignores defense.
       </p>
+      <ul className="bestiary-key" aria-label="Creature type color key">
+        {model.creatureTypes.map((t) => (
+          <li key={t.id} className={`bestiary-type-${t.id}`}>
+            <span className="bestiary-swatch" />
+            {t.label}
+          </li>
+        ))}
+      </ul>
       <input
         type="search"
         className="bestiary-search"
-        placeholder="Search creatures, powers, skills..."
+        placeholder="Search creatures, powers, skills, classic names..."
         aria-label="Search creatures"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
