@@ -1,0 +1,147 @@
+/* Tiny Mighty RPG Bestiary */
+.bestiary {
+  --b-card: #fbf8f1;
+  --b-ink: #2a2433;
+  --b-soft: #6b6378;
+  --b-easy: #2f9e6b;
+  --b-fair: #3b82c4;
+  --b-hard: #d99a1e;
+  --b-brutal: #e0642b;
+  --b-deadly: #c72a4a;
+  --b-power: #7c4dcc;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bestiary {
+    --b-card: #25212e;
+    --b-ink: #ece8f4;
+    --b-soft: #a59cb8;
+    --b-easy: #4cc790;
+    --b-fair: #62a8ee;
+    --b-hard: #f2b83f;
+    --b-brutal: #ff8650;
+    --b-deadly: #ff5f7e;
+    --b-power: #a88af0;
+  }
+}
+
+.bestiary-search {
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  margin: 4px 0 20px;
+  padding: 10px 14px;
+  font-size: 16px;
+  color: var(--b-ink);
+  background: var(--b-card);
+  border: 2px solid var(--b-power);
+  border-radius: 999px;
+  outline: none;
+}
+
+.bestiary-search:focus {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--b-power) 30%, transparent);
+}
+
+.bestiary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.bestiary-card {
+  --accent: var(--b-fair);
+  background: var(--b-card);
+  color: var(--b-ink);
+  border-radius: 10px;
+  border-top: 6px solid var(--accent);
+  padding: 14px 16px 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.bestiary-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.bestiary-easy { --accent: var(--b-easy); }
+.bestiary-fair { --accent: var(--b-fair); }
+.bestiary-hard { --accent: var(--b-hard); }
+.bestiary-brutal { --accent: var(--b-brutal); }
+.bestiary-deadly { --accent: var(--b-deadly); }
+
+.bestiary-card p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.bestiary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.bestiary-head h2 {
+  font-size: 20px;
+  margin: 0;
+  color: var(--accent);
+}
+
+.bestiary-difficulty {
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.bestiary-card .bestiary-desc {
+  font-style: italic;
+  color: var(--b-soft);
+}
+
+.bestiary-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+  text-align: center;
+}
+
+.bestiary-stats div {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-radius: 8px;
+  padding: 6px 4px;
+}
+
+.bestiary-stats dt {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--b-soft);
+}
+
+.bestiary-stats dd {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.bestiary-card .bestiary-power {
+  border-left: 4px solid var(--b-power);
+  background: color-mix(in srgb, var(--b-power) 12%, transparent);
+  padding: 6px 10px;
+  border-radius: 0 6px 6px 0;
+}
+
+.bestiary-card .bestiary-tactics {
+  color: var(--b-soft);
+  border-top: 1px dashed var(--b-soft);
+  padding-top: 8px;
+}

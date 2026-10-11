@@ -5,6 +5,7 @@ import NeuronIntelligence from "./neuron-intelligence/NeuronIntelligence";
 import RuleOfAuthorship from "./rule-of-authorship/RuleOfAuthorship";
 import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
 import DndSales from "./dnd-sales/DndSales";
+import TinyMightyBestiary from "./tiny-mighty-bestiary/TinyMightyBestiary";
 
 export interface ChartEntry {
   /** URL slug, e.g. #/chart/language-outlook */
@@ -59,6 +60,13 @@ export const charts: ChartEntry[] = [
     description:
       "Estimated lifetime Player's Handbook sales for each edition of D&D, from OD&D to the 2024 (5.5e) rules, with confidence ranges and sources.",
     component: DndSales,
+  },
+  {
+    id: "tiny-mighty-bestiary",
+    title: "Tiny Mighty RPG Bestiary",
+    description:
+      "Classic fantasy creatures statted with the Tiny Mighty RPG combat table: health, defense, bonus, turns and powers.",
+    component: TinyMightyBestiary,
   },
 ];
 

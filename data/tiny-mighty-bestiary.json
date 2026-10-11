@@ -1,0 +1,153 @@
+{
+  "title": "Tiny Mighty RPG Bestiary",
+  "rulesVersion": "Tiny Mighty RPG 1.09",
+  "tiers": [
+    { "difficulty": 0.25, "turns": 1, "defense": 3, "defenseDice": "d6-1", "health": 7, "healthDice": "2d6", "bonus": 0, "bonusDice": "d6-4" },
+    { "difficulty": 0.5, "turns": 1, "defense": 4, "defenseDice": "d6", "health": 11, "healthDice": "3d6", "bonus": 1, "bonusDice": "d6-3" },
+    { "difficulty": 1, "turns": 1, "defense": 5, "defenseDice": "d6+1", "health": 14, "healthDice": "4d6", "bonus": 2, "bonusDice": "d6-2" },
+    { "difficulty": 2, "turns": 2, "defense": 6, "defenseDice": "d6+2", "health": 18, "healthDice": "5d6", "bonus": 2, "bonusDice": "d6-2" },
+    { "difficulty": 3, "turns": 2, "defense": 7, "defenseDice": "d6+3", "health": 21, "healthDice": "6d6", "bonus": 3, "bonusDice": "d6-1" },
+    { "difficulty": 4, "turns": 3, "defense": 7, "defenseDice": "d6+3", "health": 28, "healthDice": "8d6", "bonus": 4, "bonusDice": "d6" }
+  ],
+  "powerTypes": {
+    "multi": { "label": "Multi-target", "dice": "3d6, one die per target" },
+    "direct": { "label": "Direct-target", "dice": "2d6 to 1 target" },
+    "area": { "label": "Area of effect", "dice": "1d6 to 1 pencil radius, 6s explode" },
+    "heal": { "label": "Healing", "dice": "2d6, can target self" }
+  },
+  "creatures": [
+    {
+      "id": "giant-rat",
+      "name": "Giant Rat",
+      "tier": 0.25,
+      "flying": false,
+      "description": "A dog-sized sewer scavenger that swarms anything that looks like dinner.",
+      "attack": "Gnaw",
+      "skills": "Disadvantage on Charm checks. Advantage on Senses (smell).",
+      "powers": [],
+      "tactics": "Comes in packs. Use 1 rat per player for an easy fight."
+    },
+    {
+      "id": "goblin",
+      "name": "Goblin",
+      "tier": 0.5,
+      "flying": false,
+      "description": "A sneaky, cackling raider with a rusty knife and a talent for ambush.",
+      "attack": "Rusty knife",
+      "skills": "Advantage on Charm checks to hide.",
+      "powers": [],
+      "tactics": "Hides first, then jumps the weakest looking player. Flees at half health."
+    },
+    {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "tier": 1,
+      "flying": false,
+      "description": "Animated bones with a notched sword and no will of its own.",
+      "attack": "Notched sword",
+      "skills": "Disadvantage on Wits and Charm checks.",
+      "powers": [],
+      "tactics": "Marches straight at the nearest player. Never retreats."
+    },
+    {
+      "id": "orc",
+      "name": "Orc Warrior",
+      "tier": 1,
+      "flying": false,
+      "description": "A scarred brute in mismatched armor who loves a straight fight.",
+      "attack": "Cleaver",
+      "skills": "Advantage on Physique (threats). Disadvantage on Wits.",
+      "powers": [],
+      "tactics": "Charges the biggest threat. Gets in the way of its friends."
+    },
+    {
+      "id": "giant-spider",
+      "name": "Giant Spider",
+      "tier": 1,
+      "flying": false,
+      "description": "A wall-crawling ambusher that wraps its prey in silk and bites from above.",
+      "attack": "Fangs",
+      "skills": "Advantage on Charm checks to hide and Physique checks to climb.",
+      "powers": [
+        {
+          "name": "Venom Bite",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target is poisoned (disadvantage) until it rests."
+        }
+      ],
+      "tactics": "Drops from the ceiling. Saves its venom for a player in light armor."
+    },
+    {
+      "id": "ogre",
+      "name": "Ogre",
+      "tier": 2,
+      "flying": false,
+      "description": "A lumbering giant with a club made from a small tree.",
+      "attack": "Tree club",
+      "skills": "Advantage on Physique (athletics, fists). Disadvantage on Wits and Senses.",
+      "powers": [],
+      "tactics": "Swings at whoever is closest. Easy to trick, hard to survive."
+    },
+    {
+      "id": "ghost",
+      "name": "Restless Ghost",
+      "tier": 2,
+      "flying": true,
+      "description": "A pale shape drifting through the walls of the house it died in.",
+      "attack": "Cold touch",
+      "skills": "Advantage on Charm checks to hide and frighten. Disadvantage on Physique checks.",
+      "powers": [
+        {
+          "name": "Chilling Wail",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. Passes through walls to reach its target."
+        }
+      ],
+      "tactics": "Appears, wails, vanishes into a wall. Weapons without magic or silver roll with disadvantage."
+    },
+    {
+      "id": "troll",
+      "name": "Cave Troll",
+      "tier": 3,
+      "flying": false,
+      "description": "A hulking, warty monster whose wounds close faster than they open.",
+      "attack": "Claws & fists",
+      "skills": "Advantage on Physique. Disadvantage on Charm and Wits.",
+      "powers": [
+        {
+          "name": "Regenerate",
+          "type": "heal",
+          "uses": 1,
+          "text": "Heals itself for 2d6. Fire or acid in the same turn stops it."
+        }
+      ],
+      "tactics": "Fights until hurt, regenerates, fights again. Best solved with fire."
+    },
+    {
+      "id": "dragon",
+      "name": "Dragon",
+      "tier": 4,
+      "flying": true,
+      "description": "An ancient scaled tyrant sitting on a mountain of coin.",
+      "attack": "Bite & claws",
+      "skills": "Advantage on all Charm checks. Advantage on Senses.",
+      "powers": [
+        {
+          "name": "Fire Breath",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Burns terrain too."
+        },
+        {
+          "name": "Crushing Dive",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target is knocked prone."
+        }
+      ],
+      "tactics": "Opens with Fire Breath on a group, then picks off stragglers from the air. Offers a deal if losing."
+    }
+  ]
+}
