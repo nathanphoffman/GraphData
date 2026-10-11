@@ -71,3 +71,10 @@ h1 {
 .calc-table {
   overflow-x: auto;
 }
+
+/* Dragging a slider shouldn't scroll the page or trigger edge-swipe navigation. */
+input[type="range"] {
+  touch-action: pan-y;
+  margin-inline: 8px;
+  width: calc(100% - 16px);
+}
