@@ -1950,7 +1950,8 @@
       "type": "beast",
       "themes": [
         "scifi",
-        "science-fantasy"
+        "science-fantasy",
+        "space-hammer"
       ],
       "tone": 5,
       "tier": 2,
@@ -2084,6 +2085,617 @@
         }
       ],
       "tactics": "Offers a drink or a bargain. Eats children and the foolish, in that order."
+    },
+    {
+      "id": "lasgun-grunt",
+      "name": "Lasgun Grunt",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 4,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "imperial guardsman",
+        "guardsman",
+        "astra militarum",
+        "cadian",
+        "imperial guard",
+        "conscript",
+        "fodder"
+      ],
+      "description": "A helmeted foot soldier in flak armor, one of ten billion, sent forward in waves on the Emperor's say-so.",
+      "attack": "Laser rifle",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "-",
+          "note": "morale"
+        }
+      ],
+      "powers": [],
+      "tactics": "Always arrives in numbers of 5 or more. Surrenders only if an officer is dead."
+    },
+    {
+      "id": "star-templar",
+      "name": "Star Templar",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 4,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "space marine",
+        "astartes",
+        "adeptus astartes",
+        "primaris",
+        "marine",
+        "power armor",
+        "superhuman"
+      ],
+      "description": "A seven-foot, genetically-engineered warrior in ceramite power armor, sworn to a god-emperor and a chapter banner.",
+      "attack": "Chainsword",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-",
+          "note": "empathy"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Bolt Salvo",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Explosive bolt-shells."
+        }
+      ],
+      "tactics": "Fights in squads of five. Drops from orbit in a pod when the shooting starts."
+    },
+    {
+      "id": "iron-marshal",
+      "name": "Iron Marshal",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 4,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "commissar",
+        "political officer",
+        "kommissar",
+        "officer",
+        "zealot",
+        "bolt pistol"
+      ],
+      "description": "A black-coated officer with a peaked cap and a pistol who shoots cowards before the enemy does.",
+      "attack": "Power sword",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "fear"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Summary Execution",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. May target one of its own allies; if it does, allies in sight have advantage on their next roll."
+        }
+      ],
+      "tactics": "Keeps the troops in line. Always positioned behind someone else."
+    },
+    {
+      "id": "scrapjaw-brawler",
+      "name": "Scrapjaw Brawler",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 2,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "ork",
+        "orks",
+        "orc",
+        "waaagh",
+        "boyz",
+        "greenskin",
+        "ork boy",
+        "orkz"
+      ],
+      "description": "A green, tusked bruiser in welded scrap armor with a shoota that jams and a big choppa that never does.",
+      "attack": "Big choppa",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "intimidate"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Waaagh!",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. All allies in sight roll their next attack with advantage."
+        }
+      ],
+      "tactics": "Charges in a mob. Fights better the more of his mates are around."
+    },
+    {
+      "id": "swarmling",
+      "name": "Swarmling",
+      "type": "beast",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 4,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "tyranid",
+        "gaunt",
+        "termagant",
+        "hormagaunt",
+        "genestealer",
+        "hive swarm",
+        "bug"
+      ],
+      "description": "A claw-limbed, carapaced hunter that comes in the thousands from the dark between stars.",
+      "attack": "Scything claws",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        }
+      ],
+      "powers": [],
+      "tactics": "Moves as a mob. Leaders on the hive mind tell them where to bite."
+    },
+    {
+      "id": "chitin-crusher",
+      "name": "Chitin Crusher",
+      "type": "beast",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "carnifex",
+        "tyranid",
+        "hive tyrant",
+        "monstrous creature",
+        "bio-titan",
+        "bio titan",
+        "tyrant"
+      ],
+      "description": "A house-sized, armored bio-engineered monster with bone cannons and a mouth for every limb.",
+      "attack": "Scything talons",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Smashes through walls. Takes a long time to drop."
+    },
+    {
+      "id": "chrome-revenant",
+      "name": "Chrome Revenant",
+      "type": "construct",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 5,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "necron",
+        "necrons",
+        "c'tan",
+        "immortal",
+        "tomb world",
+        "terminator",
+        "robot skeleton"
+      ],
+      "description": "A skeletal metal warrior that rises from a tomb world's sands after sixty million years, green eyes burning.",
+      "attack": "Gauss flayer",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Reanimation Protocol",
+          "type": "heal",
+          "uses": 1,
+          "text": "Heals itself 2d6, or springs back up at 1 health if destroyed by a non-critical hit."
+        }
+      ],
+      "tactics": "Walks forward in a line. Comes back unless every unit is wiped in the same round."
+    },
+    {
+      "id": "ruin-knight",
+      "name": "Ruin Knight",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 5,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "chaos marine",
+        "chaos space marine",
+        "traitor marine",
+        "heretic",
+        "word bearer",
+        "iron warrior",
+        "black legion"
+      ],
+      "description": "A scarred, spiked, horned warrior in corrupted power armor, who fought for the Emperor ten thousand years ago.",
+      "attack": "Bolter & chainaxe",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "terror"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Warp Bolt",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. A sizzling bolt of sorcerous warp energy."
+        }
+      ],
+      "tactics": "Leads cultists and daemons. Offers the party a place in the dark if it gets the chance."
+    },
+    {
+      "id": "warp-fiend",
+      "name": "Warp Fiend",
+      "type": "monstrosity",
+      "themes": [
+        "space-hammer",
+        "science-fantasy"
+      ],
+      "tone": 5,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "daemon",
+        "demon",
+        "bloodthirster",
+        "khorne",
+        "slaanesh",
+        "tzeentch",
+        "nurgle",
+        "warp spawn",
+        "fiend"
+      ],
+      "description": "A red-skinned, horned thing that bleeds out of the warp wherever skulls are piled and prayers are screamed.",
+      "attack": "Hellblade",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "fear"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Warp Rend",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. Tears at the target's soul."
+        }
+      ],
+      "tactics": "Cannot be harmed by non-magical weapons. Vanishes if the summoner's ritual is broken."
+    },
+    {
+      "id": "silver-seer",
+      "name": "Silver Seer",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "eldar",
+        "aeldari",
+        "farseer",
+        "craftworld",
+        "space elf",
+        "dark eldar",
+        "drukhari",
+        "psyker"
+      ],
+      "description": "A tall, graceful elf in runed, smooth armor who has already seen how this fight ends.",
+      "attack": "Witchblade",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Mind Lance",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. A bolt of focused psychic force."
+        },
+        {
+          "name": "Foresight",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Once per rest, makes any roll it just failed again."
+        }
+      ],
+      "tactics": "Fights from range. Hates being rushed."
+    },
+    {
+      "id": "sky-coalition-warrior",
+      "name": "Sky Coalition Warrior",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 2,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "tau",
+        "tau empire",
+        "fire warrior",
+        "greater good",
+        "pulse rifle",
+        "xenos",
+        "blue alien"
+      ],
+      "description": "A short, blue-skinned soldier in sleek armor who speaks of the greater good and shoots from behind a drone.",
+      "attack": "Pulse rifle",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "tech"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "persuade"
+        }
+      ],
+      "powers": [],
+      "tactics": "Shoots from a distance and talks about peace afterward. Fights alongside a drone."
+    },
+    {
+      "id": "gear-priest",
+      "name": "Gear Priest",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "tech-priest",
+        "tech priest",
+        "adeptus mechanicus",
+        "mechanicus",
+        "magos",
+        "servitor",
+        "cogboy",
+        "machine cult"
+      ],
+      "description": "A red-robed priest of the Machine God with a mechanical arm, a third eye and a litany to the toaster.",
+      "attack": "Power axe",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "tech"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Machine Rite",
+          "type": "heal",
+          "uses": 1,
+          "text": "Heals 2d6 to a construct or machine, itself included."
+        }
+      ],
+      "tactics": "Fights beside constructs and servitors. Offers a trade for rare machines."
+    },
+    {
+      "id": "iron-colossus",
+      "name": "Iron Colossus",
+      "type": "construct",
+      "themes": [
+        "space-hammer",
+        "scifi"
+      ],
+      "tone": 4,
+      "tier": 4,
+      "flying": false,
+      "aliases": [
+        "titan",
+        "imperator",
+        "warlord titan",
+        "reaver",
+        "mech",
+        "super heavy",
+        "god machine",
+        "walking cathedral"
+      ],
+      "description": "A city-block-tall, god-machine walker that crushes tanks and carries a cathedral on its back.",
+      "attack": "Stomp",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Senses",
+          "mod": "-",
+          "note": "small targets"
+        }
+      ],
+      "skillNote": "Players smaller than man-sized have advantage to avoid its attacks.",
+      "powers": [
+        {
+          "name": "Apocalypse Cannon",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Razes buildings."
+        },
+        {
+          "name": "Rampage Stomp",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Flattens infantry."
+        }
+      ],
+      "tactics": "Walks through walls and walls of troops. Vulnerable to climbers and sappers."
+    },
+    {
+      "id": "witch-hunter",
+      "name": "Witch Hunter",
+      "type": "humanoid",
+      "themes": [
+        "space-hammer",
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 5,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "inquisitor",
+        "inquisition",
+        "witch finder",
+        "ordo",
+        "hereticus",
+        "puritan"
+      ],
+      "description": "A grim, armored investigator with a flamer, a sealed warrant and the legal right to burn a whole planet.",
+      "attack": "Plasma pistol",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "detect lies"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Purging Flame",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Fire that does not go out."
+        }
+      ],
+      "tactics": "Questions first, burns second. Has authority to commandeer anything or anyone."
     }
   ],
   "creatureTypes": [
@@ -2148,6 +2760,10 @@
     {
       "id": "space-wars",
       "label": "Space Wars"
+    },
+    {
+      "id": "space-hammer",
+      "label": "Space Hammer"
     }
   ],
   "toneScale": [
