@@ -1485,5 +1485,722 @@
       "ghost car",
       "vehicle"
     ]
+  },
+  {
+    "id": "crystal-courier",
+    "name": "Crystal Courier",
+    "type": "animated",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A faceted crystal messenger that glides around on a cushion of light and delivers orders for its temple.",
+    "attack": "Shard slash",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Delivers a message, then attacks whoever is not on the list.",
+    "aliases": [
+      "construct",
+      "drone",
+      "crystal golem",
+      "messenger"
+    ]
+  },
+  {
+    "id": "rune-walker",
+    "name": "Rune-Etched Walker",
+    "type": "animated",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "description": "A tall war-automaton carved with glowing script, built by a long-dead order of star-priests.",
+    "attack": "Rune fist",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Marches straight at the nearest spellcaster. Slows when the runes on its chest are covered.",
+    "aliases": [
+      "golem",
+      "construct",
+      "automaton",
+      "guardian"
+    ]
+  },
+  {
+    "id": "cargo-loader",
+    "name": "Cargo Loader",
+    "type": "animated",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A yellow forklift droid that never stops hauling crates, even when someone is standing in the way.",
+    "attack": "Lift & shove",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rolls forward on its fixed route. Stops only if someone yells.",
+    "aliases": [
+      "droid",
+      "forklift",
+      "worker bot",
+      "loader"
+    ]
+  },
+  {
+    "id": "siege-walker",
+    "name": "Siege Walker",
+    "type": "animated",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A four-legged armored walker the size of a building that crushes defense lines.",
+    "attack": "Cannon & stomp",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Walks straight at the strongest point. Weak underneath, if someone gets there.",
+    "aliases": [
+      "at-at",
+      "walker",
+      "war machine",
+      "tank"
+    ]
+  },
+  {
+    "id": "servo-cherub",
+    "name": "Servo Cherub",
+    "type": "animated",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A chanting brass cherub on a rocket pack that records everything it sees and zaps blasphemers.",
+    "attack": "Zap beam",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hovers overhead and calls in reinforcements. Dies loudly.",
+    "aliases": [
+      "servo skull",
+      "drone",
+      "mech",
+      "cherub"
+    ]
+  },
+  {
+    "id": "siege-automaton",
+    "name": "Siege Automaton",
+    "type": "animated",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A scarred war-machine with a chainfist and a skull for a face, sealed in a vault until the war needs it.",
+    "attack": "Chainfist",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Marches into the thick of the group. Needs a command word to stop.",
+    "aliases": [
+      "dreadnought",
+      "war machine",
+      "servitor",
+      "golem"
+    ]
+  },
+  {
+    "id": "riot-drone",
+    "name": "Riot Drone",
+    "type": "animated",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A hovering corp-security drone with a shock baton and a recorded warning that loops forever.",
+    "attack": "Stun baton",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Warns once, then attacks. Flies out of reach when hurt.",
+    "aliases": [
+      "security drone",
+      "police drone",
+      "bot",
+      "drone"
+    ]
+  },
+  {
+    "id": "arcology-warden",
+    "name": "Arcology Warden",
+    "type": "animated",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "The building-wide security AI of a mega-tower, controlling every elevator, door and gun turret.",
+    "attack": "Turret fire",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lockdown Sweep",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Everyone in the zone is stunned until they break free."
+      }
+    ],
+    "tactics": "Seals doors and floods hallways with gas. Weak if cut off from its server.",
+    "aliases": [
+      "building ai",
+      "security ai",
+      "system",
+      "mainframe"
+    ]
+  },
+  {
+    "id": "clockwork-gunslinger",
+    "name": "Clockwork Gunslinger",
+    "type": "animated",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A brass-plated duelist that never blinks and never misses a quick draw.",
+    "attack": "Quick draw",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits for a high noon moment. Stands still until someone touches a gun.",
+    "aliases": [
+      "automaton",
+      "robot",
+      "gunslinger",
+      "mechanical man"
+    ]
+  },
+  {
+    "id": "iron-horse-automaton",
+    "name": "Iron Horse Automaton",
+    "type": "animated",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A steel stallion built for a railroad baron, with a boiler heart and a mind of its own.",
+    "attack": "Iron hooves",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rears and charges at anyone on the tracks. Runs out of steam eventually.",
+    "aliases": [
+      "steam horse",
+      "robot horse",
+      "construct",
+      "mount"
+    ]
+  },
+  {
+    "id": "waxwork-stalker",
+    "name": "Waxwork Stalker",
+    "type": "animated",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A life-sized wax figure from a closed museum that moves when no one watches.",
+    "attack": "Wax hands",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Stands still while observed. Takes a step each time the lights flicker.",
+    "aliases": [
+      "wax figure",
+      "mannequin",
+      "statue",
+      "doll"
+    ]
+  },
+  {
+    "id": "rigging-marionette",
+    "name": "Rigging Marionette",
+    "type": "animated",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A puppet of old rope and canvas that crawls through the rigging and drops on the unsuspecting.",
+    "attack": "Rope lash",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits in the rigging. Tangles a player in line and drops.",
+    "aliases": [
+      "puppet",
+      "marionette",
+      "rope thing",
+      "scarecrow"
+    ]
+  },
+  {
+    "id": "cursed-man-o-war",
+    "name": "Cursed Man-o-War",
+    "type": "animated",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A warship that sails itself with a dead crew nailed to the decks.",
+    "attack": "Broadside",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Ghost Broadside",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Every ship or boat in the zone is hit."
+      }
+    ],
+    "tactics": "Sails straight at the biggest ship. Cannons fire themselves.",
+    "aliases": [
+      "ghost ship",
+      "warship",
+      "flying dutchman",
+      "vessel"
+    ]
+  },
+  {
+    "id": "tin-footman",
+    "name": "Tin Footman",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A polite tin servant that announces guests, serves tea, and attacks anyone who disrespects the house.",
+    "attack": "Silver tray",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Bows. Hits whoever it is told to hit.",
+    "aliases": [
+      "butler",
+      "servant",
+      "automaton",
+      "valet"
+    ]
+  },
+  {
+    "id": "junkyard-guard-bot",
+    "name": "Junkyard Guard Bot",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A rusted guard-bot with one working eye that still thinks the yard is under contract.",
+    "attack": "Welding torch",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rolls out of a heap of scrap and chases trespassers.",
+    "aliases": [
+      "guard bot",
+      "robot",
+      "scrap bot",
+      "sentry"
+    ]
+  },
+  {
+    "id": "war-machine-remnant",
+    "name": "War Machine Remnant",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A pre-war killing machine still on patrol, six legs and a minigun under a coat of rust.",
+    "attack": "Minigun",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Suppressing Fire",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Everyone in the zone is pinned."
+      }
+    ],
+    "tactics": "Marches in a straight line. Keeps shooting until its ammo is gone.",
+    "aliases": [
+      "old war machine",
+      "tank",
+      "war bot",
+      "terminator"
+    ]
+  },
+  {
+    "id": "servo-janitor",
+    "name": "Servo Janitor",
+    "type": "animated",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A cheerful brass janitor that hums hymns while scrubbing the blood off the deck.",
+    "attack": "Mop swing",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Spray Cleaner",
+        "type": "utility",
+        "uses": 1,
+        "text": "Sprays a slippery foam. One target loses their next move."
+      }
+    ],
+    "tactics": "Cleans up whatever is nearest, including the players.",
+    "aliases": [
+      "janitor",
+      "cleaning bot",
+      "servitor",
+      "mop bot"
+    ]
+  },
+  {
+    "id": "haunted-umbrella",
+    "name": "Haunted Umbrella",
+    "type": "animated",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A black umbrella that opens itself in the doorway and follows people home.",
+    "attack": "Whack",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Sudden Gust",
+        "type": "utility",
+        "uses": 1,
+        "text": "Blows one target backward. They lose their next move."
+      }
+    ],
+    "tactics": "Sits by the door. Blows open in the face of the first person to leave.",
+    "aliases": [
+      "umbrella",
+      "cursed object",
+      "haunted object",
+      "brolly"
+    ]
+  },
+  {
+    "id": "vending-buddy",
+    "name": "Vending Buddy",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A dented vending machine that still dispenses a single can of unknown soda to anyone who asks.",
+    "attack": "Can toss",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Asks for coins. Throws cans when it is shaken.",
+    "aliases": [
+      "vending machine",
+      "robot",
+      "machine",
+      "snack bot"
+    ]
+  },
+  {
+    "id": "iron-maiden-cannon",
+    "name": "Iron Maiden Cannon",
+    "type": "animated",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "description": "A cursed ship's cannon that fires on its own and screams when it hits something living.",
+    "attack": "Cursed shot",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rolls out of the hold and fires at anyone on deck.",
+    "aliases": [
+      "cannon",
+      "cursed gun",
+      "haunted weapon",
+      "artillery"
+    ]
+  },
+  {
+    "id": "meat-grinder-automaton",
+    "name": "Meat-Grinder Automaton",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "description": "A factory automaton with a grinder for a chest, built when the owners stopped caring who worked there.",
+    "attack": "Grinder",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Chases the nearest worker. Pulls a player in if it gets a grip.",
+    "aliases": [
+      "factory bot",
+      "grinder",
+      "industrial bot",
+      "machine"
+    ]
+  },
+  {
+    "id": "gallows-marionette",
+    "name": "Gallows Marionette",
+    "type": "animated",
+    "themes": [
+      "western"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "description": "A puppet made from the rope and planks of an old gallows that dances for any who lie.",
+    "attack": "Rope lash",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits on the platform. Dances toward a liar.",
+    "aliases": [
+      "marionette",
+      "puppet",
+      "haunted gallows",
+      "scarecrow"
+    ]
   }
 ]

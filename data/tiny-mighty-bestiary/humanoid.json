@@ -3377,5 +3377,659 @@
       "street boss",
       "cyber thug"
     ]
+  },
+  {
+    "id": "starforged-squire",
+    "name": "Starforged Squire",
+    "type": "humanoid",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A teenage squire in glowing runic plate who is still learning to hold a laser-sword.",
+    "attack": "Rune blade",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Charges the first enemy it sees. Flinches if its knight is hurt.",
+    "aliases": [
+      "squire",
+      "padawan",
+      "apprentice",
+      "page"
+    ]
+  },
+  {
+    "id": "astral-archmage",
+    "name": "Astral Archmage",
+    "type": "humanoid",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A robed sorcerer with a halo of orbiting moons who bends starlight into spells.",
+    "attack": "Starfire staff",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Starfall",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hits everyone in the zone at once."
+      }
+    ],
+    "tactics": "Stays out of reach and casts from range. Tries to turn the players' own light against them.",
+    "aliases": [
+      "wizard",
+      "sorcerer",
+      "star mage",
+      "archmage"
+    ]
+  },
+  {
+    "id": "iron-crusade-lord",
+    "name": "Iron Crusade Lord",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A towering warrior in ancient power armor who has never lost a battle and never stopped yelling about it.",
+    "attack": "Power sword",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Heresy Cleave",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Armor and shields do not count."
+      }
+    ],
+    "tactics": "Charges the leader of the group. Rallies lesser troops with a shout.",
+    "aliases": [
+      "space marine",
+      "chapter master",
+      "warlord",
+      "crusader"
+    ]
+  },
+  {
+    "id": "outlaw-king",
+    "name": "Outlaw King",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A legendary bandit with a crown of rattlesnake rattles and a gang that numbers in the hundreds.",
+    "attack": "Twin revolvers",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Shootout",
+        "type": "multi",
+        "uses": 1,
+        "text": "Attacks up to three enemies this turn with normal damage."
+      }
+    ],
+    "tactics": "Never fights alone. Sends his crew first and picks off the hurt.",
+    "aliases": [
+      "bandit king",
+      "gang boss",
+      "desperado",
+      "outlaw"
+    ]
+  },
+  {
+    "id": "cult-inquisitor",
+    "name": "Cult Inquisitor",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "description": "A pale investigator with a ledger of confessions and a silver knife for the ones who lie.",
+    "attack": "Silver knife",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Asks questions. Strikes when the answer is wrong.",
+    "aliases": [
+      "inquisitor",
+      "investigator",
+      "cultist",
+      "priest"
+    ]
+  },
+  {
+    "id": "midnight-kingpin",
+    "name": "Midnight Kingpin",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A smiling crime boss who runs half the city and sold his shadow years ago.",
+    "attack": "Ritual dagger",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Cursed Bargain",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is cursed with disadvantage until the bargain is kept."
+      }
+    ],
+    "tactics": "Sits at a long table with a dozen bodyguards. Offers a bargain with a price in blood.",
+    "aliases": [
+      "crime boss",
+      "don",
+      "occultist",
+      "kingpin"
+    ]
+  },
+  {
+    "id": "royal-marine-sergeant",
+    "name": "Royal Marine Sergeant",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A scarlet-coated sergeant who has seen every kind of boarding action and enjoyed most of them.",
+    "attack": "Cutlass & pistol",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Shouts orders. Forms a firing line, then a bayonet charge.",
+    "aliases": [
+      "marine",
+      "soldier",
+      "sergeant",
+      "redcoat"
+    ]
+  },
+  {
+    "id": "pirate-king",
+    "name": "Pirate King",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A legendary captain with a hundred ships on his flag and the sea itself at his command.",
+    "attack": "Cutlass",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Broadside",
+        "type": "multi",
+        "uses": 1,
+        "text": "Attacks up to three enemies this turn with normal damage."
+      }
+    ],
+    "tactics": "Boards last, after his crew has done the work. Offers a share for anyone who joins.",
+    "aliases": [
+      "pirate lord",
+      "corsair king",
+      "captain",
+      "buccaneer king"
+    ]
+  },
+  {
+    "id": "brass-warlord",
+    "name": "Brass Warlord",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A general in a clanking exosuit who commands an army of mechanical troops.",
+    "attack": "Piston gauntlets",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rally the Clank",
+        "type": "multi",
+        "uses": 1,
+        "text": "Attacks up to three enemies this turn with normal damage."
+      }
+    ],
+    "tactics": "Marches with a squad of clockwork soldiers. Orders them to focus on the weakest.",
+    "aliases": [
+      "general",
+      "warlord",
+      "iron general",
+      "commander"
+    ]
+  },
+  {
+    "id": "vault-tyrant",
+    "name": "Vault Tyrant",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A shriveled old ruler of a sealed vault, in a suit of pre-war armor and a head full of secrets.",
+    "attack": "Laser rifle",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Overseer Command",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is pinned until it obeys."
+      }
+    ],
+    "tactics": "Sits at the vault door with a dozen guards. Offers safety for service.",
+    "aliases": [
+      "overseer",
+      "vault boss",
+      "tyrant",
+      "warden"
+    ]
+  },
+  {
+    "id": "rim-scrapper",
+    "name": "Rim Scrapper",
+    "type": "humanoid",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A greasy teenage scavenger on an outer-rim moon with a patched flight jacket and a stolen blaster.",
+    "attack": "Blaster snap",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Quick Shot",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Fires the stolen blaster at close range."
+      }
+    ],
+    "tactics": "Fires from behind cover and bolts for the nearest ship.",
+    "aliases": [
+      "scavenger",
+      "pilot",
+      "kid",
+      "smuggler"
+    ]
+  },
+  {
+    "id": "chimney-urchin",
+    "name": "Chimney Urchin",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A soot-covered child who climbs up the factory chimneys with a bag of stolen parts.",
+    "attack": "Brass slingshot",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Soot Bomb",
+        "type": "utility",
+        "uses": 1,
+        "text": "Throws a bag of soot. One target is blinded until their next turn."
+      }
+    ],
+    "tactics": "Hides in the flue and picks off items from afar.",
+    "aliases": [
+      "urchin",
+      "sweep",
+      "kid",
+      "thief"
+    ]
+  },
+  {
+    "id": "scrap-kid",
+    "name": "Scrap Kid",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A kid in a patched helmet with a rusty crossbow who scavenges the wasteland alone.",
+    "attack": "Crossbow",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lucky Shot",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Fires a rusty bolt at a target in reach."
+      }
+    ],
+    "tactics": "Hides on a roof and shoots from cover. Runs if hit.",
+    "aliases": [
+      "scavenger",
+      "kid",
+      "urchin",
+      "survivor"
+    ]
+  },
+  {
+    "id": "shadow-emperor",
+    "name": "Shadow Emperor",
+    "type": "humanoid",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A cloaked tyrant who sits on a throne of black glass and rules a thousand worlds.",
+    "attack": "Force lightning",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Crushing Grip",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target cannot move until released."
+      },
+      {
+        "name": "Storm of Lightning",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hits everyone in the zone."
+      }
+    ],
+    "tactics": "Orders his guards first. Strikes from the shadows once they fall.",
+    "aliases": [
+      "emperor",
+      "dark lord",
+      "sith",
+      "tyrant"
+    ]
+  },
+  {
+    "id": "cyber-samurai-champion",
+    "name": "Cyber-Samurai Champion",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A chrome-plated blade master hired by a megacorp to cut down rivals in the open street.",
+    "attack": "Mono-katana",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Flash Cut",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Strikes before anyone can react."
+      },
+      {
+        "name": "Whirling Blades",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hits everyone in reach."
+      }
+    ],
+    "tactics": "Dances through the crowd. Targets the one with the best gear.",
+    "aliases": [
+      "samurai",
+      "blade master",
+      "cyber duelist",
+      "assassin"
+    ]
+  },
+  {
+    "id": "bumbling-guardsman",
+    "name": "Bumbling Guardsman",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "description": "A nervous recruit in oversized armor who is not sure which side he is supposed to be on.",
+    "attack": "Rusty lasgun",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Shoots at the sky. Surrenders when asked politely.",
+    "aliases": [
+      "recruit",
+      "guardsman",
+      "trooper",
+      "grunt"
+    ]
+  },
+  {
+    "id": "nosy-landlady",
+    "name": "Nosy Landlady",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A small, suspicious landlady with a rolling pin who always knows who is up in the attic.",
+    "attack": "Rolling pin",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Asks questions at the door. Hits anyone sneaking out without paying rent.",
+    "aliases": [
+      "landlady",
+      "neighbor",
+      "busybody",
+      "old woman"
+    ]
+  },
+  {
+    "id": "tinkering-granny",
+    "name": "Tinkering Granny",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "description": "A cheerful old woman who builds toasters out of scrap and shoos looters with a ladle.",
+    "attack": "Hot ladle",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Offers tea. Smacks players who touch her gadgets.",
+    "aliases": [
+      "granny",
+      "old woman",
+      "hermit",
+      "tinkerer"
+    ]
   }
 ]

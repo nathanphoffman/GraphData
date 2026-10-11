@@ -2018,5 +2018,524 @@
       "giant worm",
       "dune worm"
     ]
+  },
+  {
+    "id": "tunnel-spawn",
+    "name": "Tunnel Spawn",
+    "type": "monster",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "A toothy larval horror that crawls out of hull breaches in swarms.",
+    "attack": "Gnashing",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Pours out of a vent in groups. Always one behind the one you killed.",
+    "aliases": [
+      "genestealer",
+      "larva",
+      "bug",
+      "xenos spawn"
+    ]
+  },
+  {
+    "id": "warp-behemoth",
+    "name": "Warp Behemoth",
+    "type": "monster",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A twisted tower of flesh and warp-light that tears holes in reality when it moves.",
+    "attack": "Crushing limbs",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Reality Tear",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Spawns two Warp Imps in the zone."
+      }
+    ],
+    "tactics": "Wades into the middle of the group. Rips a hole in the floor when badly hurt.",
+    "aliases": [
+      "daemon prince",
+      "great unclean one",
+      "warp beast",
+      "titan"
+    ]
+  },
+  {
+    "id": "biolab-escapee",
+    "name": "Biolab Escapee",
+    "type": "monster",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "description": "A failed corp experiment, too many limbs on a body that was only meant to have two.",
+    "attack": "Lashing limbs",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Staggers through the lab and thrashes at anything that moves.",
+    "aliases": [
+      "experiment",
+      "abomination",
+      "mutant",
+      "clone gone wrong"
+    ]
+  },
+  {
+    "id": "mesa-titan",
+    "name": "Mesa Titan",
+    "type": "monster",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A mountain-sized stone giant that wakes when the railroad drills into its back.",
+    "attack": "Stone fist",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rockslide",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Rocks fall on everyone in the zone."
+      }
+    ],
+    "tactics": "Rises slowly from the cliff face. Throws boulders if it cannot reach the group.",
+    "aliases": [
+      "giant",
+      "stone giant",
+      "mountain giant",
+      "rock monster"
+    ]
+  },
+  {
+    "id": "drain-leech",
+    "name": "Drain Leech",
+    "type": "monster",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "A pale, rope-thick leech that lives in sewer tunnels and slides up through the drain.",
+    "attack": "Latch & drain",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slides up from a drain and latches on. Hates salt.",
+    "aliases": [
+      "leech",
+      "worm",
+      "sewer thing",
+      "parasite"
+    ]
+  },
+  {
+    "id": "basement-elder",
+    "name": "Basement Elder",
+    "type": "monster",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A many-eyed mass that waits under the floor of an old building and whispers names through the pipes.",
+    "attack": "Tendril lash",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Unspeakable Gaze",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is stunned until they look away."
+      }
+    ],
+    "tactics": "Does not move. Reaches up through the floor and pulls players down.",
+    "aliases": [
+      "elder thing",
+      "cosmic horror",
+      "many-eyed horror",
+      "unspeakable"
+    ]
+  },
+  {
+    "id": "sea-serpent",
+    "name": "Sea Serpent",
+    "type": "monster",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A hundred-foot serpent of black scales that rises from deep water to snap masts in half.",
+    "attack": "Crushing coils",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mast Snap",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target's ship loses its sails or steering."
+      }
+    ],
+    "tactics": "Coils around the hull and squeezes. Dives when badly hurt.",
+    "aliases": [
+      "serpent",
+      "leviathan",
+      "sea snake",
+      "sea monster"
+    ]
+  },
+  {
+    "id": "oil-slick-crawler",
+    "name": "Oil Slick Crawler",
+    "type": "monster",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A pool of living oil that slides under doors and ignites at the worst moment.",
+    "attack": "Engulf",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slides under the door and coats the floor. Catches fire if lit.",
+    "aliases": [
+      "ooze",
+      "slime",
+      "blob",
+      "oil monster"
+    ]
+  },
+  {
+    "id": "furnace-maw",
+    "name": "Furnace Maw",
+    "type": "monster",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "description": "A fat, coal-eating worm that lives in factory furnaces and spits cinders at intruders.",
+    "attack": "Cinder spit",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Sits in the furnace door and spits. Dives in when hurt.",
+    "aliases": [
+      "worm",
+      "fire worm",
+      "furnace beast",
+      "slag worm"
+    ]
+  },
+  {
+    "id": "sump-leech",
+    "name": "Sump Leech",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "A glowing, dog-sized leech that rises out of toxic ponds to attach itself to anything warm.",
+    "attack": "Latch & drain",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slides out of the sludge and latches on. Salt makes it let go.",
+    "aliases": [
+      "leech",
+      "slug",
+      "mutant worm",
+      "parasite"
+    ]
+  },
+  {
+    "id": "glow-troll",
+    "name": "Glow Troll",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "description": "A lumbering, radioactive brute that regrows its arms and carries a stop sign as a club.",
+    "attack": "Sign bash",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Smashes whatever is closest. Grows back anything cut off by morning.",
+    "aliases": [
+      "troll",
+      "mutant giant",
+      "radioactive brute",
+      "ghoul"
+    ]
+  },
+  {
+    "id": "asteroid-devourer",
+    "name": "Asteroid Devourer",
+    "type": "monster",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A stone-crunching worm the size of a cruiser that tunnels through asteroid belts.",
+    "attack": "Crushing maw",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rams a hull from beneath. Retreats to an asteroid when hurt.",
+    "aliases": [
+      "space worm",
+      "giant worm",
+      "space monster",
+      "behemoth"
+    ]
+  },
+  {
+    "id": "plague-mammoth",
+    "name": "Plague Mammoth",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A mutated mammoth with a cloud of buzzing flies and a back full of cysts.",
+    "attack": "Tusk gore",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Charges through ruins. Spews flies that sting.",
+    "aliases": [
+      "mammoth",
+      "mutant elephant",
+      "behemoth",
+      "giant beast"
+    ]
+  },
+  {
+    "id": "maelstrom-leviathan",
+    "name": "Maelstrom Leviathan",
+    "type": "monster",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "An ocean-sized shape that rises inside whirlpools and swallows fleets.",
+    "attack": "Crushing maw",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Maelstrom",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Drags every ship in the zone toward it."
+      },
+      {
+        "name": "Deep Dive",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Drags the target underwater."
+      }
+    ],
+    "tactics": "Pulls ships into a whirlpool. Surfaces to finish the survivors.",
+    "aliases": [
+      "leviathan",
+      "kraken",
+      "sea god",
+      "monster"
+    ]
+  },
+  {
+    "id": "nuclear-colossus",
+    "name": "Nuclear Colossus",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A cracked, glowing giant that sleeps under a ruined power plant and wakes when the rain gets heavy.",
+    "attack": "Radiant fist",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Meltdown Pulse",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Gear in the zone is irradiated."
+      },
+      {
+        "name": "Colossal Smash",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is knocked prone."
+      }
+    ],
+    "tactics": "Rises slowly from the crater. Glows hotter when hurt.",
+    "aliases": [
+      "giant",
+      "nuclear giant",
+      "colossus",
+      "kaiju"
+    ]
   }
 ]

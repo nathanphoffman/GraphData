@@ -1411,5 +1411,650 @@
       "space monster",
       "kraken"
     ]
+  },
+  {
+    "id": "dust-raptor",
+    "name": "Dust Raptor",
+    "type": "beast",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A feathered desert predator that hunts in packs across the canyons of a dusty outer-rim moon.",
+    "attack": "Talon strike",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Circles the group, then dives at the one who falls behind.",
+    "aliases": [
+      "raptor",
+      "desert hunter",
+      "space bird",
+      "lizard"
+    ]
+  },
+  {
+    "id": "hive-hound",
+    "name": "Hive Hound",
+    "type": "beast",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "A lean, chitin-plated hunter bred by a hive-fleet to track prey through ship corridors.",
+    "attack": "Snapping jaws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hunts by smell. Goes for the wounded first.",
+    "aliases": [
+      "tyranid",
+      "xenos hound",
+      "alien dog",
+      "bug"
+    ]
+  },
+  {
+    "id": "bulkhead-ravager",
+    "name": "Bulkhead Ravager",
+    "type": "beast",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A hulking six-limbed horror that tears through armored doors to reach its prey.",
+    "attack": "Rending claws",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Door Breaker",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is pinned until it breaks free."
+      }
+    ],
+    "tactics": "Rips down a door and charges the biggest player. Ignores minor wounds.",
+    "aliases": [
+      "bio-titan",
+      "xenos beast",
+      "hive tyrant",
+      "monster"
+    ]
+  },
+  {
+    "id": "cyber-hound",
+    "name": "Cyber Hound",
+    "type": "beast",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A guard dog with a steel jaw and an eye that glows red when it sees an intruder.",
+    "attack": "Steel bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Chases whoever smells wrong. Leashed to a security console.",
+    "aliases": [
+      "guard dog",
+      "k9",
+      "robo dog",
+      "hound"
+    ]
+  },
+  {
+    "id": "chrome-panther-prime",
+    "name": "Chrome Panther Prime",
+    "type": "beast",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A custom-built luxury predator with a stealth coat and a vat-grown killer instinct.",
+    "attack": "Mono-claws",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Ambush Pounce",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is knocked prone."
+      }
+    ],
+    "tactics": "Cloaked until the first strike. Picks off a lone player, then retreats.",
+    "aliases": [
+      "panther",
+      "cyber cat",
+      "apex predator",
+      "tiger"
+    ]
+  },
+  {
+    "id": "great-white-buffalo",
+    "name": "Great White Buffalo",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "description": "A huge albino bison that walks through the plains as if the land itself had stood up.",
+    "attack": "Horned charge",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Stampede",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is trampled and knocked prone."
+      }
+    ],
+    "tactics": "Charges through the camp. Stops if someone shows it respect.",
+    "aliases": [
+      "bison",
+      "buffalo",
+      "spirit beast",
+      "plains giant"
+    ]
+  },
+  {
+    "id": "graveyard-hound",
+    "name": "Graveyard Hound",
+    "type": "beast",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "A lean black dog that haunts cemetery fences and watches the living with pale eyes.",
+    "attack": "Snap",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Stalks the group at a distance. Bites the one walking behind.",
+    "aliases": [
+      "black dog",
+      "dog",
+      "grim",
+      "hound"
+    ]
+  },
+  {
+    "id": "hellhound-stalker",
+    "name": "Hellhound Stalker",
+    "type": "beast",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "description": "A smoke-black hound with burning eyes that has been sent after one specific victim.",
+    "attack": "Fiery bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hellfire Breath",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is set on fire."
+      }
+    ],
+    "tactics": "Ignores everyone except its mark. Backs off if it is doused with holy water.",
+    "aliases": [
+      "hellhound",
+      "demon dog",
+      "barghest",
+      "hound"
+    ]
+  },
+  {
+    "id": "hammerhead-terror",
+    "name": "Hammerhead Terror",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "description": "A hammerhead shark with the shoulders of a bull, famous for ramming small boats.",
+    "attack": "Ram & bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rams a dinghy first, then circles the survivors.",
+    "aliases": [
+      "shark",
+      "hammerhead",
+      "sea beast",
+      "predator"
+    ]
+  },
+  {
+    "id": "kraken-spawn",
+    "name": "Kraken Spawn",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A ship-sized squid, the child of a legendary monster, that drags small vessels below.",
+    "attack": "Crushing tentacles",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Grabs the rail and pulls. Retreats if its limbs are cut.",
+    "aliases": [
+      "giant squid",
+      "kraken",
+      "octopus",
+      "sea monster"
+    ]
+  },
+  {
+    "id": "boiler-rhino",
+    "name": "Boiler Rhino",
+    "type": "beast",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A rhino fitted with a coal-burning steam engine on its back and iron plates on its hide.",
+    "attack": "Gored charge",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Builds up steam, then charges in a straight line. Stuck if its horn hits a wall.",
+    "aliases": [
+      "rhino",
+      "steam beast",
+      "armored beast",
+      "cyborg animal"
+    ]
+  },
+  {
+    "id": "steam-drake",
+    "name": "Steam Drake",
+    "type": "beast",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A brass-plated dragon-engine that vents scalding steam and lives in the cellar of a clockwork castle.",
+    "attack": "Bite & scalding steam",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Scalding Cloud",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Burns terrain, and the steam blocks sight."
+      }
+    ],
+    "tactics": "Fills the room with steam, then dives at the one who cannot see.",
+    "aliases": [
+      "drake",
+      "wyvern",
+      "steam dragon",
+      "mechanical dragon"
+    ]
+  },
+  {
+    "id": "rad-bear",
+    "name": "Rad-Bear",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A mutated grizzly the size of a truck with a glowing hide and no fear of anything.",
+    "attack": "Maul",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Charges the nearest player. Ignores minor wounds.",
+    "aliases": [
+      "bear",
+      "mutant bear",
+      "grizzly",
+      "mutant"
+    ]
+  },
+  {
+    "id": "doom-hound-alpha",
+    "name": "Doom Hound Alpha",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "The scarred leader of a mutant dog pack, with a metal plate in its skull and a thousand scars.",
+    "attack": "Savage bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Howl of the Pack",
+        "type": "multi",
+        "uses": 1,
+        "text": "Calls 2 Rad Hounds to the fight."
+      }
+    ],
+    "tactics": "Calls its pack with a howl. Goes for the throat of whoever hurt it.",
+    "aliases": [
+      "alpha",
+      "dire wolf",
+      "mutant wolf",
+      "pack leader"
+    ]
+  },
+  {
+    "id": "prism-moth",
+    "name": "Prism Moth",
+    "type": "beast",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": true,
+    "description": "A palm-sized moth with wings of stained starlight that scatters the glow of nearby lamps.",
+    "attack": "Dust flutter",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Prismatic Dazzle",
+        "type": "utility",
+        "uses": 1,
+        "text": "A flash of color. One target has disadvantage until their next turn."
+      }
+    ],
+    "tactics": "Flutters around a lamp. Dazzles the first player who swats at it.",
+    "aliases": [
+      "moth",
+      "butterfly",
+      "star insect",
+      "fairy"
+    ]
+  },
+  {
+    "id": "jackalope-gang",
+    "name": "Jackalope Gang",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A small herd of antlered rabbits that steal hats and laugh like cowboys.",
+    "attack": "Antler poke",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hat Snatch",
+        "type": "utility",
+        "uses": 1,
+        "text": "Steals one item from a target and runs. They get it back if the jackalope is caught."
+      }
+    ],
+    "tactics": "Steals a hat and runs. Impossible to catch by foot.",
+    "aliases": [
+      "jackalope",
+      "rabbit",
+      "trickster",
+      "pest"
+    ]
+  },
+  {
+    "id": "bouncing-grub-pup",
+    "name": "Bouncing Grub-Pup",
+    "type": "beast",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": false,
+    "description": "A round little bug-dog that bounces in circles and bites ankles with tiny teeth.",
+    "attack": "Ankle nip",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Bounces off the walls. Distracted by shiny things.",
+    "aliases": [
+      "pup",
+      "bug",
+      "grub",
+      "pest"
+    ]
+  },
+  {
+    "id": "overdramatic-raven",
+    "name": "Overdramatic Raven",
+    "type": "beast",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "description": "A black raven that perches on every windowsill and quotes poetry at the worst times.",
+    "attack": "Peck",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Recites a doomy rhyme. Flies away if ignored.",
+    "aliases": [
+      "raven",
+      "crow",
+      "bird",
+      "omen"
+    ]
+  },
+  {
+    "id": "drowned-pack",
+    "name": "Drowned Pack",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "description": "A pack of drowned hounds that follows a ship through the fog and howls up through the hull.",
+    "attack": "Water-logged bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Climbs over the rail in the dark. Retreats at dawn.",
+    "aliases": [
+      "ghost dogs",
+      "sea hounds",
+      "drowned dogs",
+      "pack"
+    ]
   }
 ]

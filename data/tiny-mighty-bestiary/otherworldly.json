@@ -2279,5 +2279,487 @@
       "prophet",
       "cosmic mage"
     ]
+  },
+  {
+    "id": "void-whisperer",
+    "name": "Void Whisperer",
+    "type": "otherworldly",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "A faint voice from the dark of space that makes soldiers turn on each other.",
+    "attack": "Whispers",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Speaks to a single soldier at a time. Fades when the lights come on.",
+    "aliases": [
+      "ghost",
+      "force ghost",
+      "voice",
+      "spirit"
+    ]
+  },
+  {
+    "id": "nebula-phantom",
+    "name": "Nebula Phantom",
+    "type": "otherworldly",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A drifting shape of gas and light that wraps around ships and drains their power cells.",
+    "attack": "Draining touch",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slides through the hull and goes for the reactor. Hates bright light.",
+    "aliases": [
+      "phantom",
+      "cloud",
+      "space ghost",
+      "energy being"
+    ]
+  },
+  {
+    "id": "netspace-wraith",
+    "name": "Netspace Wraith",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A digital ghost that jumps from implant to implant, wearing the faces of the dead.",
+    "attack": "Corrupting touch",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Possesses a nearby cybernetic limb. Leaves when the host is knocked out.",
+    "aliases": [
+      "ghost in the machine",
+      "digital ghost",
+      "specter",
+      "ai ghost"
+    ]
+  },
+  {
+    "id": "deep-net-god",
+    "name": "Deep Net God",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A vast alien intelligence that wakes in the lowest layers of the net and rewrites whoever looks at it.",
+    "attack": "Rewrite",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mind Rewrite",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target acts as an ally of the net until the end of next turn."
+      }
+    ],
+    "tactics": "Speaks through every screen. Takes over implanted players one at a time.",
+    "aliases": [
+      "ai god",
+      "net horror",
+      "elder intelligence",
+      "cosmic ai"
+    ]
+  },
+  {
+    "id": "squall-wraith",
+    "name": "Squall Wraith",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": true,
+    "description": "A whirlwind of rain and a woman's screaming face that rides storm fronts.",
+    "attack": "Lashing wind",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Whips the sails and tosses sailors overboard. Calm seas make it vanish.",
+    "aliases": [
+      "storm spirit",
+      "sea ghost",
+      "banshee",
+      "wraith"
+    ]
+  },
+  {
+    "id": "aether-poltergeist",
+    "name": "Aether Poltergeist",
+    "type": "otherworldly",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A spirit that haunts steam pipes and sends gouts of hot vapor through valves.",
+    "attack": "Steam burst",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slams valves and shakes pipes. Banished when the boiler is shut down.",
+    "aliases": [
+      "poltergeist",
+      "ghost",
+      "machine spirit",
+      "aether spirit"
+    ]
+  },
+  {
+    "id": "aether-sovereign",
+    "name": "Aether Sovereign",
+    "type": "otherworldly",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "An ancient spirit of lightning and brass that rules the aether between the cogs of the world.",
+    "attack": "Lightning arc",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Aether Storm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Electrical devices in the zone fail."
+      }
+    ],
+    "tactics": "Floats above the machinery. Drains power from every device in reach.",
+    "aliases": [
+      "spirit king",
+      "aether lord",
+      "machine god",
+      "djinn lord"
+    ]
+  },
+  {
+    "id": "fallout-revenant",
+    "name": "Fallout Revenant",
+    "type": "otherworldly",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A thing made of dust and radiation that wears the shape of someone who died in the blast.",
+    "attack": "Radiant touch",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Drifts toward the group slowly. Drains the life out of anything it touches.",
+    "aliases": [
+      "ghost",
+      "radiation ghost",
+      "revenant",
+      "spirit"
+    ]
+  },
+  {
+    "id": "ashen-herald",
+    "name": "Ashen Herald",
+    "type": "otherworldly",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A tall figure of smoke and ash that walks in front of the next great storm.",
+    "attack": "Ash brand",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Ashfall",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Everything in the zone is covered in ash, causing disadvantage."
+      }
+    ],
+    "tactics": "Walks slowly. Everything it touches turns to ash.",
+    "aliases": [
+      "herald",
+      "ash god",
+      "prophet",
+      "wraith"
+    ]
+  },
+  {
+    "id": "pocket-pet-ghost",
+    "name": "Pocket Pet Ghost",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A pixelated pet that lives inside an old handheld, hungry and wanting to be fed.",
+    "attack": "Nibble",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Feed Me",
+        "type": "utility",
+        "uses": 1,
+        "text": "Drains one device. It will not work until the pet is fed."
+      }
+    ],
+    "tactics": "Begs for attention. Eats the battery of whatever device is closest.",
+    "aliases": [
+      "tamagotchi",
+      "digital pet",
+      "net pet",
+      "ghost"
+    ]
+  },
+  {
+    "id": "cabin-boy-ghost",
+    "name": "Cabin Boy Ghost",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "The ghost of a young cabin boy who tags along with new crews and gets into trouble.",
+    "attack": "Cold nudge",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Ghostly Prank",
+        "type": "utility",
+        "uses": 1,
+        "text": "Unties a rope or hides a tool. One player has disadvantage on their next roll."
+      }
+    ],
+    "tactics": "Pops up with warnings and pranks. Disappears if the ship changes hands.",
+    "aliases": [
+      "ghost",
+      "child ghost",
+      "spirit",
+      "apparition"
+    ]
+  },
+  {
+    "id": "warp-seer",
+    "name": "Warp Seer",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": true,
+    "description": "A blind psyker whose eyes are sewn shut, shouting prophecies as the warp bleeds through.",
+    "attack": "Psychic bolt",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Floats above the crowd and predicts every move. Screams when it is struck.",
+    "aliases": [
+      "psyker",
+      "seer",
+      "warp prophet",
+      "oracle"
+    ]
+  },
+  {
+    "id": "hollow-man",
+    "name": "Hollow Man",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A tall thing in a trench coat with no face and no hands, known by the empty streets it leaves behind.",
+    "attack": "Cold grasp",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Appears in the corner of the eye. Takes one player quietly.",
+    "aliases": [
+      "slender man",
+      "faceless",
+      "shadow",
+      "stalker"
+    ]
+  },
+  {
+    "id": "badlands-devil",
+    "name": "Devil of the Badlands",
+    "type": "otherworldly",
+    "themes": [
+      "western"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A smiling stranger in a black duster who wins every duel and collects the losers' souls.",
+    "attack": "Hellfire revolver",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Soul Gamble",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The loser of a Wits contest is cursed until the devil is defeated."
+      },
+      {
+        "name": "Hellfire Quickdraw",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Burns terrain and gear."
+      }
+    ],
+    "tactics": "Offers a deal first. Calls a duel at high noon.",
+    "aliases": [
+      "devil",
+      "demon",
+      "stranger",
+      "dark rider"
+    ]
   }
 ]
