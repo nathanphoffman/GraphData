@@ -2537,5 +2537,384 @@
       "colossus",
       "kaiju"
     ]
+  },
+  {
+    "id": "grot-gobbler",
+    "name": "Grot Gobbler",
+    "type": "monster",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A fat, dopey xenos that swallows anything shiny and burps up grenades.",
+    "attack": "Belly flop",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waddles toward the nearest gadget. Spits it back out when startled.",
+    "aliases": [
+      "ork squig",
+      "gobbler",
+      "bug",
+      "xenos pest"
+    ]
+  },
+  {
+    "id": "mutant-hedgehog",
+    "name": "Mutant Hedgehog",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "description": "A hedgehog the size of a beachball that glows faintly and rolls downhill at anything it dislikes.",
+    "attack": "Spiny roll",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rolls down hills and stairs. Curls up when frightened.",
+    "aliases": [
+      "hedgehog",
+      "mutant animal",
+      "rolling pest",
+      "spiky critter"
+    ]
+  },
+  {
+    "id": "nova-slug",
+    "name": "Nova Slug",
+    "type": "monster",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A bloated slug that lives in nebula clouds and glows brighter when it eats power cells.",
+    "attack": "Acid slime",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Sits across the corridor and secretes slime. Eats the power cell of any device nearby.",
+    "aliases": [
+      "slug",
+      "space slug",
+      "blob",
+      "pest"
+    ]
+  },
+  {
+    "id": "bat-swarm-colossus",
+    "name": "Bat-Swarm Colossus",
+    "type": "monster",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A seething cloud of black bats that forms the shape of a hulking figure in the belfry.",
+    "attack": "Biting swarm",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Pours out of the belfry as a tide. Breaks apart if hit by light.",
+    "aliases": [
+      "bats",
+      "swarm",
+      "bat cloud",
+      "colony"
+    ]
+  },
+  {
+    "id": "sky-pike-brood",
+    "name": "Sky-Pike Brood",
+    "type": "monster",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "description": "A flock of armored sky-fish bred to pierce hulls, trailing a mother larger than a gunship.",
+    "attack": "Piercing beak",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Dives on the nearest hull. Retreats if the mother is hurt.",
+    "aliases": [
+      "sky fish",
+      "pike",
+      "sky monster",
+      "flock"
+    ]
+  },
+  {
+    "id": "smog-drake",
+    "name": "Smog Drake",
+    "type": "monster",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": true,
+    "description": "A pollution-black drake that nests in the exhaust vents of mega-towers and wheezes toxic breath.",
+    "attack": "Toxic bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Toxic Cloud",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Poisons everyone in the zone."
+      }
+    ],
+    "tactics": "Hunts along the rooftops. Breathes a fog of smoke on a crowd.",
+    "aliases": [
+      "drake",
+      "dragon",
+      "wyvern",
+      "smog monster"
+    ]
+  },
+  {
+    "id": "sandstorm-roc",
+    "name": "Sandstorm Roc",
+    "type": "monster",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "description": "An enormous bird of dust and feathers that rides desert storm-fronts.",
+    "attack": "Talons",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Dives from the storm. Carries off a horse or a rider.",
+    "aliases": [
+      "roc",
+      "giant bird",
+      "thunderbird",
+      "storm bird"
+    ]
+  },
+  {
+    "id": "catacomb-crawler",
+    "name": "Catacomb Crawler",
+    "type": "monster",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A pale, many-armed thing that lives in the cargo hold of an old wreck and grabs sailors from the dark.",
+    "attack": "Grasping arms",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits in the dark. Grabs the last sailor out of the hold.",
+    "aliases": [
+      "crawler",
+      "lurker",
+      "hold horror",
+      "sea horror"
+    ]
+  },
+  {
+    "id": "gutter-hag",
+    "name": "Gutter Hag",
+    "type": "monster",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A hunched creature that lives in the sewers of foundry cities and drags passersby into the drains.",
+    "attack": "Grasp & drag",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits in a storm drain. Grabs a leg and pulls.",
+    "aliases": [
+      "hag",
+      "sewer thing",
+      "drain horror",
+      "lurker"
+    ]
+  },
+  {
+    "id": "vacuum-lurker",
+    "name": "Vacuum Lurker",
+    "type": "monster",
+    "themes": [
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A pale, boneless thing that clings to the outside of space stations and slides in through the airlock seals.",
+    "attack": "Crushing coils",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits outside the airlock. Wraps a player and tries to pull them out into space.",
+    "aliases": [
+      "lurker",
+      "space horror",
+      "airlock thing",
+      "tentacle"
+    ]
+  },
+  {
+    "id": "chrome-gargoyle",
+    "name": "Chrome Gargoyle",
+    "type": "monster",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": true,
+    "description": "A winged guard-beast of polished chrome that perches on corporate towers and dives at intruders.",
+    "attack": "Steel claws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Perches on a ledge. Dives on whoever steps out of cover.",
+    "aliases": [
+      "gargoyle",
+      "guard beast",
+      "winged guard",
+      "statue"
+    ]
+  },
+  {
+    "id": "rad-moth-matriarch",
+    "name": "Rad-Moth Matriarch",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": true,
+    "description": "A moth the size of a bus with wings that spray glowing dust, hovering above ruined cities.",
+    "attack": "Dust wings",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Drifts above the ruins. Dusts the players with glowing spores.",
+    "aliases": [
+      "moth",
+      "mutant moth",
+      "giant insect",
+      "mothman"
+    ]
   }
 ]

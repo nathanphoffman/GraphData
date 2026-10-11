@@ -4031,5 +4031,491 @@
       "hermit",
       "tinkerer"
     ]
+  },
+  {
+    "id": "field-medic-droid",
+    "name": "Field-Medic Droid",
+    "type": "humanoid",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A battered, bright-white medical droid that follows the front line with a bag of stims.",
+    "attack": "Syringe jab",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Stim Shot",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a friend in reach."
+      }
+    ],
+    "tactics": "Heals the toughest friend first, then flees.",
+    "aliases": [
+      "medic",
+      "droid",
+      "doc bot",
+      "medical droid"
+    ]
+  },
+  {
+    "id": "frontier-doc",
+    "name": "Frontier Doc",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A rumpled traveling doctor with a battered black bag and a bottle of questionable tonic.",
+    "attack": "Scalpel",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Snake-Oil Tonic",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to any target in reach."
+      }
+    ],
+    "tactics": "Patches up outlaws for a fee. Does not like to be shot.",
+    "aliases": [
+      "doctor",
+      "sawbones",
+      "medicine man",
+      "quack"
+    ]
+  },
+  {
+    "id": "parish-exorcist",
+    "name": "Parish Exorcist",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "description": "A tired priest with a wooden cross and a flask of holy water, cleaning up after the sins of the city.",
+    "attack": "Holy water",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Blessing",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to any ally in earshot."
+      }
+    ],
+    "tactics": "Chants and sprinkles holy water. Heals the possessed.",
+    "aliases": [
+      "priest",
+      "exorcist",
+      "cleric",
+      "clergy"
+    ]
+  },
+  {
+    "id": "ships-surgeon",
+    "name": "Ship's Surgeon",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A sleep-deprived surgeon with a bone saw and a bottle of rum for the patient and the doctor.",
+    "attack": "Bone saw",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rum & Stitches",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to any target in reach, for the price of 1 handful."
+      }
+    ],
+    "tactics": "Hides in the cockpit during battle. Patches up the wounded in the sick bay.",
+    "aliases": [
+      "surgeon",
+      "ship's doctor",
+      "sawbones",
+      "medic"
+    ]
+  },
+  {
+    "id": "boilerhouse-mender",
+    "name": "Boilerhouse Mender",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A grease-stained mender who patches both people and machines with the same brass toolkit.",
+    "attack": "Spanner",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Brass Patch",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a construct, machine or ally."
+      }
+    ],
+    "tactics": "Fixes the biggest machine first, then the most broken person.",
+    "aliases": [
+      "mender",
+      "engineer",
+      "doctor",
+      "mechanic"
+    ]
+  },
+  {
+    "id": "star-lantern-healer",
+    "name": "Star Lantern Healer",
+    "type": "humanoid",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A robed healer who carries a hanging lantern of captured starlight and mends wounds with its glow.",
+    "attack": "Glowing staff",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lantern Glow",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a friend in reach."
+      }
+    ],
+    "tactics": "Stands behind the front line and keeps the warriors going.",
+    "aliases": [
+      "healer",
+      "cleric",
+      "star priest",
+      "medic"
+    ]
+  },
+  {
+    "id": "scrap-nurse",
+    "name": "Scrap Nurse",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A stern wasteland nurse in a patched coat who trades stitches for bottle caps.",
+    "attack": "Syringe",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Quick Stitch",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a friend in reach."
+      }
+    ],
+    "tactics": "Patches up anyone who pays. Gets mean if cheated.",
+    "aliases": [
+      "nurse",
+      "medic",
+      "healer",
+      "scavenger doc"
+    ]
+  },
+  {
+    "id": "ship-lord-regent",
+    "name": "Ship-Lord Regent",
+    "type": "humanoid",
+    "themes": [
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A cold, shaved-headed noble who commands a fleet from a throne of cables and glass.",
+    "attack": "Mind-lance",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Command Presence",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target must obey or lose their next turn."
+      },
+      {
+        "name": "Fleet Barrage",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hits everyone in the zone."
+      }
+    ],
+    "tactics": "Sits above the combat and issues orders. Uses a captured player as a hostage.",
+    "aliases": [
+      "regent",
+      "ship lord",
+      "admiral",
+      "space noble"
+    ]
+  },
+  {
+    "id": "hull-breaker-grunt",
+    "name": "Hull-Breaker Grunt",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A cheerful, overmuscled shipbreaker with an oversized hammer and no idea what a crisis looks like.",
+    "attack": "Hammer smash",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Smashes whatever is in front of him. Can be bribed with a snack.",
+    "aliases": [
+      "grunt",
+      "brute",
+      "worker",
+      "ork"
+    ]
+  },
+  {
+    "id": "ironclad-quartermaster",
+    "name": "Ironclad Quartermaster",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A hardened quartermaster with a cutlass and a ledger who keeps every pirate on the ship in line.",
+    "attack": "Cutlass",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Boarding Party",
+        "type": "multi",
+        "uses": 1,
+        "text": "Attacks up to three enemies this turn with normal damage."
+      }
+    ],
+    "tactics": "Barks orders. Never stands in front of the guns.",
+    "aliases": [
+      "quartermaster",
+      "first mate",
+      "officer",
+      "pirate"
+    ]
+  },
+  {
+    "id": "ash-road-preacher",
+    "name": "Ash-Road Preacher",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A fiery wasteland preacher on a rusted motorcycle, leading a flock of pilgrims to a promised city.",
+    "attack": "Spiked flail",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Flock's Fury",
+        "type": "multi",
+        "uses": 1,
+        "text": "Attacks up to three enemies this turn with normal damage."
+      }
+    ],
+    "tactics": "Speeds into a group. Calls the flock to attack.",
+    "aliases": [
+      "preacher",
+      "prophet",
+      "road priest",
+      "pilgrim leader"
+    ]
+  },
+  {
+    "id": "smuggler-sparker",
+    "name": "Smuggler Sparker",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A scrappy mechanic in a cargo bay who works on stolen parts and nibbles on snacks.",
+    "attack": "Spanner",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Tool Swap",
+        "type": "utility",
+        "uses": 1,
+        "text": "Gives a friend a gadget. They gain an advantage on their next roll."
+      }
+    ],
+    "tactics": "Hides behind a crate. Swaps parts for favors.",
+    "aliases": [
+      "mechanic",
+      "smuggler",
+      "tinkerer",
+      "grunt"
+    ]
+  },
+  {
+    "id": "wasteland-gunslinger",
+    "name": "Wasteland Gunslinger",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A tall, scarred duelist in a duster with a rebuilt pre-war revolver and a code of honor.",
+    "attack": "Pre-war revolver",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Calls a duel at dawn. Honors the terms.",
+    "aliases": [
+      "gunslinger",
+      "duelist",
+      "drifter",
+      "outlaw"
+    ]
   }
 ]

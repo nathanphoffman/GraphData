@@ -159,13 +159,44 @@
 }
 
 .bestiary-difficulty {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.bestiary-difficulty-label {
+  font-size: 11px;
+  color: var(--b-soft);
+}
+
+.bestiary-dots {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  max-width: 110px;
+  justify-content: flex-end;
+}
+
+/* Hollow ring; a partial dot fills like a pie slice from the top. */
+.bestiary-dot {
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: conic-gradient(var(--accent) calc(var(--fill, 0) * 360deg), transparent 0);
+}
+
+.bestiary-dot-full {
   background: var(--accent);
-  color: #fff;
-  font-size: 12px;
+}
+
+.bestiary-difficulty-num {
+  font-size: 13px;
   font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
+  min-width: 2ch;
+  text-align: right;
 }
 
 .bestiary-card .bestiary-desc {
@@ -383,4 +414,41 @@
 }
 .bestiary-encounter-sliders .muted {
   margin: 0.25rem 0 0;
+}
+
+/* Page-break style divider between the encounter generator and the full creature list. */
+.bestiary-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 4px double color-mix(in srgb, var(--b-ink) 45%, transparent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--b-soft);
+}
+
+.bestiary-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: color-mix(in srgb, var(--b-ink) 25%, transparent);
+}
+
+.bestiary-encounter-toggle {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--b-ink);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
 }

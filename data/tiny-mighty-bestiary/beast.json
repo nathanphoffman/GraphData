@@ -2056,5 +2056,619 @@
       "drowned dogs",
       "pack"
     ]
+  },
+  {
+    "id": "wasteland-vulture",
+    "name": "Wasteland Vulture",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": true,
+    "description": "A six-foot vulture with a scorched beak that circles anything that stops moving.",
+    "attack": "Peck",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Circles overhead. Swoops on the wounded.",
+    "aliases": [
+      "vulture",
+      "bird",
+      "scavenger",
+      "carrion bird"
+    ]
+  },
+  {
+    "id": "prairie-hawk",
+    "name": "Prairie Hawk",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": true,
+    "description": "A large, sharp-eyed hawk that follows wagon trains and swoops on spilled jerky.",
+    "attack": "Talons",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Circles the camp. Steals meat from plates.",
+    "aliases": [
+      "hawk",
+      "bird",
+      "raptor",
+      "falcon"
+    ]
+  },
+  {
+    "id": "albatross-omen",
+    "name": "Albatross Omen",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": true,
+    "description": "A huge white albatross that follows a ship for days and gets very angry if harmed.",
+    "attack": "Beak",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Glides behind the ship. Curses a sailor if it is hurt.",
+    "aliases": [
+      "albatross",
+      "bird",
+      "omen",
+      "seabird"
+    ]
+  },
+  {
+    "id": "barn-cat-terror",
+    "name": "Barn Cat Terror",
+    "type": "beast",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "description": "A fat farmhouse tabby that has killed every mouse in three villages and is now looking at the players.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Bats at dangling items. Lands on a player's head.",
+    "aliases": [
+      "cat",
+      "tabby",
+      "mouser",
+      "pest"
+    ]
+  },
+  {
+    "id": "plasma-panther",
+    "name": "Plasma Panther",
+    "type": "beast",
+    "themes": [
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A jet-black panther with veins of blue plasma that stalks space stations through the maintenance ducts.",
+    "attack": "Claws & plasma bite",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Plasma Pounce",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is burned and knocked prone."
+      }
+    ],
+    "tactics": "Cloaked in the dark until the first strike. Tears out lights before attacking.",
+    "aliases": [
+      "panther",
+      "space cat",
+      "predator",
+      "alien cat"
+    ]
+  },
+  {
+    "id": "scout-lizard",
+    "name": "Scout Lizard",
+    "type": "beast",
+    "themes": [
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A six-legged survey lizard that hisses at everything on the plain.",
+    "attack": "Snap",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Skitters and hisses. Calls its herd with a screech.",
+    "aliases": [
+      "lizard",
+      "reptile",
+      "alien beast",
+      "scout"
+    ]
+  },
+  {
+    "id": "astral-stag",
+    "name": "Astral Stag",
+    "type": "beast",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A towering stag with antlers of woven constellations that walks the ley-lines of the stars.",
+    "attack": "Antler charge",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Constellation Gore",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Antlers pin the target until they break free."
+      }
+    ],
+    "tactics": "Walks slowly through the group and tests them with a glare. Charges anyone with malice.",
+    "aliases": [
+      "stag",
+      "star beast",
+      "guardian",
+      "spirit animal"
+    ]
+  },
+  {
+    "id": "void-krill-swarm",
+    "name": "Void Krill Swarm",
+    "type": "beast",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": true,
+    "description": "A cloud of tiny, translucent crustaceans that eat through space-suit seals and hull plates alike.",
+    "attack": "Swarming bites",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hull Eater",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Corrodes gear and armor in the zone."
+      }
+    ],
+    "tactics": "Surrounds the group. Targets any gap in a suit.",
+    "aliases": [
+      "swarm",
+      "space bugs",
+      "krill",
+      "plague"
+    ]
+  },
+  {
+    "id": "grot-hound-pack",
+    "name": "Grot Hound Pack",
+    "type": "beast",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A fast, gangly pack of xenos hounds that fly on rotor-scales and howl through the ceiling vents.",
+    "attack": "Slashing jaws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Strikes in packs of three. Drops from above and retreats into the vents.",
+    "aliases": [
+      "hounds",
+      "xenos hounds",
+      "pack",
+      "bugs"
+    ]
+  },
+  {
+    "id": "chaos-hydra",
+    "name": "Chaos Hydra",
+    "type": "beast",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A many-headed horror that vomits fire and spits warp-spawn from every neck.",
+    "attack": "Biting heads",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Triple Bite",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Three heads bite at once, ignoring defense."
+      }
+    ],
+    "tactics": "Grows a new head when one is cut. Burns whatever it cannot bite.",
+    "aliases": [
+      "hydra",
+      "daemon beast",
+      "chaos beast",
+      "multi-headed horror"
+    ]
+  },
+  {
+    "id": "back-alley-tiger",
+    "name": "Back-Alley Tiger",
+    "type": "beast",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A sleek, augmented tiger kept by a night-club owner and loosed on anyone who skips the bill.",
+    "attack": "Mono-claws",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Bounds across rooftops. Jumps at the player with the most expensive gear.",
+    "aliases": [
+      "tiger",
+      "cyber cat",
+      "big cat",
+      "pet"
+    ]
+  },
+  {
+    "id": "prairie-skyray",
+    "name": "Prairie Skyray",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A flat, kite-shaped ray of air that glides above the plains and stings with a whip-like tail.",
+    "attack": "Tail whip",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Glides silently above the herd. Dives on a lone rider.",
+    "aliases": [
+      "manta",
+      "ray",
+      "sky ray",
+      "glider"
+    ]
+  },
+  {
+    "id": "barghest-warden",
+    "name": "Barghest Warden",
+    "type": "beast",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "description": "A huge black hound with eyes like dying coals that guards the churchyards of old cities.",
+    "attack": "Rending bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Stays by the gate. Chases anyone who tries to leave a grave open.",
+    "aliases": [
+      "black dog",
+      "hell dog",
+      "guardian dog",
+      "hound"
+    ]
+  },
+  {
+    "id": "great-white-terror",
+    "name": "Great White Terror",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A thirty-foot shark with a harpoon still stuck in its jaw and a grudge against every captain.",
+    "attack": "Crushing bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Savage Rush",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is dragged underwater."
+      }
+    ],
+    "tactics": "Circles the ship and rams the hull. Goes for a sailor who falls overboard.",
+    "aliases": [
+      "shark",
+      "great white",
+      "monster fish",
+      "sea beast"
+    ]
+  },
+  {
+    "id": "boiler-wyrm",
+    "name": "Boiler Wyrm",
+    "type": "beast",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A smoke-belching eel of iron plates that lives in the boiler rooms of old steamships.",
+    "attack": "Scalding bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Steam Burst",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Scalds everyone in the zone."
+      }
+    ],
+    "tactics": "Rises out of the steam. Retreats into the pipes when hurt.",
+    "aliases": [
+      "eel",
+      "wyrm",
+      "steam beast",
+      "pipe beast"
+    ]
+  },
+  {
+    "id": "irradiated-aurochs",
+    "name": "Irradiated Aurochs",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A wasteland bull the size of a bus, with a radioactive glow and a horn like a crowbar.",
+    "attack": "Horn gore",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Horn Impale",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is pinned until they break free."
+      }
+    ],
+    "tactics": "Charges the first thing that moves. Slow to turn.",
+    "aliases": [
+      "bull",
+      "aurochs",
+      "buffalo",
+      "mutant bull"
+    ]
+  },
+  {
+    "id": "hive-wyvern",
+    "name": "Hive Wyvern",
+    "type": "beast",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": true,
+    "description": "A bat-winged hunter bred by a hive-fleet to dive on ground troops and rip armor open.",
+    "attack": "Armor-rending claws",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Armor Rend",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Armor does not count and is damaged."
+      }
+    ],
+    "tactics": "Dives from above. Targets whoever wears the heaviest armor.",
+    "aliases": [
+      "wyvern",
+      "bio-beast",
+      "xenos flyer",
+      "drake"
+    ]
+  },
+  {
+    "id": "neon-pigeon-flock",
+    "name": "Neon Pigeon Flock",
+    "type": "beast",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": true,
+    "description": "A flock of cybernetic pigeons with LED-lit wings that carry ads and steal data chips from passersby.",
+    "attack": "Peck swarm",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Swarms the group and pecks at anything shiny. Scatters if one is hit.",
+    "aliases": [
+      "pigeon",
+      "bird flock",
+      "drone bird",
+      "pest"
+    ]
   }
 ]

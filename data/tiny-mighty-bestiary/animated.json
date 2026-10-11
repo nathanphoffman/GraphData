@@ -2202,5 +2202,312 @@
       "haunted gallows",
       "scarecrow"
     ]
+  },
+  {
+    "id": "rotor-scavenger",
+    "name": "Rotor Scavenger",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": true,
+    "description": "A crude quadcopter made of scrap and fan blades that hunts for metal and cuts anything in the way.",
+    "attack": "Spinning blades",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Zips overhead and dives. Falls apart on a heavy hit.",
+    "aliases": [
+      "drone",
+      "copter",
+      "scavenger drone",
+      "bot"
+    ]
+  },
+  {
+    "id": "gale-gargoyle",
+    "name": "Gale Gargoyle",
+    "type": "animated",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": true,
+    "description": "A stone figurehead that comes alive in storms and swoops off the bow at anyone on deck.",
+    "attack": "Stone talons",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Perches on the rigging. Strikes a sailor in the dark.",
+    "aliases": [
+      "gargoyle",
+      "figurehead",
+      "stone bird",
+      "statue"
+    ]
+  },
+  {
+    "id": "scarecrow-sentinel",
+    "name": "Scarecrow Sentinel",
+    "type": "animated",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A stuffed-straw guardian on a post that steps down at night and walks the fields.",
+    "attack": "Sickle swipe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits among the crops. Walks stiffly toward trespassers.",
+    "aliases": [
+      "scarecrow",
+      "straw man",
+      "guardian",
+      "golem"
+    ]
+  },
+  {
+    "id": "scrapper-drone-hive",
+    "name": "Scrapper Drone Hive",
+    "type": "animated",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "description": "A mother-drone surrounded by a swarm of tiny scavenger bots that strip a ship to the frame.",
+    "attack": "Cutting arms",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Scrap Swarm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Strips gear and armor in the zone."
+      }
+    ],
+    "tactics": "Sends out the small ones first. Fuses with whatever it eats.",
+    "aliases": [
+      "drone",
+      "hive",
+      "scrapper",
+      "swarm"
+    ]
+  },
+  {
+    "id": "forge-sentinel",
+    "name": "Forge Sentinel",
+    "type": "animated",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "description": "A smoking, skull-faced servitor that guards a forge-vault with a plasma torch and a litany.",
+    "attack": "Plasma torch",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Plasma Burn",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is on fire."
+      }
+    ],
+    "tactics": "Chants a litany and walks forward. Cannot be reasoned with.",
+    "aliases": [
+      "servitor",
+      "guardian",
+      "forge guard",
+      "machine"
+    ]
+  },
+  {
+    "id": "tumbleweed-war-bot",
+    "name": "Tumbleweed War-Bot",
+    "type": "animated",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A decommissioned war walker that went feral and now wanders the badlands with a cactus on its head.",
+    "attack": "Gatling arm",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Gatling Sweep",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Pins everyone in the zone."
+      }
+    ],
+    "tactics": "Rolls through the dust. Stands still until it gets a target.",
+    "aliases": [
+      "war bot",
+      "walker",
+      "war machine",
+      "robot"
+    ]
+  },
+  {
+    "id": "grave-shift-gurney",
+    "name": "Grave-Shift Gurney",
+    "type": "animated",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "description": "A hospital gurney that rolls through the halls at night and takes the nearest person to the morgue.",
+    "attack": "Strap & roll",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Morgue Run",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is strapped down until they break free."
+      }
+    ],
+    "tactics": "Rolls out of a closet. Straps a player down and rolls away.",
+    "aliases": [
+      "gurney",
+      "haunted hospital",
+      "cursed object",
+      "wheelchair"
+    ]
+  },
+  {
+    "id": "mast-puppet",
+    "name": "Mast-Puppet",
+    "type": "animated",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A rigging puppet made of rope and sailcloth that drops from the mast and pulls sailors up into the dark.",
+    "attack": "Rope lash",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Drops from the crow's nest. Pulls a sailor up the mast.",
+    "aliases": [
+      "puppet",
+      "rope man",
+      "rigging ghost",
+      "scarecrow"
+    ]
+  },
+  {
+    "id": "pocket-watch-sentinel",
+    "name": "Pocket-Watch Sentinel",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A coffin-sized watch-shaped guard that keeps patrol times to the minute, long after the owners died.",
+    "attack": "Clockwork crush",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Stands in a doorway at fixed times. Slow to react outside its pattern.",
+    "aliases": [
+      "guard",
+      "clockwork",
+      "sentinel",
+      "golem"
+    ]
   }
 ]

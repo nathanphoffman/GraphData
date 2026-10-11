@@ -2761,5 +2761,405 @@
       "stranger",
       "dark rider"
     ]
+  },
+  {
+    "id": "comet-sprite",
+    "name": "Comet Sprite",
+    "type": "otherworldly",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": true,
+    "description": "A giggling spark of light that rides in the exhaust of starfighters and tickles the pilots.",
+    "attack": "Sparkle poke",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Zips between ships and tweaks the controls. Pops if caught.",
+    "aliases": [
+      "sprite",
+      "space fairy",
+      "spark",
+      "spirit"
+    ]
+  },
+  {
+    "id": "warp-jester",
+    "name": "Warp Jester",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": false,
+    "description": "A jingling clown-shaped daemon that pops out of the warp to juggle skulls and ruin the mood.",
+    "attack": "Pie of doom",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Tells a terrible joke. Whoever laughs gets disadvantage.",
+    "aliases": [
+      "jester",
+      "daemon",
+      "trickster",
+      "clown"
+    ]
+  },
+  {
+    "id": "dust-devil",
+    "name": "Dust Devil",
+    "type": "otherworldly",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "A spinning whirl of sand with a face in the middle that sweeps across the desert at dusk.",
+    "attack": "Sandblast",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Whips across the camp and scatters supplies. Settles when it hits water.",
+    "aliases": [
+      "whirlwind",
+      "desert spirit",
+      "spirit",
+      "djinn"
+    ]
+  },
+  {
+    "id": "will-o-wire",
+    "name": "Will-o-Wire",
+    "type": "otherworldly",
+    "themes": [
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": true,
+    "description": "A drifting ball of blue static that haunts abandoned research stations and leads the lost into the dark.",
+    "attack": "Static shock",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Drifts ahead of the group and tries to lure them. Fades if the power comes on.",
+    "aliases": [
+      "wisp",
+      "ghost light",
+      "spirit",
+      "static"
+    ]
+  },
+  {
+    "id": "void-bride",
+    "name": "Void Bride",
+    "type": "otherworldly",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": true,
+    "description": "A pale, veiled shape that rides the dead ships of a lost fleet and calls for her missing crew.",
+    "attack": "Cold touch",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Veil of the Void",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is pulled out into open space."
+      }
+    ],
+    "tactics": "Drifts through the wreck. Pulls a player into the void with her veil.",
+    "aliases": [
+      "ghost",
+      "spectre",
+      "bride",
+      "void ghost"
+    ]
+  },
+  {
+    "id": "data-succubus",
+    "name": "Data Succubus",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A seductive net-spirit that wears a lover's face and feeds on whoever it hacks.",
+    "attack": "Draining kiss",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Memory Drain",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target forgets the last thing they did."
+      }
+    ],
+    "tactics": "Logs in as someone the target trusts. Drains their implants dry.",
+    "aliases": [
+      "succubus",
+      "net spirit",
+      "siren",
+      "ai ghost"
+    ]
+  },
+  {
+    "id": "lantern-keeper-ghost",
+    "name": "Lantern-Keeper Ghost",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "description": "The ghost of an old lighthouse keeper who now steers ships into reefs.",
+    "attack": "Cold lantern",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Appears on the cliff at night. Lights false beacons.",
+    "aliases": [
+      "ghost",
+      "keeper",
+      "lighthouse ghost",
+      "spirit"
+    ]
+  },
+  {
+    "id": "spectral-leviathan-captain",
+    "name": "Spectral Leviathan-Captain",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A ghostly captain in barnacle-covered robes who rides the back of a drowned whale-ship.",
+    "attack": "Rusted harpoon",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Drowning Curse",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target's lungs fill with seawater until the curse is lifted."
+      }
+    ],
+    "tactics": "Rises from the waves at midnight. Offers a bargain for a ghost's passage.",
+    "aliases": [
+      "ghost captain",
+      "drowned captain",
+      "ghost pirate",
+      "spectre"
+    ]
+  },
+  {
+    "id": "tick-tock-wraith",
+    "name": "Tick-Tock Wraith",
+    "type": "otherworldly",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "description": "A pale shape that dwells inside the great clock-tower and whispers the hours of the dead.",
+    "attack": "Chiming touch",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Drifts from clock to clock. Stops anyone who tries to wind the tower.",
+    "aliases": [
+      "clock ghost",
+      "time wraith",
+      "spirit",
+      "haunt"
+    ]
+  },
+  {
+    "id": "glowing-memory",
+    "name": "Glowing Memory",
+    "type": "otherworldly",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": false,
+    "description": "A friendly shimmer of a person from before the war who just wants to share a meal.",
+    "attack": "Gentle touch",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Follows the players. Tries to share memories of a better time.",
+    "aliases": [
+      "ghost",
+      "memory",
+      "apparition",
+      "shade"
+    ]
+  },
+  {
+    "id": "fallout-banshee",
+    "name": "Fallout Banshee",
+    "type": "otherworldly",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": true,
+    "description": "A shrieking shape in a tattered dress who walks ahead of every dust storm.",
+    "attack": "Piercing wail",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Death Wail",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is deafened and has disadvantage until they rest."
+      }
+    ],
+    "tactics": "Screams as the storm rolls in. Fades when the dust settles.",
+    "aliases": [
+      "banshee",
+      "storm ghost",
+      "wailer",
+      "spirit"
+    ]
+  },
+  {
+    "id": "ghost-tide",
+    "name": "Ghost Tide",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A wave of pale, grasping hands that rises out of calm water to pull sailors under.",
+    "attack": "Grasping hands",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rises at the stern. Pulls a sailor into the water.",
+    "aliases": [
+      "ghost wave",
+      "drowned hands",
+      "sea spirit",
+      "tide ghost"
+    ]
   }
 ]

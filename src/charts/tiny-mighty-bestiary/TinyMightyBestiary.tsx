@@ -93,6 +93,26 @@ function matches(creature: Creature, query: string) {
     .every((word) => text.includes(word));
 }
 
+/** One dot per whole point of difficulty, plus a partly filled dot for a fraction. The number is always shown too. */
+function DifficultyDots({ value }: { value: number }) {
+  const whole = Math.floor(value);
+  const fraction = value - whole;
+  return (
+    <span className="bestiary-difficulty" aria-label={`Difficulty ${value}`}>
+      <span className="bestiary-difficulty-label" aria-hidden="true">
+        Difficulty:
+      </span>
+      <span className="bestiary-dots" aria-hidden="true">
+        {Array.from({ length: whole }, (_, i) => (
+          <span key={i} className="bestiary-dot bestiary-dot-full" />
+        ))}
+        {fraction > 0 && <span className="bestiary-dot" style={{ ["--fill" as string]: fraction }} />}
+      </span>
+      <span className="bestiary-difficulty-num">{value}</span>
+    </span>
+  );
+}
+
 function CreatureCard({ creature }: { creature: Creature }) {
   const tier = tierFor(creature);
   const difficulty = difficultyOf(creature);
@@ -101,7 +121,7 @@ function CreatureCard({ creature }: { creature: Creature }) {
     <article className={`bestiary-card bestiary-type-${creature.type}`}>
       <header className="bestiary-head">
         <h2>{creature.name}</h2>
-        <span className="bestiary-difficulty">Difficulty {difficulty}</span>
+        <DifficultyDots value={difficulty} />
       </header>
       <p className="bestiary-desc">{creature.description}</p>
       <p className="bestiary-tone">
@@ -171,6 +191,7 @@ export default function TinyMightyBestiary() {
   const [toneRange, setToneRange] = useState<[number, number]>([0, TONE_LAST]);
   const [players, setPlayers] = useState<[number, number]>([3, 3]);
   const [levels, setLevels] = useState<[number, number]>([0, 0]);
+  const [encounterOpen, setEncounterOpen] = useState(true);
   const [encounter, setEncounter] = useState<{ low: number; high: number; picks: Creature[] } | null>(null);
   // Target difficulty range = players + levels gained, at the low and high ends.
   const targetLow = players[0] + 1 + levels[0] / 2;
@@ -267,58 +288,74 @@ export default function TinyMightyBestiary() {
         onChange={(e) => setQuery(e.target.value)}
       />
       <div className="bestiary-encounter">
-        <div className="bestiary-encounter-sliders">
-          <div className="bestiary-key">
-            <span className="bestiary-key-label">Players</span>
-            <RangeSlider stops={PLAYER_STOPS} value={players} onChange={setPlayers} labelPrefix="players" />
-          </div>
-          <div className="bestiary-key">
-            <span className="bestiary-key-label">Levels gained</span>
-            <RangeSlider stops={LEVEL_STOPS} value={levels} onChange={setLevels} labelPrefix="levels gained" />
-          </div>
-          <p className="muted">
-            Target difficulty: {targetLow === targetHigh ? targetLow : `${targetLow} to ${targetHigh}`}
-          </p>
-        </div>
         <button
           type="button"
-          className="bestiary-generate"
-          disabled={creatures.length === 0}
-          onClick={() =>
-            setEncounter({
-              low: targetLow,
-              high: targetHigh,
-              picks: buildEncounter(creatures, targetLow, targetHigh),
-            })
-          }
+          className="bestiary-encounter-toggle"
+          aria-expanded={encounterOpen}
+          onClick={() => setEncounterOpen(!encounterOpen)}
         >
-          Generate Encounter
+          <span aria-hidden="true">{encounterOpen ? "▾" : "▸"}</span> Encounter generator
         </button>
-        {encounter && (() => {
-          const total = encounter.picks.reduce((sum, c) => sum + difficultyOf(c), 0);
-          const groups = [...new Map(encounter.picks.map((c) => [c.id, c])).values()]
-            .map((c) => ({ c, n: encounter.picks.filter((p) => p.id === c.id).length }))
-            .sort((a, b) => difficultyOf(b.c) - difficultyOf(a.c));
-          return (
-            <div className="bestiary-encounter-result">
-              <p>
-                <strong>
-                  Difficulty {total} (target {encounter.low === encounter.high ? encounter.low : `${encounter.low} to ${encounter.high}`})
-                </strong>
-                {total < encounter.low && " (closest the current filters allow)"}
-              </p>
-              {groups.length === 0 && <p className="muted">Nothing in the filtered list fits under that difficulty.</p>}
-              <div className="bestiary-grid">
-                {groups.map(({ c, n }) => (
-                  <div key={c.id} className="bestiary-encounter-item">
-                    <span className="bestiary-encounter-count">x{n}</span>
-                    <CreatureCard creature={c} />
-                  </div>
-                ))}
+        {encounterOpen && (
+          <>
+            <div className="bestiary-encounter-sliders">
+              <div className="bestiary-key">
+                <span className="bestiary-key-label">Players</span>
+                <RangeSlider stops={PLAYER_STOPS} value={players} onChange={setPlayers} labelPrefix="players" />
               </div>
+              <div className="bestiary-key">
+                <span className="bestiary-key-label">Levels gained</span>
+                <RangeSlider stops={LEVEL_STOPS} value={levels} onChange={setLevels} labelPrefix="levels gained" />
+              </div>
+              <p className="muted">
+                Target difficulty: {targetLow === targetHigh ? targetLow : `${targetLow} to ${targetHigh}`}
+              </p>
             </div>
-          );
-        })()}
+            <button
+              type="button"
+              className="bestiary-generate"
+              disabled={creatures.length === 0}
+              onClick={() =>
+                setEncounter({
+                  low: targetLow,
+                  high: targetHigh,
+                  picks: buildEncounter(creatures, targetLow, targetHigh),
+                })
+              }
+            >
+              Generate Encounter
+            </button>
+            {encounter && (() => {
+              const total = encounter.picks.reduce((sum, c) => sum + difficultyOf(c), 0);
+              const groups = [...new Map(encounter.picks.map((c) => [c.id, c])).values()]
+                .map((c) => ({ c, n: encounter.picks.filter((p) => p.id === c.id).length }))
+                .sort((a, b) => difficultyOf(b.c) - difficultyOf(a.c));
+              return (
+                <div className="bestiary-encounter-result">
+                  <p>
+                    <strong>
+                      Difficulty {total} (target {encounter.low === encounter.high ? encounter.low : `${encounter.low} to ${encounter.high}`})
+                    </strong>
+                    {total < encounter.low && " (closest the current filters allow)"}
+                  </p>
+                  {groups.length === 0 && <p className="muted">Nothing in the filtered list fits under that difficulty.</p>}
+                  <div className="bestiary-grid">
+                    {groups.map(({ c, n }) => (
+                      <div key={c.id} className="bestiary-encounter-item">
+                        <span className="bestiary-encounter-count">x{n}</span>
+                        <CreatureCard creature={c} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+      
+          </>
+        )}
+      </div>
+      <div className="bestiary-divider" role="separator">
+        <span>All creatures ({creatures.length})</span>
       </div>
       {creatures.length === 0 && <p className="muted">No creatures match these filters.</p>}
       <div className="bestiary-grid">
