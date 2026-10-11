@@ -1378,5 +1378,112 @@
     ],
     "powers": [],
     "tactics": "Pours calming tea and hops away from danger. Boils over if it gets insulted."
+  },
+  {
+    "id": "dreadnought-core",
+    "name": "Dreadnought Core",
+    "type": "animated",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "The wrathful battle-mind of a gutted capital ship, still defending its dead corridors.",
+    "attack": "Turret fire",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Overload Beam",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Armor and shields do not count."
+      }
+    ],
+    "tactics": "Seals doors and sends repair drones. Opens its core to the one who cuts the main cable.",
+    "aliases": [
+      "ship ai",
+      "warship",
+      "battle computer",
+      "hal"
+    ]
+  },
+  {
+    "id": "possessed-typewriter",
+    "name": "Possessed Typewriter",
+    "type": "animated",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A black Underwood that types out the names of its next victims on its own.",
+    "attack": "Spring snap",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Types a name aloud. Whoever reads it gets disadvantage next turn.",
+    "aliases": [
+      "typewriter",
+      "cursed object",
+      "haunted machine",
+      "machine"
+    ]
+  },
+  {
+    "id": "cursed-hearse",
+    "name": "Cursed Hearse",
+    "type": "animated",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "description": "A black funeral car with no driver that rolls up to the house of anyone who has been marked.",
+    "attack": "Run down",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Dead of Night",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Lights go out, and the target has disadvantage until dawn."
+      }
+    ],
+    "tactics": "Idles outside with the engine running. Opens its back door for whoever is chosen.",
+    "aliases": [
+      "haunted car",
+      "death car",
+      "ghost car",
+      "vehicle"
+    ]
   }
 ]

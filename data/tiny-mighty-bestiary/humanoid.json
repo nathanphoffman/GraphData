@@ -3170,5 +3170,212 @@
       }
     ],
     "tactics": "Reads the names of the group aloud and sets deadlines. Tries to finish the paperwork on whoever is hurt."
+  },
+  {
+    "id": "fleet-admiral",
+    "name": "Fleet Admiral",
+    "type": "humanoid",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "description": "A grim commander in a black-glass helmet who runs entire invasion fleets from a single bridge.",
+    "attack": "Command blaster",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Fire Order",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Orbital strike on the marked spot."
+      }
+    ],
+    "tactics": "Stays on the bridge or a command shuttle. Calls in reinforcements each turn.",
+    "aliases": [
+      "warlord",
+      "imperial officer",
+      "commander",
+      "emperor"
+    ]
+  },
+  {
+    "id": "apprentice-tinker",
+    "name": "Apprentice Tinker",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A soot-covered kid with oversized goggles and a wrench half their size.",
+    "attack": "Wrench swing",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides behind a half-built machine and throws spare parts.",
+    "aliases": [
+      "mechanic",
+      "engineer",
+      "inventor",
+      "kid"
+    ]
+  },
+  {
+    "id": "industrial-magnate",
+    "name": "Industrial Magnate",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A monocled titan of industry who owns the mill, the rail, and most of the sky.",
+    "attack": "Pneumatic cane",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hired Muscle",
+        "type": "multi",
+        "uses": 1,
+        "text": "Attacks up to three enemies this turn with normal damage, through his bodyguards."
+      }
+    ],
+    "tactics": "Never fights alone. Offers a bribe, then calls the guards.",
+    "aliases": [
+      "tycoon",
+      "robber baron",
+      "industrialist",
+      "factory owner"
+    ]
+  },
+  {
+    "id": "greenhorn-deputy",
+    "name": "Greenhorn Deputy",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A freshly sworn deputy with a too-big badge and a trembling hand on their holster.",
+    "attack": "Pistol",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Shouts a lot. Shoots wild when startled.",
+    "aliases": [
+      "rookie",
+      "lawman",
+      "kid",
+      "sheriff's helper"
+    ]
+  },
+  {
+    "id": "railroad-baron",
+    "name": "Railroad Baron",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A top-hatted mogul who bought the county, the sheriff, and the only water for fifty miles.",
+    "attack": "Gold-plated revolver",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Gunhand",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Calls in hired guns for cover."
+      }
+    ],
+    "tactics": "Stands behind his train. Offers a fortune to anyone who walks away.",
+    "aliases": [
+      "tycoon",
+      "cattle baron",
+      "land baron",
+      "mogul"
+    ]
+  },
+  {
+    "id": "syndicate-enforcer",
+    "name": "Syndicate Enforcer",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A chrome-armored street boss with a hundred enemies and a hundred more on payroll.",
+    "attack": "Smart shotgun",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Walks through the door and lets the crew work. Pulls his own iron only when threatened.",
+    "aliases": [
+      "gang boss",
+      "yakuza",
+      "street boss",
+      "cyber thug"
+    ]
   }
 ]

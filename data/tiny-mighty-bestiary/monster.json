@@ -1763,5 +1763,260 @@
     ],
     "powers": [],
     "tactics": "Waits behind a nice painting. Wraps around the nearest guest and slides them into the wall."
+  },
+  {
+    "id": "vent-crawler",
+    "name": "Vent Crawler",
+    "type": "monster",
+    "themes": [
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A pale, many-legged thing that lives in the air ducts and drops on anyone who walks beneath.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Drops from a vent onto the last player in line.",
+    "aliases": [
+      "xenomorph",
+      "bug",
+      "alien",
+      "facehugger"
+    ]
+  },
+  {
+    "id": "hangar-grub",
+    "name": "Hangar Grub",
+    "type": "monster",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A fat larva that burrows into cargo crates and gnaws through whatever is inside.",
+    "attack": "Gnaw",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Bursts out of a crate. Swarms in threes if the GM wants a harder fight.",
+    "aliases": [
+      "grub",
+      "maggot",
+      "larva",
+      "pest"
+    ]
+  },
+  {
+    "id": "alley-slime",
+    "name": "Alley Slime",
+    "type": "monster",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "description": "A glowing puddle of runoff that has learned to climb walls and swallow shoes.",
+    "attack": "Engulf",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits in a puddle. Grabs a boot and slowly climbs.",
+    "aliases": [
+      "ooze",
+      "blob",
+      "sludge",
+      "slime"
+    ]
+  },
+  {
+    "id": "cactus-crawler",
+    "name": "Cactus Crawler",
+    "type": "monster",
+    "themes": [
+      "western"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A walking barrel cactus with spines like fishhooks and a bad attitude.",
+    "attack": "Spine jab",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Sits still among real cacti until someone gets close.",
+    "aliases": [
+      "cactus",
+      "plant",
+      "desert pest",
+      "tumbleweed"
+    ]
+  },
+  {
+    "id": "barnacle-biter",
+    "name": "Barnacle Biter",
+    "type": "monster",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "description": "A crab-shelled horror that clamps onto the hull and snaps at anyone who leans over the rail.",
+    "attack": "Pincer",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Clamps onto the ship. Grabs an ankle if a player leans over the side.",
+    "aliases": [
+      "crab",
+      "sea creature",
+      "hull biter",
+      "lobster"
+    ]
+  },
+  {
+    "id": "boiler-newt",
+    "name": "Boiler Newt",
+    "type": "monster",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A salamander that lives in warm pipes and hisses scalding steam when it is cornered.",
+    "attack": "Steam spit",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides in a pipe junction. Spits when someone opens the valve.",
+    "aliases": [
+      "salamander",
+      "lizard",
+      "pest",
+      "pipe dweller"
+    ]
+  },
+  {
+    "id": "mutant-grub",
+    "name": "Mutant Grub",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A bloated larva that feeds on tin cans and slowly glows brighter as it eats.",
+    "attack": "Gnaw",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Mostly harmless alone. Draws more of its kind if it is hurt.",
+    "aliases": [
+      "maggot",
+      "larva",
+      "glow grub",
+      "pest"
+    ]
+  },
+  {
+    "id": "canyon-wurm",
+    "name": "Canyon Wurm",
+    "type": "monster",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "description": "A rock-colored worm as long as a train that bursts out of the canyon floor.",
+    "attack": "Crushing bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Canyon Quake",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Knocks players prone."
+      }
+    ],
+    "tactics": "Burrows under the biggest group. Surfaces when the ground stops shaking.",
+    "aliases": [
+      "sandworm",
+      "sand wyrm",
+      "giant worm",
+      "dune worm"
+    ]
   }
 ]

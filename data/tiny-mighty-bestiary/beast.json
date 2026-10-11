@@ -1372,5 +1372,44 @@
     ],
     "powers": [],
     "tactics": "Perches on lamps and listens in. Sells what it hears to anyone with a shiny coin."
+  },
+  {
+    "id": "nebula-stalker",
+    "name": "Nebula Stalker",
+    "type": "beast",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": true,
+    "description": "A void-bred predator the size of a freighter that hunts engine wakes through open space.",
+    "attack": "Maw & tendrils",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Engine Swallow",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target's ship or vehicle is crippled until repaired."
+      }
+    ],
+    "tactics": "Rushes the loudest engine first. Retreats to a nebula if badly hurt.",
+    "aliases": [
+      "space whale",
+      "void beast",
+      "space monster",
+      "kraken"
+    ]
   }
 ]

@@ -2023,5 +2023,261 @@
     ],
     "powers": [],
     "tactics": "Guides lost people to shelter. Flickers out if anyone is cruel to it."
+  },
+  {
+    "id": "static-sprite",
+    "name": "Static Sprite",
+    "type": "otherworldly",
+    "themes": [
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": true,
+    "description": "A crackling blue wisp that leaks out of old comm panels and shocks anyone who touches the wiring.",
+    "attack": "Zap",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides in a console and zaps the first player to reach for a button.",
+    "aliases": [
+      "wisp",
+      "ghost in the machine",
+      "electric spirit",
+      "imp"
+    ]
+  },
+  {
+    "id": "starlight-wisp",
+    "name": "Starlight Wisp",
+    "type": "otherworldly",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "description": "A tiny drifting lantern of starlight that leads travelers off the path for fun.",
+    "attack": "Glimmer bump",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Leads one player away from the group. Pops harmlessly when hit.",
+    "aliases": [
+      "will-o-wisp",
+      "fairy",
+      "star mote",
+      "spirit"
+    ]
+  },
+  {
+    "id": "hangar-haunt",
+    "name": "Hangar Haunt",
+    "type": "otherworldly",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": true,
+    "description": "The flickering echo of a dead pilot that still runs pre-flight checks on a wrecked fighter.",
+    "attack": "Cold touch",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slips through bulkheads and chills a player on the way past. Fades when the ship is repaired.",
+    "aliases": [
+      "ghost",
+      "pilot ghost",
+      "spirit",
+      "specter"
+    ]
+  },
+  {
+    "id": "warp-imp",
+    "name": "Warp Imp",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "description": "A grinning scrap of warp-stuff that pops out of cracks in the hull and chews on wiring.",
+    "attack": "Claw swipe",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Speed",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Teleports a short hop each turn. Goes for the smallest, most valuable gadget.",
+    "aliases": [
+      "imp",
+      "daemon",
+      "gremlin",
+      "warp spawn"
+    ]
+  },
+  {
+    "id": "glitch-gremlin",
+    "name": "Glitch Gremlin",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A pixelated pest that lives in implants and makes them stutter at the worst time.",
+    "attack": "Static shock",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Latches onto one player's gear and gives them disadvantage on their next gadget roll.",
+    "aliases": [
+      "bug",
+      "virus",
+      "imp",
+      "glitch"
+    ]
+  },
+  {
+    "id": "bilge-sprite",
+    "name": "Bilge Sprite",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A slimy little spirit that lives in the bottom of the hold and loosens every knot it can find.",
+    "attack": "Tangle",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Cuts a rope or loosens a plank. Flees if it is spotted.",
+    "aliases": [
+      "sprite",
+      "sea imp",
+      "sailor's bane",
+      "gremlin"
+    ]
+  },
+  {
+    "id": "cog-sprite",
+    "name": "Cog Sprite",
+    "type": "otherworldly",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "description": "A buzzing spark of living gearwork that rides on steam vents and jams machinery for fun.",
+    "attack": "Spark",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Jams one machine or lock. Giggles loudly while doing it.",
+    "aliases": [
+      "fairy",
+      "spark",
+      "machine spirit",
+      "gremlin"
+    ]
+  },
+  {
+    "id": "star-oracle",
+    "name": "Star Oracle",
+    "type": "otherworldly",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": true,
+    "description": "A robed figure of living starlight that sees every battle before it happens.",
+    "attack": "Prophecy lance",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Foretold Doom",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target must succeed on a Wits roll or lose their next turn."
+      }
+    ],
+    "tactics": "Always acts first. Ignores any player who has not yet been named in its vision.",
+    "aliases": [
+      "seer",
+      "force user",
+      "prophet",
+      "cosmic mage"
+    ]
   }
 ]
