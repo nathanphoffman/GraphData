@@ -93,7 +93,7 @@ function CreatureCard({ creature }: { creature: Creature }) {
       </dl>
 
       <p>
-        <strong>Attack:</strong> {creature.attack}, 2d6 {sign(tier.bonus)} minus the target's defense.
+        <strong>Attack:</strong> {creature.attack}
       </p>
       <p>
         <strong>Skills:</strong>{" "}
@@ -105,7 +105,7 @@ function CreatureCard({ creature }: { creature: Creature }) {
             {s.note && ` (${s.note})`}
           </span>
         ))}
-        . Others {sign(tier.bonus)}. {creature.skillNote}
+        {creature.skillNote && `. ${creature.skillNote}`}
       </p>
       {creature.flying && (
         <p>

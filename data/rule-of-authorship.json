@@ -1,7 +1,7 @@
 {
   "title": "Who Wrote Dungeons & Dragons",
   "kicker": ["Civ. No. 4-79-109 · D. Minn.", "Compiled 2026"],
-  "subhead": "A rule-by-rule and product-by-product attribution of original D&D (1971–1977), built from the Arneson v. Gygax case file, the Dalluhn Manuscript forensic analysis, and the published credits of the 1974 booklets and 1975–76 supplements — covering Gygax and Arneson, plus Kuntz, Kask, Ernie Gygax and the rest of the early circle.",
+  "subhead": "Original D&D grew from two roots: Jeff Perren and Gary Gygax's Chainmail (1971), and Dave Arneson's Blackmoor campaign, itself descended from Dave Wesely's Braunstein games. Arneson supplied the dungeon, wilderness play, experience, economics, and naval and aerial ideas. Gygax supplied the combat tables, magic system, spell and monster lists, and wrote nearly every sentence of the 1974 booklets. Around them, Rob Kuntz co-ran the Greyhawk campaign, co-wrote Greyhawk (1975), and with Jim Ward wrote Gods, Demi-Gods & Heroes (1976). Brian Blume co-wrote Eldritch Wizardry. Tim Kask edited every supplement from Blackmoor on and turned The Strategic Review into The Dragon. Ernie Gygax was the first player in the dungeon, Mike Mornard brought in M.A.R. Barker, and a handful of artists filled out the books.",
   "caseStrip": [
     [{ "text": "Sources: " }, { "text": "854-page case file", "strong": true }, { "text": " (pleadings, interrogatories, exhibits, two Arneson depositions)" }],
     [{ "text": "Dalluhn Manuscript", "strong": true }, { "text": " analysis (Jon Peterson, 2015)" }],
@@ -18,10 +18,10 @@
     { "element": "Dungeon as a leveled, depth = danger environment", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Moderate–high" },
     { "element": "Wilderness / outdoor adventuring as a setting", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Moderate" },
     { "element": "Experience points & character leveling", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
-    { "element": "Character abilities (the six stats)", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — " }, { "text": "Arneson", "owner": "arneson" }, { "text": "-seeded" }], "confidence": "High" },
-    { "element": "Hit points / hit dice as damage tracking", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — converged independently" }], "confidence": "Moderate" },
+    { "element": "Character abilities (the six stats)", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " & " }, { "text": "Gygax", "owner": "gygax" }, { "text": " — Arneson-seeded" }], "confidence": "High" },
+    { "element": "Hit points / hit dice as damage tracking", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " & " }, { "text": "Gygax", "owner": "gygax" }, { "text": " — converged independently" }], "confidence": "Moderate" },
     { "element": "Armor Class & the Attack Matrix (to-hit tables)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (via Chainmail)" }], "confidence": "High" },
-    { "element": "Saving throws", "leans": [{ "text": "Joint", "owner": "joint" }], "confidence": "Moderate" },
+    { "element": "Saving throws", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " & " }, { "text": "Gygax", "owner": "gygax" }], "confidence": "Moderate" },
     { "element": "Alignment (Law / Neutral / Chaos)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (via Chainmail)" }], "confidence": "High" },
     { "element": "Vancian spell memorization", "leans": [{ "text": "Gygax", "owner": "gygax" }], "confidence": "Moderate–high" },
     { "element": "Core spell lists & magic items", "leans": [{ "text": "Gygax", "owner": "gygax" }], "confidence": "Moderate–high" },
@@ -30,15 +30,15 @@
     { "element": "Economics: investments, wages, taxation, prices", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
     { "element": "Naval combat", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
     { "element": "Aerial combat", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " (concept) / " }, { "text": "Gygax", "owner": "gygax" }, { "text": " (text)" }], "confidence": "High" },
-    { "element": "“Dungeon Master” as a referee role", "leans": [{ "text": "Disputed", "owner": "disputed" }], "confidence": "Low–moderate" },
+    { "element": "“Dungeon Master” as a referee role", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " (claimed)" }], "confidence": "Low–moderate" },
     { "element": "Cleric class origin", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " (in-play origin)" }], "confidence": "Moderate" },
     { "element": "Actual prose of the three 1974 booklets", "leans": [{ "text": "Gygax", "owner": "gygax" }], "confidence": "Very high" },
     { "element": "“Blackmoor” (Supplement II)", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Very high" },
     { "element": "“Greyhawk” (Supplement I)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Very high" },
-    { "element": "AD&D Monster Manual / Players Handbook", "leans": [{ "text": "Disputed", "owner": "disputed" }], "confidence": "—" },
+    { "element": "AD&D Monster Manual / Players Handbook", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (claimed sole author) vs. " }, { "text": "Arneson", "owner": "arneson" }, { "text": " (claimed derived)" }], "confidence": "—" },
     { "element": "Chainmail's medieval rules (the base of the fantasy supplement)", "leans": [{ "text": "Perren", "owner": "others" }], "confidence": "Moderate–high" },
-    { "element": "Thief & Paladin classes (Greyhawk)", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — " }, { "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate (credit only)" },
-    { "element": "Variable weapon damage & variable hit dice", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — " }, { "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate (credit only)" },
+    { "element": "Thief & Paladin classes (Greyhawk)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate (credit only)" },
+    { "element": "Variable weapon damage & variable hit dice", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate (credit only)" },
     { "element": "Co-running Castle Greyhawk", "leans": [{ "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate" },
     { "element": "Gods, Demi-Gods & Heroes (Supp. IV)", "leans": [{ "text": "Kuntz", "owner": "kuntz" }, { "text": " & " }, { "text": "Ward", "owner": "others" }], "confidence": "High" },
     { "element": "Eldritch Wizardry: psionics, demons, artifacts, druid", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Blume", "owner": "others" }], "confidence": "High (credit) / Low (per-rule)" },
@@ -81,7 +81,7 @@
         {
           "name": "The six character abilities",
           "owner": "joint",
-          "label": "Joint / Arneson-seeded",
+          "label": "Arneson & Gygax (Arneson-seeded)",
           "verdict": "Traceable lineage: Arneson's 1972 Blackmoor character sheet (“Wizard Gaylord”) had Brains, Looks, Health, Strength, Courage, and more — a personality-trait hodgepodge. The Dalluhn Manuscript shows a narrowed six: Intelligence, Cunning, Strength, Health, Appearance, Ego. Published OD&D lands on the familiar six, with Cunning renamed Wisdom and Health renamed Constitution, and Dexterity added new.",
           "body": ["This is Jon Peterson's strongest documented lineage in the whole analysis — the concept and early evolution trace to Blackmoor, but the final six-stat system and naming was fixed during the Gygax-led drafting stage."],
           "exhibits": [{ "cite": "Dalluhn analysis §4.5", "text": "“Dalluhn thus does appear to be a missing link between early Blackmoor and OD&D… 'Cunning' was the prime requisite for Clerics, per 'Wisdom' in OD&D.”" }]
@@ -89,7 +89,7 @@
         {
           "name": "“Dungeon Master” as a role",
           "owner": "disputed",
-          "label": "Disputed",
+          "label": "Arneson (claimed)",
           "verdict": "Arneson claims credit for creating the referee-as-Dungeon-Master concept in his interrogatory answers. No corroborating exhibit or independent source in the record confirms or refutes this specifically — treat it as an assertion, not established fact.",
           "exhibits": [{ "cite": "Arneson Interrog. Answer No. 6", "text": "claims creation of “the 'Dungeon Master' as central referee figure who designs the dungeon and narrates play.”" }]
         },
@@ -120,7 +120,7 @@
         {
           "name": "“Hit dice” as a damage concept",
           "owner": "joint",
-          "label": "Joint / converging",
+          "label": "Arneson & Gygax (converged)",
           "verdict": "Arneson's most consistently repeated claim across the record — his Reply to TSR's counterclaims, and both depositions — is that he reworked Chainmail's flat combat table into a dice-rolled hit-point system. But this one softens under the Dalluhn evidence.",
           "body": ["Chainmail already had a “hits to kill” concept for monsters — a lycanthrope “takes four simultaneous hits… to kill,” an ogre “six” — but that's a fixed threshold, not a randomized pool. The dice-rolled version — roll a die to see how many hit points a blow does, tracked as a shrinking pool — shows up independently on both sides by 1973: in Arneson's Blackmoor notes (“take from 1–6 hits”) and separately in Gygax's own 1973 draft pages (the Mornard Fragments, written and corrected in Gygax's hand, with no Arneson involvement in that document). That makes this look like parallel convergence between the two camps rather than a clean, one-directional handoff from Arneson to Gygax."],
           "exhibits": [
@@ -131,7 +131,7 @@
         {
           "name": "Saving throws",
           "owner": "joint",
-          "label": "Joint",
+          "label": "Arneson & Gygax",
           "verdict": "Arneson claims this originated with him and D&D jointly. But the Mornard Fragments — Gygax's own 1973 draft pages, independent of Arneson — already specify a d20 saving throw before the Dalluhn Manuscript's variant (3d6) exists. The concept was in motion on Gygax's side of the drafting process regardless of Arneson's input.",
           "exhibits": [{ "cite": "Dalluhn analysis §4.7", "text": "“the saving throw table at the end of Fragment D explicitly states that \"saving throws are with a 20-sided die.\"”" }]
         }
@@ -241,7 +241,7 @@
         {
           "name": "AD&D Monster Manual & Players Handbook (1977–78)",
           "owner": "disputed",
-          "label": "Disputed",
+          "label": "Gygax vs. Arneson",
           "verdict": "This is what the lawsuit actually turned on, and it's the one item the case file doesn't settle. TSR's position: independently created by Gygax (roughly 1000–1200 of his hours per book) plus named staff, entirely after the 1975 royalty agreement, owing Arneson nothing. Arneson's position: these were “copied in substantial part and wholly derived” from the game he co-authored, republished under Gygax's name alone to cut him out. The case settled by stipulated dismissal before either claim was tested at trial."
         }
       ]
@@ -253,7 +253,7 @@
         {
           "name": "Greyhawk's rules additions",
           "owner": "joint",
-          "label": "Gygax & Kuntz (credited jointly)",
+          "label": "Gygax & Kuntz",
           "verdict": "The supplement is credited to both men. It introduced the Thief and Paladin classes, variable weapon damage, variable hit dice and exceptional strength, and cut the game's dependence on Chainmail. No source reviewed here assigns an individual rule to an individual author.",
           "body": ["Wikipedia notes Kuntz's design role grew out of TSR's tiny staff, where everyone did some design. Treat the credit as shared and the split as unknown."],
           "exhibits": [{ "cite": "Greyhawk (Supp. I, 1975), credited authors", "text": "Gary Gygax & Robert J. Kuntz." }]
@@ -261,7 +261,7 @@
         {
           "name": "Variable weapon damage",
           "owner": "disputed",
-          "label": "Disputed / undocumented",
+          "label": "Gygax & Kuntz (Mornard?)",
           "verdict": "One account suggests Mike Mornard's love of medieval arms may have influenced Kuntz, who influenced Gygax, toward weapon-specific damage. It is a speculative chain of influence, not a documented authorship claim."
         },
         {

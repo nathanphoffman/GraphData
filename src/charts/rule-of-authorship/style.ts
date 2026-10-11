@@ -8,6 +8,6 @@ export const OWNER_LABELS: Record<Owner, string> = {
   kask: "Kask",
   ernie: "Ernie Gygax",
   others: "Other contributors",
-  joint: "Joint / Chainmail-rooted",
-  disputed: "Disputed",
+  joint: "Shared credit",
+  disputed: "Contested",
 };
