@@ -103,7 +103,8 @@
       "type": "beast",
       "themes": [
         "fantasy",
-        "scifi"
+        "scifi",
+        "post-apocalypse"
       ],
       "tone": 3,
       "tier": 0.25,
@@ -163,7 +164,8 @@
       "type": "otherworldly",
       "themes": [
         "fantasy",
-        "western"
+        "western",
+        "age-of-sail"
       ],
       "tone": 4,
       "tier": 1,
@@ -664,7 +666,7 @@
         "scifi",
         "science-fantasy",
         "space-wars",
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 5,
       "tier": 2,
@@ -1863,7 +1865,7 @@
         "fantasy",
         "science-fantasy",
         "scifi",
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 5,
       "tier": 4,
@@ -3246,7 +3248,7 @@
       "name": "Robed Cultist",
       "type": "humanoid",
       "themes": [
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 4,
       "tier": 0.25,
@@ -3275,7 +3277,7 @@
       "name": "Cult Magister",
       "type": "humanoid",
       "themes": [
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 5,
       "tier": 1,
@@ -3316,7 +3318,7 @@
       "name": "Briny Kin",
       "type": "otherworldly",
       "themes": [
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 4,
       "tier": 1,
@@ -3351,7 +3353,7 @@
       "name": "Ghoul",
       "type": "otherworldly",
       "themes": [
-        "cosmic-horror",
+        "occult-noir",
         "fantasy"
       ],
       "tone": 4,
@@ -3386,7 +3388,7 @@
       "name": "Faceless Gaunt",
       "type": "otherworldly",
       "themes": [
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 5,
       "tier": 1,
@@ -3426,7 +3428,7 @@
       "name": "Pale Fungoid",
       "type": "otherworldly",
       "themes": [
-        "cosmic-horror",
+        "occult-noir",
         "scifi",
         "science-fantasy"
       ],
@@ -3470,7 +3472,7 @@
       "name": "Star Wing",
       "type": "otherworldly",
       "themes": [
-        "cosmic-horror",
+        "occult-noir",
         "science-fantasy"
       ],
       "tone": 5,
@@ -3511,7 +3513,7 @@
       "name": "Black Ooze Mass",
       "type": "monster",
       "themes": [
-        "cosmic-horror",
+        "occult-noir",
         "scifi",
         "science-fantasy"
       ],
@@ -3558,7 +3560,7 @@
       "name": "Sunken Dreamer",
       "type": "otherworldly",
       "themes": [
-        "cosmic-horror",
+        "occult-noir",
         "fantasy",
         "science-fantasy"
       ],
@@ -4312,7 +4314,8 @@
       "type": "beast",
       "themes": [
         "cyberpunk",
-        "scifi"
+        "scifi",
+        "post-apocalypse"
       ],
       "tone": 4,
       "tier": 2,
@@ -4351,7 +4354,8 @@
       "type": "monster",
       "themes": [
         "cyberpunk",
-        "scifi"
+        "scifi",
+        "post-apocalypse"
       ],
       "tone": 5,
       "tier": 3,
@@ -4891,7 +4895,8 @@
       "name": "Runaway Locomotive",
       "type": "animated",
       "themes": [
-        "western"
+        "western",
+        "steampunk"
       ],
       "tone": 4,
       "tier": 3,
@@ -5226,7 +5231,7 @@
       "name": "Eager Cultist",
       "type": "humanoid",
       "themes": [
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 1,
       "tier": 0.25,
@@ -5261,7 +5266,7 @@
       "name": "Dream Cat",
       "type": "beast",
       "themes": [
-        "cosmic-horror",
+        "occult-noir",
         "fantasy"
       ],
       "tone": 2,
@@ -5295,7 +5300,7 @@
       "name": "Curio Dealer",
       "type": "humanoid",
       "themes": [
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 3,
       "tier": 0.5,
@@ -5338,7 +5343,7 @@
       "name": "Haunted Doll",
       "type": "animated",
       "themes": [
-        "cosmic-horror",
+        "occult-noir",
         "fantasy"
       ],
       "tone": 4,
@@ -5383,7 +5388,7 @@
       "name": "Void Hound",
       "type": "beast",
       "themes": [
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 5,
       "tier": 2,
@@ -5910,7 +5915,7 @@
       "type": "humanoid",
       "themes": [
         "fantasy",
-        "cosmic-horror"
+        "occult-noir"
       ],
       "tone": 5,
       "tier": 0.25,
@@ -5980,7 +5985,7 @@
       "type": "monster",
       "themes": [
         "fantasy",
-        "cosmic-horror",
+        "occult-noir",
         "space-hammer"
       ],
       "tone": 5,
@@ -6176,7 +6181,8 @@
       "themes": [
         "fantasy",
         "science-fantasy",
-        "cosmic-horror"
+        "occult-noir",
+        "age-of-sail"
       ],
       "tone": 4,
       "tier": 4,
@@ -6547,6 +6553,1361 @@
         }
       ],
       "tactics": "Bursts from the floor and disappears. Stops chasing if the players stand still."
+    },
+    {
+      "id": "deckhand-scallywag",
+      "name": "Deckhand Scallywag",
+      "type": "humanoid",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 2,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "pirate",
+        "sailor",
+        "swabbie",
+        "deckhand",
+        "buccaneer",
+        "scallywag",
+        "crewman"
+      ],
+      "description": "A barefoot, gap-toothed sailor with a mop, a cutlass and a lot of opinions about the cook.",
+      "attack": "Cutlass",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Fights in a gang. Drops its weapon to eat if food is offered."
+    },
+    {
+      "id": "parrot-lookout",
+      "name": "Parrot Lookout",
+      "type": "beast",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": true,
+      "aliases": [
+        "parrot",
+        "pirate parrot",
+        "macaw",
+        "bird",
+        "squawker",
+        "shoulder bird"
+      ],
+      "description": "A colorful, foul-mouthed parrot who repeats secrets and spots every enemy ship before the captain does.",
+      "attack": "Beak nip",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "mimic voices"
+        }
+      ],
+      "powers": [],
+      "tactics": "Squawks the alarm. Repeats private conversations at the worst time."
+    },
+    {
+      "id": "pirate-crab",
+      "name": "Pirate Crab",
+      "type": "beast",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 1,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "crab",
+        "hermit crab",
+        "sea crab",
+        "beach crab",
+        "shell",
+        "pirate hermit"
+      ],
+      "description": "A big hermit crab wearing a tricorn hat, a pirate-flag shell and a deep resentment of seagulls.",
+      "attack": "Claw snap",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "bluster"
+        }
+      ],
+      "powers": [],
+      "tactics": "Defends its treasure pile, which is mostly bottle caps. Scuttles away sideways if hurt."
+    },
+    {
+      "id": "press-ganger",
+      "name": "Press Ganger",
+      "type": "humanoid",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 4,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "crimper",
+        "kidnapper",
+        "shanghai",
+        "recruiter",
+        "slaver",
+        "sailor snatcher"
+      ],
+      "description": "A burly dockside thug with a club, a bag and a very friendly offer of a drink.",
+      "attack": "Club",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "lure"
+        },
+        {
+          "skill": "Physique",
+          "mod": "+"
+        }
+      ],
+      "powers": [],
+      "tactics": "Offers a drink in a tavern, then clubs the sleepers. Drags victims to a ship."
+    },
+    {
+      "id": "reef-shark",
+      "name": "Reef Shark",
+      "type": "beast",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "shark",
+        "great white",
+        "jaws",
+        "hammerhead",
+        "sea hunter",
+        "man-eater",
+        "predator fish"
+      ],
+      "description": "A six-foot, grey-finned shark that smells blood from a mile away and has no manners.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "blood"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Circles first. Attacks swimmers and bleeding targets."
+    },
+    {
+      "id": "cutlass-corsair",
+      "name": "Cutlass Corsair",
+      "type": "humanoid",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "privateer",
+        "buccaneer",
+        "swashbuckler",
+        "pirate",
+        "corsair",
+        "sea raider",
+        "raider"
+      ],
+      "description": "A coat-tailed, rope-swinging swashbuckler with a cutlass, a pistol and a jaunty red sash.",
+      "attack": "Cutlass",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+",
+          "note": "acrobatics"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        }
+      ],
+      "powers": [],
+      "tactics": "Swings on ropes and chandeliers. Surrenders if its ship is lost."
+    },
+    {
+      "id": "navy-lieutenant",
+      "name": "Navy Lieutenant",
+      "type": "humanoid",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "naval officer",
+        "redcoat",
+        "marine",
+        "captain",
+        "royal navy",
+        "officer",
+        "admiral"
+      ],
+      "description": "A crisp, blue-coated naval officer with a sword, a spyglass and an utterly unshakable faith in regulations.",
+      "attack": "Officer's sword",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "command"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "navigation"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Fire the Cannons",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. A broadside from a nearby ship."
+        }
+      ],
+      "tactics": "Barks orders and calls in the ship's guns. Honors a flag of truce."
+    },
+    {
+      "id": "pirate-captain",
+      "name": "Pirate Captain",
+      "type": "humanoid",
+      "themes": [
+        "age-of-sail"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "blackbeard",
+        "captain",
+        "pirate king",
+        "buccaneer captain",
+        "corsair captain",
+        "sea wolf",
+        "scourge of the seas"
+      ],
+      "description": "A bellowing, bearded captain with three pistols, a peg leg and a ship that's faster than it looks.",
+      "attack": "Cutlass & pistol",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "command"
+        },
+        {
+          "skill": "Physique",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Broadside",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Every cannon on the ship fires at once."
+        }
+      ],
+      "tactics": "Leads from the front. Offers parley and trades blows with the best of them."
+    },
+    {
+      "id": "siren",
+      "name": "Siren",
+      "type": "otherworldly",
+      "themes": [
+        "age-of-sail",
+        "fantasy"
+      ],
+      "tone": 4,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "mermaid",
+        "sea witch",
+        "lorelei",
+        "harpy",
+        "seductress",
+        "sea maiden",
+        "songstress"
+      ],
+      "description": "A beautiful, silver-scaled singer on a rock whose song pulls sailors straight to the reef.",
+      "attack": "Claws",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "song"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Lure Song",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. A hypnotic song that draws the target toward the water."
+        }
+      ],
+      "tactics": "Sings from a rock and waits for ships. Dives and vanishes underwater when hurt."
+    },
+    {
+      "id": "ghost-galleon",
+      "name": "Ghost Galleon",
+      "type": "animated",
+      "themes": [
+        "age-of-sail",
+        "fantasy"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "ghost ship",
+        "flying dutchman",
+        "phantom ship",
+        "haunted ship",
+        "cursed ship",
+        "dead ship",
+        "sea wraith"
+      ],
+      "description": "A shimmering, rotten-masted galleon with tattered black sails and a deck full of silent, glowing crew.",
+      "attack": "Ram & cannon",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "fog"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Fog Bank",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. A chilling fog that rolls over the water and blinds everything within."
+        }
+      ],
+      "tactics": "Appears from fog at night. Dissolves at dawn if its curse is not renewed."
+    },
+    {
+      "id": "drowned-captain",
+      "name": "Drowned Captain",
+      "type": "otherworldly",
+      "themes": [
+        "age-of-sail",
+        "fantasy"
+      ],
+      "tone": 5,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "davy jones",
+        "flying dutchman captain",
+        "drowned",
+        "sea ghost",
+        "locker",
+        "kraken master",
+        "deep admiral"
+      ],
+      "description": "A barnacle-bearded captain with a tentacled face and a hand on a chest that holds the hearts of drowned sailors.",
+      "attack": "Cutlass",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "dread"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Kraken's Call",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Tentacles lash up from the sea."
+        },
+        {
+          "name": "Dead Man's Bargain",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Offers a drowning player a second chance at the cost of a year of service."
+        }
+      ],
+      "tactics": "Rules a ghost ship and a crew of the drowned. Cannot leave the sea."
+    },
+    {
+      "id": "butler-bot",
+      "name": "Butler Bot",
+      "type": "animated",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "butler",
+        "servant robot",
+        "automaton butler",
+        "valet",
+        "brass butler",
+        "tea robot",
+        "robot servant"
+      ],
+      "description": "A brass butler with a monocle, a tea tray and a perfectly polite response to a fire in the library.",
+      "attack": "Tea tray",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "etiquette"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Offers tea. Will fight only to defend the household silver."
+    },
+    {
+      "id": "clockwork-spider",
+      "name": "Clockwork Spider",
+      "type": "animated",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 2,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "mechanical spider",
+        "cog spider",
+        "windup spider",
+        "tin spider",
+        "clockwork bug",
+        "gear spider"
+      ],
+      "description": "A hand-sized brass spider that ticks along walls and winds itself up with a tiny key.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "vibrations"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Swarms. Stops when it winds down after 10 turns."
+    },
+    {
+      "id": "goggled-inventor",
+      "name": "Goggled Inventor",
+      "type": "humanoid",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 1,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "inventor",
+        "mad scientist",
+        "tinkerer",
+        "engineer",
+        "gizmo",
+        "crackpot",
+        "professor"
+      ],
+      "description": "A soot-smeared, goggled inventor with a lab coat, a half-built machine and an enthusiastic, mildly dangerous plan.",
+      "attack": "Spanner",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "gadgets"
+        },
+        {
+          "skill": "Senses",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Gadget Gambit",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Pulls out an invention with a random effect: the GM rolls a d6 (1: it explodes for d6 damage; 6: it works perfectly)."
+        }
+      ],
+      "tactics": "Fights by throwing gadgets. Will try to explain the plan while being attacked."
+    },
+    {
+      "id": "airship-pirate",
+      "name": "Airship Pirate",
+      "type": "humanoid",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "sky pirate",
+        "air pirate",
+        "airship captain",
+        "corsair",
+        "cloud raider",
+        "balloon pirate",
+        "aeronaut"
+      ],
+      "description": "A goggle-wearing, grapple-gun-swinging raider who boards airships from a patched balloon.",
+      "attack": "Cutlass & flintlock",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+",
+          "note": "climbing"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        }
+      ],
+      "powers": [],
+      "tactics": "Boards from above with grappling hooks. Cuts the lines and flees if outnumbered."
+    },
+    {
+      "id": "brass-duelist",
+      "name": "Brass Duelist",
+      "type": "animated",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "fencing robot",
+        "android duelist",
+        "clockwork fencer",
+        "mechanical duelist",
+        "automaton swordsman",
+        "rapier robot"
+      ],
+      "description": "A polished, mustachioed brass automaton with a rapier arm and a flawless fencing stance.",
+      "attack": "Rapier",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Challenges the strongest fighter to a duel. Never breaks the rules of honor."
+    },
+    {
+      "id": "smog-baron",
+      "name": "Smog Baron",
+      "type": "humanoid",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 5,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "industrialist",
+        "factory owner",
+        "robber baron",
+        "tycoon",
+        "mill owner",
+        "coal baron",
+        "capitalist"
+      ],
+      "description": "A top-hatted, soot-grey mill owner with a cane, a cough and a factory that belches smoke over a whole town.",
+      "attack": "Cane",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "bargain"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Smoke Screen",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Fills the area with thick smoke, giving everyone inside cover (disadvantage to ranged attacks) for the battle."
+        }
+      ],
+      "tactics": "Hires thugs and enforcers. Offers a bribe or a dismissal. Never gets his own hands dirty."
+    },
+    {
+      "id": "gaslamp-specter",
+      "name": "Gaslamp Specter",
+      "type": "otherworldly",
+      "themes": [
+        "steampunk",
+        "fantasy"
+      ],
+      "tone": 4,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "smog ghost",
+        "fog phantom",
+        "london fog",
+        "gas lamp ghost",
+        "streetlight ghost",
+        "foggy ghost",
+        "night walker"
+      ],
+      "description": "A pale, gaslight-flickering figure in a bowler hat who walks the foggy streets and never leaves a footprint.",
+      "attack": "Cold touch",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Lamp Snuff",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Puts out every light within sight, leaving the area in darkness."
+        }
+      ],
+      "tactics": "Appears under streetlamps. Vanishes in fog when approached."
+    },
+    {
+      "id": "steam-golem",
+      "name": "Steam Golem",
+      "type": "animated",
+      "themes": [
+        "steampunk",
+        "fantasy"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "steam robot",
+        "boiler golem",
+        "steam man",
+        "juggernaut",
+        "iron giant",
+        "brass colossus",
+        "steam engine"
+      ],
+      "description": "A boiler-chested, riveted iron giant that chugs through the street and vents scalding clouds.",
+      "attack": "Piston fist",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Senses",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Steam Vent",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. A scalding cloud from its boiler."
+        }
+      ],
+      "tactics": "Marches slowly forward. Overheats and shuts down after 3 turns of fighting."
+    },
+    {
+      "id": "cloud-leviathan",
+      "name": "Cloud Leviathan",
+      "type": "monster",
+      "themes": [
+        "steampunk",
+        "fantasy",
+        "science-fantasy"
+      ],
+      "tone": 3,
+      "tier": 3,
+      "flying": true,
+      "aliases": [
+        "sky whale",
+        "air whale",
+        "zeppelin whale",
+        "cloud whale",
+        "flying whale",
+        "sky leviathan"
+      ],
+      "description": "A balloon-bellied, whale-shaped sky creature that floats through the clouds and swallows airships whole.",
+      "attack": "Tail slap",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Floats near trade routes. Ignores people unless provoked."
+    },
+    {
+      "id": "pipe-wyrm",
+      "name": "Pipe Wyrm",
+      "type": "monster",
+      "themes": [
+        "steampunk",
+        "fantasy"
+      ],
+      "tone": 3,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "mechanical dragon",
+        "steam dragon",
+        "clockwork dragon",
+        "iron dragon",
+        "brass dragon",
+        "boiler dragon"
+      ],
+      "description": "A coiling, copper-piped dragon made of boilers, gears and a hot furnace for a heart.",
+      "attack": "Piston bite",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "heat"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Scalding Breath",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Superheated steam."
+        }
+      ],
+      "tactics": "Coils through the pipes and ducts of a factory. Weak to cold water."
+    },
+    {
+      "id": "zeppelin-dread",
+      "name": "Zeppelin Dread",
+      "type": "animated",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 4,
+      "tier": 4,
+      "flying": true,
+      "aliases": [
+        "zeppelin",
+        "airship",
+        "dirigible",
+        "warship",
+        "sky fortress",
+        "airship dreadnought",
+        "blimp"
+      ],
+      "description": "A ten-story war-airship with a hundred cannons, a searchlight and a crew of brass men.",
+      "attack": "Broadside",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "searchlight"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Bombardment",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Cannons fire from above."
+        },
+        {
+          "name": "Searchlight",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Illuminates everything in sight; players in the beam have disadvantage on hide checks."
+        }
+      ],
+      "tactics": "Hovers over the battlefield. Can be brought down by sabotaging its balloon or engines."
+    },
+    {
+      "id": "junk-scavenger",
+      "name": "Junk Scavenger",
+      "type": "humanoid",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 3,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "scavenger",
+        "scrapper",
+        "junker",
+        "salvager",
+        "trash picker",
+        "scrap hunter",
+        "gleaner"
+      ],
+      "description": "A patched-leather, goggle-wearing scrapper with a pushcart of junk and a keen eye for anything useful.",
+      "attack": "Pipe wrench",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "salvage"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        }
+      ],
+      "powers": [],
+      "tactics": "Flees if a fight goes badly. Trades for anything shiny."
+    },
+    {
+      "id": "glow-rat",
+      "name": "Glow Rat",
+      "type": "beast",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 3,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "radioactive rat",
+        "mutant rat",
+        "glowing rat",
+        "rad rat",
+        "wasteland rat",
+        "giant rat"
+      ],
+      "description": "A cat-sized rat that glows green in the dark and does not care about your lunch.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "smell"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Swarms. Attacks wounded players first."
+    },
+    {
+      "id": "wasteland-raider",
+      "name": "Wasteland Raider",
+      "type": "humanoid",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 4,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "raider",
+        "marauder",
+        "road warrior",
+        "bandit",
+        "scavenger gang",
+        "biker",
+        "wasteland pirate"
+      ],
+      "description": "A spiked-armored, face-painted road thug on a patched-up motorbike with a crowbar and a grudge.",
+      "attack": "Crowbar",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "intimidate"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Rides in packs and swarms its targets. Loots the fallen and runs."
+    },
+    {
+      "id": "wasteland-merchant",
+      "name": "Wasteland Merchant",
+      "type": "humanoid",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 2,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "trader",
+        "caravan",
+        "merchant",
+        "peddler",
+        "shopkeeper",
+        "scrap dealer",
+        "vendor"
+      ],
+      "description": "A bundled-up trader with a pack-mule, a cart of wares and a firm 'no refunds' policy.",
+      "attack": "Rusty pistol",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "bargain"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Patch Kit",
+          "type": "heal",
+          "uses": 1,
+          "text": "Heals 2d6 to a player or ally for the price of 1 handful."
+        }
+      ],
+      "tactics": "Avoids fights and bargains first. Sells anything for the right price."
+    },
+    {
+      "id": "glow-husk",
+      "name": "Glow Husk",
+      "type": "humanoid",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 5,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "feral ghoul",
+        "irradiated",
+        "zombie",
+        "glowing one",
+        "rad ghoul",
+        "irradiated husk"
+      ],
+      "description": "A bloated, sickly-green, once-human shambler that glows in the dark and groans for water.",
+      "attack": "Claws",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Shambles in groups. Radiation poisons anyone who touches it."
+    },
+    {
+      "id": "atomic-roach",
+      "name": "Atomic Roach",
+      "type": "beast",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 2,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "cockroach",
+        "roach",
+        "radiroach",
+        "bug",
+        "giant cockroach",
+        "wasteland bug",
+        "survivor"
+      ],
+      "description": "A dog-sized cockroach that survived the end of the world and is mildly annoyed by it.",
+      "attack": "Mandibles",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Skitters in packs. Flees from light and a hard stomp."
+    },
+    {
+      "id": "rad-hound",
+      "name": "Rad Hound",
+      "type": "beast",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "dog",
+        "wild dog",
+        "mutant dog",
+        "hound",
+        "canine",
+        "wasteland dog",
+        "feral dog"
+      ],
+      "description": "A mangy, two-headed wild dog with a green-glowing eye and a limp.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "smell"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Runs in packs of 3. Can be tamed with food (Charm challenge)."
+    },
+    {
+      "id": "mutant-brute",
+      "name": "Mutant Brute",
+      "type": "humanoid",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 4,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "mutant",
+        "super mutant",
+        "hulk",
+        "freak",
+        "brute",
+        "big boy",
+        "twisted"
+      ],
+      "description": "A green-gray, ten-foot, muscle-bound mutant dragging a street sign and screaming for a fight.",
+      "attack": "Street sign",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Charges the nearest target. Easily distracted by shiny things and loud noises."
+    },
+    {
+      "id": "scrap-golem",
+      "name": "Scrap Golem",
+      "type": "animated",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "junk golem",
+        "junkyard robot",
+        "trash man",
+        "scrap mech",
+        "trash golem",
+        "garbage robot",
+        "scrap heap"
+      ],
+      "description": "A lumbering ten-foot heap of cars, pipes and broken appliances, held together by wires and spite.",
+      "attack": "Car-door fist",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Marches at the nearest living thing. Falls apart if its power core is destroyed."
+    },
+    {
+      "id": "rusted-sentinel",
+      "name": "Rusted Sentinel",
+      "type": "animated",
+      "themes": [
+        "post-apocalypse",
+        "scifi"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "old robot",
+        "military robot",
+        "killer robot",
+        "security robot",
+        "war machine",
+        "automated defense",
+        "pre-war robot"
+      ],
+      "description": "A rust-streaked, three-legged military robot still guarding a ruined bunker under orders no one remembers.",
+      "attack": "Claw arm",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Targeting Laser",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. A single red beam from its optic."
+        }
+      ],
+      "tactics": "Patrols its post. Attacks anything that crosses its line, regardless of side."
+    },
+    {
+      "id": "wasteland-warlord",
+      "name": "Wasteland Warlord",
+      "type": "humanoid",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 5,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "warlord",
+        "road king",
+        "boss",
+        "chieftain",
+        "road lord",
+        "bandit king",
+        "wasteland king"
+      ],
+      "description": "A scarred, skull-masked king of the wastes with a war-rig, a hundred raiders and a bad temper.",
+      "attack": "Chain axe",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "command"
+        }
+      ],
+      "powers": [
+        {
+          "name": "War Rig Charge",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Drives a rig through the party."
+        }
+      ],
+      "tactics": "Leads from a war-rig. Offers to let the party join or die."
+    },
+    {
+      "id": "dust-titan",
+      "name": "Dust Titan",
+      "type": "monster",
+      "themes": [
+        "post-apocalypse",
+        "science-fantasy"
+      ],
+      "tone": 4,
+      "tier": 4,
+      "flying": false,
+      "aliases": [
+        "giant mutant",
+        "behemoth",
+        "kaiju",
+        "sandstorm beast",
+        "wasteland giant",
+        "wasteland titan",
+        "desert giant"
+      ],
+      "description": "A hundred-foot, dust-colored giant that wakes in storms and walks through ruined cities like they're toys.",
+      "attack": "Fist",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "-"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Dust Storm",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Blinding sand and debris."
+        }
+      ],
+      "tactics": "Walks in a straight line and ignores small targets. Only turns if hit by something big."
     }
   ],
   "creatureTypes": [
@@ -6601,8 +7962,20 @@
       "label": "Western"
     },
     {
-      "id": "cosmic-horror",
-      "label": "Cosmic Horror"
+      "id": "occult-noir",
+      "label": "Occult Noir"
+    },
+    {
+      "id": "age-of-sail",
+      "label": "Age of Sail"
+    },
+    {
+      "id": "steampunk",
+      "label": "Steampunk"
+    },
+    {
+      "id": "post-apocalypse",
+      "label": "Post-Apocalypse"
     }
   ],
   "toneScale": [
