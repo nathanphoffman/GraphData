@@ -31,8 +31,43 @@ const difficulties = [...new Set(model.creatures.map(difficultyOf))].sort((a, b)
 const LAST_STEP = difficulties.length - 1;
 const TONE_LAST = model.toneScale.length - 1;
 
+/** Slider stops for the encounter builder: 1-12 players, 0-10 levels gained in half steps. */
+const PLAYER_STOPS = Array.from({ length: 12 }, (_, i) => String(i + 1));
+const LEVEL_STOPS = Array.from({ length: 21 }, (_, i) => String(i / 2));
+
 function sign(n: number) {
   return n >= 0 ? `+${n}` : `${n}`;
+}
+
+/**
+ * Random fill: pick a random target inside [low, high], then keep adding random creatures that
+ * still fit under it. Retries many times; an attempt that lands inside the range wins right away,
+ * otherwise the attempt closest to the low end is kept.
+ */
+function buildEncounter(pool: Creature[], low: number, high: number): Creature[] {
+  const targets: number[] = [];
+  for (let t = low; t <= high; t += 0.25) targets.push(t);
+  let best: Creature[] = [];
+  let bestGap = Infinity;
+  for (let attempt = 0; attempt < 300; attempt++) {
+    const target = targets[Math.floor(Math.random() * targets.length)];
+    const picks: Creature[] = [];
+    let left = target;
+    for (;;) {
+      const fits = pool.filter((c) => difficultyOf(c) <= left);
+      if (fits.length === 0) break;
+      const next = fits[Math.floor(Math.random() * fits.length)];
+      picks.push(next);
+      left -= difficultyOf(next);
+    }
+    const total = target - left;
+    if (total >= low) return picks;
+    if (low - total < bestGap) {
+      best = picks;
+      bestGap = low - total;
+    }
+  }
+  return best;
 }
 
 function matches(creature: Creature, query: string) {
@@ -134,6 +169,12 @@ export default function TinyMightyBestiary() {
   const [activeTheme, setActiveTheme] = useState<string | null>(null);
   const [range, setRange] = useState<[number, number]>([0, LAST_STEP]);
   const [toneRange, setToneRange] = useState<[number, number]>([0, TONE_LAST]);
+  const [players, setPlayers] = useState<[number, number]>([3, 3]);
+  const [levels, setLevels] = useState<[number, number]>([0, 0]);
+  const [encounter, setEncounter] = useState<{ low: number; high: number; picks: Creature[] } | null>(null);
+  // Target difficulty range = players + levels gained, at the low and high ends.
+  const targetLow = players[0] + 1 + levels[0] / 2;
+  const targetHigh = players[1] + 1 + levels[1] / 2;
   const rangeChanged = range[0] !== 0 || range[1] !== LAST_STEP || toneRange[0] !== 0 || toneRange[1] !== TONE_LAST;
   const creatures = [...model.creatures]
     .sort((a, b) => difficultyOf(a) - difficultyOf(b))
@@ -225,6 +266,60 @@ export default function TinyMightyBestiary() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
+      <div className="bestiary-encounter">
+        <div className="bestiary-encounter-sliders">
+          <div className="bestiary-key">
+            <span className="bestiary-key-label">Players</span>
+            <RangeSlider stops={PLAYER_STOPS} value={players} onChange={setPlayers} labelPrefix="players" />
+          </div>
+          <div className="bestiary-key">
+            <span className="bestiary-key-label">Levels gained</span>
+            <RangeSlider stops={LEVEL_STOPS} value={levels} onChange={setLevels} labelPrefix="levels gained" />
+          </div>
+          <p className="muted">
+            Target difficulty: {targetLow === targetHigh ? targetLow : `${targetLow} to ${targetHigh}`}
+          </p>
+        </div>
+        <button
+          type="button"
+          className="bestiary-generate"
+          disabled={creatures.length === 0}
+          onClick={() =>
+            setEncounter({
+              low: targetLow,
+              high: targetHigh,
+              picks: buildEncounter(creatures, targetLow, targetHigh),
+            })
+          }
+        >
+          Generate Encounter
+        </button>
+        {encounter && (() => {
+          const total = encounter.picks.reduce((sum, c) => sum + difficultyOf(c), 0);
+          const groups = [...new Map(encounter.picks.map((c) => [c.id, c])).values()]
+            .map((c) => ({ c, n: encounter.picks.filter((p) => p.id === c.id).length }))
+            .sort((a, b) => difficultyOf(b.c) - difficultyOf(a.c));
+          return (
+            <div className="bestiary-encounter-result">
+              <p>
+                <strong>
+                  Difficulty {total} (target {encounter.low === encounter.high ? encounter.low : `${encounter.low} to ${encounter.high}`})
+                </strong>
+                {total < encounter.low && " (closest the current filters allow)"}
+              </p>
+              {groups.length === 0 && <p className="muted">Nothing in the filtered list fits under that difficulty.</p>}
+              <div className="bestiary-grid">
+                {groups.map(({ c, n }) => (
+                  <div key={c.id} className="bestiary-encounter-item">
+                    <span className="bestiary-encounter-count">x{n}</span>
+                    <CreatureCard creature={c} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+      </div>
       {creatures.length === 0 && <p className="muted">No creatures match these filters.</p>}
       <div className="bestiary-grid">
         {creatures.map((creature) => (
