@@ -5,14 +5,9 @@
   --b-soft: #6b6378;
   --b-beast: #3f9d52;
   --b-humanoid: #2f7fc4;
-  --b-undead: #7b8794;
-  --b-giant: #c27a2c;
-  --b-monstrosity: #d1493f;
-  --b-ooze: #b3a517;
-  --b-aberration: #b53fb0;
-  --b-dragon: #d12b5c;
-  --b-construct: #1f9aa8;
-  --b-fey: #5b5bd6;
+  --b-animated: #1f9aa8;
+  --b-otherworldly: #b53fb0;
+  --b-monster: #d1493f;
   --b-power: #7c4dcc;
 }
 
@@ -23,14 +18,9 @@
     --b-soft: #a59cb8;
     --b-beast: #5fcb74;
     --b-humanoid: #5aa8ee;
-    --b-undead: #aab4c0;
-    --b-giant: #f0a04b;
-    --b-monstrosity: #ff7468;
-    --b-ooze: #dcd04a;
-    --b-aberration: #e176dc;
-    --b-dragon: #ff6b93;
-    --b-construct: #4fd0dd;
-    --b-fey: #8d8dff;
+    --b-animated: #4fd0dd;
+    --b-otherworldly: #e176dc;
+    --b-monster: #ff7468;
     --b-power: #a88af0;
   }
 }
@@ -77,14 +67,9 @@
 
 .bestiary-type-beast { --accent: var(--b-beast); }
 .bestiary-type-humanoid { --accent: var(--b-humanoid); }
-.bestiary-type-undead { --accent: var(--b-undead); }
-.bestiary-type-giant { --accent: var(--b-giant); }
-.bestiary-type-monstrosity { --accent: var(--b-monstrosity); }
-.bestiary-type-ooze { --accent: var(--b-ooze); }
-.bestiary-type-aberration { --accent: var(--b-aberration); }
-.bestiary-type-dragon { --accent: var(--b-dragon); }
-.bestiary-type-construct { --accent: var(--b-construct); }
-.bestiary-type-fey { --accent: var(--b-fey); }
+.bestiary-type-animated { --accent: var(--b-animated); }
+.bestiary-type-otherworldly { --accent: var(--b-otherworldly); }
+.bestiary-type-monster { --accent: var(--b-monster); }
 
 .bestiary-key {
   display: flex;
@@ -235,7 +220,7 @@
 }
 
 .bestiary-adv { color: var(--b-beast); }
-.bestiary-dis { color: var(--b-dragon); }
+.bestiary-dis { color: var(--b-monster); }
 
 /* Two-handle difficulty slider: two range inputs stacked on one track. */
 .bestiary-range-wrap {
