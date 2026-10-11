@@ -93,15 +93,16 @@ export default function MaintainabilityCalculator() {
       </div>
 
       <div className="panel calc-table">
+        <h3>Line Count Recommendation</h3>
         <table>
           <thead>
             <tr>
               <th>Role</th>
               <th>n</th>
-              <th>Very Stable</th>
-              <th>Normal</th>
-              <th>Unstable</th>
-              <th>Difficulty</th>
+              <th className="edge">Very Stable</th>
+              <th className="normal">Normal</th>
+              <th className="edge">Unstable</th>
+              <th className="normal">Difficulty at {formatCount(lines)} lines</th>
             </tr>
           </thead>
           <tbody>
@@ -110,12 +111,15 @@ export default function MaintainabilityCalculator() {
               const s = spans(n);
               return (
                 <tr key={role.name}>
-                  <td className="role">{role.name}</td>
+                  <td className="role">
+                    {role.name}
+                    {role.note && <span className="role-note"> ({role.note})</span>}
+                  </td>
                   <td>{n.toFixed(2)}</td>
-                  <td>{formatCount(s.lo * mult)}</td>
-                  <td>{formatCount(s.mid * mult)}</td>
-                  <td>{formatCount(s.hi * mult)}</td>
-                  <td>
+                  <td className="edge">{formatCount(s.lo * mult)}</td>
+                  <td className="normal">{formatCount(s.mid * mult)}</td>
+                  <td className="edge">{formatCount(s.hi * mult)}</td>
+                  <td className="normal">
                     <Badge tier={tierFor(position(lines / mult, n))} />
                   </td>
                 </tr>

@@ -1,6 +1,8 @@
 /** Shape of data/maintainability-calculator.json. */
 export interface Role {
   name: string;
+  /** Optional hint shown after the name in parentheses, not bold. */
+  note?: string;
   /** Skill level before the AI and code quality adjustments. */
   base: number;
 }

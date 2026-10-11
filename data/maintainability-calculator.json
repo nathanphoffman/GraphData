@@ -2,9 +2,9 @@
   "title": "Maintainability Calculator",
   "roles": [
     { "name": "Clueless", "base": 1 },
-    { "name": "Newbie", "base": 2 },
-    { "name": "Student", "base": 3 },
-    { "name": "Graduate", "base": 4 },
+    { "name": "Newbie", "note": "\"Hello World\"", "base": 2 },
+    { "name": "Dabbler", "note": "Post-\"Hello World\"", "base": 3 },
+    { "name": "Student", "base": 4 },
     { "name": "Intern", "base": 4.5 },
     { "name": "Junior", "base": 5 },
     { "name": "Mid", "base": 5.5 },

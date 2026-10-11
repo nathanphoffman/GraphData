@@ -82,3 +82,19 @@
   flex-wrap: wrap;
   gap: 6px;
 }
+
+.calc th.edge,
+.calc td.edge {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.calc th.normal,
+.calc td.normal {
+  background: color-mix(in srgb, var(--link) 15%, transparent);
+  font-weight: 700;
+}
+
+.calc .role-note {
+  font-weight: 400;
+}
