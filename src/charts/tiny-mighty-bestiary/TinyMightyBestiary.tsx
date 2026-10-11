@@ -1,9 +1,18 @@
 import { useState } from "react";
-import data from "../../../data/tiny-mighty-bestiary.json";
+import meta from "../../../data/tiny-mighty-bestiary/meta.json";
+import beasts from "../../../data/tiny-mighty-bestiary/beast.json";
+import humanoids from "../../../data/tiny-mighty-bestiary/humanoid.json";
+import animated from "../../../data/tiny-mighty-bestiary/animated.json";
+import otherworldly from "../../../data/tiny-mighty-bestiary/otherworldly.json";
+import monsters from "../../../data/tiny-mighty-bestiary/monster.json";
 import RangeSlider from "./RangeSlider";
 import type { BestiaryData, Creature } from "./types";
 import "./styles.css";
 
+const data = {
+  ...meta,
+  creatures: [...beasts, ...humanoids, ...animated, ...otherworldly, ...monsters],
+};
 const model = data as BestiaryData;
 
 function tierFor(creature: Creature) {

@@ -8,6 +8,14 @@
   --arneson-bg: #e3e8d8;
   --gygax: #395270;
   --gygax-bg: #dce3ea;
+  --kuntz: #2f6b6b;
+  --kuntz-bg: #d9e8e6;
+  --kask: #7a4a6b;
+  --kask-bg: #eadde5;
+  --ernie: #a8641f;
+  --ernie-bg: #f1e2cf;
+  --others: #5f5f66;
+  --others-bg: #e6e6e8;
   --joint: #7a6a40;
   --joint-bg: #ede6d2;
   --disputed: #a23b2e;
@@ -28,6 +36,14 @@
     --arneson-bg: #2c3324;
     --gygax: #86a9cc;
     --gygax-bg: #26333f;
+    --kuntz: #7fc0bd;
+    --kuntz-bg: #1f3331;
+    --kask: #cf9bbd;
+    --kask-bg: #382633;
+    --ernie: #e0a566;
+    --ernie-bg: #3a2c1c;
+    --others: #b4b4bc;
+    --others-bg: #2f2f33;
     --joint: #c9ae6e;
     --joint-bg: #3a331f;
     --disputed: #e08776;
@@ -37,6 +53,10 @@
 
 .auth-owner-arneson { --owner: var(--arneson); --owner-bg: var(--arneson-bg); }
 .auth-owner-gygax { --owner: var(--gygax); --owner-bg: var(--gygax-bg); }
+.auth-owner-kuntz { --owner: var(--kuntz); --owner-bg: var(--kuntz-bg); }
+.auth-owner-kask { --owner: var(--kask); --owner-bg: var(--kask-bg); }
+.auth-owner-ernie { --owner: var(--ernie); --owner-bg: var(--ernie-bg); }
+.auth-owner-others { --owner: var(--others); --owner-bg: var(--others-bg); }
 .auth-owner-joint { --owner: var(--joint); --owner-bg: var(--joint-bg); }
 .auth-owner-disputed { --owner: var(--disputed); --owner-bg: var(--disputed-bg); }
 

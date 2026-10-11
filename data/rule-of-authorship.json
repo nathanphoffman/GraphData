@@ -1,21 +1,24 @@
 {
   "title": "Who Wrote Dungeons & Dragons",
   "kicker": ["Civ. No. 4-79-109 · D. Minn.", "Compiled 2026"],
-  "subhead": "A rule-by-rule attribution, built from the Arneson v. Gygax case file, the Dalluhn Manuscript forensic analysis, and the three 1974 OD&D booklets.",
+  "subhead": "A rule-by-rule and product-by-product attribution of original D&D (1971–1977), built from the Arneson v. Gygax case file, the Dalluhn Manuscript forensic analysis, and the published credits of the 1974 booklets and 1975–76 supplements — covering Gygax and Arneson, plus Kuntz, Kask, Ernie Gygax and the rest of the early circle.",
   "caseStrip": [
     [{ "text": "Sources: " }, { "text": "854-page case file", "strong": true }, { "text": " (pleadings, interrogatories, exhibits, two Arneson depositions)" }],
     [{ "text": "Dalluhn Manuscript", "strong": true }, { "text": " analysis (Jon Peterson, 2015)" }],
-    [{ "text": "Books I–III, " }, { "text": "OD&D", "strong": true }, { "text": " (1974)" }]
+    [{ "text": "Books I–III, " }, { "text": "OD&D", "strong": true }, { "text": " (1974)" }],
+    [{ "text": "Supplements I–V", "strong": true }, { "text": " (1975–76), their credit pages, and published histories of TSR's early staff" }]
   ],
   "caveat": [
     { "text": "The case never went to trial.", "strong": true },
-    { "text": " Arneson v. Gygax was dismissed by stipulation in March 1981 — no judge or jury ever ruled on who invented what. Everything below is drawn from sworn but self-interested claims (interrogatory answers, depositions, pleadings) on both sides, weighed against the one source with no stake in the outcome: Jon Peterson's textual forensics on the Dalluhn Manuscript, a rediscovered 1973 transitional draft of D&D that sits between Arneson's Blackmoor notes and the published game. Where the two sides agree, or where Peterson's independent lineage-tracing corroborates a claim, confidence is marked higher." }
+    { "text": " Arneson v. Gygax was dismissed by stipulation in March 1981 — no judge or jury ever ruled on who invented what. Everything below is drawn from sworn but self-interested claims (interrogatory answers, depositions, pleadings) on both sides, weighed against the one source with no stake in the outcome: Jon Peterson's textual forensics on the Dalluhn Manuscript, a rediscovered 1973 transitional draft of D&D that sits between Arneson's Blackmoor notes and the published game. Where the two sides agree, or where Peterson's independent lineage-tracing corroborates a claim, confidence is marked higher." },
+    { "text": " Sections 08–11 go beyond the case file.", "strong": true },
+    { "text": " They rest on printed credit lines and secondary histories (Wikipedia, the Greyhawk wiki, designer recollections such as James Ward's). Credit lines say who is named on a book, not who wrote each rule, so entries there are marked lower confidence and flagged where a claim is uncited." }
   ],
   "summary": [
     { "element": "Dungeon as a leveled, depth = danger environment", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Moderate–high" },
     { "element": "Wilderness / outdoor adventuring as a setting", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Moderate" },
     { "element": "Experience points & character leveling", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "High" },
-    { "element": "Character abilities (the six stats)", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — Arneson-seeded" }], "confidence": "High" },
+    { "element": "Character abilities (the six stats)", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — " }, { "text": "Arneson", "owner": "arneson" }, { "text": "-seeded" }], "confidence": "High" },
     { "element": "Hit points / hit dice as damage tracking", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — converged independently" }], "confidence": "Moderate" },
     { "element": "Armor Class & the Attack Matrix (to-hit tables)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (via Chainmail)" }], "confidence": "High" },
     { "element": "Saving throws", "leans": [{ "text": "Joint", "owner": "joint" }], "confidence": "Moderate" },
@@ -31,8 +34,29 @@
     { "element": "Cleric class origin", "leans": [{ "text": "Arneson", "owner": "arneson" }, { "text": " (in-play origin)" }], "confidence": "Moderate" },
     { "element": "Actual prose of the three 1974 booklets", "leans": [{ "text": "Gygax", "owner": "gygax" }], "confidence": "Very high" },
     { "element": "“Blackmoor” (Supplement II)", "leans": [{ "text": "Arneson", "owner": "arneson" }], "confidence": "Very high" },
-    { "element": "“Greyhawk” (Supplement I)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & Kuntz" }], "confidence": "Very high" },
-    { "element": "AD&D Monster Manual / Players Handbook", "leans": [{ "text": "Disputed", "owner": "disputed" }], "confidence": "—" }
+    { "element": "“Greyhawk” (Supplement I)", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Very high" },
+    { "element": "AD&D Monster Manual / Players Handbook", "leans": [{ "text": "Disputed", "owner": "disputed" }], "confidence": "—" },
+    { "element": "Chainmail's medieval rules (the base of the fantasy supplement)", "leans": [{ "text": "Perren", "owner": "others" }], "confidence": "Moderate–high" },
+    { "element": "Thief & Paladin classes (Greyhawk)", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — " }, { "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate (credit only)" },
+    { "element": "Variable weapon damage & variable hit dice", "leans": [{ "text": "Joint", "owner": "joint" }, { "text": " — " }, { "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate (credit only)" },
+    { "element": "Co-running Castle Greyhawk", "leans": [{ "text": "Kuntz", "owner": "kuntz" }], "confidence": "Moderate" },
+    { "element": "Gods, Demi-Gods & Heroes (Supp. IV)", "leans": [{ "text": "Kuntz", "owner": "kuntz" }, { "text": " & " }, { "text": "Ward", "owner": "others" }], "confidence": "High" },
+    { "element": "Eldritch Wizardry: psionics, demons, artifacts, druid", "leans": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Blume", "owner": "others" }], "confidence": "High (credit) / Low (per-rule)" },
+    { "element": "Editing the 1975–76 supplements", "leans": [{ "text": "Kask", "owner": "kask" }], "confidence": "High" },
+    { "element": "The Strategic Review → The Dragon", "leans": [{ "text": "Kask", "owner": "kask" }, { "text": " (editor) / " }, { "text": "Gygax", "owner": "gygax" }, { "text": " (founder)" }], "confidence": "High" },
+    { "element": "First players & “Tenser”", "leans": [{ "text": "Ernie Gygax", "owner": "ernie" }], "confidence": "High (fact) / Low (rules impact)" }
+  ],
+  "products": [
+    { "title": "Chainmail", "year": "1971", "credits": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Jeff Perren", "owner": "others" }], "added": "Medieval miniatures rules plus a fantasy supplement — the combat-table ancestor of OD&D." },
+    { "title": "Dungeons & Dragons (Books I–III)", "year": "1974", "credits": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Arneson", "owner": "arneson" }], "added": "Three classes, four races, three alignments, the dungeon and wilderness frameworks. Assumed you owned Chainmail and Outdoor Survival." },
+    { "title": "Greyhawk (Supp. I)", "year": "1975", "credits": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Kuntz", "owner": "kuntz" }], "added": "Thief and Paladin, variable weapon damage and hit dice, exceptional strength; removed the Chainmail dependency." },
+    { "title": "Blackmoor (Supp. II)", "year": "1975", "credits": [{ "text": "Arneson", "owner": "arneson" }, { "text": "; edited by " }, { "text": "Kask", "owner": "kask" }], "added": "Monk and Assassin, the Temple of the Frog scenario, a revised combat system." },
+    { "title": "Eldritch Wizardry (Supp. III)", "year": "1976", "credits": [{ "text": "Gygax", "owner": "gygax" }, { "text": " & " }, { "text": "Brian Blume", "owner": "others" }, { "text": "; edited by " }, { "text": "Kask", "owner": "kask" }], "added": "Psionics, demons (Orcus, Demogorgon), artifacts, the Druid class." },
+    { "title": "Gods, Demi-Gods & Heroes (Supp. IV)", "year": "1976", "credits": [{ "text": "Kuntz", "owner": "kuntz" }, { "text": " & " }, { "text": "James Ward", "owner": "others" }, { "text": "; edited by " }, { "text": "Kask", "owner": "kask" }], "added": "Statted pantheons and heroes from myth, legend and fiction." },
+    { "title": "Swords & Spells (Supp. V)", "year": "1976", "credits": [{ "text": "Gygax", "owner": "gygax" }, { "text": "; edited by " }, { "text": "Kask", "owner": "kask" }], "added": "Mass-combat rules for D&D units (author credit not re-checked in this pass)." },
+    { "title": "The Strategic Review / The Dragon", "year": "1975–76", "credits": [{ "text": "Gygax", "owner": "gygax" }, { "text": " (founder), " }, { "text": "Kask", "owner": "kask" }, { "text": " (editor)" }], "added": "Official rules clarifications, new classes and monsters, the first venue for adventure-gaming community content." },
+    { "title": "Empire of the Petal Throne", "year": "1975", "credits": [{ "text": "M.A.R. Barker", "owner": "others" }], "added": "TSR's first setting-based RPG built on D&D's skeleton, from Barker's Tékumel." },
+    { "title": "D&D Basic Set (Holmes)", "year": "1977", "credits": [{ "text": "J. Eric Holmes", "owner": "others" }], "added": "Rewrote OD&D as a cleaner starter book for levels 1–3 — the bridge to AD&D." }
   ],
   "sections": [
     {
@@ -221,6 +245,137 @@
           "verdict": "This is what the lawsuit actually turned on, and it's the one item the case file doesn't settle. TSR's position: independently created by Gygax (roughly 1000–1200 of his hours per book) plus named staff, entirely after the 1975 royalty agreement, owing Arneson nothing. Arneson's position: these were “copied in substantial part and wholly derived” from the game he co-authored, republished under Gygax's name alone to cut him out. The case settled by stipulated dismissal before either claim was tested at trial."
         }
       ]
+    },
+    {
+      "number": "08",
+      "title": "Greyhawk & the Lake Geneva campaign",
+      "rules": [
+        {
+          "name": "Greyhawk's rules additions",
+          "owner": "joint",
+          "label": "Gygax & Kuntz (credited jointly)",
+          "verdict": "The supplement is credited to both men. It introduced the Thief and Paladin classes, variable weapon damage, variable hit dice and exceptional strength, and cut the game's dependence on Chainmail. No source reviewed here assigns an individual rule to an individual author.",
+          "body": ["Wikipedia notes Kuntz's design role grew out of TSR's tiny staff, where everyone did some design. Treat the credit as shared and the split as unknown."],
+          "exhibits": [{ "cite": "Greyhawk (Supp. I, 1975), credited authors", "text": "Gary Gygax & Robert J. Kuntz." }]
+        },
+        {
+          "name": "Variable weapon damage",
+          "owner": "disputed",
+          "label": "Disputed / undocumented",
+          "verdict": "One account suggests Mike Mornard's love of medieval arms may have influenced Kuntz, who influenced Gygax, toward weapon-specific damage. It is a speculative chain of influence, not a documented authorship claim."
+        },
+        {
+          "name": "Co-Dungeon Master of Castle Greyhawk",
+          "owner": "kuntz",
+          "label": "Kuntz",
+          "verdict": "By 1974 the Greyhawk group had grown past twenty players and Kuntz began running smaller groups as co-DM. He also ran his own Castle El Raja Key from 1973, and some of its levels were merged into Castle Greyhawk.",
+          "body": ["Wikipedia flags the “co-DM” framing as needing a citation, and the claim that Gygax's Tharizdun came from Kuntz's “Tharzduun” is likewise uncited. Both are plausible and widely repeated; neither is established here."]
+        },
+        {
+          "name": "Gods, Demi-Gods & Heroes (Supplement IV)",
+          "owner": "kuntz",
+          "label": "Kuntz & Ward",
+          "verdict": "Credited to Robert Kuntz and James Ward. Ward says the idea of presenting gods and heroes for D&D was his and that he did the heavy library research.",
+          "exhibits": [{ "cite": "Ward, EN World posts", "text": "describes the concept and the research as his; Kuntz's share of the text is not itemized there." }]
+        },
+        {
+          "name": "Other 1976 TSR work",
+          "owner": "kuntz",
+          "label": "Kuntz",
+          "verdict": "Kuntz helped redevelop the Lankhmar wargame with Gygax and Brad Stock, and wrote “The Quest for the Vermillion Volume,” the first fiction TSR published, which ran in The Strategic Review."
+        }
+      ]
+    },
+    {
+      "number": "09",
+      "title": "Editing, magazines & publishing",
+      "rules": [
+        {
+          "name": "Editing the supplements",
+          "owner": "kask",
+          "label": "Kask",
+          "verdict": "Tim Kask, TSR's first full-time employee, edited Blackmoor (1975) and Eldritch Wizardry, Gods, Demi-Gods & Heroes and Swords & Spells (1976). On Blackmoor his first assignment was editing, developing and contributing to the rules.",
+          "body": ["How heavily he rewrote any given text isn't documented in the sources I found, so “editor” is the safe reading."]
+        },
+        {
+          "name": "The Strategic Review and The Dragon",
+          "owner": "kask",
+          "label": "Kask (editor)",
+          "verdict": "Kask took over The Strategic Review in its first year, split it into Dragon (for D&D) and Little Wars (for historical gaming), and edited the first 33 issues of Dragon. Sources disagree whether he began with issue #4 or #5.",
+          "body": ["Gygax launched the newsletter; the shape it grew into is Kask's."]
+        },
+        {
+          "name": "Letting The Dungeoneer exist",
+          "owner": "kask",
+          "label": "Kask",
+          "verdict": "Kask gave Jennell Jaquays a casual license to publish The Dungeoneer, a fanzine of adventures for game masters — an early sign of TSR tolerating fan-made content."
+        },
+        {
+          "name": "Hiring and other products",
+          "owner": "kask",
+          "label": "Kask",
+          "verdict": "He hired people who became influential in the industry, including Kim Mohan, and developed and edited the historical board game William the Conqueror, 1066 and the Days of the Dragon calendar line. Exact dates for these are uncertain."
+        }
+      ]
+    },
+    {
+      "number": "10",
+      "title": "The Gygax household & the early players",
+      "rules": [
+        {
+          "name": "Ernie Gygax and “Tenser”",
+          "owner": "ernie",
+          "label": "Ernie Gygax",
+          "verdict": "Ernie and his sister Elise were the first two players of Gygax's Castle Greyhawk dungeon. Ernie rolled the wizard Tenser (an anagram of “Ernest”), and later was one of only three players to reach the bottom level, alongside Kuntz's Robilar and Terik.",
+          "body": ["He is a playtester and character-owner, not a credited designer. His traceable footprint in the rules is that Tenser's name was attached to a spell, Tenser's Floating Disc. I confirmed that name in the AD&D Players Handbook (1978), not whether the 1975 Greyhawk supplement already carried it."],
+          "exhibits": [{ "cite": "Witwer, Empire of Imagination (via Greyhawk wiki)", "text": "Ernie and Elise Gygax as the first players; Tenser as Ernie's wizard." }]
+        },
+        {
+          "name": "Mike Mornard",
+          "owner": "others",
+          "label": "Mornard",
+          "verdict": "An early Lake Geneva player. He introduced Prof. M.A.R. Barker to D&D, and Barker to Gygax, in 1974. The Mornard Fragments take their name from him.",
+          "body": ["His design influence is claimed more than documented; see variable weapon damage above."]
+        },
+        {
+          "name": "M.A.R. Barker and Empire of the Petal Throne",
+          "owner": "others",
+          "label": "Barker",
+          "verdict": "Barker's Tékumel setting was published by TSR in 1975 as Empire of the Petal Throne — a full setting from outside the Gygax–Arneson circle, built on D&D's rules."
+        }
+      ]
+    },
+    {
+      "number": "11",
+      "title": "Staff, collaborators & precursors",
+      "rules": [
+        {
+          "name": "Chainmail's medieval rules",
+          "owner": "others",
+          "label": "Perren",
+          "verdict": "Jeff Perren wrote mass-combat rules for Elastolin figures that became Chainmail's medieval rules; Gygax added the fantasy supplement. That puts Perren upstream of the combat tables credited to Gygax in section 02.",
+          "body": ["Everything attributed above to “Gygax, via Chainmail” is partly Perren's foundation."]
+        },
+        {
+          "name": "Eldritch Wizardry's co-author and thanks",
+          "owner": "gygax",
+          "label": "Gygax & Blume",
+          "verdict": "Credited to Gygax and Brian Blume. The credits also thank Steve Marsh, Dennis Sustare, Jim Ward and Tim Kask. The booklet introduced psionics, demons and demon lords, artifacts and the Druid class; nothing I found says which person wrote which.",
+          "exhibits": [{ "cite": "Eldritch Wizardry title page (Supp. III, 1976)", "text": "authors Gary Gygax & Brian Blume; edited by Tim Kask; thanks to Marsh, Sustare, Ward and Kask." }]
+        },
+        {
+          "name": "Art and illustration",
+          "owner": "others",
+          "label": "Many hands",
+          "verdict": "The 1974 art budget was $100. Cookie Corey, Greg Bell, Keenan Powell, Don Kaye and Arneson drew art at $2 or $3 a piece plus royalties. Eldritch Wizardry credits Dave Sutherland, Tracy Lesch and Gary Kwapisz, with a cover by Deborah Larson."
+        },
+        {
+          "name": "Dave Wesely's Braunstein",
+          "owner": "others",
+          "label": "Wesely (precursor)",
+          "verdict": "Arneson's roleplaying came out of Dave Wesely's Braunstein games in the Minneapolis wargaming scene, which let players act as individuals rather than armies. Arneson built Blackmoor on that idea and Gygax built D&D on Arneson's."
+        }
+      ]
     }
   ],
   "bottomLine": [
@@ -228,7 +383,9 @@
     { "text": "Arneson", "strong": true },
     { "text": " supplied the world: the dungeon as a place with depth and danger, the wilderness beyond it, the economy that runs underneath it, naval and aerial combat, and a fair amount of specific monster behavior lifted near-verbatim from his own Blackmoor notes. " },
     { "text": "Gygax", "strong": true },
-    { "text": " supplied the engine: the Chainmail-descended combat and armor class math, the alignment framework, the Vancian magic system, the bulk of the spell and magic-item lists, and — almost without exception — every sentence of actual published text, having drafted, edited, and typed all three booklets himself in Lake Geneva. Both names belong on the cover; neither side's sworn “solely mine” claims survive contact with the Dalluhn Manuscript's independent paper trail." }
+    { "text": " supplied the engine: the Chainmail-descended combat and armor class math, the alignment framework, the Vancian magic system, the bulk of the spell and magic-item lists, and — almost without exception — every sentence of actual published text, having drafted, edited, and typed all three booklets himself in Lake Geneva. Both names belong on the cover; neither side's sworn “solely mine” claims survive contact with the Dalluhn Manuscript's independent paper trail. " },
+    { "text": "Around them", "strong": true },
+    { "text": " stood a larger cast the lawsuit barely touched: Jeff Perren under Chainmail's medieval rules, Rob Kuntz co-running Greyhawk and co-writing Supplements I and IV, Tim Kask editing every supplement from Blackmoor on and building the magazine, Brian Blume and Jim Ward on Supplements III and IV, and Ernie Gygax as the first player of the dungeon. Most have a credit line rather than a documented rule-by-rule contribution, so the attributions for them here are looser than for Arneson and Gygax." }
   ],
-  "footer": "Sources: Arneson v. Gygax, Civ. No. 4-79-109 (D. Minn.), case file pp. 1–855 · Jon Peterson, “The Dalluhn Manuscript: A Pre-Publication Edition of Dungeons & Dragons” (2015) · OD&D Books I–III (1974)"
+  "footer": "Sources: Arneson v. Gygax, Civ. No. 4-79-109 (D. Minn.), case file pp. 1–855 · Jon Peterson, “The Dalluhn Manuscript: A Pre-Publication Edition of Dungeons & Dragons” (2015) · OD&D Books I–III (1974) · Supplements I–V title pages and credit lines (1975–76) · Wikipedia and Greyhawk wiki entries for Kask, Kuntz, Ward, Perren, Mornard and Tenser; Ward's EN World posts on Supplement IV"
 }

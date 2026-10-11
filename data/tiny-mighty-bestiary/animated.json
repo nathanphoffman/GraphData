@@ -1,0 +1,1382 @@
+[
+  {
+    "id": "battle-clank",
+    "name": "Battle Clank",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "robot",
+      "android",
+      "clanker"
+    ],
+    "description": "A spindly, rattling combat robot that surrenders only when its head is knocked off.",
+    "attack": "Wrist blaster",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Targeting Sweep",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Marches in a line and shoots whoever stands closest. Shuts down at 0 health."
+  },
+  {
+    "id": "beep-bot",
+    "name": "Beep Bot",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "robot sidekick",
+      "little robot",
+      "astro-bot",
+      "utility bot",
+      "droid sidekick",
+      "trash can robot"
+    ],
+    "description": "A beeping, domed astro-bot with a screwdriver arm, a projector and an excellent attitude.",
+    "attack": "Shock prod",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "hacking"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Gadget Arm",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Pops out a tool to open locks, hack a door or patch a hull."
+      }
+    ],
+    "tactics": "Sticks with the weakest player. Always has a plan, sometimes it even works."
+  },
+  {
+    "id": "chrome-revenant",
+    "name": "Chrome Revenant",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "immortal",
+      "robot skeleton",
+      "tomb robot",
+      "metal skeleton",
+      "undead robot",
+      "android skeleton"
+    ],
+    "description": "A skeletal metal warrior that rises from a tomb world's sands after sixty million years, green eyes burning.",
+    "attack": "Gauss rifle",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Reanimation Protocol",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself 2d6, or springs back up at 1 health if destroyed by a non-critical hit."
+      }
+    ],
+    "tactics": "Walks forward in a line. Comes back unless every unit is wiped in the same round."
+  },
+  {
+    "id": "iron-colossus",
+    "name": "Iron Colossus",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "titan",
+      "reaver",
+      "mech",
+      "super heavy",
+      "god machine",
+      "walking cathedral"
+    ],
+    "description": "A city-block-tall, god-machine walker that crushes tanks and carries a cathedral on its back.",
+    "attack": "Stomp",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "small targets"
+      }
+    ],
+    "skillNote": "Players smaller than man-sized have advantage to avoid its attacks.",
+    "powers": [
+      {
+        "name": "Apocalypse Cannon",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Razes buildings."
+      },
+      {
+        "name": "Rampage Stomp",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Flattens infantry."
+      }
+    ],
+    "tactics": "Walks through walls and walls of troops. Vulnerable to climbers and sappers."
+  },
+  {
+    "id": "buzz-drone",
+    "name": "Buzz Drone",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "drone",
+      "quadcopter",
+      "surveillance",
+      "camera drone",
+      "security drone",
+      "spy drone"
+    ],
+    "description": "A fist-sized flying camera with a taser and a perpetually unsettling red light.",
+    "attack": "Shock probe",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Follows the party and reports back. Alerts guards if not destroyed in 2 turns."
+  },
+  {
+    "id": "wire-ghost",
+    "name": "Wire Ghost",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "rogue ai",
+      "ai",
+      "malware",
+      "net spirit",
+      "virus",
+      "daemon"
+    ],
+    "description": "A rogue intelligence that lives in every screen, speaker and doorlock in the building and does not like being unplugged.",
+    "attack": "Static shock",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "cameras"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "System Overload",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Overloads a device or implant."
+      },
+      {
+        "name": "Total Lockdown",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Locks all doors, shuts down power and traps players in the building until it is beaten or unplugged."
+      }
+    ],
+    "tactics": "Never appears in person. Speaks through every speaker and screen."
+  },
+  {
+    "id": "riot-walker",
+    "name": "Riot Walker",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "enforcer",
+      "mech",
+      "cop robot",
+      "police robot",
+      "law bot",
+      "riot mech"
+    ],
+    "description": "A two-legged police robot with a loudspeaker voice, a shield and a perfectly legal right to shoot.",
+    "attack": "Riot cannon",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Suppression Fire",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. 'You have 20 seconds to comply.'"
+      }
+    ],
+    "tactics": "Moves slowly and shoots a lot. Stairs are its weakness."
+  },
+  {
+    "id": "tumbleweed-imp",
+    "name": "Tumbleweed Imp",
+    "type": "animated",
+    "themes": [
+      "western",
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "tumbleweed",
+      "dust devil",
+      "prairie imp",
+      "desert imp",
+      "trickster",
+      "wind spirit"
+    ],
+    "description": "A bouncing ball of dried scrub with eyes and a bad sense of timing.",
+    "attack": "Prick",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "trick"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rolls out at the worst moment. Runs away giggling when hit."
+  },
+  {
+    "id": "noodle-cart-bot",
+    "name": "Noodle Cart Bot",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "noodle vendor",
+      "food cart",
+      "street vendor",
+      "robot cook",
+      "ramen",
+      "vending robot"
+    ],
+    "description": "A rolling street cart with a mechanical arm that serves hot noodles and bad advice at 3 a.m.",
+    "attack": "Ladle",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hot Soup",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a player or ally who eats a bowl."
+      }
+    ],
+    "tactics": "Offers soup and gossip. Calls security only if someone refuses to pay."
+  },
+  {
+    "id": "runaway-locomotive",
+    "name": "Runaway Locomotive",
+    "type": "animated",
+    "themes": [
+      "western",
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "train",
+      "locomotive",
+      "iron horse",
+      "steam engine",
+      "ghost train",
+      "train robber",
+      "steam train"
+    ],
+    "description": "A smoking, brass-and-iron steam engine barreling down the track with no engineer and no brakes.",
+    "attack": "Cowcatcher",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "skillNote": "Cannot leave the tracks.",
+    "powers": [
+      {
+        "name": "Steam Blast",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. A scalding cloud from the boiler."
+      },
+      {
+        "name": "Runaway Charge",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Plows along the tracks."
+      }
+    ],
+    "tactics": "Stays on the tracks. Players can derail it by sabotaging a rail or switch."
+  },
+  {
+    "id": "haunted-doll",
+    "name": "Haunted Doll",
+    "type": "animated",
+    "themes": [
+      "occult-noir",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "creepy doll",
+      "puppet",
+      "toy",
+      "marionette",
+      "ventriloquist doll"
+    ],
+    "description": "A cracked porcelain doll with a stitched smile that is in a different spot every time you look.",
+    "attack": "Tiny knife",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Giggle",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. The doll's laugh frightens everyone in earshot: disadvantage on their next roll."
+      }
+    ],
+    "tactics": "Waits to be found. Moves only when no one is watching."
+  },
+  {
+    "id": "clank-walker",
+    "name": "Clank Walker",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "walker",
+      "scout walker",
+      "mech",
+      "bipedal walker",
+      "war machine"
+    ],
+    "description": "A two-legged armored scout walker with a chin-mounted cannon and a cockpit that is a tight squeeze.",
+    "attack": "Chin cannon",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Walks in a group. Can be tripped by a cable or a good tackle."
+  },
+  {
+    "id": "carnival-colossus",
+    "name": "Carnival Colossus",
+    "type": "animated",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "parade float",
+      "giant balloon",
+      "balloon golem",
+      "pinata",
+      "carnival",
+      "circus giant",
+      "festival"
+    ],
+    "description": "A forty-foot, confetti-stuffed parade float with a goofy grin, springy arms and a very loud calliope.",
+    "attack": "Balloon bonk",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "delight"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "skillNote": "If it falls to 0 health it explodes, dealing d6 damage (ignores defense) to everyone within 1 pencil.",
+    "powers": [
+      {
+        "name": "Confetti Cannon",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Sticky sparkles everywhere, and everyone is blinded for a turn."
+      }
+    ],
+    "tactics": "Marches in a parade and refuses to stop. Pops if it takes a really sharp hit."
+  },
+  {
+    "id": "stone-golem",
+    "name": "Stone Golem",
+    "type": "animated",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "golem",
+      "rock elemental",
+      "earth elemental",
+      "living statue",
+      "clay golem",
+      "stone guardian",
+      "statue"
+    ],
+    "description": "A seven-foot, rune-etched statue that guards a ruin and obeys a single, ancient command.",
+    "attack": "Stone fist",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Follows its programmed order. Stops if the command word is spoken or the rune erased."
+  },
+  {
+    "id": "living-armor",
+    "name": "Living Armor",
+    "type": "animated",
+    "themes": [
+      "fantasy",
+      "western"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "animated armor",
+      "suit of armor",
+      "haunted armor",
+      "empty armor",
+      "armor spirit",
+      "hollow knight",
+      "armor"
+    ],
+    "description": "An empty suit of plate armor that stands in a hall and clanks forward when the door opens.",
+    "attack": "Sword",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits as part of the decor. Falls apart in a heap when its helmet is knocked off."
+  },
+  {
+    "id": "ghost-galleon",
+    "name": "Ghost Galleon",
+    "type": "animated",
+    "themes": [
+      "age-of-sail",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "ghost ship",
+      "flying dutchman",
+      "phantom ship",
+      "haunted ship",
+      "cursed ship",
+      "dead ship",
+      "sea wraith"
+    ],
+    "description": "A shimmering, rotten-masted galleon with tattered black sails and a deck full of silent, glowing crew.",
+    "attack": "Ram & cannon",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "fog"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Fog Bank",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. A chilling fog that rolls over the water and blinds everything within."
+      }
+    ],
+    "tactics": "Appears from fog at night. Dissolves at dawn if its curse is not renewed."
+  },
+  {
+    "id": "butler-bot",
+    "name": "Butler Bot",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "butler",
+      "servant robot",
+      "automaton butler",
+      "valet",
+      "brass butler",
+      "tea robot",
+      "robot servant"
+    ],
+    "description": "A brass butler with a monocle, a tea tray and a perfectly polite response to a fire in the library.",
+    "attack": "Tea tray",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "etiquette"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Offers tea. Will fight only to defend the household silver."
+  },
+  {
+    "id": "clockwork-spider",
+    "name": "Clockwork Spider",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "mechanical spider",
+      "cog spider",
+      "windup spider",
+      "tin spider",
+      "clockwork bug",
+      "gear spider"
+    ],
+    "description": "A hand-sized brass spider that ticks along walls and winds itself up with a tiny key.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "vibrations"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Swarms. Stops when it winds down after 10 turns."
+  },
+  {
+    "id": "brass-duelist",
+    "name": "Brass Duelist",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "fencing robot",
+      "android duelist",
+      "clockwork fencer",
+      "mechanical duelist",
+      "automaton swordsman",
+      "rapier robot"
+    ],
+    "description": "A polished, mustachioed brass automaton with a rapier arm and a flawless fencing stance.",
+    "attack": "Rapier",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Challenges the strongest fighter to a duel. Never breaks the rules of honor."
+  },
+  {
+    "id": "steam-golem",
+    "name": "Steam Golem",
+    "type": "animated",
+    "themes": [
+      "steampunk",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "steam robot",
+      "boiler golem",
+      "steam man",
+      "juggernaut",
+      "iron giant",
+      "brass colossus",
+      "steam engine"
+    ],
+    "description": "A boiler-chested, riveted iron giant that chugs through the street and vents scalding clouds.",
+    "attack": "Piston fist",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Steam Vent",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. A scalding cloud from its boiler."
+      }
+    ],
+    "tactics": "Marches slowly forward. Overheats and shuts down after 3 turns of fighting."
+  },
+  {
+    "id": "zeppelin-dread",
+    "name": "Zeppelin Dread",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": true,
+    "aliases": [
+      "zeppelin",
+      "airship",
+      "dirigible",
+      "warship",
+      "sky fortress",
+      "airship dreadnought",
+      "blimp"
+    ],
+    "description": "A ten-story war-airship with a hundred cannons, a searchlight and a crew of brass men.",
+    "attack": "Broadside",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "searchlight"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Bombardment",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Cannons fire from above."
+      },
+      {
+        "name": "Searchlight",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Illuminates everything in sight; players in the beam have disadvantage on hide checks."
+      }
+    ],
+    "tactics": "Hovers over the battlefield. Can be brought down by sabotaging its balloon or engines."
+  },
+  {
+    "id": "scrap-golem",
+    "name": "Scrap Golem",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "junk golem",
+      "junkyard robot",
+      "trash man",
+      "scrap mech",
+      "trash golem",
+      "garbage robot",
+      "scrap heap"
+    ],
+    "description": "A lumbering ten-foot heap of cars, pipes and broken appliances, held together by wires and spite.",
+    "attack": "Car-door fist",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Marches at the nearest living thing. Falls apart if its power core is destroyed."
+  },
+  {
+    "id": "rusted-sentinel",
+    "name": "Rusted Sentinel",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "old robot",
+      "military robot",
+      "killer robot",
+      "security robot",
+      "war machine",
+      "automated defense",
+      "pre-war robot"
+    ],
+    "description": "A rust-streaked, three-legged military robot still guarding a ruined bunker under orders no one remembers.",
+    "attack": "Claw arm",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Targeting Laser",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A single red beam from its optic."
+      }
+    ],
+    "tactics": "Patrols its post. Attacks anything that crosses its line, regardless of side."
+  },
+  {
+    "id": "tin-can-pup",
+    "name": "Tin Can Pup",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "robot dog",
+      "toy dog",
+      "robot pup",
+      "mascot",
+      "companion",
+      "robo pup",
+      "tin dog"
+    ],
+    "description": "A wobbly dog made of two tin cans, a spring and a pair of headlight eyes that wags its tail in circles.",
+    "attack": "Nibble",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "cute"
+      }
+    ],
+    "powers": [],
+    "tactics": "Follows anyone who is kind to it. Barks at everything, including its own tail."
+  },
+  {
+    "id": "neon-koi",
+    "name": "Neon Koi",
+    "type": "animated",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": true,
+    "aliases": [
+      "hologram",
+      "holo fish",
+      "ghost fish",
+      "ad bot"
+    ],
+    "description": "A glowing holographic fish that swims through the air advertising noodles.",
+    "attack": "Zap Tail",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Drifts around crowds and pesters them. Pops with a static buzz if anyone pokes it."
+  },
+  {
+    "id": "data-courier-drone",
+    "name": "Data Courier Drone",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": true,
+    "aliases": [
+      "drone",
+      "delivery drone",
+      "quadcopter",
+      "robot",
+      "flying robot"
+    ],
+    "description": "A flying delivery bot with a locked package and a very short temper about being late.",
+    "attack": "Rotor Slap",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Tries to deliver its package to the right person and ignores everyone else. Fights only if the package is threatened."
+  },
+  {
+    "id": "midnight-radio",
+    "name": "Midnight Radio",
+    "type": "animated",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "haunted radio",
+      "cursed radio",
+      "possessed object",
+      "voice",
+      "broadcast"
+    ],
+    "description": "An old wooden radio that only picks up a station that has not aired in fifty years.",
+    "attack": "Static Burst",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Signal Scream",
+        "type": "area",
+        "uses": 1,
+        "text": "Area 2d6 damage to all enemies, ignores defense."
+      }
+    ],
+    "tactics": "Plays a calm voice that makes the group uneasy, then turns the volume up."
+  },
+  {
+    "id": "mannequin-butler",
+    "name": "Mannequin Butler",
+    "type": "animated",
+    "themes": [
+      "occult-noir",
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "mannequin",
+      "butler",
+      "automaton",
+      "doll",
+      "living statue"
+    ],
+    "description": "A stiff mannequin in a tailcoat that keeps clean, serves tea and never blinks.",
+    "attack": "Silver Tray",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Polite until the door is locked. Then it rearranges the furniture and the guests."
+  },
+  {
+    "id": "clockwork-songbird",
+    "name": "Clockwork Songbird",
+    "type": "animated",
+    "themes": [
+      "steampunk",
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "mechanical bird",
+      "toy bird",
+      "canary",
+      "wind-up bird"
+    ],
+    "description": "A brass bird that sings one tune and winds itself down by teatime.",
+    "attack": "Peck",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Sings to calm tempers. Falls asleep mid-fight if no one rewinds it."
+  },
+  {
+    "id": "figurehead-guardian",
+    "name": "Figurehead Guardian",
+    "type": "animated",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "figurehead",
+      "wooden statue",
+      "golem",
+      "ship spirit",
+      "carved lady"
+    ],
+    "description": "A carved wooden maiden pulled off a ship's prow that still guards the hull she came from.",
+    "attack": "Wooden Fist",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Stands at the bow and does not leave it. Swings at anyone who touches the ship uninvited."
+  },
+  {
+    "id": "knot-snake",
+    "name": "Knot Snake",
+    "type": "animated",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "rope",
+      "living rope",
+      "rigging",
+      "rope snake",
+      "tangle"
+    ],
+    "description": "A length of old rigging that ties itself into knots and loves to trip sailors.",
+    "attack": "Trip",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slithers across the deck and ties ankles together. Goes limp when someone says a rude word about knots."
+  },
+  {
+    "id": "chittering-skull",
+    "name": "Chittering Skull",
+    "type": "animated",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": true,
+    "aliases": [
+      "servo skull",
+      "skull drone",
+      "floating skull",
+      "cyber skull",
+      "bone drone"
+    ],
+    "description": "A floating, hollow skull with a camera in one socket and a whispering vox in the other.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Spies on the group and reports their position to something bigger. Tries to escape rather than fight."
+  },
+  {
+    "id": "crystal-sentinel",
+    "name": "Crystal Sentinel",
+    "type": "animated",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "golem",
+      "crystal golem",
+      "guardian",
+      "statue",
+      "construct"
+    ],
+    "description": "A faceted crystal guardian that hums with leftover starlight and fires prism beams.",
+    "attack": "Crystal Fist",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Prism Beam",
+        "type": "area",
+        "uses": 1,
+        "text": "Area 2d6 damage to all enemies, ignores defense."
+      }
+    ],
+    "tactics": "Stands guard until the crystal charges, then fires beams at whatever stirs. Refracts back anything that hits it."
+  },
+  {
+    "id": "rune-teapot",
+    "name": "Rune Teapot",
+    "type": "animated",
+    "themes": [
+      "science-fantasy",
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "teapot",
+      "enchanted teapot",
+      "spell kettle",
+      "tea pot",
+      "cup"
+    ],
+    "description": "A tiny teapot covered in glowing runes that pours whatever drink the room needs.",
+    "attack": "Splash",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Pours calming tea and hops away from danger. Boils over if it gets insulted."
+  }
+]

@@ -82,6 +82,32 @@ export default function RuleOfAuthorship() {
         </table>
       </div>
 
+      <h2>OD&amp;D-era products, credit by credit</h2>
+      <div className="auth-table-wrap">
+        <table className="auth-summary">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Credited to</th>
+              <th>What it added</th>
+            </tr>
+          </thead>
+          <tbody>
+            {model.products.map((product) => (
+              <tr key={product.title}>
+                <td>
+                  {product.title} <span>({product.year})</span>
+                </td>
+                <td>
+                  <Inline parts={product.credits} />
+                </td>
+                <td>{product.added}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       {model.sections.map((section) => (
         <section key={section.number}>
           <h2>

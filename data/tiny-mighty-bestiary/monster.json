@@ -1,0 +1,1767 @@
+[
+  {
+    "id": "dragon",
+    "name": "Dragon",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": true,
+    "description": "An ancient scaled tyrant sitting on a mountain of coin.",
+    "attack": "Bite & claws",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Fire Breath",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Burns terrain too."
+      },
+      {
+        "name": "Crushing Dive",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is knocked prone."
+      }
+    ],
+    "tactics": "Opens with Fire Breath on a group, then picks off stragglers from the air. Offers a deal if losing.",
+    "aliases": [
+      "wyrm",
+      "red dragon",
+      "drake",
+      "wyvern"
+    ]
+  },
+  {
+    "id": "owlbear",
+    "name": "Owlbear",
+    "type": "monster",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "owlbear",
+      "owl bear",
+      "bear",
+      "owl",
+      "monstrosity"
+    ],
+    "description": "A shaggy, feathered bear-thing with a beak like a hatchet and a terrible temper.",
+    "attack": "Beak & claws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "sight in the dark"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Grabs one player and refuses to let go. Will chase anything that runs."
+  },
+  {
+    "id": "chest-lurker",
+    "name": "Chest Lurker",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "mimic",
+      "treasure chest",
+      "doppelganger chest",
+      "shapeshifter"
+    ],
+    "description": "A fat wooden chest that is, regrettably, mostly teeth and glue.",
+    "attack": "Slam",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide as an object"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Sticky Gulp",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Anyone touching it is stuck until they win a Physique challenge."
+      }
+    ],
+    "tactics": "Waits to be opened. Players that loot first get gulped first."
+  },
+  {
+    "id": "jelly-block",
+    "name": "Jelly Block",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "gelatinous cube",
+      "cube",
+      "ooze",
+      "slime",
+      "jelly"
+    ],
+    "description": "A see-through wobbling cube that scours dungeon corridors clean, with bones and coins floating inside.",
+    "attack": "Slap",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "skillNote": "Players have disadvantage to spot it.",
+    "powers": [
+      {
+        "name": "Swallow",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense, and the target is carried inside it until freed."
+      }
+    ],
+    "tactics": "Slides down corridors and fills them. Loot is visible inside it."
+  },
+  {
+    "id": "ore-muncher",
+    "name": "Ore Muncher",
+    "type": "monster",
+    "themes": [
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "rust monster",
+      "rust",
+      "metal eater",
+      "armor eater"
+    ],
+    "description": "A pink, armored bug-lizard with feathery antennae that adores iron.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smells metal"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rust Touch",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A metal weapon or armor it touches crumbles; that item no longer gives its bonus."
+      }
+    ],
+    "tactics": "Ignores players and goes for the sword. Wooden and bone gear is safe."
+  },
+  {
+    "id": "stone-gazer",
+    "name": "Stone Gazer",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "medusa",
+      "gorgon",
+      "basilisk",
+      "snake",
+      "petrify",
+      "snake hair"
+    ],
+    "description": "A hissing woman with a head of living snakes whose eyes turn warriors into statues.",
+    "attack": "Dagger",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "vs. anyone with a mirror"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Stone Gaze",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A player dropped to 0 by it is turned to stone, not unconscious, until cured."
+      }
+    ],
+    "tactics": "Hides in a statue garden. Players who look away or use a mirror roll to avoid the gaze."
+  },
+  {
+    "id": "mountain-dinosaur",
+    "name": "Mountain Dinosaur",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "tarrasque",
+      "tarasque",
+      "kaiju",
+      "titan",
+      "colossus",
+      "behemoth",
+      "world ender",
+      "dinosaur",
+      "dino",
+      "mountain eater"
+    ],
+    "description": "A spiked, horned, mountain-sized horror that sleeps for centuries and wakes up hungry.",
+    "attack": "Horn, bite & tail",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Earthshaking Charge",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Everything it runs through is flattened."
+      },
+      {
+        "name": "Mirror Shell",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Reflects the first ray, bolt or beam that hits it back at whoever fired it."
+      }
+    ],
+    "tactics": "Not a fight, a disaster. Players should run, plan, or find a way to put it back to sleep."
+  },
+  {
+    "id": "pit-gorger",
+    "name": "Pit Gorger",
+    "type": "monster",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "pit monster",
+      "arena beast",
+      "gladiator beast"
+    ],
+    "description": "A bellowing, long-armed brute kept in a dungeon pit and fed anything that falls in.",
+    "attack": "Claw & jaws",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Grabs a player and eats them next turn unless they get free with a Physique challenge."
+  },
+  {
+    "id": "sand-maw",
+    "name": "Sand Maw",
+    "type": "monster",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "sand pit",
+      "desert pit",
+      "great pit"
+    ],
+    "description": "A tooth-ringed pit in the desert sand hiding a creature that takes a thousand years to digest a meal.",
+    "attack": "Tentacle lash",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "skillNote": "Cannot move from its pit.",
+    "powers": [
+      {
+        "name": "Swallow",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is pulled in and stuck until freed."
+      }
+    ],
+    "tactics": "Never moves. Anything that walks over the edge of the pit is dragged in."
+  },
+  {
+    "id": "dune-wyrm",
+    "name": "Dune Wyrm",
+    "type": "monster",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "sandworm",
+      "desert dragon",
+      "worm",
+      "dune"
+    ],
+    "description": "A cliff-sized horned desert serpent whose belly is full of pearls and bones.",
+    "attack": "Bite & tail",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Burrow",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Disappears under the sand and may reappear anywhere within 3 pencil lengths."
+      }
+    ],
+    "tactics": "Erupts from underneath. Retreats into the sand when badly hurt."
+  },
+  {
+    "id": "slug-lord",
+    "name": "Slug Lord",
+    "type": "monster",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "crime lord",
+      "crime boss",
+      "gangster",
+      "slug"
+    ],
+    "description": "A massive, slug-like crime boss who lounges on a dais surrounded by hired muscle.",
+    "attack": "Tail slam",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-",
+        "note": "speed"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hired Muscle",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Calls in two Chrome Troopers or Battle Clanks (0.25 difficulty each)."
+      }
+    ],
+    "tactics": "Never fights alone. Offers a deal, then reaches for the trapdoor lever."
+  },
+  {
+    "id": "bouncy-slime",
+    "name": "Bouncy Slime",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "slime",
+      "blob",
+      "jelly",
+      "gooey",
+      "bouncing",
+      "pudding"
+    ],
+    "description": "A cheerful, wobbling blob that bounces off the walls and likes to be hugged.",
+    "attack": "Bounce",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "cute"
+      }
+    ],
+    "powers": [],
+    "tactics": "Splits into two 0.25-difficulty slimes when hit for 5 or more damage."
+  },
+  {
+    "id": "puff-dragon",
+    "name": "Puff Dragon",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": true,
+    "aliases": [
+      "pseudodragon",
+      "baby dragon",
+      "drake",
+      "whelp",
+      "hatchling",
+      "cute dragon"
+    ],
+    "description": "A cat-sized, sparkly dragon that sneezes small flames and curls up in your hat.",
+    "attack": "Nip",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Tiny Flame Belch",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Lights candles and snacks."
+      }
+    ],
+    "tactics": "Plays at fighting. Bursts into tears if properly scolded."
+  },
+  {
+    "id": "black-ooze-mass",
+    "name": "Black Ooze Mass",
+    "type": "monster",
+    "themes": [
+      "occult-noir",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "shoggoth",
+      "protoplasm",
+      "blob",
+      "amoeba",
+      "mass",
+      "black goo",
+      "tekeli-li"
+    ],
+    "description": "A bubbling, hundred-eyed, house-sized slick of black protoplasm that cries 'tekeli-li' from a thousand mouths.",
+    "attack": "Pseudopod",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Engulf",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is pulled inside until freed."
+      }
+    ],
+    "tactics": "Oozes through hallways and drains. Cannot be reasoned with. Has no sense of fear."
+  },
+  {
+    "id": "vat-horror",
+    "name": "Vat Horror",
+    "type": "monster",
+    "themes": [
+      "cyberpunk",
+      "scifi",
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "mutant",
+      "experiment",
+      "biohazard",
+      "abomination",
+      "frankenstein",
+      "lab accident",
+      "bioweapon"
+    ],
+    "description": "A lumpy, wet mass of failed corporate gene-splicing, growing every time someone feeds it.",
+    "attack": "Pseudopod",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Toxic Spew",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Players damaged are poisoned (disadvantage) until they rest."
+      }
+    ],
+    "tactics": "Escaped from a lab. Crashes through anything between it and food."
+  },
+  {
+    "id": "gila-giant",
+    "name": "Gila Giant",
+    "type": "monster",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "gila monster",
+      "lizard",
+      "giant lizard",
+      "desert beast",
+      "monitor lizard",
+      "horned lizard"
+    ],
+    "description": "A truck-sized, bead-skinned lizard that dozes in the sun and bites down like a vise.",
+    "attack": "Locking bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rarely attacks unless poked. Once it bites, it does not let go until killed or bribed."
+  },
+  {
+    "id": "goat-sucker",
+    "name": "Goat Sucker",
+    "type": "monster",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "chupacabra",
+      "cryptid",
+      "livestock killer",
+      "goat killer",
+      "night stalker",
+      "ranch beast"
+    ],
+    "description": "A hunched, spiny, red-eyed thing that leaves drained cattle and a very uneasy ranch hand behind.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "night"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "powers": [],
+    "tactics": "Attacks livestock at night. Runs from fire and from loud dogs."
+  },
+  {
+    "id": "spiked-hodag",
+    "name": "Spiked Hodag",
+    "type": "monster",
+    "themes": [
+      "western",
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "hodag",
+      "tall tale",
+      "cryptid",
+      "lumberjack legend",
+      "jackalope",
+      "folklore beast"
+    ],
+    "description": "A grinning, spike-backed, toad-headed monster invented by a lumberjack and, regrettably, now real.",
+    "attack": "Tusk poke",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "trick"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides in logging camps and steals pies. Runs from anything that asks too many questions."
+  },
+  {
+    "id": "hive-lurker",
+    "name": "Hive Lurker",
+    "type": "monster",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "ambush predator",
+      "brood",
+      "stalker"
+    ],
+    "description": "A four-armed, claw-fingered predator that hides in vents and ceilings and moves like a nightmare.",
+    "attack": "Rending claws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "powers": [],
+    "tactics": "Picks off sentries one at a time. Spreads infection to the survivors."
+  },
+  {
+    "id": "rot-colossus",
+    "name": "Rot Colossus",
+    "type": "monster",
+    "themes": [
+      "space-hammer",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "rot",
+      "plague",
+      "pestilence",
+      "festering"
+    ],
+    "description": "A bloated, fly-ridden giant of green flesh with a smile of broken teeth and a stomach full of plague.",
+    "attack": "Rusted blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rot Cloud",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Damaged players are poisoned until they rest."
+      }
+    ],
+    "tactics": "Lumbers forward, infecting everything. Regenerates if not killed in one round."
+  },
+  {
+    "id": "void-serpent",
+    "name": "Void Serpent",
+    "type": "monster",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "space worm",
+      "asteroid monster",
+      "space slug",
+      "star worm",
+      "asteroid worm",
+      "space snake"
+    ],
+    "description": "A kilometer-long, rock-colored worm that lives in asteroid fields and swallows small ships whole.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "vibrations"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides inside asteroid caves. Retreats if it takes more than a few ships."
+  },
+  {
+    "id": "sugar-wyrm",
+    "name": "Sugar Wyrm",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 4,
+    "flying": true,
+    "aliases": [
+      "candy dragon",
+      "gingerbread dragon",
+      "dessert dragon",
+      "cake dragon",
+      "sweet dragon",
+      "confection"
+    ],
+    "description": "A glittering, gumdrop-scaled dragon with a licorice tail, spun-sugar wings and a lair of frosting.",
+    "attack": "Sugar snap",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Frosting Blast",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Sticky icing that halves movement until it is cleaned off."
+      }
+    ],
+    "tactics": "Offers cake and attacks only if refused. Weak to hot water and hungry players."
+  },
+  {
+    "id": "vain-wyrm",
+    "name": "Vain Wyrm",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 4,
+    "flying": true,
+    "aliases": [
+      "dragon lord",
+      "narcissistic dragon",
+      "vain dragon",
+      "pompous dragon",
+      "gold hoarder",
+      "dragon king",
+      "mirror dragon"
+    ],
+    "description": "A magnificent, jewel-encrusted dragon who admires his reflection and demands compliments before every fight.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "anything but his reflection"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Vanity Breath",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Flames that sparkle and are very flattering."
+      }
+    ],
+    "tactics": "Preens, boasts and demands tribute. Distracted by a mirror or a compliment."
+  },
+  {
+    "id": "maggot-swarm",
+    "name": "Maggot Swarm",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "occult-noir",
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "maggots",
+      "flies",
+      "swarm",
+      "insects",
+      "pestilence",
+      "carrion bugs",
+      "crawling horror"
+    ],
+    "description": "A pulsing, hissing heap of maggots and flies that crawls out of the wall when something dies.",
+    "attack": "Swarm bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Comes in a wave. Leaves everyone damaged with poison."
+  },
+  {
+    "id": "mountain-griffin",
+    "name": "Mountain Griffin",
+    "type": "monster",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "aliases": [
+      "griffin",
+      "gryphon",
+      "hippogriff",
+      "eagle lion",
+      "winged lion",
+      "sky hunter",
+      "nest"
+    ],
+    "description": "A lion-bodied, eagle-headed, golden-winged creature that nests on cliff tops and hoards shiny things.",
+    "attack": "Talons",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "sight"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Dives from above. Calms if offered a fresh horse. Mounts for those who earn its trust."
+  },
+  {
+    "id": "great-roc",
+    "name": "Great Roc",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "roc",
+      "giant eagle",
+      "giant bird",
+      "eagle",
+      "sky titan",
+      "sinbad",
+      "enormous bird"
+    ],
+    "description": "A house-sized bird with a wingspan that blots out the sun and talons that carry off elephants.",
+    "attack": "Talons",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Snatches a target and carries it off. Drops it from a height if it is hit."
+  },
+  {
+    "id": "cave-wurm",
+    "name": "Cave Wurm",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "worm",
+      "giant worm",
+      "tunnel worm",
+      "land worm",
+      "burrower",
+      "cave serpent",
+      "subterranean"
+    ],
+    "description": "A blind, pink, forty-foot earthworm with a mouthful of teeth that tunnels under the dungeon floor.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "vibrations"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Burrow",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Disappears underground and appears anywhere within 2 pencil lengths."
+      }
+    ],
+    "tactics": "Bursts from the floor and disappears. Stops chasing if the players stand still."
+  },
+  {
+    "id": "cloud-leviathan",
+    "name": "Cloud Leviathan",
+    "type": "monster",
+    "themes": [
+      "steampunk",
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "sky whale",
+      "air whale",
+      "zeppelin whale",
+      "cloud whale",
+      "flying whale",
+      "sky leviathan"
+    ],
+    "description": "A balloon-bellied, whale-shaped sky creature that floats through the clouds and swallows airships whole.",
+    "attack": "Tail slap",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Floats near trade routes. Ignores people unless provoked."
+  },
+  {
+    "id": "pipe-wyrm",
+    "name": "Pipe Wyrm",
+    "type": "monster",
+    "themes": [
+      "steampunk",
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "mechanical dragon",
+      "steam dragon",
+      "clockwork dragon",
+      "iron dragon",
+      "brass dragon",
+      "boiler dragon"
+    ],
+    "description": "A coiling, copper-piped dragon made of boilers, gears and a hot furnace for a heart.",
+    "attack": "Piston bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "heat"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Scalding Breath",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Superheated steam."
+      }
+    ],
+    "tactics": "Coils through the pipes and ducts of a factory. Weak to cold water."
+  },
+  {
+    "id": "dust-titan",
+    "name": "Dust Titan",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "giant mutant",
+      "behemoth",
+      "kaiju",
+      "sandstorm beast",
+      "wasteland giant",
+      "wasteland titan",
+      "desert giant"
+    ],
+    "description": "A hundred-foot, dust-colored giant that wakes in storms and walks through ruined cities like they're toys.",
+    "attack": "Fist",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Dust Storm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Blinding sand and debris."
+      }
+    ],
+    "tactics": "Walks in a straight line and ignores small targets. Only turns if hit by something big."
+  },
+  {
+    "id": "shellback",
+    "name": "Shellback",
+    "type": "monster",
+    "themes": [
+      "age-of-sail",
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "barnacle",
+      "sea creature",
+      "shell monster",
+      "reef monster",
+      "giant turtle",
+      "armored crab",
+      "barnacle beast"
+    ],
+    "description": "A barnacle-crusted, rock-colored sea creature that looks exactly like a reef until it rolls over and snaps.",
+    "attack": "Claw snap",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide as reef"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits at low tide in shallow water. Hides in its shell if it is hurt."
+  },
+  {
+    "id": "stormbird",
+    "name": "Stormbird",
+    "type": "monster",
+    "themes": [
+      "age-of-sail",
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": true,
+    "aliases": [
+      "albatross",
+      "giant bird",
+      "storm bird",
+      "sea eagle",
+      "omen bird",
+      "giant seabird",
+      "gull"
+    ],
+    "description": "A ship-sized, grey-winged seabird that rides storm fronts and follows doomed ships for days.",
+    "attack": "Beak & talons",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "omen"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Circles a ship until a storm rolls in. Attacks only at the worst moment."
+  },
+  {
+    "id": "hull-crusher",
+    "name": "Hull-Crusher",
+    "type": "monster",
+    "themes": [
+      "age-of-sail",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "kraken",
+      "giant squid",
+      "squid",
+      "octopus",
+      "sea monster",
+      "tentacle beast",
+      "ship killer"
+    ],
+    "description": "A cabin-sized, ten-armed sea monster that wraps a ship's hull and squeezes until it cracks.",
+    "attack": "Tentacle",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Ink Cloud",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Fills the water with a black cloud. All within sight have disadvantage to see or aim for a turn."
+      }
+    ],
+    "tactics": "Strikes from below. Drags a ship's crew into the water one at a time."
+  },
+  {
+    "id": "vending-machine-mimic",
+    "name": "Vending Machine Mimic",
+    "type": "monster",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "mimic",
+      "vending machine",
+      "snack machine",
+      "ambush"
+    ],
+    "description": "A street-corner snack dispenser with far too many teeth behind the coin slot.",
+    "attack": "Chomp",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits until someone feeds it coins, then swallows the whole arm. Spits out a single stale chip as an apology."
+  },
+  {
+    "id": "tentacled-bellhop",
+    "name": "Tentacled Bellhop",
+    "type": "monster",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "tentacle",
+      "squid man",
+      "cultist",
+      "octopus",
+      "servant"
+    ],
+    "description": "A nervous bellhop in a tight uniform whose coat is hiding too many arms.",
+    "attack": "Bag Swing",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Many Hands",
+        "type": "multi",
+        "uses": 1,
+        "text": "Attacks up to three enemies this turn with normal damage."
+      }
+    ],
+    "tactics": "Carries bags, opens doors and holds six things at once. Gets very polite and then very violent if tipped badly."
+  },
+  {
+    "id": "void-sultan",
+    "name": "Void Sultan",
+    "type": "monster",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 5,
+    "flying": true,
+    "aliases": [
+      "space emperor",
+      "sith",
+      "dark lord",
+      "emperor",
+      "star tyrant"
+    ],
+    "description": "A masked ruler of a hundred worlds who bends starlight into a throne and does not rise from it.",
+    "attack": "Star Blade",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Starfall",
+        "type": "area",
+        "uses": 1,
+        "text": "Area 2d6 damage to all enemies, ignores defense."
+      },
+      {
+        "name": "Dark Grip",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target cannot move next turn."
+      }
+    ],
+    "tactics": "Lets his guards fight first. Gets bored, stands and ends the fight in two moves."
+  },
+  {
+    "id": "dune-gullet",
+    "name": "Dune Gullet",
+    "type": "monster",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "pit monster",
+      "sand pit",
+      "desert maw",
+      "sand worm",
+      "pit beast"
+    ],
+    "description": "A huge sandy pit lined with teeth and one very patient tentacle.",
+    "attack": "Tentacle Grab",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Pit Pull",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is dragged to the pit and has disadvantage until it climbs out."
+      }
+    ],
+    "tactics": "Lies buried in the dune and waits for a skiff to cross. Drags anything near the edge down the slope."
+  },
+  {
+    "id": "slug-boss",
+    "name": "Slug Boss",
+    "type": "monster",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "crime lord",
+      "gangster",
+      "big slug",
+      "crime boss",
+      "slug lord"
+    ],
+    "description": "A very large, very sticky crime lord who lounges on a throne of stolen cushions.",
+    "attack": "Tail Slap",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Lets bodyguards do the fighting and laughs at every injury. Offers bribes when the guards are gone."
+  },
+  {
+    "id": "asteroid-leviathan",
+    "name": "Asteroid Leviathan",
+    "type": "monster",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "space worm",
+      "space whale",
+      "asteroid worm",
+      "void leviathan",
+      "giant worm"
+    ],
+    "description": "A mile-long worm that tunnels through asteroid fields and swallows small ships.",
+    "attack": "Crushing Bite",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Swallow Whole",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is swallowed and has disadvantage until freed."
+      }
+    ],
+    "tactics": "Bursts out of an asteroid and swallows whatever is nearest. Spits it out in pieces if it chokes."
+  },
+  {
+    "id": "sewer-vat-horror",
+    "name": "Sewer Vat Horror",
+    "type": "monster",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "mutant",
+      "experiment",
+      "abomination",
+      "vat spawn",
+      "blob"
+    ],
+    "description": "A failed gene experiment that has outgrown its tank and is still growing.",
+    "attack": "Slam",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Spore Burst",
+        "type": "area",
+        "uses": 1,
+        "text": "Area 2d6 damage to all enemies, ignores defense."
+      }
+    ],
+    "tactics": "Reaches for anything warm. Splits into smaller pieces when hurt and crawls toward the nearest drain."
+  },
+  {
+    "id": "boilerback-wyrm",
+    "name": "Boilerback Wyrm",
+    "type": "monster",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "steam dragon",
+      "wyrm",
+      "drake",
+      "steam wyrm",
+      "iron dragon"
+    ],
+    "description": "A coal-black wyrm with boiler plates on its back that hisses steam when it is angry.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Steam Vent",
+        "type": "area",
+        "uses": 1,
+        "text": "Area 2d6 damage to all enemies, ignores defense."
+      }
+    ],
+    "tactics": "Crashes through buildings to reach the smell of coal. Vents steam to scald anyone climbing it."
+  },
+  {
+    "id": "highway-behemoth",
+    "name": "Highway Behemoth",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "kaiju",
+      "giant bug",
+      "road beast",
+      "mutant",
+      "giant beetle"
+    ],
+    "description": "A beetle the size of a freight truck with a cracked windshield stuck in its shell.",
+    "attack": "Crush",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Road Crush",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is pinned and has disadvantage until it breaks free."
+      }
+    ],
+    "tactics": "Charges down a road and rolls over anything in its path. Sits down and chews on scrap if it has no target."
+  },
+  {
+    "id": "wallpaper-thing",
+    "name": "Wallpaper Thing",
+    "type": "monster",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "mimic",
+      "wall creature",
+      "haunted house",
+      "ooze",
+      "lurker"
+    ],
+    "description": "A patch of floral wallpaper that peels off the wall to wrap around anyone who leans on it.",
+    "attack": "Smother",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Waits behind a nice painting. Wraps around the nearest guest and slides them into the wall."
+  }
+]

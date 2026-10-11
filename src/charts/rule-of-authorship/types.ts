@@ -1,5 +1,5 @@
 /** Shape of data/rule-of-authorship.json. */
-export type Owner = "arneson" | "gygax" | "joint" | "disputed";
+export type Owner = "arneson" | "gygax" | "kuntz" | "kask" | "ernie" | "others" | "joint" | "disputed";
 
 /** A run of inline text; `owner` renders it as a colored tag, `strong` as bold. */
 export interface Segment {
@@ -37,6 +37,15 @@ export interface SummaryRow {
   confidence: string;
 }
 
+/** One OD&D-era product and who is credited on it. */
+export interface Product {
+  title: string;
+  year: string;
+  credits: Segment[];
+  /** What it added to the game. */
+  added: string;
+}
+
 export interface RuleOfAuthorshipData {
   title: string;
   kicker: [string, string];
@@ -44,6 +53,7 @@ export interface RuleOfAuthorshipData {
   caseStrip: Segment[][];
   caveat: Segment[];
   summary: SummaryRow[];
+  products: Product[];
   sections: Section[];
   bottomLine: Segment[];
   footer: string;

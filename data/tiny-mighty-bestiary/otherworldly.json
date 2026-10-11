@@ -1,0 +1,2027 @@
+[
+  {
+    "id": "skeleton",
+    "name": "Skeleton",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "western",
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "Animated bones with a notched sword and no will of its own.",
+    "attack": "Notched sword",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Marches straight at the nearest player. Never retreats.",
+    "aliases": [
+      "undead",
+      "zombie",
+      "skeleton warrior"
+    ]
+  },
+  {
+    "id": "ghost",
+    "name": "Restless Ghost",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "science-fantasy",
+      "western"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": true,
+    "description": "A pale shape drifting through the walls of the house it died in.",
+    "attack": "Cold touch",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide, frighten"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Chilling Wail",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Passes through walls to reach its target."
+      }
+    ],
+    "tactics": "Appears, wails, vanishes into a wall. Weapons without magic or silver roll with disadvantage.",
+    "aliases": [
+      "specter",
+      "spectre",
+      "spirit",
+      "banshee",
+      "wraith",
+      "poltergeist"
+    ]
+  },
+  {
+    "id": "brain-drinker",
+    "name": "Brain Drinker",
+    "type": "otherworldly",
+    "themes": [
+      "scifi",
+      "science-fantasy",
+      "space-wars",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "mind flayer",
+      "illithid",
+      "squid head",
+      "tentacle",
+      "psion",
+      "psychic"
+    ],
+    "description": "A purple-skinned thing with a squid for a face and a taste for thoughts.",
+    "attack": "Tentacle slap",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mind Blast",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Stunned players have disadvantage next turn."
+      },
+      {
+        "name": "Skull Tap",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Only works on a stunned or grabbed target."
+      }
+    ],
+    "tactics": "Blasts the group, then drinks the dazed. Keeps thralls to take hits for it."
+  },
+  {
+    "id": "eye-tyrant",
+    "name": "Eye Tyrant",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "beholder",
+      "floating eye",
+      "evil eye",
+      "eye",
+      "orb",
+      "gazer",
+      "spectator"
+    ],
+    "description": "A floating, toothy orb with one huge eye, a dozen eye-stalks and an unshakable belief that it is better than you.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Eye Rays",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. The GM picks a different effect per ray (burn, freeze, sleep, push)."
+      },
+      {
+        "name": "Null Gaze",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Its central eye switches off all magic and powers in its line of sight until it looks away."
+      }
+    ],
+    "tactics": "Hovers out of reach and treats the party as insects. Keep it from facing the caster."
+  },
+  {
+    "id": "giggle-sprite",
+    "name": "Giggle Sprite",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "pixie",
+      "fairy",
+      "faerie",
+      "sprite",
+      "imp"
+    ],
+    "description": "A thumb-sized glittering fairy that ties shoelaces together and steals hats.",
+    "attack": "Pinch",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "trick"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Giggle Dust",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A target that is dusted giggles uncontrollably and has disadvantage on its next roll."
+      }
+    ],
+    "tactics": "Never fights fair. Flees laughing the moment it is caught."
+  },
+  {
+    "id": "rainbow-trickster",
+    "name": "Rainbow Trickster",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "leprechaun",
+      "gnome",
+      "trickster",
+      "pot of gold",
+      "luck"
+    ],
+    "description": "A little green-coated gent who guards a pot of gold at the end of every rainbow and will trade it for a riddle.",
+    "attack": "Shillelagh",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lucky Dodge",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Turns the first hit against it into a miss, then it vanishes in a puff of glitter."
+      }
+    ],
+    "tactics": "Would rather bargain than fight. Fights with riddles and bad puns first."
+  },
+  {
+    "id": "mushroom-mayor",
+    "name": "Mushroom Mayor",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "myconid",
+      "mushroom",
+      "fungus",
+      "shroom",
+      "toadstool",
+      "spore"
+    ],
+    "description": "A round little mushroom wearing a sash who throws a parade for anyone who visits the village.",
+    "attack": "Cap bonk",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Healing Spores",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to itself or an ally. Players inhaling the spores also heal 2d6 once per rest."
+      }
+    ],
+    "tactics": "Peaceful. Defends the village by throwing a party that is hard to leave."
+  },
+  {
+    "id": "moonhorn",
+    "name": "Moonhorn",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "unicorn",
+      "pegasus",
+      "horse",
+      "pony",
+      "rainbow horse",
+      "magic horse"
+    ],
+    "description": "A white steed with a silver horn, hooves that leave daisies and a cure for any sniffle.",
+    "attack": "Kick",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Healing Horn",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to any target in reach."
+      }
+    ],
+    "tactics": "Does not like fighting. Only attacks creatures it considers wicked, which it can always tell."
+  },
+  {
+    "id": "bone-sorcerer",
+    "name": "Bone Sorcerer",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "lich",
+      "necromancer",
+      "undead king",
+      "skeleton king",
+      "death mage",
+      "archlich"
+    ],
+    "description": "A robed corpse with a crown of fused finger bones and a voice like cold wind through a graveyard.",
+    "attack": "Staff",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Soul Drain",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Heals the sorcerer for the same amount."
+      },
+      {
+        "name": "Grave Call",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Raises a 0.25 skeleton for every fallen creature."
+      }
+    ],
+    "tactics": "Sends skeletons first. Revives if its phylactery (a hidden item) is not destroyed."
+  },
+  {
+    "id": "blood-noble",
+    "name": "Blood Noble",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "vampire",
+      "dracula",
+      "count",
+      "nosferatu",
+      "bloodsucker",
+      "strigoi"
+    ],
+    "description": "A pale lord in a velvet cloak who has not seen a sunrise for six hundred years.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hypnotic gaze"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Blood Drain",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Heals the noble for the same amount."
+      },
+      {
+        "name": "Mist Form",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Turns to mist, ignoring the next attack and slipping through cracks."
+      }
+    ],
+    "tactics": "Appears charming, then bites. Weak to sunlight, running water and silver stakes."
+  },
+  {
+    "id": "grave-knight",
+    "name": "Grave Knight",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "death knight",
+      "wight",
+      "black knight",
+      "revenant",
+      "cursed knight",
+      "undead knight"
+    ],
+    "description": "A rust-black knight with burning blue eyes, sworn to a lord who died a thousand years ago.",
+    "attack": "Cursed greatsword",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "fear"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Challenges the strongest player to single combat. Never retreats, never surrenders."
+  },
+  {
+    "id": "hellspawn",
+    "name": "Hellspawn",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "demon",
+      "devil",
+      "balor",
+      "fiend",
+      "hellspawn",
+      "imp lord",
+      "archdevil"
+    ],
+    "description": "A horned, smoldering fiend with bat wings and a ledger of souls.",
+    "attack": "Flaming whip",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "deals"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hellfire",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Sets terrain alight."
+      },
+      {
+        "name": "Soul Bargain",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Offers a player a deal; if accepted, it gets one favor from them later."
+      }
+    ],
+    "tactics": "Offers a deal before the fight, and again when losing. Cannot be killed on its home plane."
+  },
+  {
+    "id": "void-tentacle",
+    "name": "Void Tentacle",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "science-fantasy",
+      "scifi",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "cthulhu",
+      "elder thing",
+      "shoggoth",
+      "eldritch",
+      "lovecraft",
+      "elder god",
+      "old one",
+      "star spawn"
+    ],
+    "description": "A shifting pile of writhing limbs, eyes and teeth that does not obey geometry and whispers numbers no one should know.",
+    "attack": "Tentacle lash",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "madness"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "skillNote": "Players who look directly at it have disadvantage on their next roll.",
+    "powers": [
+      {
+        "name": "Madness Gaze",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Damaged players are frightened (disadvantage) until they rest."
+      },
+      {
+        "name": "Writhing Grab",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Grabbed targets must win a Physique challenge to break free."
+      }
+    ],
+    "tactics": "Not a fight to win but a nightmare to survive. Flees if you have a way to banish it."
+  },
+  {
+    "id": "swamp-hag",
+    "name": "Swamp Hag",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "witch",
+      "hag",
+      "crone",
+      "green hag",
+      "baba yaga",
+      "sea hag",
+      "sorceress"
+    ],
+    "description": "A hunched, moss-draped woman with an iron cauldron, a bone-hut on chicken legs and a very patient grin.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bargains"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Wicked Curse",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A target is cursed: disadvantage on one skill until the hag is slain or a favor is paid."
+      }
+    ],
+    "tactics": "Offers a drink or a bargain. Eats children and the foolish, in that order."
+  },
+  {
+    "id": "warp-fiend",
+    "name": "Warp Fiend",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "daemon",
+      "demon",
+      "warp spawn",
+      "fiend"
+    ],
+    "description": "A red-skinned, horned thing that bleeds out of the warp wherever skulls are piled and prayers are screamed.",
+    "attack": "Hellblade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "fear"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Warp Rend",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Tears at the target's soul."
+      }
+    ],
+    "tactics": "Cannot be harmed by non-magical weapons. Vanishes if the summoner's ritual is broken."
+  },
+  {
+    "id": "haunted-sheriff",
+    "name": "Haunted Sheriff",
+    "type": "otherworldly",
+    "themes": [
+      "western",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "ghost sheriff",
+      "dead deputy",
+      "revenant lawman",
+      "lawman",
+      "marshal",
+      "ghost town",
+      "deadman"
+    ],
+    "description": "A grey, tattered lawman in a tin star who still patrols a ghost town and still arrests the living.",
+    "attack": "Spectral revolver",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "authority"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Final Warrant",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Served with cold, ghostly authority."
+      }
+    ],
+    "tactics": "Reads the party their rights, then the charges. Releases anyone who pays the old fine."
+  },
+  {
+    "id": "briny-kin",
+    "name": "Briny Kin",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "deep one",
+      "innsmouth",
+      "fishman",
+      "hybrid",
+      "fish person",
+      "sea cult",
+      "dagon"
+    ],
+    "description": "A bulging-eyed, gill-necked person-fish who smells of low tide and speaks in wet, burbling prayers.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "in water"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rises from the sea in numbers. Retreats to the water to recover."
+  },
+  {
+    "id": "ghoul",
+    "name": "Ghoul",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "graveyard",
+      "corpse eater",
+      "cemetery",
+      "night creature",
+      "carrion",
+      "scavenger"
+    ],
+    "description": "A hunched, rubbery thing that lives in graveyards, eats the dead and sometimes the not-quite-dead.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Comes in a pack. Paralyzes one victim with a scratch (fail a Physique challenge or lose a turn)."
+  },
+  {
+    "id": "faceless-gaunt",
+    "name": "Faceless Gaunt",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": true,
+    "aliases": [
+      "nightgaunt",
+      "night gaunt",
+      "faceless",
+      "bat wing",
+      "horned",
+      "dream thing"
+    ],
+    "description": "A black, rubbery, horned flyer with no face at all that tickles.",
+    "attack": "Tickle",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Carry Off",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Grabs a target and flies off with it, to be dropped from a great height."
+      }
+    ],
+    "tactics": "Strikes from above in silence. Carries off the weakest."
+  },
+  {
+    "id": "pale-fungoid",
+    "name": "Pale Fungoid",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": true,
+    "aliases": [
+      "mi-go",
+      "mi go",
+      "fungi from yuggoth",
+      "brain cylinder",
+      "crab alien",
+      "mushroom alien",
+      "space crab"
+    ],
+    "description": "A winged, pink, crab-like fungus from the edge of the solar system with a bad habit of removing brains and keeping them in jars.",
+    "attack": "Pincers",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "surgery"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Brain Cylinder",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A player at 0 health has their brain removed and kept alive in a jar, until it is returned."
+      }
+    ],
+    "tactics": "Collects specimens. Retreats if the party is too strong."
+  },
+  {
+    "id": "star-wing",
+    "name": "Star Wing",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": true,
+    "aliases": [
+      "byakhee",
+      "bat wing",
+      "star steed",
+      "cosmic horse",
+      "winged horror",
+      "hybrid"
+    ],
+    "description": "A bat-winged, goat-skulled steed of the void that carries cultists across the sky.",
+    "attack": "Beak & claws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Spirit Away",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Grabs a target and flies into the sky."
+      }
+    ],
+    "tactics": "Rides cultists and carries off prey. Can be summoned by a ritual or a flute."
+  },
+  {
+    "id": "sunken-dreamer",
+    "name": "Sunken Dreamer",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir",
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": true,
+    "aliases": [
+      "cthulhu",
+      "great cthulhu",
+      "r'lyeh",
+      "old one",
+      "ancient one",
+      "sleeper",
+      "dreamer",
+      "great old one"
+    ],
+    "description": "A mountain-tall, winged, tentacle-faced titan who sleeps beneath the waves and dreams of an ending.",
+    "attack": "Claws & tentacles",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "dreams"
+      }
+    ],
+    "skillNote": "Players that look at it are frightened (disadvantage) until they rest.",
+    "powers": [
+      {
+        "name": "Dream Call",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Players in the radius have disadvantage on their next roll."
+      },
+      {
+        "name": "Wake the Tide",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Summons a flood that drags players into the water, forcing a Physique challenge to avoid drowning."
+      }
+    ],
+    "tactics": "Not a fight but a cosmic event. Sinks back into the sea when the stars shift."
+  },
+  {
+    "id": "upload-ghost",
+    "name": "Upload Ghost",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "ghost in the machine",
+      "uploaded mind",
+      "digital ghost",
+      "engram",
+      "avatar",
+      "dead hacker",
+      "ai ghost"
+    ],
+    "description": "The scanned, half-corrupted mind of a dead hacker, living in the building's wiring and very unhappy about it.",
+    "attack": "Static shock",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "cameras"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Haunt the Wire",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Shuts down or takes over one device, door or implant within sight until it is destroyed."
+      }
+    ],
+    "tactics": "Appears on screens. Begs for help, then locks the doors."
+  },
+  {
+    "id": "gallows-tree",
+    "name": "Gallows Tree",
+    "type": "otherworldly",
+    "themes": [
+      "western",
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "hanging tree",
+      "haunted tree",
+      "tree spirit",
+      "wraith",
+      "noose tree",
+      "dead tree",
+      "cursed tree"
+    ],
+    "description": "A twisted dead cottonwood on a hill with a rope that sways in no wind and a ring of bones at its roots.",
+    "attack": "Branch lash",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "dread"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Noose Snare",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A rope drops over the target and hauls them up."
+      }
+    ],
+    "tactics": "Does not move. Works best at dusk and on lone travelers."
+  },
+  {
+    "id": "crossroads-fiend",
+    "name": "Crossroads Fiend",
+    "type": "otherworldly",
+    "themes": [
+      "western",
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "devil",
+      "crossroads",
+      "deal",
+      "satan",
+      "mephistopheles",
+      "dealer",
+      "faust"
+    ],
+    "description": "A well-dressed stranger at the crossroads at midnight who will teach you any song for the price of your soul.",
+    "attack": "Cane sword",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Devil's Bargain",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Offers a power or item for a favor; if accepted, the player gets advantage once per rest and owes a soul later."
+      },
+      {
+        "name": "Hellhound Call",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Summons a hellhound for one attack."
+      }
+    ],
+    "tactics": "Offers a deal before a fight and during it. Vanishes at dawn."
+  },
+  {
+    "id": "dream-eater",
+    "name": "Dream Eater",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "warp creature",
+      "whisper",
+      "horror",
+      "dream demon",
+      "temptation"
+    ],
+    "description": "A slender, pale thing with too many limbs and a voice that sounds like your own desire.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Siren Whisper",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A tempting whisper that hurts the mind."
+      }
+    ],
+    "tactics": "Dances between targets. Offers the weakest player their heart's desire."
+  },
+  {
+    "id": "warp-lord",
+    "name": "Warp Lord",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": true,
+    "aliases": [
+      "chaos god",
+      "lord of chaos",
+      "archdaemon",
+      "warp god"
+    ],
+    "description": "A towering, horned, winged tyrant of the warp with a burning axe and a throne made of skulls.",
+    "attack": "Warp axe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "terror"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Warp Storm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. A wave of raw chaos."
+      },
+      {
+        "name": "Soul Reaping",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to itself for each player at 0 health or fallen this round."
+      }
+    ],
+    "tactics": "Appears when a ritual succeeds. Banished if the ritual's focus is destroyed."
+  },
+  {
+    "id": "grave-imp",
+    "name": "Grave Imp",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "bone imp",
+      "imp",
+      "gremlin",
+      "little demon",
+      "graveyard imp",
+      "minion",
+      "familiar"
+    ],
+    "description": "A foot-tall, skin-and-bone thing with a long tongue that giggles when it breaks your things.",
+    "attack": "Bone shard",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "trick"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Serves a bigger master. Steals small items and sets small fires."
+  },
+  {
+    "id": "cheeky-poltergeist",
+    "name": "Cheeky Poltergeist",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "western"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "poltergeist",
+      "mischievous ghost",
+      "prank ghost",
+      "ghost",
+      "house ghost",
+      "spook",
+      "phantom"
+    ],
+    "description": "A giggling, invisible prankster that rearranges furniture, throws spoons and steals socks.",
+    "attack": "Thrown spoon",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Never fights seriously. Flees when someone says its name three times."
+  },
+  {
+    "id": "hearth-spirit",
+    "name": "Hearth Spirit",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "brownie",
+      "house spirit",
+      "domovoi",
+      "household spirit",
+      "kitchen spirit",
+      "helper",
+      "farm spirit"
+    ],
+    "description": "A tiny, bearded spirit who cleans the house at night in exchange for a saucer of milk and no thank-yous.",
+    "attack": "Rolling pin",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "chores"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Tidy Up",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a player or ally who has slept in the house."
+      }
+    ],
+    "tactics": "Neutral guardian of the home. Becomes spiteful if insulted or paid in clothing."
+  },
+  {
+    "id": "riddle-sphinx",
+    "name": "Riddle Sphinx",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "western"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "sphinx",
+      "riddler",
+      "riddle monster",
+      "lion woman",
+      "guardian",
+      "gate guardian",
+      "oracle"
+    ],
+    "description": "A lion-bodied, human-faced, eagle-winged guardian that asks one riddle at the desert crossing.",
+    "attack": "Paw swipe",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Asks a riddle. A correct answer lets players pass; a wrong answer means a fight."
+  },
+  {
+    "id": "ferryman-of-souls",
+    "name": "Ferryman of Souls",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "charon",
+      "ferryman",
+      "psychopomp",
+      "death",
+      "boatman",
+      "grim reaper",
+      "river guide"
+    ],
+    "description": "A hooded, silent boatman who poles a skiff across a black river for a single coin.",
+    "attack": "Oar",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "dread"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Final Crossing",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Only used against a creature that refuses to pay or tries to cross uninvited."
+      }
+    ],
+    "tactics": "Neutral. Takes anyone who pays and has no interest in fighting. Cannot be bribed."
+  },
+  {
+    "id": "siren",
+    "name": "Siren",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "mermaid",
+      "sea witch",
+      "lorelei",
+      "harpy",
+      "seductress",
+      "sea maiden",
+      "songstress"
+    ],
+    "description": "A beautiful, silver-scaled singer on a rock whose song pulls sailors straight to the reef.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "song"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lure Song",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A hypnotic song that draws the target toward the water."
+      }
+    ],
+    "tactics": "Sings from a rock and waits for ships. Dives and vanishes underwater when hurt."
+  },
+  {
+    "id": "drowned-captain",
+    "name": "Drowned Captain",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail",
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "davy jones",
+      "flying dutchman captain",
+      "drowned",
+      "sea ghost",
+      "locker",
+      "kraken master",
+      "deep admiral"
+    ],
+    "description": "A barnacle-bearded captain with a tentacled face and a hand on a chest that holds the hearts of drowned sailors.",
+    "attack": "Cutlass",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "dread"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Kraken's Call",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Tentacles lash up from the sea."
+      },
+      {
+        "name": "Dead Man's Bargain",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Offers a drowning player a second chance at the cost of a year of service."
+      }
+    ],
+    "tactics": "Rules a ghost ship and a crew of the drowned. Cannot leave the sea."
+  },
+  {
+    "id": "gaslamp-specter",
+    "name": "Gaslamp Specter",
+    "type": "otherworldly",
+    "themes": [
+      "steampunk",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "smog ghost",
+      "fog phantom",
+      "london fog",
+      "gas lamp ghost",
+      "streetlight ghost",
+      "foggy ghost",
+      "night walker"
+    ],
+    "description": "A pale, gaslight-flickering figure in a bowler hat who walks the foggy streets and never leaves a footprint.",
+    "attack": "Cold touch",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lamp Snuff",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Puts out every light within sight, leaving the area in darkness."
+      }
+    ],
+    "tactics": "Appears under streetlamps. Vanishes in fog when approached."
+  },
+  {
+    "id": "glow-wraith",
+    "name": "Glow Wraith",
+    "type": "otherworldly",
+    "themes": [
+      "post-apocalypse",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "radiation ghost",
+      "rad ghost",
+      "spirit",
+      "wraith",
+      "ghost",
+      "glowing ghost",
+      "wasteland spirit"
+    ],
+    "description": "A flickering, green-white ghost that rises from a blast crater and burns everything it touches.",
+    "attack": "Rad touch",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rad Burn",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is irradiated (disadvantage) until it rests."
+      }
+    ],
+    "tactics": "Haunts craters and ruined reactors. Cannot leave the place it died."
+  },
+  {
+    "id": "dust-oracle",
+    "name": "Dust Oracle",
+    "type": "otherworldly",
+    "themes": [
+      "post-apocalypse",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "oracle",
+      "wasteland spirit",
+      "desert spirit",
+      "sand spirit",
+      "prophet",
+      "dust spirit",
+      "wind seer"
+    ],
+    "description": "A swirling, human-shaped dust devil that speaks in the voices of the dead and always tells the truth, eventually.",
+    "attack": "Sand lash",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Dust Vision",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Shows a player one true vision about the past or future of a place or person."
+      }
+    ],
+    "tactics": "Neutral. Wants a gift or a favor in return. Scatters if disturbed too much."
+  },
+  {
+    "id": "ghost-in-the-wire",
+    "name": "Ghost in the Wire",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": true,
+    "aliases": [
+      "rogue ai",
+      "digital ghost",
+      "ghost",
+      "spirit",
+      "net wraith"
+    ],
+    "description": "The leftover mind of a dead hacker that now lives in the city power grid.",
+    "attack": "Static Touch",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Blackout",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. All lights and electronics in sight go dark for a turn. Everyone has disadvantage to see or aim."
+      }
+    ],
+    "tactics": "Flickers lights and locks doors to split the party, then hits whoever is standing near a socket."
+  },
+  {
+    "id": "lamp-post-ghoul",
+    "name": "Lamp Post Ghoul",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "ghoul",
+      "ghost",
+      "lamplighter",
+      "street spirit",
+      "wraith"
+    ],
+    "description": "A tall pale figure that stands under broken street lamps, softly humming to itself.",
+    "attack": "Cold Touch",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Only moves when nobody is looking right at it. Follows anyone who stops to hum along."
+  },
+  {
+    "id": "pocket-sprite",
+    "name": "Pocket Sprite",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "fairy",
+      "pixie",
+      "sprite",
+      "faerie",
+      "imp"
+    ],
+    "description": "A thumb-sized prankster that lives in pockets and steals buttons.",
+    "attack": "Pinch",
+    "skills": [
+      {
+        "skill": "Speed",
+        "mod": "+"
+      },
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Swaps small items between pockets. Giggles when caught and flies away."
+  },
+  {
+    "id": "saloon-spirit",
+    "name": "Saloon Spirit",
+    "type": "otherworldly",
+    "themes": [
+      "western",
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "ghost",
+      "poltergeist",
+      "phantom",
+      "haunt",
+      "spirit"
+    ],
+    "description": "A cheery ghost bartender that keeps pouring drinks for people who have long since left.",
+    "attack": "Bottle Toss",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Last Call",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. All enemies have disadvantage on their next roll."
+      }
+    ],
+    "tactics": "Offers free rounds to calm the room. Starts flinging glassware when anyone cheats at cards."
+  },
+  {
+    "id": "sunken-lighthouse-keeper",
+    "name": "Sunken Lighthouse Keeper",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail",
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "drowned man",
+      "sea ghost",
+      "revenant",
+      "lighthouse keeper",
+      "draugr"
+    ],
+    "description": "A waterlogged keeper whose lantern burns green and never goes out.",
+    "attack": "Rusted Hook",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Green Beacon",
+        "type": "area",
+        "uses": 1,
+        "text": "Area 2d6 damage to all enemies, ignores defense."
+      }
+    ],
+    "tactics": "Lures ships onto the rocks with his lantern. Waits for the survivors in the shallows."
+  },
+  {
+    "id": "rift-whisperer",
+    "name": "Rift Whisperer",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "warp daemon",
+      "chaos daemon",
+      "rift spawn",
+      "void fiend",
+      "whisperer"
+    ],
+    "description": "A tall shape that leaks out of a tear in the sky and promises everyone the thing they most want.",
+    "attack": "Claw",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Whisper of Ruin",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target has disadvantage on their next roll."
+      }
+    ],
+    "tactics": "Offers temptations and breaks the will of the weakest first. Fights only when cornered."
+  },
+  {
+    "id": "neon-shrine-fox",
+    "name": "Neon Shrine Fox",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "fox spirit",
+      "kitsune",
+      "trickster",
+      "spirit fox",
+      "shrine guardian"
+    ],
+    "description": "A glowing fox with nine fiber-optic tails who guards a tiny shrine between two skyscrapers.",
+    "attack": "Nip",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Tricks people into getting lost in the alleys. Rewards offerings of fried snacks."
+  },
+  {
+    "id": "boiler-ghost",
+    "name": "Boiler Ghost",
+    "type": "otherworldly",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "ghost",
+      "steam spirit",
+      "poltergeist",
+      "phantom",
+      "stoker"
+    ],
+    "description": "The ghost of a stoker who died in the boiler room and still shovels coal in the dark.",
+    "attack": "Scalding Hand",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Slams furnace doors and sends steam through the pipes. Calms down if someone keeps the fire stoked."
+  },
+  {
+    "id": "aether-djinn",
+    "name": "Aether Djinn",
+    "type": "otherworldly",
+    "themes": [
+      "steampunk",
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "djinn",
+      "genie",
+      "wish spirit",
+      "air spirit",
+      "lamp spirit"
+    ],
+    "description": "A smoky spirit trapped in a brass pressure pipe who grants wishes and reads every clause too closely.",
+    "attack": "Gust",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Twisted Wish",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. One enemy gets advantage on their next roll, but only if the ally who asked for it takes 1d6 damage."
+      }
+    ],
+    "tactics": "Offers deals with sharp fine print. Bursts out of the pipe if the contract is broken."
+  },
+  {
+    "id": "lantern-ghost",
+    "name": "Lantern Ghost",
+    "type": "otherworldly",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": true,
+    "aliases": [
+      "ghost",
+      "wisp",
+      "will-o-wisp",
+      "lamp spirit",
+      "traveler"
+    ],
+    "description": "A small floating lantern flame with a faint smile that leads travelers away from danger.",
+    "attack": "Warm Zap",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Guides lost people to shelter. Flickers out if anyone is cruel to it."
+  }
+]

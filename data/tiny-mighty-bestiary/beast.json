@@ -1,0 +1,1376 @@
+[
+  {
+    "id": "giant-rat",
+    "name": "Giant Rat",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "scifi",
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "description": "A dog-sized sewer scavenger that swarms anything that looks like dinner.",
+    "attack": "Gnaw",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      }
+    ],
+    "powers": [],
+    "tactics": "Comes in packs. Use 1 rat per player for an easy fight.",
+    "aliases": [
+      "rat",
+      "dire rat",
+      "vermin",
+      "swarm"
+    ]
+  },
+  {
+    "id": "giant-spider",
+    "name": "Giant Spider",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "description": "A wall-crawling ambusher that wraps its prey in silk and bites from above.",
+    "attack": "Fangs",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "climb"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Venom Bite",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is poisoned (disadvantage) until it rests."
+      }
+    ],
+    "tactics": "Drops from the ceiling. Saves its venom for a player in light armor.",
+    "aliases": [
+      "drider",
+      "phase spider",
+      "arachnid"
+    ]
+  },
+  {
+    "id": "blink-cat",
+    "name": "Blink Cat",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "displacer beast",
+      "displacer",
+      "panther",
+      "big cat",
+      "illusion"
+    ],
+    "description": "A six-legged black cat that always seems to be standing a step to the left of where it actually is.",
+    "attack": "Tentacle lash",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "skillNote": "Attacks against it have disadvantage until it is hit once.",
+    "powers": [
+      {
+        "name": "Phase Shift",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Once per rest it turns the first hit against it into a miss."
+      }
+    ],
+    "tactics": "Circles the party and attacks whoever is alone. Flees if its illusion is broken twice."
+  },
+  {
+    "id": "cave-sucker",
+    "name": "Cave Sucker",
+    "type": "beast",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "space bat",
+      "bat",
+      "parasite"
+    ],
+    "description": "A leathery, bat-winged leech that eats power cables and ship hulls.",
+    "attack": "Drain bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Clings to ships and gnaws wiring. Gets disturbed by loud noise."
+  },
+  {
+    "id": "frost-strider",
+    "name": "Frost Strider",
+    "type": "beast",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "snow lizard",
+      "ice lizard",
+      "mount",
+      "steed"
+    ],
+    "description": "A shaggy, two-legged snow lizard ridden across the ice fields.",
+    "attack": "Kick",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "athletics"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Sturdy mount in the cold. Drops dead if left out in the open overnight."
+  },
+  {
+    "id": "snow-mauler",
+    "name": "Snow Mauler",
+    "type": "beast",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "yeti",
+      "abominable snowman",
+      "ice monster",
+      "snow beast"
+    ],
+    "description": "A white-furred ice-field hunter that hauls prey back to a cave for later.",
+    "attack": "Claw swipe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "hear"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Grabs one target and drags it off. Players that cut it free have advantage to escape."
+  },
+  {
+    "id": "cosmic-whale",
+    "name": "Cosmic Whale",
+    "type": "beast",
+    "themes": [
+      "space-wars",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "space whale",
+      "star whale",
+      "spaceship whale",
+      "space orca"
+    ],
+    "description": "A starlit, ship-sized whale that sings across the void and hauls tiny cargo ships along in its slipstream.",
+    "attack": "Tail slap",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Peaceful. Fights only if its calves are threatened; otherwise it hums."
+  },
+  {
+    "id": "rat-king",
+    "name": "Rat King",
+    "type": "beast",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "plague",
+      "vermin",
+      "rat lord",
+      "rat",
+      "swarm",
+      "pied piper"
+    ],
+    "description": "A knot of fused rats with one hundred eyes and one terrible, whispery voice.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "menace"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Plague Swarm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Anyone damaged is poisoned (disadvantage) until it rests."
+      }
+    ],
+    "tactics": "Lurks below cities. Sends rats at the party in waves while it stays in the sewers."
+  },
+  {
+    "id": "hive-stalker",
+    "name": "Hive Stalker",
+    "type": "beast",
+    "themes": [
+      "scifi",
+      "science-fantasy",
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "alien",
+      "bug",
+      "acid blood",
+      "queen"
+    ],
+    "description": "A sleek black insectoid hunter with a second set of jaws, acid for blood and an unblinking, eyeless face.",
+    "attack": "Tail stab",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide in the dark"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Acid Blood",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Whoever hits it in melee for 5 or more takes d6 damage and loses an item."
+      }
+    ],
+    "tactics": "Stalks from vents and ceilings. Drags one victim away at a time to the nest."
+  },
+  {
+    "id": "swarmling",
+    "name": "Swarmling",
+    "type": "beast",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "hive swarm",
+      "bug",
+      "insectoid",
+      "hive creature",
+      "alien swarm",
+      "chitin"
+    ],
+    "description": "A claw-limbed, carapaced hunter that comes in the thousands from the dark between stars.",
+    "attack": "Scything claws",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Moves as a mob. Leaders on the hive mind tell them where to bite."
+  },
+  {
+    "id": "chitin-crusher",
+    "name": "Chitin Crusher",
+    "type": "beast",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "tyrant",
+      "alien monster",
+      "bio-monster",
+      "giant bug",
+      "chitin beast"
+    ],
+    "description": "A house-sized, armored bio-engineered monster with bone cannons and a mouth for every limb.",
+    "attack": "Scything talons",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Smashes through walls. Takes a long time to drop."
+  },
+  {
+    "id": "dust-rattler",
+    "name": "Dust Rattler",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "rattlesnake",
+      "snake",
+      "viper",
+      "rattler",
+      "sidewinder",
+      "serpent"
+    ],
+    "description": "A cart-sized rattlesnake that makes a sound like gravel in a tin can.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "heat"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Venom",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is poisoned (disadvantage) until it rests."
+      }
+    ],
+    "tactics": "Strikes from under rocks and wagon wheels. Retreats after a bite."
+  },
+  {
+    "id": "horned-jackrabbit",
+    "name": "Horned Jackrabbit",
+    "type": "beast",
+    "themes": [
+      "western",
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "jackalope",
+      "antelope hare",
+      "tall tale",
+      "jackrabbit",
+      "rabbit",
+      "hare"
+    ],
+    "description": "A rabbit with antlers that mimics human voices and starts bar fights for sport.",
+    "attack": "Antler jab",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "trick"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Mimics a player's voice to lure others away. Cannot be caught by a man with a good singing voice."
+  },
+  {
+    "id": "thunder-herd",
+    "name": "Thunder Herd",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "buffalo",
+      "bison",
+      "stampede",
+      "cattle",
+      "herd",
+      "cattle drive",
+      "longhorn"
+    ],
+    "description": "A thousand-ton wave of bison with a dust cloud that can be seen for miles.",
+    "attack": "Trample",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Stampede",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Flattens everything in its path."
+      }
+    ],
+    "tactics": "Cannot be turned except by a loud noise, a big fire or a very clever player."
+  },
+  {
+    "id": "neon-gutter-cat",
+    "name": "Neon Gutter Cat",
+    "type": "beast",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "cyber cat",
+      "stray cat",
+      "street cat",
+      "alley cat",
+      "neko",
+      "cat"
+    ],
+    "description": "A scruffy alley cat with glowing cyber-eyes, a robotic tail and a talent for knocking over trash cans.",
+    "attack": "Scratch",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "cute"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hisses, scratches and vanishes into the neon. Purrs at anyone with food."
+  },
+  {
+    "id": "sewer-gator",
+    "name": "Sewer Gator",
+    "type": "beast",
+    "themes": [
+      "cyberpunk",
+      "scifi",
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "alligator",
+      "mutant",
+      "sewer croc",
+      "crocodile",
+      "urban legend",
+      "sewer monster"
+    ],
+    "description": "A pale, blind, six-meter alligator that grew fat on dumped lab waste and the occasional squatter.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "vibrations"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Lurks under manholes and in drainage tunnels. Drags prey into the water."
+  },
+  {
+    "id": "chomp-ball",
+    "name": "Chomp Ball",
+    "type": "beast",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "ball",
+      "chomper",
+      "pet",
+      "bouncer"
+    ],
+    "description": "A red, toothy, bouncing ball of meat that eats anything and farts a lot.",
+    "attack": "Chomp",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Bounces at the nearest target. Can be ridden, with disadvantage."
+  },
+  {
+    "id": "dream-cat",
+    "name": "Dream Cat",
+    "type": "beast",
+    "themes": [
+      "occult-noir",
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "cat of ulthar",
+      "dreamland cat",
+      "cat",
+      "kitten",
+      "dream walker",
+      "star cat"
+    ],
+    "description": "A sleek, star-eyed cat that walks through dreams and keeps an eye on anyone who tries to hurt cats.",
+    "attack": "Scratch",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Warns against danger in dreams. Fights only to protect other cats."
+  },
+  {
+    "id": "void-hound",
+    "name": "Void Hound",
+    "type": "beast",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "hound of tindalos",
+      "tindalos",
+      "hellhound",
+      "dog",
+      "angle hound",
+      "time hound",
+      "cosmic dog"
+    ],
+    "description": "A rail-thin, blue-black hound that steps out of the corners of rooms and walls and never stops hunting.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Angle Step",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Appears from any corner within sight and attacks with advantage."
+      }
+    ],
+    "tactics": "Tracks a victim across time and space. Cannot be outrun, only outsmarted."
+  },
+  {
+    "id": "moss-tortoise",
+    "name": "Moss Tortoise",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "giant tortoise",
+      "turtle",
+      "giant turtle",
+      "world turtle",
+      "ancient turtle",
+      "mossy rock",
+      "shell"
+    ],
+    "description": "A hill-sized, mossy tortoise with a village on its back and a very, very slow temper.",
+    "attack": "Shell bump",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-",
+        "note": "slow"
+      }
+    ],
+    "powers": [],
+    "tactics": "Takes a turn to turn around. Withdraws into its shell if hit hard."
+  },
+  {
+    "id": "carrion-crow",
+    "name": "Carrion Crow",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "western"
+    ],
+    "tone": 5,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "raven",
+      "crow",
+      "carrion",
+      "bird",
+      "scavenger",
+      "vulture",
+      "omen"
+    ],
+    "description": "A scraggly black crow with a cold, intelligent eye that watches the battlefield and always seems to know who's next.",
+    "attack": "Peck",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "omen"
+      }
+    ],
+    "powers": [],
+    "tactics": "Circles overhead. Pecks at the wounded and fallen."
+  },
+  {
+    "id": "abyssal-leviathan",
+    "name": "Abyssal Leviathan",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "science-fantasy",
+      "occult-noir",
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "leviathan",
+      "sea serpent",
+      "kraken",
+      "sea monster",
+      "deep serpent",
+      "giant squid",
+      "ocean beast"
+    ],
+    "description": "A hundred-meter, barnacle-crusted sea serpent that rises from the dark and swallows ships whole.",
+    "attack": "Bite & coils",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "vibrations"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Tidal Surge",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. A wave that knocks everyone prone."
+      }
+    ],
+    "tactics": "Attacks ships and coastal docks. Dives and re-surfaces from below."
+  },
+  {
+    "id": "mountain-mammoth",
+    "name": "Mountain Mammoth",
+    "type": "beast",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "mammoth",
+      "woolly mammoth",
+      "giant elephant",
+      "tusker",
+      "elephant",
+      "ice age beast",
+      "tusked beast"
+    ],
+    "description": "A shaggy, house-high mammoth with tusks like fallen trees and a stampede that shakes the glacier.",
+    "attack": "Tusk gore",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Charges in a line. Cannot turn quickly."
+  },
+  {
+    "id": "parrot-lookout",
+    "name": "Parrot Lookout",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "parrot",
+      "pirate parrot",
+      "macaw",
+      "bird",
+      "squawker",
+      "shoulder bird"
+    ],
+    "description": "A colorful, foul-mouthed parrot who repeats secrets and spots every enemy ship before the captain does.",
+    "attack": "Beak nip",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "mimic voices"
+      }
+    ],
+    "powers": [],
+    "tactics": "Squawks the alarm. Repeats private conversations at the worst time."
+  },
+  {
+    "id": "pirate-crab",
+    "name": "Pirate Crab",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "crab",
+      "hermit crab",
+      "sea crab",
+      "beach crab",
+      "shell",
+      "pirate hermit"
+    ],
+    "description": "A big hermit crab wearing a tricorn hat, a pirate-flag shell and a deep resentment of seagulls.",
+    "attack": "Claw snap",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bluster"
+      }
+    ],
+    "powers": [],
+    "tactics": "Defends its treasure pile, which is mostly bottle caps. Scuttles away sideways if hurt."
+  },
+  {
+    "id": "reef-shark",
+    "name": "Reef Shark",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "shark",
+      "great white",
+      "jaws",
+      "hammerhead",
+      "sea hunter",
+      "man-eater",
+      "predator fish"
+    ],
+    "description": "A six-foot, grey-finned shark that smells blood from a mile away and has no manners.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "blood"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Circles first. Attacks swimmers and bleeding targets."
+  },
+  {
+    "id": "glow-rat",
+    "name": "Glow Rat",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "radioactive rat",
+      "mutant rat",
+      "glowing rat",
+      "rad rat",
+      "wasteland rat",
+      "giant rat"
+    ],
+    "description": "A cat-sized rat that glows green in the dark and does not care about your lunch.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Swarms. Attacks wounded players first."
+  },
+  {
+    "id": "atomic-roach",
+    "name": "Atomic Roach",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "cockroach",
+      "roach",
+      "radiroach",
+      "bug",
+      "giant cockroach",
+      "wasteland bug",
+      "survivor"
+    ],
+    "description": "A dog-sized cockroach that survived the end of the world and is mildly annoyed by it.",
+    "attack": "Mandibles",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Skitters in packs. Flees from light and a hard stomp."
+  },
+  {
+    "id": "rad-hound",
+    "name": "Rad Hound",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "dog",
+      "wild dog",
+      "mutant dog",
+      "hound",
+      "canine",
+      "wasteland dog",
+      "feral dog"
+    ],
+    "description": "A mangy, two-headed wild dog with a green-glowing eye and a limp.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Runs in packs of 3. Can be tamed with food (Charm challenge)."
+  },
+  {
+    "id": "soot-pigeon",
+    "name": "Soot Pigeon",
+    "type": "beast",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": true,
+    "aliases": [
+      "pigeon",
+      "city pigeon",
+      "messenger bird",
+      "street bird",
+      "rooftop bird",
+      "sooty bird"
+    ],
+    "description": "A grubby, sooty pigeon with a tiny brass message tube strapped to one leg and a very big attitude.",
+    "attack": "Peck",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bluster"
+      }
+    ],
+    "powers": [],
+    "tactics": "Steals crumbs and delivers the occasional message. Flocks in large numbers."
+  },
+  {
+    "id": "iron-draft-horse",
+    "name": "Iron Draft Horse",
+    "type": "beast",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "horse",
+      "carriage horse",
+      "draft horse",
+      "workhorse",
+      "cart horse",
+      "steed",
+      "brass horse"
+    ],
+    "description": "A massive, calm draft horse with iron-shod hooves and a brass-plated leg brace, hauling a steam carriage.",
+    "attack": "Kick",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Stands its ground. Bolts if frightened by a loud bang or steam whistle."
+  },
+  {
+    "id": "smog-hound",
+    "name": "Smog Hound",
+    "type": "beast",
+    "themes": [
+      "steampunk",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "dog",
+      "black dog",
+      "smog dog",
+      "foggy hound",
+      "night dog",
+      "phantom hound",
+      "street hound"
+    ],
+    "description": "A black, sooty, ember-eyed hound that prowls the fogged streets of a coal town.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "smell"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide in fog"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hunts at night, in fog. Loses the track in clean air."
+  },
+  {
+    "id": "chrome-rat-king",
+    "name": "Chrome Rat King",
+    "type": "beast",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "rat king",
+      "giant rat",
+      "sewer king",
+      "cyber rat"
+    ],
+    "description": "A knot of cybernetic rats wired into one scheming sewer lord.",
+    "attack": "Gnaw Swarm",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rat Flood",
+        "type": "area",
+        "uses": 1,
+        "text": "Area 2d6 damage to all enemies, ignores defense."
+      }
+    ],
+    "tactics": "Sends rats in first to cut wires and steal gear, then bursts out of the drain when the group is split up."
+  },
+  {
+    "id": "library-silverfish",
+    "name": "Library Silverfish",
+    "type": "beast",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "silverfish",
+      "bookworm",
+      "book bug",
+      "paper bug",
+      "insect"
+    ],
+    "description": "A silver bug the size of a cat that nibbles forbidden books and burps whispers.",
+    "attack": "Nibble",
+    "skills": [
+      {
+        "skill": "Stealth",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Speed",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Scurries between shelves and hides in the dark. Hisses a few words of old tongue if squished."
+  },
+  {
+    "id": "thunder-ram",
+    "name": "Thunder Ram",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "western"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "ram",
+      "goat",
+      "bighorn",
+      "storm goat"
+    ],
+    "description": "A broad mountain ram whose horns crack like lightning.",
+    "attack": "Headbutt",
+    "skills": [
+      {
+        "skill": "Might",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Thunder Charge",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is knocked back and has disadvantage until it stands."
+      }
+    ],
+    "tactics": "Charges from the high ground and rams into anything that glints."
+  },
+  {
+    "id": "sludge-pup",
+    "name": "Sludge Pup",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "slime",
+      "ooze pup",
+      "mutant",
+      "puppy"
+    ],
+    "description": "A cheerful ooze shaped vaguely like a puppy that loves to be petted.",
+    "attack": "Slurp",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Speed",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Wobbles up to anyone with food. Splits in two if it sneezes."
+  },
+  {
+    "id": "crow-informant",
+    "name": "Crow Informant",
+    "type": "beast",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": true,
+    "aliases": [
+      "raven",
+      "crow",
+      "spy bird",
+      "familiar",
+      "black bird"
+    ],
+    "description": "A smart crow in a tiny hat that trades gossip for shiny buttons.",
+    "attack": "Peck",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Perches on lamps and listens in. Sells what it hears to anyone with a shiny coin."
+  }
+]

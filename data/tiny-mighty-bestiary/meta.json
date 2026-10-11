@@ -1,0 +1,174 @@
+{
+  "title": "Tiny Mighty RPG Bestiary",
+  "rulesVersion": "Tiny Mighty RPG 1.09",
+  "tiers": [
+    {
+      "difficulty": 0.25,
+      "turns": 1,
+      "defense": 3,
+      "defenseDice": "d6-1",
+      "health": 7,
+      "healthDice": "2d6",
+      "bonus": 0,
+      "bonusDice": "d6-4"
+    },
+    {
+      "difficulty": 0.5,
+      "turns": 1,
+      "defense": 4,
+      "defenseDice": "d6",
+      "health": 11,
+      "healthDice": "3d6",
+      "bonus": 1,
+      "bonusDice": "d6-3"
+    },
+    {
+      "difficulty": 1,
+      "turns": 1,
+      "defense": 5,
+      "defenseDice": "d6+1",
+      "health": 14,
+      "healthDice": "4d6",
+      "bonus": 2,
+      "bonusDice": "d6-2"
+    },
+    {
+      "difficulty": 2,
+      "turns": 2,
+      "defense": 6,
+      "defenseDice": "d6+2",
+      "health": 18,
+      "healthDice": "5d6",
+      "bonus": 2,
+      "bonusDice": "d6-2"
+    },
+    {
+      "difficulty": 3,
+      "turns": 2,
+      "defense": 7,
+      "defenseDice": "d6+3",
+      "health": 21,
+      "healthDice": "6d6",
+      "bonus": 3,
+      "bonusDice": "d6-1"
+    },
+    {
+      "difficulty": 4,
+      "turns": 3,
+      "defense": 7,
+      "defenseDice": "d6+3",
+      "health": 28,
+      "healthDice": "8d6",
+      "bonus": 4,
+      "bonusDice": "d6"
+    },
+    {
+      "difficulty": 5,
+      "turns": 4,
+      "defense": 7,
+      "defenseDice": "d6+3",
+      "health": 35,
+      "healthDice": "10d6",
+      "bonus": 5,
+      "bonusDice": "d6+1",
+      "extended": true
+    }
+  ],
+  "powerTypes": {
+    "multi": {
+      "label": "Multi-target",
+      "dice": "3d6, one die per target"
+    },
+    "direct": {
+      "label": "Direct-target",
+      "dice": "2d6 to 1 target"
+    },
+    "area": {
+      "label": "Area of effect",
+      "dice": "1d6 to 1 pencil radius, 6s explode"
+    },
+    "heal": {
+      "label": "Healing",
+      "dice": "2d6, can target self"
+    },
+    "utility": {
+      "label": "Utility",
+      "dice": "no damage, GM approves the effect"
+    }
+  },
+  "creatureTypes": [
+    {
+      "id": "beast",
+      "label": "Beast"
+    },
+    {
+      "id": "humanoid",
+      "label": "Humanoid"
+    },
+    {
+      "id": "animated",
+      "label": "Animated"
+    },
+    {
+      "id": "otherworldly",
+      "label": "Otherworldly"
+    },
+    {
+      "id": "monster",
+      "label": "Monster"
+    }
+  ],
+  "themes": [
+    {
+      "id": "fantasy",
+      "label": "Fantasy"
+    },
+    {
+      "id": "scifi",
+      "label": "Sci-Fi"
+    },
+    {
+      "id": "science-fantasy",
+      "label": "Science-Fantasy"
+    },
+    {
+      "id": "space-wars",
+      "label": "Space Wars"
+    },
+    {
+      "id": "space-hammer",
+      "label": "Space Hammer"
+    },
+    {
+      "id": "cyberpunk",
+      "label": "Cyberpunk"
+    },
+    {
+      "id": "western",
+      "label": "Western"
+    },
+    {
+      "id": "occult-noir",
+      "label": "Occult Noir"
+    },
+    {
+      "id": "age-of-sail",
+      "label": "Age of Sail"
+    },
+    {
+      "id": "steampunk",
+      "label": "Steampunk"
+    },
+    {
+      "id": "post-apocalypse",
+      "label": "Post-Apocalypse"
+    }
+  ],
+  "toneScale": [
+    "Whimsy",
+    "Lean-Whimsy",
+    "Neutral",
+    "Lean-Dark",
+    "Dark"
+  ]
+}

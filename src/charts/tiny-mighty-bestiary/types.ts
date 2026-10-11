@@ -1,4 +1,4 @@
-/** Shape of data/tiny-mighty-bestiary.json. */
+/** Shape of the merged data/tiny-mighty-bestiary/*.json files (meta.json plus one file per creature type). */
 export type PowerType = "multi" | "direct" | "area" | "heal" | "utility";
 
 export interface CreatureType {

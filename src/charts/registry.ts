@@ -37,7 +37,8 @@ export const charts: ChartEntry[] = [
   {
     id: "rule-of-authorship",
     title: "True Authors of DND",
-    description: "Who wrote which rules of Dungeons & Dragons, Arneson or Gygax, based on the Arneson v. Gygax case file.",
+    description:
+      "Who wrote which rules and products of original Dungeons & Dragons (pre-1e): Gygax, Arneson, Kuntz, Kask, Ernie Gygax and others, based on the Arneson v. Gygax case file and TSR credits.",
     component: RuleOfAuthorship,
   },
   {

@@ -1,0 +1,3174 @@
+[
+  {
+    "id": "goblin",
+    "name": "Goblin",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "description": "A sneaky, cackling raider with a rusty knife and a talent for ambush.",
+    "attack": "Rusty knife",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides first, then jumps the weakest looking player. Flees at half health.",
+    "aliases": [
+      "kobold",
+      "imp",
+      "gremlin"
+    ]
+  },
+  {
+    "id": "orc",
+    "name": "Orc Warrior",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "description": "A scarred brute in mismatched armor who loves a straight fight.",
+    "attack": "Cleaver",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "threats"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Charges the biggest threat. Gets in the way of its friends.",
+    "aliases": [
+      "half-orc",
+      "hobgoblin",
+      "bugbear",
+      "gnoll"
+    ]
+  },
+  {
+    "id": "ogre",
+    "name": "Ogre",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "description": "A lumbering giant with a club made from a small tree.",
+    "attack": "Tree club",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "athletics, fists"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Swings at whoever is closest. Easy to trick, hard to survive.",
+    "aliases": [
+      "giant",
+      "hill giant",
+      "ettin"
+    ]
+  },
+  {
+    "id": "troll",
+    "name": "Cave Troll",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "description": "A hulking, warty monster whose wounds close faster than they open.",
+    "attack": "Claws & fists",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Regenerate",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6. Fire or acid in the same turn stops it."
+      }
+    ],
+    "tactics": "Fights until hurt, regenerates, fights again. Best solved with fire.",
+    "aliases": [
+      "hill troll",
+      "regeneration",
+      "ogre"
+    ]
+  },
+  {
+    "id": "chrome-trooper",
+    "name": "Chrome Trooper",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "trooper",
+      "clone",
+      "soldier",
+      "imperial"
+    ],
+    "description": "A white-armored soldier in a faceless helmet, bought by the thousand and trained to shoot just past you.",
+    "attack": "Blaster rifle",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "helmet visor"
+      }
+    ],
+    "powers": [],
+    "tactics": "Arrives in squads of four or more. Rolls disadvantage on attacks beyond one pencil length."
+  },
+  {
+    "id": "fuzz-warrior",
+    "name": "Fuzz Warrior",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "teddy bear",
+      "forest",
+      "tribal",
+      "furry"
+    ],
+    "description": "A knee-high, fuzzy forest dweller with a spear, a drum and fearsome traps.",
+    "attack": "Spear",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "traps"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "powers": [],
+    "tactics": "Fights from the treetops. Always has a net, a log or a boulder ready for something big."
+  },
+  {
+    "id": "mask-hunter",
+    "name": "Mask Hunter",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi",
+      "cyberpunk",
+      "western"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "bounty hunter",
+      "space cowboy",
+      "hunter"
+    ],
+    "description": "A lone figure in battered armor and a mask, with a jetpack, a wrist rocket and a contract.",
+    "attack": "Blaster pistol",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "tracking"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "skillNote": "Jetpack lets it fly for 15 minutes or one battle.",
+    "powers": [
+      {
+        "name": "Wrist Rockets",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Captures if paid to. Escapes by jetpack when losing."
+  },
+  {
+    "id": "dusk-monk",
+    "name": "Dusk Monk",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "dark lord",
+      "space wizard",
+      "psychic warrior",
+      "energy blade",
+      "dark knight",
+      "mystic warrior"
+    ],
+    "description": "A hooded warrior in black robes with a humming blade of colored light and a magnetic grip on the world.",
+    "attack": "Light-blade",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mind Grip",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Telekinetic choke or push."
+      },
+      {
+        "name": "Blade Deflect",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Turns the first blaster shot at it back at the shooter."
+      }
+    ],
+    "tactics": "Lets the troopers soften you up, then walks into the fight. Wants to recruit the strongest player."
+  },
+  {
+    "id": "grandpa-giant",
+    "name": "Grandpa Giant",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "friendly giant",
+      "hill giant",
+      "gentle giant"
+    ],
+    "description": "A towering, bearded giant who bakes pies the size of wagon wheels and apologizes when he steps on things.",
+    "attack": "Rolling pin",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rather bake than brawl. Might join the party if offered a good pie."
+  },
+  {
+    "id": "dread-lord",
+    "name": "Dread Lord",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "emperor",
+      "dark lord",
+      "dark side",
+      "space tyrant"
+    ],
+    "description": "A towering figure in black armor with a breath mask, a crimson blade and an army that fears him more than the enemy.",
+    "attack": "Crimson blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "fear"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Choke Grip",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is lifted and cannot move."
+      }
+    ],
+    "tactics": "Lets underlings fail. Always offers the strongest player a place at his side."
+  },
+  {
+    "id": "laser-grunt",
+    "name": "Laser Grunt",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "guardsman",
+      "conscript",
+      "fodder"
+    ],
+    "description": "A helmeted foot soldier in flak armor, one of ten billion, sent forward in waves on the Emperor's say-so.",
+    "attack": "Laser rifle",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "-",
+        "note": "morale"
+      }
+    ],
+    "powers": [],
+    "tactics": "Always arrives in numbers of 5 or more. Surrenders only if an officer is dead."
+  },
+  {
+    "id": "star-templar",
+    "name": "Star Templar",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "marine",
+      "power armor",
+      "superhuman"
+    ],
+    "description": "A seven-foot, genetically-engineered warrior in sealed power armor, sworn to a distant emperor and a brotherhood banner.",
+    "attack": "Saw-sword",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-",
+        "note": "empathy"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Bolt Salvo",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Explosive bolt-shells."
+      }
+    ],
+    "tactics": "Fights in squads of five. Drops from orbit in a pod when the shooting starts."
+  },
+  {
+    "id": "iron-marshal",
+    "name": "Iron Marshal",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "commissar",
+      "political officer",
+      "kommissar",
+      "officer",
+      "zealot"
+    ],
+    "description": "A black-coated officer with a peaked cap and a pistol who shoots cowards before the enemy does.",
+    "attack": "Power sword",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "fear"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Summary Execution",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. May target one of its own allies; if it does, allies in sight have advantage on their next roll."
+      }
+    ],
+    "tactics": "Keeps the troops in line. Always positioned behind someone else."
+  },
+  {
+    "id": "scrapjaw-brawler",
+    "name": "Scrapjaw Brawler",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "orc",
+      "greenskin",
+      "warboy",
+      "scrap fighter",
+      "space orc",
+      "brute"
+    ],
+    "description": "A green, tusked bruiser in welded scrap armor with a shoota that jams and a big choppa that never does.",
+    "attack": "Big choppa",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "intimidate"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mob Rush",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. All allies in sight roll their next attack with advantage."
+      }
+    ],
+    "tactics": "Charges in a mob. Fights better the more of his mates are around."
+  },
+  {
+    "id": "ruin-knight",
+    "name": "Ruin Knight",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "heretic",
+      "traitor",
+      "fallen knight",
+      "corrupted warrior",
+      "chaos knight"
+    ],
+    "description": "A scarred, spiked, horned warrior in corrupted power armor, who fought for the Emperor ten thousand years ago.",
+    "attack": "Heavy pistol & chainaxe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "terror"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Warp Bolt",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A sizzling bolt of sorcerous warp energy."
+      }
+    ],
+    "tactics": "Leads cultists and daemons. Offers the party a place in the dark if it gets the chance."
+  },
+  {
+    "id": "silver-seer",
+    "name": "Silver Seer",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "space elf",
+      "psyker",
+      "elf seer",
+      "oracle",
+      "fortune teller",
+      "prophet"
+    ],
+    "description": "A tall, graceful elf in runed, smooth armor who has already seen how this fight ends.",
+    "attack": "Rune blade",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mind Lance",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A bolt of focused psychic force."
+      },
+      {
+        "name": "Foresight",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Once per rest, makes any roll it just failed again."
+      }
+    ],
+    "tactics": "Fights from range. Hates being rushed."
+  },
+  {
+    "id": "sky-coalition-warrior",
+    "name": "Sky Coalition Warrior",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "pulse rifle",
+      "xenos",
+      "blue alien"
+    ],
+    "description": "A short, blue-skinned soldier in sleek armor who speaks of the greater good and shoots from behind a drone.",
+    "attack": "Pulse rifle",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "tech"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "persuade"
+      }
+    ],
+    "powers": [],
+    "tactics": "Shoots from a distance and talks about peace afterward. Fights alongside a drone."
+  },
+  {
+    "id": "gear-priest",
+    "name": "Gear Priest",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "machine priest",
+      "cog priest",
+      "technician",
+      "engineer",
+      "mechanic",
+      "machine god"
+    ],
+    "description": "A red-robed priest of the Machine God with a mechanical arm, a third eye and a litany to the toaster.",
+    "attack": "Power axe",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "tech"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Machine Rite",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a construct or machine, itself included."
+      }
+    ],
+    "tactics": "Fights beside constructs and servitors. Offers a trade for rare machines."
+  },
+  {
+    "id": "witch-hunter",
+    "name": "Witch Hunter",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "inquisitor",
+      "witch finder",
+      "puritan"
+    ],
+    "description": "A grim, armored investigator with a flamer, a sealed warrant and the legal right to burn a whole planet.",
+    "attack": "Plasma pistol",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "detect lies"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Purging Flame",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Fire that does not go out."
+      }
+    ],
+    "tactics": "Questions first, burns second. Has authority to commandeer anything or anyone."
+  },
+  {
+    "id": "suit-guard",
+    "name": "Suit Guard",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "corpo",
+      "megacorp",
+      "security",
+      "corporate cop",
+      "rent-a-cop",
+      "private security"
+    ],
+    "description": "A mirror-shaded security officer in a tailored suit who works for whoever signs the paychecks.",
+    "attack": "Stun baton",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-",
+        "note": "empathy"
+      }
+    ],
+    "powers": [],
+    "tactics": "Calls for backup first. Has orders not to damage the building."
+  },
+  {
+    "id": "street-razor",
+    "name": "Street Razor",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "street samurai",
+      "razorgirl",
+      "razor girl",
+      "cyborg",
+      "samurai",
+      "mercenary",
+      "chrome"
+    ],
+    "description": "A neon-lit mercenary with mantis blades, chrome reflexes and a debt to the wrong people.",
+    "attack": "Mono-wire",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "reflexes"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mono-Wire Sweep",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A monomolecular filament that slices through armor."
+      }
+    ],
+    "tactics": "Strikes first. Fights better in tight alleys than in the open."
+  },
+  {
+    "id": "wire-jockey",
+    "name": "Wire Jockey",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "netrunner",
+      "hacker",
+      "decker",
+      "console cowboy",
+      "cyber hacker",
+      "jack-in"
+    ],
+    "description": "A hunched hacker with a datajack, a laptop on their knees and a smile like a keyboard.",
+    "attack": "Taser knuckles",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "hacking"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Trace Burn",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Fries a machine or a person's implants through the wire."
+      }
+    ],
+    "tactics": "Stays in the back with a laptop. Can unlock doors, disable turrets and turn off cameras."
+  },
+  {
+    "id": "chop-shop-doc",
+    "name": "Chop-Shop Doc",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "ripperdoc",
+      "street doc",
+      "cyber surgeon",
+      "back-alley doctor",
+      "medic",
+      "implant doctor"
+    ],
+    "description": "A one-eyed, tattooed surgeon who will install anything for cash, no questions, and warranty void if you ask.",
+    "attack": "Scalpel",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "medicine"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bargain"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Emergency Patch",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a player or ally, and can install a minor cyber-implant for the price of 1 bag."
+      }
+    ],
+    "tactics": "Prefers to bargain, then stitch. Defends their clinic with security drones."
+  },
+  {
+    "id": "chrome-psycho",
+    "name": "Chrome Psycho",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "cyberpsycho",
+      "cyberpsychosis",
+      "borg",
+      "maniac",
+      "augmented",
+      "gang",
+      "implant junkie",
+      "berserker"
+    ],
+    "description": "A twitching, half-metal wreck of a person, drowned in implants and just barely conscious.",
+    "attack": "Arm blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Overclock",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Takes a bonus turn this round, then takes d6 damage."
+      }
+    ],
+    "tactics": "Does not retreat. Rampages until restrained or unplugged."
+  },
+  {
+    "id": "quickdraw-outlaw",
+    "name": "Quickdraw Outlaw",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "gunslinger",
+      "gunfighter",
+      "cowboy",
+      "bandit",
+      "desperado",
+      "outlaw",
+      "pistolero"
+    ],
+    "description": "A hat-wearing, spur-jingling stranger with two revolvers and a reputation to protect.",
+    "attack": "Revolver",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bluff"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Fan the Hammer",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Six shots in two heartbeats."
+      }
+    ],
+    "tactics": "Calls a duel. Shoots first and apologizes never."
+  },
+  {
+    "id": "bandit-chief",
+    "name": "Bandit Chief",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "desperado",
+      "gang leader",
+      "train robber",
+      "outlaw boss",
+      "warlord",
+      "gang",
+      "bandit king"
+    ],
+    "description": "A dust-coated, gold-toothed leader with a gang of ruffians, a fast horse and a train to rob.",
+    "attack": "Shotgun",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "command"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hired Guns",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Calls in two Quickdraw Outlaws (0.25 difficulty each, roll as bandits)."
+      }
+    ],
+    "tactics": "Never fights without a gang. Flees on a fast horse if wounded."
+  },
+  {
+    "id": "robed-cultist",
+    "name": "Robed Cultist",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "cultist",
+      "acolyte",
+      "worshipper",
+      "follower",
+      "zealot",
+      "sacrificer"
+    ],
+    "description": "A sallow, hooded figure with a ritual knife and a wide, unfocused smile.",
+    "attack": "Ritual dagger",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Fights in a mob and chants. A dead cultist leaves a note that reads 'THE STARS ARE RIGHT'."
+  },
+  {
+    "id": "cult-magister",
+    "name": "Cult Magister",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "cult leader",
+      "high priest",
+      "occultist",
+      "sorcerer",
+      "summoner",
+      "magus",
+      "dark priest"
+    ],
+    "description": "A bald, tattooed leader with hollow eyes who reads from a book that bleeds.",
+    "attack": "Sacrificial knife",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Terrible Chant",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Players hearing the chant are frightened (disadvantage) until they rest."
+      }
+    ],
+    "tactics": "Starts a ritual and tries to finish it. Stopping the ritual halves its power."
+  },
+  {
+    "id": "befuddled-wizard",
+    "name": "Befuddled Wizard",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "wizard",
+      "mage",
+      "merlin",
+      "magic user",
+      "sorcerer",
+      "old wizard",
+      "hedge wizard"
+    ],
+    "description": "A pointy-hatted, bearded wizard who has lost his glasses, his staff and the name of the spell he's casting.",
+    "attack": "Staff whack",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Wild Spell",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Casts a spell with a random effect: the GM rolls a d6 (1: turns into a frog, 6: it works perfectly)."
+      }
+    ],
+    "tactics": "Casts spells and misses. Wanders off if distracted by a shiny object."
+  },
+  {
+    "id": "roaming-minstrel",
+    "name": "Roaming Minstrel",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "bard",
+      "troubadour",
+      "jester",
+      "musician",
+      "singer",
+      "lute",
+      "fool"
+    ],
+    "description": "A feather-hatted traveling singer with a lute, a bag of gossip and a song for every occasion.",
+    "attack": "Lute smash",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Heartening Ballad",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to any ally in earshot."
+      }
+    ],
+    "tactics": "Avoids a fight by singing. Flees if the audience gets angry."
+  },
+  {
+    "id": "cave-dwarf",
+    "name": "Cave Dwarf",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "dwarf",
+      "miner",
+      "forgefolk",
+      "mountain folk",
+      "smith",
+      "gnome",
+      "delver"
+    ],
+    "description": "A short, thick-bearded miner with a pickaxe, a bad attitude and a lantern that never goes out.",
+    "attack": "Pickaxe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "underground"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Fights in tunnels. Never leaves a gem behind."
+  },
+  {
+    "id": "braggart-knight",
+    "name": "Braggart Knight",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "sir",
+      "knight errant",
+      "jouster",
+      "windbag",
+      "don quixote",
+      "pompous knight",
+      "tourney knight"
+    ],
+    "description": "A shining, plumed knight who has never lost a duel, according to him.",
+    "attack": "Lance",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "boast"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Challenges the strongest player to a joust. Cries foul if he loses."
+  },
+  {
+    "id": "errant-knight",
+    "name": "Errant Knight",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "knight",
+      "lancelot",
+      "galahad",
+      "paladin",
+      "champion",
+      "questing knight",
+      "crusader"
+    ],
+    "description": "A battered, honest knight on a quest for a grail, a lost love or just a decent meal.",
+    "attack": "Longsword",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "chivalry"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Fights fairly and honors a surrender. Joins the party for a worthy cause."
+  },
+  {
+    "id": "greenwood-archer",
+    "name": "Greenwood Archer",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "ranger",
+      "robin hood",
+      "archer",
+      "hunter",
+      "outlaw archer",
+      "woodsman",
+      "bowman"
+    ],
+    "description": "A hooded forest hunter with a longbow, a green cloak and a reputation for stealing from the rich.",
+    "attack": "Longbow",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Arrow Volley",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Arrows rain from the canopy."
+      }
+    ],
+    "tactics": "Fires from the trees and moves. Never fights in the open."
+  },
+  {
+    "id": "castle-guard",
+    "name": "Castle Guard",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "soldier",
+      "guard",
+      "man at arms",
+      "footman",
+      "watchman",
+      "sentry",
+      "town guard",
+      "infantry"
+    ],
+    "description": "A helmeted soldier in a tabard, a spear and a bad feeling about the night shift.",
+    "attack": "Spear",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Sounds the alarm when outnumbered. Takes bribes if offered quietly."
+  },
+  {
+    "id": "cutpurse",
+    "name": "Cutpurse",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "thief",
+      "rogue",
+      "pickpocket",
+      "bandit",
+      "robber",
+      "burglar",
+      "footpad",
+      "highwayman"
+    ],
+    "description": "A hooded, quick-fingered street thief who has already lifted your purse and your good mood.",
+    "attack": "Dagger",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "sleight of hand"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "hide"
+      }
+    ],
+    "powers": [],
+    "tactics": "Steals and runs. A player who catches the thief gets the loot back."
+  },
+  {
+    "id": "temple-healer",
+    "name": "Temple Healer",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "cleric",
+      "priest",
+      "healer",
+      "monk",
+      "friar",
+      "nun",
+      "druid",
+      "herbalist"
+    ],
+    "description": "A robed, soft-spoken healer who keeps bandages in one pocket and a mace in the other.",
+    "attack": "Mace",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "medicine"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Healing Touch",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a player or ally, itself included."
+      }
+    ],
+    "tactics": "Heals the wounded, friend or foe. Dislikes fighting."
+  },
+  {
+    "id": "black-knight",
+    "name": "Black Knight",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "dark knight",
+      "mordred",
+      "evil knight",
+      "brigand knight",
+      "tyrant knight",
+      "rogue knight"
+    ],
+    "description": "A knight in black armor and a closed visor who blocks a bridge and challenges all comers.",
+    "attack": "Black sword",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "fear"
+      }
+    ],
+    "powers": [],
+    "tactics": "Holds a bridge or ford. Never reveals his face. Fights to the death if challenged."
+  },
+  {
+    "id": "scheming-chancellor",
+    "name": "Scheming Chancellor",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "vizier",
+      "advisor",
+      "courtier",
+      "schemer",
+      "royal advisor",
+      "poisoner"
+    ],
+    "description": "A smiling, slender royal advisor with ink-stained fingers and a cup of wine for everyone.",
+    "attack": "Hidden knife",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "manipulate"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Poisoned Cup",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is poisoned (disadvantage) until it rests."
+      }
+    ],
+    "tactics": "Never fights directly. Always has a guard nearby and a plan to blame someone else."
+  },
+  {
+    "id": "sellsword-captain",
+    "name": "Sellsword Captain",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "mercenary",
+      "soldier of fortune",
+      "condottiere",
+      "captain",
+      "hired sword",
+      "free company",
+      "hireling"
+    ],
+    "description": "A scarred, tired veteran who leads a company of hired blades and fights for whoever pays best.",
+    "attack": "Broadsword",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "intimidate"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Will switch sides if offered more than he is being paid. Keeps his word once hired."
+  },
+  {
+    "id": "hexmaster",
+    "name": "Hexmaster",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "warlock",
+      "dark wizard",
+      "necromancer",
+      "sorcerer",
+      "evil wizard",
+      "dark lord",
+      "hexer"
+    ],
+    "description": "A gaunt, black-robed sorcerer whose shadow moves a half-second too late.",
+    "attack": "Dark staff",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "dread"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Dark Bolt",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A bolt of cold, black fire."
+      },
+      {
+        "name": "Hex",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Curses a target: disadvantage on one skill until it rests or the hexmaster dies."
+      }
+    ],
+    "tactics": "Casts from the back of the room. Teleports away in a puff of black smoke when wounded."
+  },
+  {
+    "id": "dusk-enchantress",
+    "name": "Dusk Enchantress",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "morgan le fay",
+      "morgana",
+      "sorceress",
+      "witch queen",
+      "enchantress",
+      "dark queen",
+      "evil queen"
+    ],
+    "description": "A beautiful, soft-voiced sorceress in a gown of shadows who whispers promises that always have a catch.",
+    "attack": "Silver dagger",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Enthrall",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A player who hears her voice must win a Charm challenge or follow her commands until they rest."
+      },
+      {
+        "name": "Shadow Veil",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. She and her allies become invisible to normal sight until they attack."
+      }
+    ],
+    "tactics": "Seduces and manipulates. Never fights alone; attacks only when cornered."
+  },
+  {
+    "id": "hooded-headsman",
+    "name": "Hooded Headsman",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "executioner",
+      "hangman",
+      "axeman",
+      "torturer",
+      "dungeon keeper",
+      "jailer",
+      "reaper"
+    ],
+    "description": "A masked, broad-shouldered executioner with a huge axe and an unnerving professional calm.",
+    "attack": "Great axe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "intimidate"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Final Stroke",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Brings the axe down on a bound or fallen target."
+      }
+    ],
+    "tactics": "Appears at a trial or a dungeon. Never speaks. Does not stop."
+  },
+  {
+    "id": "iron-warlord",
+    "name": "Iron Warlord",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "warlord",
+      "tyrant",
+      "conqueror",
+      "king",
+      "saxon",
+      "invader",
+      "raider king",
+      "dark king"
+    ],
+    "description": "A scar-faced conqueror in iron armor with a war band of thousands and not a hint of mercy.",
+    "attack": "War axe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "command"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "War Cry",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. All allies within sight gain advantage on their next attack."
+      }
+    ],
+    "tactics": "Leads from the front. Takes prisoners to ransom or sacrifice."
+  },
+  {
+    "id": "neon-busker",
+    "name": "Neon Busker",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "street musician",
+      "performer",
+      "dj",
+      "streamer",
+      "influencer",
+      "busker",
+      "street artist"
+    ],
+    "description": "An LED-covered street performer with a glowing guitar and a thousand followers on the feed.",
+    "attack": "Guitar swing",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Performs for a crowd. Avoids fights and live-streams them instead."
+  },
+  {
+    "id": "gig-courier",
+    "name": "Gig Courier",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "courier",
+      "delivery",
+      "skater",
+      "rollerblader",
+      "messenger",
+      "runner",
+      "delivery rider"
+    ],
+    "description": "A hoverboard-riding delivery runner with a backpack of questionable parcels and no time for you.",
+    "attack": "Parcel whack",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "athletics"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Runs away from fights. Always has a package that is somehow worth a fortune."
+  },
+  {
+    "id": "organ-broker",
+    "name": "Organ Broker",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "harvester",
+      "black market",
+      "body snatcher",
+      "organ thief",
+      "ripper",
+      "flesh peddler"
+    ],
+    "description": "A smiling, immaculate dealer with a cooler, a scalpel and a long list of customers.",
+    "attack": "Scalpel",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "medicine"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Surgical Strike",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Aimed at a gap in armor or an implant."
+      }
+    ],
+    "tactics": "Takes people alive and unharmed (mostly). Has a van and two thugs outside."
+  },
+  {
+    "id": "megacorp-chairman",
+    "name": "Megacorp Chairman",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "ceo",
+      "corporate overlord",
+      "executive",
+      "chairman",
+      "boss",
+      "board member",
+      "tycoon"
+    ],
+    "description": "A pale, immaculate billionaire with a hundred floors, a thousand lawyers and an opinion about everything.",
+    "attack": "Pen knife",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Kill Order",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Orbital strike, drone swarm or sniper team."
+      },
+      {
+        "name": "Golden Parachute",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Escapes through a hidden exit, a helicopter or a lawyer-filed injunction."
+      }
+    ],
+    "tactics": "Never in the room when the fight starts. Offers the party a job at triple pay."
+  },
+  {
+    "id": "doomsday-preacher",
+    "name": "Doomsday Preacher",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "preacher",
+      "cult leader",
+      "doomsday",
+      "reverend",
+      "tent revival",
+      "prophet",
+      "hellfire preacher"
+    ],
+    "description": "A hollow-eyed revival preacher with a battered Bible, a cough and a very specific end date.",
+    "attack": "Cane",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "sermon"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hellfire Sermon",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Listeners are shaken by guilt and dread."
+      }
+    ],
+    "tactics": "Preaches until he is stopped. Followers do the fighting."
+  },
+  {
+    "id": "saloon-brawler",
+    "name": "Saloon Brawler",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "drunk",
+      "cowboy brawler",
+      "barfly",
+      "ruffian",
+      "bar fighter",
+      "rowdy"
+    ],
+    "description": "A bearded, hat-less drunk who got thrown out of three saloons this week and has his eye on your hat.",
+    "attack": "Beer mug",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "drunk"
+      }
+    ],
+    "powers": [],
+    "tactics": "Starts a fight over nothing. Passes out in the middle of it."
+  },
+  {
+    "id": "scrap-gremlin",
+    "name": "Scrap Gremlin",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "gremlin",
+      "goblin",
+      "tinker"
+    ],
+    "description": "A knee-high, giggling, green runt with a wrench who 'fixes' things by hitting them.",
+    "attack": "Wrench",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "tinker"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides behind bigger ones. Runs when scared and returns when not."
+  },
+  {
+    "id": "eager-cultist",
+    "name": "Eager Cultist",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "new cultist",
+      "intern",
+      "cult gopher",
+      "cult newbie",
+      "volunteer",
+      "apprentice",
+      "initiate"
+    ],
+    "description": "A cheerful new cultist in an oversized robe with a clipboard, a nametag and a lot of enthusiasm.",
+    "attack": "Clipboard",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "enthusiasm"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Asks if you've heard the good news. Bursts into tears if it is attacked."
+  },
+  {
+    "id": "curio-dealer",
+    "name": "Curio Dealer",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "antiquarian",
+      "collector",
+      "shopkeeper",
+      "curio shop",
+      "pawnbroker",
+      "antique dealer",
+      "relic dealer"
+    ],
+    "description": "A quiet, bespectacled shopkeeper with a cluttered store, a wooden box and a suspiciously good price for you.",
+    "attack": "Cane",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "lore"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bargain"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Cursed Trade",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Sells a mysterious item that has advantage once per rest, but the buyer is cursed (GM's choice) when it is used."
+      }
+    ],
+    "tactics": "Never fights. Warns of the item's price and names a price anyway."
+  },
+  {
+    "id": "sand-raider",
+    "name": "Sand Raider",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "desert raider",
+      "nomad",
+      "raider",
+      "bandit",
+      "desert warrior"
+    ],
+    "description": "A masked, robed desert nomad with a hooked staff, a rifle and a strong dislike for strangers.",
+    "attack": "Hooked staff",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+",
+        "note": "desert"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Ambushes from the dunes in a group. Disappears if the odds turn."
+  },
+  {
+    "id": "cantina-smuggler",
+    "name": "Cantina Smuggler",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "smuggler",
+      "pirate",
+      "scoundrel",
+      "rogue",
+      "space pirate",
+      "cargo hauler"
+    ],
+    "description": "A smirking, vest-wearing pilot with a fast ship, a faster mouth and a very big debt.",
+    "attack": "Blaster pistol",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "piloting"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Shoot First",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Takes a surprise shot before anyone else acts."
+      }
+    ],
+    "tactics": "Bluffs first, shoots second. Runs for the ship if things turn bad."
+  },
+  {
+    "id": "arena-champion",
+    "name": "Arena Champion",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "gladiator",
+      "champion",
+      "pit fighter",
+      "arena fighter",
+      "duelist",
+      "slave warrior",
+      "bounty brawler"
+    ],
+    "description": "A scarred, undefeated pit fighter in armor made from the trophies of a hundred matches.",
+    "attack": "Vibro-blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "showmanship"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Fights for glory. Respects a good opponent and can be bargained with."
+  },
+  {
+    "id": "rogue-star-ace",
+    "name": "Rogue Star Ace",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "pilot",
+      "starfighter",
+      "ace",
+      "fighter pilot",
+      "dogfighter",
+      "hotshot"
+    ],
+    "description": "A cocky, orange-jumpsuited fighter pilot with a fast ship and a lot of kills.",
+    "attack": "Pistol",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "piloting"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Barrel Roll",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Dodges the next attack aimed at it or its ship."
+      }
+    ],
+    "tactics": "Fights from the cockpit. On foot, it runs for the ship."
+  },
+  {
+    "id": "toll-troll",
+    "name": "Toll Troll",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "bridge troll",
+      "toll keeper",
+      "troll",
+      "tollbooth",
+      "toll collector",
+      "gatekeeper"
+    ],
+    "description": "A lumpy, moss-bearded troll with a fancy hat, a ledger and a bridge that nobody crosses for free.",
+    "attack": "Toll club",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bargain"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Insists on the toll. Will accept riddles, jokes or a nice sandwich in place of coin."
+  },
+  {
+    "id": "hollow-thrall",
+    "name": "Hollow Thrall",
+    "type": "humanoid",
+    "themes": [
+      "fantasy",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "thrall",
+      "zombie",
+      "mindless servant",
+      "puppet",
+      "slave",
+      "mind controlled",
+      "husk"
+    ],
+    "description": "A pale, glassy-eyed servant who stumbles forward, mutters a name and never blinks.",
+    "attack": "Fists",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Walks forward. Stops if its master is slain or the control is broken."
+  },
+  {
+    "id": "legendary-champion",
+    "name": "Legendary Champion",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "hero",
+      "heracles",
+      "hercules",
+      "slayer",
+      "dragon slayer",
+      "demigod",
+      "legend",
+      "myth",
+      "champion of the realm"
+    ],
+    "description": "A scarred, cloaked hero with a ballad about every scar and a sword that has slain things that don't exist anymore.",
+    "attack": "Hero's blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "honor"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mighty Blow",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A blow that dents mountains."
+      }
+    ],
+    "tactics": "Fights fairly and can be talked down. Follows a code of honor and will not fight the helpless."
+  },
+  {
+    "id": "frost-king",
+    "name": "Frost King",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "ice king",
+      "giant king",
+      "jotun",
+      "frost giant",
+      "winter lord",
+      "winter king",
+      "ice giant"
+    ],
+    "description": "A fifteen-foot, ice-bearded giant on a throne of glaciers who rules a hall of frost and a feast that never ends.",
+    "attack": "Ice axe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "command"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Blizzard",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Players hit have halved movement until they warm up."
+      }
+    ],
+    "tactics": "Welcomes guests with a feast that is also a trap. Demands a tribute or a challenge."
+  },
+  {
+    "id": "deckhand-scallywag",
+    "name": "Deckhand Scallywag",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 2,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "pirate",
+      "sailor",
+      "swabbie",
+      "deckhand",
+      "buccaneer",
+      "scallywag",
+      "crewman"
+    ],
+    "description": "A barefoot, gap-toothed sailor with a mop, a cutlass and a lot of opinions about the cook.",
+    "attack": "Cutlass",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Fights in a gang. Drops its weapon to eat if food is offered."
+  },
+  {
+    "id": "press-ganger",
+    "name": "Press Ganger",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "crimper",
+      "kidnapper",
+      "shanghai",
+      "recruiter",
+      "slaver",
+      "sailor snatcher"
+    ],
+    "description": "A burly dockside thug with a club, a bag and a very friendly offer of a drink.",
+    "attack": "Club",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "lure"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Offers a drink in a tavern, then clubs the sleepers. Drags victims to a ship."
+  },
+  {
+    "id": "cutlass-corsair",
+    "name": "Cutlass Corsair",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "privateer",
+      "buccaneer",
+      "swashbuckler",
+      "pirate",
+      "corsair",
+      "sea raider",
+      "raider"
+    ],
+    "description": "A coat-tailed, rope-swinging swashbuckler with a cutlass, a pistol and a jaunty red sash.",
+    "attack": "Cutlass",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "acrobatics"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Swings on ropes and chandeliers. Surrenders if its ship is lost."
+  },
+  {
+    "id": "navy-lieutenant",
+    "name": "Navy Lieutenant",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "naval officer",
+      "redcoat",
+      "marine",
+      "captain",
+      "royal navy",
+      "officer",
+      "admiral"
+    ],
+    "description": "A crisp, blue-coated naval officer with a sword, a spyglass and an utterly unshakable faith in regulations.",
+    "attack": "Officer's sword",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "command"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "navigation"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Fire the Cannons",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. A broadside from a nearby ship."
+      }
+    ],
+    "tactics": "Barks orders and calls in the ship's guns. Honors a flag of truce."
+  },
+  {
+    "id": "pirate-captain",
+    "name": "Pirate Captain",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "blackbeard",
+      "captain",
+      "pirate king",
+      "buccaneer captain",
+      "corsair captain",
+      "sea wolf",
+      "scourge of the seas"
+    ],
+    "description": "A bellowing, bearded captain with three pistols, a peg leg and a ship that's faster than it looks.",
+    "attack": "Cutlass & pistol",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "command"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Broadside",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Every cannon on the ship fires at once."
+      }
+    ],
+    "tactics": "Leads from the front. Offers parley and trades blows with the best of them."
+  },
+  {
+    "id": "goggled-inventor",
+    "name": "Goggled Inventor",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 1,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "inventor",
+      "mad scientist",
+      "tinkerer",
+      "engineer",
+      "gizmo",
+      "crackpot",
+      "professor"
+    ],
+    "description": "A soot-smeared, goggled inventor with a lab coat, a half-built machine and an enthusiastic, mildly dangerous plan.",
+    "attack": "Spanner",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "gadgets"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Gadget Gambit",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Pulls out an invention with a random effect: the GM rolls a d6 (1: it explodes for d6 damage; 6: it works perfectly)."
+      }
+    ],
+    "tactics": "Fights by throwing gadgets. Will try to explain the plan while being attacked."
+  },
+  {
+    "id": "airship-pirate",
+    "name": "Airship Pirate",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "sky pirate",
+      "air pirate",
+      "airship captain",
+      "corsair",
+      "cloud raider",
+      "balloon pirate",
+      "aeronaut"
+    ],
+    "description": "A goggle-wearing, grapple-gun-swinging raider who boards airships from a patched balloon.",
+    "attack": "Cutlass & flintlock",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+",
+        "note": "climbing"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Boards from above with grappling hooks. Cuts the lines and flees if outnumbered."
+  },
+  {
+    "id": "smog-baron",
+    "name": "Smog Baron",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 5,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "industrialist",
+      "factory owner",
+      "robber baron",
+      "tycoon",
+      "mill owner",
+      "coal baron",
+      "capitalist"
+    ],
+    "description": "A top-hatted, soot-grey mill owner with a cane, a cough and a factory that belches smoke over a whole town.",
+    "attack": "Cane",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bargain"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Smoke Screen",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Fills the area with thick smoke, giving everyone inside cover (disadvantage to ranged attacks) for the battle."
+      }
+    ],
+    "tactics": "Hires thugs and enforcers. Offers a bribe or a dismissal. Never gets his own hands dirty."
+  },
+  {
+    "id": "junk-scavenger",
+    "name": "Junk Scavenger",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "scavenger",
+      "scrapper",
+      "junker",
+      "salvager",
+      "trash picker",
+      "scrap hunter",
+      "gleaner"
+    ],
+    "description": "A patched-leather, goggle-wearing scrapper with a pushcart of junk and a keen eye for anything useful.",
+    "attack": "Pipe wrench",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+",
+        "note": "salvage"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Flees if a fight goes badly. Trades for anything shiny."
+  },
+  {
+    "id": "wasteland-raider",
+    "name": "Wasteland Raider",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "raider",
+      "marauder",
+      "road warrior",
+      "bandit",
+      "scavenger gang",
+      "biker",
+      "wasteland pirate"
+    ],
+    "description": "A spiked-armored, face-painted road thug on a patched-up motorbike with a crowbar and a grudge.",
+    "attack": "Crowbar",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "intimidate"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Rides in packs and swarms its targets. Loots the fallen and runs."
+  },
+  {
+    "id": "wasteland-merchant",
+    "name": "Wasteland Merchant",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 2,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "trader",
+      "caravan",
+      "merchant",
+      "peddler",
+      "shopkeeper",
+      "scrap dealer",
+      "vendor"
+    ],
+    "description": "A bundled-up trader with a pack-mule, a cart of wares and a firm 'no refunds' policy.",
+    "attack": "Rusty pistol",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "bargain"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Patch Kit",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals 2d6 to a player or ally for the price of 1 handful."
+      }
+    ],
+    "tactics": "Avoids fights and bargains first. Sells anything for the right price."
+  },
+  {
+    "id": "glow-husk",
+    "name": "Glow Husk",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 0.5,
+    "flying": false,
+    "aliases": [
+      "feral ghoul",
+      "irradiated",
+      "zombie",
+      "glowing one",
+      "rad ghoul",
+      "irradiated husk"
+    ],
+    "description": "A bloated, sickly-green, once-human shambler that glows in the dark and groans for water.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Shambles in groups. Radiation poisons anyone who touches it."
+  },
+  {
+    "id": "mutant-brute",
+    "name": "Mutant Brute",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "mutant",
+      "super mutant",
+      "hulk",
+      "freak",
+      "brute",
+      "big boy",
+      "twisted"
+    ],
+    "description": "A green-gray, ten-foot, muscle-bound mutant dragging a street sign and screaming for a fight.",
+    "attack": "Street sign",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Charges the nearest target. Easily distracted by shiny things and loud noises."
+  },
+  {
+    "id": "wasteland-warlord",
+    "name": "Wasteland Warlord",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "warlord",
+      "road king",
+      "boss",
+      "chieftain",
+      "road lord",
+      "bandit king",
+      "wasteland king"
+    ],
+    "description": "A scarred, skull-masked king of the wastes with a war-rig, a hundred raiders and a bad temper.",
+    "attack": "Chain axe",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "command"
+      }
+    ],
+    "powers": [
+      {
+        "name": "War Rig Charge",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Drives a rig through the party."
+      }
+    ],
+    "tactics": "Leads from a war-rig. Offers to let the party join or die."
+  },
+  {
+    "id": "bottlecap-hermit",
+    "name": "Bottlecap Hermit",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 1,
+    "tier": 0.25,
+    "flying": false,
+    "aliases": [
+      "hermit",
+      "cap collector",
+      "junk hoarder",
+      "crazy old man",
+      "bottlecap",
+      "wanderer",
+      "packrat"
+    ],
+    "description": "A bearded, jingly old hermit in a coat of sewn-on bottle caps who is absolutely certain they are currency.",
+    "attack": "Rusty fork",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+",
+        "note": "ramble"
+      }
+    ],
+    "powers": [],
+    "tactics": "Offers to trade a cap for anything. Cries if refused."
+  },
+  {
+    "id": "back-alley-surgeon",
+    "name": "Back Alley Surgeon",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "ripperdoc",
+      "street doc",
+      "cyber doctor",
+      "chop shop doc",
+      "mad doctor"
+    ],
+    "description": "A cheerful street doctor with six arms, all of them borrowed.",
+    "attack": "Scalpel",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Stealth",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Quick Patch",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals an ally for 2d6 health, or removes one disadvantage."
+      }
+    ],
+    "tactics": "Patches up allies in the middle of a fight. Gets very invested in whoever has the best implants."
+  },
+  {
+    "id": "tea-room-medium",
+    "name": "Tea Room Medium",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "medium",
+      "seer",
+      "fortune teller",
+      "psychic",
+      "spiritualist",
+      "witch"
+    ],
+    "description": "A kindly widow who runs a seance on Thursdays and hosts something else on Fridays.",
+    "attack": "Teacup Throw",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Borrowed Voice",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. The medium speaks as a dead ally and gives one enemy disadvantage to attack for a turn."
+      }
+    ],
+    "tactics": "Offers biscuits and gossip to calm the room. Calls on the dead for help if guests get rude."
+  },
+  {
+    "id": "grave-clerk",
+    "name": "Grave Clerk",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir",
+      "fantasy"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "undertaker",
+      "clerk",
+      "necromancer",
+      "mortician",
+      "death clerk"
+    ],
+    "description": "A thin clerk who stamps death notices and has never been wrong about a date.",
+    "attack": "Letter Opener",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Might",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Final Notice",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target has disadvantage until the end of the next turn."
+      }
+    ],
+    "tactics": "Reads the names of the group aloud and sets deadlines. Tries to finish the paperwork on whoever is hurt."
+  }
+]
