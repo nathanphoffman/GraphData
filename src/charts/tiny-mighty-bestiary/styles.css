@@ -12,6 +12,7 @@
   --b-aberration: #b53fb0;
   --b-dragon: #d12b5c;
   --b-construct: #1f9aa8;
+  --b-fey: #5b5bd6;
   --b-power: #7c4dcc;
 }
 
@@ -29,6 +30,7 @@
     --b-aberration: #e176dc;
     --b-dragon: #ff6b93;
     --b-construct: #4fd0dd;
+    --b-fey: #8d8dff;
     --b-power: #a88af0;
   }
 }
@@ -82,6 +84,7 @@
 .bestiary-type-aberration { --accent: var(--b-aberration); }
 .bestiary-type-dragon { --accent: var(--b-dragon); }
 .bestiary-type-construct { --accent: var(--b-construct); }
+.bestiary-type-fey { --accent: var(--b-fey); }
 
 .bestiary-key {
   display: flex;

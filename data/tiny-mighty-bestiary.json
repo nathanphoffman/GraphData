@@ -1291,6 +1291,799 @@
         }
       ],
       "tactics": "Lets the troopers soften you up, then walks into the fight. Wants to recruit the strongest player."
+    },
+    {
+      "id": "giggle-sprite",
+      "name": "Giggle Sprite",
+      "type": "fey",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": true,
+      "aliases": [
+        "pixie",
+        "fairy",
+        "faerie",
+        "sprite",
+        "imp",
+        "tinkerbell"
+      ],
+      "description": "A thumb-sized glittering fairy that ties shoelaces together and steals hats.",
+      "attack": "Pinch",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "trick"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Giggle Dust",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. A target that is dusted giggles uncontrollably and has disadvantage on its next roll."
+        }
+      ],
+      "tactics": "Never fights fair. Flees laughing the moment it is caught."
+    },
+    {
+      "id": "bouncy-slime",
+      "name": "Bouncy Slime",
+      "type": "ooze",
+      "themes": [
+        "fantasy",
+        "science-fantasy"
+      ],
+      "tone": 1,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "slime",
+        "blob",
+        "jelly",
+        "gooey",
+        "bouncing",
+        "pudding"
+      ],
+      "description": "A cheerful, wobbling blob that bounces off the walls and likes to be hugged.",
+      "attack": "Bounce",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "cute"
+        }
+      ],
+      "powers": [],
+      "tactics": "Splits into two 0.25-difficulty slimes when hit for 5 or more damage."
+    },
+    {
+      "id": "rainbow-trickster",
+      "name": "Rainbow Trickster",
+      "type": "fey",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 1,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "leprechaun",
+        "gnome",
+        "trickster",
+        "pot of gold",
+        "luck"
+      ],
+      "description": "A little green-coated gent who guards a pot of gold at the end of every rainbow and will trade it for a riddle.",
+      "attack": "Shillelagh",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Lucky Dodge",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Turns the first hit against it into a miss, then it vanishes in a puff of glitter."
+        }
+      ],
+      "tactics": "Would rather bargain than fight. Fights with riddles and bad puns first."
+    },
+    {
+      "id": "mushroom-mayor",
+      "name": "Mushroom Mayor",
+      "type": "fey",
+      "themes": [
+        "fantasy",
+        "science-fantasy"
+      ],
+      "tone": 1,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "myconid",
+        "mushroom",
+        "fungus",
+        "shroom",
+        "toadstool",
+        "spore"
+      ],
+      "description": "A round little mushroom wearing a sash who throws a parade for anyone who visits the village.",
+      "attack": "Cap bonk",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Healing Spores",
+          "type": "heal",
+          "uses": 1,
+          "text": "Heals 2d6 to itself or an ally. Players inhaling the spores also heal 2d6 once per rest."
+        }
+      ],
+      "tactics": "Peaceful. Defends the village by throwing a party that is hard to leave."
+    },
+    {
+      "id": "puff-dragon",
+      "name": "Puff Dragon",
+      "type": "dragon",
+      "themes": [
+        "fantasy",
+        "arthurian",
+        "science-fantasy"
+      ],
+      "tone": 1,
+      "tier": 1,
+      "flying": true,
+      "aliases": [
+        "pseudodragon",
+        "baby dragon",
+        "drake",
+        "whelp",
+        "hatchling",
+        "cute dragon"
+      ],
+      "description": "A cat-sized, sparkly dragon that sneezes small flames and curls up in your hat.",
+      "attack": "Nip",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Tiny Flame Belch",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Lights candles and snacks."
+        }
+      ],
+      "tactics": "Plays at fighting. Bursts into tears if properly scolded."
+    },
+    {
+      "id": "grandpa-giant",
+      "name": "Grandpa Giant",
+      "type": "giant",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 1,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "friendly giant",
+        "bfg",
+        "hill giant",
+        "gentle giant",
+        "big friendly giant"
+      ],
+      "description": "A towering, bearded giant who bakes pies the size of wagon wheels and apologizes when he steps on things.",
+      "attack": "Rolling pin",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Rather bake than brawl. Might join the party if offered a good pie."
+    },
+    {
+      "id": "moonhorn",
+      "name": "Moonhorn",
+      "type": "fey",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 1,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "unicorn",
+        "pegasus",
+        "horse",
+        "pony",
+        "rainbow horse",
+        "magic horse"
+      ],
+      "description": "A white steed with a silver horn, hooves that leave daisies and a cure for any sniffle.",
+      "attack": "Kick",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Healing Horn",
+          "type": "heal",
+          "uses": 1,
+          "text": "Heals 2d6 to any target in reach."
+        }
+      ],
+      "tactics": "Does not like fighting. Only attacks creatures it considers wicked, which it can always tell."
+    },
+    {
+      "id": "beep-bot",
+      "name": "Beep Bot",
+      "type": "construct",
+      "themes": [
+        "space-wars",
+        "scifi"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "r2-d2",
+        "astromech",
+        "astro droid",
+        "droid",
+        "robot sidekick",
+        "little robot"
+      ],
+      "description": "A beeping, domed astro-droid with a screwdriver arm, a projector and an excellent attitude.",
+      "attack": "Shock prod",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "hacking"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Gadget Arm",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Pops out a tool to open locks, hack a door or patch a hull."
+        }
+      ],
+      "tactics": "Sticks with the weakest player. Always has a plan, sometimes it even works."
+    },
+    {
+      "id": "cosmic-whale",
+      "name": "Cosmic Whale",
+      "type": "beast",
+      "themes": [
+        "space-wars",
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 1,
+      "tier": 3,
+      "flying": true,
+      "aliases": [
+        "space whale",
+        "star whale",
+        "spaceship whale",
+        "mothra",
+        "space orca"
+      ],
+      "description": "A starlit, ship-sized whale that sings across the void and hauls tiny cargo ships along in its slipstream.",
+      "attack": "Tail slap",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Peaceful. Fights only if its calves are threatened; otherwise it hums."
+    },
+    {
+      "id": "rat-king",
+      "name": "Rat King",
+      "type": "beast",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 5,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "plague",
+        "vermin",
+        "rat lord",
+        "rat",
+        "swarm",
+        "pied piper"
+      ],
+      "description": "A knot of fused rats with one hundred eyes and one terrible, whispery voice.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "menace"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "smell"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Plague Swarm",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Anyone damaged is poisoned (disadvantage) until it rests."
+        }
+      ],
+      "tactics": "Lurks below cities. Sends rats at the party in waves while it stays in the sewers."
+    },
+    {
+      "id": "bone-sorcerer",
+      "name": "Bone Sorcerer",
+      "type": "undead",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 5,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "lich",
+        "necromancer",
+        "undead king",
+        "skeleton king",
+        "death mage",
+        "archlich"
+      ],
+      "description": "A robed corpse with a crown of fused finger bones and a voice like cold wind through a graveyard.",
+      "attack": "Staff",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Soul Drain",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. Heals the sorcerer for the same amount."
+        },
+        {
+          "name": "Grave Call",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Raises a 0.25 skeleton for every fallen creature."
+        }
+      ],
+      "tactics": "Sends skeletons first. Revives if its phylactery (a hidden item) is not destroyed."
+    },
+    {
+      "id": "blood-noble",
+      "name": "Blood Noble",
+      "type": "undead",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 5,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "vampire",
+        "dracula",
+        "count",
+        "nosferatu",
+        "bloodsucker",
+        "strigoi"
+      ],
+      "description": "A pale lord in a velvet cloak who has not seen a sunrise for six hundred years.",
+      "attack": "Claws",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hypnotic gaze"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Blood Drain",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. Heals the noble for the same amount."
+        },
+        {
+          "name": "Mist Form",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Turns to mist, ignoring the next attack and slipping through cracks."
+        }
+      ],
+      "tactics": "Appears charming, then bites. Weak to sunlight, running water and silver stakes."
+    },
+    {
+      "id": "grave-knight",
+      "name": "Grave Knight",
+      "type": "undead",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 5,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "death knight",
+        "wight",
+        "black knight",
+        "revenant",
+        "cursed knight",
+        "undead knight"
+      ],
+      "description": "A rust-black knight with burning blue eyes, sworn to a lord who died a thousand years ago.",
+      "attack": "Cursed greatsword",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "fear"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Challenges the strongest player to single combat. Never retreats, never surrenders."
+    },
+    {
+      "id": "hellspawn",
+      "name": "Hellspawn",
+      "type": "monstrosity",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 5,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "demon",
+        "devil",
+        "balor",
+        "fiend",
+        "hellspawn",
+        "imp lord",
+        "archdevil"
+      ],
+      "description": "A horned, smoldering fiend with bat wings and a ledger of souls.",
+      "attack": "Flaming whip",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "deals"
+        },
+        {
+          "skill": "Physique",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Hellfire",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Sets terrain alight."
+        },
+        {
+          "name": "Soul Bargain",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Offers a player a deal; if accepted, it gets one favor from them later."
+        }
+      ],
+      "tactics": "Offers a deal before the fight, and again when losing. Cannot be killed on its home plane."
+    },
+    {
+      "id": "void-tentacle",
+      "name": "Void Tentacle",
+      "type": "aberration",
+      "themes": [
+        "fantasy",
+        "science-fantasy",
+        "scifi"
+      ],
+      "tone": 5,
+      "tier": 4,
+      "flying": false,
+      "aliases": [
+        "cthulhu",
+        "elder thing",
+        "shoggoth",
+        "eldritch",
+        "lovecraft",
+        "elder god",
+        "old one",
+        "star spawn"
+      ],
+      "description": "A shifting pile of writhing limbs, eyes and teeth that does not obey geometry and whispers numbers no one should know.",
+      "attack": "Tentacle lash",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "madness"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "skillNote": "Players who look directly at it have disadvantage on their next roll.",
+      "powers": [
+        {
+          "name": "Madness Gaze",
+          "type": "area",
+          "uses": 1,
+          "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Damaged players are frightened (disadvantage) until they rest."
+        },
+        {
+          "name": "Writhing Grab",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Grabbed targets must win a Physique challenge to break free."
+        }
+      ],
+      "tactics": "Not a fight to win but a nightmare to survive. Flees if you have a way to banish it."
+    },
+    {
+      "id": "hive-stalker",
+      "name": "Hive Stalker",
+      "type": "beast",
+      "themes": [
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 5,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "xenomorph",
+        "alien",
+        "facehugger",
+        "chestburster",
+        "bug",
+        "acid blood",
+        "queen"
+      ],
+      "description": "A sleek black insectoid hunter with a second set of jaws, acid for blood and an unblinking, eyeless face.",
+      "attack": "Tail stab",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide in the dark"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Acid Blood",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Whoever hits it in melee for 5 or more takes d6 damage and loses an item."
+        }
+      ],
+      "tactics": "Stalks from vents and ceilings. Drags one victim away at a time to the nest."
+    },
+    {
+      "id": "dread-lord",
+      "name": "Dread Lord",
+      "type": "humanoid",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 5,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "darth vader",
+        "sith lord",
+        "emperor",
+        "dark lord",
+        "dark side",
+        "vader",
+        "space tyrant"
+      ],
+      "description": "A towering figure in black armor with a breath mask, a crimson blade and an army that fears him more than the enemy.",
+      "attack": "Crimson blade",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "fear"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Choke Grip",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target is lifted and cannot move."
+        }
+      ],
+      "tactics": "Lets underlings fail. Always offers the strongest player a place at his side."
+    },
+    {
+      "id": "swamp-hag",
+      "name": "Swamp Hag",
+      "type": "fey",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 5,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "witch",
+        "hag",
+        "crone",
+        "green hag",
+        "baba yaga",
+        "sea hag",
+        "sorceress"
+      ],
+      "description": "A hunched, moss-draped woman with an iron cauldron, a bone-hut on chicken legs and a very patient grin.",
+      "attack": "Claws",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "bargains"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Wicked Curse",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. A target is cursed: disadvantage on one skill until the hag is slain or a favor is paid."
+        }
+      ],
+      "tactics": "Offers a drink or a bargain. Eats children and the foolish, in that order."
     }
   ],
   "creatureTypes": [
@@ -1329,6 +2122,10 @@
     {
       "id": "construct",
       "label": "Construct"
+    },
+    {
+      "id": "fey",
+      "label": "Fey"
     }
   ],
   "themes": [
