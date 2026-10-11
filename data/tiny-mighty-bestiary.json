@@ -61,6 +61,17 @@
       "healthDice": "8d6",
       "bonus": 4,
       "bonusDice": "d6"
+    },
+    {
+      "difficulty": 5,
+      "turns": 4,
+      "defense": 7,
+      "defenseDice": "d6+3",
+      "health": 35,
+      "healthDice": "10d6",
+      "bonus": 5,
+      "bonusDice": "d6+1",
+      "extended": true
     }
   ],
   "powerTypes": {
@@ -90,6 +101,11 @@
       "id": "giant-rat",
       "name": "Giant Rat",
       "type": "beast",
+      "themes": [
+        "fantasy",
+        "scifi"
+      ],
+      "tone": 3,
       "tier": 0.25,
       "flying": false,
       "description": "A dog-sized sewer scavenger that swarms anything that looks like dinner.",
@@ -118,6 +134,11 @@
       "id": "goblin",
       "name": "Goblin",
       "type": "humanoid",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 2,
       "tier": 0.5,
       "flying": false,
       "description": "A sneaky, cackling raider with a rusty knife and a talent for ambush.",
@@ -141,6 +162,11 @@
       "id": "skeleton",
       "name": "Skeleton",
       "type": "undead",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 4,
       "tier": 1,
       "flying": false,
       "description": "Animated bones with a notched sword and no will of its own.",
@@ -167,6 +193,10 @@
       "id": "orc",
       "name": "Orc Warrior",
       "type": "humanoid",
+      "themes": [
+        "fantasy"
+      ],
+      "tone": 3,
       "tier": 1,
       "flying": false,
       "description": "A scarred brute in mismatched armor who loves a straight fight.",
@@ -195,6 +225,11 @@
       "id": "giant-spider",
       "name": "Giant Spider",
       "type": "beast",
+      "themes": [
+        "fantasy",
+        "scifi"
+      ],
+      "tone": 4,
       "tier": 1,
       "flying": false,
       "description": "A wall-crawling ambusher that wraps its prey in silk and bites from above.",
@@ -230,6 +265,11 @@
       "id": "ogre",
       "name": "Ogre",
       "type": "giant",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 3,
       "tier": 2,
       "flying": false,
       "description": "A lumbering giant with a club made from a small tree.",
@@ -261,6 +301,12 @@
       "id": "ghost",
       "name": "Restless Ghost",
       "type": "undead",
+      "themes": [
+        "fantasy",
+        "arthurian",
+        "science-fantasy"
+      ],
+      "tone": 4,
       "tier": 2,
       "flying": true,
       "description": "A pale shape drifting through the walls of the house it died in.",
@@ -298,6 +344,11 @@
       "id": "troll",
       "name": "Cave Troll",
       "type": "giant",
+      "themes": [
+        "fantasy",
+        "arthurian"
+      ],
+      "tone": 3,
       "tier": 3,
       "flying": false,
       "description": "A hulking, warty monster whose wounds close faster than they open.",
@@ -335,6 +386,12 @@
       "id": "dragon",
       "name": "Dragon",
       "type": "dragon",
+      "themes": [
+        "fantasy",
+        "arthurian",
+        "science-fantasy"
+      ],
+      "tone": 4,
       "tier": 4,
       "flying": true,
       "description": "An ancient scaled tyrant sitting on a mountain of coin.",
@@ -372,9 +429,13 @@
       ]
     },
     {
-      "id": "hootclaw",
-      "name": "Hootclaw",
+      "id": "owlbear",
+      "name": "Owlbear",
       "type": "monstrosity",
+      "themes": [
+        "fantasy"
+      ],
+      "tone": 3,
       "tier": 2,
       "flying": false,
       "aliases": [
@@ -404,6 +465,11 @@
       "id": "chest-lurker",
       "name": "Chest Lurker",
       "type": "monstrosity",
+      "themes": [
+        "fantasy",
+        "science-fantasy"
+      ],
+      "tone": 2,
       "tier": 1,
       "flying": false,
       "aliases": [
@@ -439,6 +505,12 @@
       "id": "jelly-block",
       "name": "Jelly Block",
       "type": "ooze",
+      "themes": [
+        "fantasy",
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 2,
       "tier": 1,
       "flying": false,
       "aliases": [
@@ -475,6 +547,11 @@
       "id": "ore-muncher",
       "name": "Ore Muncher",
       "type": "monstrosity",
+      "themes": [
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 1,
       "tier": 0.5,
       "flying": false,
       "aliases": [
@@ -506,6 +583,12 @@
       "id": "blink-cat",
       "name": "Blink Cat",
       "type": "beast",
+      "themes": [
+        "fantasy",
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 3,
       "tier": 1,
       "flying": false,
       "aliases": [
@@ -539,6 +622,11 @@
       "id": "stone-gazer",
       "name": "Stone Gazer",
       "type": "monstrosity",
+      "themes": [
+        "fantasy",
+        "science-fantasy"
+      ],
+      "tone": 4,
       "tier": 2,
       "flying": false,
       "aliases": [
@@ -576,6 +664,12 @@
       "id": "brain-drinker",
       "name": "Brain Drinker",
       "type": "aberration",
+      "themes": [
+        "scifi",
+        "science-fantasy",
+        "space-wars"
+      ],
+      "tone": 5,
       "tier": 2,
       "flying": false,
       "aliases": [
@@ -622,6 +716,12 @@
       "id": "eye-tyrant",
       "name": "Eye Tyrant",
       "type": "aberration",
+      "themes": [
+        "fantasy",
+        "scifi",
+        "science-fantasy"
+      ],
+      "tone": 5,
       "tier": 3,
       "flying": true,
       "aliases": [
@@ -668,6 +768,529 @@
         }
       ],
       "tactics": "Hovers out of reach and treats the party as insects. Keep it from facing the caster."
+    },
+    {
+      "id": "mountain-dinosaur",
+      "name": "Mountain Dinosaur",
+      "type": "monstrosity",
+      "themes": [
+        "fantasy",
+        "science-fantasy"
+      ],
+      "tone": 4,
+      "tier": 5,
+      "flying": false,
+      "aliases": [
+        "tarrasque",
+        "tarasque",
+        "kaiju",
+        "titan",
+        "colossus",
+        "godzilla",
+        "behemoth",
+        "world ender",
+        "dinosaur",
+        "dino",
+        "mountain eater"
+      ],
+      "description": "A spiked, horned, mountain-sized horror that sleeps for centuries and wakes up hungry.",
+      "attack": "Horn, bite & tail",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Earthshaking Charge",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense. Everything it runs through is flattened."
+        },
+        {
+          "name": "Mirror Shell",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Reflects the first ray, bolt or beam that hits it back at whoever fired it."
+        }
+      ],
+      "tactics": "Not a fight, a disaster. Players should run, plan, or find a way to put it back to sleep."
+    },
+    {
+      "id": "chrome-trooper",
+      "name": "Chrome Trooper",
+      "type": "humanoid",
+      "themes": [
+        "space-wars",
+        "scifi"
+      ],
+      "tone": 3,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "stormtrooper",
+        "trooper",
+        "clone",
+        "soldier",
+        "imperial"
+      ],
+      "description": "A white-armored soldier in a faceless helmet, bought by the thousand and trained to shoot just past you.",
+      "attack": "Blaster rifle",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "-",
+          "note": "helmet visor"
+        }
+      ],
+      "powers": [],
+      "tactics": "Arrives in squads of four or more. Rolls disadvantage on attacks beyond one pencil length."
+    },
+    {
+      "id": "battle-clank",
+      "name": "Battle Clank",
+      "type": "construct",
+      "themes": [
+        "space-wars",
+        "scifi"
+      ],
+      "tone": 2,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "battle droid",
+        "droid",
+        "robot",
+        "android",
+        "clanker",
+        "b1"
+      ],
+      "description": "A spindly, rattling combat robot that surrenders only when its head is knocked off.",
+      "attack": "Wrist blaster",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Targeting Sweep",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense."
+        }
+      ],
+      "tactics": "Marches in a line and shoots whoever stands closest. Shuts down at 0 health."
+    },
+    {
+      "id": "fuzz-warrior",
+      "name": "Fuzz Warrior",
+      "type": "humanoid",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 1,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "ewok",
+        "teddy bear",
+        "forest",
+        "tribal",
+        "furry"
+      ],
+      "description": "A knee-high, fuzzy forest dweller with a spear, a drum and fearsome traps.",
+      "attack": "Spear",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "traps"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide"
+        }
+      ],
+      "powers": [],
+      "tactics": "Fights from the treetops. Always has a net, a log or a boulder ready for something big."
+    },
+    {
+      "id": "cave-sucker",
+      "name": "Cave Sucker",
+      "type": "beast",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 2,
+      "tier": 0.25,
+      "flying": true,
+      "aliases": [
+        "mynock",
+        "space bat",
+        "bat",
+        "parasite"
+      ],
+      "description": "A leathery, bat-winged leech that eats power cables and ship hulls.",
+      "attack": "Drain bite",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Clings to ships and gnaws wiring. Gets disturbed by loud noise."
+    },
+    {
+      "id": "frost-strider",
+      "name": "Frost Strider",
+      "type": "beast",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 1,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "tauntaun",
+        "snow lizard",
+        "ice lizard",
+        "mount",
+        "steed"
+      ],
+      "description": "A shaggy, two-legged snow lizard ridden across the ice fields.",
+      "attack": "Kick",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+",
+          "note": "athletics"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Sturdy mount in the cold. Drops dead if left out in the open overnight."
+    },
+    {
+      "id": "snow-mauler",
+      "name": "Snow Mauler",
+      "type": "beast",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "wampa",
+        "yeti",
+        "abominable snowman",
+        "ice monster",
+        "snow beast"
+      ],
+      "description": "A white-furred ice-field hunter that hauls prey back to a cave for later.",
+      "attack": "Claw swipe",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "hear"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Grabs one target and drags it off. Players that cut it free have advantage to escape."
+    },
+    {
+      "id": "pit-gorger",
+      "name": "Pit Gorger",
+      "type": "monstrosity",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "rancor",
+        "pit monster",
+        "arena beast",
+        "gladiator beast"
+      ],
+      "description": "A bellowing, long-armed brute kept in a dungeon pit and fed anything that falls in.",
+      "attack": "Claw & jaws",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Grabs a player and eats them next turn unless they get free with a Physique challenge."
+    },
+    {
+      "id": "sand-maw",
+      "name": "Sand Maw",
+      "type": "monstrosity",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "sarlacc",
+        "sand pit",
+        "desert pit",
+        "great pit"
+      ],
+      "description": "A tooth-ringed pit in the desert sand hiding a creature that takes a thousand years to digest a meal.",
+      "attack": "Tentacle lash",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "skillNote": "Cannot move from its pit.",
+      "powers": [
+        {
+          "name": "Swallow",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target is pulled in and stuck until freed."
+        }
+      ],
+      "tactics": "Never moves. Anything that walks over the edge of the pit is dragged in."
+    },
+    {
+      "id": "dune-wyrm",
+      "name": "Dune Wyrm",
+      "type": "dragon",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 3,
+      "tier": 4,
+      "flying": false,
+      "aliases": [
+        "krayt dragon",
+        "sandworm",
+        "desert dragon",
+        "worm",
+        "dune"
+      ],
+      "description": "A cliff-sized horned desert serpent whose belly is full of pearls and bones.",
+      "attack": "Bite & tail",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Burrow",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Disappears under the sand and may reappear anywhere within 3 pencil lengths."
+        }
+      ],
+      "tactics": "Erupts from underneath. Retreats into the sand when badly hurt."
+    },
+    {
+      "id": "slug-lord",
+      "name": "Slug Lord",
+      "type": "monstrosity",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 4,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "hutt",
+        "jabba",
+        "crime lord",
+        "crime boss",
+        "gangster",
+        "slug"
+      ],
+      "description": "A massive, slug-like crime boss who lounges on a dais surrounded by hired muscle.",
+      "attack": "Tail slam",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-",
+          "note": "speed"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Hired Muscle",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Calls in two Chrome Troopers or Battle Clanks (0.25 difficulty each)."
+        }
+      ],
+      "tactics": "Never fights alone. Offers a deal, then reaches for the trapdoor lever."
+    },
+    {
+      "id": "mask-hunter",
+      "name": "Mask Hunter",
+      "type": "humanoid",
+      "themes": [
+        "space-wars",
+        "scifi"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "bounty hunter",
+        "mandalorian",
+        "boba fett",
+        "jango",
+        "space cowboy",
+        "hunter"
+      ],
+      "description": "A lone figure in battered armor and a mask, with a jetpack, a wrist rocket and a contract.",
+      "attack": "Blaster pistol",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+",
+          "note": "tracking"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "skillNote": "Jetpack lets it fly for 15 minutes or one battle.",
+      "powers": [
+        {
+          "name": "Wrist Rockets",
+          "type": "multi",
+          "uses": 1,
+          "text": "Multi-target 3d6, one die per target, ignores defense."
+        }
+      ],
+      "tactics": "Captures if paid to. Escapes by jetpack when losing."
+    },
+    {
+      "id": "dusk-monk",
+      "name": "Dusk Monk",
+      "type": "humanoid",
+      "themes": [
+        "space-wars",
+        "science-fantasy"
+      ],
+      "tone": 5,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "sith",
+        "jedi",
+        "dark jedi",
+        "force user",
+        "lightsaber",
+        "dark lord",
+        "space wizard"
+      ],
+      "description": "A hooded warrior in black robes with a humming blade of colored light and a magnetic grip on the world.",
+      "attack": "Light-blade",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Mind Grip",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. Telekinetic choke or push."
+        },
+        {
+          "name": "Blade Deflect",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Turns the first blaster shot at it back at the shooter."
+        }
+      ],
+      "tactics": "Lets the troopers soften you up, then walks into the fight. Wants to recruit the strongest player."
     }
   ],
   "creatureTypes": [
@@ -702,6 +1325,39 @@
     {
       "id": "dragon",
       "label": "Dragon"
+    },
+    {
+      "id": "construct",
+      "label": "Construct"
     }
+  ],
+  "themes": [
+    {
+      "id": "fantasy",
+      "label": "Fantasy"
+    },
+    {
+      "id": "arthurian",
+      "label": "Arthurian"
+    },
+    {
+      "id": "scifi",
+      "label": "Sci-Fi"
+    },
+    {
+      "id": "science-fantasy",
+      "label": "Science-Fantasy"
+    },
+    {
+      "id": "space-wars",
+      "label": "Space Wars"
+    }
+  ],
+  "toneScale": [
+    "Whimsy",
+    "Lean-Whimsy",
+    "Neutral",
+    "Lean-Dark",
+    "Dark"
   ]
 }

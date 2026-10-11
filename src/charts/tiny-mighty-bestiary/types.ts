@@ -6,6 +6,11 @@ export interface CreatureType {
   label: string;
 }
 
+export interface Theme {
+  id: string;
+  label: string;
+}
+
 export interface Tier {
   difficulty: number;
   turns: number;
@@ -15,6 +20,8 @@ export interface Tier {
   healthDice: string;
   bonus: number;
   bonusDice: string;
+  /** True when this row is extrapolated past the printed combat table. */
+  extended?: boolean;
 }
 
 export interface Power {
@@ -38,6 +45,10 @@ export interface Creature {
   name: string;
   /** Id from `creatureTypes`; sets the card color. */
   type: string;
+  /** Ids from `themes`; a creature can fit several. */
+  themes: string[];
+  /** 1 (Whimsy) to 5 (Dark); an index into `toneScale` plus one. */
+  tone: number;
   /** Base difficulty from the combat table, before powers. */
   tier: number;
   flying: boolean;
@@ -55,6 +66,9 @@ export interface Creature {
 export interface BestiaryData {
   title: string;
   rulesVersion: string;
+  /** Labels for tone 1-5, lightest first. */
+  toneScale: string[];
+  themes: Theme[];
   creatureTypes: CreatureType[];
   tiers: Tier[];
   powerTypes: Record<PowerType, { label: string; dice: string }>;
