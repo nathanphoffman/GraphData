@@ -7908,6 +7908,1203 @@
         }
       ],
       "tactics": "Walks in a straight line and ignores small targets. Only turns if hit by something big."
+    },
+    {
+      "id": "shellback",
+      "name": "Shellback",
+      "type": "monster",
+      "themes": [
+        "age-of-sail",
+        "fantasy"
+      ],
+      "tone": 2,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "barnacle",
+        "sea creature",
+        "shell monster",
+        "reef monster",
+        "giant turtle",
+        "armored crab",
+        "barnacle beast"
+      ],
+      "description": "A barnacle-crusted, rock-colored sea creature that looks exactly like a reef until it rolls over and snaps.",
+      "attack": "Claw snap",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide as reef"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Waits at low tide in shallow water. Hides in its shell if it is hurt."
+    },
+    {
+      "id": "stormbird",
+      "name": "Stormbird",
+      "type": "monster",
+      "themes": [
+        "age-of-sail",
+        "fantasy"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": true,
+      "aliases": [
+        "albatross",
+        "giant bird",
+        "storm bird",
+        "sea eagle",
+        "omen bird",
+        "giant seabird",
+        "gull"
+      ],
+      "description": "A ship-sized, grey-winged seabird that rides storm fronts and follows doomed ships for days.",
+      "attack": "Beak & talons",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "omen"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Circles a ship until a storm rolls in. Attacks only at the worst moment."
+    },
+    {
+      "id": "hull-crusher",
+      "name": "Hull-Crusher",
+      "type": "monster",
+      "themes": [
+        "age-of-sail",
+        "fantasy"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "kraken",
+        "giant squid",
+        "squid",
+        "octopus",
+        "sea monster",
+        "tentacle beast",
+        "ship killer"
+      ],
+      "description": "A cabin-sized, ten-armed sea monster that wraps a ship's hull and squeezes until it cracks.",
+      "attack": "Tentacle",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Ink Cloud",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Fills the water with a black cloud. All within sight have disadvantage to see or aim for a turn."
+        }
+      ],
+      "tactics": "Strikes from below. Drags a ship's crew into the water one at a time."
+    },
+    {
+      "id": "soot-pigeon",
+      "name": "Soot Pigeon",
+      "type": "beast",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": true,
+      "aliases": [
+        "pigeon",
+        "city pigeon",
+        "messenger bird",
+        "street bird",
+        "rooftop bird",
+        "sooty bird"
+      ],
+      "description": "A grubby, sooty pigeon with a tiny brass message tube strapped to one leg and a very big attitude.",
+      "attack": "Peck",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "bluster"
+        }
+      ],
+      "powers": [],
+      "tactics": "Steals crumbs and delivers the occasional message. Flocks in large numbers."
+    },
+    {
+      "id": "iron-draft-horse",
+      "name": "Iron Draft Horse",
+      "type": "beast",
+      "themes": [
+        "steampunk"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "horse",
+        "carriage horse",
+        "draft horse",
+        "workhorse",
+        "cart horse",
+        "steed",
+        "brass horse"
+      ],
+      "description": "A massive, calm draft horse with iron-shod hooves and a brass-plated leg brace, hauling a steam carriage.",
+      "attack": "Kick",
+      "skills": [
+        {
+          "skill": "Physique",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Stands its ground. Bolts if frightened by a loud bang or steam whistle."
+    },
+    {
+      "id": "smog-hound",
+      "name": "Smog Hound",
+      "type": "beast",
+      "themes": [
+        "steampunk",
+        "fantasy"
+      ],
+      "tone": 4,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "dog",
+        "black dog",
+        "smog dog",
+        "foggy hound",
+        "night dog",
+        "phantom hound",
+        "street hound"
+      ],
+      "description": "A black, sooty, ember-eyed hound that prowls the fogged streets of a coal town.",
+      "attack": "Bite",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+",
+          "note": "smell"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide in fog"
+        }
+      ],
+      "powers": [],
+      "tactics": "Hunts at night, in fog. Loses the track in clean air."
+    },
+    {
+      "id": "glow-wraith",
+      "name": "Glow Wraith",
+      "type": "otherworldly",
+      "themes": [
+        "post-apocalypse",
+        "science-fantasy"
+      ],
+      "tone": 5,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "radiation ghost",
+        "rad ghost",
+        "spirit",
+        "wraith",
+        "ghost",
+        "glowing ghost",
+        "wasteland spirit"
+      ],
+      "description": "A flickering, green-white ghost that rises from a blast crater and burns everything it touches.",
+      "attack": "Rad touch",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "hide"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Rad Burn",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target is irradiated (disadvantage) until it rests."
+        }
+      ],
+      "tactics": "Haunts craters and ruined reactors. Cannot leave the place it died."
+    },
+    {
+      "id": "dust-oracle",
+      "name": "Dust Oracle",
+      "type": "otherworldly",
+      "themes": [
+        "post-apocalypse",
+        "science-fantasy"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "oracle",
+        "wasteland spirit",
+        "desert spirit",
+        "sand spirit",
+        "prophet",
+        "dust spirit",
+        "wind seer"
+      ],
+      "description": "A swirling, human-shaped dust devil that speaks in the voices of the dead and always tells the truth, eventually.",
+      "attack": "Sand lash",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Physique",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Dust Vision",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. Shows a player one true vision about the past or future of a place or person."
+        }
+      ],
+      "tactics": "Neutral. Wants a gift or a favor in return. Scatters if disturbed too much."
+    },
+    {
+      "id": "bottlecap-hermit",
+      "name": "Bottlecap Hermit",
+      "type": "humanoid",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "hermit",
+        "cap collector",
+        "junk hoarder",
+        "crazy old man",
+        "bottlecap",
+        "wanderer",
+        "packrat"
+      ],
+      "description": "A bearded, jingly old hermit in a coat of sewn-on bottle caps who is absolutely certain they are currency.",
+      "attack": "Rusty fork",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "ramble"
+        }
+      ],
+      "powers": [],
+      "tactics": "Offers to trade a cap for anything. Cries if refused."
+    },
+    {
+      "id": "tin-can-pup",
+      "name": "Tin Can Pup",
+      "type": "animated",
+      "themes": [
+        "post-apocalypse"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": false,
+      "aliases": [
+        "robot dog",
+        "toy dog",
+        "robot pup",
+        "mascot",
+        "companion",
+        "robo pup",
+        "tin dog"
+      ],
+      "description": "A wobbly dog made of two tin cans, a spring and a pair of headlight eyes that wags its tail in circles.",
+      "attack": "Nibble",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+",
+          "note": "cute"
+        }
+      ],
+      "powers": [],
+      "tactics": "Follows anyone who is kind to it. Barks at everything, including its own tail."
+    },
+    {
+      "id": "vending-machine-mimic",
+      "name": "Vending Machine Mimic",
+      "type": "monster",
+      "themes": [
+        "cyberpunk"
+      ],
+      "tone": 1,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "mimic",
+        "vending machine",
+        "snack machine",
+        "ambush"
+      ],
+      "description": "A street-corner snack dispenser with far too many teeth behind the coin slot.",
+      "attack": "Chomp",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        }
+      ],
+      "powers": [],
+      "tactics": "Waits until someone feeds it coins, then swallows the whole arm. Spits out a single stale chip as an apology."
+    },
+    {
+      "id": "neon-koi",
+      "name": "Neon Koi",
+      "type": "animated",
+      "themes": [
+        "cyberpunk"
+      ],
+      "tone": 2,
+      "tier": 0.5,
+      "flying": true,
+      "aliases": [
+        "hologram",
+        "holo fish",
+        "ghost fish",
+        "ad bot"
+      ],
+      "description": "A glowing holographic fish that swims through the air advertising noodles.",
+      "attack": "Zap Tail",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Drifts around crowds and pesters them. Pops with a static buzz if anyone pokes it."
+    },
+    {
+      "id": "chrome-rat-king",
+      "name": "Chrome Rat King",
+      "type": "beast",
+      "themes": [
+        "cyberpunk"
+      ],
+      "tone": 3,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "rat king",
+        "giant rat",
+        "sewer king",
+        "cyber rat"
+      ],
+      "description": "A knot of cybernetic rats wired into one scheming sewer lord.",
+      "attack": "Gnaw Swarm",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Stealth",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Rat Flood",
+          "type": "area",
+          "uses": 1,
+          "text": "Area 2d6 damage to all enemies, ignores defense."
+        }
+      ],
+      "tactics": "Sends rats in first to cut wires and steal gear, then bursts out of the drain when the group is split up."
+    },
+    {
+      "id": "ghost-in-the-wire",
+      "name": "Ghost in the Wire",
+      "type": "otherworldly",
+      "themes": [
+        "cyberpunk"
+      ],
+      "tone": 4,
+      "tier": 2,
+      "flying": true,
+      "aliases": [
+        "rogue ai",
+        "digital ghost",
+        "ghost",
+        "spirit",
+        "net wraith"
+      ],
+      "description": "The leftover mind of a dead hacker that now lives in the city power grid.",
+      "attack": "Static Touch",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Blackout",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. All lights and electronics in sight go dark for a turn. Everyone has disadvantage to see or aim."
+        }
+      ],
+      "tactics": "Flickers lights and locks doors to split the party, then hits whoever is standing near a socket."
+    },
+    {
+      "id": "data-courier-drone",
+      "name": "Data Courier Drone",
+      "type": "animated",
+      "themes": [
+        "cyberpunk",
+        "scifi"
+      ],
+      "tone": 2,
+      "tier": 0.5,
+      "flying": true,
+      "aliases": [
+        "drone",
+        "delivery drone",
+        "quadcopter",
+        "robot",
+        "flying robot"
+      ],
+      "description": "A flying delivery bot with a locked package and a very short temper about being late.",
+      "attack": "Rotor Slap",
+      "skills": [
+        {
+          "skill": "Speed",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Tries to deliver its package to the right person and ignores everyone else. Fights only if the package is threatened."
+    },
+    {
+      "id": "back-alley-surgeon",
+      "name": "Back Alley Surgeon",
+      "type": "humanoid",
+      "themes": [
+        "cyberpunk"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "ripperdoc",
+        "street doc",
+        "cyber doctor",
+        "chop shop doc",
+        "mad doctor"
+      ],
+      "description": "A cheerful street doctor with six arms, all of them borrowed.",
+      "attack": "Scalpel",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Stealth",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Quick Patch",
+          "type": "heal",
+          "uses": 1,
+          "text": "Heals an ally for 2d6 health, or removes one disadvantage."
+        }
+      ],
+      "tactics": "Patches up allies in the middle of a fight. Gets very invested in whoever has the best implants."
+    },
+    {
+      "id": "lamp-post-ghoul",
+      "name": "Lamp Post Ghoul",
+      "type": "otherworldly",
+      "themes": [
+        "occult-noir"
+      ],
+      "tone": 2,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "ghoul",
+        "ghost",
+        "lamplighter",
+        "street spirit",
+        "wraith"
+      ],
+      "description": "A tall pale figure that stands under broken street lamps, softly humming to itself.",
+      "attack": "Cold Touch",
+      "skills": [
+        {
+          "skill": "Stealth",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Only moves when nobody is looking right at it. Follows anyone who stops to hum along."
+    },
+    {
+      "id": "library-silverfish",
+      "name": "Library Silverfish",
+      "type": "beast",
+      "themes": [
+        "occult-noir"
+      ],
+      "tone": 1,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "silverfish",
+        "bookworm",
+        "book bug",
+        "paper bug",
+        "insect"
+      ],
+      "description": "A silver bug the size of a cat that nibbles forbidden books and burps whispers.",
+      "attack": "Nibble",
+      "skills": [
+        {
+          "skill": "Stealth",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        },
+        {
+          "skill": "Speed",
+          "mod": "+"
+        }
+      ],
+      "powers": [],
+      "tactics": "Scurries between shelves and hides in the dark. Hisses a few words of old tongue if squished."
+    },
+    {
+      "id": "tea-room-medium",
+      "name": "Tea Room Medium",
+      "type": "humanoid",
+      "themes": [
+        "occult-noir"
+      ],
+      "tone": 2,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "medium",
+        "seer",
+        "fortune teller",
+        "psychic",
+        "spiritualist",
+        "witch"
+      ],
+      "description": "A kindly widow who runs a seance on Thursdays and hosts something else on Fridays.",
+      "attack": "Teacup Throw",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Borrowed Voice",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. The medium speaks as a dead ally and gives one enemy disadvantage to attack for a turn."
+        }
+      ],
+      "tactics": "Offers biscuits and gossip to calm the room. Calls on the dead for help if guests get rude."
+    },
+    {
+      "id": "tentacled-bellhop",
+      "name": "Tentacled Bellhop",
+      "type": "monster",
+      "themes": [
+        "occult-noir"
+      ],
+      "tone": 2,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "tentacle",
+        "squid man",
+        "cultist",
+        "octopus",
+        "servant"
+      ],
+      "description": "A nervous bellhop in a tight uniform whose coat is hiding too many arms.",
+      "attack": "Bag Swing",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Speed",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Many Hands",
+          "type": "multi",
+          "uses": 1,
+          "text": "Attacks up to three enemies this turn with normal damage."
+        }
+      ],
+      "tactics": "Carries bags, opens doors and holds six things at once. Gets very polite and then very violent if tipped badly."
+    },
+    {
+      "id": "midnight-radio",
+      "name": "Midnight Radio",
+      "type": "animated",
+      "themes": [
+        "occult-noir"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "haunted radio",
+        "cursed radio",
+        "possessed object",
+        "voice",
+        "broadcast"
+      ],
+      "description": "An old wooden radio that only picks up a station that has not aired in fifty years.",
+      "attack": "Static Burst",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        },
+        {
+          "skill": "Speed",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Signal Scream",
+          "type": "area",
+          "uses": 1,
+          "text": "Area 2d6 damage to all enemies, ignores defense."
+        }
+      ],
+      "tactics": "Plays a calm voice that makes the group uneasy, then turns the volume up."
+    },
+    {
+      "id": "mannequin-butler",
+      "name": "Mannequin Butler",
+      "type": "animated",
+      "themes": [
+        "occult-noir",
+        "steampunk"
+      ],
+      "tone": 3,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "mannequin",
+        "butler",
+        "automaton",
+        "doll",
+        "living statue"
+      ],
+      "description": "A stiff mannequin in a tailcoat that keeps clean, serves tea and never blinks.",
+      "attack": "Silver Tray",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Polite until the door is locked. Then it rearranges the furniture and the guests."
+    },
+    {
+      "id": "grave-clerk",
+      "name": "Grave Clerk",
+      "type": "humanoid",
+      "themes": [
+        "occult-noir",
+        "fantasy"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "undertaker",
+        "clerk",
+        "necromancer",
+        "mortician",
+        "death clerk"
+      ],
+      "description": "A thin clerk who stamps death notices and has never been wrong about a date.",
+      "attack": "Letter Opener",
+      "skills": [
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Final Notice",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target has disadvantage until the end of the next turn."
+        }
+      ],
+      "tactics": "Reads the names of the group aloud and sets deadlines. Tries to finish the paperwork on whoever is hurt."
+    },
+    {
+      "id": "pocket-sprite",
+      "name": "Pocket Sprite",
+      "type": "otherworldly",
+      "themes": [
+        "fantasy"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": true,
+      "aliases": [
+        "fairy",
+        "pixie",
+        "sprite",
+        "faerie",
+        "imp"
+      ],
+      "description": "A thumb-sized prankster that lives in pockets and steals buttons.",
+      "attack": "Pinch",
+      "skills": [
+        {
+          "skill": "Speed",
+          "mod": "+"
+        },
+        {
+          "skill": "Stealth",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Swaps small items between pockets. Giggles when caught and flies away."
+    },
+    {
+      "id": "thunder-ram",
+      "name": "Thunder Ram",
+      "type": "beast",
+      "themes": [
+        "fantasy",
+        "western"
+      ],
+      "tone": 2,
+      "tier": 2,
+      "flying": false,
+      "aliases": [
+        "ram",
+        "goat",
+        "bighorn",
+        "storm goat"
+      ],
+      "description": "A broad mountain ram whose horns crack like lightning.",
+      "attack": "Headbutt",
+      "skills": [
+        {
+          "skill": "Might",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Thunder Charge",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target is knocked back and has disadvantage until it stands."
+        }
+      ],
+      "tactics": "Charges from the high ground and rams into anything that glints."
+    },
+    {
+      "id": "void-sultan",
+      "name": "Void Sultan",
+      "type": "monster",
+      "themes": [
+        "space-wars",
+        "scifi"
+      ],
+      "tone": 5,
+      "tier": 5,
+      "flying": true,
+      "aliases": [
+        "space emperor",
+        "sith",
+        "dark lord",
+        "emperor",
+        "star tyrant"
+      ],
+      "description": "A masked ruler of a hundred worlds who bends starlight into a throne and does not rise from it.",
+      "attack": "Star Blade",
+      "skills": [
+        {
+          "skill": "Might",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Speed",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Starfall",
+          "type": "area",
+          "uses": 1,
+          "text": "Area 2d6 damage to all enemies, ignores defense."
+        },
+        {
+          "name": "Dark Grip",
+          "type": "direct",
+          "uses": 1,
+          "text": "Direct-target 2d6 damage, ignores defense. The target cannot move next turn."
+        }
+      ],
+      "tactics": "Lets his guards fight first. Gets bored, stands and ends the fight in two moves."
+    },
+    {
+      "id": "sludge-pup",
+      "name": "Sludge Pup",
+      "type": "beast",
+      "themes": [
+        "post-apocalypse",
+        "scifi"
+      ],
+      "tone": 2,
+      "tier": 0.5,
+      "flying": false,
+      "aliases": [
+        "slime",
+        "ooze pup",
+        "mutant",
+        "puppy"
+      ],
+      "description": "A cheerful ooze shaped vaguely like a puppy that loves to be petted.",
+      "attack": "Slurp",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Speed",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Wobbles up to anyone with food. Splits in two if it sneezes."
+    },
+    {
+      "id": "saloon-spirit",
+      "name": "Saloon Spirit",
+      "type": "otherworldly",
+      "themes": [
+        "western",
+        "occult-noir"
+      ],
+      "tone": 3,
+      "tier": 1,
+      "flying": false,
+      "aliases": [
+        "ghost",
+        "poltergeist",
+        "phantom",
+        "haunt",
+        "spirit"
+      ],
+      "description": "A cheery ghost bartender that keeps pouring drinks for people who have long since left.",
+      "attack": "Bottle Toss",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Wits",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Last Call",
+          "type": "utility",
+          "uses": 1,
+          "text": "No damage. All enemies have disadvantage on their next roll."
+        }
+      ],
+      "tactics": "Offers free rounds to calm the room. Starts flinging glassware when anyone cheats at cards."
+    },
+    {
+      "id": "sunken-lighthouse-keeper",
+      "name": "Sunken Lighthouse Keeper",
+      "type": "otherworldly",
+      "themes": [
+        "age-of-sail",
+        "occult-noir"
+      ],
+      "tone": 4,
+      "tier": 3,
+      "flying": false,
+      "aliases": [
+        "drowned man",
+        "sea ghost",
+        "revenant",
+        "lighthouse keeper",
+        "draugr"
+      ],
+      "description": "A waterlogged keeper whose lantern burns green and never goes out.",
+      "attack": "Rusted Hook",
+      "skills": [
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Stealth",
+          "mod": "+"
+        },
+        {
+          "skill": "Speed",
+          "mod": "-"
+        }
+      ],
+      "powers": [
+        {
+          "name": "Green Beacon",
+          "type": "area",
+          "uses": 1,
+          "text": "Area 2d6 damage to all enemies, ignores defense."
+        }
+      ],
+      "tactics": "Lures ships onto the rocks with his lantern. Waits for the survivors in the shallows."
+    },
+    {
+      "id": "clockwork-songbird",
+      "name": "Clockwork Songbird",
+      "type": "animated",
+      "themes": [
+        "steampunk",
+        "fantasy"
+      ],
+      "tone": 1,
+      "tier": 0.25,
+      "flying": true,
+      "aliases": [
+        "mechanical bird",
+        "toy bird",
+        "canary",
+        "wind-up bird"
+      ],
+      "description": "A brass bird that sings one tune and winds itself down by teatime.",
+      "attack": "Peck",
+      "skills": [
+        {
+          "skill": "Charm",
+          "mod": "+"
+        },
+        {
+          "skill": "Senses",
+          "mod": "+"
+        },
+        {
+          "skill": "Might",
+          "mod": "-"
+        }
+      ],
+      "powers": [],
+      "tactics": "Sings to calm tempers. Falls asleep mid-fight if no one rewinds it."
     }
   ],
   "creatureTypes": [
