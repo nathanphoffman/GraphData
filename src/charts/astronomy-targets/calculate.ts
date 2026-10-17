@@ -38,6 +38,8 @@ export const DEFAULT_SETTINGS: Settings = {
 };
 
 const STEP_HOURS = 0.5;
+/** Points taken off every score (it never goes below 0). */
+const SCORE_OFFSET = 10;
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 function dayOfYear(month: number, day: number): number {
@@ -101,9 +103,9 @@ export function surfaceBrightness(t: Target): number {
 /** Best when the target fills about half the field; too big is punished harder than too small. */
 function sizeFit(t: Target, fov: number): number {
   const ratio = t.major / fov;
-  const sigma = ratio > 0.5 ? 1.3 : 0.7;
+  const sigma = ratio > 0.5 ? 0.8 : 0.4;
   const x = Math.log(ratio / 0.5);
-  return Math.max(0.1, Math.exp(-(x * x) / (2 * sigma * sigma)));
+  return Math.max(0.05, Math.exp(-(x * x) / (2 * sigma * sigma)));
 }
 
 /**
@@ -133,10 +135,16 @@ function margin(sb: number, mm: number, glow: number): number {
   return limitingSurfaceBrightness(mm) - glow - sb;
 }
 
-/** Straight-line scale with no early cap: 0 at the limit, 1 at 10 magnitudes above it (a star-like point). */
+/**
+ * Straight-line scale with no early cap: 1 at 10 magnitudes above the limit (a star-like point), falling to 0 at 4 below it.
+ * Experienced observers see things somewhat past the nominal limit, so the limit itself is not a cliff.
+ */
 function coreScore(sb: number, mm: number, glow: number): number {
-  return clamp(margin(sb, mm, glow) / 10, 0, 1);
+  return clamp((margin(sb, mm, glow) + SEE_PAST_LIMIT) / (10 + SEE_PAST_LIMIT), 0, 1);
 }
+
+/** Magnitudes past the nominal limit that a patient observer can still pick something out. */
+const SEE_PAST_LIMIT = 4;
 
 /** Faintest star (total magnitude) a telescope of this size shows, before sky costs. */
 function limitingMagnitude(mm: number): number {
@@ -145,10 +153,10 @@ function limitingMagnitude(mm: number): number {
 
 /**
  * Total light: how much light the whole target sends you, ignoring how spread out it is (Core covers that).
- * Straight line from 0 at the scope's limit to 1 at 10 magnitudes brighter than it.
+ * Same straight-line scale as Core.
  */
 function totalLightScore(magnitude: number, mm: number, cost: number): number {
-  return clamp((limitingMagnitude(mm) - cost - magnitude) / 10, 0, 1);
+  return clamp((limitingMagnitude(mm) - cost - magnitude + SEE_PAST_LIMIT) / (10 + SEE_PAST_LIMIT), 0, 1);
 }
 
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {
@@ -182,8 +190,8 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
       const fit = sizeFit(target, fov);
       const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
       const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
-      const score =
-        100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
+      const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
+      const score = Math.max(0, raw - SCORE_OFFSET);
       return { target, score, sky, fit, light, core, peakAltitude };
     })
     .sort((a, b) => b.score - a.score);
@@ -193,4 +201,21 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
 export function darkFraction(settings: Settings, season: Season): number {
   const samples = sampleWindow(settings, season);
   return samples.length ? samples.filter((s) => s.dark).length / samples.length : 0;
+}
+
+export interface Difficulty {
+  label: string;
+  /** 0 (hardest) to 1 (easiest), for colouring. */
+  level: number;
+}
+
+/** Plain-words difficulty to see a target, from its score. */
+export function difficulty(score: number): Difficulty {
+  if (score >= 75) return { label: "Very easy", level: 1 };
+  if (score >= 50) return { label: "Easy", level: 0.85 };
+  if (score >= 35) return { label: "Moderate", level: 0.65 };
+  if (score >= 20) return { label: "Hard", level: 0.45 };
+  if (score >= 10) return { label: "Very hard", level: 0.25 };
+  if (score > 0) return { label: "Extreme", level: 0.1 };
+  return { label: "Not visible", level: 0 };
 }

@@ -1,8 +1,8 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import "./styles.css";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
-import { APERTURES, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { APERTURES, difficulty, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -48,6 +48,8 @@ interface Column {
   title?: string;
   /** Shown by default. */
   show: boolean;
+  /** Placed after the Score column instead of before it. */
+  afterScore?: boolean;
   cell: (row: ScoredTarget) => ReactNode;
 }
 
@@ -72,6 +74,17 @@ const COLUMNS: Column[] = [
   { id: "fit", label: "Size fit", show: true, cell: (r) => <Percent value={r.fit} /> },
   { id: "light", label: "Light", show: true, cell: (r) => <Percent value={r.light} /> },
   { id: "core", label: "Core", show: true, cell: (r) => <Percent value={r.core} /> },
+  {
+    id: "difficulty",
+    label: "Difficulty",
+    title: "How hard it is to see, from the score: Very easy 75+, Easy 50+, Moderate 35+, Hard 20+, Very hard 10+, Extreme above 0, Not visible at 0.",
+    show: true,
+    afterScore: true,
+    cell: (r) => {
+      const d = difficulty(r.score);
+      return <span className="astro-tag" style={{ "--tag": heat(d.level, 1) } as CSSProperties}>{d.label}</span>;
+    },
+  },
 ];
 
 export default function AstronomyTargets() {
@@ -86,6 +99,8 @@ export default function AstronomyTargets() {
       return next;
     });
   const visible = COLUMNS.filter((c) => !hidden.has(c.id));
+  const beforeScore = visible.filter((c) => !c.afterScore);
+  const afterScore = visible.filter((c) => c.afterScore);
 
   const rows = useMemo(() => scoreTargets(model.targets, settings), [settings]);
   const notDark = useMemo(
@@ -164,10 +179,13 @@ export default function AstronomyTargets() {
             <tr>
               <th>#</th>
               <th>Target</th>
-              {visible.map((c) => (
+              {beforeScore.map((c) => (
                 <th key={c.id} title={c.title}>{c.label}</th>
               ))}
               <th>Score</th>
+              {afterScore.map((c) => (
+                <th key={c.id} title={c.title}>{c.label}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
@@ -179,13 +197,16 @@ export default function AstronomyTargets() {
                   <td>
                     <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong> {t.nickname && <span className="astro-nick">{t.nickname}</span>}
                   </td>
-                  {visible.map((c) => (
+                  {beforeScore.map((c) => (
                     <td key={c.id}>{c.cell(row)}</td>
                   ))}
                   <td className="astro-score">
                     <span className="astro-bar" style={{ width: `${row.score}%`, background: heat(row.score / 100, 0.45) }} />
                     <span className="astro-score-text">{row.score.toFixed(0)}</span>
                   </td>
+                  {afterScore.map((c) => (
+                    <td key={c.id}>{c.cell(row)}</td>
+                  ))}
                 </tr>
               );
             })}
