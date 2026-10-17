@@ -51,9 +51,12 @@ export function gapLabel(b: Bucket): string {
   if (days >= 330) return "Yearly";
   const bound = b.label.endsWith("+") ? "≤ " : "~";
   const plural = (n: number, unit: string) => `${n} ${unit}${n === 1 ? "" : "s"}`;
-  if (days >= 45) return `Every ${bound}${plural(Math.round(days / 30.4), "month")}`;
-  if (days >= 10) return `Every ${bound}${plural(Math.round(days / 7), "week")}`;
-  return `Every ${bound}${plural(Math.max(1, Math.round(days)), "day")}`;
+  // Shorter waits are grouped into a few week buckets rather than counted day by day.
+  if (days < 7) return "Every < 1 week";
+  if (days < 17.5) return "Every 1–2 weeks";
+  if (days < 45) return "Every 2–4 weeks";
+  const months = Math.round(days / 30.4);
+  return `Every ${bound}${plural(months, "month")}`;
 }
 
 /** Whole years of waiting, grouped: [from, to) with the last group open-ended. */

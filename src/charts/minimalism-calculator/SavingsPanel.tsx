@@ -53,7 +53,8 @@ export default function SavingsPanel({
   }));
   const yearsToTarget = owned < target ? yearsToReach(owned, target, yearlyUses, minPlays, maxPlays) : 0;
   const totalSaved = rows.reduce((sum, r) => sum + r.saved, 0);
-
+  const totalSpent = rows.reduce((sum, r) => sum + r.cost, 0);
+  const totalToday = todayCost * YEARS;
   return (
     <details className="panel mini-savings">
       <summary>Savings (optional)</summary>
@@ -95,6 +96,10 @@ export default function SavingsPanel({
         <div className="mini-total-amount">
           {totalSaved >= 0 ? "Save" : "Spend"} {money(Math.abs(totalSaved))}
           {totalSaved < 0 && " more"}
+        </div>
+        <div className="mini-total-label">Total spent over {YEARS} years</div>
+        <div className="mini-total-amount">
+          {money(totalSpent)} <span className="muted">(vs. {money(totalToday)})</span>
         </div>
       </div>
       <p className="muted">

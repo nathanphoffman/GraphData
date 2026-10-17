@@ -1,5 +1,5 @@
 import type { ItemType } from "./items";
-import { gapLabel, goalColor, waitBuckets } from "./waiting";
+import { gapLabel, goalColor, waitBuckets, type Bucket } from "./waiting";
 
 const count = (n: number, item: ItemType) => `${n} ${n === 1 ? item.one : item.many}`;
 
@@ -12,7 +12,19 @@ interface Props {
 
 /** Bar chart of how many items wait how long between plays, colored by closeness to the goal. */
 export default function WaitChart({ owned, avgUses, goal, item }: Props) {
-  const buckets = waitBuckets(avgUses).filter((b) => Math.round(b.p * owned) > 0);
+  // Neighboring buckets that round to the same wait label (e.g. "Every ~2 months") become one bar.
+  const merged = waitBuckets(avgUses).reduce<Bucket[]>((acc, b) => {
+    const last = acc[acc.length - 1];
+    if (last && gapLabel(last) === gapLabel(b)) {
+      const p = last.p + b.p;
+      const mid = p > 0 ? (last.mid * last.p + b.mid * b.p) / p : last.mid;
+      acc[acc.length - 1] = { ...last, label: `${last.label}+${b.label}`, mid, p };
+    } else {
+      acc.push(b);
+    }
+    return acc;
+  }, []);
+  const buckets = merged.filter((b) => Math.round(b.p * owned) > 0);
   const tallest = Math.max(...buckets.map((b) => b.p));
 
   return (
