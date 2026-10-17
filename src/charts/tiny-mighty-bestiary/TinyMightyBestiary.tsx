@@ -5,6 +5,7 @@ import EncounterGenerator from "./EncounterGenerator";
 import FilterBar, { type Filters } from "./FilterBar";
 import { DIFFICULTY_BANDS, TONE_BANDS, difficultyOf, model } from "./data";
 import { matches } from "./search";
+import type { Creature } from "./types";
 import "./styles.css";
 
 const DEFAULT_FILTERS: Filters = {
@@ -23,13 +24,19 @@ export default function TinyMightyBestiary() {
   const band = DIFFICULTY_BANDS.find((b) => b.id === difficulty);
   const toneBand = TONE_BANDS.find((b) => b.id === tone);
 
-  const creatures = [...model.creatures]
-    .sort((a, b) => difficultyOf(a) - difficultyOf(b))
-    .filter((c) => c.themes.includes(theme))
-    .filter((c) => type === null || c.type === type)
-    .filter((c) => !band || (difficultyOf(c) >= band.min && difficultyOf(c) <= band.max))
-    .filter((c) => !toneBand || toneBand.tones.includes(c.tone))
-    .filter((c) => matches(c, query));
+  const passesFilters = (c: Creature) =>
+    (type === null || c.type === type) &&
+    (!band || (difficultyOf(c) >= band.min && difficultyOf(c) <= band.max)) &&
+    (!toneBand || toneBand.tones.includes(c.tone)) &&
+    matches(c, query);
+
+  const sorted = [...model.creatures].sort((a, b) => difficultyOf(a) - difficultyOf(b));
+  const creatures = sorted.filter((c) => c.themes.includes(theme) && passesFilters(c));
+  // With nothing found in the selected theme, a search falls back to every other theme.
+  const otherThemes =
+    creatures.length === 0 && query.trim() !== ""
+      ? sorted.filter((c) => !c.themes.includes(theme) && passesFilters(c))
+      : [];
 
   return (
     <div className="bestiary">
@@ -49,12 +56,24 @@ export default function TinyMightyBestiary() {
       <div className="bestiary-divider" role="separator">
         <span>All creatures ({creatures.length})</span>
       </div>
-      {creatures.length === 0 && <p className="muted">No creatures match these filters.</p>}
+      {creatures.length === 0 && otherThemes.length === 0 && <p className="muted">No creatures match these filters.</p>}
       <div className="bestiary-grid">
         {creatures.map((creature) => (
           <CreatureCard key={creature.id} creature={creature} />
         ))}
       </div>
+      {otherThemes.length > 0 && (
+        <>
+          <div className="bestiary-divider" role="separator">
+            <span>In Other Themes: ({otherThemes.length})</span>
+          </div>
+          <div className="bestiary-grid">
+            {otherThemes.map((creature) => (
+              <CreatureCard key={creature.id} creature={creature} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

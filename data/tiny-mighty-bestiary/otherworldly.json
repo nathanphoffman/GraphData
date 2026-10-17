@@ -3186,5 +3186,390 @@
       "sea spirit",
       "tide ghost"
     ]
+  },
+  {
+    "id": "prankster-archfey",
+    "name": "Prankster Archfey",
+    "type": "otherworldly",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 6,
+    "flying": true,
+    "aliases": [
+      "pixie king",
+      "trickster",
+      "fae lord",
+      "puck"
+    ],
+    "description": "A glittering, giggling trickster lord who turns every battle into a game with ridiculous rules.",
+    "attack": "Wand rap",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Swap Places",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Swaps any two creatures' bodies or positions until it stops laughing."
+      },
+      {
+        "name": "Confetti Storm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hit targets cannot lie until they rest."
+      },
+      {
+        "name": "Pie of Doom",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Hit target is covered in pie and has disadvantage on Charm until they rest."
+      }
+    ],
+    "tactics": "Treats the fight as a game and changes the rules every turn. Loses interest when ignored."
+  },
+  {
+    "id": "hellfire-marshal",
+    "name": "Hellfire Marshal",
+    "type": "otherworldly",
+    "themes": [
+      "western",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "demon sheriff",
+      "devil marshal",
+      "hell rider",
+      "bounty hunter"
+    ],
+    "description": "A burning lawman from below who rides the border hunting anyone who owes a debt.",
+    "attack": "Burning revolver",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Wanted Poster",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Names one player as its quarry; it ignores everyone else until that player is down."
+      },
+      {
+        "name": "Six Hot Shots",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Hellmount",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Leaves burning hoofprints."
+      }
+    ],
+    "tactics": "Hunts the biggest debt first. Can be bargained with, but always collects."
+  },
+  {
+    "id": "black-ice-daemon",
+    "name": "Black ICE Daemon",
+    "type": "otherworldly",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 5,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "ICE",
+      "black ice",
+      "security daemon",
+      "rogue AI avatar"
+    ],
+    "description": "A hostile security program wearing a sleek, fire-eyed avatar that burns minds out of their heads.",
+    "attack": "Neural lash",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Brain Fry",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Hit target has disadvantage on Wits until they rest."
+      },
+      {
+        "name": "Lockdown",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Seals the exits and shuts off all tech until it is deleted."
+      },
+      {
+        "name": "Mind Spike",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Strikes the most plugged-in player. Attacking its host server hurts it."
+  },
+  {
+    "id": "siren-matron",
+    "name": "Siren Matron",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail",
+      "fantasy"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "siren",
+      "sea witch",
+      "drowning song",
+      "mermaid"
+    ],
+    "description": "A beautiful, pale singer of the deep whose song draws ships to the rocks.",
+    "attack": "Claws",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Deadly Song",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets walk toward her until they win a Wits test."
+      },
+      {
+        "name": "Pull Under",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Drags the target underwater."
+      }
+    ],
+    "tactics": "Sings from the rocks. Wax earplugs work."
+  },
+  {
+    "id": "ghost-fleet-admiral",
+    "name": "Ghost Fleet Admiral",
+    "type": "otherworldly",
+    "themes": [
+      "age-of-sail",
+      "occult-noir"
+    ],
+    "tone": 4,
+    "tier": 8,
+    "flying": false,
+    "aliases": [
+      "ghost admiral",
+      "drowned admiral",
+      "davy jones",
+      "phantom fleet"
+    ],
+    "description": "A towering, sea-green admiral who commands a fleet of drowned warships from the deep.",
+    "attack": "Spectral saber",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Phantom Armada",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Ghostly cannons fire from every direction."
+      },
+      {
+        "name": "Tidal Command",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Summons a wave or storm that pushes all ships."
+      },
+      {
+        "name": "Drown Them All",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Commands the fleet from the flagship. Sink the flagship to end the fleet."
+  },
+  {
+    "id": "rift-archon",
+    "name": "Rift Archon",
+    "type": "otherworldly",
+    "themes": [
+      "science-fantasy",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 8,
+    "flying": true,
+    "aliases": [
+      "angel",
+      "archon",
+      "cosmic horror",
+      "rift lord"
+    ],
+    "description": "A many-winged being of crystal and light that tears holes into other worlds.",
+    "attack": "Crystal blades",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Tear Reality",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Opens a rift that pulls in a player until they win a Wits test."
+      },
+      {
+        "name": "Prismatic Beam",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. The GM picks a different effect per beam."
+      },
+      {
+        "name": "Starfall",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense."
+      }
+    ],
+    "tactics": "Fights from above. Close rifts to weaken it."
+  },
+  {
+    "id": "star-devourer",
+    "name": "Star Devourer",
+    "type": "otherworldly",
+    "themes": [
+      "scifi",
+      "science-fantasy",
+      "space-jammer"
+    ],
+    "tone": 5,
+    "tier": 10,
+    "flying": true,
+    "aliases": [
+      "world eater",
+      "cosmic devourer",
+      "galactus",
+      "void beast"
+    ],
+    "description": "A planet-sized thing from between the stars that eats worlds and sings while it does it.",
+    "attack": "Maw",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Black Hole Breath",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Pulls in everything nearby."
+      },
+      {
+        "name": "Gravity Crush",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Void Song",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets are afraid (disadvantage) until they rest."
+      },
+      {
+        "name": "Consume",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Removes a feature of the battlefield for good."
+      }
+    ],
+    "tactics": "Treats the party as flavor. Hurting it only makes it notice them."
   }
 ]

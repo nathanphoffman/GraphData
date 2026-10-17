@@ -2931,5 +2931,512 @@
       "giant insect",
       "mothman"
     ]
+  },
+  {
+    "id": "jolly-mimic-wagon",
+    "name": "Jolly Mimic Wagon",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "mimic",
+      "treasure chest",
+      "cart",
+      "chest monster"
+    ],
+    "description": "A cheerful traveling merchant cart with far too many teeth and a very good sale on right now.",
+    "attack": "Chomp",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Grand Opening",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A player who touches its wares is stuck to it until they win a Physique test."
+      },
+      {
+        "name": "Swallow Sale",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. A swallowed target is held inside until the wagon is hurt."
+      }
+    ],
+    "tactics": "Lures players in with free samples. Lets go of anyone stuck to it once it is badly hurt."
+  },
+  {
+    "id": "pillow-wyrm",
+    "name": "Pillow Wyrm",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 5,
+    "flying": true,
+    "aliases": [
+      "dream dragon",
+      "sleeping dragon",
+      "cloud dragon"
+    ],
+    "description": "An enormous, fluffy sleeping dragon whose snores are lullabies and whose dreams are weapons.",
+    "attack": "Tail flop",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lullaby Snore",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hit targets are sleepy (disadvantage) until they rest."
+      },
+      {
+        "name": "Dream Spill",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Its dream becomes real in the room until it wakes."
+      }
+    ],
+    "tactics": "Mostly wants to sleep. Hitting it makes it wake up cranky."
+  },
+  {
+    "id": "canyon-wyrm",
+    "name": "Canyon Wyrm",
+    "type": "monster",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 8,
+    "flying": false,
+    "aliases": [
+      "sandworm",
+      "desert worm",
+      "giant worm",
+      "burrower"
+    ],
+    "description": "A mile-long sandworm that lives under the desert and swallows trains and towns whole.",
+    "attack": "Burrow & bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Swallow Whole",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Swallowed targets take damage each turn until freed."
+      },
+      {
+        "name": "Quake",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Opens a pit under every target."
+      },
+      {
+        "name": "Surface Strike",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Attacks from below. Vibrations lure it; stay on rock."
+  },
+  {
+    "id": "aether-kraken",
+    "name": "Aether Kraken",
+    "type": "monster",
+    "themes": [
+      "steampunk",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 8,
+    "flying": true,
+    "aliases": [
+      "airship eater",
+      "sky kraken",
+      "aether squid"
+    ],
+    "description": "A giant glowing squid-beast that swims through the aether and drags airships down to feed.",
+    "attack": "Tentacle crush",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Drag Down",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Grabs a target or small craft."
+      },
+      {
+        "name": "Ink Storm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Blinds the area."
+      },
+      {
+        "name": "Tentacle Sweep",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Wraps airships and drags them down. Lightning drives it off."
+  },
+  {
+    "id": "stone-informant",
+    "name": "Gargoyle Informant",
+    "type": "monster",
+    "themes": [
+      "occult-noir",
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 5,
+    "flying": true,
+    "aliases": [
+      "gargoyle",
+      "stone watcher",
+      "informant"
+    ],
+    "description": "A winged stone watcher who knows everyone's secrets and sells them to the highest bidder.",
+    "attack": "Stone claws",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Stone Skin",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. It ignores all damage for one turn."
+      },
+      {
+        "name": "Dive Bomb",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Plays both sides, then flies away when it loses. Pay it to switch."
+  },
+  {
+    "id": "radiation-bloom",
+    "name": "Radiation Bloom",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "glowing flower",
+      "mutant plant",
+      "spore monster"
+    ],
+    "description": "A giant glowing flower that spreads spores and warps everything it touches.",
+    "attack": "Vines",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "-"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Spore Cloud",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hit targets are sick (disadvantage) until they rest."
+      },
+      {
+        "name": "Photosynthesis",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 while standing in sunlight."
+      }
+    ],
+    "tactics": "Rooted in place. Fire kills it, but also spreads the spores."
+  },
+  {
+    "id": "elder-wyrm-sovereign",
+    "name": "Elder Wyrm Sovereign",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 8,
+    "flying": true,
+    "aliases": [
+      "ancient dragon",
+      "elder dragon",
+      "wyrm king",
+      "great wyrm"
+    ],
+    "description": "A dragon so old its scales are mountains and its hoard is a kingdom.",
+    "attack": "Bite & claws",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "World Fire",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Burns terrain."
+      },
+      {
+        "name": "Crushing Tail",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Wing Storm",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Knocks everything prone and hides the sun."
+      },
+      {
+        "name": "Hoard Heal",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 from its treasure."
+      }
+    ],
+    "tactics": "Opens with World Fire, then lands to toy with the survivors. Offers a throne to anyone who kneels."
+  },
+  {
+    "id": "mountain-eater",
+    "name": "Mountain Eater",
+    "type": "monster",
+    "themes": [
+      "fantasy",
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 10,
+    "flying": false,
+    "aliases": [
+      "tarrasque",
+      "kaiju",
+      "world eater",
+      "titan beast"
+    ],
+    "description": "A walking apocalypse with a mouth like a canyon that eats mountains and rivers.",
+    "attack": "Bite",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Devour Land",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Swallows the target."
+      },
+      {
+        "name": "Earthquake Stomp",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Splits the ground."
+      },
+      {
+        "name": "Rampage",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Feast",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 by eating terrain."
+      }
+    ],
+    "tactics": "Walks toward the nearest town. Cannot be stopped, only redirected."
+  },
+  {
+    "id": "fallout-behemoth",
+    "name": "Fallout Behemoth",
+    "type": "monster",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 5,
+    "tier": 8,
+    "flying": false,
+    "aliases": [
+      "radiation titan",
+      "wasteland giant",
+      "mutant colossus"
+    ],
+    "description": "A radiation-glowing titan born from the old world's worst mistake.",
+    "attack": "Crushing fists",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Meltdown",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Poisons the area."
+      },
+      {
+        "name": "Radiant Stomp",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Absorb Radiation",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 from nearby radiation."
+      }
+    ],
+    "tactics": "Wanders toward the strongest radiation. Lead it into a clean zone."
+  },
+  {
+    "id": "hive-queen",
+    "name": "Hive Queen",
+    "type": "monster",
+    "themes": [
+      "scifi",
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "alien queen",
+      "bug queen",
+      "swarm queen"
+    ],
+    "description": "A giant insectoid queen that commands the swarm and lays more with every breath.",
+    "attack": "Claws & acid spit",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Spawn Brood",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Adds a new swarm each turn."
+      },
+      {
+        "name": "Acid Spray",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense."
+      }
+    ],
+    "tactics": "Stays behind her swarm. Kill her and the swarm collapses."
   }
 ]

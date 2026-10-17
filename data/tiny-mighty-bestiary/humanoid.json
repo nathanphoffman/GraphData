@@ -4543,5 +4543,413 @@
       "drifter",
       "outlaw"
     ]
+  },
+  {
+    "id": "cloud-giant-gourmand",
+    "name": "Cloud Giant Gourmand",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 2,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "cloud giant",
+      "chef giant",
+      "ogre cook"
+    ],
+    "description": "A towering, friendly chef-giant who is delighted to add the party to tonight's menu.",
+    "attack": "Ladle & fist",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "small targets"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Soup Tsunami",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode. Scalds targets and makes the ground slippery."
+      },
+      {
+        "name": "Pinch of Salt",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage. Throws a player across the room."
+      }
+    ],
+    "tactics": "Wants guests, not enemies. Can be talked out of dinner by a better recipe."
+  },
+  {
+    "id": "clockwork-ringmaster",
+    "name": "Clockwork Ringmaster",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 2,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "ringmaster",
+      "brass showman",
+      "circus master"
+    ],
+    "description": "A brass showman in a tall hat who runs the greatest show on gears.",
+    "attack": "Whip crack",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Spinning Spotlight",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. One target must perform for the crowd and cannot attack next turn."
+      },
+      {
+        "name": "Cannon Act",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode. Fires a clown out of the cannon."
+      }
+    ],
+    "tactics": "Keeps the audience happy. Loses power when the crowd leaves."
+  },
+  {
+    "id": "clockwork-emperor",
+    "name": "Clockwork Emperor",
+    "type": "humanoid",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "brass tyrant",
+      "clockwork king",
+      "automaton emperor"
+    ],
+    "description": "A tyrant in a brass body who rules an empire by clock and cannot be stopped.",
+    "attack": "Gear sword",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "By Decree",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Commands all minions to attack one target."
+      },
+      {
+        "name": "Imperial Cannon",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Sends minions first. Stopping his clock pauses him."
+  },
+  {
+    "id": "cult-lawyer",
+    "name": "Cult Lawyer",
+    "type": "humanoid",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "occult attorney",
+      "devil's advocate",
+      "fixer"
+    ],
+    "description": "A sharp-suited counselor whose contracts bind souls and whose objections cut deep.",
+    "attack": "Briefcase",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Binding Contract",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A target who agrees is bound and has disadvantage until they break the contract."
+      },
+      {
+        "name": "Objection!",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Stalls with paperwork while others close in. Offer a loophole to bypass him."
+  },
+  {
+    "id": "scrap-queen",
+    "name": "Scrap Queen",
+    "type": "humanoid",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "warlord",
+      "junk queen",
+      "wasteland boss",
+      "road queen"
+    ],
+    "description": "A wasteland boss who rules a junkyard fortress and rolls into battle on a throne of welded scrap.",
+    "attack": "Spiked bat",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rally the Pack",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Her minions all get advantage this turn."
+      },
+      {
+        "name": "Scrap Cannon",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode."
+      }
+    ],
+    "tactics": "Leads from the throne. Taking her down breaks the gang."
+  },
+  {
+    "id": "drowned-boarders",
+    "name": "Drowned Boarding Party",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "ghost pirates",
+      "drowned crew",
+      "undead sailors"
+    ],
+    "description": "A dripping crew of long-dead sailors that climbs over the rail in the fog.",
+    "attack": "Rusty cutlasses",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Dead Weight",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Hit targets are held by cold hands."
+      }
+    ],
+    "tactics": "Climbs aboard from all sides. Sunlight or running aground drives them off."
+  },
+  {
+    "id": "black-sail-captain",
+    "name": "Black Sail Captain",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "ghost captain",
+      "pirate lord",
+      "skeleton captain",
+      "flying dutchman"
+    ],
+    "description": "A skeletal captain whose ship sails without wind and whose curse follows any crew that sees it.",
+    "attack": "Cursed cutlass",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Black Spot",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Marks one player; they have disadvantage until the spot is lifted."
+      },
+      {
+        "name": "Broadside",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense."
+      }
+    ],
+    "tactics": "Fights from the quarterdeck. His ship is bound to him."
+  },
+  {
+    "id": "dread-inquisitor",
+    "name": "Dread Inquisitor",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "inquisitor",
+      "interrogator",
+      "imperial officer"
+    ],
+    "description": "A black-cloaked officer of the empire who interrogates with drones and doom.",
+    "attack": "Shock baton",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Mind Probe",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target reveals a secret."
+      },
+      {
+        "name": "Interrogator Drones",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target."
+      }
+    ],
+    "tactics": "Stays back with the drones. Cutting power to the drones makes him weaker."
+  },
+  {
+    "id": "storm-giant-king",
+    "name": "Storm Giant King",
+    "type": "humanoid",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "storm giant",
+      "thunder king",
+      "cloud king"
+    ],
+    "description": "A cloud-wreathed monarch in a thunder crown who judges all mortals as petitioners.",
+    "attack": "Lightning hammer",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "small targets"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Thunder Strike",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Storm Call",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Wets and shocks everything in the area."
+      }
+    ],
+    "tactics": "Fights with dignity and demands a duel. Will accept tribute."
   }
 ]

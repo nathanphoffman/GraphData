@@ -2688,5 +2688,173 @@
       "drone bird",
       "pest"
     ]
+  },
+  {
+    "id": "thunder-goose",
+    "name": "Thunder Goose",
+    "type": "beast",
+    "themes": [
+      "fantasy",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 4,
+    "flying": true,
+    "aliases": [
+      "storm goose",
+      "angry goose",
+      "honk"
+    ],
+    "description": "A honking, storm-fat goose who believes every pond, field and kingdom is hers.",
+    "attack": "Peck & wing slap",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lightning Honk",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Targets are deafened until they rest."
+      }
+    ],
+    "tactics": "Charges the loudest player first. Calms down if someone offers bread."
+  },
+  {
+    "id": "carnival-star-whale",
+    "name": "Carnival Star-Whale",
+    "type": "beast",
+    "themes": [
+      "science-fantasy",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 6,
+    "flying": true,
+    "aliases": [
+      "space whale",
+      "sky whale",
+      "void whale"
+    ],
+    "description": "A gigantic, gentle space whale hung with lanterns and carrying a whole traveling fair on its back.",
+    "attack": "Tail slap",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Song of the Deep",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hit targets cannot attack the whale until they rest."
+      },
+      {
+        "name": "Breaching Splash",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Targets are knocked prone."
+      }
+    ],
+    "tactics": "Only fights to protect the fair on its back. Calm it down and it turns into an ally."
+  },
+  {
+    "id": "buffalo-stampede",
+    "name": "Great Bison Stampede",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 3,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "bison",
+      "buffalo herd",
+      "stampede"
+    ],
+    "description": "A thundering herd of buffalo that turns the whole prairie into a battering ram.",
+    "attack": "Trample",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Stampede",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Targets are knocked prone."
+      },
+      {
+        "name": "Dust Cloud",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Players cannot see more than a pencil away until it clears."
+      }
+    ],
+    "tactics": "Runs in straight lines. Fire or a good canyon turns it."
+  },
+  {
+    "id": "mutant-mammoth",
+    "name": "Mutant Mammoth",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "mammoth",
+      "mutant elephant",
+      "two-headed beast"
+    ],
+    "description": "A giant two-headed, furred elephant that hauls supply caravans, or tramples them.",
+    "attack": "Tusks & trample",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Trample",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Targets are knocked prone."
+      },
+      {
+        "name": "Tusk Toss",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage. Throws the target a pencil length away."
+      }
+    ],
+    "tactics": "Protective of its herd. Can be tamed by keeping its calf safe."
   }
 ]

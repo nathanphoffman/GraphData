@@ -2526,5 +2526,397 @@
       "sentinel",
       "golem"
     ]
+  },
+  {
+    "id": "steam-calliope",
+    "name": "Steam Calliope",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 1,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "calliope",
+      "parade organ",
+      "music cart"
+    ],
+    "description": "A rolling parade organ that plays happy tunes while it flattens anything in its way.",
+    "attack": "Ram & pipes",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Brass Fanfare",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets are knocked back."
+      },
+      {
+        "name": "Boiler Blast",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Fills the area with steam."
+      }
+    ],
+    "tactics": "Charges in a straight line playing tunes. Stuffing its pipes makes it blow up."
+  },
+  {
+    "id": "teakettle-titan",
+    "name": "Teakettle Titan",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 2,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "giant kettle",
+      "tea walker",
+      "boiler titan"
+    ],
+    "description": "A building-sized whistling kettle on spider legs that serves boiling tea to everyone.",
+    "attack": "Stomp & spout",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Boiling Pour",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Scalds everything in the area."
+      },
+      {
+        "name": "Whistle Blast",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Deafens targets until they rest."
+      },
+      {
+        "name": "Refill",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 by drinking tea from the nearest pipe."
+      }
+    ],
+    "tactics": "Does everything with great politeness. Cut its water supply to slow it."
+  },
+  {
+    "id": "ghost-train",
+    "name": "Ghost Train",
+    "type": "animated",
+    "themes": [
+      "western",
+      "occult-noir"
+    ],
+    "tone": 5,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "phantom train",
+      "spirit locomotive",
+      "death train"
+    ],
+    "description": "A spectral steam locomotive that rolls through towns at midnight to collect souls for the last stop.",
+    "attack": "Ram",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Last Stop",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Dead targets lose a turn."
+      },
+      {
+        "name": "Whistle of the Damned",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. All players hear it and have disadvantage until the train passes."
+      }
+    ],
+    "tactics": "Follows its tracks. Break the tracks and it has to go around."
+  },
+  {
+    "id": "warframe-enforcer",
+    "name": "Warframe Enforcer",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "power armor",
+      "war frame",
+      "corp mech",
+      "enforcer"
+    ],
+    "description": "A corporate war frame with a pilot sealed inside and orders to clear the block.",
+    "attack": "Armor fists",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Suppression Fire",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Targets have disadvantage to move."
+      },
+      {
+        "name": "Block Clearing Missile",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense."
+      }
+    ],
+    "tactics": "Advances in a line and demands surrender first. Hack the pilot link to shut it down."
+  },
+  {
+    "id": "arcology-overmind",
+    "name": "Arcology Overmind",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 8,
+    "flying": false,
+    "aliases": [
+      "central AI",
+      "building AI",
+      "corp mind",
+      "overmind"
+    ],
+    "description": "A building-sized AI that runs a whole arcology and sees every resident as a resource.",
+    "attack": "Door & drone swarm",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lockdown Protocol",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Seals doors, elevators and lights until it is hacked."
+      },
+      {
+        "name": "Drone Swarm",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Orbital Strike",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Razes the floor."
+      },
+      {
+        "name": "Reroute Power",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 by diverting power from the building."
+      }
+    ],
+    "tactics": "Never fights directly. Cut its core to make it weaker."
+  },
+  {
+    "id": "dreadnought-walker",
+    "name": "Dreadnought Walker",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "steam walker",
+      "war machine",
+      "land ship"
+    ],
+    "description": "A towering steam-powered war walker with cannon turrets on every limb.",
+    "attack": "Piston stomp",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-",
+        "note": "small targets"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Broadside",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Boiler Burst",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Fills the area with steam."
+      },
+      {
+        "name": "Piston Stomp",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage. The target is knocked prone."
+      }
+    ],
+    "tactics": "Walks through everything. Climbers and saboteurs can hurt it from below."
+  },
+  {
+    "id": "hungry-archive",
+    "name": "Hungry Archive",
+    "type": "animated",
+    "themes": [
+      "occult-noir",
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "living library",
+      "book monster",
+      "grimoire"
+    ],
+    "description": "A library of forbidden books that eats memories and shelves them for later.",
+    "attack": "Paper cuts",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Page Turn",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Targets forget their last action."
+      },
+      {
+        "name": "Quiet Please",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Nobody can speak or cast until a player wins a Charm test."
+      }
+    ],
+    "tactics": "Fights from the shelves. Burning books hurts it but releases what it ate."
+  },
+  {
+    "id": "void-reaper",
+    "name": "Void Reaper Drone",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "space-hammer"
+    ],
+    "tone": 5,
+    "tier": 5,
+    "flying": true,
+    "aliases": [
+      "reaper drone",
+      "ship killer",
+      "hunter drone"
+    ],
+    "description": "A black, silent warship drone that hunts crippled ships and finishes them off.",
+    "attack": "Beam lance",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lance Barrage",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Hull Breach",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Opens the target's hull to space."
+      }
+    ],
+    "tactics": "Picks off crippled targets first. Hide in debris."
   }
 ]
