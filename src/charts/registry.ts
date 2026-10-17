@@ -4,6 +4,7 @@ import EconomicSystemsMap from "./economic-systems-map/EconomicSystemsMap";
 import NeuronIntelligence from "./neuron-intelligence/NeuronIntelligence";
 import RuleOfAuthorship from "./rule-of-authorship/RuleOfAuthorship";
 import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
+import MinimalismCalculator from "./minimalism-calculator/MinimalismCalculator";
 import DndSales from "./dnd-sales/DndSales";
 import TinyMightyBestiary from "./tiny-mighty-bestiary/TinyMightyBestiary";
 
@@ -33,6 +34,13 @@ export const charts: ChartEntry[] = [
     description:
       "How hard a codebase is to maintain, by line count, team size, code quality, AI involvement and developer skill level.",
     component: MaintainabilityCalculator,
+  },
+  {
+    id: "minimalism-calculator",
+    title: "The Minimalism Calculator",
+    description:
+      "Roughly how many of a thing you should own, from how often you use it, how often you want each one used, and how much you share with others.",
+    component: MinimalismCalculator,
   },
   {
     id: "rule-of-authorship",
