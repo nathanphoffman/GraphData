@@ -1,0 +1,445 @@
+{
+  "title": "All Intelligence",
+  "source": "AI model scores are from BenchLM (benchlm.ai, BenchAlign v5.8 snapshot, October 17, 2026). Human rows and every column BenchLM does not cover are rough placeholder estimates, not measured data. Energy per task is scored on the tasks that system can actually do. Estimate mode fills a gap with the model's own average of its measured columns times a rough per-column factor (estimateFactors), which are guesses. For AI models, energy per task is a proxy from BenchLM's output price per 1M tokens (cheaper = less energy), on a log scale; models with no listed price get no efficiency guess.",
+  "groups": [
+    {
+      "id": "thinking",
+      "name": "Thinking",
+      "columns": [
+        "reasoning",
+        "math",
+        "coding"
+      ]
+    },
+    {
+      "id": "knowledge",
+      "name": "Knowledge & Language",
+      "columns": [
+        "knowledge",
+        "multilingual",
+        "instruction"
+      ]
+    },
+    {
+      "id": "perception",
+      "name": "Perception & Space",
+      "columns": [
+        "multimodal",
+        "spatial"
+      ]
+    },
+    {
+      "id": "action",
+      "name": "Action",
+      "columns": [
+        "agentic",
+        "embodied"
+      ]
+    },
+    {
+      "id": "learning",
+      "name": "Learning & Memory",
+      "columns": [
+        "learning",
+        "continual"
+      ]
+    },
+    {
+      "id": "people",
+      "name": "People & Creativity",
+      "columns": [
+        "social",
+        "creativity"
+      ]
+    },
+    {
+      "id": "efficiency",
+      "name": "Efficiency",
+      "columns": [
+        "efficiency"
+      ]
+    }
+  ],
+  "columns": {
+    "reasoning": "Reasoning",
+    "math": "Math",
+    "coding": "Coding",
+    "knowledge": "Knowledge",
+    "multilingual": "Multilingual",
+    "instruction": "Instruction following",
+    "multimodal": "Multimodal",
+    "spatial": "Spatial / physical intuition",
+    "agentic": "Agentic",
+    "embodied": "Embodied skill",
+    "learning": "Learning efficiency",
+    "continual": "Continual learning",
+    "social": "Social / emotional",
+    "creativity": "Creativity",
+    "efficiency": "Energy per task (higher = less energy)"
+  },
+  "subjects": [
+    {
+      "name": "Human (average adult)",
+      "maker": "Human",
+      "kind": "human",
+      "scores": {
+        "agentic": 45,
+        "coding": 10,
+        "reasoning": 65,
+        "multimodal": 85,
+        "knowledge": 35,
+        "multilingual": 30,
+        "instruction": 80,
+        "math": 20,
+        "spatial": 90,
+        "embodied": 95,
+        "learning": 95,
+        "continual": 95,
+        "social": 90,
+        "creativity": 75,
+        "efficiency": 85
+      }
+    },
+    {
+      "name": "Human (skilled expert)",
+      "maker": "Human",
+      "kind": "human",
+      "scores": {
+        "agentic": 70,
+        "coding": 70,
+        "reasoning": 85,
+        "multimodal": 90,
+        "knowledge": 70,
+        "multilingual": 40,
+        "instruction": 90,
+        "math": 70,
+        "spatial": 95,
+        "embodied": 98,
+        "learning": 98,
+        "continual": 98,
+        "social": 92,
+        "creativity": 85,
+        "efficiency": 85
+      }
+    },
+    {
+      "name": "Traditional computer (Core i7)",
+      "maker": "Machine",
+      "kind": "machine",
+      "scores": {
+        "reasoning": 0,
+        "math": 30,
+        "coding": 0,
+        "knowledge": 5,
+        "multilingual": 0,
+        "instruction": 10,
+        "multimodal": 0,
+        "spatial": 0,
+        "agentic": 0,
+        "embodied": 0,
+        "learning": 0,
+        "continual": 0,
+        "social": 0,
+        "creativity": 0,
+        "efficiency": 95
+      }
+    },
+    {
+      "name": "Claude Opus 5.5",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 90,
+        "coding": 83,
+        "reasoning": 86,
+        "multimodal": 92,
+        "knowledge": 90
+      },
+      "outputPrice": 20
+    },
+    {
+      "name": "GPT-6.1 Sol",
+      "maker": "OpenAI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 76,
+        "coding": 71,
+        "reasoning": 91,
+        "knowledge": 86
+      },
+      "outputPrice": 10
+    },
+    {
+      "name": "GPT-6 Astra",
+      "maker": "OpenAI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 75,
+        "coding": 75,
+        "reasoning": 93,
+        "knowledge": 86
+      },
+      "outputPrice": 50
+    },
+    {
+      "name": "Claude Fable 5.1",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 81,
+        "coding": 77,
+        "reasoning": 85,
+        "knowledge": 87
+      },
+      "outputPrice": 50
+    },
+    {
+      "name": "Claude Sonnet 5.5",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 69,
+        "coding": 84,
+        "reasoning": 83,
+        "knowledge": 83
+      },
+      "outputPrice": 10
+    },
+    {
+      "name": "Claude Fable 5",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 76,
+        "coding": 71,
+        "knowledge": 83,
+        "instruction": 77
+      },
+      "outputPrice": 50
+    },
+    {
+      "name": "Gemini 4 Argon",
+      "maker": "Google",
+      "kind": "ai",
+      "scores": {
+        "agentic": 77,
+        "coding": 72,
+        "knowledge": 80
+      },
+      "outputPrice": 10
+    },
+    {
+      "name": "Claude Opus 5",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 78,
+        "coding": 71,
+        "reasoning": 81,
+        "multimodal": 92,
+        "knowledge": 82
+      },
+      "outputPrice": 25
+    },
+    {
+      "name": "GPT-6 Sol",
+      "maker": "OpenAI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 58,
+        "coding": 66,
+        "reasoning": 73,
+        "knowledge": 81
+      },
+      "outputPrice": 10
+    },
+    {
+      "name": "GPT-5.6 Sol",
+      "maker": "OpenAI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 69,
+        "coding": 67,
+        "reasoning": 77,
+        "multimodal": 90,
+        "knowledge": 77,
+        "instruction": 89
+      },
+      "outputPrice": 20
+    },
+    {
+      "name": "Muse Wonder Full",
+      "maker": "Meta",
+      "kind": "ai",
+      "scores": {
+        "coding": 74,
+        "knowledge": 79
+      }
+    },
+    {
+      "name": "MiMo-V2.6-Pro",
+      "maker": "Xiaomi",
+      "kind": "ai",
+      "scores": {
+        "agentic": 68,
+        "coding": 63,
+        "knowledge": 69
+      },
+      "outputPrice": 0.87
+    },
+    {
+      "name": "Muse Wonder",
+      "maker": "Meta",
+      "kind": "ai",
+      "scores": {
+        "coding": 70,
+        "knowledge": 75
+      },
+      "outputPrice": 20
+    },
+    {
+      "name": "GPT-5.6 Terra",
+      "maker": "OpenAI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 60,
+        "coding": 62,
+        "reasoning": 69,
+        "multimodal": 85,
+        "knowledge": 70,
+        "instruction": 87
+      },
+      "outputPrice": 12
+    },
+    {
+      "name": "Claude Haiku 5.5",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 63,
+        "coding": 53,
+        "reasoning": 83,
+        "knowledge": 68
+      },
+      "outputPrice": 0.5
+    },
+    {
+      "name": "Claude Opus 4.8",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 63,
+        "coding": 61,
+        "reasoning": 63,
+        "multimodal": 91,
+        "knowledge": 72,
+        "instruction": 75,
+        "math": 84
+      },
+      "outputPrice": 25
+    },
+    {
+      "name": "Kimi K3",
+      "maker": "Moonshot AI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 69,
+        "coding": 59,
+        "reasoning": 70,
+        "multimodal": 93,
+        "knowledge": 69
+      },
+      "outputPrice": 15
+    },
+    {
+      "name": "Qwen3.8 Max",
+      "maker": "Alibaba",
+      "kind": "ai",
+      "scores": {
+        "agentic": 68,
+        "coding": 54,
+        "multimodal": 91,
+        "knowledge": 68,
+        "instruction": 95
+      }
+    },
+    {
+      "name": "Step 5 Preview",
+      "maker": "StepFun",
+      "kind": "ai",
+      "scores": {
+        "agentic": 65,
+        "coding": 60,
+        "multimodal": 75,
+        "knowledge": 69
+      },
+      "outputPrice": 2.7
+    },
+    {
+      "name": "GPT-5.5",
+      "maker": "OpenAI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 63,
+        "coding": 62,
+        "reasoning": 70,
+        "multimodal": 76,
+        "knowledge": 72,
+        "instruction": 93
+      },
+      "outputPrice": 30
+    },
+    {
+      "name": "Gemini 3.8 Flash",
+      "maker": "Google",
+      "kind": "ai",
+      "scores": {
+        "agentic": 66,
+        "coding": 61,
+        "reasoning": 74,
+        "multimodal": 87,
+        "knowledge": 74
+      },
+      "outputPrice": 3.75
+    },
+    {
+      "name": "Claude Opus 4.7 (Adaptive)",
+      "maker": "Anthropic",
+      "kind": "ai",
+      "scores": {
+        "agentic": 59,
+        "coding": 56,
+        "multimodal": 54,
+        "knowledge": 66
+      },
+      "outputPrice": 25
+    },
+    {
+      "name": "Ling 3.1 Flash",
+      "maker": "InclusionAI",
+      "kind": "ai",
+      "scores": {
+        "agentic": 63,
+        "coding": 57,
+        "knowledge": 63
+      }
+    }
+  ],
+  "estimateFactors": {
+    "reasoning": 1.0,
+    "math": 1.0,
+    "coding": 1.0,
+    "knowledge": 1.0,
+    "multilingual": 0.95,
+    "instruction": 1.0,
+    "multimodal": 0.9,
+    "spatial": 0.6,
+    "agentic": 1.0,
+    "embodied": 0.2,
+    "learning": 0.4,
+    "continual": 0.2,
+    "social": 0.7,
+    "creativity": 0.7,
+    "efficiency": 0.1
+  }
+}

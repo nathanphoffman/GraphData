@@ -22,10 +22,20 @@ export function difficultyOf(creature: Creature) {
   return creature.tier + creature.powers.reduce((sum, p) => sum + 0.5 * p.uses, 0);
 }
 
-/** Every difficulty that exists in the data, lowest first. The slider steps through these. */
-export const difficulties = [...new Set(model.creatures.map(difficultyOf))].sort((a, b) => a - b);
-export const LAST_STEP = difficulties.length - 1;
-export const TONE_LAST = model.toneScale.length - 1;
+/** Difficulty filter buttons, grouped by the combat table tiers (0.25-0.5, 1-2, 3-4, 5). Powers can add half steps. */
+export const DIFFICULTY_BANDS = [
+  { id: "easy", label: "Easy (0.25-0.5)", min: 0, max: 0.99 },
+  { id: "medium", label: "Medium (1-2.5)", min: 1, max: 2.99 },
+  { id: "hard", label: "Hard (3-4.5)", min: 3, max: 4.99 },
+  { id: "deadly", label: "Deadly (5+)", min: 5, max: Infinity },
+];
+
+/** Tone filter buttons. `tones` are the 1-5 values in `toneScale` (1 = Whimsy, 5 = Dark). */
+export const TONE_BANDS = [
+  { id: "dark", label: "Dark (Dark to Lean-Dark)", tones: [4, 5] },
+  { id: "neutral", label: "Neutral (Lean-Dark to Lean-Whimsy)", tones: [2, 3, 4] },
+  { id: "whimsy", label: "Whimsy (Lean-Whimsy to Whimsy)", tones: [1, 2] },
+];
 
 /** Slider stops for the encounter builder: 1-12 players, 0-10 levels gained in half steps. */
 export const PLAYER_STOPS = Array.from({ length: 12 }, (_, i) => String(i + 1));

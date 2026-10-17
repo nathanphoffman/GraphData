@@ -1,13 +1,12 @@
 import FilterChips from "./FilterChips";
-import SliderRow from "./SliderRow";
-import { difficulties, model } from "./data";
+import { DIFFICULTY_BANDS, TONE_BANDS, model } from "./data";
 
 export interface Filters {
   query: string;
   theme: string | null;
   type: string | null;
-  difficulty: [number, number];
-  tone: [number, number];
+  difficulty: string | null;
+  tone: string | null;
 }
 
 interface Props {
@@ -44,13 +43,20 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
           </button>
         )}
       </FilterChips>
-      <SliderRow
+      <FilterChips
         label="Difficulty"
-        stops={difficulties.map(String)}
-        value={filters.difficulty}
+        options={DIFFICULTY_BANDS}
+        active={filters.difficulty}
         onChange={(difficulty) => set({ difficulty })}
+        chipClass={() => "bestiary-theme-chip"}
       />
-      <SliderRow label="Tone" stops={model.toneScale} value={filters.tone} onChange={(tone) => set({ tone })} />
+      <FilterChips
+        label="Tone"
+        options={TONE_BANDS}
+        active={filters.tone}
+        onChange={(tone) => set({ tone })}
+        chipClass={() => "bestiary-theme-chip"}
+      />
       <input
         type="search"
         className="bestiary-search"

@@ -1,0 +1,106 @@
+/* All Intelligence */
+.allint-slider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.allint-slider:first-child {
+  margin-top: 0;
+}
+
+.allint-slider input[type="range"] {
+  flex: 1;
+  accent-color: var(--link);
+}
+
+.allint-slider strong {
+  min-width: 56px;
+  text-align: right;
+  font-size: 22px;
+  color: var(--link);
+}
+
+.allint-formula {
+  margin: 12px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.allint table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.allint th,
+.allint td {
+  padding: 8px 12px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.allint th {
+  color: var(--link);
+  font-size: 13px;
+  user-select: none;
+}
+
+.allint th.sortable {
+  cursor: pointer;
+}
+
+.allint-row {
+  cursor: pointer;
+}
+
+.allint-row:hover {
+  background: color-mix(in srgb, var(--fg) 6%, transparent);
+}
+
+.allint-human .allint-name {
+  color: var(--link);
+}
+
+.allint-maker {
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.allint-score {
+  font-weight: 700;
+}
+
+.allint-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.allint-detail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: normal;
+}
+
+.allint-detail-group h4 {
+  margin: 0 0 2px;
+  color: var(--link);
+  font-size: 13px;
+}
+
+.allint th.allint-group-th {
+  white-space: pre-line;
+}
+
+.allint-source {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
