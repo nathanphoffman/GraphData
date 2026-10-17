@@ -23,3 +23,120 @@
 .mini-results .panel {
   background: color-mix(in srgb, var(--fg) 5%, transparent);
 }
+
+/* Sliders */
+
+.mini-calc label {
+  display: block;
+  font-weight: 600;
+}
+
+.mini-calc input[type="range"] {
+  width: 100%;
+}
+
+.mini-row,
+.mini-ticks {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mini-ticks {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.mini-description {
+  margin: 8px 0 12px;
+  font-size: 13px;
+}
+
+/* Recommendation: arrow over a gradient scale, then the three level boxes */
+
+.mini-scale {
+  position: relative;
+  padding-top: 20px;
+  margin-bottom: 10px;
+}
+
+.mini-arrow {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid var(--fg);
+}
+
+.mini-arrow-label {
+  position: absolute;
+  top: 0;
+  font-size: 13px;
+  line-height: 12px;
+  white-space: nowrap;
+}
+
+/* Stops sit at the centers of the three level boxes (1/6, 1/2, 5/6). */
+.mini-gradient {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #facc15 0%, #facc15 16.7%, #22c55e 50%, #ef4444 83.3%, #ef4444 100%);
+}
+
+.mini-levels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.mini-level {
+  color: #111;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.mini-level-name {
+  font-weight: 600;
+}
+
+.mini-level-count {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.mini-level-note {
+  font-size: 13px;
+}
+
+/* Wait chart */
+
+.mini-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 140px;
+}
+
+.mini-bar {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+}
+
+.mini-bar-fill {
+  border-radius: 3px 3px 0 0;
+}
+
+.mini-bar-labels {
+  display: flex;
+  gap: 4px;
+}
+
+.mini-bar-labels div {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  white-space: pre-line;
+}

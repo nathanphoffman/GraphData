@@ -27,12 +27,12 @@ export default function Slider({
 }: SliderProps) {
   return (
     <div className="panel">
-      <div className="calc-row">
+      <div className="mini-row">
         <label htmlFor={id}>{label}</label>
         <strong>{display}</strong>
       </div>
       {description && (
-        <p className="muted" style={{ margin: "8px 0 12px", fontSize: 13 }}>
+        <p className="muted mini-description">
           {description}
         </p>
       )}
@@ -45,7 +45,7 @@ export default function Slider({
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
       />
-      <div className="calc-ticks">
+      <div className="mini-ticks">
         <span>{low}</span>
         <span>{high}</span>
       </div>

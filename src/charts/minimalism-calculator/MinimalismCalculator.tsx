@@ -1,4 +1,3 @@
-import "../maintainability-calculator/styles.css";
 import "./styles.css";
 import { averageUses, recommended } from "./calculate";
 import RecommendationPanel from "./RecommendationPanel";
@@ -31,7 +30,7 @@ export default function MinimalismCalculator() {
   const people = 100 / sharePct;
 
   return (
-    <div className="calc">
+    <div className="mini-calc">
       <div className="mini-layout">
         <div className="mini-inputs">
           <h2>Your numbers</h2>

@@ -8,10 +8,15 @@ import MinimalismCalculator from "./minimalism-calculator/MinimalismCalculator";
 import DndSales from "./dnd-sales/DndSales";
 import TinyMightyBestiary from "./tiny-mighty-bestiary/TinyMightyBestiary";
 
+/** Home page sections, in display order. */
+export const categories = ["Calculators", "Tabletop RPGs", "Tech & economics", "Science"] as const;
+export type Category = (typeof categories)[number];
+
 export interface ChartEntry {
   /** URL slug, e.g. #/chart/language-outlook */
   id: string;
   title: string;
+  category: Category;
   description: string;
   component: ComponentType;
 }
@@ -24,6 +29,7 @@ export const charts: ChartEntry[] = [
   {
     id: "language-outlook",
     title: "Language Outlook",
+    category: "Tech & economics",
     description:
       "Programming language popularity weighted by developer opinion, 2019-2026, with 4-year trend lines and a 10-year projection.",
     component: LanguageOutlook,
@@ -31,6 +37,7 @@ export const charts: ChartEntry[] = [
   {
     id: "maintainability-calculator",
     title: "Maintainability Calculator",
+    category: "Calculators",
     description:
       "How hard a codebase is to maintain, by line count, team size, code quality, AI involvement and developer skill level.",
     component: MaintainabilityCalculator,
@@ -38,6 +45,7 @@ export const charts: ChartEntry[] = [
   {
     id: "minimalism-calculator",
     title: "The Minimalism Calculator",
+    category: "Calculators",
     description:
       "Roughly how many of a thing you should own, from how often you use it, how often you want each one used, and how much you share with others.",
     component: MinimalismCalculator,
@@ -45,6 +53,7 @@ export const charts: ChartEntry[] = [
   {
     id: "rule-of-authorship",
     title: "True Authors of DND",
+    category: "Tabletop RPGs",
     description:
       "Who wrote which rules and products of original Dungeons & Dragons (pre-1e): Gygax, Arneson, Kuntz, Kask, Ernie Gygax and others, based on the Arneson v. Gygax case file and TSR credits.",
     component: RuleOfAuthorship,
@@ -52,6 +61,7 @@ export const charts: ChartEntry[] = [
   {
     id: "neuron-intelligence",
     title: "Neuron Intelligence Explorer",
+    category: "Science",
     description:
       "Ranks animals by neuron count against body weight, with adjustable exponents: Neurons^x / Weight^w, then Score^k.",
     component: NeuronIntelligence,
@@ -59,6 +69,7 @@ export const charts: ChartEntry[] = [
   {
     id: "economic-systems-map",
     title: "Economic Systems Map",
+    category: "Tech & economics",
     description:
       "A two-axis map of economic systems (orientation vs. size of power) with a band of historical stability, the U.S. 1865-present, and where well-known figures sit.",
     component: EconomicSystemsMap,
@@ -66,6 +77,7 @@ export const charts: ChartEntry[] = [
   {
     id: "dnd-sales",
     title: "DND Sales over Time",
+    category: "Tabletop RPGs",
     description:
       "Estimated lifetime Player's Handbook sales for each edition of D&D, from OD&D to the 2024 (5.5e) rules, with confidence ranges and sources.",
     component: DndSales,
@@ -73,6 +85,7 @@ export const charts: ChartEntry[] = [
   {
     id: "tiny-mighty-bestiary",
     title: "Tiny Mighty RPG Bestiary",
+    category: "Tabletop RPGs",
     description:
       "Classic fantasy creatures statted with the Tiny Mighty RPG combat table: health, defense, bonus, turns and powers.",
     component: TinyMightyBestiary,
