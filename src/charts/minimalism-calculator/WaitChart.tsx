@@ -1,31 +1,33 @@
+import type { ItemType } from "./items";
 import { gapLabel, goalColor, waitBuckets } from "./calculate";
 
-const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
+const count = (n: number, item: ItemType) => `${n} ${n === 1 ? item.one : item.many}`;
 
 interface Props {
   owned: number;
   avgUses: number;
   goal: number;
+  item: ItemType;
 }
 
 /** Bar chart of how many items wait how long between plays, colored by closeness to the goal. */
-export default function WaitChart({ owned, avgUses, goal }: Props) {
+export default function WaitChart({ owned, avgUses, goal, item }: Props) {
   const buckets = waitBuckets(avgUses).filter((b) => Math.round(b.p * owned) > 0);
   const tallest = Math.max(...buckets.map((b) => b.p));
 
   return (
     <div className="panel">
-      <h3>How long items wait to be played</h3>
+      <h3>How long {item.many} wait between {item.uses}</h3>
       <p className="muted">
-        Picking at random, your {owned} items average {avgUses.toFixed(1)} uses a year each.
+        Picking at random, your {owned} {item.many} average {avgUses.toFixed(1)} {item.uses} a year each.
       </p>
       <div className="mini-bars">
         {buckets.map((b) => (
           <div key={b.label} className="mini-bar">
-            <div>{plural(Math.round(b.p * owned), "item")}</div>
+            <div>{count(Math.round(b.p * owned), item)}</div>
             <div
               className="mini-bar-fill"
-              title={`${(b.p * 100).toFixed(1)}% of items`}
+              title={`${(b.p * 100).toFixed(1)}% of ${item.many}`}
               style={{ height: Math.max(2, (b.p / tallest) * 90), background: goalColor(b.mid, goal) }}
             />
           </div>

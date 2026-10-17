@@ -1,14 +1,22 @@
 import { purchasePlan, yearsToReach } from "./calculate";
-import { useStoredNumber } from "./useStoredNumber";
+import { cap, type ItemType } from "./items";
 
 interface Props {
   owned: number;
   target: number;
   yearlyUses: number;
+  item: ItemType;
+  buyPerYear: number;
+  onBuyPerYear: (v: number) => void;
+  price: number;
+  onPrice: (v: number) => void;
+  minPlays: number;
+  onMinPlays: (v: number) => void;
+  maxPlays: number;
+  onMaxPlays: (v: number) => void;
 }
 
 const YEARS = 10;
-const isAmount = (v: number) => Number.isFinite(v) && v >= 0;
 const money = (v: number) => `$${Math.round(v).toLocaleString()}`;
 
 function NumberField({ id, label, value, onChange }: { id: string; label: string; value: number; onChange: (v: number) => void }) {
@@ -21,12 +29,20 @@ function NumberField({ id, label, value, onChange }: { id: string; label: string
 }
 
 /** Optional menu: yearly spending today vs. holding your stock at the recommended number. */
-export default function SavingsPanel({ owned, target, yearlyUses }: Props) {
-  const [buyPerYear, setBuyPerYear] = useStoredNumber("buy-per-year", 2, isAmount);
-  const [price, setPrice] = useStoredNumber("price", 30, isAmount);
-  const [minPlays, setMinPlays] = useStoredNumber("min-plays", 20, isAmount);
-  const [maxPlays, setMaxPlays] = useStoredNumber("max-plays", 100, isAmount);
-
+export default function SavingsPanel({
+  owned,
+  target,
+  yearlyUses,
+  item,
+  buyPerYear,
+  onBuyPerYear,
+  price,
+  onPrice,
+  minPlays,
+  onMinPlays,
+  maxPlays,
+  onMaxPlays,
+}: Props) {
   const todayCost = buyPerYear * price;
   const plan = purchasePlan(owned, target, yearlyUses, minPlays, maxPlays, YEARS);
   const rows = plan.map((bought, i) => ({
@@ -42,10 +58,10 @@ export default function SavingsPanel({ owned, target, yearlyUses }: Props) {
     <details className="panel mini-savings">
       <summary>Savings (optional)</summary>
       <div className="mini-savings-inputs">
-        <NumberField id="buy-per-year" label="How many were you buying per year?" value={buyPerYear} onChange={setBuyPerYear} />
-        <NumberField id="price" label="Average cost of one ($)" value={price} onChange={setPrice} />
-        <NumberField id="min-plays" label="Minimum uses to make it worth it" value={minPlays} onChange={setMinPlays} />
-        <NumberField id="max-plays" label="Maximum uses you can typically get" value={maxPlays} onChange={setMaxPlays} />
+        <NumberField id="buy-per-year" label={`How many ${item.many} were you buying per year?`} value={buyPerYear} onChange={onBuyPerYear} />
+        <NumberField id="price" label={`Average cost of one ${item.one} ($)`} value={price} onChange={onPrice} />
+        <NumberField id="min-plays" label={`Minimum ${item.uses} to make it worth it`} value={minPlays} onChange={onMinPlays} />
+        <NumberField id="max-plays" label={`Maximum ${item.uses} you can typically get`} value={maxPlays} onChange={onMaxPlays} />
       </div>
       <table className="mini-savings-table">
         <thead>
@@ -82,13 +98,13 @@ export default function SavingsPanel({ owned, target, yearlyUses }: Props) {
         </div>
       </div>
       <p className="muted">
-        {yearsToTarget === null && ` You would take over 100 years to reach ${target} items.`}
+        {yearsToTarget === null && ` You would take over 100 years to reach ${target} ${item.many}.`}
         {yearsToTarget !== null && yearsToTarget > 0 &&
-          ` You would reach ${target} items in about ${yearsToTarget} ${yearsToTarget === 1 ? "year" : "years"}.`}
+          ` You would reach ${target} ${item.many} in about ${yearsToTarget} ${yearsToTarget === 1 ? "year" : "years"}.`}
       </p>
       <p className="muted">
-        Every {Math.max(1, minPlays)} uses earns you one purchase, so you only buy once what you own has paid off. Items wear out
-        after about {Math.max(minPlays, maxPlays)} uses and get replaced.
+        Every {Math.max(1, minPlays)} {item.uses} earns you one purchase, so you only buy once what you own has paid off.
+        {cap(item.many)} wear out after about {Math.max(minPlays, maxPlays)} {item.uses} and get replaced.
       </p>
     </details>
   );

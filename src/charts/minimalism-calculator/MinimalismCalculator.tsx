@@ -1,101 +1,108 @@
+import { useEffect } from "react";
 import "./styles.css";
 import { averageUses, recommended, recommendedCount } from "./calculate";
+import { cap, findItemType, DEFAULT_ITEM_TYPE } from "./items";
 import RecommendationPanel from "./RecommendationPanel";
 import SavingsPanel from "./SavingsPanel";
+import ShareBar from "./ShareBar";
 import Slider from "./Slider";
-import {
-  OWNED_STOPS,
-  PER_WEEK_MAX,
-  PER_WEEK_MIN,
-  PER_WEEK_STEP,
-  PER_YEAR_STOPS,
-} from "./stops";
-import { useStoredNumber } from "./useStoredNumber";
+import { useCalculatorState } from "./state";
+import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_STOPS } from "./stops";
 import WaitChart from "./WaitChart";
 
 export default function MinimalismCalculator() {
-  const [perWeek, setPerWeek] = useStoredNumber(
-    "per-week",
-    3,
-    (v) => v >= PER_WEEK_MIN && v <= PER_WEEK_MAX && v / PER_WEEK_STEP === Math.round(v / PER_WEEK_STEP),
-  );
-  const [owned, setOwned] = useStoredNumber("owned", 10, (v) => OWNED_STOPS.includes(v));
-  const [perYear, setPerYear] = useStoredNumber("per-year", 52, (v) => PER_YEAR_STOPS.includes(v));
-  const [sharePct, setSharePct] = useStoredNumber(
-    "share-pct",
-    100,
-    (v) => Number.isInteger(v) && v >= 1 && v <= 100,
-  );
+  const s = useCalculatorState();
+  const item = findItemType(s.typeId) ?? DEFAULT_ITEM_TYPE;
 
-  const needed = recommended(perWeek, perYear, sharePct);
-  const people = 100 / sharePct;
+  // Once a shared link has been read, drop its values from the address so later changes win on reload.
+  useEffect(() => {
+    if (window.location.hash.includes("?")) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search + window.location.hash.split("?")[0]);
+    }
+  }, []);
+
+  const needed = recommended(s.perWeek, s.perYear, s.sharePct);
+  const people = 100 / s.sharePct;
+  const yearlyUses = s.perWeek * 52 * (s.sharePct / 100);
 
   return (
     <div className="mini-calc">
+      <ShareBar title={s.title} onTitle={s.setTitle} typeId={s.typeId} onType={s.setTypeId} shareParams={s.shareParams} />
+      {s.title.trim() && <h2 className="mini-title">{s.title.trim()}</h2>}
+
       <div className="mini-layout">
         <div className="mini-inputs">
           <h2>Your numbers</h2>
           <Slider
             id="per-week"
-            label="Uses per week (whoever owns it)"
-            description="All items in the category combined, e.g. reading 2 books a week."
-            value={perWeek}
+            label={`${cap(item.uses)} per week (whoever owns it)`}
+            description={`All your ${item.many} combined, e.g. ${item.weekExample}.`}
+            value={s.perWeek}
             min={PER_WEEK_MIN}
             max={PER_WEEK_MAX}
             step={PER_WEEK_STEP}
-            display={`${perWeek} / week`}
+            display={`${s.perWeek} / week`}
             low="0.25 (once a month)"
             high={`${PER_WEEK_MAX}`}
-            onChange={setPerWeek}
+            onChange={s.setPerWeek}
           />
           <Slider
             id="owned"
-            label="How many you own"
-            value={OWNED_STOPS.indexOf(owned)}
+            label={`How many ${item.many} you own`}
+            value={OWNED_STOPS.indexOf(s.owned)}
             min={0}
             max={OWNED_STOPS.length - 1}
-            display={`${owned}`}
+            display={`${s.owned}`}
             low="1"
             high="1000"
-            onChange={(i) => setOwned(OWNED_STOPS[i])}
+            onChange={(i) => s.setOwned(OWNED_STOPS[i])}
           />
           <Slider
             id="per-year"
-            label="Uses per year you want from each item"
-            description="Per single item, e.g. each board game played 10 times a year."
-            value={PER_YEAR_STOPS.indexOf(perYear)}
+            label={`${cap(item.uses)} per year you want from each ${item.one}`}
+            description={`Per single ${item.one}, e.g. ${item.yearExample}.`}
+            value={PER_YEAR_STOPS.indexOf(s.perYear)}
             min={0}
             max={PER_YEAR_STOPS.length - 1}
-            display={`${perYear} / year`}
+            display={`${s.perYear} / year`}
             low="0.1 (decadely)"
             high="365 (daily)"
-            onChange={(i) => setPerYear(PER_YEAR_STOPS[i])}
+            onChange={(i) => s.setPerYear(PER_YEAR_STOPS[i])}
           />
           <Slider
             id="share"
             label="Your share of the contributing"
-            description="Play with 3 people who all chip in equally? You supply 33%."
-            value={sharePct}
+            description={`Pool your ${item.many} with 3 friends who all chip in equally? You supply 33%.`}
+            value={s.sharePct}
             min={1}
             max={100}
-            display={`${sharePct}% (1 in ${people.toFixed(people % 1 ? 1 : 0)})`}
+            display={`${s.sharePct}% (1 in ${people.toFixed(people % 1 ? 1 : 0)})`}
             low="1% (mostly borrow)"
             high="100% (all mine)"
-            onChange={setSharePct}
+            onChange={s.setSharePct}
           />
         </div>
 
         <div className="mini-results">
           <h2>Results</h2>
-          <RecommendationPanel owned={owned} needed={needed} />
-          <WaitChart owned={owned} avgUses={averageUses(perWeek, sharePct, owned)} goal={perYear} />
+          <RecommendationPanel owned={s.owned} needed={needed} />
+          <WaitChart owned={s.owned} avgUses={averageUses(s.perWeek, s.sharePct, s.owned)} goal={s.perYear} item={item} />
         </div>
       </div>
 
       <SavingsPanel
-        owned={owned}
+        owned={s.owned}
         target={recommendedCount(needed)}
-        yearlyUses={perWeek * 52 * (sharePct / 100)}
+        yearlyUses={yearlyUses}
+        item={item}
+        buyPerYear={s.buyPerYear}
+        onBuyPerYear={s.setBuyPerYear}
+        price={s.price}
+        onPrice={s.setPrice}
+        minPlays={s.minPlays}
+        onMinPlays={s.setMinPlays}
+        maxPlays={s.maxPlays}
+        onMaxPlays={s.setMaxPlays}
       />
     </div>
   );
