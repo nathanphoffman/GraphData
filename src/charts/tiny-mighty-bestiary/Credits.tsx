@@ -28,8 +28,8 @@ export default function Credits() {
         onClick={(e) => e.target === dialog.current && dialog.current.close()}
       >
         <h2 id="bestiary-credits-title">Tiny Mighty Attribution Credit</h2>
-        <p>The original Tiny Mighty RPG was made entirely by humans, this bestiary was not, and the contributors listed below had no part in making it. This was exclusively a project of Nathan Hoffman, the original author of the game.</p>
-        <h3>Original Tiny Mighty RPG Attribution:</h3>
+        <p>The original Tiny Mighty RPG was made entirely by humans, this bestiary was not, and <strong>the contributors listed below had no part in making it</strong>. This was exclusively a project of Nathan Hoffman, the original author of the game.</p>
+        <h3>Original Human Tiny Mighty RPG Attribution:</h3>
         <p>
           Author: Nathan Hoffman
           <br />

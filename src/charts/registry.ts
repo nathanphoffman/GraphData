@@ -84,10 +84,10 @@ export const charts: ChartEntry[] = [
   },
   {
     id: "tiny-mighty-bestiary",
-    title: "Tiny Mighty RPG Bestiary (AI)",
+    title: "Unofficial Bestiary for Tiny Mighty",
     category: "Tabletop RPGs",
     description:
-      "Classic fantasy creatures statted with the Tiny Mighty RPG combat table: health, defense, bonus, turns and powers.",
+      "A bestiary created by Nathan Hoffman with AI, this is not an official Tiny Mighty project or endorsed in any way by my contributors. Classic fantasy creatures statted with the Tiny Mighty RPG combat table: health, defense, bonus, turns and powers.",
     component: TinyMightyBestiary,
   },
 ];
