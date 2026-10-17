@@ -84,7 +84,7 @@ export const charts: ChartEntry[] = [
   },
   {
     id: "tiny-mighty-bestiary",
-    title: "Tiny Mighty RPG Bestiary",
+    title: "Tiny Mighty RPG Bestiary (AI)",
     category: "Tabletop RPGs",
     description:
       "Classic fantasy creatures statted with the Tiny Mighty RPG combat table: health, defense, bonus, turns and powers.",
