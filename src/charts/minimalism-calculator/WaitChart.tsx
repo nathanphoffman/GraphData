@@ -1,5 +1,5 @@
 import type { ItemType } from "./items";
-import { gapLabel, goalColor, waitBuckets } from "./calculate";
+import { gapLabel, goalColor, waitBuckets } from "./waiting";
 
 const count = (n: number, item: ItemType) => `${n} ${n === 1 ? item.one : item.many}`;
 

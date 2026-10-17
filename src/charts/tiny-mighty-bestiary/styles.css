@@ -452,3 +452,15 @@
   text-align: left;
   cursor: pointer;
 }
+
+.bestiary-art {
+  color: var(--b-ink);
+}
+
+.bestiary-art svg {
+  display: block;
+  width: 100%;
+  max-width: 185px;
+  height: auto;
+  margin: 0 auto;
+}

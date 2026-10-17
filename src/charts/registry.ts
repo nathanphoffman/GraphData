@@ -47,7 +47,7 @@ export const charts: ChartEntry[] = [
     title: "The Minimalism Calculator",
     category: "Calculators",
     description:
-      "Roughly how many of a thing you should own, from how often you use it, how often you want each one used, and how much you share with others.",
+      "How many of a thing you should own (board games, books, tools and more), based on how often you use it, how much you share, and what it costs to keep buying. Includes sharing and goal charts, a 10-year savings table and a link you can share.",
     component: MinimalismCalculator,
   },
   {

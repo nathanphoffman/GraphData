@@ -1,4 +1,4 @@
-import { purchasePlan, yearsToReach } from "./calculate";
+import { purchasePlan, yearsToReach } from "./spending";
 import { cap, type ItemType } from "./items";
 
 interface Props {

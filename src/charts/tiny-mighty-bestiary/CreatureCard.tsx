@@ -1,3 +1,4 @@
+import CreatureArt from "./CreatureArt";
 import DifficultyDots from "./DifficultyDots";
 import { difficultyOf, model, tierFor } from "./data";
 import type { Creature, Tier } from "./types";
@@ -64,6 +65,7 @@ export default function CreatureCard({ creature }: { creature: Creature }) {
         <h2>{creature.name}</h2>
         <DifficultyDots value={difficultyOf(creature)} />
       </header>
+      <CreatureArt id={creature.id} />
       <p className="bestiary-desc">{creature.description}</p>
       <p className="bestiary-tone">
         Tone: <strong>{model.toneScale[creature.tone - 1]}</strong>

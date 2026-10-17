@@ -1,4 +1,6 @@
-/* Minimalism calculator: inputs on the left, results on the right on wide screens */
+/* Minimalism calculator */
+
+/* Layout: inputs on the left, results on the right on wide screens */
 
 @media (min-width: 900px) {
   .mini-layout {
@@ -25,12 +27,58 @@
   background: color-mix(in srgb, var(--fg) 5%, transparent);
 }
 
-/* Sliders */
+.mini-title {
+  margin: 0 0 16px;
+  font-size: 26px;
+}
+
+/* Form fields */
 
 .mini-calc label {
   display: block;
   font-weight: 600;
 }
+
+.mini-calc input[type="text"],
+.mini-calc input[type="number"],
+.mini-calc select {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+  padding: 8px 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* Title, item type and share link */
+
+.mini-sharebar {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+}
+
+@media (max-width: 700px) {
+  .mini-sharebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mini-sharebar button {
+  padding: 9px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--link);
+  background: var(--link);
+  color: var(--bg);
+  cursor: pointer;
+}
+
+/* Sliders */
 
 .mini-calc input[type="range"] {
   width: 100%;
@@ -142,6 +190,14 @@
   white-space: pre-line;
 }
 
+/* Line charts (goal and sharing) */
+
+.mini-curve {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Savings */
 
 .mini-savings summary {
@@ -154,18 +210,6 @@
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 16px;
   margin: 16px 0;
-}
-
-.mini-calc input[type="number"] {
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 6px;
-  padding: 8px 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
-  background: var(--bg);
-  color: var(--fg);
 }
 
 .mini-savings-table {
@@ -220,53 +264,4 @@
 .mini-total-amount {
   font-size: 28px;
   font-weight: 700;
-}
-
-/* Title, item type and share link */
-
-.mini-sharebar {
-  display: grid;
-  grid-template-columns: 2fr 1fr auto;
-  gap: 16px;
-  align-items: end;
-}
-
-@media (max-width: 700px) {
-  .mini-sharebar {
-    grid-template-columns: 1fr;
-  }
-}
-
-.mini-calc input[type="text"],
-.mini-calc select {
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 6px;
-  padding: 8px 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
-  background: var(--bg);
-  color: var(--fg);
-}
-
-.mini-sharebar button {
-  padding: 9px 16px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid var(--link);
-  background: var(--link);
-  color: var(--bg);
-  cursor: pointer;
-}
-
-.mini-title {
-  margin: 0 0 16px;
-  font-size: 26px;
-}
-
-.mini-curve {
-  display: block;
-  width: 100%;
-  height: auto;
 }
