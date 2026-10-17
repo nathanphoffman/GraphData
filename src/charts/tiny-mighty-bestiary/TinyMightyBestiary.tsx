@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CreatureCard from "./CreatureCard";
+import Credits from "./Credits";
 import EncounterGenerator from "./EncounterGenerator";
 import FilterBar, { type Filters } from "./FilterBar";
 import { LAST_STEP, TONE_LAST, difficulties, difficultyOf, model } from "./data";
@@ -32,6 +33,7 @@ export default function TinyMightyBestiary() {
 
   return (
     <div className="bestiary">
+      <Credits />
       <p className="muted">
         Built with the combat table from {model.rulesVersion}. Net difficulty of an encounter should equal the number
         of players plus the levels they have gained. Each 1-use power adds 0.5 difficulty. Enemies die at 0 health and
