@@ -1,8 +1,15 @@
 import { model } from "./data";
 import type { Creature } from "./types";
 
-/** True when every word of the query appears somewhere in the creature's searchable text. */
+/** Lowercase with everything but letters and digits removed, so "AT-AT", "at at" and "ATAT" all look the same. */
+const squash = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+/** True when every word of the query appears somewhere in the creature's searchable text. Names and aliases also match ignoring spacing and punctuation. */
 export function matches(creature: Creature, query: string) {
+  const names = [creature.name, ...creature.aliases].map(squash);
+  const inNames = (word: string) => word !== "" && names.some((n) => n.includes(word));
+  if (inNames(squash(query))) return true;
+
   const text = [
     creature.name,
     ...creature.aliases,
@@ -22,5 +29,5 @@ export function matches(creature: Creature, query: string) {
     .toLowerCase()
     .split(/\s+/)
     .filter(Boolean)
-    .every((word) => text.includes(word));
+    .every((word) => text.includes(word) || inNames(squash(word)));
 }

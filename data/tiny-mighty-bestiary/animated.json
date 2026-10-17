@@ -2918,5 +2918,282 @@
       }
     ],
     "tactics": "Picks off crippled targets first. Hide in debris."
+  },
+  {
+    "id": "four-armed-cyborg-general",
+    "name": "Four-Armed Cyborg General",
+    "type": "animated",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 4,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "general grievous",
+      "droid general",
+      "cyborg",
+      "droid commander",
+      "four arms"
+    ],
+    "description": "A coughing cyborg warlord who wields four laser blades, collects trophies and commands a droid army.",
+    "attack": "Four blades",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Blade Whirl",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Call the Army",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Adds a fresh group of droids to the fight."
+      }
+    ],
+    "tactics": "Hides behind droids until the party gets close. Wounds make him cough and run."
+  },
+  {
+    "id": "probe-drone",
+    "name": "Probe Drone",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "probe droid",
+      "viper droid",
+      "scout drone",
+      "spy droid"
+    ],
+    "description": "A floating, one-eyed scout droid that drops from the sky, scans everything and calls in the fleet.",
+    "attack": "Shock arm",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Call Reinforcements",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A group of troopers shows up two turns later."
+      }
+    ],
+    "tactics": "Scans, reports, then flees. Destroy it before it sends its signal."
+  },
+  {
+    "id": "chrome-assassin",
+    "name": "Chrome Assassin",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "ig-88",
+      "assassin droid",
+      "killer droid",
+      "hunter droid",
+      "bounty droid"
+    ],
+    "description": "A tall, thin silver droid that has been programmed with a long list of targets.",
+    "attack": "Rifle",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Perfect Shot",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Has one target and ignores the rest. Stops when the target is gone or the droid is destroyed."
+  },
+  {
+    "id": "rolling-shield-droid",
+    "name": "Rolling Shield Droid",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "droideka",
+      "destroyer droid",
+      "wheel droid",
+      "shield droid"
+    ],
+    "description": "A droid that rolls into battle as a wheel, then unfolds with a bubble shield and twin cannons.",
+    "attack": "Twin cannons",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Bubble Shield",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Blocks every ranged attack until it moves."
+      }
+    ],
+    "tactics": "Rolls in, unfolds and plants itself. Melee attackers get around the shield."
+  },
+  {
+    "id": "scrap-crawler",
+    "name": "Scrap Crawler",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "sandcrawler",
+      "jawa",
+      "jawa crawler",
+      "junk fortress",
+      "junk crawler"
+    ],
+    "description": "A rolling junk fortress the size of a house that collects droids and scrap from the desert.",
+    "attack": "Ram & tractor beam",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Tractor Hook",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Pulls a target inside until they escape."
+      }
+    ],
+    "tactics": "Moves slowly toward the largest pile of scrap. Climb on top to find the hatch."
+  },
+  {
+    "id": "moon-fortress",
+    "name": "Moon Fortress",
+    "type": "animated",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 9,
+    "flying": false,
+    "aliases": [
+      "death star",
+      "planet killer",
+      "battle station",
+      "deathstar",
+      "space station"
+    ],
+    "description": "A moon-sized battle station with a planet-cracking laser, a dark emperor and one very small weak spot.",
+    "attack": "Turbolasers",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Planet Cracker",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Destroys everything in the area."
+      },
+      {
+        "name": "Tractor Beam",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Holds a ship or a party in place until the beam is cut."
+      }
+    ],
+    "tactics": "A battle station, not a monster: the players win by finding the shaft and blowing the reactor."
   }
 ]

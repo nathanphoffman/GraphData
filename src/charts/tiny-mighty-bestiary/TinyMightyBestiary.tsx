@@ -3,7 +3,7 @@ import CreatureCard from "./CreatureCard";
 import Credits from "./Credits";
 import EncounterGenerator from "./EncounterGenerator";
 import FilterBar, { type Filters } from "./FilterBar";
-import { DIFFICULTY_BANDS, TONE_BANDS, difficultyOf, model } from "./data";
+import { DIFFICULTY_BANDS, TONE_BANDS, compareBy, difficultyOf, model } from "./data";
 import { matches } from "./search";
 import type { Creature } from "./types";
 import "./styles.css";
@@ -14,11 +14,12 @@ const DEFAULT_FILTERS: Filters = {
   type: null,
   difficulty: null,
   tone: null,
+  sort: "difficulty",
 };
 
 export default function TinyMightyBestiary() {
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
-  const { query, theme, type, difficulty, tone } = filters;
+  const { query, theme, type, difficulty, tone, sort } = filters;
 
   const canClear = type !== null || difficulty !== null || tone !== null;
   const band = DIFFICULTY_BANDS.find((b) => b.id === difficulty);
@@ -30,7 +31,7 @@ export default function TinyMightyBestiary() {
     (!toneBand || toneBand.tones.includes(c.tone)) &&
     matches(c, query);
 
-  const sorted = [...model.creatures].sort((a, b) => difficultyOf(a) - difficultyOf(b));
+  const sorted = [...model.creatures].sort(compareBy(sort));
   const creatures = sorted.filter((c) => c.themes.includes(theme) && passesFilters(c));
   // With nothing found in the selected theme, a search falls back to every other theme.
   const otherThemes =
@@ -50,7 +51,7 @@ export default function TinyMightyBestiary() {
         filters={filters}
         onChange={setFilters}
         canClear={canClear}
-        onClear={() => setFilters({ ...DEFAULT_FILTERS, query, theme })}
+        onClear={() => setFilters({ ...DEFAULT_FILTERS, query, theme, sort })}
       />
       <EncounterGenerator pool={creatures} />
       <div className="bestiary-divider" role="separator">

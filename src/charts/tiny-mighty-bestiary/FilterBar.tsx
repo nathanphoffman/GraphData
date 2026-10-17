@@ -1,5 +1,5 @@
 import FilterChips from "./FilterChips";
-import { DIFFICULTY_BANDS, TONE_BANDS, model } from "./data";
+import { DIFFICULTY_BANDS, SORTS, TONE_BANDS, model } from "./data";
 
 export interface Filters {
   query: string;
@@ -7,6 +7,7 @@ export interface Filters {
   type: string | null;
   difficulty: string | null;
   tone: string | null;
+  sort: string;
 }
 
 interface Props {
@@ -68,6 +69,13 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         options={TONE_BANDS}
         active={filters.tone}
         onChange={(tone) => set({ tone })}
+        chipClass={() => "bestiary-theme-chip"}
+      />
+      <FilterChips
+        label="Sort"
+        options={SORTS}
+        active={filters.sort}
+        onChange={(sort) => sort && set({ sort })}
         chipClass={() => "bestiary-theme-chip"}
       />
       <input

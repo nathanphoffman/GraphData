@@ -2856,5 +2856,38 @@
       }
     ],
     "tactics": "Protective of its herd. Can be tamed by keeping its calf safe."
+  },
+  {
+    "id": "thunder-herdbeast",
+    "name": "Thunder Herdbeast",
+    "type": "beast",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "bantha",
+      "nerf",
+      "mount",
+      "desert beast",
+      "furry mount"
+    ],
+    "description": "A huge shaggy, horned desert mount that can carry a whole tribe and is gentler than it looks.",
+    "attack": "Horns & stomp",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Gentle until frightened. A stampede ends when its rider calms it down."
   }
 ]

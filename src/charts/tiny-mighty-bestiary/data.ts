@@ -40,3 +40,31 @@ export const TONE_BANDS = [
 /** Slider stops for the encounter builder: 1-12 players, 0-10 levels gained in half steps. */
 export const PLAYER_STOPS = Array.from({ length: 12 }, (_, i) => String(i + 1));
 export const LEVEL_STOPS = Array.from({ length: 21 }, (_, i) => String(i / 2));
+
+/** Sort buttons. Ties always fall back to difficulty, then name. */
+export const SORTS = [
+  { id: "az", label: "Name A-Z" },
+  { id: "za", label: "Name Z-A" },
+  { id: "difficulty", label: "Difficulty" },
+  { id: "type", label: "Type" },
+  { id: "tone", label: "Tone" },
+];
+
+const byDifficultyThenName = (a: Creature, b: Creature) =>
+  difficultyOf(a) - difficultyOf(b) || a.name.localeCompare(b.name);
+
+export function compareBy(sort: string): (a: Creature, b: Creature) => number {
+  const typeOrder = (c: Creature) => model.creatureTypes.findIndex((t) => t.id === c.type);
+  switch (sort) {
+    case "az":
+      return (a, b) => a.name.localeCompare(b.name);
+    case "za":
+      return (a, b) => b.name.localeCompare(a.name);
+    case "type":
+      return (a, b) => typeOrder(a) - typeOrder(b) || byDifficultyThenName(a, b);
+    case "tone":
+      return (a, b) => a.tone - b.tone || byDifficultyThenName(a, b);
+    default:
+      return byDifficultyThenName;
+  }
+}

@@ -4951,5 +4951,221 @@
       }
     ],
     "tactics": "Fights with dignity and demands a duel. Will accept tribute."
+  },
+  {
+    "id": "shag-giant",
+    "name": "Shag Giant",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "wookiee",
+      "chewbacca",
+      "furry co-pilot",
+      "gentle giant"
+    ],
+    "description": "A seven-foot furry co-pilot with a bandolier, a loud roar and a famous temper when a friend gets hurt.",
+    "attack": "Fists & bowcaster",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Loyal to a friend first. Hurt his friend and he gets angry and fights harder."
+  },
+  {
+    "id": "swamp-hermit-master",
+    "name": "Swamp Hermit Master",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "yoda",
+      "jedi master",
+      "little green",
+      "force master",
+      "hermit"
+    ],
+    "description": "A tiny, ancient green hermit with big ears and a walking stick who fights like a hurricane.",
+    "attack": "Walking stick",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Force Push",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Knocks targets prone."
+      },
+      {
+        "name": "Lift Anything",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Moves anything the size of a ship until it stops focusing."
+      }
+    ],
+    "tactics": "Acts frail and confused until hit. Never fights when talk can win."
+  },
+  {
+    "id": "star-knight",
+    "name": "Star Knight",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "jedi",
+      "jedi knight",
+      "lightsaber",
+      "light side",
+      "space wizard"
+    ],
+    "description": "A robed warrior-monk with a laser sword, a calm voice and a strong code of honor.",
+    "attack": "Laser sword",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Blade Deflect",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Reflects one ranged attack back at the attacker."
+      }
+    ],
+    "tactics": "Tries to talk first. Fights defensively and protects the weak."
+  },
+  {
+    "id": "twin-blade-zealot",
+    "name": "Twin-Blade Zealot",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "darth maul",
+      "sith assassin",
+      "double lightsaber",
+      "sith",
+      "horned warrior"
+    ],
+    "description": "A horned acrobat in black with a double-bladed laser staff and a grudge.",
+    "attack": "Double blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Whirling Blades",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Hits every target in reach."
+      },
+      {
+        "name": "Flip Strike",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Leaps past guards."
+      }
+    ],
+    "tactics": "Cuts through guards to reach the strongest player first. Weak to ranged attacks."
+  },
+  {
+    "id": "crimson-guard",
+    "name": "Crimson Guard",
+    "type": "humanoid",
+    "themes": [
+      "space-wars",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "royal guard",
+      "praetorian",
+      "red guard",
+      "emperor's guard",
+      "elite guard"
+    ],
+    "description": "A silent bodyguard in full red armor with a long force pike and a perfect record.",
+    "attack": "Force pike",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Pike Sweep",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Hits every target in reach."
+      }
+    ],
+    "tactics": "Always stands between the emperor and the party. Never talks and never retreats."
   }
 ]
