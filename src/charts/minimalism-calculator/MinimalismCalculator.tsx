@@ -1,6 +1,7 @@
 import "./styles.css";
-import { averageUses, recommended } from "./calculate";
+import { averageUses, recommended, recommendedCount } from "./calculate";
 import RecommendationPanel from "./RecommendationPanel";
+import SavingsPanel from "./SavingsPanel";
 import Slider from "./Slider";
 import {
   OWNED_STOPS,
@@ -90,6 +91,12 @@ export default function MinimalismCalculator() {
           <WaitChart owned={owned} avgUses={averageUses(perWeek, sharePct, owned)} goal={perYear} />
         </div>
       </div>
+
+      <SavingsPanel
+        owned={owned}
+        target={recommendedCount(needed)}
+        yearlyUses={perWeek * 52 * (sharePct / 100)}
+      />
     </div>
   );
 }

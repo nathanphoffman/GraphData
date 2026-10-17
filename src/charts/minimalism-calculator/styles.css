@@ -140,3 +140,83 @@
   font-size: 12px;
   white-space: pre-line;
 }
+
+/* Savings */
+
+.mini-savings summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.mini-savings-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.mini-calc input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+  padding: 8px 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.mini-savings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.mini-savings-table th,
+.mini-savings-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.mini-savings-table th {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .mini-savings-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.mini-total {
+  margin: 16px 0 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 2px solid;
+}
+
+.mini-total-save {
+  color: #16a34a;
+  border-color: #16a34a;
+  background: color-mix(in srgb, #16a34a 12%, transparent);
+}
+
+.mini-total-spend {
+  color: #dc2626;
+  border-color: #dc2626;
+  background: color-mix(in srgb, #dc2626 12%, transparent);
+}
+
+.mini-total-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mini-total-amount {
+  font-size: 28px;
+  font-weight: 700;
+}

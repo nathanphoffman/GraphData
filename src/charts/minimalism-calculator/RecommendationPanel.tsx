@@ -1,4 +1,4 @@
-import { arrowPosition } from "./calculate";
+import { arrowPosition, recommendedCount as countFor } from "./calculate";
 
 const LEVELS = [
   {
@@ -28,7 +28,7 @@ interface Props {
 
 /** Gradient scale with an arrow at how many you own, then the minimal / recommended / maximal boxes. */
 export default function RecommendationPanel({ owned, needed }: Props) {
-  const recommendedCount = Math.max(0, Math.ceil(needed - 1e-9));
+  const recommendedCount = countFor(needed);
   const onTarget = owned === recommendedCount || Math.abs(owned - needed) <= needed * 0.1;
   const diffColor = onTarget ? "#16a34a" : owned > needed ? "#dc2626" : "#eab308";
   const arrowPct = arrowPosition(owned, needed);
