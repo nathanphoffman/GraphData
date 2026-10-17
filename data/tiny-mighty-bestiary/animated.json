@@ -96,7 +96,10 @@
       "tomb robot",
       "metal skeleton",
       "undead robot",
-      "android skeleton"
+      "android skeleton",
+      "necron",
+      "necron warrior",
+      "flayed one"
     ],
     "description": "A skeletal metal warrior that rises from a tomb world's sands after sixty million years, green eyes burning.",
     "attack": "Gauss rifle",
@@ -137,7 +140,11 @@
       "mech",
       "super heavy",
       "god machine",
-      "walking cathedral"
+      "walking cathedral",
+      "imperator titan",
+      "warlord titan",
+      "adeptus titanicus",
+      "mechanicus"
     ],
     "description": "A city-block-tall, god-machine walker that crushes tanks and carries a cathedral on its back.",
     "attack": "Stomp",
@@ -1286,7 +1293,10 @@
       "skull drone",
       "floating skull",
       "cyber skull",
-      "bone drone"
+      "bone drone",
+      "servo-skull",
+      "imperium",
+      "mechanicus"
     ],
     "description": "A floating, hollow skull with a camera in one socket and a whispering vox in the other.",
     "attack": "Bite",
@@ -1650,7 +1660,10 @@
       "servo skull",
       "drone",
       "mech",
-      "cherub"
+      "cherub",
+      "servo-skull",
+      "servitor",
+      "imperium"
     ]
   },
   {
@@ -1681,7 +1694,12 @@
       "dreadnought",
       "war machine",
       "servitor",
-      "golem"
+      "golem",
+      "mechanicus",
+      "kastelan",
+      "cybernetica",
+      "robot",
+      "adeptus mechanicus"
     ]
   },
   {
@@ -2052,7 +2070,9 @@
       "janitor",
       "cleaning bot",
       "servitor",
-      "mop bot"
+      "mop bot",
+      "mechanicus",
+      "adeptus mechanicus"
     ]
   },
   {
@@ -2385,7 +2405,10 @@
       "servitor",
       "guardian",
       "forge guard",
-      "machine"
+      "machine",
+      "mechanicus",
+      "skitarii",
+      "adeptus mechanicus"
     ]
   },
   {
@@ -3195,5 +3218,710 @@
       }
     ],
     "tactics": "A battle station, not a monster: the players win by finding the shaft and blowing the reactor."
+  },
+  {
+    "id": "neon-karaoke-bot",
+    "name": "Neon Karaoke Bot",
+    "type": "animated",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 1,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "karaoke",
+      "singing robot",
+      "street bot",
+      "idol bot",
+      "jukebox"
+    ],
+    "description": "A glowing street-corner robot that will sing every hit song of the last century, whether you want it or not.",
+    "attack": "Mic swing",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Power Ballad",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Hit targets must dance and have disadvantage until the song ends."
+      }
+    ],
+    "tactics": "Stays on the stage and sings. Cut its power cable or boo it off the stage."
+  },
+  {
+    "id": "cherub-skull-swarm",
+    "name": "Cherub Skull Swarm",
+    "type": "animated",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 2,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "servo skull",
+      "skull drone",
+      "cherub drone",
+      "angel skull",
+      "servo-skull",
+      "cherub",
+      "imperium"
+    ],
+    "description": "A cloud of tiny winged skulls with halos that sing hymns and shoot lasers.",
+    "attack": "Zap",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hymn Barrage",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Flies in a flock and sings. Break the leading skull and the rest scatter."
+  },
+  {
+    "id": "clockwork-carousel",
+    "name": "Clockwork Carousel",
+    "type": "animated",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 1,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "carousel",
+      "merry-go-round",
+      "carnival ride",
+      "steam horse ride"
+    ],
+    "description": "A huge gear-driven carousel that rolls through towns playing music and grabbing riders.",
+    "attack": "Spin & gallop",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Wild Ride",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets are carried around and must win Physique to get off."
+      },
+      {
+        "name": "Calliope Waltz",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Everyone in earshot must dance until the music stops."
+      },
+      {
+        "name": "Brass Ring",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Rolls toward the biggest crowd. Stop the main gear to stop the ride."
+  },
+  {
+    "id": "gingerbread-colossus",
+    "name": "Gingerbread Colossus",
+    "type": "animated",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 1,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "gingerbread man",
+      "cookie giant",
+      "candy giant",
+      "sweet golem",
+      "biscuit titan"
+    ],
+    "description": "A house-sized cookie giant with gumdrop buttons, icing trim and an unquenchable urge to hug you.",
+    "attack": "Giant hug",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Gumdrop Barrage",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Sticky. Hit targets have disadvantage to move."
+      },
+      {
+        "name": "Candy Cane Slam",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Regrow Icing",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 by licking its own icing."
+      }
+    ],
+    "tactics": "Chases the smallest player. Dunk it in milk and it falls apart."
+  },
+  {
+    "id": "convoy-city",
+    "name": "Roving Convoy City",
+    "type": "animated",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 3,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "war rig",
+      "convoy",
+      "wheeled city",
+      "road city",
+      "truck city"
+    ],
+    "description": "A city on wheels built from a hundred trucks, towing its streets, markets and a warlord's tower across the dust.",
+    "attack": "Ramming prow",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Cannon Wall",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense."
+      },
+      {
+        "name": "Boarding Gangs",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Drivers and raiders swarm the targets."
+      },
+      {
+        "name": "Fuel Run",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Adds a fresh convoy of vehicles each turn."
+      }
+    ],
+    "tactics": "Rolls forward and cannot turn quickly. Lure it into a trap or take out the lead truck."
+  },
+  {
+    "id": "battle-barge",
+    "name": "Battle Barge Cathedral",
+    "type": "animated",
+    "themes": [
+      "space-hammer"
+    ],
+    "tone": 3,
+    "tier": 8,
+    "flying": false,
+    "aliases": [
+      "battleship",
+      "warship",
+      "gothic cruiser",
+      "space cathedral",
+      "flagship",
+      "battle barge",
+      "space marine",
+      "imperial navy",
+      "adeptus astartes"
+    ],
+    "description": "A cathedral-shaped warship the size of a mountain, with a thousand guns and a thousand prayers.",
+    "attack": "Broadside",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Lance Strike",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Orbital Bombardment",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Razes buildings."
+      },
+      {
+        "name": "Boarding Pods",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Drops marines into the fight."
+      }
+    ],
+    "tactics": "Hangs in orbit and hammers one target. Board it and cut the reactor to stop it."
+  },
+  {
+    "id": "chrome-scarab-swarm",
+    "name": "Chrome Scarab Swarm",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "tomb robot",
+      "metal beetles",
+      "scarab",
+      "metal swarm",
+      "robot bugs",
+      "necron",
+      "canoptek",
+      "canoptek scarab"
+    ],
+    "description": "A hissing cloud of palm-sized metal beetles that strips armor and flesh from anything it covers.",
+    "attack": "Gnawing swarm",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Armor Strip",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A hit target loses its armor bonus until it rests."
+      }
+    ],
+    "tactics": "Swarms the best-armored target. Fire and area attacks scatter it."
+  },
+  {
+    "id": "tomb-lord",
+    "name": "Tomb Lord",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "necron lord",
+      "tomb robot lord",
+      "metal lord",
+      "skeleton robot king",
+      "undying lord",
+      "necron",
+      "overlord",
+      "cryptek",
+      "necrons"
+    ],
+    "description": "A crowned, skeletal metal lord who wakes in a dead world and has not forgotten a single grudge.",
+    "attack": "Staff of light",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Phase Back",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 as its body repairs itself."
+      },
+      {
+        "name": "Staff Blast",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Commands tomb warriors from behind. Teleports away when badly hurt."
+  },
+  {
+    "id": "tomb-monolith",
+    "name": "Tomb Monolith",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 6,
+    "flying": true,
+    "aliases": [
+      "obelisk",
+      "tomb gate",
+      "monolith",
+      "floating obelisk",
+      "portal tower",
+      "necron",
+      "necron monolith",
+      "necrons"
+    ],
+    "description": "A huge floating black obelisk with a green glowing doorway that spits out an endless line of tomb warriors.",
+    "attack": "Gauss lightning",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Portal Ranks",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Brings in a fresh squad of tomb warriors each turn."
+      },
+      {
+        "name": "Eternity Gate",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets are flung away."
+      }
+    ],
+    "tactics": "Hovers over the battlefield and calls in troops. Close the gate by destroying its power core."
+  },
+  {
+    "id": "spirit-stone-walker",
+    "name": "Spirit-Stone Walker",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "wraith",
+      "wraithguard",
+      "spirit construct",
+      "ghost robot",
+      "crystal golem",
+      "eldar",
+      "aeldari",
+      "wraithlord",
+      "craftworld"
+    ],
+    "description": "A towering, graceful construct of bone-colored crystal animated by the soul of a dead space elf.",
+    "attack": "Crystal fists",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Soul Wail",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Hit targets are afraid (disadvantage) until they rest."
+      }
+    ],
+    "tactics": "Walks slowly and fights like a mourner. A soul gem in the chest controls it."
+  },
+  {
+    "id": "sky-battlesuit",
+    "name": "Sky Coalition Battlesuit",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "crisis suit",
+      "battlesuit",
+      "exo suit",
+      "blue suit",
+      "mech suit",
+      "tau",
+      "tau empire"
+    ],
+    "description": "A tall, sleek, white-and-orange battle exo-suit with a pilot, a jetpack and a lot of guns.",
+    "attack": "Burst cannon",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Jet Strike",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Jumps and fires from the air."
+      }
+    ],
+    "tactics": "Hits and jumps away. Close combat is its weakness."
+  },
+  {
+    "id": "entombed-veteran",
+    "name": "Entombed Veteran",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "dreadnought",
+      "walker",
+      "old hero",
+      "marine walker",
+      "entombed hero",
+      "space marine",
+      "astartes",
+      "adeptus astartes"
+    ],
+    "description": "A wounded old hero sealed alive in a walking war machine with an arm cannon and a power fist.",
+    "attack": "Power fist",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Last Stand",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Wake the Ancient",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Gains advantage on every attack for one turn."
+      }
+    ],
+    "tactics": "Fights until the pilot dies. A talk with the old hero can reveal old memories."
+  },
+  {
+    "id": "penitent-engine",
+    "name": "Penitent Engine",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "penitent",
+      "war walker",
+      "penance engine",
+      "flail walker",
+      "sister walker",
+      "sisters of battle",
+      "adepta sororitas",
+      "sororitas"
+    ],
+    "description": "A walking war machine with a penitent soul strapped inside, flaming flails and a mad scream.",
+    "attack": "Flails",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Flail Frenzy",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Hits every target in reach."
+      }
+    ],
+    "tactics": "Charges in a straight line and keeps swinging. Hard to stop; easy to dodge."
+  },
+  {
+    "id": "throne-knight",
+    "name": "Throne Knight",
+    "type": "animated",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "knight",
+      "imperial knight",
+      "noble walker",
+      "house knight",
+      "war walker",
+      "questoris",
+      "knight house",
+      "titan"
+    ],
+    "description": "A tall, noble war walker piloted by a house lord, with a thermal cannon on one arm and a reaper chain-sword on the other.",
+    "attack": "Reaper chainsword",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Thermal Cannon",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Walker's Stomp",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets are knocked prone."
+      }
+    ],
+    "tactics": "Strides in with a banner and a challenge. Honor-bound and easy to bait."
   }
 ]

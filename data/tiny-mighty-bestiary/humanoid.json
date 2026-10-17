@@ -389,7 +389,10 @@
     "aliases": [
       "guardsman",
       "conscript",
-      "fodder"
+      "fodder",
+      "astra militarum",
+      "imperial guard",
+      "lasgun trooper"
     ],
     "description": "A helmeted foot soldier in flak armor, one of ten billion, sent forward in waves on the Emperor's say-so.",
     "attack": "Laser rifle",
@@ -417,7 +420,12 @@
     "aliases": [
       "marine",
       "power armor",
-      "superhuman"
+      "superhuman",
+      "space marine",
+      "adeptus astartes",
+      "astartes",
+      "ultramarine",
+      "primaris"
     ],
     "description": "A seven-foot, genetically-engineered warrior in sealed power armor, sworn to a distant emperor and a brotherhood banner.",
     "attack": "Saw-sword",
@@ -462,7 +470,10 @@
       "political officer",
       "kommissar",
       "officer",
-      "zealot"
+      "zealot",
+      "astra militarum",
+      "imperial guard",
+      "commissar yarrick"
     ],
     "description": "A black-coated officer with a peaked cap and a pistol who shoots cowards before the enemy does.",
     "attack": "Power sword",
@@ -504,7 +515,12 @@
       "warboy",
       "scrap fighter",
       "space orc",
-      "brute"
+      "brute",
+      "ork",
+      "ork boy",
+      "orks",
+      "choppa",
+      "slugga"
     ],
     "description": "A green, tusked bruiser in welded scrap armor with a shoota that jams and a big choppa that never does.",
     "attack": "Big choppa",
@@ -550,7 +566,12 @@
       "traitor",
       "fallen knight",
       "corrupted warrior",
-      "chaos knight"
+      "chaos knight",
+      "chaos space marine",
+      "chaos marine",
+      "heretic astartes",
+      "traitor marine",
+      "chaos"
     ],
     "description": "A scarred, spiked, horned warrior in corrupted power armor, who fought for the Emperor ten thousand years ago.",
     "attack": "Heavy pistol & chainaxe",
@@ -593,7 +614,12 @@
       "elf seer",
       "oracle",
       "fortune teller",
-      "prophet"
+      "prophet",
+      "eldar",
+      "aeldari",
+      "farseer",
+      "craftworld",
+      "asuryani"
     ],
     "description": "A tall, graceful elf in runed, smooth armor who has already seen how this fight ends.",
     "attack": "Rune blade",
@@ -641,7 +667,11 @@
     "aliases": [
       "pulse rifle",
       "xenos",
-      "blue alien"
+      "blue alien",
+      "tau",
+      "tau empire",
+      "fire warrior",
+      "fire caste"
     ],
     "description": "A short, blue-skinned soldier in sleek armor who speaks of the greater good and shoots from behind a drone.",
     "attack": "Pulse rifle",
@@ -681,7 +711,12 @@
       "technician",
       "engineer",
       "mechanic",
-      "machine god"
+      "machine god",
+      "tech-priest",
+      "techpriest",
+      "adeptus mechanicus",
+      "mechanicus",
+      "magos"
     ],
     "description": "A red-robed priest of the Machine God with a mechanical arm, a third eye and a litany to the toaster.",
     "attack": "Power axe",
@@ -721,7 +756,10 @@
     "aliases": [
       "inquisitor",
       "witch finder",
-      "puritan"
+      "puritan",
+      "inquisition",
+      "ordo hereticus",
+      "acolyte"
     ],
     "description": "A grim, armored investigator with a flamer, a sealed warrant and the legal right to burn a whole planet.",
     "attack": "Plasma pistol",
@@ -2046,7 +2084,10 @@
     "aliases": [
       "gremlin",
       "goblin",
-      "tinker"
+      "tinker",
+      "gretchin",
+      "grot",
+      "ork"
     ],
     "description": "A knee-high, giggling, green runt with a wrench who 'fixes' things by hitting them.",
     "attack": "Wrench",
@@ -3503,7 +3544,10 @@
       "space marine",
       "chapter master",
       "warlord",
-      "crusader"
+      "crusader",
+      "astartes",
+      "adeptus astartes",
+      "primarch"
     ]
   },
   {
@@ -3990,7 +4034,10 @@
       "recruit",
       "guardsman",
       "trooper",
-      "grunt"
+      "grunt",
+      "astra militarum",
+      "imperial guard",
+      "conscript"
     ]
   },
   {
@@ -4395,7 +4442,10 @@
       "grunt",
       "brute",
       "worker",
-      "ork"
+      "ork",
+      "imperial navy",
+      "voidsman",
+      "imperium"
     ]
   },
   {
@@ -5167,5 +5217,1003 @@
       }
     ],
     "tactics": "Always stands between the emperor and the party. Never talks and never retreats."
+  },
+  {
+    "id": "cosmic-jester-emperor",
+    "name": "Cosmic Jester Emperor",
+    "type": "humanoid",
+    "themes": [
+      "space-jammer",
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "space jester",
+      "cosmic clown",
+      "star king",
+      "galactic fool",
+      "emperor of fools"
+    ],
+    "description": "A cackling emperor of the stars in a comet-tail cape who rules three galaxies by prank.",
+    "attack": "Joke scepter",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Cosmic Prank",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Swaps the places of any two creatures or ships."
+      },
+      {
+        "name": "Star Pie",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Covers the area in glitter."
+      },
+      {
+        "name": "Laugh Track",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets cannot lie until they rest."
+      }
+    ],
+    "tactics": "Treats the fight as a show and loves an audience. Tell a better joke to calm him down."
+  },
+  {
+    "id": "megacorp-ceo",
+    "name": "Megacorp CEO",
+    "type": "humanoid",
+    "themes": [
+      "cyberpunk"
+    ],
+    "tone": 3,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "ceo",
+      "corporate boss",
+      "executive",
+      "megacorp boss",
+      "corp president"
+    ],
+    "description": "A cybernetic executive in a golden suit who owns the city, the police and your debt.",
+    "attack": "Gold arm",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hostile Takeover",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Converts one enemy of the CEO into a loyal employee until they rest."
+      },
+      {
+        "name": "Security Override",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Turrets and drones open fire."
+      },
+      {
+        "name": "Golden Parachute",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 by cashing in a bonus."
+      }
+    ],
+    "tactics": "Fights from a penthouse with drones and guards. Hit the stock price or expose a secret to crash his confidence."
+  },
+  {
+    "id": "dead-eye-legend",
+    "name": "Dead-Eye Legend",
+    "type": "humanoid",
+    "themes": [
+      "western"
+    ],
+    "tone": 4,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "gunslinger",
+      "outlaw legend",
+      "legendary outlaw",
+      "gunfighter",
+      "deadeye"
+    ],
+    "description": "A near-mythical outlaw with a red bandana, twin pistols and a hundred tall tales, most of them true.",
+    "attack": "Twin revolvers",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Dead Eye",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Fan the Hammer",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Legend Grows",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Everyone who hears his name has disadvantage until they rest."
+      }
+    ],
+    "tactics": "Wants a clean duel at high noon. Refusing to draw shames him into a rage."
+  },
+  {
+    "id": "pirate-queen",
+    "name": "Pirate Queen",
+    "type": "humanoid",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 8,
+    "flying": false,
+    "aliases": [
+      "pirate king",
+      "pirate captain",
+      "sea queen",
+      "fleet admiral",
+      "pirate lord"
+    ],
+    "description": "The ruler of a hundred ships who commands the seas with a cutlass, a brace of pistols and a single look.",
+    "attack": "Cutlass",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Broadside Command",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Her fleet fires from the sea."
+      },
+      {
+        "name": "Rally the Fleet",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Brings in a fresh pirate crew each turn."
+      },
+      {
+        "name": "Pistol Duel",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Fights from the deck and respects boldness. Win her over and she calls the fleet to your side."
+  },
+  {
+    "id": "silver-ranger",
+    "name": "Silver Ranger",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "space elf",
+      "elf ranger",
+      "space elf scout",
+      "elf sniper",
+      "star elf",
+      "eldar",
+      "aeldari",
+      "ranger",
+      "craftworld",
+      "asuryani"
+    ],
+    "description": "A tall, cloaked space elf scout with a long rifle who watches from afar and vanishes into the wild.",
+    "attack": "Long rifle",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Snipes from a hiding spot, then relocates. Fights with distance and patience."
+  },
+  {
+    "id": "razor-raider",
+    "name": "Razor Raider",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "dark elf",
+      "dark elf raider",
+      "space pirate",
+      "pain raider",
+      "dark eldar",
+      "drukhari",
+      "kabalite",
+      "wych",
+      "commorrite"
+    ],
+    "description": "A spiked, black-armored dark elf pirate who raids on sky-skiffs and takes prisoners for sport.",
+    "attack": "Razor blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Raids fast and grabs a victim. Leaves at the first hint of a real fight."
+  },
+  {
+    "id": "pain-archon",
+    "name": "Pain Archon",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "dark elf lord",
+      "archon",
+      "dark elf prince",
+      "pain lord",
+      "dark eldar lord",
+      "drukhari",
+      "dark eldar",
+      "commorrite"
+    ],
+    "description": "A dark elf lord in a cape of flayed skin who runs a pain cult and loves a good audience.",
+    "attack": "Splinter pistol & blade",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Poisoned Splinters",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is poisoned (disadvantage) until it rests."
+      },
+      {
+        "name": "Pain Feast",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 by draining pain from a target."
+      }
+    ],
+    "tactics": "Fights from a hovering throne with a retinue. Hit the retinue to take its power."
+  },
+  {
+    "id": "mask-dancer",
+    "name": "Mask Dancer",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "harlequin",
+      "masked dancer",
+      "space jester",
+      "mask performer",
+      "space elf jester",
+      "harlequins",
+      "aeldari",
+      "eldar",
+      "troupe"
+    ],
+    "description": "A grinning, masked space elf performer who dances through bullets and sings tragedies in a laser sword fight.",
+    "attack": "Flip blade",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Dazzle Dance",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A hit target loses its next turn watching the dance."
+      }
+    ],
+    "tactics": "Moves through the fight like a stage act. Pays attention to the audience."
+  },
+  {
+    "id": "mask-troupe-master",
+    "name": "Mask Troupe Master",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 3,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "harlequin master",
+      "troupe leader",
+      "mask master",
+      "shadowseer",
+      "space actor",
+      "harlequin",
+      "troupe master",
+      "eldar",
+      "aeldari"
+    ],
+    "description": "A masked, cloaked master of the dance who leads a troupe across the stars to act out a war.",
+    "attack": "Prismatic blade",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Final Act",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. The dance sweeps through every target."
+      },
+      {
+        "name": "Cast Shadow",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Becomes unseen until it attacks."
+      }
+    ],
+    "tactics": "Directs the troupe like a play. Break the cast and the show falls apart."
+  },
+  {
+    "id": "scrap-warboss",
+    "name": "Scrap Warboss",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "ork warboss",
+      "green boss",
+      "warlord",
+      "big boss",
+      "space ork boss",
+      "ork",
+      "warboss",
+      "waaagh",
+      "orks"
+    ],
+    "description": "A huge green brute in a welded armor suit and a metal claw who leads the biggest mob in the sector.",
+    "attack": "Power claw",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Waaagh!",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. All of his mob gets advantage this turn."
+      },
+      {
+        "name": "Claw Smash",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage."
+      }
+    ],
+    "tactics": "Leads from the front and brags. The mob follows whoever hits hardest."
+  },
+  {
+    "id": "greater-good-envoy",
+    "name": "Greater Good Envoy",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "ethereal",
+      "sky coalition leader",
+      "blue diplomat",
+      "greater good leader",
+      "peace envoy",
+      "tau",
+      "tau empire",
+      "aun"
+    ],
+    "description": "A tall, blue-skinned diplomat in white robes with two floating drones who wants to talk peace first.",
+    "attack": "Drone guns",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rally to the Cause",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. All allies within sight get advantage this turn."
+      }
+    ],
+    "tactics": "Offers a treaty before shooting. Lose its drones and it falls apart."
+  },
+  {
+    "id": "chapter-librarian",
+    "name": "Chapter Librarian",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "librarian",
+      "space marine psyker",
+      "psychic marine",
+      "blue marine",
+      "marine wizard",
+      "space marine",
+      "astartes",
+      "psyker",
+      "adeptus astartes"
+    ],
+    "description": "A blue-armored psychic warrior with a force staff who uses the warp as a weapon and a leash.",
+    "attack": "Force staff",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Psychic Lance",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Mind Shield",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Blocks one psychic attack or power."
+      }
+    ],
+    "tactics": "Stays behind the line and picks off psykers. Struggles when the warp resists."
+  },
+  {
+    "id": "blood-zealot",
+    "name": "Blood Zealot",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "chaos marine",
+      "berserker",
+      "blood berserker",
+      "khorne zealot",
+      "red marine",
+      "khorne",
+      "chaos space marine",
+      "world eaters",
+      "chaos"
+    ],
+    "description": "A red-armored, horned berserker who bathes in blood and fights with two huge chainblades.",
+    "attack": "Chain axes",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Blood Rage",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage. Gains advantage on the next attack."
+      }
+    ],
+    "tactics": "Charges the strongest enemy and never retreats. Pull it from the fray and it crumbles."
+  },
+  {
+    "id": "inquisitor-lord",
+    "name": "Inquisitor Lord",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "inquisitor",
+      "space inquisitor",
+      "grand inquisitor",
+      "imperial judge",
+      "witch lord",
+      "inquisition",
+      "ordo",
+      "imperium"
+    ],
+    "description": "A black-coated, high-ranking judge with a hat, a seal and a retinue who can order planets purged.",
+    "attack": "Plasma pistol",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Purge Order",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Orders an allied squad to attack one target with advantage."
+      },
+      {
+        "name": "Heretic's Doom",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      }
+    ],
+    "tactics": "Questions first and burns later. Prove innocence and he becomes an ally."
+  },
+  {
+    "id": "flame-sister",
+    "name": "Flame Sister",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "sister of battle",
+      "battle nun",
+      "space nun",
+      "holy sister",
+      "warrior nun",
+      "sisters of battle",
+      "adepta sororitas",
+      "battle sister",
+      "sororitas"
+    ],
+    "description": "A warrior-nun in red and white armor who prays loudly, burns heretics, and does both with a smile.",
+    "attack": "Flamer",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Holy Flame",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode. Burns terrain too."
+      }
+    ],
+    "tactics": "Fights in a group and prays between shots. Faith keeps her going when hurt."
+  },
+  {
+    "id": "golden-sentinel",
+    "name": "Golden Sentinel",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 5,
+    "flying": false,
+    "aliases": [
+      "custodes",
+      "golden guard",
+      "palace guard",
+      "gold guardian",
+      "emperor's guard",
+      "adeptus custodes",
+      "custodian guard"
+    ],
+    "description": "A giant gold-armored bodyguard with a spear and a very old oath who has not left the palace in ten thousand years.",
+    "attack": "Guardian spear",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Spear Sweep",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      },
+      {
+        "name": "Oathkeeper",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Takes the next hit meant for an ally."
+      }
+    ],
+    "tactics": "Never leaves its post and only attacks what comes close. A real oath bends its course."
+  },
+  {
+    "id": "throne-warden-captain",
+    "name": "Throne Warden Captain",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "custodes captain",
+      "golden captain",
+      "guard captain",
+      "gold commander",
+      "palace commander",
+      "custodes",
+      "adeptus custodes",
+      "shield-captain",
+      "captain-general"
+    ],
+    "description": "The gold-armored commander of the palace guard in a red cloak, wielding a huge blade that sings.",
+    "attack": "Singing blade",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Last Oath",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Rally the Wardens",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Calls two Golden Sentinels to the fight."
+      },
+      {
+        "name": "Whirling Blade",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Fights from the front and speaks little. Respects honorable duelists."
+  },
+  {
+    "id": "hybrid-cultist",
+    "name": "Hybrid Cultist",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "genestealer hybrid",
+      "cult hybrid",
+      "four-armed cultist",
+      "purple cultist",
+      "star cult",
+      "genestealer cult",
+      "genestealer",
+      "hybrid",
+      "neophyte"
+    ],
+    "description": "A four-armed, purple-skinned, half-human cultist with a mining tool and a secret faith in the star-child.",
+    "attack": "Mining pick",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [],
+    "tactics": "Hides in the crowd. Strike when the cult leader gives a signal."
+  },
+  {
+    "id": "hearth-miner",
+    "name": "Hearth Miner",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 2,
+    "tier": 1,
+    "flying": false,
+    "aliases": [
+      "squat",
+      "dwarf miner",
+      "space dwarf",
+      "asteroid miner",
+      "stocky miner",
+      "leagues of votann",
+      "votann",
+      "kin"
+    ],
+    "description": "A short, stocky, bearded asteroid miner in a mining suit with a pick, a laser drill and a stubborn streak.",
+    "attack": "Mining pick",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [],
+    "tactics": "Digs in and holds the line. Never leaves a mate behind."
+  },
+  {
+    "id": "ancestor-hold-lord",
+    "name": "Ancestor Hold Lord",
+    "type": "humanoid",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "squat lord",
+      "dwarf lord",
+      "space dwarf lord",
+      "hold lord",
+      "clan lord",
+      "leagues of votann",
+      "votann",
+      "squat",
+      "ancestor",
+      "hold",
+      "kin lord"
+    ],
+    "description": "A short, tough, armored lord of a mining clan with a huge beard, a hammer and a ledger of old grudges.",
+    "attack": "Grudge hammer",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Settle the Grudge",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Doubles on a creature that wronged it."
+      }
+    ],
+    "tactics": "Remembers every insult. Pay a debt and it stands as an ally."
   }
 ]

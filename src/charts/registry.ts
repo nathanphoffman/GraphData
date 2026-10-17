@@ -8,6 +8,7 @@ import MinimalismCalculator from "./minimalism-calculator/MinimalismCalculator";
 import DndSales from "./dnd-sales/DndSales";
 import TinyMightyBestiary from "./tiny-mighty-bestiary/TinyMightyBestiary";
 import AllIntelligence from "./all-intelligence/AllIntelligence";
+import AstronomyTargets from "./astronomy-targets/AstronomyTargets";
 
 /** Home page sections, in display order. */
 export const categories = ["Calculators", "Tabletop RPGs", "Tech & economics", "Science"] as const;
@@ -98,6 +99,14 @@ export const charts: ChartEntry[] = [
     description:
       "A universal intelligence table for AI models and humans: 15 columns in 7 groups (thinking, knowledge, perception, action, learning, people, efficiency), combined with a geometric mean. Starts from BenchLM data, with adjustable handling of zero and unmeasured scores.",
     component: AllIntelligence,
+  },
+  {
+    id: "astronomy-targets",
+    title: "Amateur Astronomy Targets",
+    category: "Science",
+    description:
+      "Popular northern hemisphere deep-sky targets ranked for a season and a time window, adjusted for your telescope's focal length and mirror or lens size.",
+    component: AstronomyTargets,
   },
 ];
 

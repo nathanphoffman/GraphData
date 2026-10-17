@@ -307,7 +307,10 @@
       "alien",
       "bug",
       "acid blood",
-      "queen"
+      "queen",
+      "lictor",
+      "tyranid",
+      "hive fleet"
     ],
     "description": "A sleek black insectoid hunter with a second set of jaws, acid for blood and an unblinking, eyeless face.",
     "attack": "Tail stab",
@@ -353,7 +356,12 @@
       "insectoid",
       "hive creature",
       "alien swarm",
-      "chitin"
+      "chitin",
+      "tyranid",
+      "termagant",
+      "hormagaunt",
+      "gaunt",
+      "hive fleet"
     ],
     "description": "A claw-limbed, carapaced hunter that comes in the thousands from the dark between stars.",
     "attack": "Scything claws",
@@ -386,7 +394,11 @@
       "alien monster",
       "bio-monster",
       "giant bug",
-      "chitin beast"
+      "chitin beast",
+      "tyranid",
+      "carnifex",
+      "hive fleet",
+      "bio-titan"
     ],
     "description": "A house-sized, armored bio-engineered monster with bone cannons and a mouth for every limb.",
     "attack": "Scything talons",
@@ -615,7 +627,10 @@
       "ball",
       "chomper",
       "pet",
-      "bouncer"
+      "bouncer",
+      "squig",
+      "ork squig",
+      "ork"
     ],
     "description": "A red, toothy, bouncing ball of meat that eats anything and farts a lot.",
     "attack": "Chomp",
@@ -1480,7 +1495,9 @@
       "tyranid",
       "xenos hound",
       "alien dog",
-      "bug"
+      "bug",
+      "hive fleet",
+      "ravener"
     ]
   },
   {
@@ -1518,7 +1535,10 @@
       "bio-titan",
       "xenos beast",
       "hive tyrant",
-      "monster"
+      "monster",
+      "tyranid",
+      "carnifex",
+      "hive fleet"
     ]
   },
   {
@@ -2005,7 +2025,10 @@
       "pup",
       "bug",
       "grub",
-      "pest"
+      "pest",
+      "tyranid",
+      "ripper",
+      "hive fleet"
     ]
   },
   {
@@ -2371,7 +2394,11 @@
       "hounds",
       "xenos hounds",
       "pack",
-      "bugs"
+      "bugs",
+      "kroot",
+      "kroot hound",
+      "tau",
+      "tau empire"
     ]
   },
   {
@@ -2409,7 +2436,10 @@
       "hydra",
       "daemon beast",
       "chaos beast",
-      "multi-headed horror"
+      "multi-headed horror",
+      "chaos",
+      "daemon engine",
+      "chaos spawn"
     ]
   },
   {
@@ -2655,7 +2685,11 @@
       "wyvern",
       "bio-beast",
       "xenos flyer",
-      "drake"
+      "drake",
+      "tyranid",
+      "gargoyle",
+      "hive fleet",
+      "winged tyranid"
     ]
   },
   {
@@ -2889,5 +2923,432 @@
     ],
     "powers": [],
     "tactics": "Gentle until frightened. A stampede ends when its rider calms it down."
+  },
+  {
+    "id": "jackalope-sheriff",
+    "name": "Jackalope Sheriff",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 1,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "jackalope",
+      "rabbit sheriff",
+      "deputy rabbit",
+      "horned rabbit"
+    ],
+    "description": "A jackrabbit with antlers, a tiny hat and a very big sense of justice.",
+    "attack": "Antler jab",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Quick Draw Hop",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. Hops away before anyone can answer."
+      }
+    ],
+    "tactics": "Arrests the loudest player first. Pay the fine in carrots."
+  },
+  {
+    "id": "parrot-admiral",
+    "name": "Parrot Admiral",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 1,
+    "tier": 4,
+    "flying": true,
+    "aliases": [
+      "pirate parrot",
+      "captain's parrot",
+      "pirate bird",
+      "admiral parrot"
+    ],
+    "description": "A scarlet parrot in an admiral's hat who shouts orders to an entire pirate fleet.",
+    "attack": "Beak & cutlass",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Pieces of Eight",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Orders the whole crew to attack one player."
+      },
+      {
+        "name": "Squawk",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Deafens targets until they rest."
+      }
+    ],
+    "tactics": "Perches high and screams orders. Throw a cracker and it goes quiet."
+  },
+  {
+    "id": "trash-panda-warlord",
+    "name": "Trash Panda Warlord",
+    "type": "beast",
+    "themes": [
+      "post-apocalypse"
+    ],
+    "tone": 2,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "raccoon",
+      "raccoon king",
+      "dump boss",
+      "trash raccoon",
+      "garbage king"
+    ],
+    "description": "A masked raccoon boss in a crown of can lids who rules the dump with a gang of clever hands.",
+    "attack": "Claws & bat",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Gang Steal",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Steals one item from a player without them noticing."
+      },
+      {
+        "name": "Dump Dive",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target. Ambushes from the trash piles."
+      }
+    ],
+    "tactics": "Steals first and fights second. Offer shiny things for peace."
+  },
+  {
+    "id": "thunderbird",
+    "name": "Thunderbird",
+    "type": "beast",
+    "themes": [
+      "western"
+    ],
+    "tone": 2,
+    "tier": 6,
+    "flying": true,
+    "aliases": [
+      "roc",
+      "storm bird",
+      "giant eagle",
+      "sky spirit",
+      "thunder eagle"
+    ],
+    "description": "A giant bird of the high plains whose wingbeats make thunder and whose eyes spark lightning.",
+    "attack": "Beak & talons",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Storm Wings",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Knocks targets prone."
+      },
+      {
+        "name": "Lightning Strike",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense."
+      },
+      {
+        "name": "Sky Dive",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense."
+      }
+    ],
+    "tactics": "Fights from the clouds and strikes metal first. Respects courage and bargains."
+  },
+  {
+    "id": "fuzz-matriarch",
+    "name": "Fuzz Matriarch",
+    "type": "beast",
+    "themes": [
+      "space-wars"
+    ],
+    "tone": 1,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "ewok queen",
+      "fuzz queen",
+      "teddy matriarch",
+      "giant teddy bear",
+      "forest queen"
+    ],
+    "description": "The towering, motherly queen of a forest tribe of tiny fuzzy warriors.",
+    "attack": "Spear & hug",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Call the Tribe",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Adds a group of Fuzz Warriors each turn."
+      },
+      {
+        "name": "Mama Bear Hug",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is grabbed until freed."
+      }
+    ],
+    "tactics": "Protects her tribe at any cost. Hurt a cub and she turns into a storm."
+  },
+  {
+    "id": "island-tortoise",
+    "name": "Island Tortoise",
+    "type": "beast",
+    "themes": [
+      "age-of-sail"
+    ],
+    "tone": 3,
+    "tier": 8,
+    "flying": false,
+    "aliases": [
+      "giant tortoise",
+      "island turtle",
+      "sea turtle",
+      "aspidochelone",
+      "living island"
+    ],
+    "description": "A tortoise as big as an island with a forest, a lighthouse and a whole village on its back.",
+    "attack": "Head slam",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Tide Slam",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Sends a wave across the area."
+      },
+      {
+        "name": "Shell Quake",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Targets are knocked prone."
+      },
+      {
+        "name": "Retreat to Shell",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 while hiding in its shell."
+      }
+    ],
+    "tactics": "Sleeps for centuries and wakes slowly. Protect the village on its back."
+  },
+  {
+    "id": "neon-kaiju-ape",
+    "name": "Neon Kaiju Ape",
+    "type": "beast",
+    "themes": [
+      "cyberpunk",
+      "scifi"
+    ],
+    "tone": 4,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "kaiju",
+      "giant ape",
+      "cyber gorilla",
+      "city smasher",
+      "king kong"
+    ],
+    "description": "A skyscraper-sized, cybernetic ape that smashes through the city, lit up by its own neon implants.",
+    "attack": "Fists",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rooftop Slam",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Collapses the buildings in the area."
+      },
+      {
+        "name": "Chain Beat",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets are knocked prone."
+      }
+    ],
+    "tactics": "Climbs the tallest tower and smashes anything that flies. Cut its power cables to slow it."
+  },
+  {
+    "id": "smokestack-behemoth",
+    "name": "Smokestack Behemoth",
+    "type": "beast",
+    "themes": [
+      "steampunk"
+    ],
+    "tone": 4,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "steam bull",
+      "iron bull",
+      "boiler bull",
+      "mechanical beast",
+      "giant bull"
+    ],
+    "description": "A coal-fed iron-plated bull with a boiler in its belly and a smokestack on its back.",
+    "attack": "Horns & stomp",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Steam Charge",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is knocked prone."
+      },
+      {
+        "name": "Boiler Burst",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Fills the area with scalding steam."
+      }
+    ],
+    "tactics": "Charges the biggest target and cannot turn well. Break the boiler and it stops."
+  },
+  {
+    "id": "blood-hound",
+    "name": "Blood Hound",
+    "type": "beast",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 5,
+    "tier": 3,
+    "flying": false,
+    "aliases": [
+      "flesh hound",
+      "khorne hound",
+      "chaos hound",
+      "war hound",
+      "daemon dog",
+      "khorne",
+      "chaos"
+    ],
+    "description": "A red-fleshed, brass-collared hound of the warp that tracks anything with a pulse.",
+    "attack": "Fangs",
+    "skills": [
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Scent of Blood",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Tracks any hurt creature anywhere and ignores obstacles to reach it."
+      }
+    ],
+    "tactics": "Hunts the wounded first. Magic users make it mad and it hates psychics."
   }
 ]

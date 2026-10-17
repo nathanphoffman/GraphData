@@ -747,7 +747,11 @@
     "aliases": [
       "ambush predator",
       "brood",
-      "stalker"
+      "stalker",
+      "genestealer",
+      "tyranid",
+      "lictor",
+      "hive fleet"
     ],
     "description": "A four-armed, claw-fingered predator that hides in vents and ceilings and moves like a nightmare.",
     "attack": "Rending claws",
@@ -781,7 +785,11 @@
       "rot",
       "plague",
       "pestilence",
-      "festering"
+      "festering",
+      "great unclean one",
+      "nurgle",
+      "chaos",
+      "greater daemon"
     ],
     "description": "A bloated, fly-ridden giant of green flesh with a smile of broken teeth and a stomach full of plague.",
     "attack": "Rusted blade",
@@ -957,7 +965,10 @@
       "insects",
       "pestilence",
       "carrion bugs",
-      "crawling horror"
+      "crawling horror",
+      "nurgle",
+      "plague maggots",
+      "chaos"
     ],
     "description": "A pulsing, hissing heap of maggots and flies that crawls out of the wall when something dies.",
     "attack": "Swarm bite",
@@ -2059,7 +2070,10 @@
       "genestealer",
       "larva",
       "bug",
-      "xenos spawn"
+      "xenos spawn",
+      "tyranid",
+      "ripper",
+      "hive fleet"
     ]
   },
   {
@@ -2097,7 +2111,11 @@
       "daemon prince",
       "great unclean one",
       "warp beast",
-      "titan"
+      "titan",
+      "chaos",
+      "daemon engine",
+      "greater daemon",
+      "warp"
     ]
   },
   {
@@ -2581,7 +2599,11 @@
       "ork squig",
       "gobbler",
       "bug",
-      "xenos pest"
+      "xenos pest",
+      "ork",
+      "grot",
+      "gretchin",
+      "snotling"
     ]
   },
   {
@@ -2705,7 +2727,10 @@
       "sky fish",
       "pike",
       "sky monster",
-      "flock"
+      "flock",
+      "tyranid",
+      "hive fleet",
+      "harridan"
     ]
   },
   {
@@ -3438,5 +3463,175 @@
       }
     ],
     "tactics": "Stays behind her swarm. Kill her and the swarm collapses."
+  },
+  {
+    "id": "sphinx-ledger",
+    "name": "Sphinx of the Ledger",
+    "type": "monster",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 3,
+    "tier": 7,
+    "flying": false,
+    "aliases": [
+      "sphinx",
+      "riddle beast",
+      "debt collector",
+      "ledger monster",
+      "oracle"
+    ],
+    "description": "A winged-lion sphinx with a human face and a ledger of every debt, sin and secret in the city.",
+    "attack": "Claws & riddle",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Pay Your Debt",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target loses something they owe."
+      },
+      {
+        "name": "Riddle of Ruin",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A player must answer or lose a turn each round."
+      },
+      {
+        "name": "Secret Ledger",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Reveals a secret."
+      }
+    ],
+    "tactics": "Poses riddles and keeps score. Answer correctly to make it back down."
+  },
+  {
+    "id": "world-tree-guardian",
+    "name": "World Tree Guardian",
+    "type": "monster",
+    "themes": [
+      "fantasy"
+    ],
+    "tone": 3,
+    "tier": 9,
+    "flying": false,
+    "aliases": [
+      "world tree",
+      "great tree",
+      "treant",
+      "ent",
+      "tree god",
+      "forest guardian"
+    ],
+    "description": "A forest-sized, ancient tree with a face in its trunk and a root in every kingdom.",
+    "attack": "Root slam",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Root Grab",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Holds targets until freed."
+      },
+      {
+        "name": "Living Canopy",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Falling branches crush everything below."
+      },
+      {
+        "name": "Photosynthesis",
+        "type": "heal",
+        "uses": 1,
+        "text": "Heals itself for 2d6 in sunlight."
+      },
+      {
+        "name": "Seed Call",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Summons a new swarm of treants each turn."
+      }
+    ],
+    "tactics": "Slow and patient. Fire hurts it, but angers the whole forest."
+  },
+  {
+    "id": "cult-patriarch",
+    "name": "Cult Patriarch",
+    "type": "monster",
+    "themes": [
+      "space-hammer",
+      "scifi"
+    ],
+    "tone": 5,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "genestealer patriarch",
+      "cult father",
+      "brood father",
+      "alien patriarch",
+      "hive patriarch",
+      "genestealer cult",
+      "patriarch",
+      "magus"
+    ],
+    "description": "The huge, purple, four-armed ancestor of a hidden cult whose children are everywhere.",
+    "attack": "Rending claws",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Hypnotic Gaze",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A target must obey one simple order unless they win a Wits test."
+      },
+      {
+        "name": "Brood Call",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Adds a new group of hybrid cultists each turn."
+      }
+    ],
+    "tactics": "Stays hidden in the nest and sends minions first. Kill the patriarch and the cult falls into chaos."
   }
 ]

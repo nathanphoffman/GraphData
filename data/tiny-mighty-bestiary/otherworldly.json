@@ -654,7 +654,10 @@
       "daemon",
       "demon",
       "warp spawn",
-      "fiend"
+      "fiend",
+      "bloodletter",
+      "khorne",
+      "chaos daemon"
     ],
     "description": "A red-skinned, horned thing that bleeds out of the warp wherever skulls are piled and prayers are screamed.",
     "attack": "Hellblade",
@@ -1138,7 +1141,10 @@
       "whisper",
       "horror",
       "dream demon",
-      "temptation"
+      "temptation",
+      "slaanesh",
+      "chaos",
+      "daemon"
     ],
     "description": "A slender, pale thing with too many limbs and a voice that sounds like your own desire.",
     "attack": "Claws",
@@ -1177,7 +1183,12 @@
       "chaos god",
       "lord of chaos",
       "archdaemon",
-      "warp god"
+      "warp god",
+      "bloodthirster",
+      "greater daemon",
+      "khorne",
+      "chaos",
+      "daemon prince"
     ],
     "description": "A towering, horned, winged tyrant of the warp with a burning axe and a throne made of skulls.",
     "attack": "Warp axe",
@@ -1855,7 +1866,11 @@
       "chaos daemon",
       "rift spawn",
       "void fiend",
-      "whisperer"
+      "whisperer",
+      "chaos",
+      "daemon",
+      "tzeentch",
+      "warp horror"
     ],
     "description": "A tall shape that leaks out of a tear in the sky and promises everyone the thing they most want.",
     "attack": "Claw",
@@ -2158,7 +2173,11 @@
       "imp",
       "daemon",
       "gremlin",
-      "warp spawn"
+      "warp spawn",
+      "tzeentch",
+      "pink horror",
+      "horror",
+      "chaos"
     ]
   },
   {
@@ -2704,7 +2723,11 @@
       "psyker",
       "seer",
       "warp prophet",
-      "oracle"
+      "oracle",
+      "tzeentch",
+      "chaos sorcerer",
+      "rogue psyker",
+      "chaos"
     ]
   },
   {
@@ -2842,7 +2865,10 @@
       "jester",
       "daemon",
       "trickster",
-      "clown"
+      "clown",
+      "tzeentch",
+      "slaanesh",
+      "chaos"
     ]
   },
   {
@@ -3571,5 +3597,355 @@
       }
     ],
     "tactics": "Treats the party as flavor. Hurting it only makes it notice them."
+  },
+  {
+    "id": "poltergeist-landlord",
+    "name": "Poltergeist Landlord",
+    "type": "otherworldly",
+    "themes": [
+      "occult-noir"
+    ],
+    "tone": 2,
+    "tier": 3,
+    "flying": true,
+    "aliases": [
+      "ghost landlord",
+      "poltergeist",
+      "haunted landlord",
+      "rent ghost"
+    ],
+    "description": "A bespectacled ghost who owns the whole building and wants the rent three centuries late.",
+    "attack": "Flying furniture",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Rent Is Due",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A player must pay or lose a turn."
+      },
+      {
+        "name": "Furniture Storm",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode. Chairs and lamps fly everywhere."
+      }
+    ],
+    "tactics": "Haunts the building and slams doors. Pay the rent or find his lease."
+  },
+  {
+    "id": "bubble-diplomat",
+    "name": "Bubble Diplomat",
+    "type": "otherworldly",
+    "themes": [
+      "scifi",
+      "space-jammer"
+    ],
+    "tone": 1,
+    "tier": 4,
+    "flying": false,
+    "aliases": [
+      "alien diplomat",
+      "bubble alien",
+      "space ambassador",
+      "bubble ship"
+    ],
+    "description": "A tiny green alien in a huge bubble who negotiates treaties by rolling over anyone who disagrees.",
+    "attack": "Bubble bump",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Treaty of Bubbles",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Traps one player in a bubble until it pops."
+      },
+      {
+        "name": "Rolling Diplomacy",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage. Rolls over the target."
+      }
+    ],
+    "tactics": "Talks a lot and stays inside the bubble. Pop it and it is just a nervous little alien."
+  },
+  {
+    "id": "party-deity",
+    "name": "Party Deity",
+    "type": "otherworldly",
+    "themes": [
+      "science-fantasy"
+    ],
+    "tone": 1,
+    "tier": 8,
+    "flying": true,
+    "aliases": [
+      "party god",
+      "birthday god",
+      "celebration god",
+      "clown god",
+      "festival deity"
+    ],
+    "description": "A god of celebration with a party hat, a thousand balloons and a birthday every day.",
+    "attack": "Confetti cannon",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Surprise Party",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense. Everyone in the area is happy and cannot attack."
+      },
+      {
+        "name": "Balloon Lift",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets float away until the balloons pop."
+      },
+      {
+        "name": "Make a Wish",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. The GM grants one silly wish to a player or monster."
+      }
+    ],
+    "tactics": "Wants everyone to have a good time. Ruin the party and it gets sad, then angry."
+  },
+  {
+    "id": "time-tyrant",
+    "name": "Time Tyrant",
+    "type": "otherworldly",
+    "themes": [
+      "science-fantasy",
+      "scifi"
+    ],
+    "tone": 3,
+    "tier": 9,
+    "flying": true,
+    "aliases": [
+      "clock god",
+      "time lord",
+      "chronos",
+      "clock tyrant",
+      "time god"
+    ],
+    "description": "A clock-faced god in a crown of gears who owns every second and charges interest.",
+    "attack": "Hands of time",
+    "skills": [
+      {
+        "skill": "Wits",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Physique",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Stop Time",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. Freezes everyone but itself for one turn."
+      },
+      {
+        "name": "Age Rapidly",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is aged and has disadvantage until they rest."
+      }
+    ],
+    "tactics": "Acts first and often twice. Smash the main clock to stop it."
+  },
+  {
+    "id": "velvet-daemon",
+    "name": "Velvet Daemon",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "daemonette",
+      "slaanesh",
+      "pleasure daemon",
+      "warp daemon",
+      "temptation daemon",
+      "chaos"
+    ],
+    "description": "A graceful, pink-skinned warp daemon with crab claws and a voice that makes you forget why you came.",
+    "attack": "Pincer claws",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Honeyed Whisper",
+        "type": "direct",
+        "uses": 1,
+        "text": "Direct-target 2d6 damage, ignores defense. The target is charmed and has disadvantage until it rests."
+      }
+    ],
+    "tactics": "Dances around the toughest target, stealing focus. Plug your ears or look away to resist."
+  },
+  {
+    "id": "pleasure-prince",
+    "name": "Pleasure Prince",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 6,
+    "flying": false,
+    "aliases": [
+      "keeper of secrets",
+      "greater daemon",
+      "slaanesh prince",
+      "lord of pleasure",
+      "daemon prince",
+      "slaanesh",
+      "chaos"
+    ],
+    "description": "A towering, six-limbed, many-eyed greater daemon who offers every desire and collects every soul.",
+    "attack": "Pincers",
+    "skills": [
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Senses",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "+"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Heart's Desire",
+        "type": "utility",
+        "uses": 1,
+        "text": "No damage. A player must act on their deepest desire or lose a turn."
+      },
+      {
+        "name": "Sonic Scream",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode, ignores defense."
+      },
+      {
+        "name": "Indulgence",
+        "type": "multi",
+        "uses": 1,
+        "text": "Multi-target 3d6, one die per target, ignores defense. Hit targets cannot act against it next turn."
+      }
+    ],
+    "tactics": "Offers a bargain first. Keeps its word, but the bargain never works out well for the player."
+  },
+  {
+    "id": "boil-bearer",
+    "name": "Boil Bearer",
+    "type": "otherworldly",
+    "themes": [
+      "space-hammer",
+      "science-fantasy"
+    ],
+    "tone": 4,
+    "tier": 2,
+    "flying": false,
+    "aliases": [
+      "plaguebearer",
+      "nurgle",
+      "rot daemon",
+      "plague daemon",
+      "disease daemon",
+      "chaos"
+    ],
+    "description": "A one-eyed, pot-bellied, boil-covered green daemon who swings a bell and smiles at the rot.",
+    "attack": "Rusty blade & bell",
+    "skills": [
+      {
+        "skill": "Physique",
+        "mod": "+"
+      },
+      {
+        "skill": "Charm",
+        "mod": "+"
+      },
+      {
+        "skill": "Wits",
+        "mod": "-"
+      }
+    ],
+    "powers": [
+      {
+        "name": "Plague Breath",
+        "type": "area",
+        "uses": 1,
+        "text": "Area of effect 1d6 to 1 pencil radius, 6s explode. Hit targets are sick (disadvantage) until they rest."
+      }
+    ],
+    "tactics": "Walks slowly toward the nearest living thing, ringing its bell. Hard to kill, harder to scare."
   }
 ]
