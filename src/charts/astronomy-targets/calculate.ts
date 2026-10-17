@@ -59,8 +59,12 @@ function altitude(ra: number, dec: number, lst: number, lat: number): number {
   return Math.asin(clamp(sinAlt, -1, 1)) / RAD;
 }
 
+const OBLIQUITY = 23.44;
+
 interface Sample {
   lst: number;
+  /** Ecliptic longitude of the sun in degrees, which is where the planets line up from. */
+  sunLon: number;
   /** True when the sun is far enough below the horizon to see faint things. */
   dark: boolean;
 }
@@ -78,10 +82,32 @@ function sampleWindow(settings: Settings, season: Season): Sample[] {
     for (let t = start; t < end; t += STEP_HOURS) {
       const lst = (sunRa + (t - 12) + 48) % 24;
       const sunAlt = altitude(sunRa, sunDec, lst, settings.latitude);
-      samples.push({ lst, dark: sunAlt < -12 });
+      samples.push({ lst, sunLon: (((doy - 79) * 360) / 365.2422 + 360) % 360, dark: sunAlt < -12 });
     }
   }
   return samples;
+}
+
+interface Position {
+  ra: number;
+  dec: number;
+}
+
+/** Angles from the sun to try for a planet: all the way round for outer planets, back and forth for inner ones. */
+function planetOffsets(maxElongation: number): number[] {
+  if (maxElongation >= 180) return Array.from({ length: 12 }, (_, i) => i * 30);
+  return Array.from({ length: 7 }, (_, i) => -maxElongation + (i * 2 * maxElongation) / 6);
+}
+
+/** A planet is always on the ecliptic, so averaging over offsets from the sun averages over its orbit. */
+function positionsAt(target: Target, sample: Sample): Position[] {
+  if (!target.planet) return [{ ra: target.ra, dec: target.dec }];
+  return planetOffsets(target.planet.maxElongation).map((offset) => {
+    const lon = (sample.sunLon + offset) * RAD;
+    const dec = Math.asin(Math.sin(OBLIQUITY * RAD) * Math.sin(lon)) / RAD;
+    const ra = (Math.atan2(Math.cos(OBLIQUITY * RAD) * Math.sin(lon), Math.cos(lon)) / RAD / 15 + 24) % 24;
+    return { ra, dec };
+  });
 }
 
 /** 0 at 10° or lower, 1 at 55° or higher: low objects fight haze and thick air. */
@@ -163,30 +189,35 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
   const seasonSamples = Object.fromEntries(
     (Object.keys(SEASONS) as Season[]).map((season) => [season, sampleWindow(settings, season)]),
   ) as Record<Season, Sample[]>;
+  const allSamples = Object.values(seasonSamples).flat();
   const { fov } = FOCAL_LENGTHS[settings.focalLength];
   const { mm } = APERTURES[settings.aperture];
 
   return targets
     .map((target) => {
-      const samples = seasonSamples[target.bestSeason];
+      const samples = target.bestSeason === "any" ? allSamples : seasonSamples[target.bestSeason];
       let skyTotal = 0;
       let lightTotal = 0;
       let coreTotal = 0;
       let peakAltitude = -90;
       let aboveHorizon = 0;
+      let count = 0;
       for (const s of samples) {
-        const alt = altitude(target.ra, target.dec, s.lst, settings.latitude);
-        if (!s.dark) continue;
-        skyTotal += altitudeQuality(alt);
-        peakAltitude = Math.max(peakAltitude, alt);
-        if (alt <= 0) continue;
-        // Every moment it is up counts equally here, so time spent low in the glow drags Light and Core down.
-        aboveHorizon++;
-        const glow = skyGlowPenalty(settings.bortle, alt);
-        lightTotal += totalLightScore(target.magnitude, mm, glow);
-        coreTotal += coreScore(coreSurfaceBrightness(target), mm, glow);
+        for (const pos of positionsAt(target, s)) {
+          count++;
+          const alt = altitude(pos.ra, pos.dec, s.lst, settings.latitude);
+          if (!s.dark) continue;
+          skyTotal += altitudeQuality(alt);
+          peakAltitude = Math.max(peakAltitude, alt);
+          if (alt <= 0) continue;
+          // Every moment it is up counts equally here, so time spent low in the glow drags Light and Core down.
+          aboveHorizon++;
+          const glow = skyGlowPenalty(settings.bortle, alt);
+          lightTotal += totalLightScore(target.magnitude, mm, glow);
+          coreTotal += coreScore(coreSurfaceBrightness(target), mm, glow);
+        }
       }
-      const sky = samples.length ? skyTotal / samples.length : 0;
+      const sky = count ? skyTotal / count : 0;
       const fit = sizeFit(target, fov);
       const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
       const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;

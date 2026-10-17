@@ -142,3 +142,21 @@
   text-align: center;
   border-radius: 6px;
 }
+
+.astro-tag-any { --tag: #8a63d2; }
+
+.astro-filter {
+  font-family: inherit;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.astro-filter:hover {
+  opacity: 1;
+}
+
+.astro-filter-on {
+  opacity: 1;
+  color: var(--bg);
+  background: var(--tag);
+}

@@ -1,5 +1,6 @@
-import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useMemo, type CSSProperties, type ReactNode } from "react";
 import "./styles.css";
+import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { APERTURES, difficulty, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
@@ -7,6 +8,8 @@ import { APERTURES, difficulty, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFr
 const model = data as AstronomyTargetsData;
 
 function formatSize(major: number, minor: number): string {
+  if (major === 0) return "point";
+  if (major < 1) return `${Math.round(major * 60)}″`;
   const fmt = (v: number) => (v >= 10 ? v.toFixed(0) : v.toFixed(1));
   return major === minor ? `${fmt(major)}′` : `${fmt(major)}′ × ${fmt(minor)}′`;
 }
@@ -22,6 +25,9 @@ const BORTLE_NOTES = [
   "City sky",
   "Inner city",
 ];
+
+type SeasonFilter = Season | "any";
+const SEASON_FILTERS: SeasonFilter[] = ["spring", "summer", "autumn", "winter", "any"];
 
 const pct = (v: number) => `${Math.round(v * 100)}%`;
 
@@ -40,6 +46,9 @@ const TYPE_SYMBOLS: Record<string, string> = {
   "Planetary nebula": "💍",
   "Supernova remnant": "💥",
   "Double star": "🌟",
+  Star: "⭐",
+  Planet: "🪐",
+  Moon: "🌙",
 };
 
 interface Column {
@@ -57,7 +66,9 @@ interface Column {
 const COLUMNS: Column[] = [
   { id: "constellation", label: "Constellation", show: false, cell: (r) => r.target.constellation },
   { id: "season", label: "Best season", show: true, cell: (r) => (
-      <span className={`astro-tag astro-tag-${r.target.bestSeason}`}>{SEASONS[r.target.bestSeason].label.split(" ")[0]}</span>
+      <span className={`astro-tag astro-tag-${r.target.bestSeason}`}>
+        {r.target.bestSeason === "any" ? "Any" : SEASONS[r.target.bestSeason].label.split(" ")[0]}
+      </span>
     ),
   },
   { id: "mag", label: "Mag", show: true, cell: (r) => r.target.magnitude.toFixed(1) },
@@ -67,7 +78,7 @@ const COLUMNS: Column[] = [
     label: "Surface br.",
     title: "Magnitude per square arcminute: light spread over the target. Higher = dimmer.",
     show: true,
-    cell: (r) => surfaceBrightness(r.target).toFixed(1),
+    cell: (r) => (r.target.type === "Star" || r.target.planet ? "—" : surfaceBrightness(r.target).toFixed(1)),
   },
   { id: "alt", label: "Peak alt", show: true, cell: (r) => (r.peakAltitude > 0 ? `${r.peakAltitude.toFixed(0)}°` : "below horizon") },
   { id: "sky", label: "Sky", show: true, cell: (r) => <Percent value={r.sky} /> },
@@ -87,22 +98,53 @@ const COLUMNS: Column[] = [
   },
 ];
 
+const defaultHidden = COLUMNS.filter((c) => !c.show).map((c) => c.id);
+
+/** Keeps only valid saved fields, so an old or edited save can never break the page. */
+function parseSettings(saved: unknown): Settings | null {
+  if (typeof saved !== "object" || saved === null) return null;
+  const s = saved as Record<string, unknown>;
+  const time = (v: unknown, fallback: string) => (typeof v === "string" && /^\d\d:\d\d$/.test(v) ? v : fallback);
+  const pick = <K extends string>(v: unknown, options: Record<K, unknown>, fallback: K): K =>
+    typeof v === "string" && v in options ? (v as K) : fallback;
+  const number = (v: unknown, lo: number, hi: number, fallback: number) =>
+    typeof v === "number" && v >= lo && v <= hi ? v : fallback;
+  return {
+    from: time(s.from, DEFAULT_SETTINGS.from),
+    to: time(s.to, DEFAULT_SETTINGS.to),
+    latitude: number(s.latitude, 0, 80, DEFAULT_SETTINGS.latitude),
+    focalLength: pick(s.focalLength, FOCAL_LENGTHS, DEFAULT_SETTINGS.focalLength),
+    aperture: pick(s.aperture, APERTURES, DEFAULT_SETTINGS.aperture),
+    bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle)),
+  };
+}
+
+function parseHidden(saved: unknown): string[] | null {
+  if (!Array.isArray(saved)) return null;
+  return saved.filter((id): id is string => COLUMNS.some((c) => c.id === id));
+}
+
+function parseSeasonFilter(saved: unknown): SeasonFilter | null {
+  return SEASON_FILTERS.find((season) => season === saved) ?? null;
+}
+
 export default function AstronomyTargets() {
-  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useStoredState<Settings>("settings", DEFAULT_SETTINGS, parseSettings);
   const set = (patch: Partial<Settings>) => setSettings((prev) => ({ ...prev, ...patch }));
 
-  const [hidden, setHidden] = useState<Set<string>>(() => new Set(COLUMNS.filter((c) => !c.show).map((c) => c.id)));
+  const [hiddenList, setHiddenList] = useStoredState<string[]>("hidden-columns", defaultHidden, parseHidden);
+  const hidden = useMemo(() => new Set(hiddenList), [hiddenList]);
   const toggleColumn = (id: string) =>
-    setHidden((prev) => {
-      const next = new Set(prev);
-      if (!next.delete(id)) next.add(id);
-      return next;
-    });
+    setHiddenList((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]));
   const visible = COLUMNS.filter((c) => !hidden.has(c.id));
   const beforeScore = visible.filter((c) => !c.afterScore);
   const afterScore = visible.filter((c) => c.afterScore);
 
-  const rows = useMemo(() => scoreTargets(model.targets, settings), [settings]);
+  const [seasonFilter, setSeasonFilter] = useStoredState<SeasonFilter | null>("season-filter", null, parseSeasonFilter);
+  const toggleSeason = (season: SeasonFilter) => setSeasonFilter((prev) => (prev === season ? null : season));
+
+  const scored = useMemo(() => scoreTargets(model.targets, settings), [settings]);
+  const rows = seasonFilter ? scored.filter((row) => row.target.bestSeason === seasonFilter) : scored;
   const notDark = useMemo(
     () => (Object.keys(SEASONS) as Season[]).filter((season) => darkFraction(settings, season) < 1),
     [settings],
@@ -157,6 +199,20 @@ export default function AstronomyTargets() {
           />
           <small>{BORTLE_NOTES[settings.bortle - 1]}</small>
         </label>
+        <div className="astro-columns">
+          <span>Best season:</span>
+          {SEASON_FILTERS.map((season) => (
+            <button
+              key={season}
+              type="button"
+              aria-pressed={seasonFilter === season}
+              className={`astro-tag astro-tag-${season} astro-filter${seasonFilter === season ? " astro-filter-on" : ""}`}
+              onClick={() => toggleSeason(season)}
+            >
+              {season === "any" ? "Any" : SEASONS[season].label.split(" ")[0]}
+            </button>
+          ))}
+        </div>
         <div className="astro-columns">
           <span>Columns:</span>
           {COLUMNS.map((c) => (

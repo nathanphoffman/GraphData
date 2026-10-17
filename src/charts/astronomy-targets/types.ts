@@ -17,8 +17,13 @@ export interface Target {
   coreBoost?: number;
   /** Star clusters and double stars: magnitude of the brightest member stars. Used instead of coreBoost. */
   brightStar?: number;
-  /** Season when it is highest around midnight. */
-  bestSeason: Season;
+  /** Season when it is highest around midnight. "any" for planets, which are scored over the whole year. */
+  bestSeason: Season | "any";
+  /** Planets only: ra and dec are ignored, and its position is averaged over where it can be in the sky. */
+  planet?: {
+    /** Furthest it ever gets from the sun in the sky, in degrees. 180 = anywhere (outer planets). */
+    maxElongation: number;
+  };
 }
 
 export interface AstronomyTargetsData {
