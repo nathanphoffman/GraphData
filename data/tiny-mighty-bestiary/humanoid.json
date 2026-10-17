@@ -4,7 +4,8 @@
     "name": "Goblin",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 0.5,
@@ -31,7 +32,8 @@
     "name": "Orc Warrior",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -63,7 +65,8 @@
     "name": "Ogre",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -1112,7 +1115,8 @@
     "name": "Befuddled Wizard",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 1,
@@ -1153,7 +1157,8 @@
     "name": "Roaming Minstrel",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.5,
@@ -1194,7 +1199,8 @@
     "name": "Cave Dwarf",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 1,
@@ -1268,7 +1274,8 @@
     "name": "Errant Knight",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -1539,7 +1546,8 @@
     "name": "Sellsword Captain",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 2,
@@ -1578,7 +1586,8 @@
     "name": "Hexmaster",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 2,
@@ -1630,7 +1639,8 @@
     "name": "Dusk Enchantress",
     "type": "humanoid",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 2,
@@ -2172,7 +2182,8 @@
     "type": "humanoid",
     "themes": [
       "space-wars",
-      "scifi"
+      "scifi",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 1,
@@ -2375,7 +2386,7 @@
       "fantasy"
     ],
     "tone": 3,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "hero",
@@ -2423,7 +2434,7 @@
       "fantasy"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "ice king",
@@ -2466,7 +2477,8 @@
     "name": "Deckhand Scallywag",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 0.25,
@@ -2500,7 +2512,8 @@
     "name": "Press Ganger",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 0.5,
@@ -2534,7 +2547,8 @@
     "name": "Cutlass Corsair",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -2569,7 +2583,8 @@
     "name": "Navy Lieutenant",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -2612,7 +2627,8 @@
     "name": "Pirate Captain",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -2654,7 +2670,8 @@
     "name": "Goggled Inventor",
     "type": "humanoid",
     "themes": [
-      "steampunk"
+      "steampunk",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 1,
@@ -2696,7 +2713,8 @@
     "name": "Airship Pirate",
     "type": "humanoid",
     "themes": [
-      "steampunk"
+      "steampunk",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -3179,7 +3197,7 @@
       "space-wars"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "A grim commander in a black-glass helmet who runs entire invasion fleets from a single bridge.",
     "attack": "Command blaster",
@@ -3214,7 +3232,8 @@
     "name": "Apprentice Tinker",
     "type": "humanoid",
     "themes": [
-      "steampunk"
+      "steampunk",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.25,
@@ -3383,7 +3402,8 @@
     "name": "Starforged Squire",
     "type": "humanoid",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 1,
@@ -3414,10 +3434,11 @@
     "name": "Astral Archmage",
     "type": "humanoid",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A robed sorcerer with a halo of orbiting moons who bends starlight into spells.",
     "attack": "Starfire staff",
@@ -3455,7 +3476,7 @@
       "space-hammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A towering warrior in ancient power armor who has never lost a battle and never stopped yelling about it.",
     "attack": "Power sword",
@@ -3597,7 +3618,8 @@
     "name": "Royal Marine Sergeant",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 3,
@@ -3628,10 +3650,11 @@
     "name": "Pirate King",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A legendary captain with a hundred ships on his flag and the sea itself at his command.",
     "attack": "Cutlass",
@@ -3707,7 +3730,7 @@
       "post-apocalypse"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A shriveled old ruler of a sealed vault, in a suit of pre-war armor and a head full of secrets.",
     "attack": "Laser rifle",
@@ -3859,7 +3882,7 @@
       "space-wars"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "A cloaked tyrant who sits on a throne of black glass and rules a thousand worlds.",
     "attack": "Force lightning",
@@ -4151,7 +4174,8 @@
     "name": "Ship's Surgeon",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -4227,7 +4251,8 @@
     "name": "Star Lantern Healer",
     "type": "humanoid",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 1,
@@ -4306,7 +4331,7 @@
       "scifi"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A cold, shaved-headed noble who commands a fleet from a throne of cables and glass.",
     "attack": "Mind-lance",
@@ -4378,7 +4403,8 @@
     "name": "Ironclad Quartermaster",
     "type": "humanoid",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 3,

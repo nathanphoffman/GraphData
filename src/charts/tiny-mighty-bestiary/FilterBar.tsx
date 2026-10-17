@@ -3,7 +3,7 @@ import { DIFFICULTY_BANDS, TONE_BANDS, model } from "./data";
 
 export interface Filters {
   query: string;
-  theme: string | null;
+  theme: string;
   type: string | null;
   difficulty: string | null;
   tone: string | null;
@@ -17,6 +17,11 @@ interface Props {
   onClear: () => void;
 }
 
+/** Themes shown on the first row; the rest go on a second row. */
+const SCIFI_THEMES = new Set(["scifi", "science-fantasy", "space-wars", "space-hammer", "space-jammer", "cyberpunk", "post-apocalypse"]);
+const SCIFI_OPTIONS = model.themes.filter((t) => SCIFI_THEMES.has(t.id));
+const OTHER_OPTIONS = model.themes.filter((t) => !SCIFI_THEMES.has(t.id));
+
 export default function FilterBar({ filters, onChange, canClear, onClear }: Props) {
   const set = (patch: Partial<Filters>) => onChange({ ...filters, ...patch });
 
@@ -24,9 +29,17 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
     <>
       <FilterChips
         label="Theme"
-        options={model.themes}
+        options={SCIFI_OPTIONS}
         active={filters.theme}
-        onChange={(theme) => set({ theme })}
+        onChange={(theme) => theme && set({ theme })}
+        chipClass={() => "bestiary-theme-chip"}
+      />
+      <FilterChips
+        label=""
+        groupName="Theme"
+        options={OTHER_OPTIONS}
+        active={filters.theme}
+        onChange={(theme) => theme && set({ theme })}
         chipClass={() => "bestiary-theme-chip"}
       />
       <FilterChips

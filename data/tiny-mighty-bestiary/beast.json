@@ -80,7 +80,8 @@
     "themes": [
       "fantasy",
       "scifi",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -118,7 +119,8 @@
     "type": "beast",
     "themes": [
       "space-wars",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 0.25,
@@ -216,10 +218,11 @@
     "themes": [
       "space-wars",
       "scifi",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 1,
-    "tier": 3,
+    "tier": 4,
     "flying": true,
     "aliases": [
       "space whale",
@@ -376,7 +379,7 @@
       "scifi"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "tyrant",
@@ -489,7 +492,7 @@
       "western"
     ],
     "tone": 3,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "buffalo",
@@ -711,7 +714,8 @@
     "type": "beast",
     "themes": [
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 3,
@@ -785,10 +789,11 @@
       "fantasy",
       "science-fantasy",
       "occult-noir",
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 7,
     "flying": false,
     "aliases": [
       "leviathan",
@@ -834,7 +839,7 @@
       "fantasy"
     ],
     "tone": 3,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "mammoth",
@@ -870,7 +875,8 @@
     "name": "Parrot Lookout",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.25,
@@ -904,7 +910,8 @@
     "name": "Pirate Crab",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.5,
@@ -938,7 +945,8 @@
     "name": "Reef Shark",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -1379,10 +1387,11 @@
     "type": "beast",
     "themes": [
       "space-wars",
-      "scifi"
+      "scifi",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": true,
     "description": "A void-bred predator the size of a freighter that hunts engine wakes through open space.",
     "attack": "Maw & tendrils",
@@ -1589,7 +1598,7 @@
       "western"
     ],
     "tone": 3,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A huge albino bison that walks through the plains as if the land itself had stood up.",
     "attack": "Horned charge",
@@ -1693,7 +1702,8 @@
     "name": "Hammerhead Terror",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 2,
@@ -1724,10 +1734,11 @@
     "name": "Kraken Spawn",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "description": "A ship-sized squid, the child of a legendary monster, that drags small vessels below.",
     "attack": "Crushing tentacles",
@@ -1786,10 +1797,11 @@
     "name": "Steam Drake",
     "type": "beast",
     "themes": [
-      "steampunk"
+      "steampunk",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A brass-plated dragon-engine that vents scalding steam and lives in the cellar of a clockwork castle.",
     "attack": "Bite & scalding steam",
@@ -1893,7 +1905,8 @@
     "name": "Prism Moth",
     "type": "beast",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 0.25,
@@ -2031,7 +2044,8 @@
     "name": "Drowned Pack",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 2,
@@ -2124,7 +2138,8 @@
     "name": "Albatross Omen",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 0.5,
@@ -2255,7 +2270,8 @@
     "name": "Astral Stag",
     "type": "beast",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 3,
@@ -2293,7 +2309,8 @@
     "name": "Void Krill Swarm",
     "type": "beast",
     "themes": [
-      "space-wars"
+      "space-wars",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 3,
@@ -2365,7 +2382,7 @@
       "space-hammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "A many-headed horror that vomits fire and spits warp-spawn from every neck.",
     "attack": "Biting heads",
@@ -2493,7 +2510,8 @@
     "name": "Great White Terror",
     "type": "beast",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 3,

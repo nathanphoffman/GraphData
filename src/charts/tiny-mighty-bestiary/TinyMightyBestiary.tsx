@@ -9,7 +9,7 @@ import "./styles.css";
 
 const DEFAULT_FILTERS: Filters = {
   query: "",
-  theme: null,
+  theme: "fantasy",
   type: null,
   difficulty: null,
   tone: null,
@@ -19,13 +19,13 @@ export default function TinyMightyBestiary() {
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
   const { query, theme, type, difficulty, tone } = filters;
 
-  const canClear = theme !== null || type !== null || difficulty !== null || tone !== null;
+  const canClear = type !== null || difficulty !== null || tone !== null;
   const band = DIFFICULTY_BANDS.find((b) => b.id === difficulty);
   const toneBand = TONE_BANDS.find((b) => b.id === tone);
 
   const creatures = [...model.creatures]
     .sort((a, b) => difficultyOf(a) - difficultyOf(b))
-    .filter((c) => theme === null || c.themes.includes(theme))
+    .filter((c) => c.themes.includes(theme))
     .filter((c) => type === null || c.type === type)
     .filter((c) => !band || (difficultyOf(c) >= band.min && difficultyOf(c) <= band.max))
     .filter((c) => !toneBand || toneBand.tones.includes(c.tone))
@@ -43,7 +43,7 @@ export default function TinyMightyBestiary() {
         filters={filters}
         onChange={setFilters}
         canClear={canClear}
-        onClear={() => setFilters({ ...DEFAULT_FILTERS, query })}
+        onClear={() => setFilters({ ...DEFAULT_FILTERS, query, theme })}
       />
       <EncounterGenerator pool={creatures} />
       <div className="bestiary-divider" role="separator">

@@ -129,7 +129,7 @@
       "scifi"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 7,
     "flying": false,
     "aliases": [
       "titan",
@@ -518,10 +518,11 @@
     "type": "animated",
     "themes": [
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 1,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "parade float",
@@ -643,10 +644,11 @@
     "type": "animated",
     "themes": [
       "age-of-sail",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "ghost ship",
@@ -724,7 +726,8 @@
     "name": "Clockwork Spider",
     "type": "animated",
     "themes": [
-      "steampunk"
+      "steampunk",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 0.5,
@@ -796,10 +799,11 @@
     "type": "animated",
     "themes": [
       "steampunk",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "steam robot",
@@ -841,10 +845,11 @@
     "name": "Zeppelin Dread",
     "type": "animated",
     "themes": [
-      "steampunk"
+      "steampunk",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 6,
     "flying": true,
     "aliases": [
       "zeppelin",
@@ -1161,7 +1166,8 @@
     "type": "animated",
     "themes": [
       "steampunk",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.25,
@@ -1196,7 +1202,8 @@
     "name": "Figurehead Guardian",
     "type": "animated",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -1232,7 +1239,8 @@
     "name": "Knot Snake",
     "type": "animated",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.5,
@@ -1304,7 +1312,8 @@
     "name": "Crystal Sentinel",
     "type": "animated",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 3,
@@ -1348,7 +1357,8 @@
     "type": "animated",
     "themes": [
       "science-fantasy",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.5,
@@ -1387,7 +1397,7 @@
       "space-wars"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "The wrathful battle-mind of a gutted capital ship, still defending its dead corridors.",
     "attack": "Turret fire",
@@ -1491,7 +1501,8 @@
     "name": "Crystal Courier",
     "type": "animated",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 1,
@@ -1522,7 +1533,8 @@
     "name": "Rune-Etched Walker",
     "type": "animated",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -1587,7 +1599,7 @@
       "space-wars"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "description": "A four-legged armored walker the size of a building that crushes defense lines.",
     "attack": "Cannon & stomp",
@@ -1711,7 +1723,7 @@
       "cyberpunk"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "The building-wide security AI of a mega-tower, controlling every elevator, door and gun turret.",
     "attack": "Turret fire",
@@ -1839,7 +1851,8 @@
     "name": "Rigging Marionette",
     "type": "animated",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 1,
@@ -1870,10 +1883,11 @@
     "name": "Cursed Man-o-War",
     "type": "animated",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "A warship that sails itself with a dead crew nailed to the decks.",
     "attack": "Broadside",
@@ -1973,7 +1987,7 @@
       "post-apocalypse"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A pre-war killing machine still on patrol, six legs and a minigun under a coat of rust.",
     "attack": "Minigun",
@@ -2115,7 +2129,8 @@
     "name": "Iron Maiden Cannon",
     "type": "animated",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 2,
@@ -2239,7 +2254,8 @@
     "name": "Gale Gargoyle",
     "type": "animated",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 2,
@@ -2453,7 +2469,8 @@
     "name": "Mast-Puppet",
     "type": "animated",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 3,

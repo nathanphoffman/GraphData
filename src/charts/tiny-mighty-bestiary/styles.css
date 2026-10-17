@@ -525,3 +525,22 @@
   margin: 14px 0 6px;
   font-size: 20px;
 }
+
+/* Two dots overlapped and offset, taking the footprint of one dot plus the offset. */
+.bestiary-dot-double {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  margin: 5px 5px 0 0;
+}
+
+.bestiary-dot-double .bestiary-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-shadow: 0 0 0 1.5px var(--b-card);
+}
+
+.bestiary-dot-double .bestiary-dot:first-child {
+  transform: translate(5px, -5px);
+}

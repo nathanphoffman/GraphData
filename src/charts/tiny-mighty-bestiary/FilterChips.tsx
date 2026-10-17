@@ -1,5 +1,7 @@
 interface Props {
   label: string;
+  /** Accessible name suffix when the visible label is blank (a continuation row). */
+  groupName?: string;
   options: { id: string; label: string }[];
   active: string | null;
   /** Called with the new selection: the clicked id, or null when the active chip is clicked again. */
@@ -12,9 +14,9 @@ interface Props {
 }
 
 /** One row of single-select filter chips. Clicking the active chip turns it off. */
-export default function FilterChips({ label, options, active, onChange, chipClass, swatch, children }: Props) {
+export default function FilterChips({ label, groupName = label, options, active, onChange, chipClass, swatch, children }: Props) {
   return (
-    <div className="bestiary-key" role="group" aria-label={`Filter by ${label.toLowerCase()}`}>
+    <div className="bestiary-key" role="group" aria-label={`Filter by ${groupName.toLowerCase()}`}>
       <span className="bestiary-key-label">{label}</span>
       {options.map((o) => {
         const isActive = active === o.id;

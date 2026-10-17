@@ -5,10 +5,11 @@
     "type": "monster",
     "themes": [
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 6,
     "flying": true,
     "description": "An ancient scaled tyrant sitting on a mountain of coin.",
     "attack": "Bite & claws",
@@ -201,7 +202,8 @@
     "type": "monster",
     "themes": [
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 2,
@@ -246,7 +248,7 @@
       "science-fantasy"
     ],
     "tone": 4,
-    "tier": 5,
+    "tier": 9,
     "flying": false,
     "aliases": [
       "tarrasque",
@@ -336,7 +338,7 @@
       "science-fantasy"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "sand pit",
@@ -375,7 +377,7 @@
       "science-fantasy"
     ],
     "tone": 3,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "aliases": [
       "sandworm",
@@ -490,7 +492,8 @@
     "type": "monster",
     "themes": [
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 1,
@@ -539,7 +542,7 @@
       "science-fantasy"
     ],
     "tone": 5,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "shoggoth",
@@ -586,7 +589,7 @@
       "post-apocalypse"
     ],
     "tone": 5,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "mutant",
@@ -772,7 +775,7 @@
       "science-fantasy"
     ],
     "tone": 5,
-    "tier": 3,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "rot",
@@ -812,10 +815,11 @@
     "type": "monster",
     "themes": [
       "space-wars",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 3,
-    "tier": 3,
+    "tier": 6,
     "flying": true,
     "aliases": [
       "space worm",
@@ -900,7 +904,7 @@
       "science-fantasy"
     ],
     "tone": 2,
-    "tier": 4,
+    "tier": 5,
     "flying": true,
     "aliases": [
       "dragon lord",
@@ -975,7 +979,8 @@
     "name": "Mountain Griffin",
     "type": "monster",
     "themes": [
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -1015,10 +1020,11 @@
     "type": "monster",
     "themes": [
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 3,
-    "tier": 3,
+    "tier": 4,
     "flying": true,
     "aliases": [
       "roc",
@@ -1098,10 +1104,11 @@
     "themes": [
       "steampunk",
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 3,
-    "tier": 3,
+    "tier": 4,
     "flying": true,
     "aliases": [
       "sky whale",
@@ -1185,7 +1192,7 @@
       "science-fantasy"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "aliases": [
       "giant mutant",
@@ -1228,7 +1235,8 @@
     "type": "monster",
     "themes": [
       "age-of-sail",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 1,
@@ -1268,7 +1276,8 @@
     "type": "monster",
     "themes": [
       "age-of-sail",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -1308,10 +1317,11 @@
     "type": "monster",
     "themes": [
       "age-of-sail",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "aliases": [
       "kraken",
@@ -1431,7 +1441,7 @@
       "scifi"
     ],
     "tone": 5,
-    "tier": 5,
+    "tier": 8,
     "flying": true,
     "aliases": [
       "space emperor",
@@ -1561,10 +1571,11 @@
     "type": "monster",
     "themes": [
       "space-wars",
-      "scifi"
+      "scifi",
+      "space-jammer"
     ],
     "tone": 3,
-    "tier": 4,
+    "tier": 8,
     "flying": false,
     "aliases": [
       "space worm",
@@ -1607,7 +1618,7 @@
       "cyberpunk"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "mutant",
@@ -1650,7 +1661,7 @@
       "steampunk"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "steam dragon",
@@ -1693,7 +1704,7 @@
       "post-apocalypse"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "kaiju",
@@ -1893,7 +1904,8 @@
     "name": "Barnacle Biter",
     "type": "monster",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 0.5,
@@ -1989,7 +2001,7 @@
       "western"
     ],
     "tone": 4,
-    "tier": 3,
+    "tier": 4,
     "flying": false,
     "description": "A rock-colored worm as long as a train that bursts out of the canyon floor.",
     "attack": "Crushing bite",
@@ -2058,7 +2070,7 @@
       "space-hammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 7,
     "flying": false,
     "description": "A twisted tower of flesh and warp-light that tears holes in reality when it moves.",
     "attack": "Crushing limbs",
@@ -2127,7 +2139,7 @@
       "western"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 8,
     "flying": false,
     "description": "A mountain-sized stone giant that wakes when the railroad drills into its back.",
     "attack": "Stone fist",
@@ -2196,7 +2208,7 @@
       "occult-noir"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "A many-eyed mass that waits under the floor of an old building and whispers names through the pipes.",
     "attack": "Tendril lash",
@@ -2231,10 +2243,11 @@
     "name": "Sea Serpent",
     "type": "monster",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A hundred-foot serpent of black scales that rises from deep water to snap masts in half.",
     "attack": "Crushing coils",
@@ -2393,10 +2406,11 @@
     "name": "Asteroid Devourer",
     "type": "monster",
     "themes": [
-      "space-wars"
+      "space-wars",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "A stone-crunching worm the size of a cruiser that tunnels through asteroid belts.",
     "attack": "Crushing maw",
@@ -2427,7 +2441,7 @@
       "post-apocalypse"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "A mutated mammoth with a cloud of buzzing flies and a back full of cysts.",
     "attack": "Tusk gore",
@@ -2455,10 +2469,11 @@
     "name": "Maelstrom Leviathan",
     "type": "monster",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 10,
     "flying": false,
     "description": "An ocean-sized shape that rises inside whirlpools and swallows fleets.",
     "attack": "Crushing maw",
@@ -2502,7 +2517,7 @@
       "post-apocalypse"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 7,
     "flying": false,
     "description": "A cracked, glowing giant that sleeps under a ruined power plant and wakes when the rain gets heavy.",
     "attack": "Radiant fist",
@@ -2670,7 +2685,7 @@
       "space-hammer"
     ],
     "tone": 3,
-    "tier": 3,
+    "tier": 4,
     "flying": true,
     "description": "A flock of armored sky-fish bred to pierce hulls, trailing a mother larger than a gunship.",
     "attack": "Piercing beak",
@@ -2739,7 +2754,7 @@
       "western"
     ],
     "tone": 3,
-    "tier": 3,
+    "tier": 4,
     "flying": true,
     "description": "An enormous bird of dust and feathers that rides desert storm-fronts.",
     "attack": "Talons",

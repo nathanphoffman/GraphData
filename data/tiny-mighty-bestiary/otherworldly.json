@@ -6,7 +6,8 @@
     "themes": [
       "fantasy",
       "western",
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 1,
@@ -38,7 +39,8 @@
     "themes": [
       "fantasy",
       "science-fantasy",
-      "western"
+      "western",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 2,
@@ -82,7 +84,8 @@
       "scifi",
       "science-fantasy",
       "space-wars",
-      "occult-noir"
+      "occult-noir",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 2,
@@ -134,10 +137,11 @@
     "themes": [
       "fantasy",
       "scifi",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 5,
-    "tier": 3,
+    "tier": 4,
     "flying": true,
     "aliases": [
       "beholder",
@@ -539,10 +543,11 @@
       "fantasy",
       "science-fantasy",
       "scifi",
-      "occult-noir"
+      "occult-noir",
+      "space-jammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "aliases": [
       "cthulhu",
@@ -834,7 +839,8 @@
     "themes": [
       "occult-noir",
       "scifi",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 2,
@@ -877,7 +883,8 @@
     "type": "otherworldly",
     "themes": [
       "occult-noir",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 2,
@@ -919,10 +926,11 @@
     "themes": [
       "occult-noir",
       "fantasy",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 9,
     "flying": true,
     "aliases": [
       "cthulhu",
@@ -1163,7 +1171,7 @@
       "science-fantasy"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 6,
     "flying": true,
     "aliases": [
       "chaos god",
@@ -1404,7 +1412,8 @@
     "type": "otherworldly",
     "themes": [
       "age-of-sail",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 1,
@@ -1447,7 +1456,8 @@
     "type": "otherworldly",
     "themes": [
       "age-of-sail",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 3,
@@ -1791,7 +1801,8 @@
     "type": "otherworldly",
     "themes": [
       "age-of-sail",
-      "occult-noir"
+      "occult-noir",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 3,
@@ -1950,7 +1961,8 @@
     "type": "otherworldly",
     "themes": [
       "steampunk",
-      "fantasy"
+      "fantasy",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 3,
@@ -2060,7 +2072,8 @@
     "name": "Starlight Wisp",
     "type": "otherworldly",
     "themes": [
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.25,
@@ -2184,7 +2197,8 @@
     "name": "Bilge Sprite",
     "type": "otherworldly",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 0.25,
@@ -2247,10 +2261,11 @@
     "type": "otherworldly",
     "themes": [
       "space-wars",
-      "science-fantasy"
+      "science-fantasy",
+      "space-jammer"
     ],
     "tone": 4,
-    "tier": 4,
+    "tier": 5,
     "flying": true,
     "description": "A robed figure of living starlight that sees every battle before it happens.",
     "attack": "Prophecy lance",
@@ -2285,7 +2300,8 @@
     "name": "Void Whisperer",
     "type": "otherworldly",
     "themes": [
-      "space-wars"
+      "space-wars",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 1,
@@ -2316,7 +2332,8 @@
     "name": "Nebula Phantom",
     "type": "otherworldly",
     "themes": [
-      "space-wars"
+      "space-wars",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -2381,7 +2398,7 @@
       "cyberpunk"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 7,
     "flying": false,
     "description": "A vast alien intelligence that wakes in the lowest layers of the net and rewrites whoever looks at it.",
     "attack": "Rewrite",
@@ -2416,7 +2433,8 @@
     "name": "Squall Wraith",
     "type": "otherworldly",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 4,
     "tier": 2,
@@ -2478,10 +2496,11 @@
     "name": "Aether Sovereign",
     "type": "otherworldly",
     "themes": [
-      "steampunk"
+      "steampunk",
+      "space-jammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 5,
     "flying": false,
     "description": "An ancient spirit of lightning and brass that rules the aether between the cogs of the world.",
     "attack": "Lightning arc",
@@ -2623,7 +2642,8 @@
     "name": "Cabin Boy Ghost",
     "type": "otherworldly",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 2,
     "tier": 0.25,
@@ -2767,7 +2787,8 @@
     "name": "Comet Sprite",
     "type": "otherworldly",
     "themes": [
-      "space-wars"
+      "space-wars",
+      "space-jammer"
     ],
     "tone": 1,
     "tier": 0.5,
@@ -2891,7 +2912,8 @@
     "name": "Void Bride",
     "type": "otherworldly",
     "themes": [
-      "space-wars"
+      "space-wars",
+      "space-jammer"
     ],
     "tone": 5,
     "tier": 3,
@@ -2967,7 +2989,8 @@
     "name": "Lantern-Keeper Ghost",
     "type": "otherworldly",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 2,
@@ -2998,10 +3021,11 @@
     "name": "Spectral Leviathan-Captain",
     "type": "otherworldly",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 5,
-    "tier": 4,
+    "tier": 6,
     "flying": false,
     "description": "A ghostly captain in barnacle-covered robes who rides the back of a drowned whale-ship.",
     "attack": "Rusted harpoon",
@@ -3136,7 +3160,8 @@
     "name": "Ghost Tide",
     "type": "otherworldly",
     "themes": [
-      "age-of-sail"
+      "age-of-sail",
+      "space-jammer"
     ],
     "tone": 3,
     "tier": 3,

@@ -72,6 +72,61 @@
       "bonus": 5,
       "bonusDice": "d6+1",
       "extended": true
+    },
+    {
+      "difficulty": 6,
+      "turns": 5,
+      "defense": 8,
+      "defenseDice": "d6+4",
+      "health": 42,
+      "healthDice": "12d6",
+      "bonus": 6,
+      "bonusDice": "d6+2",
+      "extended": true
+    },
+    {
+      "difficulty": 7,
+      "turns": 5,
+      "defense": 8,
+      "defenseDice": "d6+4",
+      "health": 52,
+      "healthDice": "15d6",
+      "bonus": 7,
+      "bonusDice": "d6+3",
+      "extended": true
+    },
+    {
+      "difficulty": 8,
+      "turns": 6,
+      "defense": 9,
+      "defenseDice": "d6+5",
+      "health": 63,
+      "healthDice": "18d6",
+      "bonus": 8,
+      "bonusDice": "d6+4",
+      "extended": true
+    },
+    {
+      "difficulty": 9,
+      "turns": 6,
+      "defense": 9,
+      "defenseDice": "d6+5",
+      "health": 77,
+      "healthDice": "22d6",
+      "bonus": 9,
+      "bonusDice": "d6+5",
+      "extended": true
+    },
+    {
+      "difficulty": 10,
+      "turns": 7,
+      "defense": 10,
+      "defenseDice": "d6+6",
+      "health": 91,
+      "healthDice": "26d6",
+      "bonus": 10,
+      "bonusDice": "d6+6",
+      "extended": true
     }
   ],
   "powerTypes": {
@@ -134,6 +189,10 @@
     {
       "id": "space-wars",
       "label": "Space Wars"
+    },
+    {
+      "id": "space-jammer",
+      "label": "Space Jammer"
     },
     {
       "id": "space-hammer",
