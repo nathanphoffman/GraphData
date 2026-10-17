@@ -20,7 +20,8 @@
   font-size: 18px;
 }
 
-.mini-results .panel {
+.mini-results .panel,
+.mini-chart {
   background: color-mix(in srgb, var(--fg) 5%, transparent);
 }
 
@@ -262,4 +263,10 @@
 .mini-title {
   margin: 0 0 16px;
   font-size: 26px;
+}
+
+.mini-curve {
+  display: block;
+  width: 100%;
+  height: auto;
 }

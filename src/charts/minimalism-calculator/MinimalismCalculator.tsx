@@ -4,7 +4,9 @@ import { averageUses, recommended, recommendedCount } from "./calculate";
 import { cap, findItemType, DEFAULT_ITEM_TYPE } from "./items";
 import RecommendationPanel from "./RecommendationPanel";
 import SavingsPanel from "./SavingsPanel";
+import GoalCurve from "./GoalCurve";
 import ShareBar from "./ShareBar";
+import SharingCurve from "./SharingCurve";
 import Slider from "./Slider";
 import { useCalculatorState } from "./state";
 import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_STOPS } from "./stops";
@@ -81,12 +83,19 @@ export default function MinimalismCalculator() {
             high="100% (all mine)"
             onChange={s.setSharePct}
           />
+          <GoalCurve yearlyUses={yearlyUses} goal={s.perYear} item={item} onGoal={s.setPerYear} />
         </div>
 
         <div className="mini-results">
           <h2>Results</h2>
           <RecommendationPanel owned={s.owned} needed={needed} />
           <WaitChart owned={s.owned} avgUses={averageUses(s.perWeek, s.sharePct, s.owned)} goal={s.perYear} item={item} />
+          <SharingCurve
+            soloNeeded={recommended(s.perWeek, s.perYear, 100)}
+            people={people}
+            item={item}
+            onPeople={(n) => s.setSharePct(Math.min(100, Math.max(1, Math.round(100 / n))))}
+          />
         </div>
       </div>
 
