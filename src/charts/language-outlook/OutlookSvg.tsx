@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import type { ScaleLinear } from "d3-scale";
-import { LINE_COLORS, PROJECTION_CHANGE_KEY, PROJECTION_PREFIX, seriesColor } from "./style";
+import { LINE_COLORS, LINE_DASHES, PROJECTION_PREFIX, changeKey, seriesColor } from "./style";
 import { H, MARGIN, W, arrowPoints, lineSegments, makeXAt } from "./layout";
 import type { LanguageOutlookData } from "./types";
 
@@ -12,7 +12,7 @@ interface Props {
   onTipHide: () => void;
 }
 
-/** The plot: grid, connecting lines, then one column of dots/arrows per language. */
+/** The plot: grid, connecting lines, then one column of dots per language. */
 export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }: Props) {
   const { languages, series, lines } = model;
   const xAt = makeXAt(languages.length);
@@ -39,6 +39,8 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
                 stroke={LINE_COLORS[key]}
                 strokeWidth={1.5}
                 strokeOpacity={0.45}
+                strokeDasharray={LINE_DASHES[key]}
+                strokeLinecap={LINE_DASHES[key] ? "round" : undefined}
                 strokeLinejoin="round"
               />
             ))
@@ -63,21 +65,32 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
             const cx = xAt(i);
             const cy = yScale(v);
             if (key.startsWith(PROJECTION_PREFIX)) {
-              const change = lang.values[PROJECTION_CHANGE_KEY] ?? 0;
+              const change = lang.values[changeKey(key)] ?? 0;
               const sign = change >= 0 ? "+" : "";
               return (
-                <polygon
-                  key={key}
-                  points={arrowPoints(cx, cy, change)}
-                  fill={seriesColor(key, s)}
-                  fillOpacity={0.85}
-                  stroke="#4c4c4c"
-                  strokeWidth={0.8}
-                  onMouseMove={(e) =>
-                    onTip(e, `${lang.name} - ${key}: ${v.toFixed(2)} (trend change ${sign}${change.toFixed(2)})`)
-                  }
-                  onMouseLeave={onTipHide}
-                />
+                <g key={key}>
+                  <polygon
+                    points={arrowPoints(cx, cy, change)}
+                    fill={seriesColor(key, s)}
+                    fillOpacity={0.5}
+                    stroke="#4c4c4c"
+                    strokeOpacity={0.5}
+                    strokeWidth={0.8}
+                    pointerEvents="none"
+                  />
+                  <circle
+                    cx={cx}
+                    cy={cy}
+                    r={6}
+                    fill={seriesColor(key, s)}
+                    stroke="#4c4c4c"
+                    strokeWidth={1}
+                    onMouseMove={(e) =>
+                      onTip(e, `${lang.name} - ${key}: ${v.toFixed(2)} (trend change ${sign}${change.toFixed(2)})`)
+                    }
+                    onMouseLeave={onTipHide}
+                  />
+                </g>
               );
             }
             return (

@@ -6,24 +6,6 @@ export const W = 1100;
 export const H = 560;
 export const MARGIN = { left: 50, right: 10, top: 10, bottom: 90 };
 
-/** Arrow outline centred on (cx, cy); points up for growth and down for decline. */
-export function arrowPoints(cx: number, cy: number, change: number): string {
-  const h = 10 + Math.min(40, Math.abs(change) * 6);
-  const w = h * 0.55;
-  const head = h * 0.5;
-  const dir = change >= 0 ? -1 : 1;
-  const pts: Array<[number, number]> = [
-    [cx, cy + (dir * h) / 2],
-    [cx - w / 2, cy + dir * (h / 2 - head)],
-    [cx - w / 6, cy + dir * (h / 2 - head)],
-    [cx - w / 6, cy - (dir * h) / 2],
-    [cx + w / 6, cy - (dir * h) / 2],
-    [cx + w / 6, cy + dir * (h / 2 - head)],
-    [cx + w / 2, cy + dir * (h / 2 - head)],
-  ];
-  return pts.map((p) => p.join(",")).join(" ");
-}
-
 /** Y scale that fits the largest value among the series and lines currently shown. */
 export function buildYScale(model: LanguageOutlookData, visible: Record<string, boolean>) {
   const shown: number[] = [];
@@ -35,6 +17,25 @@ export function buildYScale(model: LanguageOutlookData, visible: Record<string, 
   }
   const max = Math.max(10, Math.ceil(Math.max(...shown) / 10) * 10);
   return scaleLinear().domain([0, max]).range([H - MARGIN.bottom, MARGIN.top]);
+}
+
+/** Arrow whose tail sits on (cx, cy); it points up for a positive change, down for a negative one,
+ *  and gets longer the bigger the change. */
+export function arrowPoints(cx: number, cy: number, change: number): string {
+  const h = 10 + Math.min(40, Math.abs(change) * 6);
+  const w = h * 0.55;
+  const headBase = h - h * 0.5;
+  const dir = change >= 0 ? -1 : 1;
+  const pts: Array<[number, number]> = [
+    [cx, cy + dir * h],
+    [cx - w / 2, cy + dir * headBase],
+    [cx - w / 6, cy + dir * headBase],
+    [cx - w / 6, cy],
+    [cx + w / 6, cy],
+    [cx + w / 6, cy + dir * headBase],
+    [cx + w / 2, cy + dir * headBase],
+  ];
+  return pts.map((p) => p.join(",")).join(" ");
 }
 
 /** X position of the i-th language, spread evenly across the plot. */

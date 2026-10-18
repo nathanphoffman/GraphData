@@ -1,29 +1,139 @@
-import { LINE_COLORS, LINE_LABELS, seriesColor } from "./style";
+import { useState } from "react";
+import { arrowPoints } from "./layout";
+import { LEGEND_GROUPS, LINE_COLORS, LINE_DASHES, LINE_LABELS, PROJECTION_PREFIX, seriesColor } from "./style";
 import type { LanguageOutlookData } from "./types";
 
 interface Props {
   model: LanguageOutlookData;
   visible: Record<string, boolean>;
   onToggle: (key: string, on: boolean) => void;
+  sortKey: string;
+  onSort: (key: string) => void;
 }
 
-/** Checkbox legend: one entry per dot series, then one per connecting line. */
-export default function Legend({ model, visible, onToggle }: Props) {
+/** One-row colour key for a group: overlapping circles for dot series, thick bars for lines. */
+function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[] }) {
+  return (
+    <div className="legend-key" aria-hidden="true">
+      {keys.map((key) => {
+        if (key.startsWith(PROJECTION_PREFIX)) {
+          // projection dots come with a faint arrow, as on the chart
+          const color = seriesColor(key, model.series.indexOf(key));
+          return (
+            <svg key={key} className="key-arrow" width={16} height={30} viewBox="0 0 16 30">
+              <title>{key}</title>
+              <polygon
+                points={arrowPoints(8, 22, 1)}
+                fill={color}
+                fillOpacity={0.5}
+                stroke="#4c4c4c"
+                strokeOpacity={0.5}
+                strokeWidth={0.8}
+              />
+              <circle cx={8} cy={22} r={6} fill={color} stroke="#4c4c4c" strokeWidth={1} />
+            </svg>
+          );
+        }
+        if (model.series.includes(key)) {
+          return (
+            <span
+              key={key}
+              className="key-dot"
+              style={{ background: seriesColor(key, model.series.indexOf(key)) }}
+              title={key}
+            />
+          );
+        }
+        const dash = LINE_DASHES[key];
+        const color = LINE_COLORS[key];
+        // dotted lines: draw dots spaced like the chart's dash pattern (dot + gap)
+        const period = dash ? dash.split(" ").reduce((sum, n) => sum + Number(n), 0) : 0;
+        return (
+          <span
+            key={key}
+            className="key-bar"
+            style={
+              dash
+                ? { backgroundImage: `radial-gradient(circle, ${color} 2px, transparent 2.5px)`, backgroundSize: `${period + 2}px 100%` }
+                : { background: color }
+            }
+            title={LINE_LABELS[key] ?? key}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+/** Checkbox legend: boxes in a grid, one per group; the checkboxes slide open under the description. */
+export default function Legend({ model, visible, onToggle, sortKey, onSort }: Props) {
+  const [open, setOpen] = useState<Record<string, boolean>>({});
+  const allKeys = [...model.series, ...model.lines];
+  const sections = LEGEND_GROUPS.map((group) => ({
+    title: group.title,
+    description: group.description,
+    keys: allKeys.filter((key) => LEGEND_GROUPS.find((g) => g.test(key)) === group),
+  })).filter((section) => section.keys.length > 0);
+
+  const labelOf = (key: string) => LINE_LABELS[key] ?? key;
+
   return (
     <div className="legend">
-      {model.series.map((key, i) => (
-        <label key={key}>
-          <input type="checkbox" checked={visible[key]} onChange={(e) => onToggle(key, e.target.checked)} />
-          <span className="swatch dot" style={{ background: seriesColor(key, i) }} />
-          {key}
-        </label>
-      ))}
-      {model.lines.map((key) => (
-        <label key={key}>
-          <input type="checkbox" checked={visible[key]} onChange={(e) => onToggle(key, e.target.checked)} />
-          <span className="swatch line" style={{ borderTopColor: LINE_COLORS[key] }} />
-          {LINE_LABELS[key] ?? key}
-        </label>
+      <fieldset className="legend-group">
+        <legend>Sort order</legend>
+        <p className="legend-description">
+          Orders the languages from left to right, highest first, by any one metric. Languages with no value for it go last.
+        </p>
+        <select className="sort-select" value={sortKey} onChange={(e) => onSort(e.target.value)}>
+          {sections.map(({ title, keys }) => (
+            <optgroup key={title} label={title}>
+              {keys.map((key) => (
+                <option key={key} value={key}>
+                  {labelOf(key)}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+      </fieldset>
+      {sections.map(({ title, description, keys }) => (
+        <fieldset key={title} className="legend-group">
+          <legend>{title}</legend>
+          <ColourKey model={model} keys={keys} />
+          <p className="legend-description">{description}</p>
+          <button
+            type="button"
+            className="legend-toggle"
+            aria-expanded={!!open[title]}
+            onClick={() => setOpen({ ...open, [title]: !open[title] })}
+          >
+            <span className={open[title] ? "chevron open" : "chevron"}>▸</span>
+            Filters ({keys.filter((key) => visible[key]).length}/{keys.length} shown)
+          </button>
+          <div className={open[title] ? "legend-panel open" : "legend-panel"}>
+            <div className="legend-panel-inner">
+              {keys.map((key) => (
+                <label key={key}>
+                  <input type="checkbox" checked={visible[key]} onChange={(e) => onToggle(key, e.target.checked)} />
+                  {model.series.includes(key) ? (
+                    <>
+                      <span className="swatch dot" style={{ background: seriesColor(key, model.series.indexOf(key)) }} />
+                      {key}
+                    </>
+                  ) : (
+                    <>
+                      <span
+                        className="swatch line"
+                        style={{ borderTopColor: LINE_COLORS[key], borderTopStyle: LINE_DASHES[key] ? "dotted" : "solid" }}
+                      />
+                      {labelOf(key)}
+                    </>
+                  )}
+                </label>
+              ))}
+            </div>
+          </div>
+        </fieldset>
       ))}
     </div>
   );

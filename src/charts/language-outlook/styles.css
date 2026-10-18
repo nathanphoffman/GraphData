@@ -1,8 +1,116 @@
 .legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
   margin: 8px 0;
+}
+
+.legend-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 6px 12px 10px;
+  border: 1px solid #ffffff40;
+  border-radius: 6px;
+}
+
+.legend-key {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  min-height: 30px;
+}
+
+/* dots overlap so a group with many (the 8 years) still fits on one line */
+.key-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #4c4c4c;
+  box-sizing: border-box;
+}
+
+.key-dot + .key-dot {
+  margin-left: -10px;
+}
+
+.key-arrow {
+  flex: none;
+}
+
+.key-arrow + .key-arrow {
+  margin-left: 6px;
+}
+
+.key-bar {
+  width: 26px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.key-bar:not(:first-child) {
+  margin-left: 8px;
+}
+
+.legend-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.chevron {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.chevron.open {
+  transform: rotate(90deg);
+}
+
+/* grid row trick: animates from 0 to the content's natural height */
+.legend-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.25s ease, visibility 0.25s;
+}
+
+.legend-panel.open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+.legend-panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.legend-description {
+  margin: 0 0 2px;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.7;
+}
+
+.legend-group legend {
+  padding: 0 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
 }
 
 .legend label {
@@ -43,5 +151,12 @@
   color: #fff;
   padding: 4px 8px;
   border-radius: 4px;
+  font-size: 13px;
+}
+
+.sort-select {
+  width: 100%;
+  padding: 4px 6px;
+  font: inherit;
   font-size: 13px;
 }
