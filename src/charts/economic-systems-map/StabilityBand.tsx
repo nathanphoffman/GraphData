@@ -4,17 +4,10 @@ import type { EconomicSystemsData } from "./types";
 
 /** Layer 1: line of stability, clipped to the grid because the band can run past it. */
 export default function StabilityBand({ stability }: { stability: EconomicSystemsData["stability"] }) {
-  const [x1, y1] = stability.from;
-  const [x2, y2] = stability.to;
-  const hw = stability.halfWidth;
-  const band = [
-    [x1, y1 - hw],
-    [x2, y2 - hw],
-    [x2, y2 + hw],
-    [x1, y1 + hw],
-  ]
-    .map(([x, y]) => `${toX(x)},${toY(y)}`)
-    .join(" ");
+  const { upper, lower } = stability;
+  const [x1, y1] = [upper.from[0], (upper.from[1] + lower.from[1]) / 2];
+  const [x2, y2] = [upper.to[0], (upper.to[1] + lower.to[1]) / 2];
+  const band = [upper.from, upper.to, lower.to, lower.from].map(([x, y]) => `${toX(x)},${toY(y)}`).join(" ");
   const angle = (Math.atan2(toY(y2) - toY(y1), toX(x2) - toX(x1)) * 180) / Math.PI;
   const labelBoxW = stability.label.length * 7.6 + 16;
   const labelX = 1.0;
@@ -27,8 +20,8 @@ export default function StabilityBand({ stability }: { stability: EconomicSystem
       </clipPath>
       <g clipPath="url(#grid-clip)">
         <polygon points={band} fill={COLORS.stability} fillOpacity={0.13} />
-        <line x1={toX(x1)} y1={toY(y1 - hw)} x2={toX(x2)} y2={toY(y2 - hw)} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
-        <line x1={toX(x1)} y1={toY(y1 + hw)} x2={toX(x2)} y2={toY(y2 + hw)} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
+        <line x1={toX(upper.from[0])} y1={toY(upper.from[1])} x2={toX(upper.to[0])} y2={toY(upper.to[1])} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
+        <line x1={toX(lower.from[0])} y1={toY(lower.from[1])} x2={toX(lower.to[0])} y2={toY(lower.to[1])} stroke={COLORS.stability} strokeWidth={2.2} strokeOpacity={0.8} strokeDasharray="8 6" />
         <line x1={toX(x1)} y1={toY(y1)} x2={toX(x2)} y2={toY(y2)} stroke={COLORS.stability} strokeWidth={1} strokeOpacity={0.35} />
       </g>
       <g transform={`translate(${toX(labelX)} ${toY(labelY)}) rotate(${angle})`}>

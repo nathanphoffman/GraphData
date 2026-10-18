@@ -23,7 +23,7 @@ function overlapArea(a: Box, b: Box): number {
   return ox > -PAD && oy > -PAD ? (ox + PAD) * (oy + PAD) : 0;
 }
 
-/** Boxes that labels must stay clear of: cell names and the overlay label. */
+/** Boxes that labels must stay clear of: cell names. */
 export function fixedObstacles(data: EconomicSystemsData, showNames = true): Box[] {
   const boxes: Box[] = [];
   if (showNames) {
@@ -36,7 +36,6 @@ export function fixedObstacles(data: EconomicSystemsData, showNames = true): Box
       });
     }
   }
-  boxes.push({ cx: toX(data.overlay.labelAt[0]), cy: toY(data.overlay.labelAt[1]), w: 96, h: 36 });
   return boxes;
 }
 

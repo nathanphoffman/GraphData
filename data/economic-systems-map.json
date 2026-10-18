@@ -24,7 +24,7 @@
       "col": 1,
       "row": 0,
       "auth": "Yugoslavia",
-      "dem": "DSA Platform*"
+      "dem": "DSA Platform (never implemented)"
     },
     {
       "name": "New Deal Liberalism",
@@ -51,7 +51,7 @@
       "name": "Nordic Model",
       "col": 1,
       "row": 1,
-      "auth": "Kuwait*",
+      "auth": "Kuwait (oil-funded welfare state)",
       "dem": "Sweden"
     },
     {
@@ -72,14 +72,14 @@
       "name": "Mutualism",
       "col": 0,
       "row": 2,
-      "auth": "Jonestown",
-      "dem": "Amish"
+      "auth": "Shakers",
+      "dem": "Early Human Tribes"
     },
     {
       "name": "Left Libertarianism",
       "col": 1,
       "row": 2,
-      "auth": "Makhno's Ukraine*",
+      "auth": "Makhno's Ukraine (crushed by the army, 1921)",
       "dem": "Rojava"
     },
     {
@@ -93,21 +93,32 @@
       "name": "Right Libertarianism",
       "col": 3,
       "row": 2,
-      "auth": "British Hong Kong",
-      "dem": "Frontier America*"
+      "auth": "British Hong Kong (near Reg. Capitalism & Classical Liberalism)",
+      "dem": "Frontier America (no real government)"
     }
   ],
   "stability": {
     "label": "Historical Stability",
-    "from": [
-      0,
-      0.5
-    ],
-    "to": [
-      4,
-      2.5
-    ],
-    "halfWidth": 0.8
+    "upper": {
+      "from": [
+        0,
+        1.5
+      ],
+      "to": [
+        4,
+        3.2143
+      ]
+    },
+    "lower": {
+      "from": [
+        0,
+        -0.2143
+      ],
+      "to": [
+        4,
+        1.5
+      ]
+    }
   },
   "overlay": {
     "label": "U.S.",
@@ -133,10 +144,6 @@
         2.55,
         1.98
       ]
-    ],
-    "labelAt": [
-      2.75,
-      2.38
     ]
   },
   "groups": [
@@ -217,7 +224,7 @@
     {
       "name": "Biden",
       "group": "presidents",
-      "x": 2.55,
+      "x": 2.75,
       "y": 2.3
     },
     {
@@ -558,7 +565,6 @@
     }
   ],
   "footnote": "Figures placed by stated economic views (not governance style); placements approximate and contestable.",
-  "examplesFootnote": "* = theoretical or weak fit.",
   "theory": {
     "heading": "The theory of historical stability",
     "paragraphs": [

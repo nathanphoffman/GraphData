@@ -10,7 +10,7 @@ import FigureLabels from "./FigureLabels";
 import Legend from "./Legend";
 
 const W = GRID_X0 + GRID_W + 8;
-const H = GRID_Y0 + GRID_H + 70;
+const H = GRID_Y0 + GRID_H + 94;
 const FONT = "system-ui, -apple-system, Segoe UI, sans-serif";
 
 interface Props {

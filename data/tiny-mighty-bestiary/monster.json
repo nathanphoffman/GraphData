@@ -166,7 +166,8 @@
     "type": "monster",
     "themes": [
       "scifi",
-      "science-fantasy"
+      "science-fantasy",
+      "fantasy"
     ],
     "tone": 1,
     "tier": 0.5,
@@ -214,7 +215,8 @@
       "basilisk",
       "snake",
       "petrify",
-      "snake hair"
+      "snake hair",
+      "cockatrice"
     ],
     "description": "A hissing woman with a head of living snakes whose eyes turn warriors into statues.",
     "attack": "Dagger",
@@ -1083,7 +1085,8 @@
       "land worm",
       "burrower",
       "cave serpent",
-      "subterranean"
+      "subterranean",
+      "purple worm"
     ],
     "description": "A blind, pink, forty-foot earthworm with a mouthful of teeth that tunnels under the dungeon floor.",
     "attack": "Bite",

@@ -24,9 +24,14 @@ export default function Legend({ model, showExamples }: Props) {
             </g>
           );
         })}
-      <text x={GRID_X0} y={GRID_Y0 + GRID_H + 58} fontSize={11} fontStyle="italic" fill={COLORS.muted}>
+      <g>
+        <rect x={GRID_X0 + 4} y={GRID_Y0 + GRID_H + 44} width={22} height={13} fill={COLORS.overlay} fillOpacity={0.1} stroke={COLORS.overlay} strokeWidth={2} strokeDasharray="5 3" />
+        <text x={GRID_X0 + 36} y={GRID_Y0 + GRID_H + 55} fontSize={13} fill="#333">
+          {model.overlay.label} {model.overlay.sublabel}
+        </text>
+      </g>
+      <text x={GRID_X0} y={GRID_Y0 + GRID_H + 82} fontSize={11} fontStyle="italic" fill={COLORS.muted}>
         {model.footnote}
-        {showExamples ? ` ${model.examplesFootnote}` : ""}
       </text>
     </>
   );

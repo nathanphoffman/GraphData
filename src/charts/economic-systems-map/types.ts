@@ -30,13 +30,12 @@ export interface EconomicSystemsData {
   columns: string[];
   rows: string[];
   cells: Cell[];
-  stability: { label: string; from: Point; to: Point; halfWidth: number };
-  overlay: { label: string; sublabel: string; polygon: Point[]; labelAt: Point };
+  stability: { label: string; upper: { from: Point; to: Point }; lower: { from: Point; to: Point } };
+  overlay: { label: string; sublabel: string; polygon: Point[] };
   groups: Group[];
   figures: Figure[];
   theory: { heading: string; paragraphs: string[]; caveat: string };
   footnote: string;
-  examplesFootnote: string;
 }
 
 /** An axis-aligned box in SVG pixels, given by its center. */

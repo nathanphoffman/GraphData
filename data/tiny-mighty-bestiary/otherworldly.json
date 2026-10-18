@@ -85,7 +85,8 @@
       "science-fantasy",
       "space-wars",
       "occult-noir",
-      "space-jammer"
+      "space-jammer",
+      "fantasy"
     ],
     "tone": 5,
     "tier": 2,
@@ -96,7 +97,11 @@
       "squid head",
       "tentacle",
       "psion",
-      "psychic"
+      "psychic",
+      "mindflayer",
+      "ulitharid",
+      "elder brain",
+      "intellect devourer"
     ],
     "description": "A purple-skinned thing with a squid for a face and a taste for thoughts.",
     "attack": "Tentacle slap",
@@ -150,7 +155,9 @@
       "eye",
       "orb",
       "gazer",
-      "spectator"
+      "spectator",
+      "death tyrant",
+      "gauth"
     ],
     "description": "A floating, toothy orb with one huge eye, a dozen eye-stalks and an unshakable belief that it is better than you.",
     "attack": "Bite",
@@ -504,7 +511,10 @@
       "fiend",
       "hellspawn",
       "imp lord",
-      "archdevil"
+      "archdevil",
+      "pit fiend",
+      "erinyes",
+      "bone devil"
     ],
     "description": "A horned, smoldering fiend with bat wings and a ledger of souls.",
     "attack": "Flaming whip",
@@ -610,7 +620,9 @@
       "green hag",
       "baba yaga",
       "sea hag",
-      "sorceress"
+      "sorceress",
+      "night hag",
+      "annis hag"
     ],
     "description": "A hunched, moss-draped woman with an iron cauldron, a bone-hut on chicken legs and a very patient grin.",
     "attack": "Claws",
@@ -777,7 +789,8 @@
       "cemetery",
       "night creature",
       "carrion",
-      "scavenger"
+      "scavenger",
+      "ghast"
     ],
     "description": "A hunched, rubbery thing that lives in graveyards, eats the dead and sometimes the not-quite-dead.",
     "attack": "Claws",

@@ -2275,7 +2275,8 @@
     "type": "animated",
     "themes": [
       "age-of-sail",
-      "space-jammer"
+      "space-jammer",
+      "fantasy"
     ],
     "tone": 4,
     "tier": 2,
