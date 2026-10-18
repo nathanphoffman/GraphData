@@ -15,3 +15,13 @@ for (let v = 310; v <= 1000; v += 10) OWNED_STOPS.push(v);
 export const PER_WEEK_MIN = 0.25;
 export const PER_WEEK_MAX = 21;
 export const PER_WEEK_STEP = 0.25;
+
+/** Names shown on the uses-per-year slider when it sits exactly on a familiar frequency. */
+export const PER_YEAR_BENCHMARKS: Record<number, string> = {
+  0.1: "Decadely",
+  0.5: "Biannually",
+  1: "Annually",
+  12: "Monthly",
+  52: "Weekly",
+  365: "Daily",
+};

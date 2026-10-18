@@ -9,7 +9,7 @@ import ShareBar from "./ShareBar";
 import SharingCurve from "./SharingCurve";
 import Slider from "./Slider";
 import { useCalculatorState } from "./state";
-import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_STOPS } from "./stops";
+import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_BENCHMARKS, PER_YEAR_STOPS } from "./stops";
 import WaitChart from "./WaitChart";
 
 export default function MinimalismCalculator() {
@@ -35,10 +35,10 @@ export default function MinimalismCalculator() {
       <div className="mini-layout">
         <div className="mini-inputs">
           <h2>Your numbers</h2>
+          <div className="mini-dials">
           <Slider
             id="per-week"
-            label={`${cap(item.uses)} per week (whoever owns it)`}
-            description={`All your ${item.many} combined, e.g. ${item.weekExample}.`}
+            label={`${cap(item.uses)} per week`}
             value={s.perWeek}
             min={PER_WEEK_MIN}
             max={PER_WEEK_MAX}
@@ -46,43 +46,46 @@ export default function MinimalismCalculator() {
             display={`${s.perWeek} / week`}
             low="0.25 (once a month)"
             high={`${PER_WEEK_MAX}`}
+            learnMore={`How often ${item.many} get used in total, by anyone who owns one. All your ${item.many} combined, e.g. ${item.weekExample}. This is the demand: the busier the week, the more ${item.many} you need so you rarely have to wait.`}
             onChange={s.setPerWeek}
           />
           <Slider
             id="owned"
-            label={`How many ${item.many} you own`}
+            label={`${cap(item.many)} owned`}
             value={OWNED_STOPS.indexOf(s.owned)}
             min={0}
             max={OWNED_STOPS.length - 1}
             display={`${s.owned}`}
             low="1"
             high="1000"
+            learnMore={`How many ${item.many} you have today. The calculator compares this with how many you actually need and tells you if you have too many, too few, or about right.`}
             onChange={(i) => s.setOwned(OWNED_STOPS[i])}
           />
           <Slider
             id="per-year"
-            label={`${cap(item.uses)} per year you want from each ${item.one}`}
-            description={`Per single ${item.one}, e.g. ${item.yearExample}.`}
+            label={`${cap(item.uses)} each / year`}
             value={PER_YEAR_STOPS.indexOf(s.perYear)}
             min={0}
             max={PER_YEAR_STOPS.length - 1}
-            display={`${s.perYear} / year`}
+            display={PER_YEAR_BENCHMARKS[s.perYear] ?? `${s.perYear} / year`}
             low="0.1 (decadely)"
             high="365 (daily)"
+            learnMore={`How much use you want out of each single ${item.one} per year. A higher number means each one is worked harder (e.g. ${item.yearExample}), so you need fewer of them. A lower number means they sit idle more and you need more.`}
             onChange={(i) => s.setPerYear(PER_YEAR_STOPS[i])}
           />
           <Slider
             id="share"
-            label="Your share of the contributing"
-            description={`Pool your ${item.many} with 3 friends who all chip in equally? You supply 33%.`}
+            label="Your share"
             value={s.sharePct}
             min={1}
             max={100}
             display={`${s.sharePct}% (1 in ${people.toFixed(people % 1 ? 1 : 0)})`}
             low="1% (mostly borrow)"
             high="100% (all mine)"
+            learnMore={`If you pool ${item.many} with friends or family, you only need to cover your share of the total use. 100% means everything is yours. 25% means four people chip in equally, so you each need about a quarter as many.`}
             onChange={s.setSharePct}
           />
+          </div>
           <GoalCurve yearlyUses={yearlyUses} goal={s.perYear} item={item} onGoal={s.setPerYear} />
         </div>
 
