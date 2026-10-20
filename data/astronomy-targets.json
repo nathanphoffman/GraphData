@@ -1,6 +1,6 @@
 {
  "title": "Amateur Astronomy Targets",
- "source": "Positions, magnitudes and sizes are rounded catalogue values (Messier/NGC), good to about 0.1 hour / 1 degree. Core boost is my own rough estimate of how many magnitudes brighter the bright centre is than the whole-object average. Best season is when the target is highest around midnight (by right ascension), with a few hand adjustments. For star clusters and double stars the core uses the magnitude of the brightest member stars (brightStar, approximate) instead of a core boost. The 25 brightest stars in the northern sky (north of the celestial equator) are listed from memory (approximate positions and magnitudes); variable stars use a typical value, and Rigil Kentaurus is the Alpha Centauri system combined. Planets use typical (average) magnitudes and disk sizes, and are scored in the season and at the position along the ecliptic where they are highest. Moon uses an average magnitude over its phases, and moonlight is not counted against other targets.",
+ "source": "Positions, magnitudes and sizes are rounded catalogue values (Messier/NGC), good to about 0.1 hour / 1 degree. Core boost is my own rough estimate of how many magnitudes brighter the bright centre is than the whole-object average. Best season is when the target is highest around midnight (by right ascension), with a few hand adjustments. For star clusters and double stars the core uses the magnitude of the brightest member stars (brightStar, approximate) instead of a core boost. The 25 brightest stars in the northern sky (north of the celestial equator) are listed from memory (approximate positions and magnitudes); variable stars use a typical value, and Rigil Kentaurus is the Alpha Centauri system combined. Planets use typical (average) magnitudes and disk sizes, and are scored in the season and at the position along the ecliptic where they are highest. Moon uses an average magnitude over its phases, and moonlight is not counted against other targets. Simulator adjustment is my own judgment, in percentage points, of whether the eyepiece preview (small-medium focal length and mirror/lens, Bortle 4) looks better (+) or worse (-) than the score suggests; a slider sets how much of it is added to the score (50% by default).",
  "targets": [
   {
    "id": "M31",
@@ -38,8 +38,9 @@
    "magnitude": 3.7,
    "major": 60,
    "minor": 60,
-   "bestSeason": "autumn",
-   "brightStar": 6.5
+   "brightStar": 6.5,
+   "simAdjust": 10,
+   "bestSeason": "autumn"
   },
   {
    "id": "Mel 20",
@@ -51,8 +52,9 @@
    "magnitude": 1.2,
    "major": 180,
    "minor": 180,
-   "bestSeason": "autumn",
-   "brightStar": 3.0
+   "brightStar": 3.0,
+   "simAdjust": -10,
+   "bestSeason": "autumn"
   },
   {
    "id": "M45",
@@ -64,8 +66,9 @@
    "magnitude": 1.6,
    "major": 110,
    "minor": 110,
-   "bestSeason": "autumn",
-   "brightStar": 3.0
+   "brightStar": 3.0,
+   "simAdjust": 0,
+   "bestSeason": "autumn"
   },
   {
    "id": "NGC 1499",
@@ -480,8 +483,9 @@
    "magnitude": 3.6,
    "major": 60,
    "minor": 60,
-   "bestSeason": "summer",
-   "brightStar": 5.2
+   "brightStar": 5.2,
+   "simAdjust": 5,
+   "bestSeason": "summer"
   },
   {
    "id": "Albireo",
@@ -558,8 +562,9 @@
    "magnitude": 4.6,
    "major": 32,
    "minor": 32,
-   "bestSeason": "summer",
-   "brightStar": 7.0
+   "brightStar": 7.0,
+   "simAdjust": 5,
+   "bestSeason": "summer"
   },
   {
    "id": "M2",
@@ -610,8 +615,9 @@
    "magnitude": 1.8,
    "major": 275,
    "minor": 275,
-   "bestSeason": "spring",
-   "brightStar": 5.0
+   "brightStar": 5.0,
+   "simAdjust": -20,
+   "bestSeason": "spring"
   },
   {
    "id": "Arcturus",
@@ -1113,6 +1119,7 @@
    "major": 100,
    "minor": 100,
    "brightStar": 5.1,
+   "simAdjust": -20,
    "bestSeason": "winter"
   },
   {
@@ -1295,6 +1302,7 @@
    "major": 70,
    "minor": 70,
    "brightStar": 6.7,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -1438,10 +1446,11 @@
    "major": 31,
    "minor": 31,
    "coreBoost": 0,
-   "bestSeason": "any",
    "planet": {
     "maxElongation": 180
-   }
+   },
+   "simAdjust": 10,
+   "bestSeason": "any"
   },
   {
    "id": "Castor",
@@ -1818,6 +1827,7 @@
    "major": 60,
    "minor": 60,
    "brightStar": 7.5,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {

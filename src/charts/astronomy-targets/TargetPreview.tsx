@@ -16,14 +16,14 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 }
 
 /** Average linear brightness of the photo (or of the target's own oval within it), used as "the target's typical surface brightness". */
-function meanLinear(img: HTMLImageElement, info: TargetImage, target: Target): number {
+function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target): { mean: number; bg: number } {
   const w = 256;
   const h = Math.round(w * (img.naturalHeight / img.naturalWidth));
   const c = document.createElement("canvas");
   c.width = w;
   c.height = h;
   const g = c.getContext("2d");
-  if (!g) return 0.05;
+  if (!g) return { mean: 0.05, bg: 0 };
   g.drawImage(img, 0, 0, w, h);
   const px = g.getImageData(0, 0, w, h).data;
   const f = info.footprint;
@@ -33,8 +33,12 @@ function meanLinear(img: HTMLImageElement, info: TargetImage, target: Target): n
   const angle = ((f?.angleDeg ?? 0) * Math.PI) / 180;
   let sum = 0;
   let n = 0;
+  const all: number[] = [];
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4;
+      const lum = Math.pow((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255, 2.2);
+      all.push(lum);
       if (f) {
         const dx = x - f.cx * w;
         const dy = y - f.cy * h;
@@ -42,16 +46,20 @@ function meanLinear(img: HTMLImageElement, info: TargetImage, target: Target): n
         const v = -dx * Math.sin(angle) + dy * Math.cos(angle);
         if ((u / a) ** 2 + (v / b) ** 2 > 1) continue;
       }
-      const i = (y * w + x) * 4;
-      sum += Math.pow((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255, 2.2);
+      sum += lum;
       n++;
     }
   }
-  return Math.max(0.005, n ? sum / n : 0.05);
+  // The photo's own sky level (its dim 10th percentile) is not part of the target, so it is taken off before brightening.
+  all.sort((p, q) => p - q);
+  const bg = all[Math.floor(all.length * 0.1)] ?? 0;
+  return { mean: Math.max(0.005, (n ? sum / n : 0.05) - bg), bg };
 }
 
 /** How much more you see looking slightly off to the side of the target (the eye's rod cells are more sensitive), in magnitudes. */
 const AVERTED_BOOST = 0.9;
+/** Brightness beyond this many magnitudes over the limit adds nothing but turns the photo's dark sky white (the Moon). */
+const MAX_MARGIN = 6;
 /** Seconds for one full direct, averted, direct cycle. */
 const CYCLE_SECONDS = 8;
 
@@ -62,7 +70,7 @@ const CYCLE_SECONDS = 8;
  * Returns a function that draws one frame for a given amount of averted vision (0 = looking straight at it, 1 = looking to the side):
  * averted vision is more sensitive but softer and colourless.
  */
-function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, fov: number, margin: number, skyGlow: number, center: { cx: number; cy: number } | undefined) {
+function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, bg: number, fov: number, margin: number, skyGlow: number, center: { cx: number; cy: number } | undefined) {
   const size = VIEW_SIZE * SCALE;
   canvas.width = canvas.height = size;
   const g = canvas.getContext("2d", { willReadFrequently: true });
@@ -111,7 +119,7 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
   const skyTint = [1, 0.82, 0.62];
 
   return (averted: number) => {
-    const gain = Math.pow(10, 0.4 * (margin + AVERTED_BOOST * averted)) / mean;
+    const gain = Math.pow(10, 0.4 * (Math.min(margin, MAX_MARGIN) + AVERTED_BOOST * averted)) / mean;
     const soften = 0.6 * averted;
     const colour = 0.15 * (1 - averted);
     for (let p = 0; p < size * size; p++) {
@@ -124,11 +132,12 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
       const lin0 = lut[sharp[i]] + (lut[blur[i]] - lut[sharp[i]]) * soften;
       const lin1 = lut[sharp[i + 1]] + (lut[blur[i + 1]] - lut[sharp[i + 1]]) * soften;
       const lin2 = lut[sharp[i + 2]] + (lut[blur[i + 2]] - lut[sharp[i + 2]]) * soften;
-      const lum = 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2;
+      const rawLum = 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2;
+      const lum = Math.max(0, rawLum - bg);
       const level = 1 - Math.exp(-Math.max(0, lum * gain * weight[p] - 2.5) / 8);
       for (let c = 0; c < 3; c++) {
         // The eye sees almost no colour in the dark; keep a hint of the photo's tint when looking straight at it.
-        const tint = lum > 0 ? 1 - colour + colour * ((c === 0 ? lin0 : c === 1 ? lin1 : lin2) / lum) : 1;
+        const tint = rawLum > 0 ? 1 - colour + colour * ((c === 0 ? lin0 : c === 1 ? lin1 : lin2) / rawLum) : 1;
         const v = Math.min(1, skyLevel * skyTint[c] + level * base[c] * tint) * vignette[p];
         d[i + c] = Math.round(255 * Math.pow(v, 1 / 2.2));
       }
@@ -145,21 +154,21 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   const info = TARGET_IMAGES[row.target.id];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const thumbRef = useRef<HTMLSpanElement>(null);
-  const [loaded, setLoaded] = useState<{ img: HTMLImageElement; mean: number } | null>(null);
+  const [loaded, setLoaded] = useState<{ img: HTMLImageElement; mean: number; bg: number } | null>(null);
   const alt = row.peakAltitude > 0 ? Math.max(20, row.peakAltitude) : 45;
   const { fov, margin, skyGlow } = viewConditions(row.target, settings, alt);
 
   useEffect(() => {
     let cancelled = false;
     loadImage(info.src).then((img) => {
-      if (!cancelled) setLoaded({ img, mean: meanLinear(img, info, row.target) });
+      if (!cancelled) setLoaded({ img, ...measurePhoto(img, info, row.target) });
     }).catch(() => {});
     return () => { cancelled = true; };
   }, [info, row.target]);
 
   useEffect(() => {
     if (!loaded || !canvasRef.current) return;
-    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, fov, margin, skyGlow, info.footprint);
+    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, loaded.bg, fov, margin, skyGlow, info.footprint);
     if (!render) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const show = (averted: number) => {

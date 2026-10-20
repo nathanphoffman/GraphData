@@ -98,6 +98,18 @@ const COLUMNS: Column[] = [
       return <span className="astro-tag" style={{ "--tag": heat(d.level, 1) } as CSSProperties}>{d.label}</span>;
     },
   },
+  {
+    id: "simAdjust",
+    label: "Simulator Adjustment",
+    title: "How much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Blank = not judged yet. Part of it is added to the score, set by the slider above the table.",
+    show: true,
+    afterScore: true,
+    cell: (r) => {
+      const v = r.target.simAdjust;
+      if (v === undefined) return "—";
+      return <span className="astro-tag" style={{ "--tag": heat(0.5 + v / 60, 1) } as CSSProperties}>{v > 0 ? `+${v}%` : v < 0 ? `−${-v}%` : "0%"}</span>;
+    },
+  },
 ];
 
 const defaultHidden = COLUMNS.filter((c) => !c.show).map((c) => c.id);
@@ -123,6 +135,7 @@ function parseSettings(saved: unknown): Settings | null {
     eyepieceMm: number(s.eyepieceMm, 2, 100, DEFAULT_SETTINGS.eyepieceMm),
     eyepieceAfov: number(s.eyepieceAfov, 20, 120, DEFAULT_SETTINGS.eyepieceAfov),
     bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle) * 2) / 2,
+    simWeight: Math.round(number(s.simWeight, 0, 100, DEFAULT_SETTINGS.simWeight)),
   };
 }
 
@@ -248,6 +261,18 @@ export default function AstronomyTargets() {
             onChange={(e) => set({ bortle: Number(e.target.value) })}
           />
           <small>{settings.bortle % 1 === 0 ? BORTLE_NOTES[settings.bortle - 1] : `Between ${BORTLE_NOTES[Math.floor(settings.bortle) - 1].toLowerCase()} and ${BORTLE_NOTES[Math.ceil(settings.bortle) - 1].toLowerCase()}`}</small>
+        </label>
+        <label>
+          <span>Simulator adjustment applied ({settings.simWeight}%)</span>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={5}
+            value={settings.simWeight}
+            onChange={(e) => set({ simWeight: Number(e.target.value) })}
+          />
+          <small>0% ignores it, 100% adds the full amount to the score.</small>
         </label>
         <div className="astro-columns">
           <span>Best season:</span>
