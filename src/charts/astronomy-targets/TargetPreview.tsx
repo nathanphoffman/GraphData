@@ -50,57 +50,89 @@ function meanLinear(img: HTMLImageElement, info: TargetImage, target: Target): n
   return Math.max(0.005, n ? sum / n : 0.05);
 }
 
+/** How much more you see looking slightly off to the side of the target (the eye's rod cells are more sensitive), in magnitudes. */
+const AVERTED_BOOST = 0.9;
+/** Seconds for one full direct, averted, direct cycle. */
+const CYCLE_SECONDS = 8;
+
 /**
  * Rough eyepiece simulation: the photo is placed at the right scale inside a round field, then each pixel is dimmed by how far
  * the scope's reach (after sky glow) is from the target's brightness. Faint nebulosity and faint stars drop out first,
  * leaving bright stars on a grey or orange sky. This is an approximation, not a calibrated render.
+ * Returns a function that draws one frame for a given amount of averted vision (0 = looking straight at it, 1 = looking to the side):
+ * averted vision is more sensitive but softer and colourless.
  */
-function drawView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, fov: number, margin: number, skyGlow: number) {
+function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, fov: number, margin: number, skyGlow: number, center: { cx: number; cy: number } | undefined) {
   const size = VIEW_SIZE * SCALE;
   canvas.width = canvas.height = size;
   const g = canvas.getContext("2d", { willReadFrequently: true });
-  if (!g) return;
+  if (!g) return null;
   const pxPerArcmin = size / fov;
   const w = widthArcmin * pxPerArcmin;
   const h = w * (img.naturalHeight / img.naturalWidth);
   g.fillStyle = "#000";
   g.fillRect(0, 0, size, size);
   g.imageSmoothingQuality = "high";
-  g.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
-  const frame = g.getImageData(0, 0, size, size);
+  // Put the target (when we know where it is in the photo) in the middle of the field.
+  const left = size / 2 - (center?.cx ?? 0.5) * w;
+  const top = size / 2 - (center?.cy ?? 0.5) * h;
+  g.drawImage(img, left, top, w, h);
+  const sharp = g.getImageData(0, 0, size, size).data;
+  // A softened copy, blended in for averted vision (skipped where the browser can't blur a canvas).
+  const soft = document.createElement("canvas");
+  soft.width = soft.height = size;
+  const sg = soft.getContext("2d", { willReadFrequently: true });
+  if (!sg) return null;
+  sg.filter = "blur(3px)";
+  sg.drawImage(canvas, 0, 0);
+  const blur = sg.getImageData(0, 0, size, size).data;
+
+  const frame = g.createImageData(size, size);
   const d = frame.data;
-  const gain = Math.pow(10, 0.4 * margin) / mean;
-  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3;
   const half = size / 2;
-  for (let i = 0; i < d.length; i += 4) {
-    const p = i / 4;
-    const x = (p % size) - half;
-    const y = Math.floor(p / size) - half;
-    const r = Math.hypot(x, y) / half;
-    if (r > 1) {
-      d[i] = d[i + 1] = d[i + 2] = 0;
-      d[i + 3] = 255;
-      continue;
-    }
-    const lin = [d[i], d[i + 1], d[i + 2]].map((v) => Math.pow(v / 255, 2.2));
-    const lum = 0.3 * lin[0] + 0.59 * lin[1] + 0.11 * lin[2];
-    // Soft edge where the photo ends so its border doesn't show.
-    const ex = Math.min(1, Math.max(0, (w / 2 - Math.abs(x)) / 12));
-    const ey = Math.min(1, Math.max(0, (h / 2 - Math.abs(y)) / 12));
-    const seen = lum * gain * ex * ey;
-    const level = 1 - Math.exp(-Math.max(0, seen - 2.5) / 8);
-    // The eye sees almost no colour in the dark; keep a hint of the photo's tint.
-    const vignette = 1 - 0.25 * r * r;
-    const base = [0.86, 0.93, 1.0];
-    for (let c = 0; c < 3; c++) {
-      const tint = lum > 0 ? 0.85 + 0.15 * (lin[c] / lum) : 1;
-      const sky = skyLevel * [1, 0.82, 0.62][c];
-      const v = Math.min(1, sky + level * base[c] * tint) * vignette;
-      d[i + c] = Math.round(255 * Math.pow(v, 1 / 2.2));
-    }
-    d[i + 3] = 255;
+  // Per-pixel factors that don't change between frames: inside the round field, soft photo edge, and vignette.
+  const weight = new Float32Array(size * size);
+  const vignette = new Float32Array(size * size);
+  for (let p = 0; p < size * size; p++) {
+    const px = p % size;
+    const py = Math.floor(p / size);
+    const r = Math.hypot(px - half, py - half) / half;
+    if (r > 1) continue;
+    const ex = Math.min(1, Math.max(0, Math.min(px - left, left + w - px) / 12));
+    const ey = Math.min(1, Math.max(0, Math.min(py - top, top + h - py) / 12));
+    weight[p] = ex * ey;
+    vignette[p] = 1 - 0.25 * r * r;
   }
-  g.putImageData(frame, 0, 0);
+  const lut = new Float32Array(256).map((_, v) => Math.pow(v / 255, 2.2));
+  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3;
+  const base = [0.86, 0.93, 1.0];
+  const skyTint = [1, 0.82, 0.62];
+
+  return (averted: number) => {
+    const gain = Math.pow(10, 0.4 * (margin + AVERTED_BOOST * averted)) / mean;
+    const soften = 0.6 * averted;
+    const colour = 0.15 * (1 - averted);
+    for (let p = 0; p < size * size; p++) {
+      const i = p * 4;
+      d[i + 3] = 255;
+      if (vignette[p] === 0) {
+        d[i] = d[i + 1] = d[i + 2] = 0;
+        continue;
+      }
+      const lin0 = lut[sharp[i]] + (lut[blur[i]] - lut[sharp[i]]) * soften;
+      const lin1 = lut[sharp[i + 1]] + (lut[blur[i + 1]] - lut[sharp[i + 1]]) * soften;
+      const lin2 = lut[sharp[i + 2]] + (lut[blur[i + 2]] - lut[sharp[i + 2]]) * soften;
+      const lum = 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2;
+      const level = 1 - Math.exp(-Math.max(0, lum * gain * weight[p] - 2.5) / 8);
+      for (let c = 0; c < 3; c++) {
+        // The eye sees almost no colour in the dark; keep a hint of the photo's tint when looking straight at it.
+        const tint = lum > 0 ? 1 - colour + colour * ((c === 0 ? lin0 : c === 1 ? lin1 : lin2) / lum) : 1;
+        const v = Math.min(1, skyLevel * skyTint[c] + level * base[c] * tint) * vignette[p];
+        d[i + c] = Math.round(255 * Math.pow(v, 1 / 2.2));
+      }
+    }
+    g.putImageData(frame, 0, 0);
+  };
 }
 
 export function hasPreview(id: string): boolean {
@@ -110,6 +142,7 @@ export function hasPreview(id: string): boolean {
 export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; settings: Settings; x: number; y: number }) {
   const info = TARGET_IMAGES[row.target.id];
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const thumbRef = useRef<HTMLSpanElement>(null);
   const [loaded, setLoaded] = useState<{ img: HTMLImageElement; mean: number } | null>(null);
   const alt = row.peakAltitude > 0 ? Math.max(20, row.peakAltitude) : 45;
   const { fov, margin, skyGlow } = viewConditions(row.target, settings, alt);
@@ -123,8 +156,31 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   }, [info, row.target]);
 
   useEffect(() => {
-    if (loaded && canvasRef.current) drawView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, fov, margin, skyGlow);
-  }, [loaded, info.widthArcmin, fov, margin, skyGlow]);
+    if (!loaded || !canvasRef.current) return;
+    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, fov, margin, skyGlow, info.footprint);
+    if (!render) return;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const show = (averted: number) => {
+      render(averted);
+      if (thumbRef.current) thumbRef.current.style.left = `${averted * 100}%`;
+    };
+    if (still) {
+      show(0.5);
+      return;
+    }
+    let frame = 0;
+    let last = 0;
+    const tick = (now: number) => {
+      // About 20 frames a second is plenty for a slow fade and keeps the per-pixel work light.
+      if (now - last > 50) {
+        last = now;
+        show((1 - Math.cos((now / 1000) * ((2 * Math.PI) / CYCLE_SECONDS))) / 2);
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow]);
 
   const width = VIEW_SIZE * 2 + 48;
   const left = Math.min(x + 16, window.innerWidth - width - 8);
@@ -138,6 +194,13 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
       </figure>
       <figure>
         <canvas ref={canvasRef} style={{ width: VIEW_SIZE, height: VIEW_SIZE }} />
+        <div className="astro-gaze" aria-hidden="true">
+          <span>Direct</span>
+          <div className="astro-gaze-track">
+            <span ref={thumbRef} className="astro-gaze-thumb" />
+          </div>
+          <span>Averted</span>
+        </div>
         <figcaption>Your view (approximate)</figcaption>
       </figure>
       <small>{info.credit}</small>
