@@ -49,6 +49,7 @@ export const DEFAULT_SETTINGS: Settings = {
   eyepieceAfov: 52,
   bortle: 4,
   simWeight: 50,
+  authorWeight: 50,
   opticalQuality: 50,
 };
 
@@ -290,7 +291,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
     const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
-    const score = clamp(raw - SCORE_OFFSET + ((target.simAdjust ?? 0) * settings.simWeight) / 100, 0, 100);
+    const score = clamp(raw - SCORE_OFFSET + ((target.simAdjust ?? 0) * settings.simWeight) / 100 + ((target.authorAdjust ?? 0) * settings.authorWeight) / 100, 0, 100);
     return { target, score, sky, fit, light, core, peakAltitude };
   };
 

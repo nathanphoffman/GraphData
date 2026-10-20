@@ -87,27 +87,21 @@ const COLUMNS: Column[] = [
   { id: "light", label: "Light", show: true, cell: (r) => <Percent value={r.light} /> },
   { id: "core", label: "Core", show: true, cell: (r) => <Percent value={r.core} /> },
   {
-    id: "difficulty",
-    label: "Difficulty",
-    title: "How hard it is to see, from the score: Very easy 75+, Easy 50+, Moderate 35+, Hard 20+, Very hard 10+, Extreme above 0, Not visible at 0.",
-    show: true,
-    afterScore: true,
-    cell: (r, settings) => {
-      if (isNakedEye(r.target, settings.bortle)) return <span className="astro-tag" style={{ "--tag": heat(1, 1) } as CSSProperties}>Naked Eye</span>;
-      const d = difficulty(r.score);
-      return <span className="astro-tag" style={{ "--tag": heat(d.level, 1) } as CSSProperties}>{d.label}</span>;
-    },
-  },
-  {
-    id: "simAdjust",
-    label: "Simulator Adjustment",
-    title: "How much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Blank = not judged yet. Part of it is added to the score, set by the slider above the table.",
+    id: "adjust",
+    label: "Simulator / Author",
+    title: "Top: how much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Bottom: the author's own adjustment in score points, from field experience. -- = not rated yet (counts as 0). Part of each is added to the score, set by the sliders above the table.",
     show: true,
     afterScore: true,
     cell: (r) => {
-      const v = r.target.simAdjust;
-      if (v === undefined) return "—";
-      return <span className="astro-tag" style={{ "--tag": heat(0.5 + v / 60, 1) } as CSSProperties}>{v >= 0 ? `+${v}%` : `−${-v}%`}</span>;
+      const sim = r.target.simAdjust;
+      const author = r.target.authorAdjust;
+      const fmt = (v: number) => (v >= 0 ? `+${v}` : `−${-v}`);
+      return (
+        <div className="astro-stack">
+          {sim === undefined ? "—" : <span className="astro-tag" style={{ "--tag": heat(0.5 + sim / 60, 1) } as CSSProperties} title="Simulator adjustment">{fmt(sim)}%</span>}
+          {author === undefined ? "--" : <span className="astro-tag" style={{ "--tag": heat(0.5 + author / 30, 1) } as CSSProperties} title="Author adjustment">{fmt(author)}</span>}
+        </div>
+      );
     },
   },
 ];
@@ -137,6 +131,7 @@ function parseSettings(saved: unknown): Settings | null {
     eyepieceAfov: number(s.eyepieceAfov, 20, 120, DEFAULT_SETTINGS.eyepieceAfov),
     bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle) * 2) / 2,
     simWeight: Math.round(number(s.simWeight, 0, 100, DEFAULT_SETTINGS.simWeight)),
+    authorWeight: Math.round(number(s.authorWeight, 0, 100, DEFAULT_SETTINGS.authorWeight)),
     opticalQuality: Math.round(number(s.opticalQuality, 0, 100, DEFAULT_SETTINGS.opticalQuality)),
   };
 }
@@ -316,6 +311,18 @@ export default function AstronomyTargets() {
               />
               <small>0% ignores it, 100% adds the full amount to the score.</small>
             </label>
+            <label>
+              <span>Author adjustment applied ({settings.authorWeight}%)</span>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                step={5}
+                value={settings.authorWeight}
+                onChange={(e) => set({ authorWeight: Number(e.target.value) })}
+              />
+              <small>0% ignores it, 100% adds the full amount to the score.</small>
+            </label>
             <div className="astro-columns">
               <span>Best season:</span>
               {SEASON_FILTERS.map((season) => (
@@ -368,7 +375,7 @@ export default function AstronomyTargets() {
               {beforeScore.map((c) => (
                 <th key={c.id} title={c.title}>{c.label}</th>
               ))}
-              <th>Score</th>
+              <th title="How hard it is to see, from the score: Very easy 75+, Easy 50+, Moderate 35+, Hard 20+, Very hard 10+, Extreme above 0, Not visible at 0.">Difficulty / Score</th>
               {afterScore.map((c) => (
                 <th key={c.id} title={c.title}>{c.label}</th>
               ))}
@@ -390,8 +397,15 @@ export default function AstronomyTargets() {
                     <td key={c.id}>{c.cell(row, settings)}</td>
                   ))}
                   <td className="astro-score">
-                    <span className="astro-bar" style={{ width: `${row.score}%`, background: heat(row.score / 100, 0.45) }} />
-                    <span className="astro-score-text">{row.score.toFixed(0)}</span>
+                    <div className="astro-difficulty">
+                      {isNakedEye(t, settings.bortle)
+                        ? <span className="astro-tag" style={{ "--tag": heat(1, 1) } as CSSProperties}>Naked Eye</span>
+                        : <span className="astro-tag" style={{ "--tag": heat(difficulty(row.score).level, 1) } as CSSProperties}>{difficulty(row.score).label}</span>}
+                    </div>
+                    <div className="astro-scorebar">
+                      <span className="astro-bar" style={{ width: `${row.score}%`, background: heat(row.score / 100, 0.45) }} />
+                      <span className="astro-score-text">{row.score.toFixed(0)}</span>
+                    </div>
                   </td>
                   {afterScore.map((c) => (
                     <td key={c.id}>{c.cell(row, settings)}</td>

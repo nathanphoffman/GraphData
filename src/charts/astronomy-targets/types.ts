@@ -19,6 +19,8 @@ export interface Target {
   brightStar?: number;
   /** My judgment, in percentage points, of how much better (+) or worse (-) the target looks in the eyepiece preview than its score suggests. */
   simAdjust?: number;
+  /** The author's own field-experience adjustment, in score points. Missing = not rated yet (counts as 0). */
+  authorAdjust?: number;
   /** Season when it is highest around midnight. "any" for planets, which are scored over the whole year. */
   bestSeason: Season | "any";
   /** Planets only: ra and dec are ignored, and its position is averaged over where it can be in the sky. */
@@ -59,6 +61,8 @@ export interface Settings {
   bortle: number;
   /** How much of each target's simulator adjustment is added to its score, 0-100 (percent). */
   simWeight: number;
+  /** How much of each target's author adjustment is added to its score, 0-100 (percent). */
+  authorWeight: number;
   /** Preview only: optical quality, 0 (poor) to 100 (excellent). 50 is an average telescope. */
   opticalQuality: number;
 }
