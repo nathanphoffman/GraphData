@@ -37,14 +37,14 @@ export const APERTURES: Record<Aperture, { label: string; mm: number }> = {
 };
 
 export const DEFAULT_SETTINGS: Settings = {
-  latitude: 40,
+  latitude: 40.2,
   focalLength: "medium",
   aperture: "medium",
   manual: false,
   preset: "ed80cf",
   scopeFocalMm: 900,
   apertureIn: 5,
-  eyepieceMm: 25,
+  eyepieceMm: 32,
   eyepieceAfov: 52,
   bortle: 4,
   simWeight: 50,

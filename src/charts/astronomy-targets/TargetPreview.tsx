@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import type { ScoredTarget, Settings, Target, TargetDetails } from "./types";
 import details from "../../../data/astronomy-target-details.json";
 import { difficulty, effectiveQuality, formatHour, formatSize, isNakedEye, previewOptics, surfaceBrightness, viewConditions } from "./calculate";
 import { TARGET_IMAGES, type TargetImage } from "./images";
+import { guideStarsFor } from "./guideStars";
+import { FindingChart, GuideList } from "./FindingChart";
 
 const VIEW_SIZE = 280;
 const SCALE = 2;
@@ -306,15 +308,23 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     return () => cancelAnimationFrame(frame);
   }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved, effectiveQuality(settings)]);
 
-  const width = VIEW_SIZE * 2 + 340 + 80;
-  const height = VIEW_SIZE + 190;
-  const left = Math.min(x + 16, window.innerWidth - width - 8);
-  const top = Math.min(y + 16, window.innerHeight - height);
+  // Measure the real box so it can be moved fully on screen: beside the cursor, flipped to its left or lifted up when it would overflow.
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [box, setBox] = useState({ w: 700, h: VIEW_SIZE + 190 });
+  useLayoutEffect(() => {
+    const el = boxRef.current;
+    if (el && (el.offsetWidth !== box.w || el.offsetHeight !== box.h)) setBox({ w: el.offsetWidth, h: el.offsetHeight });
+  });
+  const GAP = 16;
+  const EDGE = 8;
+  const left = x + GAP + box.w > window.innerWidth - EDGE ? x - GAP - box.w : x + GAP;
+  const top = Math.min(y + GAP, window.innerHeight - EDGE - box.h);
 
   const { tiles, notes, extra } = previewStats(row);
+  const guideStars = guideStarsFor(row.target);
 
   return (
-    <div className="astro-preview" style={{ left: Math.max(8, left), top: Math.max(8, top) }}>
+    <div ref={boxRef} className="astro-preview" style={{ left: Math.max(EDGE, left), top: Math.max(EDGE, top) }}>
       <PreviewHead row={row} settings={settings} />
       <dl className="astro-stats">
         {tiles.map(([label, value]) => (
@@ -350,10 +360,21 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
             {notes.length > 0 && <ul>{notes.map((n) => <li key={n.label}><strong>{n.label}:</strong> {n.value}</li>)}</ul>}
             <h5>How to find it</h5>
             <p>{extra.howToFind}</p>
+            {guideStars.length > 0 && (
+              <>
+                <h5>Triangulate from bright stars</h5>
+                <GuideList stars={guideStars} />
+              </>
+            )}
             <small>A fist held at arm's length is about 10°, three fingers about 5°, your thumb about 2°.</small>
           </>
         )}
       </div>
+      {guideStars.length > 0 && (
+        <div className="astro-text">
+          <FindingChart stars={guideStars} target={row.target} />
+        </div>
+      )}
       <small>{info.credit}</small>
     </div>
   );
