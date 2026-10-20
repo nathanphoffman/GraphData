@@ -3,6 +3,23 @@ import dc from "./images/dc.jpg";
 import m31 from "./images/m31.jpg";
 import m81 from "./images/m81.jpg";
 import mel20 from "./images/mel20.jpg";
+import img_cr_399 from "./images/cr_399.jpg";
+import img_stock_2 from "./images/stock_2.jpg";
+import img_ic_4665 from "./images/ic_4665.jpg";
+import img_ngc_2232 from "./images/ngc_2232.jpg";
+import img_m39 from "./images/m39.jpg";
+import img_mel_111 from "./images/mel_111.jpg";
+import img_ngc_2264 from "./images/ngc_2264.jpg";
+import img_m34 from "./images/m34.jpg";
+import img_ic_4756 from "./images/ic_4756.jpg";
+import img_ngc_457 from "./images/ngc_457.jpg";
+import img_ngc_752 from "./images/ngc_752.jpg";
+import img_m35 from "./images/m35.jpg";
+import img_mel_25 from "./images/mel_25.jpg";
+import img_ngc_6633 from "./images/ngc_6633.jpg";
+import img_ngc_1647 from "./images/ngc_1647.jpg";
+import img_ic_405 from "./images/ic_405.jpg";
+import moon from "./images/moon.jpg";
 
 export interface TargetImage {
   src: string;
@@ -16,6 +33,9 @@ export interface TargetImage {
    */
   footprint?: { cx: number; cy: number; angleDeg: number };
 }
+
+const DSS_CREDIT = "Digitized Sky Survey 2 (STScI/NASA, Palomar/ESO/UK Schmidt), via CDS hips2fits";
+const CENTRED = { cx: 0.5, cy: 0.5, angleDeg: 0 };
 
 /** Photos by target id. Public-domain images from Wikimedia Commons. */
 export const TARGET_IMAGES: Record<string, TargetImage> = {
@@ -60,5 +80,109 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     widthArcmin: 62.5,
     credit: "Robert Gendler, NASA, ESA (public domain)",
     footprint: { cx: 0.169, cy: 0.578, angleDeg: -63 },
+  },
+  // Moon: the disc is about 1580 px across at 1920 px wide, and the Moon averages 31 arcminutes.
+  Moon: {
+    src: moon,
+    widthArcmin: 37.7,
+    credit: "Gregory H. Revera, CC BY-SA 3.0 (Wikimedia Commons)",
+    footprint: { cx: 0.5, cy: 0.5, angleDeg: 0 },
+  },
+  // The rest are Digitized Sky Survey cutouts centred on the target, so their width is exact.
+  "Cr 399": {
+    src: img_cr_399,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Stock 2": {
+    src: img_stock_2,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 4665": {
+    src: img_ic_4665,
+    widthArcmin: 210,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2232": {
+    src: img_ngc_2232,
+    widthArcmin: 300,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M39": {
+    src: img_m39,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Mel 111": {
+    src: img_mel_111,
+    widthArcmin: 480,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2264": {
+    src: img_ngc_2264,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M34": {
+    src: img_m34,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 4756": {
+    src: img_ic_4756,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 457": {
+    src: img_ngc_457,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 752": {
+    src: img_ngc_752,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M35": {
+    src: img_m35,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Mel 25": {
+    src: img_mel_25,
+    widthArcmin: 480,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 6633": {
+    src: img_ngc_6633,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 1647": {
+    src: img_ngc_1647,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 405": {
+    src: img_ic_405,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
   },
 };
