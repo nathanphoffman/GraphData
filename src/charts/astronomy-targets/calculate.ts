@@ -389,6 +389,14 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     .sort((a, b) => b.score - a.score);
 }
 
+/** Apparent size as text: "point", arcseconds under 1′, or arcminutes. */
+export function formatSize(major: number, minor: number): string {
+  if (major === 0) return "point";
+  if (major < 1) return `${Math.round(major * 60)}″`;
+  const fmt = (v: number) => (v >= 10 ? v.toFixed(0) : v.toFixed(1));
+  return major === minor ? `${fmt(major)}′` : `${fmt(major)}′ × ${fmt(minor)}′`;
+}
+
 /** 22 becomes "10 PM", 0 becomes "12 AM". */
 export const formatHour = (h: number) => `${h % 12 === 0 ? 12 : h % 12} ${h < 12 ? "AM" : "PM"}`;
 

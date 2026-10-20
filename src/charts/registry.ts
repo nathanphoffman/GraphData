@@ -9,6 +9,7 @@ import DndSales from "./dnd-sales/DndSales";
 import TinyMightyBestiary from "./tiny-mighty-bestiary/TinyMightyBestiary";
 import AllIntelligence from "./all-intelligence/AllIntelligence";
 import AstronomyTargets from "./astronomy-targets/AstronomyTargets";
+import WeightJourney from "./weight-journey/WeightJourney";
 
 /** Home page sections, in display order. */
 export const categories = ["Calculators", "Tabletop RPGs", "Tech & economics", "Science"] as const;
@@ -21,6 +22,8 @@ export interface ChartEntry {
   category: Category;
   description: string;
   component: ComponentType;
+  /** Not listed on the home page; only reachable by typing the URL. */
+  unlisted?: boolean;
 }
 
 /**
@@ -107,6 +110,14 @@ export const charts: ChartEntry[] = [
     description:
       "Popular northern hemisphere deep-sky targets ranked for a season and a time window, adjusted for your telescope's focal length and mirror or lens size.",
     component: AstronomyTargets,
+  },
+  {
+    id: "weight-journey",
+    title: "Weight Journey",
+    category: "Science",
+    description: "Personal daily weight table, gap-filled, with a trend curve and projection.",
+    component: WeightJourney,
+    unlisted: true,
   },
 ];
 

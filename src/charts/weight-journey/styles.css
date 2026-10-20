@@ -1,0 +1,126 @@
+/* Weight Journey */
+.weight-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.weight-stats div {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px 14px;
+  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-radius: 10px;
+}
+
+.weight-stats span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.weight-stats strong {
+  font-size: 22px;
+  color: var(--link);
+}
+
+.weight-ranges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.weight-ranges button,
+.weight-more {
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.weight-ranges button.active {
+  background: var(--link);
+  border-color: var(--link);
+  color: var(--bg);
+}
+
+.weight-chart {
+  width: 100%;
+  height: auto;
+}
+
+.weight-chart text {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.weight-chart .grid {
+  stroke: color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.weight-chart path {
+  fill: none;
+  stroke-linejoin: round;
+}
+
+.weight-chart .line-actual {
+  stroke: var(--link);
+  stroke-width: 1.5;
+}
+
+.weight-chart .dot {
+  fill: var(--link);
+}
+
+.weight-chart .line-fit {
+  stroke: #e8912d;
+  stroke-width: 2.5;
+}
+
+.weight-chart .line-future {
+  stroke: #e8912d;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+}
+
+.weight-legend .key {
+  display: inline-block;
+  width: 18px;
+  height: 0;
+  margin: 0 6px 3px 14px;
+  border-top: 3px solid var(--link);
+}
+
+.weight-legend .key:first-child {
+  margin-left: 0;
+}
+
+.weight-legend .key.fit {
+  border-color: #e8912d;
+}
+
+.weight-legend .key.future {
+  border-top: 3px dashed #e8912d;
+}
+
+.weight table {
+  width: 100%;
+  max-width: 460px;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.weight th,
+.weight td {
+  padding: 6px 12px;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.weight tr.estimated {
+  color: var(--muted);
+  font-style: italic;
+}

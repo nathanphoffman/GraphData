@@ -1,0 +1,3278 @@
+{
+ "M31": {
+  "distance": "2.5 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(s)b)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~220,000 light-years"
+   },
+   {
+    "label": "Stars",
+    "value": "~1 trillion"
+   },
+   {
+    "label": "Approaching",
+    "value": "Heading toward us at ~110 km/s; merger with the Milky Way in ~4-5 billion years"
+   }
+  ],
+  "about": "The nearest big galaxy and the most distant thing most people can see with the naked eye. Under dark skies it is wider than six full Moons, though binoculars and small scopes show mostly its bright core. Look for M32 and M110, its two brightest companions.",
+  "howToFind": "Find the Great Square of Pegasus. From its top-left star (Alpheratz), follow the line of stars in Andromeda to Mirach, turn toward Cassiopeia to Mu Andromedae, and go the same distance again. It is a fuzzy oval smudge, even visible to the naked eye in dark skies."
+ },
+ "M33": {
+  "distance": "2.7 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(s)cd)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~60,000 light-years"
+   },
+   {
+    "label": "Stars",
+    "value": "~40 billion"
+   },
+   {
+    "label": "Group",
+    "value": "Local Group, third largest member"
+   }
+  ],
+  "about": "A face-on spiral whose light is spread thinly, so it is a classic 'faint but big' target that needs dark skies and low power. Averted vision brings out its brighter core and sometimes a hint of spiral arms in larger scopes.",
+  "howToFind": "Look about halfway between Mirach (in Andromeda) and Alpha Trianguli, the brightest star of the small triangle below it. It is large and faint, so use the lowest power and a dark sky."
+ },
+ "M32": {
+  "distance": "2.5 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Compact elliptical galaxy (cE2)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~6,500 light-years"
+   },
+   {
+    "label": "Role",
+    "value": "Satellite of M31"
+   }
+  ],
+  "about": "A small, very dense companion of the Andromeda Galaxy, sitting just south of M31's core. It looks like a fuzzy star with a bright centre and is easy to find with the core of M31 as a guide.",
+  "howToFind": "Centre on the bright core of the Andromeda Galaxy (M31). M32 is the small, round, star-like fuzz just south (toward the bottom of the view in a typical eyepiece) of the core, hugging the edge of M31's glow."
+ },
+ "M110": {
+  "distance": "2.7 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Dwarf elliptical galaxy"
+   },
+   {
+    "label": "Diameter",
+    "value": "~17,000 light-years"
+   },
+   {
+    "label": "Role",
+    "value": "Satellite of M31"
+   }
+  ],
+  "about": "The other bright companion of the Andromeda Galaxy, lying northwest of M31. It is much lower in surface brightness than M32, so it is a subtle oval glow that needs dark skies.",
+  "howToFind": "Centre on the core of the Andromeda Galaxy (M31). M110 is a faint oval glow on the opposite side from M32, north-west of M31's core, about half a degree away. It needs a dark sky."
+ },
+ "M81": {
+  "distance": "12 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(s)ab)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~90,000 light-years"
+   },
+   {
+    "label": "Group",
+    "value": "M81 Group, with M82"
+   }
+  ],
+  "about": "A bright, grand-design spiral that a small scope shows as an oval glow with a brighter core. It shares a low-power field with the Cigar Galaxy (M82), so the pair is a favourite.",
+  "howToFind": "Find the Big Dipper. Draw a line from Phecda (bottom-left of the bowl) through Dubhe (top-right) and continue about the same distance again, roughly 10 degrees. M81 and M82 sit together there."
+ },
+ "M82": {
+  "distance": "12 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Starburst galaxy (I0)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~40,000 light-years"
+   },
+   {
+    "label": "Star formation",
+    "value": "Roughly 10x faster than the Milky Way"
+   }
+  ],
+  "about": "A thin, edge-on galaxy being stirred into a burst of star formation by a close pass of M81. It looks like a stretched streak of light, with dark dust lanes visible in larger scopes.",
+  "howToFind": "Find the Big Dipper. Draw a line from Phecda (bottom-left of the bowl) through Dubhe (top-right) and continue about the same distance again, roughly 10 degrees. M82 is the thin streak just north of the brighter M81."
+ },
+ "M66": {
+  "distance": "35 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Intermediate spiral (SAB(s)b)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~95,000 light-years"
+   },
+   {
+    "label": "Group",
+    "value": "Leo Triplet, with M65 and NGC 3628"
+   }
+  ],
+  "about": "The brightest member of the Leo Triplet, an oval glow with a bright core. It fits in the same field as M65 and NGC 3628 in a wide-field scope.",
+  "howToFind": "Find Denebola, the bright star at the tail of Leo. M66 is about 7 degrees west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M65": {
+  "distance": "35 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SAB(rs)a)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~100,000 light-years"
+   },
+   {
+    "label": "Group",
+    "value": "Leo Triplet, with M66 and NGC 3628"
+   }
+  ],
+  "about": "A tilted spiral, more elongated and slightly fainter than M66, in the same wide-field view. Its dust lane needs a big scope.",
+  "howToFind": "Find Denebola, the bright star at the tail of Leo. M65 is about 7 degrees west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M104": {
+  "distance": "29 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(s)a)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~50,000 light-years"
+   },
+   {
+    "label": "Feature",
+    "value": "Prominent dust lane, huge central bulge"
+   }
+  ],
+  "about": "The Sombrero is seen nearly edge-on with a bright bulge and a dark dust lane. Small scopes show an oval glow with a bright core; the dust lane appears in larger apertures with steady skies.",
+  "howToFind": "Find Algorab, a star in Corvus, the small kite of stars just south-west of Spica. M104 is about 5 degrees north-east of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M63": {
+  "distance": "27 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(rs)bc)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~100,000 light-years"
+   },
+   {
+    "label": "Group",
+    "value": "M51 Group"
+   }
+  ],
+  "about": "A bright oval core with a faint, diffuse halo. Photographs show a sunflower-like pattern of flocculent spiral arms, but visually it is a soft elongated glow.",
+  "howToFind": "Find Cor Caroli, the brightest star of Canes Venatici, which forms a triangle with Arcturus and the Big Dipper's handle. M63 is about 5 degrees north-east of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M51": {
+  "distance": "23 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(s)bc), interacting"
+   },
+   {
+    "label": "Diameter",
+    "value": "~76,000 light-years"
+   },
+   {
+    "label": "Companion",
+    "value": "NGC 5195, which it is interacting with"
+   }
+  ],
+  "about": "The Whirlpool is the first galaxy where spiral structure was seen. Visually it is two fuzzy patches, M51 and its companion NGC 5195, joined by a faint bridge in dark skies and larger scopes.",
+  "howToFind": "Find Alkaid, the end star of the Big Dipper's handle, and move about 3.5 degrees south-west (down and toward Cor Caroli). Look for a round fuzzy patch with a smaller one touching it."
+ },
+ "M101": {
+  "distance": "21 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SAB(rs)cd)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~170,000 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Large and face-on, so very low surface brightness"
+   }
+  ],
+  "about": "A huge, face-on spiral that looks very faint through an eyepiece because its light is spread over a large area. It is a good test of sky darkness and averted vision.",
+  "howToFind": "It forms a triangle with Mizar and Alkaid, the last two stars of the Big Dipper's handle. It is large and faint, so use a dark sky and low power."
+ },
+ "M64": {
+  "distance": "24 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(rs)ab)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~54,000 light-years"
+   },
+   {
+    "label": "Feature",
+    "value": "Dark dust lane in front of the core; the outer gas rotates backwards"
+   }
+  ],
+  "about": "The Black Eye Galaxy has a bright oval glow with a dark crescent of dust visible in medium scopes under good skies.",
+  "howToFind": "Find Vindemiatrix, the brightest star in Virgo's upraised arm, north-west of Spica. M64 is about 11 degrees north of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M94": {
+  "distance": "16 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(r)ab)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~50,000 light-years"
+   },
+   {
+    "label": "Feature",
+    "value": "Bright inner ring, outer ring faint"
+   }
+  ],
+  "about": "A compact galaxy with an unusually bright core and a faint halo. Small scopes see mostly the glowing centre.",
+  "howToFind": "Find Cor Caroli, the brightest star of Canes Venatici, which forms a triangle with Arcturus and the Big Dipper's handle. M94 is about 3 degrees north of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M106": {
+  "distance": "24 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SAB(s)bc)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~135,000 light-years"
+   },
+   {
+    "label": "Feature",
+    "value": "Active galactic nucleus, water maser"
+   }
+  ],
+  "about": "A large, relatively bright spiral that sits alone in a quiet part of the sky. The core is easy, the elongated halo needs darker skies.",
+  "howToFind": "Find Chara, the second-brightest star of Canes Venatici, just north-west of Cor Caroli. M106 is about 6 degrees north-west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "NGC 4565": {
+  "distance": "40 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Edge-on spiral galaxy (SA(s)b)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~140,000 light-years"
+   },
+   {
+    "label": "Feature",
+    "value": "Dust lane across a bulge"
+   }
+  ],
+  "about": "The Needle is a thin edge-on galaxy, one of the best of its kind. Through a scope it appears as a long, razor-thin streak with a brighter centre.",
+  "howToFind": "Find Cor Caroli, the brightest star of Canes Venatici, which forms a triangle with Arcturus and the Big Dipper's handle. NGC 4565 is about 13 degrees south of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M87": {
+  "distance": "53 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Giant elliptical galaxy (E+0-1)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~120,000 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Has a supermassive black hole, the first one imaged (2019)"
+   }
+  ],
+  "about": "The giant at the heart of the Virgo Cluster. It looks like a plain round glow with a brighter centre, but hosts a black hole about 6.5 billion times the Sun's mass.",
+  "howToFind": "Find Vindemiatrix, the brightest star in Virgo's upraised arm, north-west of Spica. M87 is about 8 degrees west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "NGC 891": {
+  "distance": "30 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Edge-on spiral galaxy (SA(s)b)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~100,000 light-years"
+   }
+  ],
+  "about": "A thin edge-on galaxy with a dark dust lane that bisects it. A challenge for small scopes, it needs a dark sky and averted vision.",
+  "howToFind": "Find Almach, the last bright star in that line of stars leading away from the Great Square of Pegasus. NGC 891 is about 3 degrees east of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "NGC 4631": {
+  "distance": "25 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SB(s)d)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~75,000 light-years"
+   },
+   {
+    "label": "Feature",
+    "value": "Distorted by interactions with nearby galaxies"
+   }
+  ],
+  "about": "The Whale Galaxy is a long, edge-on galaxy that looks like a streak of light, with a nearby companion, NGC 4627, forming its 'tail'.",
+  "howToFind": "Find Cor Caroli, the brightest star of Canes Venatici, which forms a triangle with Arcturus and the Big Dipper's handle. NGC 4631 is about 6 degrees south-west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M74": {
+  "distance": "32 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(s)c)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~95,000 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Face-on, famously low surface brightness"
+   }
+  ],
+  "about": "The Phantom Galaxy is a perfect face-on spiral that is very hard to see, because its light is spread so thin. It is often called one of the toughest Messier objects.",
+  "howToFind": "Find Hamal, the brightest star in Aries, between the Pleiades and the Great Square of Pegasus. M74 is about 11 degrees south-west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "NGC 253": {
+  "distance": "11 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Starburst spiral (SAB(s)c)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~90,000 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Nearest starburst galaxy"
+   }
+  ],
+  "about": "A big, elongated galaxy in the southern sky that reaches decent altitude only from low latitudes. It's a bright, spectacular object in dark skies.",
+  "howToFind": "Find Diphda, the brightest star in the dim sky south of the Great Square of Pegasus. NGC 253 is about 7 degrees south of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "NGC 7331": {
+  "distance": "45 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SA(s)b)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~130,000 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Often called a twin of the Milky Way"
+   }
+  ],
+  "about": "A tilted spiral that looks like a faint elongated glow. Nearby are the tiny Stephan's Quintet galaxies, which need a large scope.",
+  "howToFind": "Find Scheat, the top-right corner of the Great Square of Pegasus. NGC 7331 is about 9 degrees north-west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "NGC 6946": {
+  "distance": "22 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Spiral galaxy (SAB(rs)cd)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~40,000 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Has hosted 10 observed supernovae, giving it the Fireworks name"
+   }
+  ],
+  "about": "A nearly face-on galaxy sitting in a rich star field, so it appears as a faint glow that is easy to lose among the foreground stars.",
+  "howToFind": "Find Alderamin, the brightest star in Cepheus, a shape like a child's drawing of a house, east of Cassiopeia. NGC 6946 is about 6 degrees south-west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M108": {
+  "distance": "45 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Barred spiral (SB(s)cd)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~110,000 light-years"
+   }
+  ],
+  "about": "A long, thin, edge-on galaxy that is a challenge for small scopes. It lies near the Owl Nebula (M97).",
+  "howToFind": "Find Merak, the other 'pointer' star, at the bottom of the Big Dipper's bowl. M108 is about 1.5 degrees south-east of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M109": {
+  "distance": "83 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Barred spiral (SB(rs)bc)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~140,000 light-years"
+   }
+  ],
+  "about": "A faint barred spiral lying near the bright star Phecda in the Big Dipper, which makes it easy to find but hard to see.",
+  "howToFind": "Find Phecda, the bottom-left star of the Big Dipper's bowl, the one closest to the handle. M109 is about 0.6 degrees south-east of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M77": {
+  "distance": "47 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Seyfert galaxy (SA(rs)b)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~170,000 light-years"
+   },
+   {
+    "label": "Feature",
+    "value": "Active nucleus"
+   }
+  ],
+  "about": "A bright, compact core and a faint disk. It's one of the brightest Seyfert galaxies in the sky.",
+  "howToFind": "Find Menkar, the nose of Cetus the sea monster. M77 is about 6 degrees south-west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M49": {
+  "distance": "56 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Giant elliptical galaxy (E2)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~150,000 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Brightest galaxy of the Virgo Cluster"
+   }
+  ],
+  "about": "The first Virgo Cluster member found. It's a round glow that brightens toward the centre.",
+  "howToFind": "Find Vindemiatrix, the brightest star in Virgo's upraised arm, north-west of Spica. M49 is about 9 degrees west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M84": {
+  "distance": "55 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Lenticular galaxy (E1 / S0)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~90,000 light-years"
+   },
+   {
+    "label": "Group",
+    "value": "Markarian's Chain in the Virgo Cluster"
+   }
+  ],
+  "about": "A bright round galaxy at the heart of Markarian's Chain, which also includes M86.",
+  "howToFind": "Find Denebola, the bright star at the tail of Leo. M84 is about 9 degrees east of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M86": {
+  "distance": "52 million light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Lenticular galaxy (S0)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~100,000 light-years"
+   },
+   {
+    "label": "Group",
+    "value": "Markarian's Chain in the Virgo Cluster"
+   }
+  ],
+  "about": "A round, bright galaxy next to M84. They fit in the same eyepiece field and are the heart of Markarian's Chain.",
+  "howToFind": "Find Vindemiatrix, the brightest star in Virgo's upraised arm, north-west of Spica. M86 is about 9 degrees west of it. Use your lowest power, let your eyes adjust for a few minutes, and look slightly to the side of it so it appears."
+ },
+ "M3": {
+  "distance": "34,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class VI)"
+   },
+   {
+    "label": "Stars",
+    "value": "~500,000"
+   },
+   {
+    "label": "Age",
+    "value": "~11.4 billion years"
+   },
+   {
+    "label": "Diameter",
+    "value": "~180 light-years"
+   }
+  ],
+  "about": "A big, bright, round ball of stars. Small scopes show a fuzzy glow with a bright centre; larger scopes begin to resolve the outer stars.",
+  "howToFind": "Look about halfway between Arcturus and Cor Caroli. It looks like a fuzzy star in binoculars."
+ },
+ "M5": {
+  "distance": "24,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class V)"
+   },
+   {
+    "label": "Stars",
+    "value": "~100,000s"
+   },
+   {
+    "label": "Age",
+    "value": "~13 billion years"
+   },
+   {
+    "label": "Diameter",
+    "value": "~165 light-years"
+   }
+  ],
+  "about": "One of the finest globulars. It is bright and obvious even in small scopes, and it has a lovely pair of stars nearby (5 Serpentis).",
+  "howToFind": "Start at Unukalhai (Serpens) and move about 6 degrees south-west. The star 5 Serpentis sits right next to the cluster."
+ },
+ "M4": {
+  "distance": "7,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class IX)"
+   },
+   {
+    "label": "Age",
+    "value": "~12.2 billion years"
+   },
+   {
+    "label": "Notable",
+    "value": "One of the nearest globulars; contains a white dwarf and a pulsar"
+   }
+  ],
+  "about": "Near the red supergiant Antares. It's loose, large and its stars resolve easily, but its low altitude from mid-northern latitudes makes it dimmer than it should be.",
+  "howToFind": "It is the easiest of all: M4 is about 1.3 degrees west of Antares, the red heart of Scorpius."
+ },
+ "M13": {
+  "distance": "22,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class V)"
+   },
+   {
+    "label": "Stars",
+    "value": "~300,000"
+   },
+   {
+    "label": "Age",
+    "value": "~11.65 billion years"
+   },
+   {
+    "label": "Diameter",
+    "value": "~145 light-years"
+   }
+  ],
+  "about": "The Great Hercules Cluster, the northern sky's best-known globular. A small scope shows a bright fuzzy ball, and a 6-inch begins to speckle with stars. In 1974 a radio message was sent toward it.",
+  "howToFind": "Find the Keystone, the box of four stars in Hercules, about a third of the way from Vega to Arcturus. M13 sits on the west side of the box, about one third of the way from Eta to Zeta Herculis. It is visible as a faint fuzzy star in binoculars."
+ },
+ "M92": {
+  "distance": "26,700 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class IV)"
+   },
+   {
+    "label": "Age",
+    "value": "~14 billion years"
+   },
+   {
+    "label": "Notable",
+    "value": "One of the oldest known globulars"
+   }
+  ],
+  "about": "A little smaller than M13 but just as dense, and easily overlooked because of its famous neighbour in Hercules.",
+  "howToFind": "Find M13 in the Keystone of Hercules, then move about 9 degrees north-north-east. It forms a triangle with Iota and Eta Herculis."
+ },
+ "M22": {
+  "distance": "10,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class VII)"
+   },
+   {
+    "label": "Age",
+    "value": "~12 billion years"
+   },
+   {
+    "label": "Notable",
+    "value": "Contains a planetary nebula and black-hole candidates"
+   }
+  ],
+  "about": "One of the closest, brightest globulars. It's low in northern skies, but from a clear southern horizon it's spectacular.",
+  "howToFind": "Find the Teapot of Sagittarius. M22 is about 2.5 degrees north-east of Kaus Borealis, the top star of the Teapot's lid."
+ },
+ "M15": {
+  "distance": "33,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class IV)"
+   },
+   {
+    "label": "Age",
+    "value": "~12 billion years"
+   },
+   {
+    "label": "Notable",
+    "value": "Very dense core; a planetary nebula (Pease 1) lies within"
+   }
+  ],
+  "about": "A tightly packed globular whose core is hard to resolve. It's bright and compact, an easy find near the star Enif.",
+  "howToFind": "Find Enif, the nose of Pegasus. M15 is about 4 degrees north-west of it, a fuzzy star in binoculars."
+ },
+ "M2": {
+  "distance": "37,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class II)"
+   },
+   {
+    "label": "Age",
+    "value": "~13 billion years"
+   },
+   {
+    "label": "Stars",
+    "value": "~150,000"
+   }
+  ],
+  "about": "A rich, dense, round globular in Aquarius, bright and compact in a small scope but not resolved in small apertures.",
+  "howToFind": "Find Sadalsuud (Beta Aquarii) and go about 5 degrees north."
+ },
+ "M12": {
+  "distance": "15,700 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class IX)"
+   },
+   {
+    "label": "Age",
+    "value": "~12.5 billion years"
+   }
+  ],
+  "about": "A loose, easily-resolved globular, sitting a few degrees from M10. It has a less compressed core than most, so it looks mottled in medium scopes.",
+  "howToFind": "Find Unukalhai, the brightest star of Serpens' head, about two fists south of the Northern Crown. M12 is about 18 degrees south-east of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M10": {
+  "distance": "14,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class VII)"
+   },
+   {
+    "label": "Age",
+    "value": "~11.4 billion years"
+   }
+  ],
+  "about": "A bright globular in Ophiuchus that makes a nice pair with M12 in wide fields.",
+  "howToFind": "Find Rasalhague, the star at Ophiuchus's head, about 15 degrees west of Altair. M10 is about 19 degrees south-west of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M14": {
+  "distance": "30,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class VIII)"
+   },
+   {
+    "label": "Age",
+    "value": "~13 billion years"
+   }
+  ],
+  "about": "A fairly faint globular, noticeably dimmer than M10 and M12, which sit nearby in the same constellation.",
+  "howToFind": "Find Rasalhague, the star at Ophiuchus's head, about 15 degrees west of Altair. M14 is about 16 degrees south of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M19": {
+  "distance": "28,700 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class VIII)"
+   },
+   {
+    "label": "Notable",
+    "value": "One of the most oblate (flattened) globulars"
+   }
+  ],
+  "about": "An oval-shaped globular, an easy find near the heart of the Milky Way. It is low in northern skies.",
+  "howToFind": "Find Antares, the bright red heart of Scorpius. M19 is about 7 degrees east of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M9": {
+  "distance": "25,800 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class VIII)"
+   },
+   {
+    "label": "Notable",
+    "value": "Lies near the galactic centre"
+   }
+  ],
+  "about": "A small, compact globular close to the centre of the Milky Way. It's easy to find but low from mid-northern latitudes.",
+  "howToFind": "Find Antares, the bright red heart of Scorpius. M9 is about 14 degrees north-east of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M80": {
+  "distance": "32,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class II)"
+   },
+   {
+    "label": "Notable",
+    "value": "One of the densest globulars in the Milky Way"
+   }
+  ],
+  "about": "A dense, bright globular between Antares and Beta Scorpii. It's one of the more compact ones, so it shows a bright core.",
+  "howToFind": "Find Dschubba, the brightest of the three stars that form Scorpius's head, above Antares. M80 is about 4 degrees east of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M55": {
+  "distance": "17,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class XI)"
+   },
+   {
+    "label": "Notable",
+    "value": "A very loose, sparse globular"
+   }
+  ],
+  "about": "A large, sparse globular in Sagittarius whose stars resolve in medium scopes. It's low in northern skies.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M55 is about 17 degrees east of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M54": {
+  "distance": "87,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class III)"
+   },
+   {
+    "label": "Notable",
+    "value": "Actually belongs to the Sagittarius Dwarf Galaxy, not the Milky Way"
+   }
+  ],
+  "about": "One of the most distant globulars in Messier's list. It's a bright, compact core that looks like a fuzzy star.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M54 is about 8 degrees south-east of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M53": {
+  "distance": "58,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class V)"
+   },
+   {
+    "label": "Notable",
+    "value": "Among the farthest globulars in the Messier list"
+   }
+  ],
+  "about": "A compact, round globular near the star Alpha Comae Berenices, found by star-hopping.",
+  "howToFind": "Find Vindemiatrix, the brightest star in Virgo's upraised arm, north-west of Spica. M53 is about 8 degrees north of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M28": {
+  "distance": "18,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class IV)"
+   },
+   {
+    "label": "Notable",
+    "value": "Hosts a millisecond pulsar"
+   }
+  ],
+  "about": "A bright, compact globular near the Lagoon Nebula and the Teapot's spout.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M28 is about 0.9 degrees north-west of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M30": {
+  "distance": "27,100 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class V)"
+   },
+   {
+    "label": "Notable",
+    "value": "Has a core-collapsed centre"
+   }
+  ],
+  "about": "A compact globular in Capricornus with a bright core. It's low from northern skies.",
+  "howToFind": "Find Sadalsuud, the brightest star in Aquarius, in the dim stretch of sky south of Pegasus. M30 is about 18 degrees south of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M56": {
+  "distance": "32,900 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class X)"
+   },
+   {
+    "label": "Notable",
+    "value": "Sits in a rich Milky Way star field"
+   }
+  ],
+  "about": "A faint, small globular sitting between Albireo and Gamma Lyrae.",
+  "howToFind": "Find Albireo, the star at the head of Cygnus the Swan. M56 is about 4 degrees north-west of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M71": {
+  "distance": "12,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Globular cluster (Class X)"
+   },
+   {
+    "label": "Notable",
+    "value": "Sparse; was once classified as an open cluster"
+   }
+  ],
+  "about": "A loose, faint globular in Sagitta. It's rich in field stars and hard to tell from an open cluster.",
+  "howToFind": "Find Altair, the bright star at the south corner of the Summer Triangle, with a fainter star on each side. M71 is about 10 degrees north of it. It looks like a fuzzy star at first. Use medium power to see it as a round, grainy ball."
+ },
+ "M45": {
+  "distance": "444 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~1,000 (6-9 visible to the naked eye)"
+   },
+   {
+    "label": "Age",
+    "value": "~100 million years"
+   },
+   {
+    "label": "Colour",
+    "value": "Hot blue stars with a faint reflection nebula"
+   }
+  ],
+  "about": "The Pleiades, or Seven Sisters, is the most famous star cluster in the sky and visible to the naked eye from even bright cities. It looks best in binoculars or at the lowest power in a scope.",
+  "howToFind": "No tools needed: look for a tiny dipper-shaped group of stars about 12 degrees (a fist) north-west of Aldebaran, in Taurus. Binoculars show hundreds of stars."
+ },
+ "Mel 20": {
+  "distance": "570 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster (Alpha Persei Moving Group)"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~50 million years"
+   },
+   {
+    "label": "Brightest",
+    "value": "Mirfak (Alpha Persei)"
+   }
+  ],
+  "about": "A very large, sparse, bright cluster surrounding Mirfak. It's too big for most scopes but great in binoculars.",
+  "howToFind": "Find Mirfak, the brightest star in Perseus, in the curved line of stars between Cassiopeia and the Pleiades. Mel 20 is about 0.4 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 869/884": {
+  "distance": "7,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Two open clusters (h and Chi Persei)"
+   },
+   {
+    "label": "Stars",
+    "value": "~300 each"
+   },
+   {
+    "label": "Age",
+    "value": "~13 million years"
+   },
+   {
+    "label": "Brightest",
+    "value": "Red and blue supergiants"
+   }
+  ],
+  "about": "The Double Cluster is one of the most beautiful star groups in the sky. Visible to the naked eye as a hazy patch, it looks best at low power where both clusters fit in the field.",
+  "howToFind": "Find Cassiopeia's W and Perseus. The Double Cluster lies midway between them as a fuzzy patch you can see with the naked eye in dark skies. Binoculars or low power show two bright clusters side by side."
+ },
+ "Cr 399": {
+  "distance": "~420 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Asterism (a chance alignment of stars)"
+   },
+   {
+    "label": "Stars",
+    "value": "~10 bright"
+   }
+  ],
+  "about": "Brocchi's Cluster, the Coathanger, is a chance alignment of stars that looks like an upside-down coat hanger. It's too big for most telescopes but ideal for binoculars.",
+  "howToFind": "Look halfway between Vega and Altair for a line of six stars with a hook, like a coat hanger hung upside down. Binoculars show it best."
+ },
+ "M44": {
+  "distance": "~600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~1,000"
+   },
+   {
+    "label": "Age",
+    "value": "~600 million years"
+   }
+  ],
+  "about": "The Beehive, also called Praesepe, is a naked-eye cluster in Cancer that Galileo first resolved into stars. It's best in binoculars or a wide-field scope.",
+  "howToFind": "In a dark sky it looks like a fuzzy patch with the naked eye, halfway between Pollux (in Gemini) and Regulus (in Leo), in the dim constellation Cancer. Binoculars show it as a swarm of stars."
+ },
+ "Mel 111": {
+  "distance": "~280 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~50"
+   },
+   {
+    "label": "Age",
+    "value": "~450 million years"
+   }
+  ],
+  "about": "The Coma Star Cluster is a huge, sparse cluster of stars that is visible to the naked eye in dark skies. It's very close and spans over 4 degrees, so it's a binocular target.",
+  "howToFind": "Find Cor Caroli, the brightest star of Canes Venatici, which forms a triangle with Arcturus and the Big Dipper's handle. Mel 111 is about 14 degrees south-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "Mel 25": {
+  "distance": "~153 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~300"
+   },
+   {
+    "label": "Age",
+    "value": "~625 million years"
+   },
+   {
+    "label": "Notable",
+    "value": "Nearest open cluster to the Sun"
+   }
+  ],
+  "about": "The Hyades is the V-shaped head of Taurus the Bull. Aldebaran is not a member, just along the line of sight.",
+  "howToFind": "Find Aldebaran, the orange eye of Taurus. The Hyades is the large V of stars it appears to sit in. Binoculars are best."
+ },
+ "M34": {
+  "distance": "~1,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~250 million years"
+   }
+  ],
+  "about": "A bright, loose cluster in Perseus that is visible to the naked eye in dark skies, and is rich in binoculars.",
+  "howToFind": "Find Algol, the 'Demon Star' in Perseus, south of Mirfak. M34 is about 5 degrees west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M35": {
+  "distance": "~2,800 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~2,000"
+   },
+   {
+    "label": "Age",
+    "value": "~150 million years"
+   }
+  ],
+  "about": "A big, rich cluster at the foot of Gemini. It has a fainter, more distant neighbour, NGC 2158, in the same eyepiece.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. M35 is about 10 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M36": {
+  "distance": "~4,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~60"
+   },
+   {
+    "label": "Age",
+    "value": "~25 million years"
+   }
+  ],
+  "about": "One of the three bright Auriga clusters, along with M37 and M38. It's a compact, young group.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. M36 is about 6 degrees north of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M37": {
+  "distance": "~4,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~500"
+   },
+   {
+    "label": "Age",
+    "value": "~500 million years"
+   }
+  ],
+  "about": "The brightest and richest of the Auriga trio, packed with stars like salt and pepper. It's a hazy glow in binoculars and a sparkle in a scope.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. M37 is about 7 degrees north-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M38": {
+  "distance": "~4,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~290 million years"
+   }
+  ],
+  "about": "A loose cluster in a pi shape or starfish pattern. A faint companion, NGC 1907, is nearby.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. M38 is about 7 degrees north of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M39": {
+  "distance": "~1,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~30"
+   },
+   {
+    "label": "Age",
+    "value": "~300 million years"
+   }
+  ],
+  "about": "A large, sparse cluster in Cygnus. It's best at low power or in binoculars, where it forms a triangle of stars.",
+  "howToFind": "Find Deneb, the star at the tail of Cygnus, at the top of the Summer Triangle. M39 is about 9 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M41": {
+  "distance": "~2,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~190 million years"
+   }
+  ],
+  "about": "A bright cluster less than 5 degrees below Sirius, easily found in binoculars. It has a few orange giants.",
+  "howToFind": "Find Sirius, the brightest star in the whole sky, below and to the left of Orion's Belt. M41 is about 4 degrees south of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M46": {
+  "distance": "~5,400 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~500"
+   },
+   {
+    "label": "Age",
+    "value": "~300 million years"
+   },
+   {
+    "label": "Notable",
+    "value": "Contains a planetary nebula, NGC 2438"
+   }
+  ],
+  "about": "A dense, rich cluster in Puppis. The planetary nebula is a foreground object that appears inside it.",
+  "howToFind": "Find Sirius, the brightest star in the whole sky, below and to the left of Orion's Belt. M46 is about 14 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M47": {
+  "distance": "~1,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~50"
+   },
+   {
+    "label": "Age",
+    "value": "~78 million years"
+   }
+  ],
+  "about": "A bright, loose cluster in Puppis visible to the naked eye in dark skies. It sits next to the richer M46.",
+  "howToFind": "Find Sirius, the brightest star in the whole sky, below and to the left of Orion's Belt. M47 is about 13 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M48": {
+  "distance": "~1,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~80"
+   },
+   {
+    "label": "Age",
+    "value": "~300 million years"
+   }
+  ],
+  "about": "A big, sparse cluster in Hydra, bright in binoculars and a good low-power target.",
+  "howToFind": "Find Procyon, the bright star to the lower left of Orion, which forms a triangle with Betelgeuse and Sirius. M48 is about 14 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M50": {
+  "distance": "~3,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~200"
+   },
+   {
+    "label": "Age",
+    "value": "~130 million years"
+   }
+  ],
+  "about": "A heart-shaped cluster in Monoceros. It's easy to find halfway between Sirius and Procyon.",
+  "howToFind": "Find Sirius, the brightest star in the whole sky, below and to the left of Orion's Belt. M50 is about 9 degrees north-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M52": {
+  "distance": "~5,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~35 million years"
+   }
+  ],
+  "about": "A rich, compact cluster in Cassiopeia, easily found by extending a line through Alpha and Beta Cassiopeiae. It lies near the Bubble Nebula.",
+  "howToFind": "Find Caph, the star at the end of Cassiopeia's W that is nearest Andromeda. M52 is about 6 degrees north-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M67": {
+  "distance": "~2,700 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~500"
+   },
+   {
+    "label": "Age",
+    "value": "~4 billion years"
+   },
+   {
+    "label": "Notable",
+    "value": "One of the oldest known open clusters"
+   }
+  ],
+  "about": "An old, rich cluster in Cancer that has survived far longer than most. It's a hazy patch in binoculars and a mass of faint stars in a telescope.",
+  "howToFind": "Find Regulus, the bright star at the bottom of Leo's backwards question mark. M67 is about 19 degrees west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M93": {
+  "distance": "~3,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~80"
+   },
+   {
+    "label": "Age",
+    "value": "~380 million years"
+   }
+  ],
+  "about": "A compact, triangular cluster in Puppis, easy to find with binoculars.",
+  "howToFind": "Find Sirius, the brightest star in the whole sky, below and to the left of Orion's Belt. M93 is about 16 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M103": {
+  "distance": "~8,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~25"
+   },
+   {
+    "label": "Age",
+    "value": "~25 million years"
+   }
+  ],
+  "about": "A tiny cluster at the end of Cassiopeia, close to Delta Cassiopeiae. A scope shows a triangle of brighter stars.",
+  "howToFind": "Find Segin, the star at the far end of Cassiopeia's W. M103 is about 4 degrees south-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M6": {
+  "distance": "~1,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~80"
+   },
+   {
+    "label": "Age",
+    "value": "~100 million years"
+   }
+  ],
+  "about": "The Butterfly Cluster is a naked-eye cluster in Scorpius shaped like a butterfly's wings. It's low in northern skies.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M6 is about 12 degrees south-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M7": {
+  "distance": "~980 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~80"
+   },
+   {
+    "label": "Age",
+    "value": "~220 million years"
+   }
+  ],
+  "about": "Ptolemy's Cluster is a bright, naked-eye cluster in the tail of Scorpius, known since antiquity. It's low from northern latitudes.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M7 is about 12 degrees south-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M11": {
+  "distance": "~6,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~2,900"
+   },
+   {
+    "label": "Age",
+    "value": "~250 million years"
+   }
+  ],
+  "about": "The Wild Duck Cluster is one of the richest, most compact open clusters. Its stars form a V like a flock of ducks.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M11 is about 20 degrees north of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M18": {
+  "distance": "~4,900 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~20"
+   },
+   {
+    "label": "Notable",
+    "value": "Sits in the Sagittarius star clouds"
+   }
+  ],
+  "about": "A small, sparse cluster between M17 and M24. It can be hard to tell from the star background.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M18 is about 9 degrees north of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M21": {
+  "distance": "~4,250 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~60"
+   },
+   {
+    "label": "Age",
+    "value": "~5 million years"
+   }
+  ],
+  "about": "A young cluster just northeast of the Trifid Nebula. It's an easy partner to M20 in a low-power view.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M21 is about 6 degrees north-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M23": {
+  "distance": "~2,150 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~150"
+   },
+   {
+    "label": "Age",
+    "value": "~220 million years"
+   }
+  ],
+  "about": "A big, rich cluster that lies near the Teapot's spout and is easy in binoculars.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M23 is about 10 degrees north-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M24": {
+  "distance": "~10,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Star cloud"
+   },
+   {
+    "label": "Size",
+    "value": "About 90 arcminutes by 35"
+   }
+  ],
+  "about": "The Sagittarius Star Cloud is a bright patch of the Milky Way. It's not a cluster but a gap in the dust that shows the dense stars beyond, a spectacular sight in binoculars.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M24 is about 7 degrees north of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M25": {
+  "distance": "~2,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~600"
+   },
+   {
+    "label": "Age",
+    "value": "~90 million years"
+   },
+   {
+    "label": "Notable",
+    "value": "Contains a Cepheid variable, U Sagittarii"
+   }
+  ],
+  "about": "A bright, scattered cluster in Sagittarius. It's visible to the naked eye in dark skies.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M25 is about 6 degrees north of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M26": {
+  "distance": "~5,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~25"
+   }
+  ],
+  "about": "A small, faint cluster in Scutum, found next to the Wild Duck Cluster (M11).",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M26 is about 17 degrees north of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M29": {
+  "distance": "~4,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~50"
+   }
+  ],
+  "about": "The Cooling Tower is a small, tight group of stars in Cygnus, found near Sadr.",
+  "howToFind": "Find Sadr, the star at the centre of the Northern Cross in Cygnus. M29 is about 1.8 degrees south of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 457": {
+  "distance": "~7,900 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~80"
+   },
+   {
+    "label": "Age",
+    "value": "~21 million years"
+   },
+   {
+    "label": "Brightest",
+    "value": "Phi Cassiopeiae, a yellow supergiant"
+   }
+  ],
+  "about": "The Owl or ET Cluster has two bright stars that look like eyes. It's one of the nicest clusters in Cassiopeia.",
+  "howToFind": "Find Schedar, the brightest star in the W of Cassiopeia. NGC 457 is about 5 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 663": {
+  "distance": "~8,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~400"
+   },
+   {
+    "label": "Age",
+    "value": "~25 million years"
+   }
+  ],
+  "about": "A rich cluster in Cassiopeia, easily found in the Cassiopeia clusters hop.",
+  "howToFind": "Find Segin, the star at the far end of Cassiopeia's W. NGC 663 is about 3 degrees south of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 129": {
+  "distance": "~5,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~35"
+   }
+  ],
+  "about": "A loose group in Cassiopeia best at low power.",
+  "howToFind": "Find Caph, the star at the end of Cassiopeia's W that is nearest Andromeda. NGC 129 is about 3 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 225": {
+  "distance": "~2,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~25"
+   }
+  ],
+  "about": "The Sailboat Cluster is a sparse group of stars in Cassiopeia, near Gamma Cassiopeiae.",
+  "howToFind": "Find Caph, the star at the end of Cassiopeia's W that is nearest Andromeda. NGC 225 is about 5 degrees north-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 752": {
+  "distance": "~1,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~1.5 billion years"
+   }
+  ],
+  "about": "A big, sparse, old cluster in Andromeda. It's best seen in binoculars or a wide-field scope.",
+  "howToFind": "Find Almach, the last bright star in that line of stars leading away from the Great Square of Pegasus. NGC 752 is about 5 degrees south of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 1502": {
+  "distance": "~3,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~45"
+   },
+   {
+    "label": "Notable",
+    "value": "Starts Kemble's Cascade, a line of stars"
+   }
+  ],
+  "about": "A tight cluster in Camelopardalis, at the head of the long star chain called Kemble's Cascade.",
+  "howToFind": "Find Mirfak, the brightest star in Perseus, in the curved line of stars between Cassiopeia and the Pleiades. NGC 1502 is about 14 degrees north-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 1647": {
+  "distance": "~1,800 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~200"
+   },
+   {
+    "label": "Age",
+    "value": "~150 million years"
+   }
+  ],
+  "about": "A big, sparse cluster in Taurus, near the Hyades. It's best in binoculars.",
+  "howToFind": "Find Aldebaran, the bright orange eye of Taurus the Bull, which you reach by following Orion's Belt up and to the right. NGC 1647 is about 4 degrees north-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 2129": {
+  "distance": "~7,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~20"
+   }
+  ],
+  "about": "A sparse young cluster in Gemini.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. NGC 2129 is about 9 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 2169": {
+  "distance": "~3,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~30"
+   },
+   {
+    "label": "Feature",
+    "value": "Looks like a '37' or a chevron"
+   }
+  ],
+  "about": "A small cluster in Orion with a distinctive '37' shape, near Xi Orionis.",
+  "howToFind": "Find Betelgeuse, the bright orange-red star at Orion's shoulder. NGC 2169 is about 7 degrees north-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 2232": {
+  "distance": "~1,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~20 bright"
+   }
+  ],
+  "about": "A loose, large cluster in Monoceros that is visible in binoculars.",
+  "howToFind": "Find Alnitak, the star at the left end of Orion's Belt (when facing south). NGC 2232 is about 12 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 2264": {
+  "distance": "~2,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster with nebulosity"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~3 million years"
+   },
+   {
+    "label": "Feature",
+    "value": "Cone Nebula and Fox Fur Nebula"
+   }
+  ],
+  "about": "The Christmas Tree Cluster is a young cluster; the star pattern looks like a tree. The Cone Nebula is a dark-dust and glowing-gas formation at its southern tip.",
+  "howToFind": "Find Betelgeuse, the bright orange-red star at Orion's shoulder. NGC 2264 is about 12 degrees east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 2301": {
+  "distance": "~2,800 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~100"
+   },
+   {
+    "label": "Age",
+    "value": "~200 million years"
+   }
+  ],
+  "about": "A loose cluster with chains of stars, in Monoceros.",
+  "howToFind": "Find Procyon, the bright star to the lower left of Orion, which forms a triangle with Betelgeuse and Sirius. NGC 2301 is about 13 degrees west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 2362": {
+  "distance": "~4,800 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~60"
+   },
+   {
+    "label": "Age",
+    "value": "~5 million years"
+   },
+   {
+    "label": "Brightest",
+    "value": "Tau Canis Majoris"
+   }
+  ],
+  "about": "A young cluster around the bright star Tau Canis Majoris. It's a tiny, tight group of stars.",
+  "howToFind": "Find Sirius, the brightest star in the whole sky, below and to the left of Orion's Belt. NGC 2362 is about 11 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 6633": {
+  "distance": "~1,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~30"
+   },
+   {
+    "label": "Age",
+    "value": "~660 million years"
+   }
+  ],
+  "about": "A bright, scattered cluster in Ophiuchus that makes a nice pair with IC 4756 in binoculars.",
+  "howToFind": "Find Rasalhague, the star at Ophiuchus's head, about 15 degrees west of Altair. NGC 6633 is about 14 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 6791": {
+  "distance": "~13,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~10,000"
+   },
+   {
+    "label": "Age",
+    "value": "~8 billion years"
+   },
+   {
+    "label": "Notable",
+    "value": "One of the oldest and richest open clusters"
+   }
+  ],
+  "about": "A very old, very rich cluster in Lyra that looks faint because it's so distant.",
+  "howToFind": "Find Sheliak, one of the two stars at the bottom of Lyra's small parallelogram, below Vega. NGC 6791 is about 8 degrees north-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "NGC 7789": {
+  "distance": "~7,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~1,000"
+   },
+   {
+    "label": "Age",
+    "value": "~1.6 billion years"
+   }
+  ],
+  "about": "Caroline's Rose is a rich old cluster in Cassiopeia whose stars swirl like rose petals.",
+  "howToFind": "Find Caph, the star at the end of Cassiopeia's W that is nearest Andromeda. NGC 7789 is about 3 degrees south-west of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "IC 4665": {
+  "distance": "~1,100 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~30"
+   },
+   {
+    "label": "Age",
+    "value": "~40 million years"
+   }
+  ],
+  "about": "The Summer Beehive is a big, sparse cluster in Ophiuchus, best in binoculars.",
+  "howToFind": "Find Rasalhague, the star at Ophiuchus's head, about 15 degrees west of Altair. IC 4665 is about 7 degrees south of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "IC 4756": {
+  "distance": "~1,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~80"
+   },
+   {
+    "label": "Age",
+    "value": "~800 million years"
+   }
+  ],
+  "about": "Graff's Cluster is a huge, sparse cluster in Serpens. It's one of the nicest binocular clusters.",
+  "howToFind": "Find Rasalhague, the star at Ophiuchus's head, about 15 degrees west of Altair. IC 4756 is about 17 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "Stock 2": {
+  "distance": "~1,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Open cluster"
+   },
+   {
+    "label": "Stars",
+    "value": "~300"
+   }
+  ],
+  "about": "The Muscle Man Cluster is a big, sparse group in Cassiopeia, near the Double Cluster.",
+  "howToFind": "Find Segin, the star at the far end of Cassiopeia's W. Stock 2 is about 5 degrees south-east of it. Binoculars or your lowest-power eyepiece work best, since the cluster is bigger than most telescope views."
+ },
+ "M42": {
+  "distance": "~1,340 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission and reflection nebula"
+   },
+   {
+    "label": "Diameter",
+    "value": "~24 light-years"
+   },
+   {
+    "label": "Stars",
+    "value": "Contains the Trapezium, four hot young stars"
+   },
+   {
+    "label": "Age",
+    "value": "Stars ~2 million years old"
+   }
+  ],
+  "about": "The Orion Nebula is a star-forming cloud visible to the naked eye as the fuzzy middle star of Orion's sword. In a telescope it shows wings of glowing gas around the Trapezium. It's the brightest nebula in the sky.",
+  "howToFind": "Find Orion's Belt, the row of three stars. Just below it hangs Orion's sword, three fainter stars in a line; the middle one is the Orion Nebula, which looks fuzzy even to the naked eye."
+ },
+ "M43": {
+  "distance": "~1,340 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula"
+   },
+   {
+    "label": "Diameter",
+    "value": "~7 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Part of the Orion Nebula complex"
+   }
+  ],
+  "about": "De Mairan's Nebula is a small, rounded lobe of the Orion Nebula that is separated from M42 by a dark lane. It's lit by a single young star.",
+  "howToFind": "Find the Orion Nebula (M42) in Orion's sword. M43 is the small, round patch just north-east of it, separated by a dark lane."
+ },
+ "M78": {
+  "distance": "~1,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Reflection nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Brightest reflection nebula in the sky"
+   }
+  ],
+  "about": "A reflection nebula in Orion whose gas and dust reflect the light of nearby stars. It's faint and fuzzy, with two stars embedded in it.",
+  "howToFind": "Find Alnitak, the star at the left end of Orion's Belt (when facing south). M78 is about 3 degrees north-east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 2024": {
+  "distance": "~1,350 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Next to Alnitak, the left belt star of Orion"
+   }
+  ],
+  "about": "The Flame Nebula is drowned out by the glare of Alnitak, so it needs dark skies and the star kept out of view.",
+  "howToFind": "Find Alnitak, the star at the left end of Orion's Belt (when facing south). NGC 2024 is about 0.3 degrees east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "IC 434": {
+  "distance": "~1,375 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula, backdrop of the Horsehead Nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "The Horsehead (Barnard 33) is a dark cloud silhouetted against it"
+   }
+  ],
+  "about": "A faint glow that lights the famous Horsehead Nebula. It's one of the hardest visual targets and normally needs an H-beta filter and a dark sky.",
+  "howToFind": "Find Alnitak, the star at the left end of Orion's Belt (when facing south). IC 434 is about 0.5 degrees south of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 2175": {
+  "distance": "~6,400 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with young cluster"
+   },
+   {
+    "label": "Diameter",
+    "value": "~100 light-years"
+   }
+  ],
+  "about": "The Monkey Head Nebula is a faint glow in Orion around a young cluster, NGC 2175. It's hard to see visually.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. NGC 2175 is about 13 degrees south-east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 2237": {
+  "distance": "~5,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with young cluster (NGC 2244)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~130 light-years"
+   }
+  ],
+  "about": "The Rosette Nebula is a huge ring of glowing gas around a young cluster. Its faint ring needs dark skies and a filter. The cluster at its centre is easy.",
+  "howToFind": "Find Betelgeuse, the bright orange-red star at Orion's shoulder. NGC 2237 is about 10 degrees east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 1499": {
+  "distance": "~1,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula"
+   },
+   {
+    "label": "Length",
+    "value": "~2.5 degrees"
+   }
+  ],
+  "about": "The California Nebula is huge and very faint, so it needs a dark sky and a hydrogen-beta filter. It's a great camera target.",
+  "howToFind": "Find Algol, the 'Demon Star' in Perseus, south of Mirfak. NGC 1499 is about 11 degrees south-east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "IC 405": {
+  "distance": "~1,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission/reflection nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Lit by the star AE Aurigae"
+   }
+  ],
+  "about": "The Flaming Star Nebula is a faint cloud around a runaway star in Auriga, hard to see visually.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. IC 405 is about 6 degrees north of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "M8": {
+  "distance": "~4,100 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with open cluster"
+   },
+   {
+    "label": "Diameter",
+    "value": "~110 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "Visible to the naked eye"
+   }
+  ],
+  "about": "The Lagoon Nebula is a large star-forming region in Sagittarius, visible to the naked eye from a dark site. Binoculars show its glow and a cluster in the middle.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M8 is about 6 degrees west of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "M20": {
+  "distance": "~5,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission, reflection and dark nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Three-lobed by dark dust lanes"
+   }
+  ],
+  "about": "The Trifid Nebula is split into three parts by dark lanes. It's a faint glow in a small scope, and its colours show up only in photographs.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M20 is about 6 degrees west of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "M16": {
+  "distance": "~7,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with open cluster"
+   },
+   {
+    "label": "Notable",
+    "value": "Contains the Pillars of Creation"
+   }
+  ],
+  "about": "The Eagle Nebula is a star-forming region in Serpens. The cluster is easy; the nebula and its pillars are best in larger scopes with a filter.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M16 is about 12 degrees north of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "M17": {
+  "distance": "~5,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula"
+   },
+   {
+    "label": "Diameter",
+    "value": "~15 light-years"
+   }
+  ],
+  "about": "The Omega or Swan Nebula is one of the brightest nebulae. Its bright bar looks like a check mark or a swan in a small scope.",
+  "howToFind": "Find Kaus Borealis, the star at the top of the Teapot's lid in Sagittarius. M17 is about 9 degrees north of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 7000": {
+  "distance": "~2,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula"
+   },
+   {
+    "label": "Size",
+    "value": "~2 degrees, similar to 4 full Moons"
+   }
+  ],
+  "about": "The North America Nebula looks like the continent in photographs. It's visible as a faint glow to the naked eye in dark skies and needs a wide field and a filter.",
+  "howToFind": "Find Deneb, the star at the tail of Cygnus, at the top of the Summer Triangle. NGC 7000 is about 3 degrees east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "IC 5146": {
+  "distance": "~3,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission/reflection nebula with cluster"
+   }
+  ],
+  "about": "The Cocoon Nebula is a small, faint nebula in Cygnus with a young cluster at its heart.",
+  "howToFind": "Find Deneb, the star at the tail of Cygnus, at the top of the Summer Triangle. IC 5146 is about 13 degrees east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 7380": {
+  "distance": "~7,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with open cluster"
+   }
+  ],
+  "about": "The Wizard Nebula is a faint nebula around an open cluster in Cepheus. It's very hard visually.",
+  "howToFind": "Find Caph, the star at the end of Cassiopeia's W that is nearest Andromeda. NGC 7380 is about 11 degrees west of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 7023": {
+  "distance": "~1,400 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Reflection nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Lit by the star HD 200775"
+   }
+  ],
+  "about": "The Iris Nebula is a blue reflection nebula around a bright star in Cepheus. Visually only the star and a faint haze show.",
+  "howToFind": "Find Alderamin, the brightest star in Cepheus, a shape like a child's drawing of a house, east of Cassiopeia. NGC 7023 is about 6 degrees north of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "IC 1396": {
+  "distance": "~2,400 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula"
+   },
+   {
+    "label": "Size",
+    "value": "~3 degrees"
+   }
+  ],
+  "about": "A huge, very faint emission nebula in Cepheus containing the Elephant's Trunk dark cloud. It's mostly an astrophotography target.",
+  "howToFind": "Find Alderamin, the brightest star in Cepheus, a shape like a child's drawing of a house, east of Cassiopeia. IC 1396 is about 6 degrees south-east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "IC 1805": {
+  "distance": "~7,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with young cluster (Melotte 15)"
+   }
+  ],
+  "about": "The Heart Nebula is a large, faint emission nebula in Cassiopeia. It's dim visually and needs a dark sky.",
+  "howToFind": "Find Segin, the star at the far end of Cassiopeia's W. IC 1805 is about 5 degrees south-east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "IC 1848": {
+  "distance": "~7,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with clusters"
+   }
+  ],
+  "about": "The Soul Nebula is next to the Heart Nebula. It's very faint visually.",
+  "howToFind": "Find Segin, the star at the far end of Cassiopeia's W. IC 1848 is about 7 degrees south-east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 281": {
+  "distance": "~9,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula with cluster"
+   },
+   {
+    "label": "Notable",
+    "value": "Contains the Pacman-shaped dark clouds"
+   }
+  ],
+  "about": "The Pacman Nebula is a faint nebula around a small cluster in Cassiopeia.",
+  "howToFind": "Find Schedar, the brightest star in the W of Cassiopeia. NGC 281 is about 1.7 degrees east of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "NGC 7635": {
+  "distance": "~7,100 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "A bubble blown by a hot star's wind"
+   }
+  ],
+  "about": "The Bubble Nebula is a ring of glowing gas next to M52. It's very faint visually and needs a large scope and filter.",
+  "howToFind": "Find Caph, the star at the end of Cassiopeia's W that is nearest Andromeda. NGC 7635 is about 6 degrees west of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "M57": {
+  "distance": "~2,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   },
+   {
+    "label": "Diameter",
+    "value": "~1 light-year"
+   },
+   {
+    "label": "Central star",
+    "value": "Mag ~15.7, a white dwarf"
+   }
+  ],
+  "about": "The Ring Nebula is a shell of gas shed by a dying star. In a small scope at medium power it looks like a smoke ring or a small, faint doughnut, and it's easy to find between Beta and Gamma Lyrae.",
+  "howToFind": "Find Lyra's small parallelogram below Vega. The Ring Nebula is halfway between its bottom two stars, Beta and Gamma Lyrae."
+ },
+ "M27": {
+  "distance": "~1,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   },
+   {
+    "label": "Diameter",
+    "value": "~3 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "The first planetary nebula discovered (1764)"
+   }
+  ],
+  "about": "The Dumbbell Nebula is one of the brightest planetary nebulae. It looks like an apple core in a small scope and is easy to see in binoculars from dark skies.",
+  "howToFind": "Find the little arrow of Sagitta, then look for the 'nose' star Gamma Sagittae. The Dumbbell is about 3 degrees north of it in Vulpecula, easy to find in binoculars."
+ },
+ "M97": {
+  "distance": "~2,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   },
+   {
+    "label": "Diameter",
+    "value": "~3 light-years"
+   }
+  ],
+  "about": "The Owl Nebula is a faint, round planetary nebula. Larger scopes show two dark patches that look like an owl's eyes.",
+  "howToFind": "Find Merak, the other 'pointer' star, at the bottom of the Big Dipper's bowl. M97 is about 2 degrees south-east of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "M76": {
+  "distance": "~2,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Bipolar, often called the faintest Messier object"
+   }
+  ],
+  "about": "The Little Dumbbell is the dimmest object in Messier's list in many lists. It's a small, faint rectangle in a medium scope.",
+  "howToFind": "Find Almach, the last bright star in that line of stars leading away from the Great Square of Pegasus. M76 is about 10 degrees north of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "NGC 7293": {
+  "distance": "~650 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2.5 light-years"
+   },
+   {
+    "label": "Notable",
+    "value": "One of the nearest planetary nebulae"
+   }
+  ],
+  "about": "The Helix Nebula is huge and faint because its light is spread over a large area. It needs a dark sky and a filter. It's low in northern skies.",
+  "howToFind": "In Aquarius, low in the south from mid-northern latitudes. Use a sky app to find Delta Aquarii, then look about 7 degrees south-west of it. It is huge and faint, so use binoculars or low power, a filter if you have one, and a dark clear southern horizon."
+ },
+ "NGC 6543": {
+  "distance": "~3,300 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Very complex structure seen by Hubble"
+   }
+  ],
+  "about": "The Cat's Eye Nebula is a tiny planetary nebula. In a small scope it looks like a slightly fuzzy bluish star.",
+  "howToFind": "Find Eltanin, the bright star in the head of Draco, about 12 degrees above Vega. NGC 6543 is about 15 degrees north of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "NGC 6826": {
+  "distance": "~3,200 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   },
+   {
+    "label": "Notable",
+    "value": "Blinks in and out of view with averted vision"
+   }
+  ],
+  "about": "The Blinking Planetary appears and disappears as you look straight at it and then away from it, because of the central star.",
+  "howToFind": "Find Deneb, the star at the tail of Cygnus, at the top of the Summer Triangle. NGC 6826 is about 11 degrees north-west of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "NGC 7662": {
+  "distance": "~5,600 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   }
+  ],
+  "about": "The Blue Snowball is a small, round planetary nebula with a blue-green hue. It looks like a fuzzy star at low power.",
+  "howToFind": "Find Scheat, the top-right corner of the Great Square of Pegasus. NGC 7662 is about 15 degrees north of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "NGC 2392": {
+  "distance": "~6,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   }
+  ],
+  "about": "The Eskimo Nebula is small and bright, with a central star surrounded by a halo. It needs high magnification to show anything beyond a fuzzy star.",
+  "howToFind": "Find Pollux, the brighter of the twin stars of Gemini. NGC 2392 is about 8 degrees south-west of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "NGC 7009": {
+  "distance": "~5,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   }
+  ],
+  "about": "The Saturn Nebula has ansae that look like Saturn's rings. In a small scope it's a blue-green oval.",
+  "howToFind": "Find Sadalsuud, the brightest star in Aquarius, in the dim stretch of sky south of Pegasus. NGC 7009 is about 9 degrees south-west of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "NGC 3242": {
+  "distance": "~4,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   }
+  ],
+  "about": "The Ghost of Jupiter is a bright, oval, bluish disk in Hydra, about the size of Jupiter.",
+  "howToFind": "Hydra is the long, faint snake south of Cancer and Leo. Use a sky app to find Mu Hydrae near its head, then look about 2 degrees south of it. At low power it looks like a star; high power shows a small blue-green disc."
+ },
+ "NGC 40": {
+  "distance": "~3,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Planetary nebula"
+   }
+  ],
+  "about": "The Bow-Tie Nebula is a small, faint planetary nebula around a very bright central star.",
+  "howToFind": "Find Segin, the star at the far end of Cassiopeia's W. NGC 40 is about 13 degrees north-west of it. At low power it looks like a star. Switch to higher power and it will show a small, slightly fuzzy disc."
+ },
+ "M1": {
+  "distance": "~6,500 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Supernova remnant"
+   },
+   {
+    "label": "Age",
+    "value": "Exploded in 1054 CE"
+   },
+   {
+    "label": "Pulsar",
+    "value": "Spins about 30 times a second"
+   }
+  ],
+  "about": "The Crab Nebula is the debris from a star that was seen exploding in 1054 CE. In a small scope it's a faint oval smudge.",
+  "howToFind": "Find Elnath, the tip of Taurus's northern horn. M1 is about 7 degrees south of it. It is faint, so use a dark sky and, if you have one, an OIII filter."
+ },
+ "NGC 6960/92": {
+  "distance": "~2,400 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Supernova remnant"
+   },
+   {
+    "label": "Age",
+    "value": "~10,000 years old"
+   },
+   {
+    "label": "Size",
+    "value": "~3 degrees"
+   }
+  ],
+  "about": "The Veil Nebula is a huge remnant of a supernova that looks like faint wisps. It needs a dark sky and an OIII filter.",
+  "howToFind": "Find Sadr, the star at the centre of the Northern Cross in Cygnus. NGC 6960/92 is about 11 degrees south-east of it. It is faint, so use a dark sky and, if you have one, an OIII filter."
+ },
+ "Albireo": {
+  "distance": "~430 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Double star"
+   },
+   {
+    "label": "Colours",
+    "value": "Gold (K3) and blue (B8)"
+   },
+   {
+    "label": "Separation",
+    "value": "~35 arcseconds"
+   },
+   {
+    "label": "Visible",
+    "value": "In almost any telescope"
+   }
+  ],
+  "about": "The most beautiful double star in the sky, a gold-orange star beside a blue one. It marks the head of Cygnus the Swan and is easy to split at low power.",
+  "howToFind": "Find the Northern Cross in Cygnus; Albireo is the star at the bottom, the swan's beak. The colourful pair splits in even a small telescope."
+ },
+ "Moon": {
+  "distance": "384,400 km (1.3 light-seconds)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "3,474 km"
+   },
+   {
+    "label": "Cycle",
+    "value": "29.5 days"
+   },
+   {
+    "label": "Notable",
+    "value": "Its brightness varies across phases; an average magnitude is used here"
+   }
+  ],
+  "about": "Earth's only natural satellite. The terminator, the line between day and night, shows the best craters and mountains. A full Moon is bright but flat.",
+  "howToFind": "Look up! It is in the sky about half the time. Check the phase: crater detail looks best along the shadow line, not at full Moon."
+ },
+ "Mercury": {
+  "distance": "0.6-1.4 AU (5-12 light-minutes)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "4,879 km"
+   },
+   {
+    "label": "Phases",
+    "value": "Like the Moon"
+   },
+   {
+    "label": "Notable",
+    "value": "Always close to the Sun in the sky"
+   }
+  ],
+  "about": "Mercury is small and hard to find, since it never strays far from the Sun. It shows phases like the Moon.",
+  "howToFind": "Very tricky: look low on the horizon about 45 minutes after sunset or before sunrise, when it is at its greatest distance from the Sun."
+ },
+ "Venus": {
+  "distance": "0.3-1.7 AU (3-14 light-minutes)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "12,104 km"
+   },
+   {
+    "label": "Phases",
+    "value": "Like the Moon"
+   },
+   {
+    "label": "Notable",
+    "value": "Brightest planet; cloud-covered"
+   }
+  ],
+  "about": "Venus is brilliant and shows phases in even small telescopes. It looks like a featureless white disk because of its thick clouds.",
+  "howToFind": "Look low in the west after sunset or low in the east before sunrise: it is the brightest 'star' in the sky, steady and silvery-white."
+ },
+ "Mars": {
+  "distance": "0.4-2.7 AU (3-22 light-minutes)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "6,779 km"
+   },
+   {
+    "label": "Moons",
+    "value": "Phobos and Deimos (tiny)"
+   },
+   {
+    "label": "Notable",
+    "value": "Best seen near opposition, every ~26 months"
+   }
+  ],
+  "about": "The red planet shows its polar caps and dark markings in a small scope, but only when it's close to Earth.",
+  "howToFind": "Look for a steady, orange-red 'star' that does not twinkle. Check a sky app for when it is high and bright."
+ },
+ "Jupiter": {
+  "distance": "4.2-6.2 AU (35-52 light-minutes)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "139,820 km (11x Earth)"
+   },
+   {
+    "label": "Moons",
+    "value": "4 bright Galilean moons (Io, Europa, Ganymede, Callisto)"
+   },
+   {
+    "label": "Notable",
+    "value": "Cloud belts and the Great Red Spot"
+   }
+  ],
+  "about": "A small telescope shows Jupiter's cloud belts and its four bright moons, which change position nightly.",
+  "howToFind": "Look for a very bright, steady, cream-white 'star' that is brighter than anything else except Venus. A small scope shows four moons."
+ },
+ "Saturn": {
+  "distance": "8.0-10.1 AU (67-84 light-minutes)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "116,460 km (excluding rings)"
+   },
+   {
+    "label": "Moons",
+    "value": "Titan is visible in small scopes"
+   },
+   {
+    "label": "Notable",
+    "value": "Rings tilt over a 29-year cycle"
+   }
+  ],
+  "about": "The ringed planet is one of the best sights in the sky. Even a small scope shows its rings clearly.",
+  "howToFind": "Look for a steady, yellowish 'star' that does not twinkle. Even a small telescope shows its rings."
+ },
+ "Uranus": {
+  "distance": "18-21 AU (2.5-3 light-hours)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "50,724 km"
+   },
+   {
+    "label": "Colour",
+    "value": "Pale blue-green"
+   },
+   {
+    "label": "Notable",
+    "value": "Barely visible to the naked eye in dark skies"
+   }
+  ],
+  "about": "A small blue-green dot in a telescope, found only with a chart. It was the first planet found with a telescope (1781).",
+  "howToFind": "You need a sky app to find it: it is a faint dot in a dark sky and looks like a very small bluish-green disc in a telescope."
+ },
+ "Neptune": {
+  "distance": "29-31 AU (4 light-hours)",
+  "facts": [
+   {
+    "label": "Diameter",
+    "value": "49,244 km"
+   },
+   {
+    "label": "Colour",
+    "value": "Blue"
+   },
+   {
+    "label": "Notable",
+    "value": "Not visible to the naked eye"
+   }
+  ],
+  "about": "A tiny blue-grey dot that looks like a star. It needs a chart to find and a medium scope to see a disk.",
+  "howToFind": "You need a sky app and a telescope: it is a faint bluish dot that looks just like a star."
+ },
+ "NGC 6888": {
+  "distance": "~5,000 light-years",
+  "facts": [
+   {
+    "label": "Type",
+    "value": "Emission nebula (Wolf-Rayet bubble)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~25 light-years"
+   },
+   {
+    "label": "Source",
+    "value": "Wind from the star WR 136"
+   }
+  ],
+  "about": "The Crescent Nebula is a shell of gas blown by a massive, dying star. It's faint and needs a dark sky and an OIII filter to show anything beyond a hint of glow.",
+  "howToFind": "Find Sadr, the star at the centre of the Northern Cross in Cygnus. NGC 6888 is about 3 degrees south-west of it. Use low power under a dark sky. A nebula filter (UHC or OIII) helps a lot if you have one."
+ },
+ "Arcturus": {
+  "distance": "37 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "K1.5 III (orange giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Orange"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~170x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~25x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "A fast-moving star, an old giant from the Milky Way's halo"
+   }
+  ],
+  "about": "The brightest star in the northern sky and the fourth brightest overall. Follow the arc of the Big Dipper's handle to find it.",
+  "howToFind": "Follow the curve of the Big Dipper's handle away from the bowl ('arc to Arcturus'). It is the bright orange star you reach."
+ },
+ "Vega": {
+  "distance": "25 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A0 V (main sequence)"
+   },
+   {
+    "label": "Colour",
+    "value": "Blue-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~40x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2.4x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Spins so fast it's flattened; has a dusty debris disk"
+   }
+  ],
+  "about": "The brightest star in Lyra and the fifth brightest in the sky. It was the north star about 12,000 years ago and will be again in about 13,700 CE.",
+  "howToFind": "The brightest star nearly overhead on summer evenings. It is one corner of the Summer Triangle, with Deneb and Altair."
+ },
+ "Capella": {
+  "distance": "43 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "G8 III + G0 III (two yellow giants)"
+   },
+   {
+    "label": "Colour",
+    "value": "Yellow"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~160x the Sun (combined)"
+   },
+   {
+    "label": "Diameter",
+    "value": "Giants ~12x and ~9x the Sun"
+   },
+   {
+    "label": "Notable",
+    "value": "A four-star system"
+   }
+  ],
+  "about": "The sixth brightest star in the sky and the brightest in Auriga. It's actually two pairs of stars, though to the eye it looks like one yellow star.",
+  "howToFind": "A bright yellow star in Auriga, high in the northern sky on winter evenings. It is close to the northern horizon in summer."
+ },
+ "Procyon": {
+  "distance": "11.5 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "F5 IV-V (main sequence)"
+   },
+   {
+    "label": "Colour",
+    "value": "Yellow-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~7x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Has a white dwarf companion that needs a large scope"
+   }
+  ],
+  "about": "The little dog's star. It's one of the closest stars to the Sun and forms the Winter Triangle with Sirius and Betelgeuse.",
+  "howToFind": "Find Orion, then look to the lower left of Betelgeuse. Procyon forms a triangle with Betelgeuse and Sirius."
+ },
+ "Betelgeuse": {
+  "distance": "~550-700 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "M1-2 Ia-ab (red supergiant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Deep orange-red"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~100,000x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~700-900x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "A semi-regular variable, between mag 0.0 and 1.6"
+   }
+  ],
+  "about": "The red shoulder of Orion, and a star that will eventually explode as a supernova. It dimmed dramatically in 2019-2020.",
+  "howToFind": "The orange-red star marking Orion's shoulder (upper left, when you face south in winter)."
+ },
+ "Altair": {
+  "distance": "17 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A7 V (main sequence)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~10x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~1.8x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Spins once in ~9 hours, so it's noticeably flattened"
+   }
+  ],
+  "about": "The bright star of Aquila and the south corner of the Summer Triangle. It's one of the closest naked-eye stars.",
+  "howToFind": "The bright star at the south point of the Summer Triangle, with a fainter star on either side of it."
+ },
+ "Aldebaran": {
+  "distance": "~65 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "K5 III (orange giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Orange"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~400x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~44x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Has a probable red dwarf companion; a spacecraft, Pioneer 10, is heading its way"
+   }
+  ],
+  "about": "The eye of Taurus the Bull. It looks like the brightest star of the Hyades cluster but is not part of it, lying about half as far away.",
+  "howToFind": "Follow Orion's Belt up and to the right. The first bright orange star you reach is Aldebaran, the eye of Taurus."
+ },
+ "Pollux": {
+  "distance": "34 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "K0 III (orange giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Orange"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~43x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~9x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Has a confirmed exoplanet, Thestias"
+   }
+  ],
+  "about": "The brighter of the Gemini twins, slightly brighter than Castor despite its Beta label.",
+  "howToFind": "The brighter of the twin stars of Gemini, above and to the left of Orion. Its twin, Castor, is next to it."
+ },
+ "Deneb": {
+  "distance": "~1,500-2,600 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A2 Ia (blue-white supergiant)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~200,000x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~200x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Distance is uncertain"
+   }
+  ],
+  "about": "The tail of Cygnus the Swan and the northeast corner of the Summer Triangle. It's one of the most luminous stars visible to the naked eye.",
+  "howToFind": "The tail of Cygnus the Swan and the top of the Summer Triangle. Look for the Northern Cross overhead in summer."
+ },
+ "Regulus": {
+  "distance": "~79 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "B8 IVn (blue-white main sequence)"
+   },
+   {
+    "label": "Colour",
+    "value": "Blue-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~140x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~4x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Spins in 16 hours, so it's strongly flattened; a multiple star"
+   }
+  ],
+  "about": "The heart of Leo the Lion. It sits almost exactly on the ecliptic, so the Moon and planets pass close to it.",
+  "howToFind": "The bright star at the bottom of Leo's backwards question mark (the 'Sickle'), in spring."
+ },
+ "Castor": {
+  "distance": "~51 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A1 V + A2 V (six-star system)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~50x the Sun (combined)"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Six stars in total"
+   }
+  ],
+  "about": "The other twin in Gemini. A small telescope splits it into two bright stars, each of which is itself a double.",
+  "howToFind": "The slightly fainter of the Gemini twins, above and to the left of Orion in winter."
+ },
+ "Bellatrix": {
+  "distance": "~250 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "B2 III (blue giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Blue-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~9,000x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~6x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Will become a red giant in a few million years"
+   }
+  ],
+  "about": "The 'Amazon Star' marking Orion's left shoulder.",
+  "howToFind": "Orion's upper-right shoulder star, opposite Betelgeuse."
+ },
+ "Elnath": {
+  "distance": "~130 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "B7 III (blue-white giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Blue-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~700x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~5x the Sun's diameter"
+   }
+  ],
+  "about": "The tip of Taurus's northern horn. It was once shared with Auriga.",
+  "howToFind": "The tip of the northern horn of Taurus, about 12 degrees north-east of Aldebaran, shared with Auriga's pentagon."
+ },
+ "Alioth": {
+  "distance": "~82 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A1 III-IV p (peculiar)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~100x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~4x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "A magnetic star with unusual abundances"
+   }
+  ],
+  "about": "The brightest star in the Big Dipper, the one closest to the bowl in the handle.",
+  "howToFind": "The bright star in the Big Dipper's handle closest to the bowl."
+ },
+ "Dubhe": {
+  "distance": "~123 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "K0 III (orange giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Orange"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~300x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~30x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "A binary; the companion needs a telescope"
+   }
+  ],
+  "about": "One of the pointer stars of the Big Dipper. Following it and Merak leads to Polaris.",
+  "howToFind": "One of the two 'pointer' stars at the edge of the Big Dipper's bowl. Follow it and Merak to find Polaris."
+ },
+ "Mirfak": {
+  "distance": "~510 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "F5 Ib (yellow-white supergiant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Yellow-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~5,000x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~60x the Sun's diameter"
+   }
+  ],
+  "about": "The brightest star in Perseus and the centre of the Alpha Persei Cluster. Sweep it with binoculars.",
+  "howToFind": "The brightest star in Perseus, in the curved line of stars that leads from Cassiopeia toward the Pleiades."
+ },
+ "Alkaid": {
+  "distance": "~104 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "B3 V (blue main sequence)"
+   },
+   {
+    "label": "Colour",
+    "value": "Blue-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~600x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~3.4x the Sun's diameter"
+   }
+  ],
+  "about": "The end of the Big Dipper's handle. Unlike most of the other Dipper stars, it isn't part of the Ursa Major moving group.",
+  "howToFind": "The star at the very end of the Big Dipper's handle."
+ },
+ "Menkalinan": {
+  "distance": "~82 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A2 IV + A2 IV (eclipsing binary)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~50x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2.4x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Two stars that eclipse each other every 3.96 days"
+   }
+  ],
+  "about": "The shoulder of Auriga the Charioteer.",
+  "howToFind": "The second-brightest star of Auriga's pentagon, about 7 degrees east of Capella."
+ },
+ "Alhena": {
+  "distance": "~109 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A1 IV (white subgiant)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~160x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~3.3x the Sun's diameter"
+   }
+  ],
+  "about": "The foot of Pollux in Gemini, found close to the Milky Way.",
+  "howToFind": "In Gemini's foot, about 15 degrees south-west (down and to the right) of Pollux."
+ },
+ "Polaris": {
+  "distance": "~430 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "F7 Ib (yellow supergiant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Yellow-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~1,200x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~46x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "A Cepheid variable and part of a triple system"
+   }
+  ],
+  "about": "The North Star, which hardly moves because it lies almost exactly over Earth's north pole. It's not especially bright, just always in the same place.",
+  "howToFind": "Use the two 'pointer' stars at the outer edge of the Big Dipper's bowl (Merak to Dubhe) and go about five times that distance. It barely moves during the night."
+ },
+ "Hamal": {
+  "distance": "~66 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "K2 III (orange giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Orange"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~91x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~15x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Has an exoplanet candidate"
+   }
+  ],
+  "about": "The brightest star in Aries, the Ram. Its name means 'lamb' in Arabic.",
+  "howToFind": "The brightest star in Aries, in the small crooked line of stars between the Pleiades and the Great Square of Pegasus."
+ },
+ "Mizar": {
+  "distance": "~83 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A2 V (white main sequence)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~70x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2.4x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Four stars in Mizar, six counting Alcor"
+   }
+  ],
+  "about": "The middle star in the handle of the Big Dipper. Alcor sits next to it, and together they're a famous naked-eye double; Mizar itself is a telescopic double, the first discovered (1617).",
+  "howToFind": "The middle star in the Big Dipper's handle. Look for its tiny companion, Alcor, right next to it."
+ },
+ "Mirach": {
+  "distance": "~197 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "M0 III (red giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "Orange-red"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~1,800x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~100x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "A line from Mirach through Mu Andromedae leads to M31"
+   }
+  ],
+  "about": "The middle star in the Andromeda line, used to hop to the Andromeda Galaxy (M31).",
+  "howToFind": "The middle of the three bright stars running from the Great Square of Pegasus into Andromeda. It has a slightly orange tint."
+ },
+ "Alpheratz": {
+  "distance": "~97 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "B8 IVpMnHg (blue-white)"
+   },
+   {
+    "label": "Colour",
+    "value": "Blue-white"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~200x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2.7x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "A chemically peculiar star, rich in mercury and manganese"
+   }
+  ],
+  "about": "The star that joins the Great Square of Pegasus to Andromeda, belonging to both.",
+  "howToFind": "The top-left corner star of the Great Square of Pegasus, which it shares with Andromeda."
+ },
+ "Rasalhague": {
+  "distance": "~49 light-years",
+  "facts": [
+   {
+    "label": "Spectral type",
+    "value": "A5 III (white giant)"
+   },
+   {
+    "label": "Colour",
+    "value": "White"
+   },
+   {
+    "label": "Luminosity",
+    "value": "~25x the Sun"
+   },
+   {
+    "label": "Diameter",
+    "value": "~2.6x the Sun's diameter"
+   },
+   {
+    "label": "Notable",
+    "value": "Has a close companion, discovered in 1867"
+   }
+  ],
+  "about": "The head of Ophiuchus the Serpent Bearer. Its name means 'head of the serpent collector.'",
+  "howToFind": "A moderately bright star about 15 degrees west of Altair, at the head of Ophiuchus."
+ }
+}

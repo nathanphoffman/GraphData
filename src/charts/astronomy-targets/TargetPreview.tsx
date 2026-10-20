@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import type { ScoredTarget, Settings, Target } from "./types";
-import { effectiveQuality, previewOptics, viewConditions } from "./calculate";
+import type { ScoredTarget, Settings, Target, TargetDetails } from "./types";
+import details from "../../../data/astronomy-target-details.json";
+import { difficulty, effectiveQuality, formatHour, formatSize, isNakedEye, previewOptics, surfaceBrightness, viewConditions } from "./calculate";
 import { TARGET_IMAGES, type TargetImage } from "./images";
 
 const VIEW_SIZE = 280;
@@ -210,6 +211,50 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
   };
 }
 
+const DETAILS = details as Record<string, TargetDetails>;
+
+/** The facts we already have for a target, then the extra details and a short description. */
+function TargetInfo({ row, settings }: { row: ScoredTarget; settings: Settings }) {
+  const t = row.target;
+  const extra = DETAILS[t.id];
+  const level = isNakedEye(t, settings.bortle) ? "Naked Eye" : difficulty(row.score).label;
+  const rows: [string, string][] = [
+    ["Magnitude", t.magnitude.toFixed(1)],
+    ["Size", formatSize(t.major, t.minor)],
+  ];
+  if (t.type !== "Star" && !t.planet && t.type !== "Moon") rows.push(["Surface brightness", `${surfaceBrightness(t).toFixed(1)} mag/arcmin²`]);
+  if (extra) rows.push(["Distance", extra.distance]);
+  rows.push(["Best time", `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${row.bestHour === null ? "" : `, ${formatHour(row.bestHour)}`}`]);
+  rows.push(["Peak altitude", row.peakAltitude > 0 ? `${row.peakAltitude.toFixed(0)}°` : "below horizon"]);
+  rows.push(["Score", `${row.score.toFixed(0)} (${level})`]);
+  for (const f of extra?.facts ?? []) rows.push([f.label, f.value]);
+  return (
+    <div className="astro-info">
+      <h4>
+        {t.id}
+        {t.nickname && <span> {t.nickname}</span>}
+      </h4>
+      <div className="astro-info-sub">{t.type} · {t.constellation}</div>
+      <dl>
+        {rows.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      {extra && <p>{extra.about}</p>}
+      {extra && (
+        <>
+          <h5>How to find it</h5>
+          <p>{extra.howToFind}</p>
+          <small>A fist held at arm's length is about 10°, three fingers about 5°, your thumb about 2°.</small>
+        </>
+      )}
+    </div>
+  );
+}
+
 export function hasPreview(id: string): boolean {
   return id in TARGET_IMAGES;
 }
@@ -264,8 +309,9 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved, effectiveQuality(settings)]);
 
   const width = VIEW_SIZE * 2 + 48;
+  const height = VIEW_SIZE + 520;
   const left = Math.min(x + 16, window.innerWidth - width - 8);
-  const top = Math.min(y + 16, window.innerHeight - VIEW_SIZE - 90);
+  const top = Math.min(y + 16, window.innerHeight - height);
 
   return (
     <div className="astro-preview" style={{ left: Math.max(8, left), top: Math.max(8, top) }}>
@@ -287,6 +333,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
         </div>
         <figcaption>Your view (approximate), {eyepiece.magnification.toFixed(0)}×</figcaption>
       </figure>
+      <TargetInfo row={row} settings={settings} />
       <small>{info.credit}</small>
     </div>
   );

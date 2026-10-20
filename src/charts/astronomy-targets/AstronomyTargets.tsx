@@ -6,16 +6,9 @@ import type { Schedule } from "./calculate";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
 import { ScheduleModal } from "./Schedule";
-import { buildSchedule, formatHour, activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, qualityAdjust, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, scoreTargets, surfaceBrightness } from "./calculate";
+import { buildSchedule, formatHour, formatSize, activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, qualityAdjust, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
-
-function formatSize(major: number, minor: number): string {
-  if (major === 0) return "point";
-  if (major < 1) return `${Math.round(major * 60)}″`;
-  const fmt = (v: number) => (v >= 10 ? v.toFixed(0) : v.toFixed(1));
-  return major === minor ? `${fmt(major)}′` : `${fmt(major)}′ × ${fmt(minor)}′`;
-}
 
 const BORTLE_NOTES = [
   "Pristine dark sky",

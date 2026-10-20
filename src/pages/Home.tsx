@@ -12,7 +12,7 @@ export default function Home() {
           <h2>{category}</h2>
           <ul className="chart-list">
             {charts
-              .filter((chart) => chart.category === category)
+              .filter((chart) => chart.category === category && !chart.unlisted)
               .map((chart) => (
                 <li key={chart.id}>
                   <Link to={`/chart/${chart.id}`}>{chart.title}</Link>

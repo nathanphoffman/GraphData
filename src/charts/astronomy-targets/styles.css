@@ -281,6 +281,64 @@
   flex-basis: 100%;
 }
 
+.astro-info {
+  flex-basis: 100%;
+  max-width: 608px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.astro-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.astro-info h4 span {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.astro-info-sub {
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+.astro-info dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 16px;
+  margin: 0 0 8px;
+}
+
+.astro-info dl div {
+  display: flex;
+  gap: 6px;
+}
+
+.astro-info dt {
+  flex: none;
+  color: var(--muted);
+}
+
+.astro-info dd {
+  margin: 0;
+}
+
+.astro-info h5 {
+  margin: 10px 0 2px;
+  font-size: 13px;
+}
+
+.astro-info small {
+  display: block;
+  margin-top: 4px;
+  text-align: left;
+}
+
+.astro-info p {
+  margin: 0;
+}
+
 .astro-controls .astro-check {
   flex-direction: row;
   align-items: center;

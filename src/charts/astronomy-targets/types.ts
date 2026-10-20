@@ -80,3 +80,12 @@ export interface ScoredTarget {
   /** Highest altitude (degrees) reached while it is dark inside the window. */
   peakAltitude: number;
 }
+
+/** Extra facts about a target, shown in the hover tooltip. */
+export interface TargetDetails {
+  distance: string;
+  facts: { label: string; value: string }[];
+  about: string;
+  /** Plain-language steps for finding it in the sky. */
+  howToFind: string;
+}
