@@ -107,7 +107,7 @@ const COLUMNS: Column[] = [
     cell: (r) => {
       const v = r.target.simAdjust;
       if (v === undefined) return "—";
-      return <span className="astro-tag" style={{ "--tag": heat(0.5 + v / 60, 1) } as CSSProperties}>{v > 0 ? `+${v}%` : v < 0 ? `−${-v}%` : "0%"}</span>;
+      return <span className="astro-tag" style={{ "--tag": heat(0.5 + v / 60, 1) } as CSSProperties}>{v >= 0 ? `+${v}%` : `−${-v}%`}</span>;
     },
   },
 ];

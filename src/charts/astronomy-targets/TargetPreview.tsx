@@ -58,10 +58,38 @@ function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target):
 
 /** How much more you see looking slightly off to the side of the target (the eye's rod cells are more sensitive), in magnitudes. */
 const AVERTED_BOOST = 0.9;
-/** Brightness beyond this many magnitudes over the limit adds nothing but turns the photo's dark sky white (the Moon). */
-const MAX_MARGIN = 6;
 /** Seconds for one full direct, averted, direct cycle. */
 const CYCLE_SECONDS = 8;
+
+/** Stars and planets are far smaller than a pixel of the field, so they are drawn as a glowing dot, not from the photo. */
+function preparePoint(g: CanvasRenderingContext2D, size: number, margin: number, skyGlow: number) {
+  const frame = g.createImageData(size, size);
+  const d = frame.data;
+  const half = size / 2;
+  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3;
+  const base = [0.86, 0.93, 1.0];
+  const skyTint = [1, 0.82, 0.62];
+  return (averted: number) => {
+    const reach = Math.max(0, Math.min(margin + AVERTED_BOOST * averted, 6));
+    const glowRadius = (2 + 2.5 * reach) * SCALE;
+    for (let p = 0; p < size * size; p++) {
+      const i = p * 4;
+      const dist = Math.hypot((p % size) - half, Math.floor(p / size) - half);
+      d[i + 3] = 255;
+      if (dist > half) {
+        d[i] = d[i + 1] = d[i + 2] = 0;
+        continue;
+      }
+      const level = Math.min(1, Math.exp(-((dist / (1.2 * SCALE)) ** 2)) + 0.35 * Math.exp(-dist / glowRadius));
+      const vignette = 1 - 0.25 * (dist / half) ** 2;
+      for (let c = 0; c < 3; c++) {
+        const v = Math.min(1, skyLevel * skyTint[c] + level * base[c]) * vignette;
+        d[i + c] = Math.round(255 * Math.pow(v, 1 / 2.2));
+      }
+    }
+    g.putImageData(frame, 0, 0);
+  };
+}
 
 /**
  * Rough eyepiece simulation: the photo is placed at the right scale inside a round field, then each pixel is dimmed by how far
@@ -70,11 +98,12 @@ const CYCLE_SECONDS = 8;
  * Returns a function that draws one frame for a given amount of averted vision (0 = looking straight at it, 1 = looking to the side):
  * averted vision is more sensitive but softer and colourless.
  */
-function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, bg: number, fov: number, margin: number, skyGlow: number, center: { cx: number; cy: number } | undefined) {
+function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, bg: number, fov: number, margin: number, skyGlow: number, center: { cx: number; cy: number } | undefined, point: boolean) {
   const size = VIEW_SIZE * SCALE;
   canvas.width = canvas.height = size;
   const g = canvas.getContext("2d", { willReadFrequently: true });
   if (!g) return null;
+  if (point) return preparePoint(g, size, margin, skyGlow);
   const pxPerArcmin = size / fov;
   const w = widthArcmin * pxPerArcmin;
   const h = w * (img.naturalHeight / img.naturalWidth);
@@ -119,7 +148,7 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
   const skyTint = [1, 0.82, 0.62];
 
   return (averted: number) => {
-    const gain = Math.pow(10, 0.4 * (Math.min(margin, MAX_MARGIN) + AVERTED_BOOST * averted)) / mean;
+    const gain = Math.pow(10, 0.4 * (margin + AVERTED_BOOST * averted)) / mean;
     const soften = 0.6 * averted;
     const colour = 0.15 * (1 - averted);
     for (let p = 0; p < size * size; p++) {
@@ -157,6 +186,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   const [loaded, setLoaded] = useState<{ img: HTMLImageElement; mean: number; bg: number } | null>(null);
   const alt = row.peakAltitude > 0 ? Math.max(20, row.peakAltitude) : 45;
   const { fov, margin, skyGlow } = viewConditions(row.target, settings, alt);
+  const unresolved = row.target.major * ((VIEW_SIZE * SCALE) / fov) < 6;
 
   useEffect(() => {
     let cancelled = false;
@@ -168,7 +198,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
 
   useEffect(() => {
     if (!loaded || !canvasRef.current) return;
-    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, loaded.bg, fov, margin, skyGlow, info.footprint);
+    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, loaded.bg, fov, margin, skyGlow, info.footprint, unresolved);
     if (!render) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const show = (averted: number) => {
@@ -191,7 +221,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow]);
+  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved]);
 
   const width = VIEW_SIZE * 2 + 48;
   const left = Math.min(x + 16, window.innerWidth - width - 8);
