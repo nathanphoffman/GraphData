@@ -102,21 +102,26 @@ export function project(days: Day[], fitDays: number, aheadDays: number): { fit:
 const round1 = (n: number) => Math.round(n * 10) / 10;
 
 /** Trailing averages (the day itself plus the days before it) and the blended number built from them. */
-export function addAverages<T extends Day>(days: T[]): (T & Averages)[] {
+export function addAverages<T extends Day>(
+  days: T[],
+  windows = { short: 3, medium: 30, long: 365 },
+  /** real days per row; the 30-row change is divided by it so `monthly` is always per 30 real days */
+  step = 1,
+): (T & Averages)[] {
   const prefix = [0];
   for (const d of days) prefix.push(prefix[prefix.length - 1] + d.weight);
   const trailing = (i: number, size: number) => {
     const from = Math.max(0, i - size + 1);
     return (prefix[i + 1] - prefix[from]) / (i + 1 - from);
   };
-  const blended = days.map((_, i) => (3 * trailing(i, 3) + 2 * trailing(i, 30) + trailing(i, 365)) / 6);
+  const blended = days.map((_, i) => (3 * trailing(i, windows.short) + 2 * trailing(i, windows.medium) + trailing(i, windows.long)) / 6);
   return days.map((d, i) => ({
     ...d,
-    avg3: round1(trailing(i, 3)),
-    avg30: round1(trailing(i, 30)),
-    avg365: round1(trailing(i, 365)),
+    avg3: round1(trailing(i, windows.short)),
+    avg30: round1(trailing(i, windows.medium)),
+    avg365: round1(trailing(i, windows.long)),
     blended: round1(blended[i]),
-    monthly: i >= 30 ? round1(blended[i] - blended[i - 30]) : null,
+    monthly: i >= windows.medium ? round1((blended[i] - blended[i - windows.medium]) / step) : null,
   }));
 }
 
@@ -136,4 +141,24 @@ export function addMuscle<T extends Day>(days: T[]): (T & Muscle)[] {
     const before = i <= start ? 0 : MUSCLE_TOTAL * share((i - 1 - start) / span);
     return { ...d, muscleDaily: total - before, muscleTotal: total };
   });
+}
+
+/**
+ * Squash every `step` days into one row so that row counts as "a day":
+ * weight is the block's mean, muscle gain is the block's sum, and the date is the block's last day.
+ * Blocks are counted back from the latest day so the newest block is always complete.
+ */
+export function compress<T extends Day & Muscle>(days: T[], step: number): T[] {
+  const blocks: T[] = [];
+  for (let end = days.length; end > 0; end -= step) {
+    const block = days.slice(Math.max(0, end - step), end);
+    const last = block[block.length - 1];
+    blocks.unshift({
+      ...last,
+      weight: round1(block.reduce((sum, d) => sum + d.weight, 0) / block.length),
+      estimated: block.every((d) => d.estimated),
+      muscleDaily: block.reduce((sum, d) => sum + d.muscleDaily, 0),
+    });
+  }
+  return blocks;
 }

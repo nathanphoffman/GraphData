@@ -165,3 +165,27 @@
 .weight td .adjusted {
   color: var(--muted);
 }
+
+.weight-gap {
+  width: 16px;
+}
+
+.weight td span[class*="band-"] {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 4px;
+  color: #111;
+  font-style: normal;
+}
+
+.weight .band-orange { background: #f4a259; }
+.weight .band-yellow { background: #f2d95c; }
+.weight .band-green { background: #7bc97b; }
+.weight .band-blue { background: #7fb2f0; }
+.weight .band-red { background: #e5675f; }
+
+.weight-compress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
