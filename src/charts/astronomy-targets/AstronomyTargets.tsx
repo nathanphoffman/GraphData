@@ -2,9 +2,11 @@ import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import "./styles.css";
 import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
+import type { Schedule } from "./calculate";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
-import { activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, qualityAdjust, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, scoreTargets, surfaceBrightness } from "./calculate";
+import { ScheduleModal } from "./Schedule";
+import { buildSchedule, formatHour, activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, qualityAdjust, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -29,9 +31,6 @@ const BORTLE_NOTES = [
 
 type SeasonFilter = Season | "any";
 const SEASON_FILTERS: SeasonFilter[] = ["spring", "summer", "autumn", "winter", "any"];
-
-/** 22 becomes "10 PM", 0 becomes "12 AM". */
-const formatHour = (h: number) => `${h % 12 === 0 ? 12 : h % 12} ${h < 12 ? "AM" : "PM"}`;
 
 const pct = (v: number) => `${Math.round(v * 100)}%`;
 
@@ -241,6 +240,7 @@ export default function AstronomyTargets() {
   const [seasonFilter, setSeasonFilter] = useStoredState<SeasonFilter | null>("season-filter", null, parseSeasonFilter);
   const toggleSeason = (season: SeasonFilter) => setSeasonFilter((prev) => (prev === season ? null : season));
 
+  const [schedule, setSchedule] = useState<Schedule | null>(null);
   const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
 
   const scored = useMemo(() => scoreTargets(model.targets, settings), [settings]);
@@ -400,6 +400,9 @@ export default function AstronomyTargets() {
                   {season === "any" ? "Any" : SEASONS[season].label.split(" ")[0]}
                 </button>
               ))}
+              {seasonFilter && seasonFilter !== "any" && (
+                <button type="button" onClick={() => setSchedule(buildSchedule(scored, seasonFilter, settings))}>Generate Schedule</button>
+              )}
             </div>
             <div className="astro-columns">
               <span>Columns:</span>
@@ -481,6 +484,7 @@ export default function AstronomyTargets() {
         </table>
       </div>
 
+      {schedule && <ScheduleModal schedule={schedule} onClose={() => setSchedule(null)} />}
       {hover && (() => {
         const row = rows.find((r) => r.target.id === hover.id);
         return row ? <TargetPreview row={row} settings={settings} x={hover.x} y={hover.y} /> : null;

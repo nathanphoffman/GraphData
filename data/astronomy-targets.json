@@ -14,7 +14,7 @@
    "minor": 60,
    "coreBoost": 2.5,
    "simAdjust": 5,
-   "authorAdjust": 2.5,
+   "authorAdjust": -5,
    "bestSeason": "autumn"
   },
   {
