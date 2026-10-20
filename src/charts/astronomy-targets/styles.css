@@ -425,6 +425,7 @@
 
 .astro-photo {
   position: relative;
+  width: fit-content;
 }
 
 .astro-circle {

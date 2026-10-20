@@ -373,7 +373,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const fit = sizeFit(target, fov);
     const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
-    const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
+    const raw = 100 * Math.pow(sky, 0.1) * Math.pow(fit, 0.4) * Math.pow(light, 0.2) * Math.pow(core, 0.3);
     const score = Math.min(100, raw - SCORE_OFFSET + adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) + adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) + qualityAdjust(target, settings));
     return { target, score, sky, fit, light, core, peakAltitude, bestHour: hour };
   };

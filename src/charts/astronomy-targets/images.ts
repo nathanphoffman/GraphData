@@ -181,6 +181,8 @@ export interface TargetImage {
    * instead of the whole photo, which matters when the photo is mostly empty sky and stars.
    */
   footprint?: { cx: number; cy: number; angleDeg: number };
+  /** Skip the red circle on the photo, for targets that are obvious in the picture. */
+  noCircle?: boolean;
 }
 
 const DSS_CREDIT = "Digitized Sky Survey 2 (STScI/NASA, Palomar/ESO/UK Schmidt), via CDS hips2fits";
@@ -448,6 +450,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     widthArcmin: 210,
     credit: DSS_CREDIT,
     footprint: CENTRED,
+    noCircle: true,
   },
   "NGC 6888": {
     src: img_ngc_6888,

@@ -67,7 +67,7 @@ const CIRCLE_MIN = 0.03;
 /** A red outline around the target on the photo, when the target is only a small part of what the photo shows. */
 function TargetCircle({ target, info, img }: { target: Target; info: TargetImage; img: HTMLImageElement }) {
   const f = info.footprint;
-  if (!f || target.major <= 0 || target.major / info.widthArcmin >= CIRCLE_BELOW) return null;
+  if (!f || info.noCircle || target.major <= 0 || target.major / info.widthArcmin >= CIRCLE_BELOW) return null;
   const w = info.widthArcmin;
   const h = w * (img.naturalHeight / img.naturalWidth);
   const min = (w * CIRCLE_MIN) / 2;
@@ -339,7 +339,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
           <img src={info.src} alt={row.target.nickname || row.target.id} style={{ height: VIEW_SIZE }} />
           {loaded && <TargetCircle target={row.target} info={info} img={loaded.img} />}
         </div>
-        <figcaption>Photo{loaded && info.footprint && row.target.major > 0 && row.target.major / info.widthArcmin < CIRCLE_BELOW ? " (target circled)" : ""}</figcaption>
+        <figcaption>Photo{loaded && info.footprint && !info.noCircle && row.target.major > 0 && row.target.major / info.widthArcmin < CIRCLE_BELOW ? " (target circled)" : ""}</figcaption>
       </figure>
       <figure>
         <canvas ref={canvasRef} style={{ width: VIEW_SIZE, height: VIEW_SIZE }} />
