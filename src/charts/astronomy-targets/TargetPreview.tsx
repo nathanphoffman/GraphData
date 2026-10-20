@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import type { ScoredTarget, Settings } from "./types";
+import type { ScoredTarget, Settings, Target } from "./types";
 import { viewConditions } from "./calculate";
-import { TARGET_IMAGES } from "./images";
+import { TARGET_IMAGES, type TargetImage } from "./images";
 
 const VIEW_SIZE = 280;
 const SCALE = 2;
@@ -15,17 +15,39 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
-/** Average linear brightness of the photo, used as "the target's typical surface brightness". */
-function meanLinear(img: HTMLImageElement): number {
+/** Average linear brightness of the photo (or of the target's own oval within it), used as "the target's typical surface brightness". */
+function meanLinear(img: HTMLImageElement, info: TargetImage, target: Target): number {
+  const w = 256;
+  const h = Math.round(w * (img.naturalHeight / img.naturalWidth));
   const c = document.createElement("canvas");
-  c.width = c.height = 64;
+  c.width = w;
+  c.height = h;
   const g = c.getContext("2d");
   if (!g) return 0.05;
-  g.drawImage(img, 0, 0, 64, 64);
-  const px = g.getImageData(0, 0, 64, 64).data;
+  g.drawImage(img, 0, 0, w, h);
+  const px = g.getImageData(0, 0, w, h).data;
+  const f = info.footprint;
+  const pxPerArcmin = w / info.widthArcmin;
+  const a = (target.major / 2) * pxPerArcmin;
+  const b = (target.minor / 2) * pxPerArcmin;
+  const angle = ((f?.angleDeg ?? 0) * Math.PI) / 180;
   let sum = 0;
-  for (let i = 0; i < px.length; i += 4) sum += Math.pow((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255, 2.2);
-  return Math.max(0.005, sum / (px.length / 4));
+  let n = 0;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (f) {
+        const dx = x - f.cx * w;
+        const dy = y - f.cy * h;
+        const u = dx * Math.cos(angle) + dy * Math.sin(angle);
+        const v = -dx * Math.sin(angle) + dy * Math.cos(angle);
+        if ((u / a) ** 2 + (v / b) ** 2 > 1) continue;
+      }
+      const i = (y * w + x) * 4;
+      sum += Math.pow((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255, 2.2);
+      n++;
+    }
+  }
+  return Math.max(0.005, n ? sum / n : 0.05);
 }
 
 /**
@@ -95,10 +117,10 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   useEffect(() => {
     let cancelled = false;
     loadImage(info.src).then((img) => {
-      if (!cancelled) setLoaded({ img, mean: meanLinear(img) });
+      if (!cancelled) setLoaded({ img, mean: meanLinear(img, info, row.target) });
     }).catch(() => {});
     return () => { cancelled = true; };
-  }, [info.src]);
+  }, [info, row.target]);
 
   useEffect(() => {
     if (loaded && canvasRef.current) drawView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, fov, margin, skyGlow);
