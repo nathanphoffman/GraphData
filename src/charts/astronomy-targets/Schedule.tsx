@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { hasPreview } from "./TargetPreview";
 import { formatHour, SEASONS, WINDOW_HOURS, type Schedule, type ScheduleItem, type ScheduleLevel } from "./calculate";
 
 const LEVELS: { level: ScheduleLevel; label: string; hue: number }[] = [
@@ -7,10 +8,16 @@ const LEVELS: { level: ScheduleLevel; label: string; hue: number }[] = [
   { level: "hard", label: "Hard", hue: 0 },
 ];
 
-function Item({ item }: { item: ScheduleItem }) {
+type OnHover = (hover: { id: string; x: number; y: number } | null) => void;
+
+function Item({ item, onHover }: { item: ScheduleItem; onHover: OnHover }) {
   const t = item.row.target;
+  const preview = hasPreview(t.id);
   return (
-    <li>
+    <li
+      onMouseMove={preview ? (e) => onHover({ id: t.id, x: e.clientX, y: e.clientY }) : undefined}
+      onMouseLeave={preview ? () => onHover(null) : undefined}
+    >
       <strong>{t.id}</strong>
       {t.nickname && <span> {t.nickname}</span>}
       <span className="astro-nick"> · {t.type} · score {item.row.score.toFixed(0)} · best {formatHour(item.row.bestHour ?? 0)} · up {formatHour(item.up[0])}–{formatHour(item.up[1])}</span>
@@ -18,7 +25,7 @@ function Item({ item }: { item: ScheduleItem }) {
   );
 }
 
-export function ScheduleModal({ schedule, onClose }: { schedule: Schedule; onClose: () => void }) {
+export function ScheduleModal({ schedule, onClose, onHover }: { schedule: Schedule; onClose: () => void; onHover: OnHover }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -40,7 +47,7 @@ export function ScheduleModal({ schedule, onClose }: { schedule: Schedule; onClo
             {LEVELS.filter((l) => slot.items[l.level].length > 0).map((l) => (
               <div key={l.level}>
                 <span className="astro-tag" style={{ "--tag": `hsl(${l.hue} 70% 45%)` } as React.CSSProperties}>{l.label}</span>
-                <ul>{slot.items[l.level].map((item) => <Item key={item.row.target.id} item={item} />)}</ul>
+                <ul>{slot.items[l.level].map((item) => <Item key={item.row.target.id} item={item} onHover={onHover} />)}</ul>
               </div>
             ))}
             {slot.more > 0 && <small className="astro-nick">+{slot.more} more in this window</small>}
@@ -50,13 +57,23 @@ export function ScheduleModal({ schedule, onClose }: { schedule: Schedule; onClo
           <section className="astro-slot">
             <h3>Reach</h3>
             <p className="astro-note">One very hard object for the adventurous, picked at random (best around {formatHour(schedule.reach.row.bestHour ?? 0)}).</p>
-            <ul><Item item={schedule.reach} /></ul>
+            <ul><Item item={schedule.reach} onHover={onHover} /></ul>
           </section>
         )}
         {schedule.stars.length > 0 && (
           <section className="astro-slot">
             <h3>Notable stars out</h3>
-            <p>{schedule.stars.map((r) => r.target.id).join(", ")}</p>
+            <p>
+              {schedule.stars.map((r, i) => (
+                <span
+                  key={r.target.id}
+                  onMouseMove={hasPreview(r.target.id) ? (e) => onHover({ id: r.target.id, x: e.clientX, y: e.clientY }) : undefined}
+                  onMouseLeave={hasPreview(r.target.id) ? () => onHover(null) : undefined}
+                >
+                  {r.target.id}{i < schedule.stars.length - 1 ? ", " : ""}
+                </span>
+              ))}
+            </p>
           </section>
         )}
       </div>

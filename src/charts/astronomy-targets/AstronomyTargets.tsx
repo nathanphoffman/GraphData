@@ -484,7 +484,7 @@ export default function AstronomyTargets() {
         </table>
       </div>
 
-      {schedule && <ScheduleModal schedule={schedule} onClose={() => setSchedule(null)} />}
+      {schedule && <ScheduleModal schedule={schedule} onClose={() => { setSchedule(null); setHover(null); }} onHover={setHover} />}
       {hover && (() => {
         const row = rows.find((r) => r.target.id === hover.id);
         return row ? <TargetPreview row={row} settings={settings} x={hover.x} y={hover.y} /> : null;

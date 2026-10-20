@@ -56,6 +56,27 @@ function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target):
   return { mean: Math.max(0.005, (n ? sum / n : 0.05) - bg), bg };
 }
 
+/** Targets smaller than this share of the photo's width get a red circle on the photo, so you can tell which thing in the picture is the target. */
+const CIRCLE_BELOW = 0.5;
+/** The circle is never smaller than this share of the photo's width, so tiny targets can still be found. */
+const CIRCLE_MIN = 0.03;
+
+/** A red outline around the target on the photo, when the target is only a small part of what the photo shows. */
+function TargetCircle({ target, info, img }: { target: Target; info: TargetImage; img: HTMLImageElement }) {
+  const f = info.footprint;
+  if (!f || target.major <= 0 || target.major / info.widthArcmin >= CIRCLE_BELOW) return null;
+  const w = info.widthArcmin;
+  const h = w * (img.naturalHeight / img.naturalWidth);
+  const min = (w * CIRCLE_MIN) / 2;
+  const cx = f.cx * w;
+  const cy = f.cy * h;
+  return (
+    <svg className="astro-circle" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
+      <ellipse cx={cx} cy={cy} rx={Math.max(target.major / 2, min)} ry={Math.max(target.minor / 2, min)} transform={`rotate(${f.angleDeg} ${cx} ${cy})`} />
+    </svg>
+  );
+}
+
 /** How much more you see looking slightly off to the side of the target (the eye's rod cells are more sensitive), in magnitudes. */
 const AVERTED_BOOST = 0.9;
 /** Dark-adapted eyes see red as dark and blue-green as bright, and sky-survey photos are red-heavy, so the photo's red is turned down and its blue turned up. */
@@ -249,8 +270,11 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   return (
     <div className="astro-preview" style={{ left: Math.max(8, left), top: Math.max(8, top) }}>
       <figure>
-        <img src={info.src} alt={row.target.nickname || row.target.id} style={{ height: VIEW_SIZE }} />
-        <figcaption>Photo</figcaption>
+        <div className="astro-photo">
+          <img src={info.src} alt={row.target.nickname || row.target.id} style={{ height: VIEW_SIZE }} />
+          {loaded && <TargetCircle target={row.target} info={info} img={loaded.img} />}
+        </div>
+        <figcaption>Photo{loaded && info.footprint && row.target.major > 0 && row.target.major / info.widthArcmin < CIRCLE_BELOW ? " (target circled)" : ""}</figcaption>
       </figure>
       <figure>
         <canvas ref={canvasRef} style={{ width: VIEW_SIZE, height: VIEW_SIZE }} />
