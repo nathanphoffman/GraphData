@@ -97,6 +97,78 @@ import jupiter from "./images/jupiter.jpg";
 import saturn from "./images/saturn.jpg";
 import uranus from "./images/uranus.jpg";
 import neptune from "./images/neptune.jpg";
+import img_m101 from "./images/m101.jpg";
+import img_ic_5146 from "./images/ic_5146.jpg";
+import img_m64 from "./images/m64.jpg";
+import img_m32 from "./images/m32.jpg";
+import img_regulus from "./images/regulus.jpg";
+import img_m26 from "./images/m26.jpg";
+import img_aldebaran from "./images/aldebaran.jpg";
+import img_ngc_1502 from "./images/ngc_1502.jpg";
+import img_m51 from "./images/m51.jpg";
+import img_ngc_6543 from "./images/ngc_6543.jpg";
+import img_ngc_891 from "./images/ngc_891.jpg";
+import img_m93 from "./images/m93.jpg";
+import img_ngc_6826 from "./images/ngc_6826.jpg";
+import img_ngc_7662 from "./images/ngc_7662.jpg";
+import img_m6 from "./images/m6.jpg";
+import img_ngc_253 from "./images/ngc_253.jpg";
+import img_m14 from "./images/m14.jpg";
+import img_ngc_2129 from "./images/ngc_2129.jpg";
+import img_m49 from "./images/m49.jpg";
+import img_m65 from "./images/m65.jpg";
+import img_m17 from "./images/m17.jpg";
+import img_m86 from "./images/m86.jpg";
+import img_m7 from "./images/m7.jpg";
+import img_ngc_2169 from "./images/ngc_2169.jpg";
+import img_m56 from "./images/m56.jpg";
+import img_ngc_7331 from "./images/ngc_7331.jpg";
+import img_m21 from "./images/m21.jpg";
+import img_ic_1848 from "./images/ic_1848.jpg";
+import img_m103 from "./images/m103.jpg";
+import img_m57 from "./images/m57.jpg";
+import img_m27 from "./images/m27.jpg";
+import img_m66 from "./images/m66.jpg";
+import img_ngc_2392 from "./images/ngc_2392.jpg";
+import img_ngc_1499 from "./images/ngc_1499.jpg";
+import img_m29 from "./images/m29.jpg";
+import img_m104 from "./images/m104.jpg";
+import img_m108 from "./images/m108.jpg";
+import img_m20 from "./images/m20.jpg";
+import img_m87 from "./images/m87.jpg";
+import img_ngc_7635 from "./images/ngc_7635.jpg";
+import img_ngc_2362 from "./images/ngc_2362.jpg";
+import img_m74 from "./images/m74.jpg";
+import img_m43 from "./images/m43.jpg";
+import img_m71 from "./images/m71.jpg";
+import img_m1 from "./images/m1.jpg";
+import img_ngc_6946 from "./images/ngc_6946.jpg";
+import img_ngc_40 from "./images/ngc_40.jpg";
+import img_m78 from "./images/m78.jpg";
+import img_m84 from "./images/m84.jpg";
+import img_m18 from "./images/m18.jpg";
+import img_m28 from "./images/m28.jpg";
+import img_m76 from "./images/m76.jpg";
+import img_ngc_7009 from "./images/ngc_7009.jpg";
+import img_m109 from "./images/m109.jpg";
+import img_m77 from "./images/m77.jpg";
+import img_m19 from "./images/m19.jpg";
+import img_m97 from "./images/m97.jpg";
+import img_m8 from "./images/m8.jpg";
+import img_m30 from "./images/m30.jpg";
+import img_ngc_6960_92 from "./images/ngc_6960_92.jpg";
+import img_ngc_3242 from "./images/ngc_3242.jpg";
+import img_m9 from "./images/m9.jpg";
+import img_m80 from "./images/m80.jpg";
+import img_m54 from "./images/m54.jpg";
+import img_m4 from "./images/m4.jpg";
+import img_m55 from "./images/m55.jpg";
+import img_ngc_7293 from "./images/ngc_7293.jpg";
+import img_ngc_2237 from "./images/ngc_2237.jpg";
+import img_ngc_2024 from "./images/ngc_2024.jpg";
+import img_ic_434 from "./images/ic_434.jpg";
+import mercury from "./images/mercury.jpg";
+import venus from "./images/venus.jpg";
 
 export interface TargetImage {
   src: string;
@@ -724,5 +796,437 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     widthArcmin: 0.0466,
     credit: "NASA/JPL, Voyager 2 (public domain)",
     footprint: { cx: 0.49, cy: 0.5, angleDeg: 0 },
+  },
+  "M101": {
+    src: img_m101,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 5146": {
+    src: img_ic_5146,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M64": {
+    src: img_m64,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M32": {
+    src: img_m32,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Regulus": {
+    src: img_regulus,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M26": {
+    src: img_m26,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Aldebaran": {
+    src: img_aldebaran,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 1502": {
+    src: img_ngc_1502,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M51": {
+    src: img_m51,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 6543": {
+    src: img_ngc_6543,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 891": {
+    src: img_ngc_891,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M93": {
+    src: img_m93,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 6826": {
+    src: img_ngc_6826,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7662": {
+    src: img_ngc_7662,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M6": {
+    src: img_m6,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 253": {
+    src: img_ngc_253,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M14": {
+    src: img_m14,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2129": {
+    src: img_ngc_2129,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M49": {
+    src: img_m49,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M65": {
+    src: img_m65,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M17": {
+    src: img_m17,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M86": {
+    src: img_m86,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M7": {
+    src: img_m7,
+    widthArcmin: 240,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2169": {
+    src: img_ngc_2169,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M56": {
+    src: img_m56,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7331": {
+    src: img_ngc_7331,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M21": {
+    src: img_m21,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 1848": {
+    src: img_ic_1848,
+    widthArcmin: 300,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M103": {
+    src: img_m103,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M57": {
+    src: img_m57,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M27": {
+    src: img_m27,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M66": {
+    src: img_m66,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2392": {
+    src: img_ngc_2392,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 1499": {
+    src: img_ngc_1499,
+    widthArcmin: 435,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M29": {
+    src: img_m29,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M104": {
+    src: img_m104,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M108": {
+    src: img_m108,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M20": {
+    src: img_m20,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M87": {
+    src: img_m87,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7635": {
+    src: img_ngc_7635,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2362": {
+    src: img_ngc_2362,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M74": {
+    src: img_m74,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M43": {
+    src: img_m43,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M71": {
+    src: img_m71,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M1": {
+    src: img_m1,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 6946": {
+    src: img_ngc_6946,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 40": {
+    src: img_ngc_40,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M78": {
+    src: img_m78,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M84": {
+    src: img_m84,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M18": {
+    src: img_m18,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M28": {
+    src: img_m28,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M76": {
+    src: img_m76,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7009": {
+    src: img_ngc_7009,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M109": {
+    src: img_m109,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M77": {
+    src: img_m77,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M19": {
+    src: img_m19,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M97": {
+    src: img_m97,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M8": {
+    src: img_m8,
+    widthArcmin: 270,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M30": {
+    src: img_m30,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 6960/92": {
+    src: img_ngc_6960_92,
+    widthArcmin: 480,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 3242": {
+    src: img_ngc_3242,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M9": {
+    src: img_m9,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M80": {
+    src: img_m80,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M54": {
+    src: img_m54,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M4": {
+    src: img_m4,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M55": {
+    src: img_m55,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7293": {
+    src: img_ngc_7293,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2237": {
+    src: img_ngc_2237,
+    widthArcmin: 240,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2024": {
+    src: img_ngc_2024,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 434": {
+    src: img_ic_434,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  Mercury: {
+    src: mercury,
+    widthArcmin: 0.148,
+    credit: "NASA/JPL, MESSENGER (public domain)",
+    footprint: { cx: 0.548, cy: 0.5, angleDeg: 0 },
+  },
+  Venus: {
+    src: venus,
+    widthArcmin: 0.483,
+    credit: "NASA/JPL, Mariner 10 (public domain)",
+    footprint: { cx: 0.48, cy: 0.5, angleDeg: 0 },
   },
 };
