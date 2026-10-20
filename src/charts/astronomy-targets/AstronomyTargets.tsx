@@ -4,7 +4,7 @@ import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
-import { activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, qualityAdjust, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -88,11 +88,12 @@ const COLUMNS: Column[] = [
   { id: "core", label: "Core", show: true, cell: (r) => <Percent value={r.core} /> },
   {
     id: "adjust",
-    label: "Simulator / Author",
-    title: "Top: how much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Bottom: the author's own adjustment in score points, from field experience. -- = not rated yet (counts as 0). Part of each is added to the score, set by the sliders above the table.",
+    label: "Simulator / Author / Quality",
+    title: "Top: how much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Middle: the author's own adjustment in score points, from field experience. -- = not rated yet (counts as 0). Bottom: score points for the telescope's optical quality, which helps planets, stars and clusters most and barely affects nebulae and galaxies (always added in full). Part of the top two is added to the score, set by the sliders above the table.",
     show: true,
     afterScore: true,
-    cell: (r) => {
+    cell: (r, settings) => {
+      const quality = Math.round(qualityAdjust(r.target, settings) * 10) / 10;
       const sim = r.target.simAdjust;
       const author = r.target.authorAdjust;
       const fmt = (v: number) => (v >= 0 ? `+${v}` : `−${-v}`);
@@ -100,6 +101,7 @@ const COLUMNS: Column[] = [
         <div className="astro-stack">
           {sim === undefined ? "—" : <span className="astro-tag" style={{ "--tag": heat(0.5 + sim / 60, 1) } as CSSProperties} title="Simulator adjustment">{fmt(sim)}%</span>}
           {author === undefined ? "--" : <span className="astro-tag" style={{ "--tag": heat(0.5 + author / 30, 1) } as CSSProperties} title="Author adjustment">{fmt(author)}</span>}
+          <span className="astro-tag" style={{ "--tag": heat(0.5 + quality / 50, 1) } as CSSProperties} title="Quality adjustment">{fmt(quality)}</span>
         </div>
       );
     },
@@ -426,8 +428,8 @@ export default function AstronomyTargets() {
                         : <span className="astro-tag" style={{ "--tag": heat(difficulty(row.score).level, 1) } as CSSProperties}>{difficulty(row.score).label}</span>}
                     </div>
                     <div className="astro-scorebar">
-                      <span className="astro-bar" style={{ width: `${row.score}%`, background: heat(row.score / 100, 0.45) }} />
-                      <span className="astro-score-text">{row.score.toFixed(0)}</span>
+                      <span className="astro-bar" style={{ width: `${Math.max(0, row.score)}%`, background: heat(row.score / 100, 0.45) }} />
+                      <span className="astro-score-text">{row.score.toFixed(0).replace("-", "−")}</span>
                     </div>
                   </td>
                   {afterScore.map((c) => (

@@ -94,7 +94,7 @@ export function optics(settings: Settings): { fov: number; mm: number } {
 
 const STEP_HOURS = 0.5;
 /** Points taken off every score (it never goes below 0). */
-const SCORE_OFFSET = 10;
+const SCORE_OFFSET = 18;
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 function dayOfYear(month: number, day: number): number {
@@ -285,6 +285,26 @@ export function previewOptics(settings: Settings) {
   };
 }
 
+/** How much optical quality matters for each kind of target: sharp, contrasty optics help point-like and detailed things most, and barely matter for faint diffuse glows. */
+const QUALITY_SENSITIVITY: Record<string, number> = {
+  Planet: 1,
+  "Double star": 1,
+  "Globular cluster": 0.8,
+  Moon: 0.6,
+  "Open cluster": 0.6,
+  "Planetary nebula": 0.5,
+  Star: 0.4,
+  Galaxy: 0.15,
+  Nebula: 0.15,
+  "Supernova remnant": 0.15,
+};
+
+/** Score points for good or poor optics: up to +25 for the best, down to -25 for the worst, scaled by how much the target type cares. */
+export function qualityAdjust(t: Target, settings: Settings): number {
+  const q = (effectiveQuality(settings) - 50) / 50;
+  return (QUALITY_SENSITIVITY[t.type] ?? 0.3) * 25 * q;
+}
+
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {
   const seasonSamples = Object.fromEntries(
     (Object.keys(SEASONS) as Season[]).map((season) => [season, sampleWindow(settings, season)]),
@@ -320,7 +340,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
     const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
-    const score = clamp(raw - SCORE_OFFSET + ((target.simAdjust ?? 0) * settings.simWeight) / 100 + ((target.authorAdjust ?? 0) * settings.authorWeight) / 100, 0, 100);
+    const score = Math.min(100, raw - SCORE_OFFSET + ((target.simAdjust ?? 0) * settings.simWeight) / 100 + ((target.authorAdjust ?? 0) * settings.authorWeight) / 100 + qualityAdjust(target, settings));
     return { target, score, sky, fit, light, core, peakAltitude };
   };
 
