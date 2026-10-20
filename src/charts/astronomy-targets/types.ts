@@ -35,8 +35,8 @@ export interface AstronomyTargetsData {
 }
 
 export type Season = "spring" | "summer" | "autumn" | "winter";
-export type FocalLength = "small" | "small-medium" | "medium" | "medium-long" | "long";
-export type Aperture = "small" | "small-medium" | "medium" | "medium-large" | "large";
+export type FocalLength = "tiny" | "tiny-small" | "small" | "small-medium" | "medium" | "medium-large" | "large" | "large-huge" | "huge";
+export type Aperture = "tiny" | "tiny-small" | "small" | "small-medium" | "medium" | "medium-large" | "large" | "large-huge" | "huge";
 
 export interface Settings {
   /** Local solar time, "HH:MM". */

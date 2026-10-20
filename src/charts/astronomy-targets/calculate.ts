@@ -12,20 +12,28 @@ export const SEASONS: Record<Season, { label: string; dates: [number, number][] 
 
 /** Typical true field of view in arcminutes for each focal length class. */
 export const FOCAL_LENGTHS: Record<FocalLength, { label: string; fov: number }> = {
-  small: { label: "Small (under 500 mm, wide field)", fov: 240 },
+  tiny: { label: "Tiny (about 150 mm, ultra-wide field)", fov: 480 },
+  "tiny-small": { label: "Tiny-Small (about 200 mm)", fov: 340 },
+  small: { label: "Small (about 300 mm, wide field)", fov: 240 },
   "small-medium": { label: "Small-Medium (about 500 mm)", fov: 147 },
-  medium: { label: "Medium (500–1200 mm)", fov: 90 },
-  "medium-long": { label: "Medium-Long (about 1200 mm)", fov: 56 },
-  long: { label: "Long (over 1200 mm, tight field)", fov: 35 },
+  medium: { label: "Medium (about 800 mm)", fov: 90 },
+  "medium-large": { label: "Medium-Large (about 1200 mm)", fov: 56 },
+  large: { label: "Large (about 2000 mm, tight field)", fov: 35 },
+  "large-huge": { label: "Large-Huge (about 2800 mm)", fov: 25 },
+  huge: { label: "Huge (about 4000 mm, very tight field)", fov: 18 },
 };
 
 /** Representative mirror/lens diameter in mm for each size class. */
 export const APERTURES: Record<Aperture, { label: string; mm: number }> = {
-  small: { label: "Small (under 100 mm / 4 in)", mm: 70 },
+  tiny: { label: "Tiny (about 40 mm / 1.5 in)", mm: 40 },
+  "tiny-small": { label: "Tiny-Small (about 55 mm / 2 in)", mm: 55 },
+  small: { label: "Small (about 70 mm / 3 in)", mm: 70 },
   "small-medium": { label: "Small-Medium (about 100 mm / 4 in)", mm: 95 },
-  medium: { label: "Medium (100–200 mm / 4–8 in)", mm: 130 },
-  "medium-large": { label: "Medium-Large (about 200 mm / 8 in)", mm: 180 },
-  large: { label: "Large (over 200 mm / 8 in)", mm: 250 },
+  medium: { label: "Medium (about 130 mm / 5 in)", mm: 130 },
+  "medium-large": { label: "Medium-Large (about 180 mm / 7 in)", mm: 180 },
+  large: { label: "Large (about 250 mm / 10 in)", mm: 250 },
+  "large-huge": { label: "Large-Huge (about 350 mm / 14 in)", mm: 350 },
+  huge: { label: "Huge (about 500 mm / 20 in)", mm: 500 },
 };
 
 export const DEFAULT_SETTINGS: Settings = {

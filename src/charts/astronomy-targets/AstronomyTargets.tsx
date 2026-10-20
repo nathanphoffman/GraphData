@@ -127,7 +127,8 @@ function parseSettings(saved: unknown): Settings | null {
     from: time(s.from, DEFAULT_SETTINGS.from),
     to: time(s.to, DEFAULT_SETTINGS.to),
     latitude: number(s.latitude, 0, 80, DEFAULT_SETTINGS.latitude),
-    focalLength: pick(s.focalLength, FOCAL_LENGTHS, DEFAULT_SETTINGS.focalLength),
+    // Older saved settings used "medium-long" and "long" for what are now Medium-Large and Large.
+    focalLength: pick(s.focalLength === "medium-long" ? "medium-large" : s.focalLength === "long" ? "large" : s.focalLength, FOCAL_LENGTHS, DEFAULT_SETTINGS.focalLength),
     aperture: pick(s.aperture, APERTURES, DEFAULT_SETTINGS.aperture),
     manual: s.manual === true,
     scopeFocalMm: number(s.scopeFocalMm, 50, 10000, DEFAULT_SETTINGS.scopeFocalMm),
