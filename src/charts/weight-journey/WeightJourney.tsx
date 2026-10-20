@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { scaleLinear, scaleTime } from "d3-scale";
 import "./styles.css";
 import data from "../../../data/weight-journey.json";
-import { type Averages, addAverages, addMuscle, compress, fillDays, project } from "./calculate";
+import { type Averages, addAverages, addMuscle, compress, fillDays, project, projectTapering, taperToTotal } from "./calculate";
 
 const days = fillDays(data.weights as [string, number][]);
 const withMuscle = addMuscle(days);
@@ -89,6 +89,12 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
 const dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
 const compressedRows = buildRows(compress(withMuscle, COMPRESS_STEP), COMPRESSED_WINDOWS, COMPRESS_STEP);
 
+/** Tapering curve from `start` to `target` (treated as the total loss) over `ahead` days, starting at `date`. */
+const taperCurve = (date: string, start: number, target: number, ahead: number) => [
+  { date, weight: start },
+  ...taperToTotal(date, start, start - target, ahead),
+];
+
 function line(points: { x: number; y: number }[]): string {
   return points.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join("");
 }
@@ -119,13 +125,68 @@ export default function WeightJourney() {
     );
   };
 
+  // Projection tool: monthly loss typed in the shown unit, converted back to lb.
+  const [lossInput, setLossInput] = useState("");
+  const [projMonths, setProjMonths] = useState("12");
+  const monthlyLoss = Number(lossInput) / k;
+  const aheadDays = Math.round(Number(projMonths) * 30);
+  const tapered = useMemo(() => {
+    if (!lossInput || !(monthlyLoss > 0) || !(aheadDays > 0)) return null;
+    const lastRow = dailyRows[dailyRows.length - 1];
+    return projectTapering(
+      lastRow.date,
+      lastRow.avg3,
+      withMuscle[withMuscle.length - 1].muscleTotal,
+      monthlyLoss,
+      withMuscle[withMuscle.length - 1].muscleDaily,
+      aheadDays,
+    );
+  }, [lossInput, monthlyLoss, aheadDays]);
+
+  const [showAllTrend, setShowAllTrend] = useState(false);
+  /** Tapering curve from a row's 3-day average down to its 3 day projected all average, treated as the total loss (first month = 1/12 of it). Today, yesterday and the day before. */
+  const allTrend = useMemo(() => {
+    if (!showAllTrend) return null;
+    const ahead = aheadDays > 0 ? aheadDays : 365;
+    const curve = (date: string, start: number, target: number) => taperCurve(date, start, target, ahead);
+    const trends = [0, 1, 2].flatMap((back) => {
+      const row = tableRows[tableRows.length - 1 - back];
+      if (!row || row.allProj3 === null || row.allProj3Adj === null) return [];
+      return [{ back, actual: curve(row.date, row.avg3, row.allProj3), adjusted: curve(row.date, row.adj.avg3, row.allProj3Adj) }];
+    });
+    return trends.length ? { trends, date: trends[0].actual[trends[0].actual.length - 1].date } : null;
+  }, [showAllTrend, tableRows, aheadDays]);
+
+  const [showSpread, setShowSpread] = useState(false);
+  /**
+   * The last 7 rows each give a tapering curve to their own 3 day projected all average. Sorted best (lowest target)
+   * to worst (highest), with a mean curve; used for the shaded range.
+   */
+  const spread = useMemo(() => {
+    if (!showSpread) return null;
+    const ahead = aheadDays > 0 ? aheadDays : 365;
+    const rows7 = tableRows.slice(-7).filter((r) => r.allProj3 !== null && r.allProj3Adj !== null);
+    if (rows7.length < 2) return null;
+    const build = (start: (r: (typeof rows7)[number]) => number, target: (r: (typeof rows7)[number]) => number) => {
+      const curves = rows7
+        .map((r) => ({ target: target(r), points: taperCurve(r.date, start(r), target(r), ahead) }))
+        .sort((a, b) => a.target - b.target);
+      const mean = (f: (r: (typeof rows7)[number]) => number) => rows7.reduce((sum, r) => sum + f(r), 0) / rows7.length;
+      return { curves, mean: taperCurve(rows7[rows7.length - 1].date, mean(start), mean(target), ahead) };
+    };
+    return {
+      actual: build((r) => r.avg3, (r) => r.allProj3!),
+      adjusted: build((r) => r.adj.avg3, (r) => r.allProj3Adj!),
+    };
+  }, [showSpread, tableRows, aheadDays]);
+
   const chart = useMemo(() => {
     const shown = days.slice(-Math.min(range.days, days.length));
-    const shownFuture = future;
+    const shownFuture = tapered ? [...future, ...tapered] : future;
     const shownAvg = tableRows.filter((d) => d.date >= shown[0].date);
-    const all = [...shown, ...shownFuture, ...projectedAdjusted.future, ...shownAvg.map((d) => ({ weight: d.adj.avg3 }))] as { date: string; weight: number }[];
+    const all = [...shown, ...shownFuture, ...projectedAdjusted.future, ...(tapered ?? []).flatMap((d) => [{ weight: d.weight }, { weight: d.adjusted }]), ...(allTrend ? allTrend.trends.flatMap((t) => [...t.actual, ...t.adjusted]) : []), ...(spread ? [spread.actual, spread.adjusted].flatMap((g) => [...g.curves[0].points, ...g.curves[g.curves.length - 1].points]) : []), ...shownAvg.map((d) => ({ weight: d.adj.avg3 }))] as { date: string; weight: number }[];
     const x = scaleTime()
-      .domain([toDate(shown[0].date), toDate(shownFuture[shownFuture.length - 1].date)])
+      .domain([toDate(shown[0].date), toDate([shownFuture[shownFuture.length - 1].date, allTrend?.date ?? "", spread ? spread.actual.mean[spread.actual.mean.length - 1].date : ""].sort().pop()!)])
       .range([M.left, W - M.right]);
     const weights = all.map((d) => d.weight * k);
     const y = scaleLinear()
@@ -133,6 +194,24 @@ export default function WeightJourney() {
       .range([H - M.bottom, M.top]);
     const pt = (d: { date: string; weight: number }) => ({ x: x(toDate(d.date)), y: y(d.weight * k) });
     const firstShown = shown[0].date;
+    /** Shaded bands between neighbouring curves: the closer two curves sit at the end, the more opaque the band (that's where the projections concentrate). */
+    const shade = (g: NonNullable<typeof spread>["actual"]) => {
+      const gaps = g.curves.slice(1).map((c, i) => Math.max(Math.abs(c.target - g.curves[i].target), 0.1));
+      const densest = Math.max(...gaps.map((gap) => 1 / gap));
+      return {
+        bands: gaps.map((gap, i) => {
+          const a = g.curves[i].points.map(pt);
+          const b = g.curves[i + 1].points.map(pt).reverse();
+          return { d: `${line(a)}L${line(b).slice(1)}Z`, opacity: 0.06 + (0.5 * (1 / gap)) / densest };
+        }),
+        best: line(g.curves[0].points.map(pt)),
+        worst: line(g.curves[g.curves.length - 1].points.map(pt)),
+        mean: line(g.mean.map(pt)),
+      };
+    };
+    const lastRow = dailyRows[dailyRows.length - 1];
+    const anchor = pt({ date: lastRow.date, weight: lastRow.avg3 });
+    const anchorAdjusted = pt({ date: lastRow.date, weight: lastRow.adj.avg3 });
     return {
       x,
       y,
@@ -146,9 +225,19 @@ export default function WeightJourney() {
       ]),
       measured: shown.filter((d) => !d.estimated).map(pt),
       fit: line(fit.filter((d) => d.date >= firstShown).map(pt)),
-      future: line([pt(fit[fit.length - 1]), ...shownFuture.map(pt)]),
+      future: line([pt(fit[fit.length - 1]), ...future.map(pt)]),
+      spread: spread ? { actual: shade(spread.actual), adjusted: shade(spread.adjusted) } : null,
+      allTrends: (allTrend?.trends ?? []).map((t) => ({
+        back: t.back,
+        actual: line(t.actual.map(pt)),
+        adjusted: line(t.adjusted.map(pt)),
+      })),
+      taper: tapered ? line([anchor, ...tapered.map(pt)]) : "",
+      taperAdjusted: tapered
+        ? line([anchorAdjusted, ...tapered.map((d) => pt({ date: d.date, weight: d.adjusted }))])
+        : "",
     };
-  }, [range, k, tableRows]);
+  }, [range, k, tableRows, tapered, allTrend, spread]);
 
   const first = days[0];
   const latest = days[days.length - 1];
@@ -196,6 +285,28 @@ export default function WeightJourney() {
         ))}
       </div>
 
+      <div className="weight-ranges weight-projection">
+        <label>
+          Projected loss per month ({unit}){" "}
+          <input type="number" min="0" step="0.5" value={lossInput} placeholder="e.g. 4" onChange={(e) => setLossInput(e.target.value)} />
+        </label>
+        <label>
+          Show for{" "}
+          <input type="number" min="1" step="1" value={projMonths} onChange={(e) => setProjMonths(e.target.value)} /> months
+        </label>
+        <label className="weight-compress">
+          <input type="checkbox" checked={showAllTrend} onChange={(e) => setShowAllTrend(e.target.checked)} /> Show future trend lines following all average projection
+        </label>
+        <label className="weight-compress">
+          <input type="checkbox" checked={showSpread} onChange={(e) => setShowSpread(e.target.checked)} /> Show best / worst range from the last week of projections
+        </label>
+        {tapered && (
+          <span className="muted">
+            In {projMonths} months: {w(tapered[tapered.length - 1].weight)} {unit} ({w(tapered[tapered.length - 1].adjusted)} {unit} muscle-adjusted)
+          </span>
+        )}
+      </div>
+
       <svg viewBox={`0 0 ${W} ${H}`} className="weight-chart" role="img" aria-label="Weight over time">
         {chart.y.ticks(8).map((t) => (
           <g key={t}>
@@ -217,10 +328,44 @@ export default function WeightJourney() {
         <path d={chart.futureAdjusted} className="line-future-adjusted" />
         <path d={chart.fit} className="line-fit" />
         <path d={chart.future} className="line-future" />
+        {chart.spread &&
+          (["actual", "adjusted"] as const).map((series) => (
+            <g key={series} className={`spread spread-${series}`}>
+              {chart.spread![series].bands.map((b, i) => (
+                <path key={i} d={b.d} className="spread-band" fillOpacity={b.opacity} />
+              ))}
+              <path d={chart.spread![series].best} className="spread-best" />
+              <path d={chart.spread![series].worst} className="spread-worst" />
+              <path d={chart.spread![series].mean} className="spread-mean" />
+            </g>
+          ))}
+        {chart.allTrends.map((t) => (
+          <g key={t.back} opacity={1 - t.back * 0.3}>
+            <path d={t.adjusted} className="line-all-trend-adjusted" />
+            <path d={t.actual} className="line-all-trend" />
+          </g>
+        ))}
+        <path d={chart.taperAdjusted} className="line-taper-adjusted" />
+        <path d={chart.taper} className="line-taper" />
       </svg>
       <p className="muted weight-legend">
         <span className="key actual" /> weight (gaps filled in a straight line) <span className="key avg3" /> 3-day average
         <span className="key avg3-adjusted" /> 3-day average minus muscle gained <span className="key fit" /> trend curve <span className="key future-adjusted" /> muscle-adjusted trend and projection
+        {showSpread && (
+          <>
+            <span className="key spread-key" /> last week of projections: shaded range (darker where they bunch up), solid = best (lowest) and worst (highest), dotted = average. Purple is actual, cyan is muscle-adjusted
+          </>
+        )}
+        {showAllTrend && (
+          <>
+            <span className="key all-trend" /> all average trend (3 day projected all average = total loss, tapering; fainter lines start from yesterday and the day before) <span className="key all-trend-adjusted" /> same, muscle-adjusted
+          </>
+        )}
+        {tapered && (
+          <>
+            <span className="key taper" /> projection from your monthly loss <span className="key taper-adjusted" /> same, minus muscle gained (muscle gain continues and slows at the same rate; total loss tends to 12x the first month)
+          </>
+        )}
         <span className="key future" /> projection (quadratic curve through the last 90 days, 90 days ahead)
       </p>
 

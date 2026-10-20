@@ -162,3 +162,48 @@ export function compress<T extends Day & Muscle>(days: T[], step: number): T[] {
   }
   return blocks;
 }
+
+export interface TargetPoint {
+  date: string;
+  weight: number;
+  /** weight minus all muscle gained so far, including the projected gain */
+  adjusted: number;
+}
+
+/**
+ * Project `aheadDays` of weight loss. The daily loss starts at `monthlyLoss / 30` and the daily muscle gain
+ * at `muscleDaily`; both shrink by the same factor each month. Each month keeps 11/12 of the last month's rate,
+ * so the loss over all time adds up to 12x the first month.
+ */
+export function projectTapering(
+  startDate: string,
+  startWeight: number,
+  startMuscle: number,
+  monthlyLoss: number,
+  muscleDaily: number,
+  aheadDays: number,
+): TargetPoint[] {
+  const start = parse(startDate);
+  let weight = startWeight;
+  let muscle = startMuscle;
+  const points: TargetPoint[] = [];
+  for (let k = 1; k <= aheadDays; k++) {
+    const factor = (11 / 12) ** (k / 30);
+    weight -= (monthlyLoss / 30) * factor;
+    muscle += muscleDaily * factor;
+    points.push({ date: format(start + k * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle) });
+  }
+  return points;
+}
+
+/**
+ * Curve that ends up `totalLoss` below `startWeight` once all time has passed: each month's loss is 11/12 of the
+ * previous one, so the first month loses totalLoss / 12. Returns the weight on each of the next `aheadDays` days.
+ */
+export function taperToTotal(startDate: string, startWeight: number, totalLoss: number, aheadDays: number): Projection[] {
+  const start = parse(startDate);
+  return Array.from({ length: aheadDays }, (_, i) => ({
+    date: format(start + (i + 1) * DAY_MS),
+    weight: round1(startWeight - totalLoss * (1 - (11 / 12) ** ((i + 1) / 30))),
+  }));
+}
