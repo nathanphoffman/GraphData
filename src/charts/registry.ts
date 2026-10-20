@@ -108,7 +108,7 @@ export const charts: ChartEntry[] = [
     title: "Amateur Astronomy Targets",
     category: "Science",
     description:
-      "Popular northern hemisphere deep-sky targets ranked for a season and a time window, adjusted for your telescope's focal length and mirror or lens size.",
+      "Popular northern hemisphere deep-sky targets ranked for a season, adjusted for your telescope's focal length and mirror or lens size.",
     component: AstronomyTargets,
   },
   {

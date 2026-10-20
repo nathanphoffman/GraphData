@@ -5,6 +5,23 @@ export interface Day {
   estimated: boolean;
 }
 
+export interface Averages {
+  avg3: number;
+  avg30: number;
+  avg365: number;
+  /** (3 x avg3 + 2 x avg30 + 1 x avg365) / 6 */
+  blended: number;
+  /** blended now minus blended 30 days ago; null for the first 30 days */
+  monthly: number | null;
+}
+
+export interface Muscle {
+  /** pounds of muscle gained on this day */
+  muscleDaily: number;
+  /** pounds of muscle gained from MUSCLE_START up to and including this day */
+  muscleTotal: number;
+}
+
 export interface Projection {
   date: string;
   weight: number;
@@ -80,4 +97,43 @@ export function project(days: Day[], fitDays: number, aheadDays: number): { fit:
       weight: at(n + k),
     })),
   };
+}
+
+const round1 = (n: number) => Math.round(n * 10) / 10;
+
+/** Trailing averages (the day itself plus the days before it) and the blended number built from them. */
+export function addAverages<T extends Day>(days: T[]): (T & Averages)[] {
+  const prefix = [0];
+  for (const d of days) prefix.push(prefix[prefix.length - 1] + d.weight);
+  const trailing = (i: number, size: number) => {
+    const from = Math.max(0, i - size + 1);
+    return (prefix[i + 1] - prefix[from]) / (i + 1 - from);
+  };
+  const blended = days.map((_, i) => (3 * trailing(i, 3) + 2 * trailing(i, 30) + trailing(i, 365)) / 6);
+  return days.map((d, i) => ({
+    ...d,
+    avg3: round1(trailing(i, 3)),
+    avg30: round1(trailing(i, 30)),
+    avg365: round1(trailing(i, 365)),
+    blended: round1(blended[i]),
+    monthly: i >= 30 ? round1(blended[i] - blended[i - 30]) : null,
+  }));
+}
+
+const MUSCLE_START = "2024-06-20";
+const MUSCLE_TOTAL = 14.5;
+/** How much the daily gain tapers by the end: 0 is a straight line, 0.5 means the last day gains 50% less than the first. */
+const MUSCLE_TAPER = 0.5;
+
+/** Estimated muscle gain: a nearly straight line from MUSCLE_START to the last day that adds up to MUSCLE_TOTAL lb. */
+export function addMuscle<T extends Day>(days: T[]): (T & Muscle)[] {
+  const start = days.findIndex((d) => d.date >= MUSCLE_START);
+  const span = days.length - 1 - start;
+  // Cumulative share of the total at position u (0..1): a line bent slightly flat toward the end.
+  const share = (u: number) => (u - (MUSCLE_TAPER * u * u) / 2) / (1 - MUSCLE_TAPER / 2);
+  return days.map((d, i) => {
+    const total = i < start ? 0 : MUSCLE_TOTAL * share((i - start) / span);
+    const before = i <= start ? 0 : MUSCLE_TOTAL * share((i - 1 - start) / span);
+    return { ...d, muscleDaily: total - before, muscleTotal: total };
+  });
 }

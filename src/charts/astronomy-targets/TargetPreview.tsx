@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { ScoredTarget, Settings, Target, TargetDetails } from "./types";
 import details from "../../../data/astronomy-target-details.json";
 import { difficulty, effectiveQuality, formatHour, formatSize, isNakedEye, previewOptics, surfaceBrightness, viewConditions } from "./calculate";
@@ -213,46 +213,44 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
 
 const DETAILS = details as Record<string, TargetDetails>;
 
-/** The facts we already have for a target, then the extra details and a short description. */
-function TargetInfo({ row, settings }: { row: ScoredTarget; settings: Settings }) {
+/** Longest value that fits in a small stat tile; longer facts are listed as sentences instead. */
+const TILE_MAX = 28;
+
+/** The header: name, kind of object and the score. */
+function PreviewHead({ row, settings }: { row: ScoredTarget; settings: Settings }) {
+  const t = row.target;
+  const level = isNakedEye(t, settings.bortle) ? { label: "Naked Eye", level: 1 } : difficulty(row.score);
+  return (
+    <div className="astro-preview-head">
+      <div>
+        <h4>
+          {t.id}
+          {t.nickname && <span> {t.nickname}</span>}
+        </h4>
+        <div className="astro-preview-sub">{t.type} · {t.constellation}</div>
+      </div>
+      <div className="astro-score-pill" style={{ "--tag": `hsl(${Math.round(level.level * 120)} 70% 45%)` } as CSSProperties}>
+        {row.score.toFixed(0).replace("-", "−")} · {level.label}
+      </div>
+    </div>
+  );
+}
+
+/** Stat tiles for the numbers, then the description and how to find it. */
+function previewStats(row: ScoredTarget) {
   const t = row.target;
   const extra = DETAILS[t.id];
-  const level = isNakedEye(t, settings.bortle) ? "Naked Eye" : difficulty(row.score).label;
-  const rows: [string, string][] = [
+  const tiles: [string, string][] = [
     ["Magnitude", t.magnitude.toFixed(1)],
     ["Size", formatSize(t.major, t.minor)],
   ];
-  if (t.type !== "Star" && !t.planet && t.type !== "Moon") rows.push(["Surface brightness", `${surfaceBrightness(t).toFixed(1)} mag/arcmin²`]);
-  if (extra) rows.push(["Distance", extra.distance]);
-  rows.push(["Best time", `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${row.bestHour === null ? "" : `, ${formatHour(row.bestHour)}`}`]);
-  rows.push(["Peak altitude", row.peakAltitude > 0 ? `${row.peakAltitude.toFixed(0)}°` : "below horizon"]);
-  rows.push(["Score", `${row.score.toFixed(0)} (${level})`]);
-  for (const f of extra?.facts ?? []) rows.push([f.label, f.value]);
-  return (
-    <div className="astro-info">
-      <h4>
-        {t.id}
-        {t.nickname && <span> {t.nickname}</span>}
-      </h4>
-      <div className="astro-info-sub">{t.type} · {t.constellation}</div>
-      <dl>
-        {rows.map(([label, value]) => (
-          <div key={label}>
-            <dt>{label}</dt>
-            <dd>{value}</dd>
-          </div>
-        ))}
-      </dl>
-      {extra && <p>{extra.about}</p>}
-      {extra && (
-        <>
-          <h5>How to find it</h5>
-          <p>{extra.howToFind}</p>
-          <small>A fist held at arm's length is about 10°, three fingers about 5°, your thumb about 2°.</small>
-        </>
-      )}
-    </div>
-  );
+  if (t.type !== "Star" && !t.planet && t.type !== "Moon") tiles.push(["Surface br.", `${surfaceBrightness(t).toFixed(1)}`]);
+  if (extra) tiles.push(["Distance", extra.distance]);
+  tiles.push(["Best time", `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${row.bestHour === null ? "" : `, ${formatHour(row.bestHour)}`}`]);
+  tiles.push(["Peak altitude", row.peakAltitude > 0 ? `${row.peakAltitude.toFixed(0)}°` : "below horizon"]);
+  const notes: { label: string; value: string }[] = [];
+  for (const f of extra?.facts ?? []) (f.value.length <= TILE_MAX ? tiles.push([f.label, f.value]) : notes.push(f));
+  return { tiles, notes, extra };
 }
 
 export function hasPreview(id: string): boolean {
@@ -308,13 +306,24 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     return () => cancelAnimationFrame(frame);
   }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved, effectiveQuality(settings)]);
 
-  const width = VIEW_SIZE * 2 + 48;
-  const height = VIEW_SIZE + 520;
+  const width = VIEW_SIZE * 2 + 340 + 80;
+  const height = VIEW_SIZE + 190;
   const left = Math.min(x + 16, window.innerWidth - width - 8);
   const top = Math.min(y + 16, window.innerHeight - height);
 
+  const { tiles, notes, extra } = previewStats(row);
+
   return (
     <div className="astro-preview" style={{ left: Math.max(8, left), top: Math.max(8, top) }}>
+      <PreviewHead row={row} settings={settings} />
+      <dl className="astro-stats">
+        {tiles.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
       <figure>
         <div className="astro-photo">
           <img src={info.src} alt={row.target.nickname || row.target.id} style={{ height: VIEW_SIZE }} />
@@ -333,7 +342,18 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
         </div>
         <figcaption>Your view (approximate), {eyepiece.magnification.toFixed(0)}×</figcaption>
       </figure>
-      <TargetInfo row={row} settings={settings} />
+      <div className="astro-text">
+        {extra && (
+          <>
+            <h5>About</h5>
+            <p>{extra.about}</p>
+            {notes.length > 0 && <ul>{notes.map((n) => <li key={n.label}><strong>{n.label}:</strong> {n.value}</li>)}</ul>}
+            <h5>How to find it</h5>
+            <p>{extra.howToFind}</p>
+            <small>A fist held at arm's length is about 10°, three fingers about 5°, your thumb about 2°.</small>
+          </>
+        )}
+      </div>
       <small>{info.credit}</small>
     </div>
   );

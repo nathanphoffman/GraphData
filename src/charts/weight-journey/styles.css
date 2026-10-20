@@ -68,7 +68,18 @@
 
 .weight-chart .line-actual {
   stroke: var(--link);
-  stroke-width: 1.5;
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+.weight-chart .line-avg3 {
+  stroke: var(--link);
+  stroke-width: 2.5;
+}
+
+.weight-chart .line-avg3-adjusted {
+  stroke: #2a9d6f;
+  stroke-width: 2.5;
 }
 
 .weight-chart .dot {
@@ -86,6 +97,21 @@
   stroke-dasharray: 6 5;
 }
 
+.weight-chart .line-fit-adjusted {
+  stroke: #2a9d6f;
+  stroke-width: 2.5;
+}
+
+.weight-chart .line-future-adjusted {
+  stroke: #2a9d6f;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+}
+
+.weight-legend .key.future-adjusted {
+  border-top: 3px dashed #2a9d6f;
+}
+
 .weight-legend .key {
   display: inline-block;
   width: 18px;
@@ -98,6 +124,10 @@
   margin-left: 0;
 }
 
+.weight-legend .key.avg3-adjusted {
+  border-color: #2a9d6f;
+}
+
 .weight-legend .key.fit {
   border-color: #e8912d;
 }
@@ -108,7 +138,8 @@
 
 .weight table {
   width: 100%;
-  max-width: 460px;
+  overflow-x: auto;
+  display: block;
   border-collapse: collapse;
   margin: 12px 0;
 }
@@ -123,4 +154,14 @@
 .weight tr.estimated {
   color: var(--muted);
   font-style: italic;
+}
+
+.weight th small {
+  display: block;
+  font-weight: normal;
+  color: var(--muted);
+}
+
+.weight td .adjusted {
+  color: var(--muted);
 }

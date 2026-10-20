@@ -53,7 +53,7 @@ interface Column {
   title?: string;
   /** Shown by default. */
   show: boolean;
-  /** Placed after the Score column instead of before it. */
+  /** Placed right after the Score column, ahead of the other columns. */
   afterScore?: boolean;
   cell: (row: ScoredTarget, settings: Settings) => ReactNode;
 }
@@ -70,24 +70,38 @@ const COLUMNS: Column[] = [
       </>
     ),
   },
-  { id: "mag", label: "Mag", show: true, cell: (r) => r.target.magnitude.toFixed(1) },
-  { id: "size", label: "Size", show: true, cell: (r) => formatSize(r.target.major, r.target.minor) },
   {
-    id: "sb",
-    label: "Surface br.",
-    title: "Magnitude per square arcminute: light spread over the target. Higher = dimmer.",
+    id: "magsize",
+    label: "Mag / Size",
+    title: "Top: total magnitude (smaller is brighter). Bottom: apparent size.",
     show: true,
-    cell: (r) => (r.target.type === "Star" || r.target.planet ? "—" : surfaceBrightness(r.target).toFixed(1)),
+    cell: (r) => (
+      <div className="astro-stack">
+        <span>{r.target.magnitude.toFixed(1)}</span>
+        <span className="astro-sub">{formatSize(r.target.major, r.target.minor)}</span>
+      </div>
+    ),
   },
-  { id: "alt", label: "Peak alt", show: true, cell: (r) => (r.peakAltitude > 0 ? `${r.peakAltitude.toFixed(0)}°` : "below horizon") },
+  {
+    id: "sbalt",
+    label: "Surf. br. / Peak alt",
+    title: "Top: magnitude per square arcminute, the light spread over the target (higher = dimmer). Bottom: highest altitude it reaches while it is dark.",
+    show: true,
+    cell: (r) => (
+      <div className="astro-stack">
+        <span>{r.target.type === "Star" || r.target.planet ? "—" : surfaceBrightness(r.target).toFixed(1)}</span>
+        <span className="astro-sub">{r.peakAltitude > 0 ? `${r.peakAltitude.toFixed(0)}°` : "below horizon"}</span>
+      </div>
+    ),
+  },
   { id: "sky", label: "Sky", show: true, cell: (r) => <Percent value={r.sky} /> },
   { id: "fit", label: "Size fit", show: true, cell: (r) => <Percent value={r.fit} /> },
   { id: "light", label: "Light", show: true, cell: (r) => <Percent value={r.light} /> },
   { id: "core", label: "Core", show: true, cell: (r) => <Percent value={r.core} /> },
   {
     id: "adjust",
-    label: "Simulator / Author / Quality",
-    title: "Top: how much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Middle: the author's own adjustment in score points, from field experience. -- = not rated yet (counts as 0). Bottom: score points for the telescope's optical quality, which helps planets, stars and clusters most and barely affects nebulae and galaxies (always added in full). Part of the top two is added to the score, set by the sliders above the table, and scaled by the Bortle setting (judged at Bortle 5). Positive ones grow to 1.5x at Bortle 1 and fade to 0 at Bortle 9; negative ones shrink to 0.5x at Bortle 1 and grow to 1.5x at Bortle 9.",
+    label: "Sim / Author / Quality",
+    title: "First chip: how much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Second chip: the author's own adjustment in score points, from field experience. -- = not rated yet (counts as 0). Third chip: score points for the telescope's optical quality, which helps planets, stars and clusters most and barely affects nebulae and galaxies (always added in full). Part of the first two is added to the score, set by the sliders above the table, and scaled by the Bortle setting (judged at Bortle 5). Positive ones grow to 1.5x at Bortle 1 and fade to 0 at Bortle 9; negative ones shrink to 0.5x at Bortle 1 and grow to 1.5x at Bortle 9.",
     show: true,
     afterScore: true,
     cell: (r, settings) => {
@@ -96,7 +110,7 @@ const COLUMNS: Column[] = [
       const author = r.target.authorAdjust;
       const fmt = (v: number) => (v >= 0 ? `+${v}` : `−${-v}`);
       return (
-        <div className="astro-stack">
+        <div className="astro-chips">
           {sim === undefined ? "—" : <span className="astro-tag" style={{ "--tag": heat(0.5 + sim / 60, 1) } as CSSProperties} title="Simulator adjustment">{fmt(sim)}%</span>}
           {author === undefined ? "--" : <span className="astro-tag" style={{ "--tag": heat(0.5 + author / 30, 1) } as CSSProperties} title="Author adjustment">{fmt(author)}</span>}
           <span className="astro-tag" style={{ "--tag": heat(0.5 + quality / 50, 1) } as CSSProperties} title="Quality adjustment">{fmt(quality)}</span>
@@ -227,8 +241,8 @@ export default function AstronomyTargets() {
   const toggleColumn = (id: string) =>
     setHiddenList((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]));
   const visible = COLUMNS.filter((c) => !hidden.has(c.id));
-  const beforeScore = visible.filter((c) => !c.afterScore);
   const afterScore = visible.filter((c) => c.afterScore);
+  const beforeScore = visible.filter((c) => !c.afterScore);
 
   const [seasonFilter, setSeasonFilter] = useStoredState<SeasonFilter | null>("season-filter", null, parseSeasonFilter);
   const toggleSeason = (season: SeasonFilter) => setSeasonFilter((prev) => (prev === season ? null : season));
@@ -380,32 +394,6 @@ export default function AstronomyTargets() {
               />
               <small>0% ignores it, 100% adds the full amount to the score.</small>
             </label>
-            <div className="astro-columns">
-              <span>Best season:</span>
-              {SEASON_FILTERS.map((season) => (
-                <button
-                  key={season}
-                  type="button"
-                  aria-pressed={seasonFilter === season}
-                  className={`astro-tag astro-tag-${season} astro-filter${seasonFilter === season ? " astro-filter-on" : ""}`}
-                  onClick={() => toggleSeason(season)}
-                >
-                  {season === "any" ? "Any" : SEASONS[season].label.split(" ")[0]}
-                </button>
-              ))}
-              {seasonFilter && seasonFilter !== "any" && (
-                <button type="button" onClick={() => setSchedule(buildSchedule(scored, seasonFilter, settings))}>Generate Schedule</button>
-              )}
-            </div>
-            <div className="astro-columns">
-              <span>Columns:</span>
-              {COLUMNS.map((c) => (
-                <label key={c.id}>
-                  <input type="checkbox" checked={!hidden.has(c.id)} onChange={() => toggleColumn(c.id)} />
-                  {c.label}
-                </label>
-              ))}
-            </div>
           </div>
         </section>
         <p className="astro-note">
@@ -415,7 +403,7 @@ export default function AstronomyTargets() {
         </p>
       </div>
 
-      <div className="astro-search">
+      <div className="astro-toolbar">
         <input
           type="search"
           placeholder="Search name, nickname, constellation or type"
@@ -423,6 +411,34 @@ export default function AstronomyTargets() {
           onChange={(e) => setQuery(e.target.value)}
           aria-label="Search targets"
         />
+        <div className="astro-seasons">
+          <span>Best season</span>
+          {SEASON_FILTERS.map((season) => (
+            <button
+              key={season}
+              type="button"
+              aria-pressed={seasonFilter === season}
+              className={`astro-tag astro-tag-${season} astro-filter${seasonFilter === season ? " astro-filter-on" : ""}`}
+              onClick={() => toggleSeason(season)}
+            >
+              {season === "any" ? "Any" : SEASONS[season].label.split(" ")[0]}
+            </button>
+          ))}
+          {seasonFilter && seasonFilter !== "any" && (
+            <button type="button" className="astro-button" onClick={() => setSchedule(buildSchedule(scored, seasonFilter, settings))}>Generate Schedule</button>
+          )}
+        </div>
+        <details className="astro-columns-menu">
+          <summary>Columns</summary>
+          <div>
+            {COLUMNS.map((c) => (
+              <label key={c.id}>
+                <input type="checkbox" checked={!hidden.has(c.id)} onChange={() => toggleColumn(c.id)} />
+                {c.label}
+              </label>
+            ))}
+          </div>
+        </details>
         <small>{rows.length} of {model.targets.length} targets</small>
       </div>
 
@@ -432,11 +448,8 @@ export default function AstronomyTargets() {
             <tr>
               <th>#</th>
               <th>Target</th>
-              {beforeScore.map((c) => (
-                <th key={c.id} title={c.title}>{c.label}</th>
-              ))}
               <th title="How hard it is to see, from the score: Excellent 75+, Very easy 50+, Easy 35+, Moderate 20+, Hard 10+, Very hard above 0, Extreme at 0 or below.">Difficulty / Score</th>
-              {afterScore.map((c) => (
+              {[...afterScore, ...beforeScore].map((c) => (
                 <th key={c.id} title={c.title}>{c.label}</th>
               ))}
             </tr>
@@ -448,14 +461,13 @@ export default function AstronomyTargets() {
                 <tr key={t.id} className={row.score <= 0 ? "astro-hidden" : undefined}>
                   <td>{i + 1}</td>
                   <td
+                    className="astro-target"
+                    title={t.nickname ? `${t.id} ${t.nickname}` : t.id}
                     onMouseMove={hasPreview(t.id) ? (e) => setHover({ id: t.id, x: e.clientX, y: e.clientY }) : undefined}
                     onMouseLeave={hasPreview(t.id) ? () => setHover(null) : undefined}
                   >
                     <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong>{t.nickname && <div className="astro-nick">{t.nickname}</div>}
                   </td>
-                  {beforeScore.map((c) => (
-                    <td key={c.id}>{c.cell(row, settings)}</td>
-                  ))}
                   <td className="astro-score">
                     <div className="astro-difficulty">
                       {isNakedEye(t, settings.bortle)
@@ -467,7 +479,7 @@ export default function AstronomyTargets() {
                       <span className="astro-score-text">{row.score.toFixed(0).replace("-", "−")}</span>
                     </div>
                   </td>
-                  {afterScore.map((c) => (
+                  {[...afterScore, ...beforeScore].map((c) => (
                     <td key={c.id}>{c.cell(row, settings)}</td>
                   ))}
                 </tr>
