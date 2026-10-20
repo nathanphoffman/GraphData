@@ -223,6 +223,8 @@ export function viewConditions(t: Target, settings: Settings, alt: number) {
     fov,
     // Point-like things (stars, planets) saturate their photo and bloom into a huge blob, so cap how much brighter than the limit they can look.
     margin: Math.min(margin(surfaceBrightness(t), mm, glow), t.major === 0 ? 1.5 : 6),
+    // For dot-like targets: how many magnitudes brighter than the faintest star the scope shows under this sky.
+    pointMargin: limitingMagnitude(mm) - glow - t.magnitude,
     skyGlow: clamp((settings.bortle - 1) / 8, 0, 1),
   };
 }

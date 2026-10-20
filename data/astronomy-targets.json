@@ -1,6 +1,6 @@
 {
  "title": "Amateur Astronomy Targets",
- "source": "Positions, magnitudes and sizes are rounded catalogue values (Messier/NGC), good to about 0.1 hour / 1 degree. Core boost is my own rough estimate of how many magnitudes brighter the bright centre is than the whole-object average. Best season is when the target is highest around midnight (by right ascension), with a few hand adjustments. For star clusters and double stars the core uses the magnitude of the brightest member stars (brightStar, approximate) instead of a core boost. The 25 brightest stars in the northern sky (north of the celestial equator) are listed from memory (approximate positions and magnitudes); variable stars use a typical value, and Rigil Kentaurus is the Alpha Centauri system combined. Planets use typical (average) magnitudes and disk sizes, and are scored in the season and at the position along the ecliptic where they are highest. Moon uses an average magnitude over its phases, and moonlight is not counted against other targets. Simulator adjustment is my own judgment, in percentage points: I rate each target 0-100 for how easy it is to see and 0-100 for how impressive it looks in the eyepiece preview (small-medium focal length and mirror/lens, Bortle 4, latitude 40), average the two, and subtract the base score; a slider sets how much of it is added to the score (50% by default).",
+ "source": "Positions, magnitudes and sizes are rounded catalogue values (Messier/NGC), good to about 0.1 hour / 1 degree. Core boost is my own rough estimate of how many magnitudes brighter the bright centre is than the whole-object average. Best season is when the target is highest around midnight (by right ascension), with a few hand adjustments. For star clusters and double stars the core uses the magnitude of the brightest member stars (brightStar, approximate) instead of a core boost. The 25 brightest stars in the northern sky (north of the celestial equator) are listed from memory (approximate positions and magnitudes); variable stars use a typical value, and Rigil Kentaurus is the Alpha Centauri system combined. Planets use typical (average) magnitudes and disk sizes, and are scored in the season and at the position along the ecliptic where they are highest. Moon uses an average magnitude over its phases, and moonlight is not counted against other targets. Simulator adjustment is my own judgment, in percentage points between -25 and +25, of how the hover preview looks (small-medium focal length and mirror/lens, Bortle 5, latitude 40) compared with the score: easy to see and attractive in the preview is positive, faint or empty is negative. A slider sets how much of it is added to the score (50% by default).",
  "targets": [
   {
    "id": "M31",
@@ -13,7 +13,7 @@
    "major": 190,
    "minor": 60,
    "coreBoost": 2.5,
-   "simAdjust": 30,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -27,7 +27,7 @@
    "major": 70,
    "minor": 42,
    "coreBoost": 0.5,
-   "simAdjust": 5,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -41,7 +41,7 @@
    "major": 60,
    "minor": 60,
    "brightStar": 6.5,
-   "simAdjust": 25,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -55,7 +55,7 @@
    "major": 180,
    "minor": 180,
    "brightStar": 3.0,
-   "simAdjust": -15,
+   "simAdjust": 0,
    "bestSeason": "autumn"
   },
   {
@@ -69,7 +69,7 @@
    "major": 110,
    "minor": 110,
    "brightStar": 3.0,
-   "simAdjust": 20,
+   "simAdjust": 15,
    "bestSeason": "autumn"
   },
   {
@@ -83,7 +83,7 @@
    "major": 145,
    "minor": 40,
    "coreBoost": 0.3,
-   "simAdjust": -5,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -97,7 +97,7 @@
    "major": 6,
    "minor": 4,
    "coreBoost": 1.0,
-   "simAdjust": 20,
+   "simAdjust": -15,
    "bestSeason": "winter"
   },
   {
@@ -111,7 +111,7 @@
    "major": 85,
    "minor": 60,
    "coreBoost": 3.0,
-   "simAdjust": 50,
+   "simAdjust": -25,
    "bestSeason": "winter"
   },
   {
@@ -125,7 +125,7 @@
    "major": 8,
    "minor": 6,
    "coreBoost": 1.0,
-   "simAdjust": 20,
+   "simAdjust": -15,
    "bestSeason": "winter"
   },
   {
@@ -139,7 +139,7 @@
    "major": 24,
    "minor": 24,
    "brightStar": 9.0,
-   "simAdjust": 20,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -153,7 +153,7 @@
    "major": 28,
    "minor": 28,
    "brightStar": 8.0,
-   "simAdjust": 25,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -167,7 +167,7 @@
    "major": 80,
    "minor": 60,
    "coreBoost": 0.5,
-   "simAdjust": 20,
+   "simAdjust": -20,
    "bestSeason": "winter"
   },
   {
@@ -181,7 +181,7 @@
    "major": 38,
    "minor": 38,
    "brightStar": 7.0,
-   "simAdjust": 20,
+   "simAdjust": -10,
    "bestSeason": "winter"
   },
   {
@@ -195,7 +195,7 @@
    "major": 95,
    "minor": 95,
    "brightStar": 6.3,
-   "simAdjust": 40,
+   "simAdjust": 10,
    "bestSeason": "spring"
   },
   {
@@ -209,7 +209,7 @@
    "major": 27,
    "minor": 14,
    "coreBoost": 2.0,
-   "simAdjust": 15,
+   "simAdjust": 5,
    "bestSeason": "spring"
   },
   {
@@ -223,7 +223,7 @@
    "major": 11,
    "minor": 4.5,
    "coreBoost": 2.5,
-   "simAdjust": 20,
+   "simAdjust": -10,
    "bestSeason": "spring"
   },
   {
@@ -237,7 +237,7 @@
    "major": 9,
    "minor": 4,
    "coreBoost": 1.5,
-   "simAdjust": 20,
+   "simAdjust": -10,
    "bestSeason": "spring"
   },
   {
@@ -251,7 +251,7 @@
    "major": 3.4,
    "minor": 3.3,
    "coreBoost": 0.3,
-   "simAdjust": 20,
+   "simAdjust": -10,
    "bestSeason": "spring"
   },
   {
@@ -265,7 +265,7 @@
    "major": 9,
    "minor": 4,
    "coreBoost": 2.0,
-   "simAdjust": 25,
+   "simAdjust": 0,
    "bestSeason": "spring"
   },
   {
@@ -279,7 +279,7 @@
    "major": 12,
    "minor": 7,
    "coreBoost": 1.2,
-   "simAdjust": 10,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -293,7 +293,7 @@
    "major": 11,
    "minor": 7,
    "coreBoost": 0.8,
-   "simAdjust": 20,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -307,7 +307,7 @@
    "major": 18,
    "minor": 18,
    "coreBoost": 2.0,
-   "simAdjust": 30,
+   "simAdjust": 15,
    "bestSeason": "spring"
   },
   {
@@ -321,7 +321,7 @@
    "major": 29,
    "minor": 27,
    "coreBoost": 0.3,
-   "simAdjust": -5,
+   "simAdjust": -20,
    "bestSeason": "spring"
   },
   {
@@ -335,7 +335,7 @@
    "major": 23,
    "minor": 23,
    "coreBoost": 2.0,
-   "simAdjust": 40,
+   "simAdjust": 15,
    "bestSeason": "spring"
   },
   {
@@ -349,7 +349,7 @@
    "major": 36,
    "minor": 36,
    "coreBoost": 1.2,
-   "simAdjust": 40,
+   "simAdjust": -5,
    "bestSeason": "spring"
   },
   {
@@ -363,7 +363,7 @@
    "major": 20,
    "minor": 20,
    "coreBoost": 2.0,
-   "simAdjust": 35,
+   "simAdjust": 15,
    "bestSeason": "summer"
   },
   {
@@ -377,7 +377,7 @@
    "major": 14,
    "minor": 14,
    "coreBoost": 2.0,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -391,7 +391,7 @@
    "major": 25,
    "minor": 25,
    "brightStar": 6.0,
-   "simAdjust": 40,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -405,7 +405,7 @@
    "major": 80,
    "minor": 80,
    "brightStar": 5.6,
-   "simAdjust": 30,
+   "simAdjust": -10,
    "bestSeason": "summer"
   },
   {
@@ -419,7 +419,7 @@
    "major": 28,
    "minor": 28,
    "coreBoost": 0.8,
-   "simAdjust": 25,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -433,7 +433,7 @@
    "major": 90,
    "minor": 40,
    "coreBoost": 1.5,
-   "simAdjust": 55,
+   "simAdjust": -15,
    "bestSeason": "summer"
   },
   {
@@ -447,7 +447,7 @@
    "major": 35,
    "minor": 28,
    "coreBoost": 0.8,
-   "simAdjust": 0,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -461,7 +461,7 @@
    "major": 11,
    "minor": 11,
    "coreBoost": 1.0,
-   "simAdjust": 25,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -475,7 +475,7 @@
    "major": 32,
    "minor": 32,
    "coreBoost": 1.5,
-   "simAdjust": 30,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -489,7 +489,7 @@
    "major": 14,
    "minor": 14,
    "brightStar": 8.5,
-   "simAdjust": 35,
+   "simAdjust": -10,
    "bestSeason": "summer"
   },
   {
@@ -503,7 +503,7 @@
    "major": 1.4,
    "minor": 1.0,
    "coreBoost": 0.5,
-   "simAdjust": 45,
+   "simAdjust": 5,
    "bestSeason": "summer"
   },
   {
@@ -517,7 +517,7 @@
    "major": 60,
    "minor": 60,
    "brightStar": 5.2,
-   "simAdjust": 5,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -531,7 +531,7 @@
    "major": 0.6,
    "minor": 0.6,
    "brightStar": 3.1,
-   "simAdjust": 60,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -545,7 +545,7 @@
    "major": 8,
    "minor": 6,
    "coreBoost": 0.5,
-   "simAdjust": 50,
+   "simAdjust": 5,
    "bestSeason": "summer"
   },
   {
@@ -559,7 +559,7 @@
    "major": 180,
    "minor": 120,
    "coreBoost": 2.0,
-   "simAdjust": 10,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -573,7 +573,7 @@
    "major": 120,
    "minor": 100,
    "coreBoost": 0.3,
-   "simAdjust": -10,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -587,7 +587,7 @@
    "major": 18,
    "minor": 18,
    "coreBoost": 3.0,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -601,7 +601,7 @@
    "major": 32,
    "minor": 32,
    "brightStar": 7.0,
-   "simAdjust": 5,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -615,7 +615,7 @@
    "major": 16,
    "minor": 16,
    "coreBoost": 2.0,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -629,7 +629,7 @@
    "major": 25,
    "minor": 25,
    "coreBoost": 0.3,
-   "simAdjust": 20,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -643,7 +643,7 @@
    "major": 13,
    "minor": 13,
    "brightStar": 10.0,
-   "simAdjust": 20,
+   "simAdjust": 0,
    "bestSeason": "autumn"
   },
   {
@@ -657,7 +657,7 @@
    "major": 275,
    "minor": 275,
    "brightStar": 5.0,
-   "simAdjust": -15,
+   "simAdjust": -5,
    "bestSeason": "spring"
   },
   {
@@ -671,7 +671,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": -0.05,
-   "simAdjust": 40,
+   "simAdjust": 10,
    "bestSeason": "spring"
   },
   {
@@ -685,7 +685,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 0.03,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -699,7 +699,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 0.08,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -713,7 +713,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 0.34,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -727,7 +727,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 0.5,
-   "simAdjust": 45,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -741,7 +741,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 0.76,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -755,7 +755,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 0.86,
-   "simAdjust": 50,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -769,7 +769,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.14,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -783,7 +783,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.25,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -797,7 +797,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.35,
-   "simAdjust": 40,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -848,7 +848,7 @@
    "planet": {
     "maxElongation": 180
    },
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "any"
   },
   {
@@ -865,7 +865,7 @@
    "planet": {
     "maxElongation": 180
    },
-   "simAdjust": 60,
+   "simAdjust": 15,
    "bestSeason": "any"
   },
   {
@@ -882,7 +882,7 @@
    "planet": {
     "maxElongation": 180
    },
-   "simAdjust": 60,
+   "simAdjust": 15,
    "bestSeason": "any"
   },
   {
@@ -899,7 +899,7 @@
    "planet": {
     "maxElongation": 180
    },
-   "simAdjust": 15,
+   "simAdjust": 0,
    "bestSeason": "any"
   },
   {
@@ -916,7 +916,7 @@
    "planet": {
     "maxElongation": 180
    },
-   "simAdjust": 0,
+   "simAdjust": -5,
    "bestSeason": "any"
   },
   {
@@ -930,7 +930,7 @@
    "major": 25,
    "minor": 25,
    "brightStar": 10.5,
-   "simAdjust": 0,
+   "simAdjust": -15,
    "bestSeason": "autumn"
   },
   {
@@ -944,7 +944,7 @@
    "major": 12,
    "minor": 12,
    "coreBoost": 0.5,
-   "simAdjust": 0,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -958,7 +958,7 @@
    "major": 25,
    "minor": 25,
    "coreBoost": 1.0,
-   "simAdjust": -5,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -972,7 +972,7 @@
    "major": 18,
    "minor": 18,
    "coreBoost": 2.5,
-   "simAdjust": -5,
+   "simAdjust": -15,
    "bestSeason": "summer"
   },
   {
@@ -1000,7 +1000,7 @@
    "major": 20,
    "minor": 20,
    "brightStar": 5.0,
-   "simAdjust": 20,
+   "simAdjust": 0,
    "bestSeason": "autumn"
   },
   {
@@ -1028,7 +1028,7 @@
    "major": 21,
    "minor": 21,
    "brightStar": 9.0,
-   "simAdjust": -10,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -1056,7 +1056,7 @@
    "major": 16,
    "minor": 16,
    "brightStar": 8.5,
-   "simAdjust": 25,
+   "simAdjust": 5,
    "bestSeason": "autumn"
   },
   {
@@ -1070,7 +1070,7 @@
    "major": 6,
    "minor": 6,
    "brightStar": 7.5,
-   "simAdjust": 35,
+   "simAdjust": -5,
    "bestSeason": "autumn"
   },
   {
@@ -1084,7 +1084,7 @@
    "major": 8.5,
    "minor": 6.5,
    "coreBoost": 3.0,
-   "simAdjust": 35,
+   "simAdjust": -10,
    "bestSeason": "autumn"
   },
   {
@@ -1098,7 +1098,7 @@
    "major": 22,
    "minor": 11,
    "coreBoost": 0.5,
-   "simAdjust": 10,
+   "simAdjust": -15,
    "bestSeason": "autumn"
   },
   {
@@ -1112,7 +1112,7 @@
    "major": 330,
    "minor": 330,
    "brightStar": 3.5,
-   "simAdjust": 10,
+   "simAdjust": -5,
    "bestSeason": "winter"
   },
   {
@@ -1126,7 +1126,7 @@
    "major": 21,
    "minor": 21,
    "brightStar": 7.9,
-   "simAdjust": 15,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -1140,7 +1140,7 @@
    "major": 8,
    "minor": 8,
    "brightStar": 7.0,
-   "simAdjust": 30,
+   "simAdjust": 5,
    "bestSeason": "autumn"
   },
   {
@@ -1154,7 +1154,7 @@
    "major": 12,
    "minor": 12,
    "brightStar": 9.0,
-   "simAdjust": 35,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -1168,7 +1168,7 @@
    "major": 37,
    "minor": 19,
    "coreBoost": 2.0,
-   "simAdjust": -30,
+   "simAdjust": -20,
    "bestSeason": "winter"
   },
   {
@@ -1182,7 +1182,7 @@
    "major": 20,
    "minor": 20,
    "brightStar": 4.7,
-   "simAdjust": 5,
+   "simAdjust": 0,
    "bestSeason": "winter"
   },
   {
@@ -1196,7 +1196,7 @@
    "major": 100,
    "minor": 100,
    "brightStar": 5.1,
-   "simAdjust": -20,
+   "simAdjust": -5,
    "bestSeason": "winter"
   },
   {
@@ -1210,7 +1210,7 @@
    "major": 30,
    "minor": 30,
    "brightStar": 9.5,
-   "simAdjust": 30,
+   "simAdjust": -5,
    "bestSeason": "spring"
   },
   {
@@ -1224,7 +1224,7 @@
    "major": 6,
    "minor": 6,
    "brightStar": 7.0,
-   "simAdjust": 35,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -1238,7 +1238,7 @@
    "major": 30,
    "minor": 30,
    "brightStar": 5.7,
-   "simAdjust": 20,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -1252,7 +1252,7 @@
    "major": 7,
    "minor": 7,
    "brightStar": 7.0,
-   "simAdjust": 25,
+   "simAdjust": -5,
    "bestSeason": "winter"
   },
   {
@@ -1266,7 +1266,7 @@
    "major": 54,
    "minor": 54,
    "brightStar": 8.5,
-   "simAdjust": 0,
+   "simAdjust": -15,
    "bestSeason": "winter"
   },
   {
@@ -1280,7 +1280,7 @@
    "major": 40,
    "minor": 40,
    "coreBoost": 1.0,
-   "simAdjust": -15,
+   "simAdjust": -20,
    "bestSeason": "winter"
   },
   {
@@ -1294,7 +1294,7 @@
    "major": 15,
    "minor": 15,
    "brightStar": 8.0,
-   "simAdjust": 25,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -1308,7 +1308,7 @@
    "major": 15,
    "minor": 15,
    "brightStar": 8.5,
-   "simAdjust": 25,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -1322,7 +1322,7 @@
    "major": 27,
    "minor": 27,
    "brightStar": 8.7,
-   "simAdjust": 25,
+   "simAdjust": -10,
    "bestSeason": "winter"
   },
   {
@@ -1336,7 +1336,7 @@
    "major": 10,
    "minor": 5,
    "coreBoost": 2.0,
-   "simAdjust": 15,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -1350,7 +1350,7 @@
    "major": 11,
    "minor": 9,
    "coreBoost": 2.5,
-   "simAdjust": 15,
+   "simAdjust": -10,
    "bestSeason": "spring"
   },
   {
@@ -1364,7 +1364,7 @@
    "major": 19,
    "minor": 8,
    "coreBoost": 1.5,
-   "simAdjust": 0,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -1378,7 +1378,7 @@
    "major": 16,
    "minor": 2.5,
    "coreBoost": 1.0,
-   "simAdjust": 5,
+   "simAdjust": -20,
    "bestSeason": "spring"
   },
   {
@@ -1392,7 +1392,7 @@
    "major": 70,
    "minor": 70,
    "brightStar": 6.7,
-   "simAdjust": -5,
+   "simAdjust": -10,
    "bestSeason": "summer"
   },
   {
@@ -1406,7 +1406,7 @@
    "major": 16,
    "minor": 16,
    "coreBoost": 1.5,
-   "simAdjust": 25,
+   "simAdjust": 5,
    "bestSeason": "summer"
   },
   {
@@ -1420,7 +1420,7 @@
    "major": 27,
    "minor": 27,
    "brightStar": 9.2,
-   "simAdjust": 25,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -1434,7 +1434,7 @@
    "major": 20,
    "minor": 20,
    "coreBoost": 1.5,
-   "simAdjust": 25,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -1448,7 +1448,7 @@
    "major": 11,
    "minor": 11,
    "coreBoost": 1.5,
-   "simAdjust": 25,
+   "simAdjust": 0,
    "bestSeason": "summer"
   },
   {
@@ -1462,7 +1462,7 @@
    "major": 7,
    "minor": 7,
    "brightStar": 8.6,
-   "simAdjust": 30,
+   "simAdjust": -10,
    "bestSeason": "summer"
   },
   {
@@ -1476,7 +1476,7 @@
    "major": 16,
    "minor": 16,
    "brightStar": 11.5,
-   "simAdjust": 5,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -1490,7 +1490,7 @@
    "major": 52,
    "minor": 52,
    "brightStar": 8.0,
-   "simAdjust": -10,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -1504,7 +1504,7 @@
    "major": 27,
    "minor": 27,
    "brightStar": 7.5,
-   "simAdjust": 15,
+   "simAdjust": 5,
    "bestSeason": "summer"
   },
   {
@@ -1518,7 +1518,7 @@
    "major": 20,
    "minor": 10,
    "coreBoost": 1.0,
-   "simAdjust": -10,
+   "simAdjust": -15,
    "bestSeason": "summer"
   },
   {
@@ -1532,7 +1532,7 @@
    "major": 32,
    "minor": 32,
    "brightStar": 6.8,
-   "simAdjust": 5,
+   "simAdjust": -15,
    "bestSeason": "summer"
   },
   {
@@ -1549,7 +1549,7 @@
    "planet": {
     "maxElongation": 180
    },
-   "simAdjust": 10,
+   "simAdjust": 5,
    "bestSeason": "any"
   },
   {
@@ -1563,7 +1563,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.58,
-   "simAdjust": 60,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -1577,7 +1577,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.64,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -1591,7 +1591,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.65,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -1605,7 +1605,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.76,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "spring"
   },
   {
@@ -1619,7 +1619,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.79,
-   "simAdjust": 40,
+   "simAdjust": 10,
    "bestSeason": "spring"
   },
   {
@@ -1633,7 +1633,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.79,
-   "simAdjust": 45,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -1647,7 +1647,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.86,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "spring"
   },
   {
@@ -1661,7 +1661,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.9,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -1675,7 +1675,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.93,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "winter"
   },
   {
@@ -1689,7 +1689,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 1.98,
-   "simAdjust": 50,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -1703,7 +1703,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 2.0,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -1717,7 +1717,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 2.04,
-   "simAdjust": 60,
+   "simAdjust": 10,
    "bestSeason": "spring"
   },
   {
@@ -1731,7 +1731,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 2.05,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -1745,7 +1745,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 2.06,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "autumn"
   },
   {
@@ -1759,7 +1759,7 @@
    "major": 0,
    "minor": 0,
    "brightStar": 2.07,
-   "simAdjust": 35,
+   "simAdjust": 10,
    "bestSeason": "summer"
   },
   {
@@ -1773,7 +1773,7 @@
    "major": 7,
    "minor": 7,
    "coreBoost": 2.5,
-   "simAdjust": 25,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -1787,7 +1787,7 @@
    "major": 13,
    "minor": 2.8,
    "coreBoost": 1.0,
-   "simAdjust": 0,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -1801,7 +1801,7 @@
    "major": 15,
    "minor": 3.5,
    "coreBoost": 1.0,
-   "simAdjust": 10,
+   "simAdjust": -20,
    "bestSeason": "spring"
   },
   {
@@ -1815,7 +1815,7 @@
    "major": 10,
    "minor": 9,
    "coreBoost": 0.8,
-   "simAdjust": 5,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -1829,7 +1829,7 @@
    "major": 27,
    "minor": 7,
    "coreBoost": 1.5,
-   "simAdjust": 30,
+   "simAdjust": -15,
    "bestSeason": "autumn"
   },
   {
@@ -1843,7 +1843,7 @@
    "major": 10,
    "minor": 3,
    "coreBoost": 1.5,
-   "simAdjust": 35,
+   "simAdjust": -5,
    "bestSeason": "spring"
   },
   {
@@ -1857,7 +1857,7 @@
    "major": 19,
    "minor": 19,
    "coreBoost": 1.0,
-   "simAdjust": 40,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -1871,7 +1871,7 @@
    "major": 14,
    "minor": 14,
    "coreBoost": 2.0,
-   "simAdjust": 30,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -1885,7 +1885,7 @@
    "major": 13,
    "minor": 13,
    "coreBoost": 2.0,
-   "simAdjust": 25,
+   "simAdjust": 5,
    "bestSeason": "spring"
   },
   {
@@ -1899,7 +1899,7 @@
    "major": 10,
    "minor": 10,
    "coreBoost": 3.0,
-   "simAdjust": 35,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -1913,7 +1913,7 @@
    "major": 13,
    "minor": 13,
    "brightStar": 8.0,
-   "simAdjust": 30,
+   "simAdjust": 0,
    "bestSeason": "summer"
   },
   {
@@ -1927,7 +1927,7 @@
    "major": 90,
    "minor": 35,
    "brightStar": 7.5,
-   "simAdjust": 30,
+   "simAdjust": -10,
    "bestSeason": "summer"
   },
   {
@@ -1941,7 +1941,7 @@
    "major": 22,
    "minor": 22,
    "brightStar": 9.0,
-   "simAdjust": 30,
+   "simAdjust": 0,
    "bestSeason": "winter"
   },
   {
@@ -1955,7 +1955,7 @@
    "major": 60,
    "minor": 60,
    "brightStar": 7.5,
-   "simAdjust": -20,
+   "simAdjust": -10,
    "bestSeason": "autumn"
   },
   {
@@ -1969,7 +1969,7 @@
    "major": 8,
    "minor": 8,
    "brightStar": 4.4,
-   "simAdjust": 45,
+   "simAdjust": 5,
    "bestSeason": "winter"
   },
   {
@@ -1983,7 +1983,7 @@
    "major": 45,
    "minor": 45,
    "brightStar": 7.8,
-   "simAdjust": -10,
+   "simAdjust": -15,
    "bestSeason": "winter"
   },
   {
@@ -1997,7 +1997,7 @@
    "major": 170,
    "minor": 140,
    "coreBoost": 0.3,
-   "simAdjust": -15,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -2011,7 +2011,7 @@
    "major": 60,
    "minor": 60,
    "coreBoost": 0.5,
-   "simAdjust": -10,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -2025,7 +2025,7 @@
    "major": 100,
    "minor": 50,
    "coreBoost": 0.3,
-   "simAdjust": -5,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -2039,7 +2039,7 @@
    "major": 35,
    "minor": 30,
    "coreBoost": 1.0,
-   "simAdjust": -15,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -2053,7 +2053,7 @@
    "major": 30,
    "minor": 30,
    "coreBoost": 1.0,
-   "simAdjust": 15,
+   "simAdjust": -20,
    "bestSeason": "winter"
   },
   {
@@ -2067,7 +2067,7 @@
    "major": 15,
    "minor": 8,
    "coreBoost": 0.5,
-   "simAdjust": 0,
+   "simAdjust": -20,
    "bestSeason": "autumn"
   },
   {
@@ -2081,7 +2081,7 @@
    "major": 0.8,
    "minor": 0.8,
    "coreBoost": 0.5,
-   "simAdjust": 35,
+   "simAdjust": 0,
    "bestSeason": "winter"
   },
   {
@@ -2095,7 +2095,7 @@
    "major": 0.4,
    "minor": 0.4,
    "coreBoost": 0.5,
-   "simAdjust": 35,
+   "simAdjust": 0,
    "bestSeason": "summer"
   },
   {
@@ -2109,7 +2109,7 @@
    "major": 2.7,
    "minor": 1.8,
    "coreBoost": 0.5,
-   "simAdjust": 30,
+   "simAdjust": -5,
    "bestSeason": "autumn"
   },
   {
@@ -2123,7 +2123,7 @@
    "major": 10,
    "minor": 4,
    "coreBoost": 1.5,
-   "simAdjust": 20,
+   "simAdjust": -15,
    "bestSeason": "autumn"
   },
   {
@@ -2137,7 +2137,7 @@
    "major": 11,
    "minor": 10,
    "coreBoost": 0.5,
-   "simAdjust": 5,
+   "simAdjust": -20,
    "bestSeason": "summer"
   },
   {
@@ -2151,7 +2151,7 @@
    "major": 9,
    "minor": 2,
    "coreBoost": 1.0,
-   "simAdjust": 10,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -2165,7 +2165,7 @@
    "major": 7.5,
    "minor": 5,
    "coreBoost": 1.0,
-   "simAdjust": 20,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -2179,7 +2179,7 @@
    "major": 7,
    "minor": 6,
    "coreBoost": 2.5,
-   "simAdjust": 25,
+   "simAdjust": -10,
    "bestSeason": "autumn"
   },
   {
@@ -2193,7 +2193,7 @@
    "major": 9,
    "minor": 7.5,
    "coreBoost": 2.0,
-   "simAdjust": 25,
+   "simAdjust": -10,
    "bestSeason": "spring"
   },
   {
@@ -2207,7 +2207,7 @@
    "major": 6.5,
    "minor": 5.5,
    "coreBoost": 2.0,
-   "simAdjust": 25,
+   "simAdjust": -15,
    "bestSeason": "spring"
   },
   {
@@ -2221,7 +2221,7 @@
    "major": 9,
    "minor": 6,
    "coreBoost": 2.0,
-   "simAdjust": 20,
+   "simAdjust": -10,
    "bestSeason": "spring"
   },
   {
@@ -2235,7 +2235,7 @@
    "major": 0.7,
    "minor": 0.4,
    "coreBoost": 0.5,
-   "simAdjust": 45,
+   "simAdjust": 0,
    "bestSeason": "summer"
   },
   {
@@ -2249,7 +2249,7 @@
    "major": 0.7,
    "minor": 0.6,
    "coreBoost": 0.5,
-   "simAdjust": 35,
+   "simAdjust": 0,
    "bestSeason": "spring"
   },
   {
@@ -2263,7 +2263,7 @@
    "major": 0.5,
    "minor": 0.5,
    "coreBoost": 0.5,
-   "simAdjust": 35,
+   "simAdjust": 0,
    "bestSeason": "autumn"
   },
   {
@@ -2277,7 +2277,7 @@
    "major": 0.45,
    "minor": 0.4,
    "coreBoost": 0.5,
-   "simAdjust": 30,
+   "simAdjust": 0,
    "bestSeason": "summer"
   },
   {
@@ -2291,7 +2291,7 @@
    "major": 1,
    "minor": 1,
    "coreBoost": 0.5,
-   "simAdjust": 35,
+   "simAdjust": -10,
    "bestSeason": "autumn"
   },
   {
@@ -2305,7 +2305,7 @@
    "major": 7,
    "minor": 7,
    "coreBoost": 1.0,
-   "simAdjust": 35,
+   "simAdjust": -10,
    "bestSeason": "summer"
   },
   {
@@ -2319,7 +2319,7 @@
    "major": 9,
    "minor": 9,
    "coreBoost": 1.0,
-   "simAdjust": 25,
+   "simAdjust": 0,
    "bestSeason": "summer"
   },
   {
@@ -2333,7 +2333,7 @@
    "major": 12,
    "minor": 12,
    "coreBoost": 2.5,
-   "simAdjust": 35,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -2347,7 +2347,7 @@
    "major": 11,
    "minor": 11,
    "coreBoost": 2.0,
-   "simAdjust": 35,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -2361,7 +2361,7 @@
    "major": 9,
    "minor": 9,
    "coreBoost": 1.5,
-   "simAdjust": 30,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -2375,7 +2375,7 @@
    "major": 12,
    "minor": 12,
    "coreBoost": 3.0,
-   "simAdjust": 35,
+   "simAdjust": -5,
    "bestSeason": "summer"
   },
   {
@@ -2389,7 +2389,7 @@
    "major": 20,
    "minor": 15,
    "coreBoost": 1.0,
-   "simAdjust": 35,
+   "simAdjust": -20,
    "bestSeason": "winter"
   },
   {
@@ -2403,7 +2403,7 @@
    "major": 8,
    "minor": 6,
    "coreBoost": 0.0,
-   "simAdjust": 10,
+   "simAdjust": -20,
    "bestSeason": "winter"
   },
   {
@@ -2417,7 +2417,7 @@
    "major": 9,
    "minor": 9,
    "brightStar": 9.0,
-   "simAdjust": 30,
+   "simAdjust": -10,
    "bestSeason": "summer"
   },
   {
@@ -2431,7 +2431,7 @@
    "major": 15,
    "minor": 15,
    "brightStar": 10.0,
-   "simAdjust": 20,
+   "simAdjust": -10,
    "bestSeason": "summer"
   }
  ]
