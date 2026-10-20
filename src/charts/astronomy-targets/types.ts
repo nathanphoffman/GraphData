@@ -49,6 +49,8 @@ export interface Settings {
   aperture: Aperture;
   /** When true, the four values below replace the focal length and aperture size classes. */
   manual: boolean;
+  /** Id of a preset telescope (see PRESETS), or "" for none. A preset replaces the size classes, the manual entry and the optical quality slider. */
+  preset: string;
   /** Telescope focal length in mm. */
   scopeFocalMm: number;
   /** Mirror or lens diameter in inches. */

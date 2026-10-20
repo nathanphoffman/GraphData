@@ -43,6 +43,7 @@ export const DEFAULT_SETTINGS: Settings = {
   focalLength: "medium",
   aperture: "medium",
   manual: false,
+  preset: "ed80cf",
   scopeFocalMm: 900,
   apertureIn: 5,
   eyepieceMm: 25,
@@ -53,14 +54,40 @@ export const DEFAULT_SETTINGS: Settings = {
   opticalQuality: 50,
 };
 
+export interface Preset {
+  label: string;
+  /** Mirror or lens diameter in mm. */
+  mm: number;
+  focalMm: number;
+  /** Optical quality, 0 (poor) to 100 (excellent), same scale as the slider. */
+  quality: number;
+}
+
+/** Telescopes that can be picked by name. They replace the size classes, the manual entry and the optical quality slider. */
+export const PRESETS: Record<string, Preset> = {
+  astroscan: { label: "Astroscan (114 mm f/4 reflector)", mm: 114, focalMm: 450, quality: 25 },
+  ed80cf: { label: "Explore Scientific ED80CF (80 mm f/6 triplet apo)", mm: 80, focalMm: 480, quality: 95 },
+};
+
+export function activePreset(settings: Settings): Preset | undefined {
+  return PRESETS[settings.preset];
+}
+
+/** Optical quality in use: the preset's, or the slider. */
+export function effectiveQuality(settings: Settings): number {
+  return activePreset(settings)?.quality ?? settings.opticalQuality;
+}
+
 /** Magnification and true field of view (arcminutes) of a manually entered telescope and eyepiece. */
 export function manualOptics(settings: Settings) {
-  const magnification = settings.scopeFocalMm / settings.eyepieceMm;
+  const magnification = scopeFocalLength(settings) / settings.eyepieceMm;
   return { magnification, fov: (settings.eyepieceAfov * 60) / magnification };
 }
 
 /** Field of view (arcminutes) and aperture (mm) in use, from the size classes or the manual telescope. */
 export function optics(settings: Settings): { fov: number; mm: number } {
+  const preset = activePreset(settings);
+  if (preset) return { fov: manualOptics(settings).fov, mm: preset.mm };
   if (settings.manual) return { fov: manualOptics(settings).fov, mm: settings.apertureIn * 25.4 };
   return { fov: FOCAL_LENGTHS[settings.focalLength].fov, mm: APERTURES[settings.aperture].mm };
 }
@@ -230,8 +257,10 @@ export function viewConditions(t: Target, settings: Settings, alt: number) {
   };
 }
 
-/** Telescope focal length in mm: the manual entry, or the typical value for the size class. */
+/** Telescope focal length in mm: the preset's, the manual entry, or the typical value for the size class. */
 export function scopeFocalLength(settings: Settings): number {
+  const preset = activePreset(settings);
+  if (preset) return preset.focalMm;
   return settings.manual ? settings.scopeFocalMm : FOCAL_LENGTHS[settings.focalLength].mm;
 }
 

@@ -4,7 +4,7 @@ import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
-import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -125,6 +125,7 @@ function parseSettings(saved: unknown): Settings | null {
     focalLength: pick(s.focalLength === "medium-long" ? "medium-large" : s.focalLength === "long" ? "large" : s.focalLength, FOCAL_LENGTHS, DEFAULT_SETTINGS.focalLength),
     aperture: pick(s.aperture, APERTURES, DEFAULT_SETTINGS.aperture),
     manual: s.manual === true,
+    preset: typeof s.preset === "string" && s.preset in PRESETS ? s.preset : "",
     scopeFocalMm: number(s.scopeFocalMm, 50, 10000, DEFAULT_SETTINGS.scopeFocalMm),
     apertureIn: number(s.apertureIn, 1, 40, DEFAULT_SETTINGS.apertureIn),
     eyepieceMm: number(s.eyepieceMm, 2, 100, DEFAULT_SETTINGS.eyepieceMm),
@@ -243,10 +244,29 @@ export default function AstronomyTargets() {
         <section className="astro-group">
           <h3>Your telescope</h3>
           <div className="astro-fields">
-            <label className="astro-check">
-              <input type="checkbox" checked={settings.manual} onChange={(e) => set({ manual: e.target.checked })} />
-              <span>Manual telescope</span>
+            <label>
+              <span>Select a preset</span>
+              <select
+                value={settings.preset || (settings.manual ? "manual" : "generic")}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  set(v === "manual" ? { preset: "", manual: true } : v === "generic" ? { preset: "", manual: false } : { preset: v });
+                }}
+              >
+                <option value="manual">Manual</option>
+                <option value="generic">Select Generic</option>
+                {Object.entries(PRESETS).map(([key, p]) => (
+                  <option key={key} value={key}>{p.label}</option>
+                ))}
+              </select>
+              {activePreset(settings) && (
+                <small>
+                  Using {activePreset(settings)!.mm} mm aperture, {activePreset(settings)!.focalMm} mm focal length, optical quality {opticalQualityLabel(activePreset(settings)!.quality).toLowerCase()} ({activePreset(settings)!.quality}).
+                </small>
+              )}
             </label>
+            {!settings.preset && (
+              <>
             {settings.manual ? (
               <>
                 <NumberField label="Telescope focal length (mm)" value={settings.scopeFocalMm} min={50} max={10000} onChange={(v) => set({ scopeFocalMm: v })} />
@@ -272,6 +292,21 @@ export default function AstronomyTargets() {
                 </label>
               </>
             )}
+              </>
+            )}
+            <label>
+              <span>Optical quality ({opticalQualityLabel(effectiveQuality(settings))}{activePreset(settings) ? ", set by preset" : ""})</span>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                step={5}
+                value={effectiveQuality(settings)}
+                disabled={!!settings.preset}
+                onChange={(e) => set({ opticalQuality: Number(e.target.value) })}
+              />
+              <small>Only changes the hover preview: good optics add contrast and colour, poor optics flatten them and soften the image.</small>
+            </label>
           </div>
         </section>
         <section className="astro-group">
@@ -280,20 +315,8 @@ export default function AstronomyTargets() {
             <NumberField label="Eyepiece focal length (mm)" value={settings.eyepieceMm} min={2} max={100} onChange={(v) => set({ eyepieceMm: v })} />
             <NumberField label="Eyepiece apparent field (°)" value={settings.eyepieceAfov} min={20} max={120} onChange={(v) => set({ eyepieceAfov: v })} />
             <p className="astro-note">
-              {previewOptics(settings).magnification.toFixed(0)}× magnification, true field {(previewOptics(settings).fov / 60).toFixed(2)}°. Shorter eyepiece = more zoom, bigger and dimmer. Only changes the hover preview, unless Manual telescope is on (then it also sets the field used in the table).
+              {previewOptics(settings).magnification.toFixed(0)}× magnification, true field {(previewOptics(settings).fov / 60).toFixed(2)}°. Shorter eyepiece = more zoom, bigger and dimmer. Only changes the hover preview, unless a preset or Manual telescope is on (then it also sets the field used in the table).
             </p>
-            <label>
-              <span>Optical quality ({opticalQualityLabel(settings.opticalQuality)})</span>
-              <input
-                type="range"
-                min={0}
-                max={100}
-                step={5}
-                value={settings.opticalQuality}
-                onChange={(e) => set({ opticalQuality: Number(e.target.value) })}
-              />
-              <small>Only changes the hover preview: good optics add contrast and colour, poor optics flatten them and soften the image.</small>
-            </label>
           </div>
         </section>
         <section className="astro-group">

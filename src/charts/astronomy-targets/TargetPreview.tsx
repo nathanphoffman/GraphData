@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { ScoredTarget, Settings, Target } from "./types";
-import { previewOptics, viewConditions } from "./calculate";
+import { effectiveQuality, previewOptics, viewConditions } from "./calculate";
 import { TARGET_IMAGES, type TargetImage } from "./images";
 
 const VIEW_SIZE = 280;
@@ -212,7 +212,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
 
   useEffect(() => {
     if (!loaded || !canvasRef.current) return;
-    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, loaded.bg, fov, margin, view.pointMargin, skyGlow, info.footprint, unresolved, (settings.opticalQuality - 50) / 50);
+    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, loaded.bg, fov, margin, view.pointMargin, skyGlow, info.footprint, unresolved, (effectiveQuality(settings) - 50) / 50);
     if (!render) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const show = (averted: number) => {
@@ -235,7 +235,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved, settings.opticalQuality]);
+  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved, effectiveQuality(settings)]);
 
   const width = VIEW_SIZE * 2 + 48;
   const left = Math.min(x + 16, window.innerWidth - width - 8);
