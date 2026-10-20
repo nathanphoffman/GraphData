@@ -60,6 +60,9 @@ function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target):
 const AVERTED_BOOST = 0.9;
 /** Dark-adapted eyes see red as dark and blue-green as bright, and sky-survey photos are red-heavy, so the photo's red is turned down and its blue turned up. */
 const COOL_BALANCE = [0.65, 0.9, 1.15];
+/** Magnitudes above the faintest star where a point starts to glow, and how much further it takes to glow fully. */
+const BLOOM_START = 4;
+const BLOOM_RANGE = 6;
 /** Seconds for one full direct, averted, direct cycle. */
 const CYCLE_SECONDS = 8;
 
@@ -77,6 +80,8 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
     // Brighter points bloom bigger; one that is only just brighter than the faintest star shows as a tiny dot.
     const reach = Math.max(0, Math.min(0.6 * (pointMargin + AVERTED_BOOST * averted), 8));
     const glowRadius = (2 + 2.5 * reach) * SCALE * (1 + 0.6 * poor);
+    // Only things far brighter than the faintest star bloom; faint points (small planetary nebulae, dim stars) stay sharp pinpoints.
+    const bloom = Math.max(0, Math.min(1, (pointMargin + AVERTED_BOOST * averted - BLOOM_START) / BLOOM_RANGE));
     for (let p = 0; p < size * size; p++) {
       const i = p * 4;
       const dist = Math.hypot((p % size) - half, Math.floor(p / size) - half);
@@ -85,7 +90,7 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
         d[i] = d[i + 1] = d[i + 2] = 0;
         continue;
       }
-      const level = Math.min(1, Math.exp(-((dist / (1.2 * SCALE * (1 + 0.5 * poor))) ** 2)) + (0.35 + 0.2 * poor) * Math.exp(-dist / glowRadius));
+      const level = Math.min(1, Math.exp(-((dist / (1.2 * SCALE * (1 + 0.5 * poor))) ** 2)) + bloom * (0.35 + 0.2 * poor) * Math.exp(-dist / glowRadius));
       const vignette = 1 - 0.25 * (dist / half) ** 2;
       for (let c = 0; c < 3; c++) {
         const v = Math.min(1, skyLevel * skyTint[c] + level * base[c]) * vignette;
