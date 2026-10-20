@@ -44,11 +44,24 @@ function band(lb: number | null, adjusted: boolean): string {
   return "band-red";
 }
 
+/** Colour for a monthly change (lb, negative = loss) using kg thresholds. */
+function deltaBand(lb: number | null): string {
+  if (lb === null) return "";
+  const kg = lb * KG_PER_LB;
+  if (kg < -3) return "band-orange";
+  if (kg >= -1.5 && kg <= -0.5) return "band-blue";
+  if (kg < 0) return "band-green";
+  if (kg < 1) return "band-yellow";
+  return "band-red";
+}
+
 /** Mean of the 3-day, 30-day, 365-day, blended and 1-year projected values (projection is missing for the first 30 days). */
 function allAverage(a: Averages): number {
   const values = [a.avg3, a.avg30, a.avg365, a.blended, yearly(a.blended, a.monthly)].filter((v): v is number => v !== null);
   return values.reduce((sum, v) => sum + v, 0) / values.length;
 }
+
+const round1 = (n: number) => Math.round(n * 10) / 10;
 
 const yearly = (blended: number, monthly: number | null) => (monthly === null ? null : blended + monthly * 12);
 
@@ -75,8 +88,15 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     const values = series.slice(Math.max(0, i - 2), i + 1).filter((v): v is number => v !== null);
     return values.length ? values.reduce((sum, v) => sum + v, 0) / values.length : null;
   };
+  /** Monthly rate from the 3-day average: change over 15 days doubled, averaged with the change over 30 days. */
+  const lag15 = Math.round(15 / step);
+  const lag30 = Math.round(30 / step);
+  const recent = (get: (d: (typeof baseRows)[number]) => number, i: number) =>
+    i >= lag30 ? round1((2 * (get(baseRows[i]) - get(baseRows[i - lag15])) + (get(baseRows[i]) - get(baseRows[i - lag30]))) / 2) : null;
   return baseRows.map((d, i) => ({
     ...d,
+    recent: recent((r) => r.avg3, i),
+    recentAdj: recent((r) => r.adj.avg3, i),
     allAvg: allActual[i],
     allAvgAdj: allAdjusted[i],
     allProj: projActual[i],
@@ -106,7 +126,7 @@ export default function WeightJourney() {
   const [unit, setUnit] = useState<Unit>("lb");
   const k = unit === "kg" ? KG_PER_LB : 1;
   const w = (lb: number, digits = 1) => (lb * k).toFixed(digits);
-  const signed = (lb: number) => `${lb > 0 ? "+" : ""}${w(lb)} ${unit}`;
+  const signed = (lb: number) => `${lb > 0 ? "+" : ""}${w(lb)}`;
 
   /** Actual value on top, muscle-adjusted value underneath; `colour` adds the target-band highlight. */
   const two = (
@@ -114,13 +134,14 @@ export default function WeightJourney() {
     adjusted: number | null,
     colour = true,
     fmt: (lb: number) => string = w,
+    bandOf: (lb: number | null, adjusted: boolean) => string = band,
   ) => {
     const show = (n: number | null) => (n === null ? "—" : fmt(n));
     return (
       <>
-        <span className={colour ? band(actual, false) : ""}>{show(actual)}</span>
+        <span className={colour ? bandOf(actual, false) : ""}>{show(actual)}</span>
         <br />
-        <span className={`adjusted ${colour ? band(adjusted, true) : ""}`}>{show(adjusted)}</span>
+        <span className={`adjusted ${colour ? bandOf(adjusted, true) : ""}`}>{show(adjusted)}</span>
       </>
     );
   };
@@ -247,9 +268,11 @@ export default function WeightJourney() {
   const today = tableRows[tableRows.length - 1];
   const yearOut = today.monthly === null ? null : Math.round((today.blended + today.monthly * 12) * 10) / 10;
 
-  const [showAll, setShowAll] = useState(false);
+  // Starts at the latest 60 rows; each click of the button adds 6 more months (older) of rows.
+  const [extraMonths, setExtraMonths] = useState(0);
   const newestFirst = useMemo(() => [...tableRows].reverse(), [tableRows]);
-  const rows = showAll ? newestFirst : newestFirst.slice(0, 60);
+  const rowsPerMonth = 30 / (compressed ? COMPRESS_STEP : 1);
+  const rows = newestFirst.slice(0, 60 + Math.round(extraMonths * rowsPerMonth));
 
   return (
     <div className="weight">
@@ -371,7 +394,7 @@ export default function WeightJourney() {
 
       <table>
         <thead>
-          <tr><th>Date</th><th>Weight ({unit})</th><th>Muscle gain ({unit})</th><th>Muscle gained so far ({unit})</th><th>3-day avg<small>actual / muscle-adjusted</small></th><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th><th>Projected / month</th><th>Projected in 1 year</th><th>All average</th><th>Projected all average</th><th>3 day projected all average</th><th></th></tr>
+          <tr><th>Date</th><th>Weight ({unit})</th><th>Muscle gain ({unit})</th><th>Muscle gained so far ({unit})</th><th>3-day avg<small>actual / muscle-adjusted</small></th><th>Recent weight loss / month<small>from 15 and 30 day change</small></th><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th><th>Projected / month</th><th>Projected in 1 year</th><th>All average</th><th>Projected all average</th><th>3 day projected all average</th><th></th></tr>
         </thead>
         <tbody>
           {rows.map((d) => (
@@ -381,10 +404,11 @@ export default function WeightJourney() {
               <td>{w(d.muscleDaily, 3)}</td>
               <td>{w(d.muscleTotal, 2)}</td>
               <td>{two(d.avg3, d.adj.avg3)}</td>
+              <td>{two(d.recent, d.recentAdj, true, signed, deltaBand)}</td>
               <td>{two(d.avg30, d.adj.avg30)}</td>
               <td>{two(d.avg365, d.adj.avg365)}</td>
               <td>{two(d.blended, d.adj.blended)}</td>
-              <td>{two(d.monthly, d.adj.monthly, false, signed)}</td>
+              <td>{two(d.monthly, d.adj.monthly, true, signed, deltaBand)}</td>
               <td>{two(yearly(d.blended, d.monthly), yearly(d.adj.blended, d.adj.monthly))}</td>
               <td>{two(d.allAvg, d.allAvgAdj)}</td>
               <td>{two(d.allProj, d.allProjAdj)}</td>
@@ -394,9 +418,11 @@ export default function WeightJourney() {
           ))}
         </tbody>
       </table>
-      <button className="weight-more" onClick={() => setShowAll(!showAll)}>
-        {showAll ? "Show only the latest 60 rows" : `Show all ${tableRows.length} ${compressed ? "rows" : "days"}`}
-      </button>
+      {rows.length < newestFirst.length && (
+        <button className="weight-more" onClick={() => setExtraMonths(extraMonths + 6)}>
+          Show next 6 months
+        </button>
+      )}
     </div>
   );
 }
