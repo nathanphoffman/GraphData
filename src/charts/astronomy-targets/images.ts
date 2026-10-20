@@ -20,6 +20,29 @@ import img_ngc_6633 from "./images/ngc_6633.jpg";
 import img_ngc_1647 from "./images/ngc_1647.jpg";
 import img_ic_405 from "./images/ic_405.jpg";
 import moon from "./images/moon.jpg";
+import img_m47 from "./images/m47.jpg";
+import img_m38 from "./images/m38.jpg";
+import img_m44 from "./images/m44.jpg";
+import img_m37 from "./images/m37.jpg";
+import img_m48 from "./images/m48.jpg";
+import img_m42 from "./images/m42.jpg";
+import img_m13 from "./images/m13.jpg";
+import img_m3 from "./images/m3.jpg";
+import img_m24 from "./images/m24.jpg";
+import img_m25 from "./images/m25.jpg";
+import img_m41 from "./images/m41.jpg";
+import img_ngc_7789 from "./images/ngc_7789.jpg";
+import img_ngc_7023 from "./images/ngc_7023.jpg";
+import img_ngc_129 from "./images/ngc_129.jpg";
+import img_ngc_663 from "./images/ngc_663.jpg";
+import img_ngc_225 from "./images/ngc_225.jpg";
+import img_m15 from "./images/m15.jpg";
+import img_m5 from "./images/m5.jpg";
+import img_m33 from "./images/m33.jpg";
+import img_ngc_6888 from "./images/ngc_6888.jpg";
+import img_m92 from "./images/m92.jpg";
+import img_ngc_2301 from "./images/ngc_2301.jpg";
+import img_m46 from "./images/m46.jpg";
 
 export interface TargetImage {
   src: string;
@@ -181,6 +204,144 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
   },
   "IC 405": {
     src: img_ic_405,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M47": {
+    src: img_m47,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M38": {
+    src: img_m38,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M44": {
+    src: img_m44,
+    widthArcmin: 285,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M37": {
+    src: img_m37,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M48": {
+    src: img_m48,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M42": {
+    src: img_m42,
+    widthArcmin: 255,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M13": {
+    src: img_m13,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M3": {
+    src: img_m3,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M24": {
+    src: img_m24,
+    widthArcmin: 270,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M25": {
+    src: img_m25,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M41": {
+    src: img_m41,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7789": {
+    src: img_ngc_7789,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7023": {
+    src: img_ngc_7023,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 129": {
+    src: img_ngc_129,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 663": {
+    src: img_ngc_663,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 225": {
+    src: img_ngc_225,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M15": {
+    src: img_m15,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M5": {
+    src: img_m5,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M33": {
+    src: img_m33,
+    widthArcmin: 210,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 6888": {
+    src: img_ngc_6888,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M92": {
+    src: img_m92,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 2301": {
+    src: img_ngc_2301,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M46": {
+    src: img_m46,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
