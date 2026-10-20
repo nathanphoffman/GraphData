@@ -41,6 +41,7 @@ export const DEFAULT_SETTINGS: Settings = {
   eyepieceAfov: 52,
   bortle: 4,
   simWeight: 50,
+  previewZoom: 0,
 };
 
 /** Magnification and true field of view (arcminutes) of a manually entered telescope and eyepiece. */
@@ -216,6 +217,14 @@ export function viewConditions(t: Target, settings: Settings, alt: number) {
     margin: Math.min(margin(surfaceBrightness(t), mm, glow), t.major === 0 ? 1.5 : 6),
     skyGlow: clamp((settings.bortle - 1) / 8, 0, 1),
   };
+}
+
+/** Each doubling of magnification dims the preview by this many magnitudes (the same light is spread over a bigger image). */
+export const ZOOM_DIMMING = 1;
+
+/** Magnification of the current setup, taking a typical 52 degree eyepiece for the size classes. */
+export function baseMagnification(settings: Settings): number {
+  return settings.manual ? manualOptics(settings).magnification : (52 * 60) / optics(settings).fov;
 }
 
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {

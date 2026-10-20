@@ -4,7 +4,7 @@ import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
-import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, manualOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, baseMagnification, manualOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -136,6 +136,7 @@ function parseSettings(saved: unknown): Settings | null {
     eyepieceAfov: number(s.eyepieceAfov, 20, 120, DEFAULT_SETTINGS.eyepieceAfov),
     bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle) * 2) / 2,
     simWeight: Math.round(number(s.simWeight, 0, 100, DEFAULT_SETTINGS.simWeight)),
+    previewZoom: Math.round(number(s.previewZoom, -1, 2, DEFAULT_SETTINGS.previewZoom) * 10) / 10,
   };
 }
 
@@ -189,7 +190,13 @@ export default function AstronomyTargets() {
   const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
 
   const scored = useMemo(() => scoreTargets(model.targets, settings), [settings]);
-  const rows = seasonFilter ? scored.filter((row) => row.target.bestSeason === seasonFilter) : scored;
+  const [query, setQuery] = useState("");
+  const needle = query.trim().toLowerCase();
+  const rows = scored.filter(
+    (row) =>
+      (!seasonFilter || row.target.bestSeason === seasonFilter) &&
+      (!needle || [row.target.id, row.target.nickname, row.target.constellation, row.target.type].some((v) => v.toLowerCase().includes(needle))),
+  );
   const notDark = useMemo(
     () => (Object.keys(SEASONS) as Season[]).filter((season) => darkFraction(settings, season) < 1),
     [settings],
@@ -263,6 +270,18 @@ export default function AstronomyTargets() {
           <small>{settings.bortle % 1 === 0 ? BORTLE_NOTES[settings.bortle - 1] : `Between ${BORTLE_NOTES[Math.floor(settings.bortle) - 1].toLowerCase()} and ${BORTLE_NOTES[Math.ceil(settings.bortle) - 1].toLowerCase()}`}</small>
         </label>
         <label>
+          <span>Preview eyepiece zoom ({Math.pow(2, settings.previewZoom).toFixed(1)}×, about {(baseMagnification(settings) * Math.pow(2, settings.previewZoom)).toFixed(0)}× magnification)</span>
+          <input
+            type="range"
+            min={-1}
+            max={2}
+            step={0.1}
+            value={settings.previewZoom}
+            onChange={(e) => set({ previewZoom: Number(e.target.value) })}
+          />
+          <small>Only changes the hover preview: higher zoom shows a smaller patch of sky, bigger and dimmer.</small>
+        </label>
+        <label>
           <span>Simulator adjustment applied ({settings.simWeight}%)</span>
           <input
             type="range"
@@ -302,6 +321,17 @@ export default function AstronomyTargets() {
           half hour on the 15th of each month in that season; moonlight is not counted.
           {notDark.length > 0 && ` Part of this window is not fully dark in: ${notDark.map((s) => SEASONS[s].label.split(" ")[0]).join(", ")}.`}
         </p>
+      </div>
+
+      <div className="astro-search">
+        <input
+          type="search"
+          placeholder="Search name, nickname, constellation or type"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          aria-label="Search targets"
+        />
+        <small>{rows.length} of {model.targets.length} targets</small>
       </div>
 
       <div className="panel calc-table">

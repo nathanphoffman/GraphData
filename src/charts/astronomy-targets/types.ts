@@ -59,6 +59,8 @@ export interface Settings {
   bortle: number;
   /** How much of each target's simulator adjustment is added to its score, 0-100 (percent). */
   simWeight: number;
+  /** Preview only: zoom as a power of two (0 = your setup, 1 = twice the magnification, -1 = half). */
+  previewZoom: number;
 }
 
 export interface ScoredTarget {
