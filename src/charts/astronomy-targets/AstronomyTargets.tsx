@@ -4,7 +4,7 @@ import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
-import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, manualOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -117,6 +117,11 @@ function parseSettings(saved: unknown): Settings | null {
     latitude: number(s.latitude, 0, 80, DEFAULT_SETTINGS.latitude),
     focalLength: pick(s.focalLength, FOCAL_LENGTHS, DEFAULT_SETTINGS.focalLength),
     aperture: pick(s.aperture, APERTURES, DEFAULT_SETTINGS.aperture),
+    manual: s.manual === true,
+    scopeFocalMm: number(s.scopeFocalMm, 50, 10000, DEFAULT_SETTINGS.scopeFocalMm),
+    apertureIn: number(s.apertureIn, 1, 40, DEFAULT_SETTINGS.apertureIn),
+    eyepieceMm: number(s.eyepieceMm, 2, 100, DEFAULT_SETTINGS.eyepieceMm),
+    eyepieceAfov: number(s.eyepieceAfov, 20, 120, DEFAULT_SETTINGS.eyepieceAfov),
     bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle)),
   };
 }
@@ -128,6 +133,29 @@ function parseHidden(saved: unknown): string[] | null {
 
 function parseSeasonFilter(saved: unknown): SeasonFilter | null {
   return SEASON_FILTERS.find((season) => season === saved) ?? null;
+}
+
+/** Keeps what you type as text so you can pass through out-of-range values (typing "900" starts with "9"); only valid numbers are applied. */
+function NumberField({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
+  const [draft, setDraft] = useState<string | null>(null);
+  return (
+    <label>
+      <span>{label}</span>
+      <input
+        type="number"
+        min={min}
+        max={max}
+        step="any"
+        value={draft ?? value}
+        onChange={(e) => {
+          setDraft(e.target.value);
+          const v = Number(e.target.value);
+          if (e.target.value !== "" && v >= min && v <= max) onChange(v);
+        }}
+        onBlur={() => setDraft(null)}
+      />
+    </label>
+  );
 }
 
 export default function AstronomyTargets() {
@@ -175,22 +203,40 @@ export default function AstronomyTargets() {
             onChange={(e) => set({ latitude: Math.min(80, Math.max(0, Number(e.target.value))) })}
           />
         </label>
-        <label>
-          <span>Focal length</span>
-          <select value={settings.focalLength} onChange={(e) => set({ focalLength: e.target.value as FocalLength })}>
-            {Object.entries(FOCAL_LENGTHS).map(([key, f]) => (
-              <option key={key} value={key}>{f.label}</option>
-            ))}
-          </select>
+        <label className="astro-check">
+          <input type="checkbox" checked={settings.manual} onChange={(e) => set({ manual: e.target.checked })} />
+          <span>Manual telescope</span>
         </label>
-        <label>
-          <span>Mirror / lens size</span>
-          <select value={settings.aperture} onChange={(e) => set({ aperture: e.target.value as Aperture })}>
-            {Object.entries(APERTURES).map(([key, a]) => (
-              <option key={key} value={key}>{a.label}</option>
-            ))}
-          </select>
-        </label>
+        {settings.manual ? (
+          <>
+            <NumberField label="Telescope focal length (mm)" value={settings.scopeFocalMm} min={50} max={10000} onChange={(v) => set({ scopeFocalMm: v })} />
+            <NumberField label="Mirror / lens size (inches)" value={settings.apertureIn} min={1} max={40} onChange={(v) => set({ apertureIn: v })} />
+            <NumberField label="Eyepiece focal length (mm)" value={settings.eyepieceMm} min={2} max={100} onChange={(v) => set({ eyepieceMm: v })} />
+            <NumberField label="Eyepiece apparent field (°)" value={settings.eyepieceAfov} min={20} max={120} onChange={(v) => set({ eyepieceAfov: v })} />
+            <p className="astro-note">
+              {manualOptics(settings).magnification.toFixed(0)}× magnification, true field {(manualOptics(settings).fov / 60).toFixed(2)}°.
+            </p>
+          </>
+        ) : (
+          <>
+            <label>
+              <span>Focal length</span>
+              <select value={settings.focalLength} onChange={(e) => set({ focalLength: e.target.value as FocalLength })}>
+                {Object.entries(FOCAL_LENGTHS).map(([key, f]) => (
+                  <option key={key} value={key}>{f.label}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>Mirror / lens size</span>
+              <select value={settings.aperture} onChange={(e) => set({ aperture: e.target.value as Aperture })}>
+                {Object.entries(APERTURES).map(([key, a]) => (
+                  <option key={key} value={key}>{a.label}</option>
+                ))}
+              </select>
+            </label>
+          </>
+        )}
         <label>
           <span>Light pollution (Bortle {settings.bortle})</span>
           <input

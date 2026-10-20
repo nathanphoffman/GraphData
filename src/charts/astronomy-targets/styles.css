@@ -206,3 +206,13 @@
 .astro-preview small {
   flex-basis: 100%;
 }
+
+.astro-controls .astro-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.astro-controls .astro-check input {
+  padding: 0;
+}

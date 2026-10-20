@@ -34,8 +34,25 @@ export const DEFAULT_SETTINGS: Settings = {
   latitude: 40,
   focalLength: "medium",
   aperture: "medium",
+  manual: false,
+  scopeFocalMm: 900,
+  apertureIn: 5,
+  eyepieceMm: 25,
+  eyepieceAfov: 52,
   bortle: 4,
 };
+
+/** Magnification and true field of view (arcminutes) of a manually entered telescope and eyepiece. */
+export function manualOptics(settings: Settings) {
+  const magnification = settings.scopeFocalMm / settings.eyepieceMm;
+  return { magnification, fov: (settings.eyepieceAfov * 60) / magnification };
+}
+
+/** Field of view (arcminutes) and aperture (mm) in use, from the size classes or the manual telescope. */
+export function optics(settings: Settings): { fov: number; mm: number } {
+  if (settings.manual) return { fov: manualOptics(settings).fov, mm: settings.apertureIn * 25.4 };
+  return { fov: FOCAL_LENGTHS[settings.focalLength].fov, mm: APERTURES[settings.aperture].mm };
+}
 
 const STEP_HOURS = 0.5;
 /** Points taken off every score (it never goes below 0). */
@@ -190,10 +207,10 @@ function totalLightScore(magnitude: number, mm: number, cost: number): number {
  * faintest thing this scope shows (negative = below it), and how bright the sky glow is (0 dark, 1 inner city).
  */
 export function viewConditions(t: Target, settings: Settings, alt: number) {
-  const { mm } = APERTURES[settings.aperture];
+  const { fov, mm } = optics(settings);
   const glow = skyGlowPenalty(settings.bortle, alt);
   return {
-    fov: FOCAL_LENGTHS[settings.focalLength].fov,
+    fov,
     margin: margin(surfaceBrightness(t), mm, glow),
     skyGlow: clamp((settings.bortle - 1) / 8, 0, 1),
   };
@@ -203,8 +220,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
   const seasonSamples = Object.fromEntries(
     (Object.keys(SEASONS) as Season[]).map((season) => [season, sampleWindow(settings, season)]),
   ) as Record<Season, Sample[]>;
-  const { fov } = FOCAL_LENGTHS[settings.focalLength];
-  const { mm } = APERTURES[settings.aperture];
+  const { fov, mm } = optics(settings);
 
   const evaluate = (target: Target, samples: Sample[]) => {
     let skyTotal = 0;

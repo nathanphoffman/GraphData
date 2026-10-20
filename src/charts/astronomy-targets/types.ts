@@ -43,6 +43,16 @@ export interface Settings {
   latitude: number;
   focalLength: FocalLength;
   aperture: Aperture;
+  /** When true, the four values below replace the focal length and aperture size classes. */
+  manual: boolean;
+  /** Telescope focal length in mm. */
+  scopeFocalMm: number;
+  /** Mirror or lens diameter in inches. */
+  apertureIn: number;
+  /** Eyepiece focal length in mm. */
+  eyepieceMm: number;
+  /** Eyepiece apparent field of view in degrees. */
+  eyepieceAfov: number;
   /** Bortle scale: 1 = pristine dark sky, 9 = inner city. */
   bortle: number;
 }
