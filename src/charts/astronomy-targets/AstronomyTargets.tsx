@@ -137,6 +137,7 @@ function parseSettings(saved: unknown): Settings | null {
     eyepieceAfov: number(s.eyepieceAfov, 20, 120, DEFAULT_SETTINGS.eyepieceAfov),
     bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle) * 2) / 2,
     simWeight: Math.round(number(s.simWeight, 0, 100, DEFAULT_SETTINGS.simWeight)),
+    opticalQuality: Math.round(number(s.opticalQuality, 0, 100, DEFAULT_SETTINGS.opticalQuality)),
     previewZoom: Math.round(number(s.previewZoom, -1, 2, DEFAULT_SETTINGS.previewZoom) * 10) / 10,
   };
 }
@@ -151,6 +152,10 @@ function parseSeasonFilter(saved: unknown): SeasonFilter | null {
 }
 
 /** Keeps what you type as text so you can pass through out-of-range values (typing "900" starts with "9"); only valid numbers are applied. */
+function opticalQualityLabel(v: number): string {
+  return v < 20 ? "Poor" : v < 40 ? "Below average" : v < 60 ? "Average" : v < 80 ? "Good" : "Excellent";
+}
+
 function NumberField({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
   const [draft, setDraft] = useState<string | null>(null);
   return (
@@ -281,6 +286,18 @@ export default function AstronomyTargets() {
             onChange={(e) => set({ previewZoom: Number(e.target.value) })}
           />
           <small>Only changes the hover preview: higher zoom shows a smaller patch of sky, bigger and dimmer.</small>
+        </label>
+        <label>
+          <span>Optical quality ({opticalQualityLabel(settings.opticalQuality)})</span>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={5}
+            value={settings.opticalQuality}
+            onChange={(e) => set({ opticalQuality: Number(e.target.value) })}
+          />
+          <small>Only changes the hover preview: good optics add contrast and colour, poor optics flatten them and soften the image.</small>
         </label>
         <label>
           <span>Simulator adjustment applied ({settings.simWeight}%)</span>

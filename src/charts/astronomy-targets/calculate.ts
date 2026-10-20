@@ -50,6 +50,7 @@ export const DEFAULT_SETTINGS: Settings = {
   bortle: 4,
   simWeight: 50,
   previewZoom: 0,
+  opticalQuality: 50,
 };
 
 /** Magnification and true field of view (arcminutes) of a manually entered telescope and eyepiece. */

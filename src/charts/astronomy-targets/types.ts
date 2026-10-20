@@ -61,6 +61,8 @@ export interface Settings {
   simWeight: number;
   /** Preview only: zoom as a power of two (0 = your setup, 1 = twice the magnification, -1 = half). */
   previewZoom: number;
+  /** Preview only: optical quality, 0 (poor) to 100 (excellent). 50 is an average telescope. */
+  opticalQuality: number;
 }
 
 export interface ScoredTarget {

@@ -62,16 +62,18 @@ const AVERTED_BOOST = 0.9;
 const CYCLE_SECONDS = 8;
 
 /** Stars and planets are far smaller than a pixel of the field, so they are drawn as a glowing dot, not from the photo. */
-function preparePoint(g: CanvasRenderingContext2D, size: number, margin: number, skyGlow: number) {
+function preparePoint(g: CanvasRenderingContext2D, size: number, margin: number, skyGlow: number, quality: number) {
   const frame = g.createImageData(size, size);
   const d = frame.data;
   const half = size / 2;
-  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3;
+  // Poor optics smear a star into a bigger, hazier dot; good optics keep it tight.
+  const poor = Math.max(0, -quality);
+  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3 + 0.015 * poor;
   const base = [0.86, 0.93, 1.0];
   const skyTint = [1, 0.82, 0.62];
   return (averted: number) => {
     const reach = Math.max(0, Math.min(margin + AVERTED_BOOST * averted, 6));
-    const glowRadius = (2 + 2.5 * reach) * SCALE;
+    const glowRadius = (2 + 2.5 * reach) * SCALE * (1 + 0.6 * poor);
     for (let p = 0; p < size * size; p++) {
       const i = p * 4;
       const dist = Math.hypot((p % size) - half, Math.floor(p / size) - half);
@@ -80,7 +82,7 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, margin: number,
         d[i] = d[i + 1] = d[i + 2] = 0;
         continue;
       }
-      const level = Math.min(1, Math.exp(-((dist / (1.2 * SCALE)) ** 2)) + 0.35 * Math.exp(-dist / glowRadius));
+      const level = Math.min(1, Math.exp(-((dist / (1.2 * SCALE * (1 + 0.5 * poor))) ** 2)) + (0.35 + 0.2 * poor) * Math.exp(-dist / glowRadius));
       const vignette = 1 - 0.25 * (dist / half) ** 2;
       for (let c = 0; c < 3; c++) {
         const v = Math.min(1, skyLevel * skyTint[c] + level * base[c]) * vignette;
@@ -98,12 +100,12 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, margin: number,
  * Returns a function that draws one frame for a given amount of averted vision (0 = looking straight at it, 1 = looking to the side):
  * averted vision is more sensitive but softer and colourless.
  */
-function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, bg: number, fov: number, margin: number, skyGlow: number, center: { cx: number; cy: number } | undefined, point: boolean) {
+function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcmin: number, mean: number, bg: number, fov: number, margin: number, skyGlow: number, center: { cx: number; cy: number } | undefined, point: boolean, quality: number) {
   const size = VIEW_SIZE * SCALE;
   canvas.width = canvas.height = size;
   const g = canvas.getContext("2d", { willReadFrequently: true });
   if (!g) return null;
-  if (point) return preparePoint(g, size, margin, skyGlow);
+  if (point) return preparePoint(g, size, margin, skyGlow, quality);
   const pxPerArcmin = size / fov;
   const w = widthArcmin * pxPerArcmin;
   const h = w * (img.naturalHeight / img.naturalWidth);
@@ -143,14 +145,19 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
     vignette[p] = 1 - 0.25 * r * r;
   }
   const lut = new Float32Array(256).map((_, v) => Math.pow(v / 255, 2.2));
-  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3;
-  const base = [0.86, 0.93, 1.0];
+  // Optical quality: good optics add contrast and colour; poor optics flatten them, lift the sky with scattered light and soften the image.
+  const poor = Math.max(0, -quality);
+  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3 + 0.015 * poor;
   const skyTint = [1, 0.82, 0.62];
 
   return (averted: number) => {
     const gain = Math.pow(10, 0.4 * (margin + AVERTED_BOOST * averted)) / mean;
-    const soften = 0.6 * averted;
-    const colour = 0.15 * (1 - averted);
+    const soften = Math.min(1, 0.6 * averted + 0.6 * poor);
+    // The eye sees almost no colour in the dark and none at all in averted vision; good optics keep more of the photo's colour.
+    const colour = Math.max(0, (0.175 + 0.25 * quality) * (1 - averted));
+    const contrast = 8 * (1 - 0.3 * quality);
+    const tone = (x: number, w: number) => 1 - Math.exp(-Math.max(0, x * gain * w - 2.5) / contrast);
+    const tint = [0.86 + 0.14 * colour, 0.93 + 0.07 * colour, 1.0];
     for (let p = 0; p < size * size; p++) {
       const i = p * 4;
       d[i + 3] = 255;
@@ -161,13 +168,12 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
       const lin0 = lut[sharp[i]] + (lut[blur[i]] - lut[sharp[i]]) * soften;
       const lin1 = lut[sharp[i + 1]] + (lut[blur[i + 1]] - lut[sharp[i + 1]]) * soften;
       const lin2 = lut[sharp[i + 2]] + (lut[blur[i + 2]] - lut[sharp[i + 2]]) * soften;
-      const rawLum = 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2;
-      const lum = Math.max(0, rawLum - bg);
-      const level = 1 - Math.exp(-Math.max(0, lum * gain * weight[p] - 2.5) / 8);
+      const w = weight[p];
+      const grey = tone(Math.max(0, 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2 - bg), w);
       for (let c = 0; c < 3; c++) {
-        // The eye sees almost no colour in the dark; keep a hint of the photo's tint when looking straight at it.
-        const tint = rawLum > 0 ? 1 - colour + colour * ((c === 0 ? lin0 : c === 1 ? lin1 : lin2) / rawLum) : 1;
-        const v = Math.min(1, skyLevel * skyTint[c] + level * base[c] * tint) * vignette[p];
+        const chan = tone(Math.max(0, (c === 0 ? lin0 : c === 1 ? lin1 : lin2) - bg), w);
+        const level = grey + (chan - grey) * colour;
+        const v = Math.min(1, skyLevel * skyTint[c] + level * tint[c]) * vignette[p];
         d[i + c] = Math.round(255 * Math.pow(v, 1 / 2.2));
       }
     }
@@ -202,7 +208,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
 
   useEffect(() => {
     if (!loaded || !canvasRef.current) return;
-    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, loaded.bg, fov, margin, skyGlow, info.footprint, unresolved);
+    const render = prepareView(canvasRef.current, loaded.img, info.widthArcmin, loaded.mean, loaded.bg, fov, margin, skyGlow, info.footprint, unresolved, (settings.opticalQuality - 50) / 50);
     if (!render) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const show = (averted: number) => {
@@ -225,7 +231,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved]);
+  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved, settings.opticalQuality]);
 
   const width = VIEW_SIZE * 2 + 48;
   const left = Math.min(x + 16, window.innerWidth - width - 8);
