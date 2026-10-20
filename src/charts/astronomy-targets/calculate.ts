@@ -189,41 +189,49 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
   const seasonSamples = Object.fromEntries(
     (Object.keys(SEASONS) as Season[]).map((season) => [season, sampleWindow(settings, season)]),
   ) as Record<Season, Sample[]>;
-  const allSamples = Object.values(seasonSamples).flat();
   const { fov } = FOCAL_LENGTHS[settings.focalLength];
   const { mm } = APERTURES[settings.aperture];
 
+  const evaluate = (target: Target, samples: Sample[]) => {
+    let skyTotal = 0;
+    let lightTotal = 0;
+    let coreTotal = 0;
+    let peakAltitude = -90;
+    let aboveHorizon = 0;
+    let count = 0;
+    for (const s of samples) {
+      let positions = positionsAt(target, s).map((pos) => altitude(pos.ra, pos.dec, s.lst, settings.latitude));
+      // A planet can be anywhere along the ecliptic, so use the spot where it is highest at this moment.
+      if (target.planet) positions = [Math.max(...positions)];
+      for (const alt of positions) {
+        count++;
+        if (!s.dark) continue;
+        skyTotal += altitudeQuality(alt);
+        peakAltitude = Math.max(peakAltitude, alt);
+        if (alt <= 0) continue;
+        // Every moment it is up counts equally here, so time spent low in the glow drags Light and Core down.
+        aboveHorizon++;
+        const glow = skyGlowPenalty(settings.bortle, alt);
+        lightTotal += totalLightScore(target.magnitude, mm, glow);
+        coreTotal += coreScore(coreSurfaceBrightness(target), mm, glow);
+      }
+    }
+    const sky = count ? skyTotal / count : 0;
+    const fit = sizeFit(target, fov);
+    const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
+    const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
+    const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
+    const score = Math.max(0, raw - SCORE_OFFSET);
+    return { target, score, sky, fit, light, core, peakAltitude };
+  };
+
   return targets
     .map((target) => {
-      const samples = target.bestSeason === "any" ? allSamples : seasonSamples[target.bestSeason];
-      let skyTotal = 0;
-      let lightTotal = 0;
-      let coreTotal = 0;
-      let peakAltitude = -90;
-      let aboveHorizon = 0;
-      let count = 0;
-      for (const s of samples) {
-        for (const pos of positionsAt(target, s)) {
-          count++;
-          const alt = altitude(pos.ra, pos.dec, s.lst, settings.latitude);
-          if (!s.dark) continue;
-          skyTotal += altitudeQuality(alt);
-          peakAltitude = Math.max(peakAltitude, alt);
-          if (alt <= 0) continue;
-          // Every moment it is up counts equally here, so time spent low in the glow drags Light and Core down.
-          aboveHorizon++;
-          const glow = skyGlowPenalty(settings.bortle, alt);
-          lightTotal += totalLightScore(target.magnitude, mm, glow);
-          coreTotal += coreScore(coreSurfaceBrightness(target), mm, glow);
-        }
-      }
-      const sky = count ? skyTotal / count : 0;
-      const fit = sizeFit(target, fov);
-      const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
-      const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
-      const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
-      const score = Math.max(0, raw - SCORE_OFFSET);
-      return { target, score, sky, fit, light, core, peakAltitude };
+      if (target.bestSeason !== "any") return evaluate(target, seasonSamples[target.bestSeason]);
+      // Planets: score every season and keep the one where it is best placed.
+      return (Object.keys(seasonSamples) as Season[])
+        .map((season) => evaluate(target, seasonSamples[season]))
+        .reduce((best, r) => (r.score > best.score ? r : best));
     })
     .sort((a, b) => b.score - a.score);
 }
