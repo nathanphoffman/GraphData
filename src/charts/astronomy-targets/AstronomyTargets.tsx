@@ -3,7 +3,7 @@ import "./styles.css";
 import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
-import { APERTURES, difficulty, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -59,7 +59,7 @@ interface Column {
   show: boolean;
   /** Placed after the Score column instead of before it. */
   afterScore?: boolean;
-  cell: (row: ScoredTarget) => ReactNode;
+  cell: (row: ScoredTarget, settings: Settings) => ReactNode;
 }
 
 /** Optional columns, in display order. The rank, target name and score are always shown. */
@@ -91,7 +91,8 @@ const COLUMNS: Column[] = [
     title: "How hard it is to see, from the score: Very easy 75+, Easy 50+, Moderate 35+, Hard 20+, Very hard 10+, Extreme above 0, Not visible at 0.",
     show: true,
     afterScore: true,
-    cell: (r) => {
+    cell: (r, settings) => {
+      if (isNakedEye(r.target, settings.bortle)) return <span className="astro-tag" style={{ "--tag": heat(1, 1) } as CSSProperties}>Naked Eye</span>;
       const d = difficulty(r.score);
       return <span className="astro-tag" style={{ "--tag": heat(d.level, 1) } as CSSProperties}>{d.label}</span>;
     },
@@ -251,17 +252,17 @@ export default function AstronomyTargets() {
                 <tr key={t.id} className={row.score < 1 ? "astro-hidden" : undefined}>
                   <td>{i + 1}</td>
                   <td>
-                    <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong> {t.nickname && <span className="astro-nick">{t.nickname}</span>}
+                    <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong>{t.nickname && <div className="astro-nick">{t.nickname}</div>}
                   </td>
                   {beforeScore.map((c) => (
-                    <td key={c.id}>{c.cell(row)}</td>
+                    <td key={c.id}>{c.cell(row, settings)}</td>
                   ))}
                   <td className="astro-score">
                     <span className="astro-bar" style={{ width: `${row.score}%`, background: heat(row.score / 100, 0.45) }} />
                     <span className="astro-score-text">{row.score.toFixed(0)}</span>
                   </td>
                   {afterScore.map((c) => (
-                    <td key={c.id}>{c.cell(row)}</td>
+                    <td key={c.id}>{c.cell(row, settings)}</td>
                   ))}
                 </tr>
               );

@@ -186,7 +186,7 @@
   },
   {
    "id": "M81",
-   "nickname": "Bode's Galaxy",
+   "nickname": "Bode's Galaxy (Cigar nearby)",
    "type": "Galaxy",
    "constellation": "Ursa Major",
    "ra": 9.926,
@@ -199,7 +199,7 @@
   },
   {
    "id": "M82",
-   "nickname": "Cigar Galaxy",
+   "nickname": "Cigar Galaxy (Bode's nearby)",
    "type": "Galaxy",
    "constellation": "Ursa Major",
    "ra": 9.93,
@@ -207,7 +207,7 @@
    "magnitude": 8.4,
    "major": 11,
    "minor": 4.5,
-   "coreBoost": 1.5,
+   "coreBoost": 2.5,
    "bestSeason": "spring"
   },
   {
@@ -615,7 +615,7 @@
   },
   {
    "id": "Arcturus",
-   "nickname": "\u03b1 Boo",
+   "nickname": "\u03b1 Boo (#1 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Bo\u00f6tes",
    "ra": 14.262,
@@ -628,7 +628,7 @@
   },
   {
    "id": "Vega",
-   "nickname": "\u03b1 Lyr",
+   "nickname": "\u03b1 Lyr (#2 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Lyra",
    "ra": 18.615,
@@ -641,7 +641,7 @@
   },
   {
    "id": "Capella",
-   "nickname": "\u03b1 Aur",
+   "nickname": "\u03b1 Aur (#3 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Auriga",
    "ra": 5.278,
@@ -654,7 +654,7 @@
   },
   {
    "id": "Procyon",
-   "nickname": "\u03b1 CMi",
+   "nickname": "\u03b1 CMi (#4 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Canis Minor",
    "ra": 7.655,
@@ -667,7 +667,7 @@
   },
   {
    "id": "Betelgeuse",
-   "nickname": "\u03b1 Ori",
+   "nickname": "\u03b1 Ori (#5 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Orion",
    "ra": 5.92,
@@ -680,7 +680,7 @@
   },
   {
    "id": "Altair",
-   "nickname": "\u03b1 Aql",
+   "nickname": "\u03b1 Aql (#6 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Aquila",
    "ra": 19.847,
@@ -693,7 +693,7 @@
   },
   {
    "id": "Aldebaran",
-   "nickname": "\u03b1 Tau",
+   "nickname": "\u03b1 Tau (#7 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Taurus",
    "ra": 4.598,
@@ -706,7 +706,7 @@
   },
   {
    "id": "Pollux",
-   "nickname": "\u03b2 Gem",
+   "nickname": "\u03b2 Gem (#8 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Gemini",
    "ra": 7.755,
@@ -719,7 +719,7 @@
   },
   {
    "id": "Deneb",
-   "nickname": "\u03b1 Cyg",
+   "nickname": "\u03b1 Cyg (#9 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Cygnus",
    "ra": 20.69,
@@ -732,7 +732,7 @@
   },
   {
    "id": "Regulus",
-   "nickname": "\u03b1 Leo",
+   "nickname": "\u03b1 Leo (#10 Brightest Northern Star)",
    "type": "Star",
    "constellation": "Leo",
    "ra": 10.14,

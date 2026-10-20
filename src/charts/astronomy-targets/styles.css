@@ -49,7 +49,7 @@
 }
 
 .astro-nick {
-  margin-left: 4px;
+  margin-left: 0;
   color: var(--muted);
   font-size: 13px;
 }
@@ -159,4 +159,9 @@
   opacity: 1;
   color: var(--bg);
   background: var(--tag);
+}
+
+.astro th:nth-child(-n+2),
+.astro td:nth-child(-n+2) {
+  width: 1%;
 }

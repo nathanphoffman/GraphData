@@ -126,12 +126,12 @@ export function surfaceBrightness(t: Target): number {
   return t.magnitude + 2.5 * Math.log10(area);
 }
 
-/** Best when the target fills about half the field; too big is punished harder than too small. */
+/** Best when the target fills about a third of the field; too small is punished harder than too big. */
 function sizeFit(t: Target, fov: number): number {
   const ratio = t.major / fov;
-  const sigma = ratio > 0.5 ? 0.8 : 0.4;
-  const x = Math.log(ratio / 0.5);
-  return Math.max(0.05, Math.exp(-(x * x) / (2 * sigma * sigma)));
+  const sigma = ratio > 0.33 ? 1.2 : 0.65;
+  const x = Math.log(ratio / 0.33);
+  return Math.max(0.01, Math.exp(-(x * x) / (2 * sigma * sigma)));
 }
 
 /**
@@ -238,6 +238,14 @@ export interface Difficulty {
   label: string;
   /** 0 (hardest) to 1 (easiest), for colouring. */
   level: number;
+}
+
+/** Faintest star seen with the naked eye under each Bortle class (1-9), roughly. */
+const NAKED_EYE_LIMIT = [7.6, 7.1, 6.6, 6.2, 5.6, 5.1, 4.6, 4.1, 4.0];
+
+/** A star counts as "Naked Eye" when it is at least 1.5 magnitudes brighter than the faintest star you can see at this Bortle. */
+export function isNakedEye(t: Target, bortle: number): boolean {
+  return t.type === "Star" && t.magnitude <= NAKED_EYE_LIMIT[clamp(bortle, 1, 9) - 1] - 1.5;
 }
 
 /** Plain-words difficulty to see a target, from its score. */
