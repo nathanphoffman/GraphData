@@ -283,7 +283,10 @@ const NAKED_EYE_LIMIT = [7.6, 7.1, 6.6, 6.2, 5.6, 5.1, 4.6, 4.1, 4.0];
 
 /** A star counts as "Naked Eye" when it is at least 1.5 magnitudes brighter than the faintest star you can see at this Bortle. */
 export function isNakedEye(t: Target, bortle: number): boolean {
-  return t.type === "Star" && t.magnitude <= NAKED_EYE_LIMIT[clamp(bortle, 1, 9) - 1] - 1.5;
+  const pos = clamp(bortle, 1, 9) - 1;
+  const lo = Math.floor(pos);
+  const limit = NAKED_EYE_LIMIT[lo] + (NAKED_EYE_LIMIT[Math.min(8, lo + 1)] - NAKED_EYE_LIMIT[lo]) * (pos - lo);
+  return t.type === "Star" && t.magnitude <= limit - 1.5;
 }
 
 /** Plain-words difficulty to see a target, from its score. */

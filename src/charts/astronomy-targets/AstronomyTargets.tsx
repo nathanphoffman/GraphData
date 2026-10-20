@@ -122,7 +122,7 @@ function parseSettings(saved: unknown): Settings | null {
     apertureIn: number(s.apertureIn, 1, 40, DEFAULT_SETTINGS.apertureIn),
     eyepieceMm: number(s.eyepieceMm, 2, 100, DEFAULT_SETTINGS.eyepieceMm),
     eyepieceAfov: number(s.eyepieceAfov, 20, 120, DEFAULT_SETTINGS.eyepieceAfov),
-    bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle)),
+    bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle) * 2) / 2,
   };
 }
 
@@ -243,11 +243,11 @@ export default function AstronomyTargets() {
             type="range"
             min={1}
             max={9}
-            step={1}
+            step={0.5}
             value={settings.bortle}
             onChange={(e) => set({ bortle: Number(e.target.value) })}
           />
-          <small>{BORTLE_NOTES[settings.bortle - 1]}</small>
+          <small>{settings.bortle % 1 === 0 ? BORTLE_NOTES[settings.bortle - 1] : `Between ${BORTLE_NOTES[Math.floor(settings.bortle) - 1].toLowerCase()} and ${BORTLE_NOTES[Math.ceil(settings.bortle) - 1].toLowerCase()}`}</small>
         </label>
         <div className="astro-columns">
           <span>Best season:</span>
