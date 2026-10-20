@@ -41,9 +41,6 @@ export type FocalLength = "tiny" | "tiny-small" | "small" | "small-medium" | "me
 export type Aperture = "tiny" | "tiny-small" | "small" | "small-medium" | "medium" | "medium-large" | "large" | "large-huge" | "huge";
 
 export interface Settings {
-  /** Local solar time, "HH:MM". */
-  from: string;
-  to: string;
   latitude: number;
   focalLength: FocalLength;
   aperture: Aperture;
@@ -78,6 +75,8 @@ export interface ScoredTarget {
   fit: number;
   light: number;
   core: number;
+  /** Ideal hour to look (0-23, local solar time), the average over its best season of when it is highest in the dark. Null for planets, which have no fixed best hour. */
+  bestHour: number | null;
   /** Highest altitude (degrees) reached while it is dark inside the window. */
   peakAltitude: number;
 }

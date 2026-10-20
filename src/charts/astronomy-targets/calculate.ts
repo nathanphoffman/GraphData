@@ -37,8 +37,6 @@ export const APERTURES: Record<Aperture, { label: string; mm: number }> = {
 };
 
 export const DEFAULT_SETTINGS: Settings = {
-  from: "22:00",
-  to: "01:00",
   latitude: 40,
   focalLength: "medium",
   aperture: "medium",
@@ -101,11 +99,6 @@ function dayOfYear(month: number, day: number): number {
   return Math.round((Date.UTC(2025, month - 1, day) - Date.UTC(2025, 0, 0)) / 86400000);
 }
 
-function parseHours(time: string): number {
-  const [h, m] = time.split(":").map(Number);
-  return (h || 0) + (m || 0) / 60;
-}
-
 /** Altitude in degrees of a point (ra hours, dec deg) at the given local sidereal time. */
 function altitude(ra: number, dec: number, lst: number, lat: number): number {
   const hourAngle = (lst - ra) * 15 * RAD;
@@ -120,28 +113,35 @@ interface Sample {
   lst: number;
   /** Ecliptic longitude of the sun in degrees, which is where the planets line up from. */
   sunLon: number;
+  /** Local solar time in hours; past 24 means after midnight. */
+  hour: number;
+  /** Which of the season's sample dates this is. */
+  date: number;
   /** True when the sun is far enough below the horizon to see faint things. */
   dark: boolean;
 }
 
-/** Sample every half hour of the window on three dates in a season. Time is local solar time (no daylight saving). */
-function sampleWindow(settings: Settings, season: Season): Sample[] {
-  const start = parseHours(settings.from);
-  let end = parseHours(settings.to);
-  if (end <= start) end += 24;
+/** Sample every half hour from start to end (hours, past 24 means after midnight) on three dates in a season. Time is local solar time (no daylight saving). */
+function sampleWindow(latitude: number, season: Season, start: number, end: number): Sample[] {
   const samples: Sample[] = [];
-  for (const [month, day] of SEASONS[season].dates) {
+  SEASONS[season].dates.forEach(([month, day], date) => {
     const doy = dayOfYear(month, day);
     const sunRa = (((doy - 79) * 24) / 365.2422 + 24) % 24;
     const sunDec = -23.44 * Math.cos(((2 * Math.PI) / 365) * (doy + 10));
     for (let t = start; t < end; t += STEP_HOURS) {
       const lst = (sunRa + (t - 12) + 48) % 24;
-      const sunAlt = altitude(sunRa, sunDec, lst, settings.latitude);
-      samples.push({ lst, sunLon: (((doy - 79) * 360) / 365.2422 + 360) % 360, dark: sunAlt < -12 });
+      const sunAlt = altitude(sunRa, sunDec, lst, latitude);
+      samples.push({ lst, hour: t, date, sunLon: (((doy - 79) * 360) / 365.2422 + 360) % 360, dark: sunAlt < -12 });
     }
-  }
+  });
   return samples;
 }
+
+/** Hours around the ideal hour that are scored. */
+const VIEW_HALF_WINDOW = 1.5;
+/** The night searched for each target's ideal hour: 5 pm to 7 am. */
+const NIGHT_START = 17;
+const NIGHT_END = 31;
 
 interface Position {
   ra: number;
@@ -321,13 +321,31 @@ function adjustPoints(value: number, weight: number, bortle: number): number {
   return ((value * weight) / 100) * bortleScale(value, bortle);
 }
 
+/**
+ * The ideal hour to view a target in a season: on each sample date, the dark half hour when it is highest, averaged over the dates
+ * (so 9 pm, 10 pm and 11 pm give 10 pm). Null for planets, which have no fixed best hour (they are scored around midnight).
+ */
+function bestHour(target: Target, season: Season, latitude: number): number | null {
+  if (target.planet) return null;
+  const best: { alt: number; hour: number }[] = [];
+  for (const s of sampleWindow(latitude, season, NIGHT_START, NIGHT_END)) {
+    if (!s.dark) continue;
+    const alt = altitude(target.ra, target.dec, s.lst, latitude);
+    if (!best[s.date] || alt > best[s.date].alt) best[s.date] = { alt, hour: s.hour };
+  }
+  const found = best.filter(Boolean);
+  if (!found.length) return null;
+  return Math.round(found.reduce((sum, b) => sum + b.hour, 0) / found.length) % 24;
+}
+
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {
-  const seasonSamples = Object.fromEntries(
-    (Object.keys(SEASONS) as Season[]).map((season) => [season, sampleWindow(settings, season)]),
-  ) as Record<Season, Sample[]>;
   const { fov, mm } = optics(settings);
 
-  const evaluate = (target: Target, samples: Sample[]) => {
+  const evaluate = (target: Target, season: Season) => {
+    const hour = bestHour(target, season, settings.latitude);
+    // Score the few hours around the ideal one (around midnight for planets, and for anything that is never up in the dark).
+    const centre = hour === null ? 24 : hour < NIGHT_START - 12 ? hour + 24 : hour;
+    const samples = sampleWindow(settings.latitude, season, centre - VIEW_HALF_WINDOW, centre + VIEW_HALF_WINDOW);
     let skyTotal = 0;
     let lightTotal = 0;
     let coreTotal = 0;
@@ -357,24 +375,18 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
     const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
     const score = Math.min(100, raw - SCORE_OFFSET + adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) + adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) + qualityAdjust(target, settings));
-    return { target, score, sky, fit, light, core, peakAltitude };
+    return { target, score, sky, fit, light, core, peakAltitude, bestHour: hour };
   };
 
   return targets
     .map((target) => {
-      if (target.bestSeason !== "any") return evaluate(target, seasonSamples[target.bestSeason]);
+      if (target.bestSeason !== "any") return evaluate(target, target.bestSeason);
       // Planets: score every season and keep the one where it is best placed.
-      return (Object.keys(seasonSamples) as Season[])
-        .map((season) => evaluate(target, seasonSamples[season]))
+      return (Object.keys(SEASONS) as Season[])
+        .map((season) => evaluate(target, season))
         .reduce((best, r) => (r.score > best.score ? r : best));
     })
     .sort((a, b) => b.score - a.score);
-}
-
-/** Share of the window (0-1) that is dark enough on every sampled date of a season. */
-export function darkFraction(settings: Settings, season: Season): number {
-  const samples = sampleWindow(settings, season);
-  return samples.length ? samples.filter((s) => s.dark).length / samples.length : 0;
 }
 
 export interface Difficulty {

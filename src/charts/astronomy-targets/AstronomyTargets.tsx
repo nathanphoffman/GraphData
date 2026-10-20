@@ -4,7 +4,7 @@ import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
-import { activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, qualityAdjust, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { activePreset, APERTURES, effectiveQuality, PRESETS, difficulty, isNakedEye, qualityAdjust, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -29,6 +29,9 @@ const BORTLE_NOTES = [
 
 type SeasonFilter = Season | "any";
 const SEASON_FILTERS: SeasonFilter[] = ["spring", "summer", "autumn", "winter", "any"];
+
+/** 22 becomes "10 PM", 0 becomes "12 AM". */
+const formatHour = (h: number) => `${h % 12 === 0 ? 12 : h % 12} ${h < 12 ? "AM" : "PM"}`;
 
 const pct = (v: number) => `${Math.round(v * 100)}%`;
 
@@ -66,10 +69,13 @@ interface Column {
 /** Optional columns, in display order. The rank, target name and score are always shown. */
 const COLUMNS: Column[] = [
   { id: "constellation", label: "Constellation", show: false, cell: (r) => r.target.constellation },
-  { id: "season", label: "Best season", show: true, cell: (r) => (
-      <span className={`astro-tag astro-tag-${r.target.bestSeason}`}>
-        {r.target.bestSeason === "any" ? "Any" : SEASONS[r.target.bestSeason].label.split(" ")[0]}
-      </span>
+  { id: "season", label: "Best time", title: "The season when it is best placed, and below it the ideal hour to look: the average over that season of when it is highest in the dark (local solar time). Planets have no fixed best hour.", show: true, cell: (r) => (
+      <>
+        <span className={`astro-tag astro-tag-${r.target.bestSeason}`}>
+          {r.target.bestSeason === "any" ? "Any" : SEASONS[r.target.bestSeason].label.split(" ")[0]}
+        </span>
+        <div className="astro-hour">{r.bestHour === null ? "Varies" : formatHour(r.bestHour)}</div>
+      </>
     ),
   },
   { id: "mag", label: "Mag", show: true, cell: (r) => r.target.magnitude.toFixed(1) },
@@ -114,14 +120,11 @@ const defaultHidden = COLUMNS.filter((c) => !c.show).map((c) => c.id);
 function parseSettings(saved: unknown): Settings | null {
   if (typeof saved !== "object" || saved === null) return null;
   const s = saved as Record<string, unknown>;
-  const time = (v: unknown, fallback: string) => (typeof v === "string" && /^\d\d:\d\d$/.test(v) ? v : fallback);
   const pick = <K extends string>(v: unknown, options: Record<K, unknown>, fallback: K): K =>
     typeof v === "string" && v in options ? (v as K) : fallback;
   const number = (v: unknown, lo: number, hi: number, fallback: number) =>
     typeof v === "number" && v >= lo && v <= hi ? v : fallback;
   return {
-    from: time(s.from, DEFAULT_SETTINGS.from),
-    to: time(s.to, DEFAULT_SETTINGS.to),
     latitude: number(s.latitude, 0, 80, DEFAULT_SETTINGS.latitude),
     // Older saved settings used "medium-long" and "long" for what are now Medium-Large and Large.
     focalLength: pick(s.focalLength === "medium-long" ? "medium-large" : s.focalLength === "long" ? "large" : s.focalLength, FOCAL_LENGTHS, DEFAULT_SETTINGS.focalLength),
@@ -248,10 +251,6 @@ export default function AstronomyTargets() {
       (!seasonFilter || row.target.bestSeason === seasonFilter) &&
       (!needle || [row.target.id, row.target.nickname, row.target.constellation, row.target.type].some((v) => v.toLowerCase().includes(needle))),
   );
-  const notDark = useMemo(
-    () => (Object.keys(SEASONS) as Season[]).filter((season) => darkFraction(settings, season) < 1),
-    [settings],
-  );
 
   return (
     <div className="astro">
@@ -259,14 +258,6 @@ export default function AstronomyTargets() {
         <section className="astro-group">
           <h3>Your sky</h3>
           <div className="astro-fields">
-            <label>
-              <span>Observing from</span>
-              <input type="time" value={settings.from} onChange={(e) => e.target.value && set({ from: e.target.value })} />
-            </label>
-            <label>
-              <span>Until</span>
-              <input type="time" value={settings.to} onChange={(e) => e.target.value && set({ to: e.target.value })} />
-            </label>
             <label>
               <span>Latitude (°N)</span>
               <input
@@ -423,8 +414,8 @@ export default function AstronomyTargets() {
         </section>
         <p className="astro-note">
           Times are local solar time (ignore daylight saving). Each target is scored in its best season, checking every
-          half hour on the 15th of each month in that season; moonlight is not counted.
-          {notDark.length > 0 && ` Part of this window is not fully dark in: ${notDark.map((s) => SEASONS[s].label.split(" ")[0]).join(", ")}.`}
+          half hour on the 15th of each month in that season, for the three hours around its best time (when it is
+          highest in the dark); moonlight is not counted.
         </p>
       </div>
 
