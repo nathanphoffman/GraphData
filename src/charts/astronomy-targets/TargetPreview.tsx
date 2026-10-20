@@ -91,6 +91,8 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
   const d = frame.data;
   const half = size / 2;
   // Per-pixel factors that don't change between frames: inside the round field, soft photo edge, and vignette.
+  // Photos smaller than the field (planets in a wide view) get a proportionally smaller soft edge so they don't fade away.
+  const feather = Math.max(0.5, Math.min(12, Math.min(w, h) / 4));
   const weight = new Float32Array(size * size);
   const vignette = new Float32Array(size * size);
   for (let p = 0; p < size * size; p++) {
@@ -98,8 +100,8 @@ function prepareView(canvas: HTMLCanvasElement, img: HTMLImageElement, widthArcm
     const py = Math.floor(p / size);
     const r = Math.hypot(px - half, py - half) / half;
     if (r > 1) continue;
-    const ex = Math.min(1, Math.max(0, Math.min(px - left, left + w - px) / 12));
-    const ey = Math.min(1, Math.max(0, Math.min(py - top, top + h - py) / 12));
+    const ex = Math.min(1, Math.max(0, Math.min(px - left, left + w - px) / feather));
+    const ey = Math.min(1, Math.max(0, Math.min(py - top, top + h - py) / feather));
     weight[p] = ex * ey;
     vignette[p] = 1 - 0.25 * r * r;
   }

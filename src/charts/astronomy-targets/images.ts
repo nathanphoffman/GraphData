@@ -43,6 +43,60 @@ import img_ngc_6888 from "./images/ngc_6888.jpg";
 import img_m92 from "./images/m92.jpg";
 import img_ngc_2301 from "./images/ngc_2301.jpg";
 import img_m46 from "./images/m46.jpg";
+import img_ngc_2175 from "./images/ngc_2175.jpg";
+import img_ngc_7000 from "./images/ngc_7000.jpg";
+import img_m106 from "./images/m106.jpg";
+import img_ngc_281 from "./images/ngc_281.jpg";
+import img_m67 from "./images/m67.jpg";
+import img_ngc_7380 from "./images/ngc_7380.jpg";
+import img_m36 from "./images/m36.jpg";
+import img_m50 from "./images/m50.jpg";
+import img_vega from "./images/vega.jpg";
+import img_capella from "./images/capella.jpg";
+import img_m53 from "./images/m53.jpg";
+import img_ic_1396 from "./images/ic_1396.jpg";
+import img_m11 from "./images/m11.jpg";
+import img_arcturus from "./images/arcturus.jpg";
+import img_pollux from "./images/pollux.jpg";
+import img_deneb from "./images/deneb.jpg";
+import img_castor from "./images/castor.jpg";
+import img_alioth from "./images/alioth.jpg";
+import img_alkaid from "./images/alkaid.jpg";
+import img_procyon from "./images/procyon.jpg";
+import img_menkalinan from "./images/menkalinan.jpg";
+import img_altair from "./images/altair.jpg";
+import img_mizar from "./images/mizar.jpg";
+import img_mirach from "./images/mirach.jpg";
+import img_dubhe from "./images/dubhe.jpg";
+import img_betelgeuse from "./images/betelgeuse.jpg";
+import img_m52 from "./images/m52.jpg";
+import img_elnath from "./images/elnath.jpg";
+import img_alpheratz from "./images/alpheratz.jpg";
+import img_m23 from "./images/m23.jpg";
+import img_mirfak from "./images/mirfak.jpg";
+import img_alhena from "./images/alhena.jpg";
+import img_m110 from "./images/m110.jpg";
+import img_hamal from "./images/hamal.jpg";
+import img_m12 from "./images/m12.jpg";
+import img_ngc_4565 from "./images/ngc_4565.jpg";
+import img_m16 from "./images/m16.jpg";
+import img_m10 from "./images/m10.jpg";
+import img_m94 from "./images/m94.jpg";
+import img_rasalhague from "./images/rasalhague.jpg";
+import img_albireo from "./images/albireo.jpg";
+import img_ic_1805 from "./images/ic_1805.jpg";
+import img_bellatrix from "./images/bellatrix.jpg";
+import img_m2 from "./images/m2.jpg";
+import img_m22 from "./images/m22.jpg";
+import img_ngc_6791 from "./images/ngc_6791.jpg";
+import img_polaris from "./images/polaris.jpg";
+import img_m63 from "./images/m63.jpg";
+import img_ngc_4631 from "./images/ngc_4631.jpg";
+import mars from "./images/mars.jpg";
+import jupiter from "./images/jupiter.jpg";
+import saturn from "./images/saturn.jpg";
+import uranus from "./images/uranus.jpg";
+import neptune from "./images/neptune.jpg";
 
 export interface TargetImage {
   src: string;
@@ -345,5 +399,330 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
+  },
+  "NGC 2175": {
+    src: img_ngc_2175,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7000": {
+    src: img_ngc_7000,
+    widthArcmin: 360,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M106": {
+    src: img_m106,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 281": {
+    src: img_ngc_281,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M67": {
+    src: img_m67,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 7380": {
+    src: img_ngc_7380,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M36": {
+    src: img_m36,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M50": {
+    src: img_m50,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Vega": {
+    src: img_vega,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Capella": {
+    src: img_capella,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M53": {
+    src: img_m53,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 1396": {
+    src: img_ic_1396,
+    widthArcmin: 480,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M11": {
+    src: img_m11,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Arcturus": {
+    src: img_arcturus,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Pollux": {
+    src: img_pollux,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Deneb": {
+    src: img_deneb,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Castor": {
+    src: img_castor,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Alioth": {
+    src: img_alioth,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Alkaid": {
+    src: img_alkaid,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Procyon": {
+    src: img_procyon,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Menkalinan": {
+    src: img_menkalinan,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Altair": {
+    src: img_altair,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Mizar": {
+    src: img_mizar,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Mirach": {
+    src: img_mirach,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Dubhe": {
+    src: img_dubhe,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Betelgeuse": {
+    src: img_betelgeuse,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M52": {
+    src: img_m52,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Elnath": {
+    src: img_elnath,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Alpheratz": {
+    src: img_alpheratz,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M23": {
+    src: img_m23,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Mirfak": {
+    src: img_mirfak,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Alhena": {
+    src: img_alhena,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M110": {
+    src: img_m110,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Hamal": {
+    src: img_hamal,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M12": {
+    src: img_m12,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 4565": {
+    src: img_ngc_4565,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M16": {
+    src: img_m16,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M10": {
+    src: img_m10,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M94": {
+    src: img_m94,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Rasalhague": {
+    src: img_rasalhague,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Albireo": {
+    src: img_albireo,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "IC 1805": {
+    src: img_ic_1805,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Bellatrix": {
+    src: img_bellatrix,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M2": {
+    src: img_m2,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M22": {
+    src: img_m22,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 6791": {
+    src: img_ngc_6791,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "Polaris": {
+    src: img_polaris,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "M63": {
+    src: img_m63,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  "NGC 4631": {
+    src: img_ngc_4631,
+    widthArcmin: 180,
+    credit: DSS_CREDIT,
+    footprint: CENTRED,
+  },
+  // Planets: widthArcmin is set so the planet's disc matches its size in the data (Saturn includes the rings).
+  Mars: {
+    src: mars,
+    widthArcmin: 0.19,
+    credit: "NASA, ESA, STScI / Hubble (public domain)",
+    footprint: { cx: 0.5, cy: 0.5, angleDeg: 0 },
+  },
+  Jupiter: {
+    src: jupiter,
+    widthArcmin: 0.716,
+    credit: "NASA/JPL/University of Arizona, Cassini (public domain)",
+    footprint: { cx: 0.515, cy: 0.5, angleDeg: 0 },
+  },
+  Saturn: {
+    src: saturn,
+    widthArcmin: 0.737,
+    credit: "NASA, ESA, A. Simon (GSFC), M. H. Wong (UC Berkeley), OPAL team (public domain)",
+    footprint: { cx: 0.5, cy: 0.495, angleDeg: 0 },
+  },
+  Uranus: {
+    src: uranus,
+    widthArcmin: 0.0743,
+    credit: "NASA/JPL, Voyager 2 (public domain)",
+    footprint: { cx: 0.496, cy: 0.5, angleDeg: 0 },
+  },
+  Neptune: {
+    src: neptune,
+    widthArcmin: 0.0466,
+    credit: "NASA/JPL, Voyager 2 (public domain)",
+    footprint: { cx: 0.49, cy: 0.5, angleDeg: 0 },
   },
 };
