@@ -4,7 +4,7 @@ import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
 import { hasPreview, TargetPreview } from "./TargetPreview";
-import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, baseMagnification, manualOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
+import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, previewOptics, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
 
@@ -138,7 +138,6 @@ function parseSettings(saved: unknown): Settings | null {
     bortle: Math.round(number(s.bortle, 1, 9, DEFAULT_SETTINGS.bortle) * 2) / 2,
     simWeight: Math.round(number(s.simWeight, 0, 100, DEFAULT_SETTINGS.simWeight)),
     opticalQuality: Math.round(number(s.opticalQuality, 0, 100, DEFAULT_SETTINGS.opticalQuality)),
-    previewZoom: Math.round(number(s.previewZoom, -1, 2, DEFAULT_SETTINGS.previewZoom) * 10) / 10,
   };
 }
 
@@ -211,129 +210,137 @@ export default function AstronomyTargets() {
   return (
     <div className="astro">
       <div className="panel astro-controls">
-        <label>
-          <span>Observing from</span>
-          <input type="time" value={settings.from} onChange={(e) => e.target.value && set({ from: e.target.value })} />
-        </label>
-        <label>
-          <span>Until</span>
-          <input type="time" value={settings.to} onChange={(e) => e.target.value && set({ to: e.target.value })} />
-        </label>
-        <label>
-          <span>Latitude (°N)</span>
-          <input
-            type="number"
-            min={0}
-            max={80}
-            value={settings.latitude}
-            onChange={(e) => set({ latitude: Math.min(80, Math.max(0, Number(e.target.value))) })}
-          />
-        </label>
-        <label className="astro-check">
-          <input type="checkbox" checked={settings.manual} onChange={(e) => set({ manual: e.target.checked })} />
-          <span>Manual telescope</span>
-        </label>
-        {settings.manual ? (
-          <>
-            <NumberField label="Telescope focal length (mm)" value={settings.scopeFocalMm} min={50} max={10000} onChange={(v) => set({ scopeFocalMm: v })} />
-            <NumberField label="Mirror / lens size (inches)" value={settings.apertureIn} min={1} max={40} onChange={(v) => set({ apertureIn: v })} />
+        <section className="astro-group">
+          <h3>Your sky</h3>
+          <div className="astro-fields">
+            <label>
+              <span>Observing from</span>
+              <input type="time" value={settings.from} onChange={(e) => e.target.value && set({ from: e.target.value })} />
+            </label>
+            <label>
+              <span>Until</span>
+              <input type="time" value={settings.to} onChange={(e) => e.target.value && set({ to: e.target.value })} />
+            </label>
+            <label>
+              <span>Latitude (°N)</span>
+              <input
+                type="number"
+                min={0}
+                max={80}
+                value={settings.latitude}
+                onChange={(e) => set({ latitude: Math.min(80, Math.max(0, Number(e.target.value))) })}
+              />
+            </label>
+            <label>
+              <span>Light pollution (Bortle {settings.bortle})</span>
+              <input
+                type="range"
+                min={1}
+                max={9}
+                step={0.5}
+                value={settings.bortle}
+                onChange={(e) => set({ bortle: Number(e.target.value) })}
+              />
+              <small>{settings.bortle % 1 === 0 ? BORTLE_NOTES[settings.bortle - 1] : `Between ${BORTLE_NOTES[Math.floor(settings.bortle) - 1].toLowerCase()} and ${BORTLE_NOTES[Math.ceil(settings.bortle) - 1].toLowerCase()}`}</small>
+            </label>
+          </div>
+        </section>
+        <section className="astro-group">
+          <h3>Your telescope</h3>
+          <div className="astro-fields">
+            <label className="astro-check">
+              <input type="checkbox" checked={settings.manual} onChange={(e) => set({ manual: e.target.checked })} />
+              <span>Manual telescope</span>
+            </label>
+            {settings.manual ? (
+              <>
+                <NumberField label="Telescope focal length (mm)" value={settings.scopeFocalMm} min={50} max={10000} onChange={(v) => set({ scopeFocalMm: v })} />
+                <NumberField label="Mirror / lens size (inches)" value={settings.apertureIn} min={1} max={40} onChange={(v) => set({ apertureIn: v })} />
+              </>
+            ) : (
+              <>
+                <label>
+                  <span>Focal length</span>
+                  <select value={settings.focalLength} onChange={(e) => set({ focalLength: e.target.value as FocalLength })}>
+                    {Object.entries(FOCAL_LENGTHS).map(([key, f]) => (
+                      <option key={key} value={key}>{f.label}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>Mirror / lens size</span>
+                  <select value={settings.aperture} onChange={(e) => set({ aperture: e.target.value as Aperture })}>
+                    {Object.entries(APERTURES).map(([key, a]) => (
+                      <option key={key} value={key}>{a.label}</option>
+                    ))}
+                  </select>
+                </label>
+              </>
+            )}
+          </div>
+        </section>
+        <section className="astro-group">
+          <h3>Hover preview</h3>
+          <div className="astro-fields">
             <NumberField label="Eyepiece focal length (mm)" value={settings.eyepieceMm} min={2} max={100} onChange={(v) => set({ eyepieceMm: v })} />
             <NumberField label="Eyepiece apparent field (°)" value={settings.eyepieceAfov} min={20} max={120} onChange={(v) => set({ eyepieceAfov: v })} />
             <p className="astro-note">
-              {manualOptics(settings).magnification.toFixed(0)}× magnification, true field {(manualOptics(settings).fov / 60).toFixed(2)}°.
+              {previewOptics(settings).magnification.toFixed(0)}× magnification, true field {(previewOptics(settings).fov / 60).toFixed(2)}°. Shorter eyepiece = more zoom, bigger and dimmer. Only changes the hover preview, unless Manual telescope is on (then it also sets the field used in the table).
             </p>
-          </>
-        ) : (
-          <>
             <label>
-              <span>Focal length</span>
-              <select value={settings.focalLength} onChange={(e) => set({ focalLength: e.target.value as FocalLength })}>
-                {Object.entries(FOCAL_LENGTHS).map(([key, f]) => (
-                  <option key={key} value={key}>{f.label}</option>
-                ))}
-              </select>
+              <span>Optical quality ({opticalQualityLabel(settings.opticalQuality)})</span>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                step={5}
+                value={settings.opticalQuality}
+                onChange={(e) => set({ opticalQuality: Number(e.target.value) })}
+              />
+              <small>Only changes the hover preview: good optics add contrast and colour, poor optics flatten them and soften the image.</small>
             </label>
+          </div>
+        </section>
+        <section className="astro-group">
+          <h3>Scoring and filters</h3>
+          <div className="astro-fields">
             <label>
-              <span>Mirror / lens size</span>
-              <select value={settings.aperture} onChange={(e) => set({ aperture: e.target.value as Aperture })}>
-                {Object.entries(APERTURES).map(([key, a]) => (
-                  <option key={key} value={key}>{a.label}</option>
-                ))}
-              </select>
+              <span>Simulator adjustment applied ({settings.simWeight}%)</span>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                step={5}
+                value={settings.simWeight}
+                onChange={(e) => set({ simWeight: Number(e.target.value) })}
+              />
+              <small>0% ignores it, 100% adds the full amount to the score.</small>
             </label>
-          </>
-        )}
-        <label>
-          <span>Light pollution (Bortle {settings.bortle})</span>
-          <input
-            type="range"
-            min={1}
-            max={9}
-            step={0.5}
-            value={settings.bortle}
-            onChange={(e) => set({ bortle: Number(e.target.value) })}
-          />
-          <small>{settings.bortle % 1 === 0 ? BORTLE_NOTES[settings.bortle - 1] : `Between ${BORTLE_NOTES[Math.floor(settings.bortle) - 1].toLowerCase()} and ${BORTLE_NOTES[Math.ceil(settings.bortle) - 1].toLowerCase()}`}</small>
-        </label>
-        <label>
-          <span>Preview eyepiece zoom ({Math.pow(2, settings.previewZoom).toFixed(1)}×, about {(baseMagnification(settings) * Math.pow(2, settings.previewZoom)).toFixed(0)}× magnification)</span>
-          <input
-            type="range"
-            min={-1}
-            max={2}
-            step={0.1}
-            value={settings.previewZoom}
-            onChange={(e) => set({ previewZoom: Number(e.target.value) })}
-          />
-          <small>Only changes the hover preview: higher zoom shows a smaller patch of sky, bigger and dimmer.</small>
-        </label>
-        <label>
-          <span>Optical quality ({opticalQualityLabel(settings.opticalQuality)})</span>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={5}
-            value={settings.opticalQuality}
-            onChange={(e) => set({ opticalQuality: Number(e.target.value) })}
-          />
-          <small>Only changes the hover preview: good optics add contrast and colour, poor optics flatten them and soften the image.</small>
-        </label>
-        <label>
-          <span>Simulator adjustment applied ({settings.simWeight}%)</span>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={5}
-            value={settings.simWeight}
-            onChange={(e) => set({ simWeight: Number(e.target.value) })}
-          />
-          <small>0% ignores it, 100% adds the full amount to the score.</small>
-        </label>
-        <div className="astro-columns">
-          <span>Best season:</span>
-          {SEASON_FILTERS.map((season) => (
-            <button
-              key={season}
-              type="button"
-              aria-pressed={seasonFilter === season}
-              className={`astro-tag astro-tag-${season} astro-filter${seasonFilter === season ? " astro-filter-on" : ""}`}
-              onClick={() => toggleSeason(season)}
-            >
-              {season === "any" ? "Any" : SEASONS[season].label.split(" ")[0]}
-            </button>
-          ))}
-        </div>
-        <div className="astro-columns">
-          <span>Columns:</span>
-          {COLUMNS.map((c) => (
-            <label key={c.id}>
-              <input type="checkbox" checked={!hidden.has(c.id)} onChange={() => toggleColumn(c.id)} />
-              {c.label}
-            </label>
-          ))}
-        </div>
+            <div className="astro-columns">
+              <span>Best season:</span>
+              {SEASON_FILTERS.map((season) => (
+                <button
+                  key={season}
+                  type="button"
+                  aria-pressed={seasonFilter === season}
+                  className={`astro-tag astro-tag-${season} astro-filter${seasonFilter === season ? " astro-filter-on" : ""}`}
+                  onClick={() => toggleSeason(season)}
+                >
+                  {season === "any" ? "Any" : SEASONS[season].label.split(" ")[0]}
+                </button>
+              ))}
+            </div>
+            <div className="astro-columns">
+              <span>Columns:</span>
+              {COLUMNS.map((c) => (
+                <label key={c.id}>
+                  <input type="checkbox" checked={!hidden.has(c.id)} onChange={() => toggleColumn(c.id)} />
+                  {c.label}
+                </label>
+              ))}
+            </div>
+          </div>
+        </section>
         <p className="astro-note">
           Times are local solar time (ignore daylight saving). Each target is scored in its best season, checking every
           half hour on the 15th of each month in that season; moonlight is not counted.

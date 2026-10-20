@@ -11,16 +11,16 @@ export const SEASONS: Record<Season, { label: string; dates: [number, number][] 
 };
 
 /** Typical true field of view in arcminutes for each focal length class. */
-export const FOCAL_LENGTHS: Record<FocalLength, { label: string; fov: number }> = {
-  tiny: { label: "Tiny (about 150 mm, ultra-wide field)", fov: 480 },
-  "tiny-small": { label: "Tiny-Small (about 200 mm)", fov: 340 },
-  small: { label: "Small (about 300 mm, wide field)", fov: 240 },
-  "small-medium": { label: "Small-Medium (about 500 mm)", fov: 147 },
-  medium: { label: "Medium (about 800 mm)", fov: 90 },
-  "medium-large": { label: "Medium-Large (about 1200 mm)", fov: 56 },
-  large: { label: "Large (about 2000 mm, tight field)", fov: 35 },
-  "large-huge": { label: "Large-Huge (about 2800 mm)", fov: 25 },
-  huge: { label: "Huge (about 4000 mm, very tight field)", fov: 18 },
+export const FOCAL_LENGTHS: Record<FocalLength, { label: string; fov: number; mm: number }> = {
+  tiny: { label: "Tiny (about 150 mm, ultra-wide field)", fov: 480, mm: 150 },
+  "tiny-small": { label: "Tiny-Small (about 200 mm)", fov: 340, mm: 200 },
+  small: { label: "Small (about 300 mm, wide field)", fov: 240, mm: 300 },
+  "small-medium": { label: "Small-Medium (about 500 mm)", fov: 147, mm: 500 },
+  medium: { label: "Medium (about 800 mm)", fov: 90, mm: 800 },
+  "medium-large": { label: "Medium-Large (about 1200 mm)", fov: 56, mm: 1200 },
+  large: { label: "Large (about 2000 mm, tight field)", fov: 35, mm: 2000 },
+  "large-huge": { label: "Large-Huge (about 2800 mm)", fov: 25, mm: 2800 },
+  huge: { label: "Huge (about 4000 mm, very tight field)", fov: 18, mm: 4000 },
 };
 
 /** Representative mirror/lens diameter in mm for each size class. */
@@ -49,7 +49,6 @@ export const DEFAULT_SETTINGS: Settings = {
   eyepieceAfov: 52,
   bortle: 4,
   simWeight: 50,
-  previewZoom: 0,
   opticalQuality: 50,
 };
 
@@ -228,12 +227,30 @@ export function viewConditions(t: Target, settings: Settings, alt: number) {
   };
 }
 
-/** Each doubling of magnification dims the preview by this many magnitudes (the same light is spread over a bigger image). */
-export const ZOOM_DIMMING = 1;
+/** Telescope focal length in mm: the manual entry, or the typical value for the size class. */
+export function scopeFocalLength(settings: Settings): number {
+  return settings.manual ? settings.scopeFocalMm : FOCAL_LENGTHS[settings.focalLength].mm;
+}
 
-/** Magnification of the current setup, taking a typical 52 degree eyepiece for the size classes. */
-export function baseMagnification(settings: Settings): number {
-  return settings.manual ? manualOptics(settings).magnification : (52 * 60) / optics(settings).fov;
+/** Brightness an extended object loses once the exit pupil (aperture / magnification) is smaller than the eye's pupil, in magnitudes. */
+function pupilDimming(exitPupilMm: number): number {
+  return 5 * Math.log10(Math.max(1, 7 / exitPupilMm));
+}
+
+/** A 25 mm eyepiece is the reference: the preview looks the same as before at that size and dims or brightens from there. */
+const REFERENCE_EYEPIECE_MM = 25;
+
+/** What the hover preview shows through the chosen eyepiece: magnification, true field (arcminutes) and dimming (magnitudes). */
+export function previewOptics(settings: Settings) {
+  const focal = scopeFocalLength(settings);
+  const { mm } = optics(settings);
+  const magnification = focal / settings.eyepieceMm;
+  const referenceDimming = pupilDimming(mm / (focal / REFERENCE_EYEPIECE_MM));
+  return {
+    magnification,
+    fov: (settings.eyepieceAfov * 60) / magnification,
+    dimming: pupilDimming(mm / magnification) - referenceDimming,
+  };
 }
 
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {

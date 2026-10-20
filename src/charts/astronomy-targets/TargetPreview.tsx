@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { ScoredTarget, Settings, Target } from "./types";
-import { baseMagnification, viewConditions, ZOOM_DIMMING } from "./calculate";
+import { previewOptics, viewConditions } from "./calculate";
 import { TARGET_IMAGES, type TargetImage } from "./images";
 
 const VIEW_SIZE = 280;
@@ -192,9 +192,10 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   const [loaded, setLoaded] = useState<{ img: HTMLImageElement; mean: number; bg: number } | null>(null);
   const alt = row.peakAltitude > 0 ? Math.max(20, row.peakAltitude) : 45;
   const view = viewConditions(row.target, settings, alt);
-  // The preview zoom slider: more magnification shows a smaller patch of sky, bigger and dimmer.
-  const fov = view.fov / Math.pow(2, settings.previewZoom);
-  const margin = view.margin - ZOOM_DIMMING * settings.previewZoom;
+  // The preview eyepiece: more magnification shows a smaller patch of sky, bigger and dimmer.
+  const eyepiece = previewOptics(settings);
+  const fov = eyepiece.fov;
+  const margin = view.margin - eyepiece.dimming;
   const skyGlow = view.skyGlow;
   const unresolved = row.target.major * ((VIEW_SIZE * SCALE) / fov) < 6;
 
@@ -252,7 +253,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
           </div>
           <span>Averted</span>
         </div>
-        <figcaption>Your view (approximate), {(baseMagnification(settings) * Math.pow(2, settings.previewZoom)).toFixed(0)}×</figcaption>
+        <figcaption>Your view (approximate), {eyepiece.magnification.toFixed(0)}×</figcaption>
       </figure>
       <small>{info.credit}</small>
     </div>

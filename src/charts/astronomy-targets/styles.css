@@ -1,5 +1,20 @@
 /* Astronomy targets */
 .astro-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.astro-group h3 {
+  margin: 0 0 8px;
+  color: var(--link);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.astro-fields {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px 16px;
