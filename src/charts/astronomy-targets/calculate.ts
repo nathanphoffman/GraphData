@@ -305,6 +305,22 @@ export function qualityAdjust(t: Target, settings: Settings): number {
   return (QUALITY_SENSITIVITY[t.type] ?? 0.3) * 25 * q;
 }
 
+/**
+ * The simulator and author adjustments are judged at Bortle 5, and grow or shrink with the sky.
+ * Positive ones (looks better than the score says): 1.5x at Bortle 1, 1x at 5, fading to nothing at 9 where everything is washed out.
+ * Negative ones (looks worse): the reverse of the dark side, 0.5x at Bortle 1, 1x at 5, 1.5x at 9. Straight lines between.
+ */
+export function bortleScale(adjust: number, bortle: number): number {
+  const b = clamp(bortle, 1, 9);
+  if (adjust >= 0) return b <= 5 ? 1 + (5 - b) * 0.125 : 1 - (b - 5) * 0.25;
+  return 1 + (b - 5) * 0.125;
+}
+
+/** Score points from one adjustment: its value, times the slider share, times the Bortle scaling. */
+function adjustPoints(value: number, weight: number, bortle: number): number {
+  return ((value * weight) / 100) * bortleScale(value, bortle);
+}
+
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {
   const seasonSamples = Object.fromEntries(
     (Object.keys(SEASONS) as Season[]).map((season) => [season, sampleWindow(settings, season)]),
@@ -340,7 +356,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
     const raw = 100 * Math.pow(sky, 0.2) * Math.pow(fit, 0.2) * Math.pow(light, 0.2) * Math.pow(core, 0.4);
-    const score = Math.min(100, raw - SCORE_OFFSET + ((target.simAdjust ?? 0) * settings.simWeight) / 100 + ((target.authorAdjust ?? 0) * settings.authorWeight) / 100 + qualityAdjust(target, settings));
+    const score = Math.min(100, raw - SCORE_OFFSET + adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) + adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) + qualityAdjust(target, settings));
     return { target, score, sky, fit, light, core, peakAltitude };
   };
 
@@ -380,11 +396,11 @@ export function isNakedEye(t: Target, bortle: number): boolean {
 
 /** Plain-words difficulty to see a target, from its score. */
 export function difficulty(score: number): Difficulty {
-  if (score >= 75) return { label: "Very easy", level: 1 };
-  if (score >= 50) return { label: "Easy", level: 0.85 };
-  if (score >= 35) return { label: "Moderate", level: 0.65 };
-  if (score >= 20) return { label: "Hard", level: 0.45 };
-  if (score >= 10) return { label: "Very hard", level: 0.25 };
-  if (score > 0) return { label: "Extreme", level: 0.1 };
-  return { label: "Not visible", level: 0 };
+  if (score >= 75) return { label: "Excellent", level: 1 };
+  if (score >= 50) return { label: "Very easy", level: 0.85 };
+  if (score >= 35) return { label: "Easy", level: 0.65 };
+  if (score >= 20) return { label: "Moderate", level: 0.45 };
+  if (score >= 10) return { label: "Hard", level: 0.25 };
+  if (score > 0) return { label: "Very hard", level: 0.1 };
+  return { label: "Extreme", level: 0 };
 }

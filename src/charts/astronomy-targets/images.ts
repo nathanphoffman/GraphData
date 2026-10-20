@@ -190,9 +190,10 @@ const CENTRED = { cx: 0.5, cy: 0.5, angleDeg: 0 };
 export const TARGET_IMAGES: Record<string, TargetImage> = {
   M45: {
     src: m45,
-    // Estimated from the spacing of known stars (about 23 pixels per arcminute at 1920 px wide).
-    widthArcmin: 83,
-    credit: "NASA, ESA, AURA/Caltech, Palomar Observatory (public domain)",
+    // A Pan-STARRS cutout centred on the cluster, so its width is exact. It shows the stars without the dust nebulosity.
+    widthArcmin: 156,
+    credit: "Pan-STARRS1 DR1 (Pan-STARRS Science Consortium, STScI/NASA), via CDS hips2fits",
+    footprint: CENTRED,
   },
   M31: {
     src: m31,

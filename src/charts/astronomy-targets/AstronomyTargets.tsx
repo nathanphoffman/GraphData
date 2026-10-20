@@ -89,7 +89,7 @@ const COLUMNS: Column[] = [
   {
     id: "adjust",
     label: "Simulator / Author / Quality",
-    title: "Top: how much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Middle: the author's own adjustment in score points, from field experience. -- = not rated yet (counts as 0). Bottom: score points for the telescope's optical quality, which helps planets, stars and clusters most and barely affects nebulae and galaxies (always added in full). Part of the top two is added to the score, set by the sliders above the table.",
+    title: "Top: how much better (+) or worse (-), in percentage points, the eyepiece preview looks than the score suggests (judged at small-medium focal length and mirror/lens). Middle: the author's own adjustment in score points, from field experience. -- = not rated yet (counts as 0). Bottom: score points for the telescope's optical quality, which helps planets, stars and clusters most and barely affects nebulae and galaxies (always added in full). Part of the top two is added to the score, set by the sliders above the table, and scaled by the Bortle setting (judged at Bortle 5). Positive ones grow to 1.5x at Bortle 1 and fade to 0 at Bortle 9; negative ones shrink to 0.5x at Bortle 1 and grow to 1.5x at Bortle 9.",
     show: true,
     afterScore: true,
     cell: (r, settings) => {
@@ -174,6 +174,54 @@ function NumberField({ label, value, min, max, onChange }: { label: string; valu
     </label>
   );
 }
+
+interface Zone {
+  /** Upper end of the zone, in the slider's own units. */
+  to: number;
+  label: string;
+  hue: number;
+}
+
+/** A range slider with coloured stretches under it marking what is typical, e.g. narrow, normal and wide eyepieces. `log` spaces the slider by ratio, for values that span a wide range. */
+function ZoneSlider({ label, value, min, max, zones, log, unit, onChange }: { label: string; value: number; min: number; max: number; zones: Zone[]; log?: boolean; unit: string; onChange: (v: number) => void }) {
+  const toPos = (v: number) => (log ? Math.log(v / min) / Math.log(max / min) : (v - min) / (max - min));
+  const fromPos = (p: number) => {
+    const v = log ? min * Math.pow(max / min, p) : min + p * (max - min);
+    return log && v < 10 ? Math.round(v * 2) / 2 : Math.round(v);
+  };
+  let from = 0;
+  const stops = zones.map((z) => {
+    const start = from;
+    const end = Math.min(1, toPos(z.to));
+    from = end;
+    return { ...z, start: start * 100, end: end * 100 };
+  });
+  const bar = stops.map((z) => `hsl(${z.hue} 65% 50% / 0.7) ${z.start}% ${z.end}%`).join(", ");
+  return (
+    <label>
+      <span>{label} ({value} {unit})</span>
+      <input type="range" min={0} max={1000} step={1} value={Math.round(toPos(value) * 1000)} onChange={(e) => onChange(fromPos(Number(e.target.value) / 1000))} />
+      <div className="astro-zones" style={{ background: `linear-gradient(to right, ${bar})` }} aria-hidden="true" />
+      <div className="astro-zone-labels">
+        {stops.map((z) => (
+          <span key={z.label} style={{ left: `${(z.start + z.end) / 2}%`, color: `hsl(${z.hue} 65% 45%)` }}>{z.label}</span>
+        ))}
+      </div>
+    </label>
+  );
+}
+
+const EYEPIECE_MM_ZONES: Zone[] = [
+  { to: 10, label: "High power", hue: 0 },
+  { to: 25, label: "Medium", hue: 50 },
+  { to: 100, label: "Low power", hue: 140 },
+];
+
+const EYEPIECE_AFOV_ZONES: Zone[] = [
+  { to: 50, label: "Narrow", hue: 0 },
+  { to: 70, label: "Normal", hue: 50 },
+  { to: 120, label: "Wide", hue: 140 },
+];
 
 export default function AstronomyTargets() {
   const [settings, setSettings] = useStoredState<Settings>("settings", DEFAULT_SETTINGS, parseSettings);
@@ -314,8 +362,8 @@ export default function AstronomyTargets() {
         <section className="astro-group">
           <h3>Hover preview</h3>
           <div className="astro-fields">
-            <NumberField label="Eyepiece focal length (mm)" value={settings.eyepieceMm} min={2} max={100} onChange={(v) => set({ eyepieceMm: v })} />
-            <NumberField label="Eyepiece apparent field (°)" value={settings.eyepieceAfov} min={20} max={120} onChange={(v) => set({ eyepieceAfov: v })} />
+            <ZoneSlider label="Eyepiece focal length" value={settings.eyepieceMm} min={2} max={100} log unit="mm" zones={EYEPIECE_MM_ZONES} onChange={(v) => set({ eyepieceMm: v })} />
+            <ZoneSlider label="Eyepiece apparent field" value={settings.eyepieceAfov} min={20} max={120} unit="°" zones={EYEPIECE_AFOV_ZONES} onChange={(v) => set({ eyepieceAfov: v })} />
             <p className="astro-note">
               {previewOptics(settings).magnification.toFixed(0)}× magnification, true field {(previewOptics(settings).fov / 60).toFixed(2)}°. Shorter eyepiece = more zoom, bigger and dimmer. Only changes the hover preview, unless a preset or Manual telescope is on (then it also sets the field used in the table).
             </p>
@@ -400,7 +448,7 @@ export default function AstronomyTargets() {
               {beforeScore.map((c) => (
                 <th key={c.id} title={c.title}>{c.label}</th>
               ))}
-              <th title="How hard it is to see, from the score: Very easy 75+, Easy 50+, Moderate 35+, Hard 20+, Very hard 10+, Extreme above 0, Not visible at 0.">Difficulty / Score</th>
+              <th title="How hard it is to see, from the score: Excellent 75+, Very easy 50+, Easy 35+, Moderate 20+, Hard 10+, Very hard above 0, Extreme at 0 or below.">Difficulty / Score</th>
               {afterScore.map((c) => (
                 <th key={c.id} title={c.title}>{c.label}</th>
               ))}
@@ -410,7 +458,7 @@ export default function AstronomyTargets() {
             {rows.map((row, i) => {
               const t = row.target;
               return (
-                <tr key={t.id} className={row.score < 1 ? "astro-hidden" : undefined}>
+                <tr key={t.id} className={row.score <= 0 ? "astro-hidden" : undefined}>
                   <td>{i + 1}</td>
                   <td
                     onMouseMove={hasPreview(t.id) ? (e) => setHover({ id: t.id, x: e.clientX, y: e.clientY }) : undefined}
