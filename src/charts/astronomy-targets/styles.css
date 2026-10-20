@@ -165,3 +165,44 @@
 .astro td:nth-child(-n+2) {
   width: 1%;
 }
+
+.astro-preview {
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+  pointer-events: none;
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--fg) 25%, transparent);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+.astro-preview figure {
+  margin: 0;
+}
+
+.astro-preview img {
+  display: block;
+  border-radius: 4px;
+}
+
+.astro-preview canvas {
+  display: block;
+  border-radius: 50%;
+  background: #000;
+}
+
+.astro-preview figcaption,
+.astro-preview small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.astro-preview small {
+  flex-basis: 100%;
+}

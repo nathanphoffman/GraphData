@@ -185,6 +185,20 @@ function totalLightScore(magnitude: number, mm: number, cost: number): number {
   return clamp((limitingMagnitude(mm) - cost - magnitude + SEE_PAST_LIMIT) / (10 + SEE_PAST_LIMIT), 0, 1);
 }
 
+/**
+ * What the eyepiece view should look like: how many magnitudes of surface brightness the target sits above the
+ * faintest thing this scope shows (negative = below it), and how bright the sky glow is (0 dark, 1 inner city).
+ */
+export function viewConditions(t: Target, settings: Settings, alt: number) {
+  const { mm } = APERTURES[settings.aperture];
+  const glow = skyGlowPenalty(settings.bortle, alt);
+  return {
+    fov: FOCAL_LENGTHS[settings.focalLength].fov,
+    margin: margin(surfaceBrightness(t), mm, glow),
+    skyGlow: clamp((settings.bortle - 1) / 8, 0, 1),
+  };
+}
+
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {
   const seasonSamples = Object.fromEntries(
     (Object.keys(SEASONS) as Season[]).map((season) => [season, sampleWindow(settings, season)]),

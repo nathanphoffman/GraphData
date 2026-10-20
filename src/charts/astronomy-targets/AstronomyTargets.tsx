@@ -1,8 +1,9 @@
-import { useMemo, type CSSProperties, type ReactNode } from "react";
+import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import "./styles.css";
 import { useStoredState } from "./useStoredState";
 import data from "../../../data/astronomy-targets.json";
 import type { Aperture, AstronomyTargetsData, FocalLength, ScoredTarget, Season, Settings } from "./types";
+import { hasPreview, TargetPreview } from "./TargetPreview";
 import { APERTURES, difficulty, isNakedEye, DEFAULT_SETTINGS, FOCAL_LENGTHS, SEASONS, darkFraction, scoreTargets, surfaceBrightness } from "./calculate";
 
 const model = data as AstronomyTargetsData;
@@ -144,6 +145,8 @@ export default function AstronomyTargets() {
   const [seasonFilter, setSeasonFilter] = useStoredState<SeasonFilter | null>("season-filter", null, parseSeasonFilter);
   const toggleSeason = (season: SeasonFilter) => setSeasonFilter((prev) => (prev === season ? null : season));
 
+  const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
+
   const scored = useMemo(() => scoreTargets(model.targets, settings), [settings]);
   const rows = seasonFilter ? scored.filter((row) => row.target.bestSeason === seasonFilter) : scored;
   const notDark = useMemo(
@@ -251,7 +254,10 @@ export default function AstronomyTargets() {
               return (
                 <tr key={t.id} className={row.score < 1 ? "astro-hidden" : undefined}>
                   <td>{i + 1}</td>
-                  <td>
+                  <td
+                    onMouseMove={hasPreview(t.id) ? (e) => setHover({ id: t.id, x: e.clientX, y: e.clientY }) : undefined}
+                    onMouseLeave={hasPreview(t.id) ? () => setHover(null) : undefined}
+                  >
                     <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong>{t.nickname && <div className="astro-nick">{t.nickname}</div>}
                   </td>
                   {beforeScore.map((c) => (
@@ -270,6 +276,11 @@ export default function AstronomyTargets() {
           </tbody>
         </table>
       </div>
+
+      {hover && (() => {
+        const row = rows.find((r) => r.target.id === hover.id);
+        return row ? <TargetPreview row={row} settings={settings} x={hover.x} y={hover.y} /> : null;
+      })()}
 
       <p className="muted astro-source">
         Types: {Object.entries(TYPE_SYMBOLS).map(([type, symbol]) => `${symbol} ${type}`).join(" · ")}.
