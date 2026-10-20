@@ -92,7 +92,7 @@ export function optics(settings: Settings): { fov: number; mm: number } {
 
 const STEP_HOURS = 0.5;
 /** Points taken off every score (it never goes below 0). */
-const SCORE_OFFSET = 18;
+const SCORE_OFFSET = 9;
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 function dayOfYear(month: number, day: number): number {
@@ -233,11 +233,11 @@ function limitingMagnitude(mm: number): number {
 }
 
 /**
- * Total light: how much light the whole target sends you, ignoring how spread out it is (Core covers that).
+ * Light: the target's average surface brightness against the sky, so big spread-out targets wash out in bright skies (Core covers the bright centre).
  * Same straight-line scale as Core.
  */
-function totalLightScore(magnitude: number, mm: number, cost: number): number {
-  return clamp((limitingMagnitude(mm) - cost - magnitude + SEE_PAST_LIMIT) / (10 + SEE_PAST_LIMIT), 0, 1);
+function lightScore(sb: number, mm: number, glow: number): number {
+  return coreScore(sb, mm, glow);
 }
 
 /**
@@ -365,7 +365,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
         // Every moment it is up counts equally here, so time spent low in the glow drags Light and Core down.
         aboveHorizon++;
         const glow = skyGlowPenalty(settings.bortle, alt);
-        lightTotal += totalLightScore(target.magnitude, mm, glow);
+        lightTotal += lightScore(surfaceBrightness(target), mm, glow);
         coreTotal += coreScore(coreSurfaceBrightness(target), mm, glow);
       }
     }

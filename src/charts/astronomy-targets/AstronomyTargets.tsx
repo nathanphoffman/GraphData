@@ -501,7 +501,7 @@ export default function AstronomyTargets() {
 
       <p className="muted astro-source">
         Score = Sky × Size fit × Light × Core, scaled to 100, with Core counting double (40% against 20% each for the rest). Sky: how high it is during your window. Size fit: how
-        well it fills your field of view (big targets need a short focal length). Light: the total light the whole target sends you (its magnitude) against what your mirror or lens can gather, after light pollution (which hurts more near the horizon). Core: the same test on the bright centre, since a compact core is easy to spot even when the whole object is faint. {model.source}
+        well it fills your field of view (big targets need a short focal length). Light: the target's average surface brightness (its light spread over its area) against what your mirror or lens can show, after light pollution (which hurts more near the horizon). Core: the same test on the bright centre, since a compact core is easy to spot even when the whole object is faint. {model.source}
       </p>
     </div>
   );
