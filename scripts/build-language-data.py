@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds data/language-outlook.json from the 'Languages' sheet of Programming Languages.ods.
+"""Builds data/language-outlook/language-outlook.json from the 'Languages' sheet of Programming Languages.ods.
 
 Usage (from the GraphData folder):
     npm run data
@@ -20,9 +20,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_ODS = ROOT.parent / "Programming Languages.ods"
-OUT = ROOT / "data" / "language-outlook.json"
-TIOBE_2019 = ROOT / "data" / "sources" / "tiobe-2019.json"
-TIOBE_SEPT = ROOT / "data" / "sources" / "tiobe-september.json"
+OUT = ROOT / "data" / "language-outlook" / "language-outlook.json"
+TIOBE_2019 = ROOT / "data" / "language-outlook" / "sources" / "tiobe-2019.json"
+TIOBE_SEPT = ROOT / "data" / "language-outlook" / "sources" / "tiobe-september.json"
 
 YEARS = list(range(2019, 2027))
 RECENT, PRIOR = (2024, 2026), (2021, 2023)  # inclusive windows

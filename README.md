@@ -26,7 +26,7 @@ src/pages/             Home page and the chart page wrapper
 Edit `../Programming Languages.ods`, then:
 
 ```bash
-npm run data       # rewrites data/language-outlook.json (needs LibreOffice)
+npm run data       # rewrites data/language-outlook/language-outlook.json (needs LibreOffice)
 ```
 
 ## Add a chart

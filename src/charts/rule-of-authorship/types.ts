@@ -1,4 +1,4 @@
-/** Shape of data/rule-of-authorship.json. */
+/** Shape of data/misc/rule-of-authorship.json. */
 export type Owner = "arneson" | "gygax" | "kuntz" | "kask" | "ernie" | "others" | "joint" | "disputed";
 
 /** A run of inline text; `owner` renders it as a colored tag, `strong` as bold. */

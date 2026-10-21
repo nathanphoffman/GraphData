@@ -1,11 +1,11 @@
 import { useState } from "react";
-import CreatureCard from "./CreatureCard";
-import Credits from "./Credits";
-import EncounterGenerator from "./EncounterGenerator";
-import FilterBar, { type Filters } from "./FilterBar";
-import { DIFFICULTY_BANDS, TONE_BANDS, compareBy, difficultyOf, model } from "./data";
-import { matches } from "./search";
-import type { Creature } from "./types";
+import CreatureCard from "./ui/cards/CreatureCard";
+import Credits from "./ui/cards/Credits";
+import EncounterGenerator from "./encounter/EncounterGenerator";
+import FilterBar, { type Filters } from "./ui/filters/FilterBar";
+import { DIFFICULTY_BANDS, TONE_BANDS, compareBy, difficultyOf, model } from "./model/data";
+import { matches } from "./model/search";
+import type { Creature } from "./model/types";
 import "./styles.css";
 
 const DEFAULT_FILTERS: Filters = {

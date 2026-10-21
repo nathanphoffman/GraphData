@@ -1,4 +1,4 @@
-/** Shape of data/maintainability-calculator.json. */
+/** Shape of data/misc/maintainability-calculator.json. */
 export interface Role {
   name: string;
   /** Optional hint shown after the name in parentheses, not bold. */

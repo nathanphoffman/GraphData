@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import "./styles.css";
-import { averageUses, recommended, recommendedCount } from "./calculate";
-import { cap, findItemType, DEFAULT_ITEM_TYPE } from "./items";
-import RecommendationPanel from "./RecommendationPanel";
-import SavingsPanel from "./SavingsPanel";
-import GoalCurve from "./GoalCurve";
-import ShareBar from "./ShareBar";
-import SharingCurve from "./SharingCurve";
-import Slider from "./Slider";
-import { useCalculatorState } from "./state";
-import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_BENCHMARKS, PER_YEAR_STOPS } from "./stops";
-import WaitChart from "./WaitChart";
+import { averageUses, recommended, recommendedCount } from "./logic/calculate";
+import { cap, findItemType, DEFAULT_ITEM_TYPE } from "./logic/items";
+import RecommendationPanel from "./panels/RecommendationPanel";
+import SavingsPanel from "./panels/SavingsPanel";
+import GoalCurve from "./graphs/GoalCurve";
+import ShareBar from "./panels/ShareBar";
+import SharingCurve from "./graphs/SharingCurve";
+import Slider from "./panels/Slider";
+import { useCalculatorState } from "./state/state";
+import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_BENCHMARKS, PER_YEAR_STOPS } from "./logic/stops";
+import WaitChart from "./graphs/WaitChart";
 
 export default function MinimalismCalculator() {
   const s = useCalculatorState();

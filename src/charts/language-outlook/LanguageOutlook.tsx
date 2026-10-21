@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
-import data from "../../../data/language-outlook.json";
+import data from "../../../data/language-outlook/language-outlook.json";
 import type { LanguageOutlookData, LanguageRecord, Tooltip } from "./types";
 import { HIDDEN_BY_DEFAULT_PREFIXES } from "./style";
 import { buildYScale } from "./layout";

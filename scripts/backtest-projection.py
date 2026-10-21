@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Tests the projection on known data: uses only 2019-2024 to project 2025 and 2026, then compares
-with what actually happened (Year 2025 / Year 2026 in data/language-outlook.json).
+with what actually happened (Year 2025 / Year 2026 in data/language-outlook/language-outlook.json).
 
 Usage: python3 scripts/backtest-projection.py
 """

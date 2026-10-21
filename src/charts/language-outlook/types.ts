@@ -1,4 +1,4 @@
-/** Shape of data/language-outlook.json (written by scripts/build-language-data.py). */
+/** Shape of data/language-outlook/language-outlook.json (written by scripts/build-language-data.py). */
 export interface LanguageRecord {
   name: string;
   /** Keyed by series name, e.g. "Year 2026", "Combined avg 2024-2026". */

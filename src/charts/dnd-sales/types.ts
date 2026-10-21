@@ -1,4 +1,4 @@
-/** Shape of data/dnd-sales.json. */
+/** Shape of data/misc/dnd-sales.json. */
 export type Confidence = "guess" | "low" | "medium";
 
 export interface Edition {

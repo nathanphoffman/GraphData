@@ -1,19 +1,11 @@
 import { useState } from "react";
 import "./styles.css";
-import data from "../../../data/maintainability-calculator.json";
-import type { MaintainabilityData, Tier } from "./types";
-import { TIERS } from "./style";
-import { aiName, formatCount, letterGrade, position, spans, tierFor } from "./calculate";
+import data from "../../../data/misc/maintainability-calculator.json";
+import type { MaintainabilityData } from "./types";
+import { aiName, letterGrade } from "./calculate";
+import { RoleTable, SliderPanel, TierLegend } from "./Sections";
 
 const model = data as MaintainabilityData;
-
-function Badge({ tier }: { tier: Tier }) {
-  return (
-    <span className="badge" style={{ background: tier.background, color: tier.color }}>
-      {tier.name}
-    </span>
-  );
-}
 
 export default function MaintainabilityCalculator() {
   const [loc, setLoc] = useState("10000");
@@ -23,7 +15,6 @@ export default function MaintainabilityCalculator() {
 
   const lines = Math.max(0, Number(loc) || 0);
   const people = Math.max(1, Math.floor(Number(team) || 1));
-  const mult = Math.sqrt(people);
   const q = Math.min(100, Math.max(0, qualityPct)) / 100;
   const qMod = q - 0.75;
   const pct = Math.round(q * 100);
@@ -45,102 +36,31 @@ export default function MaintainabilityCalculator() {
         </label>
       </div>
 
-      <div className="panel">
-        <div className="calc-row">
-          <label htmlFor="quality">Code Quality Letter Grade</label>
-          <strong>
-            {letterGrade(pct)} · {pct}% ({qMod >= 0 ? "+" : "−"}
-            {Math.abs(qMod).toFixed(2)})
-          </strong>
-        </div>
-        <input
-          id="quality"
-          type="range"
-          min={0}
-          max={100}
-          step={1}
-          value={qualityPct}
-          onChange={(e) => setQualityPct(Number(e.target.value))}
-        />
-        <div className="calc-ticks">
-          <span>F− 0% (−0.75)</span>
-          <span>C 75% (±0)</span>
-          <span>A+ 100% (+0.25)</span>
-        </div>
-      </div>
+      <SliderPanel
+        id="quality"
+        label="Code Quality Letter Grade"
+        value={`${letterGrade(pct)} · ${pct}% (${qMod >= 0 ? "+" : "−"}${Math.abs(qMod).toFixed(2)})`}
+        min={0}
+        max={100}
+        step={1}
+        current={qualityPct}
+        onChange={setQualityPct}
+        ticks={["F− 0% (−0.75)", "C 75% (±0)", "A+ 100% (+0.25)"]}
+      />
+      <SliderPanel
+        id="ai"
+        label="AI involvement"
+        value={`${ai.toFixed(1)} (${aiName(ai)})`}
+        min={0}
+        max={1}
+        step={0.1}
+        current={ai}
+        onChange={(v) => setAi(Math.round(v * 10) / 10)}
+        ticks={["0 No AI", "0.5 AI‑Written", "1 Full Vibe AI"]}
+      />
 
-      <div className="panel">
-        <div className="calc-row">
-          <label htmlFor="ai">AI involvement</label>
-          <strong>
-            {ai.toFixed(1)} ({aiName(ai)})
-          </strong>
-        </div>
-        <input
-          id="ai"
-          type="range"
-          min={0}
-          max={1}
-          step={0.1}
-          value={ai}
-          onChange={(e) => setAi(Math.round(Number(e.target.value) * 10) / 10)}
-        />
-        <div className="calc-ticks">
-          <span>0 No AI</span>
-          <span>0.5 AI‑Written</span>
-          <span>1 Full Vibe AI</span>
-        </div>
-      </div>
-
-      <div className="panel calc-table">
-        <h3>Line Count Recommendation</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Role</th>
-              <th>n</th>
-              <th className="edge">Very Stable</th>
-              <th className="normal">Normal</th>
-              <th className="edge">Unstable</th>
-              <th className="normal">Difficulty at {formatCount(lines)} lines</th>
-            </tr>
-          </thead>
-          <tbody>
-            {model.roles.map((role) => {
-              const n = role.base + ai + qMod;
-              const s = spans(n);
-              return (
-                <tr key={role.name}>
-                  <td className="role">
-                    {role.name}
-                    {role.note && <span className="role-note"> ({role.note})</span>}
-                  </td>
-                  <td>{n.toFixed(2)}</td>
-                  <td className="edge">{formatCount(s.lo * mult)}</td>
-                  <td className="normal">{formatCount(s.mid * mult)}</td>
-                  <td className="edge">{formatCount(s.hi * mult)}</td>
-                  <td className="normal">
-                    <Badge tier={tierFor(position(lines / mult, n))} />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="panel">
-        <div className="calc-scale">
-          {TIERS.map((tier) => (
-            <Badge key={tier.name} tier={tier} />
-          ))}
-        </div>
-        <p className="muted">
-          Each line count is placed on a logarithmic position between Very Stable (−1), Stable (0, n<sup>n</sup>) and
-          Unstable (+1). Normal spans −0.1 to +0.1. Below −1 is Trivial; above +1 is Impossible. All line counts are
-          multiplied by √(team members), reflecting diminishing returns from added people.
-        </p>
-      </div>
+      <RoleTable roles={model.roles} lines={lines} mult={Math.sqrt(people)} shift={ai + qMod} />
+      <TierLegend />
     </div>
   );
 }
