@@ -164,7 +164,7 @@ export default function WeightJourney() {
     );
   }, [lossInput, monthlyLoss, aheadDays]);
 
-  const [showAllTrend, setShowAllTrend] = useState(false);
+  const [showAllTrend, setShowAllTrend] = useState(true);
   /** Tapering curve from a row's 3-day average down to its 3 day projected all average, treated as the total loss (first month = 1/12 of it). Today, yesterday and the day before. */
   const allTrend = useMemo(() => {
     if (!showAllTrend) return null;
@@ -178,7 +178,7 @@ export default function WeightJourney() {
     return trends.length ? { trends, date: trends[0].actual[trends[0].actual.length - 1].date } : null;
   }, [showAllTrend, tableRows, aheadDays]);
 
-  const [showSpread, setShowSpread] = useState(false);
+  const [showSpread, setShowSpread] = useState(true);
   /**
    * The last 7 rows each give a tapering curve to their own 3 day projected all average. Sorted best (lowest target)
    * to worst (highest), with a mean curve; used for the shaded range.
@@ -200,6 +200,25 @@ export default function WeightJourney() {
       adjusted: build((r) => r.adj.avg3, (r) => r.allProj3Adj!),
     };
   }, [showSpread, tableRows, aheadDays]);
+
+  const [showQuadratic, setShowQuadratic] = useState(true);
+  const [showGeneral, setShowGeneral] = useState(true);
+  /**
+   * Quadratic projection averaged with the mean curve of the last week's 3 day projected all averages, day by day
+   * (only the days both cover, which is the quadratic's 90 days ahead).
+   */
+  const general = useMemo(() => {
+    const ahead = aheadDays > 0 ? aheadDays : 365;
+    const rows7 = tableRows.slice(-7).filter((r) => r.allProj3 !== null);
+    if (!rows7.length) return null;
+    const mean = (f: (r: (typeof rows7)[number]) => number) => rows7.reduce((sum, r) => sum + f(r), 0) / rows7.length;
+    const meanCurve = taperCurve(rows7[rows7.length - 1].date, mean((r) => r.avg3), mean((r) => r.allProj3!), ahead);
+    const quadratic = new Map([fit[fit.length - 1], ...future].map((d) => [d.date, d.weight]));
+    return meanCurve.flatMap((d) => {
+      const q = quadratic.get(d.date);
+      return q === undefined ? [] : [{ date: d.date, weight: (d.weight + q) / 2 }];
+    });
+  }, [tableRows, aheadDays]);
 
   const chart = useMemo(() => {
     const shown = days.slice(-Math.min(range.days, days.length));
@@ -247,6 +266,7 @@ export default function WeightJourney() {
       measured: shown.filter((d) => !d.estimated).map(pt),
       fit: line(fit.filter((d) => d.date >= firstShown).map(pt)),
       future: line([pt(fit[fit.length - 1]), ...future.map(pt)]),
+      general: general ? line(general.map(pt)) : "",
       spread: spread ? { actual: shade(spread.actual), adjusted: shade(spread.adjusted) } : null,
       allTrends: (allTrend?.trends ?? []).map((t) => ({
         back: t.back,
@@ -258,7 +278,7 @@ export default function WeightJourney() {
         ? line([anchorAdjusted, ...tapered.map((d) => pt({ date: d.date, weight: d.adjusted }))])
         : "",
     };
-  }, [range, k, tableRows, tapered, allTrend, spread]);
+  }, [range, k, tableRows, tapered, allTrend, spread, general]);
 
   const first = days[0];
   const latest = days[days.length - 1];
@@ -318,6 +338,12 @@ export default function WeightJourney() {
           <input type="number" min="1" step="1" value={projMonths} onChange={(e) => setProjMonths(e.target.value)} /> months
         </label>
         <label className="weight-compress">
+          <input type="checkbox" checked={showQuadratic} onChange={(e) => setShowQuadratic(e.target.checked)} /> Show Quadratic Projection
+        </label>
+        <label className="weight-compress">
+          <input type="checkbox" checked={showGeneral} onChange={(e) => setShowGeneral(e.target.checked)} /> Show General Projection
+        </label>
+        <label className="weight-compress">
           <input type="checkbox" checked={showAllTrend} onChange={(e) => setShowAllTrend(e.target.checked)} /> Show future trend lines following all average projection
         </label>
         <label className="weight-compress">
@@ -348,9 +374,10 @@ export default function WeightJourney() {
         <path d={chart.avg3Adjusted} className="line-avg3-adjusted" />
         <path d={chart.avg3} className="line-avg3" />
         <path d={chart.fitAdjusted} className="line-fit-adjusted" />
-        <path d={chart.futureAdjusted} className="line-future-adjusted" />
+        {showQuadratic && <path d={chart.futureAdjusted} className="line-future-adjusted" />}
         <path d={chart.fit} className="line-fit" />
-        <path d={chart.future} className="line-future" />
+        {showQuadratic && <path d={chart.future} className="line-future" />}
+        {showGeneral && <path d={chart.general} className="line-general" />}
         {chart.spread &&
           (["actual", "adjusted"] as const).map((series) => (
             <g key={series} className={`spread spread-${series}`}>
@@ -389,7 +416,16 @@ export default function WeightJourney() {
             <span className="key taper" /> projection from your monthly loss <span className="key taper-adjusted" /> same, minus muscle gained (muscle gain continues and slows at the same rate; total loss tends to 12x the first month)
           </>
         )}
-        <span className="key future" /> projection (quadratic curve through the last 90 days, 90 days ahead)
+        {showQuadratic && (
+          <>
+            <span className="key future" /> Quadratic Projection (quadratic curve through the last 90 days, 90 days ahead)
+          </>
+        )}
+        {showGeneral && (
+          <>
+            <span className="key general" /> General Projection (average of the Quadratic Projection and the mean of the last week's 3 day projected all average trend lines)
+          </>
+        )}
       </p>
 
       <table>

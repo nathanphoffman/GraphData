@@ -282,3 +282,14 @@
   border-top-width: 8px;
   opacity: 0.45;
 }
+
+.weight-chart .line-general {
+  stroke: #d6336c;
+  stroke-width: 3;
+  stroke-dasharray: 10 4 2 4;
+  fill: none;
+}
+
+.weight-legend .key.general {
+  border-top: 3px dashed #d6336c;
+}
