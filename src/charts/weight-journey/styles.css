@@ -184,12 +184,6 @@
 .weight .band-blue { background: #7fb2f0; }
 .weight .band-red { background: #e5675f; }
 
-.weight-compress {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .weight-projection {
   align-items: center;
   flex-wrap: wrap;

@@ -143,26 +143,6 @@ export function addMuscle<T extends Day>(days: T[]): (T & Muscle)[] {
   });
 }
 
-/**
- * Squash every `step` days into one row so that row counts as "a day":
- * weight is the block's mean, muscle gain is the block's sum, and the date is the block's last day.
- * Blocks are counted back from the latest day so the newest block is always complete.
- */
-export function compress<T extends Day & Muscle>(days: T[], step: number): T[] {
-  const blocks: T[] = [];
-  for (let end = days.length; end > 0; end -= step) {
-    const block = days.slice(Math.max(0, end - step), end);
-    const last = block[block.length - 1];
-    blocks.unshift({
-      ...last,
-      weight: round1(block.reduce((sum, d) => sum + d.weight, 0) / block.length),
-      estimated: block.every((d) => d.estimated),
-      muscleDaily: block.reduce((sum, d) => sum + d.muscleDaily, 0),
-    });
-  }
-  return blocks;
-}
-
 export interface TargetPoint {
   date: string;
   weight: number;

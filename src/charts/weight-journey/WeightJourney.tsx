@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { scaleLinear, scaleTime } from "d3-scale";
 import "./styles.css";
 import data from "../../../data/weight-journey.json";
-import { type Averages, addAverages, addMuscle, compress, fillDays, project, projectTapering, taperToTotal } from "./calculate";
+import { type Averages, addAverages, addMuscle, fillDays, project, projectTapering, taperToTotal } from "./calculate";
 
 const days = fillDays(data.weights as [string, number][]);
 const withMuscle = addMuscle(days);
@@ -66,10 +66,6 @@ const round1 = (n: number) => Math.round(n * 10) / 10;
 const yearly = (blended: number, monthly: number | null) => (monthly === null ? null : blended + monthly * 12);
 
 const DAILY_WINDOWS = { short: 3, medium: 30, long: 365 };
-// Days per row in the compressed view: 3 rows = 3x that many days, 30 rows = 30x, and the long average uses all data.
-const COMPRESS_STEP = 3;
-const COMPRESSED_WINDOWS = { short: 3, medium: 30, long: Infinity };
-
 function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step: number) {
   const actual = addAverages(rows, windows, step);
   // Same averages again on weight minus the muscle gained so far.
@@ -107,7 +103,6 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
 }
 
 const dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
-const compressedRows = buildRows(compress(withMuscle, COMPRESS_STEP), COMPRESSED_WINDOWS, COMPRESS_STEP);
 
 /** Tapering curve from `start` to `target` (treated as the total loss) over `ahead` days, starting at `date`. */
 const taperCurve = (date: string, start: number, target: number, ahead: number) => [
@@ -121,8 +116,7 @@ function line(points: { x: number; y: number }[]): string {
 
 export default function WeightJourney() {
   const [range, setRange] = useState(RANGES[0]);
-  const [compressed, setCompressed] = useState(false);
-  const tableRows = compressed ? compressedRows : dailyRows;
+  const tableRows = dailyRows;
   const [unit, setUnit] = useState<Unit>("lb");
   const k = unit === "kg" ? KG_PER_LB : 1;
   const w = (lb: number, digits = 1) => (lb * k).toFixed(digits);
@@ -455,12 +449,6 @@ export default function WeightJourney() {
               <option key={q} value={q}>{q.replace("-", " ")}</option>
             ))}
           </select>
-        </div>
-        <div className="control-group">
-          <span className="control-label">Table rows</span>
-          <label className="toggle">
-            <input type="checkbox" checked={compressed} onChange={(e) => setCompressed(e.target.checked)} /> Compress to {COMPRESS_STEP} day view
-          </label>
         </div>
       </div>
 
