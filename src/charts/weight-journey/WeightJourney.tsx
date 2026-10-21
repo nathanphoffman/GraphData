@@ -288,11 +288,16 @@ export default function WeightJourney() {
   const today = tableRows[tableRows.length - 1];
   const yearOut = today.monthly === null ? null : Math.round((today.blended + today.monthly * 12) * 10) / 10;
 
-  // Starts at the latest 60 rows; each click of the button adds 6 more months (older) of rows.
-  const [extraMonths, setExtraMonths] = useState(0);
+  // Table shows the last 90 days by default, or one chosen quarter (e.g. "2025-Q3").
+  const [period, setPeriod] = useState("default");
+  const quarterOf = (iso: string) => `${iso.slice(0, 4)}-Q${Math.floor((Number(iso.slice(5, 7)) - 1) / 3) + 1}`;
   const newestFirst = useMemo(() => [...tableRows].reverse(), [tableRows]);
-  const rowsPerMonth = 30 / (compressed ? COMPRESS_STEP : 1);
-  const rows = newestFirst.slice(0, 60 + Math.round(extraMonths * rowsPerMonth));
+  const quarters = useMemo(() => [...new Set(newestFirst.map((r) => quarterOf(r.date)))], [newestFirst]);
+  const rows = useMemo(() => {
+    if (period !== "default") return newestFirst.filter((r) => quarterOf(r.date) === period);
+    const cutoff = new Date(toDate(newestFirst[0].date).getTime() - 89 * 86_400_000).toISOString().slice(0, 10);
+    return newestFirst.filter((r) => r.date >= cutoff);
+  }, [newestFirst, period]);
 
   return (
     <div className="weight">
@@ -311,49 +316,62 @@ export default function WeightJourney() {
         )}
       </div>
 
-      <div className="weight-ranges">
-        {(["lb", "kg"] as Unit[]).map((u) => (
-          <button key={u} className={u === unit ? "active" : ""} onClick={() => setUnit(u)}>
-            {u}
-          </button>
-        ))}
-        <span className="weight-gap" />
-        <label className="weight-compress">
-          <input type="checkbox" checked={compressed} onChange={(e) => setCompressed(e.target.checked)} /> Compress to {COMPRESS_STEP} day view
-        </label>
-        {RANGES.map((r) => (
-          <button key={r.label} className={r === range ? "active" : ""} onClick={() => setRange(r)}>
-            {r.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="weight-ranges weight-projection">
-        <label>
-          Projected loss per month ({unit}){" "}
-          <input type="number" min="0" step="0.5" value={lossInput} placeholder="e.g. 4" onChange={(e) => setLossInput(e.target.value)} />
-        </label>
-        <label>
-          Show for{" "}
-          <input type="number" min="1" step="1" value={projMonths} onChange={(e) => setProjMonths(e.target.value)} /> months
-        </label>
-        <label className="weight-compress">
-          <input type="checkbox" checked={showQuadratic} onChange={(e) => setShowQuadratic(e.target.checked)} /> Show Quadratic Projection
-        </label>
-        <label className="weight-compress">
-          <input type="checkbox" checked={showGeneral} onChange={(e) => setShowGeneral(e.target.checked)} /> Show General Projection
-        </label>
-        <label className="weight-compress">
-          <input type="checkbox" checked={showAllTrend} onChange={(e) => setShowAllTrend(e.target.checked)} /> Show future trend lines following all average projection
-        </label>
-        <label className="weight-compress">
-          <input type="checkbox" checked={showSpread} onChange={(e) => setShowSpread(e.target.checked)} /> Show best / worst range from the last week of projections
-        </label>
-        {tapered && (
-          <span className="muted">
-            In {projMonths} months: {w(tapered[tapered.length - 1].weight)} {unit} ({w(tapered[tapered.length - 1].adjusted)} {unit} muscle-adjusted)
-          </span>
-        )}
+      <div className="weight-controls">
+        <div className="control-group">
+          <span className="control-label">Units</span>
+          <div className="segmented">
+            {(["lb", "kg"] as Unit[]).map((u) => (
+              <button key={u} className={u === unit ? "active" : ""} onClick={() => setUnit(u)}>
+                {u}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="control-group">
+          <span className="control-label">Chart range</span>
+          <div className="segmented">
+            {RANGES.map((r) => (
+              <button key={r.label} className={r === range ? "active" : ""} onClick={() => setRange(r)}>
+                {r.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="control-group">
+          <span className="control-label">Projection tool</span>
+          <div className="field-row">
+            <label className="field">
+              Loss per month ({unit})
+              <input type="number" min="0" step="0.5" value={lossInput} placeholder="e.g. 4" onChange={(e) => setLossInput(e.target.value)} />
+            </label>
+            <label className="field">
+              Show for (months)
+              <input type="number" min="1" step="1" value={projMonths} onChange={(e) => setProjMonths(e.target.value)} />
+            </label>
+          </div>
+          {tapered && (
+            <span className="muted">
+              In {projMonths} months: {w(tapered[tapered.length - 1].weight)} {unit} ({w(tapered[tapered.length - 1].adjusted)} {unit} muscle-adjusted)
+            </span>
+          )}
+        </div>
+        <div className="control-group control-wide">
+          <span className="control-label">Lines</span>
+          <div className="toggles">
+            <label className="toggle">
+              <input type="checkbox" checked={showQuadratic} onChange={(e) => setShowQuadratic(e.target.checked)} /> Quadratic Projection
+            </label>
+            <label className="toggle">
+              <input type="checkbox" checked={showGeneral} onChange={(e) => setShowGeneral(e.target.checked)} /> General Projection
+            </label>
+            <label className="toggle">
+              <input type="checkbox" checked={showAllTrend} onChange={(e) => setShowAllTrend(e.target.checked)} /> Future trend lines (all average projection)
+            </label>
+            <label className="toggle">
+              <input type="checkbox" checked={showSpread} onChange={(e) => setShowSpread(e.target.checked)} /> Best / worst range (last week)
+            </label>
+          </div>
+        </div>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="weight-chart" role="img" aria-label="Weight over time">
@@ -428,6 +446,24 @@ export default function WeightJourney() {
         )}
       </p>
 
+      <div className="weight-controls table-controls">
+        <div className="control-group">
+          <span className="control-label">Table period</span>
+          <select value={period} onChange={(e) => setPeriod(e.target.value)}>
+            <option value="default">[default] last 90 days</option>
+            {quarters.map((q) => (
+              <option key={q} value={q}>{q.replace("-", " ")}</option>
+            ))}
+          </select>
+        </div>
+        <div className="control-group">
+          <span className="control-label">Table rows</span>
+          <label className="toggle">
+            <input type="checkbox" checked={compressed} onChange={(e) => setCompressed(e.target.checked)} /> Compress to {COMPRESS_STEP} day view
+          </label>
+        </div>
+      </div>
+
       <table>
         <thead>
           <tr><th>Date</th><th>Weight ({unit})</th><th>Muscle gain ({unit})</th><th>Muscle gained so far ({unit})</th><th>3-day avg<small>actual / muscle-adjusted</small></th><th>Recent weight loss / month<small>from 15 and 30 day change</small></th><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th><th>Projected / month</th><th>Projected in 1 year</th><th>All average</th><th>Projected all average</th><th>3 day projected all average</th><th></th></tr>
@@ -454,11 +490,6 @@ export default function WeightJourney() {
           ))}
         </tbody>
       </table>
-      {rows.length < newestFirst.length && (
-        <button className="weight-more" onClick={() => setExtraMonths(extraMonths + 6)}>
-          Show next 6 months
-        </button>
-      )}
     </div>
   );
 }
