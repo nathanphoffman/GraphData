@@ -2,7 +2,11 @@ import { addAverages, addMuscle, fillDays, project } from "../calculate";
 import data from "../../../../data/misc/weight-journey.json";
 import { allAverage, last3, projectAll, recentRate } from "./averages";
 
-export const days = fillDays(data.weights as [string, number][]);
+const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
+// Placeholder rows (weight 0) and future dates are skipped.
+const weighIns = (data.weights as [string, number][]).filter(([date, weight]) => weight > 0 && date <= today);
+
+export const days = fillDays(weighIns);
 export const withMuscle = addMuscle(days);
 export const projectedAdjusted = project(
   withMuscle.map((d) => ({ ...d, weight: d.weight - d.muscleTotal })),
