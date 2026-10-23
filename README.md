@@ -35,4 +35,4 @@ npm run data       # rewrites data/language-outlook/language-outlook.json (needs
 2. Create `src/charts/<name>/<Name>.tsx` with a default-exported React component.
 3. Add one entry to `src/charts/registry.ts`.
 
-The chart then shows up on the home page and at `#/chart/<id>`.
+The chart then shows up on the home page and at `/<id>`.

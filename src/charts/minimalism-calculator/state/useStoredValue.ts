@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
-/** A value from a shared link's query (the part after "?" in the hash), if the link has one. */
+/** A value from a shared link's query (the part after "?"), if the link has one. */
 function sharedParam(key: string): string | null {
-  const query = window.location.hash.split("?")[1];
-  return query ? new URLSearchParams(query).get(key) : null;
+  return new URLSearchParams(window.location.search).get(key);
 }
 
 /**

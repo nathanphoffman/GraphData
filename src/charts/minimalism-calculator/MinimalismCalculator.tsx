@@ -18,8 +18,8 @@ export default function MinimalismCalculator() {
 
   // Once a shared link has been read, drop its values from the address so later changes win on reload.
   useEffect(() => {
-    if (window.location.hash.includes("?")) {
-      window.history.replaceState(null, "", window.location.pathname + window.location.search + window.location.hash.split("?")[0]);
+    if (window.location.search) {
+      window.history.replaceState(null, "", window.location.pathname);
     }
   }, []);
 

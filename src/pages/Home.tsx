@@ -15,7 +15,7 @@ export default function Home() {
               .filter((chart) => chart.category === category && !chart.unlisted)
               .map((chart) => (
                 <li key={chart.id}>
-                  <Link to={`/chart/${chart.id}`}>{chart.title}</Link>
+                  <Link to={`/${chart.id}`}>{chart.title}</Link>
                   <p>{chart.description}</p>
                 </li>
               ))}

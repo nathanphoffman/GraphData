@@ -16,7 +16,7 @@ export const categories = ["Calculators", "Tabletop RPGs", "Tech & economics", "
 export type Category = (typeof categories)[number];
 
 export interface ChartEntry {
-  /** URL slug, e.g. #/chart/language-outlook */
+  /** URL slug, e.g. /language-outlook */
   id: string;
   title: string;
   category: Category;

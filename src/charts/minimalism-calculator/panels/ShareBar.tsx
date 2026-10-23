@@ -14,8 +14,7 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
   const [copied, setCopied] = useState(false);
 
   const copyLink = async () => {
-    const page = window.location.href.split("#")[0] + window.location.hash.split("?")[0];
-    const url = `${page}?${new URLSearchParams(shareParams())}`;
+    const url = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(shareParams())}`;
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
