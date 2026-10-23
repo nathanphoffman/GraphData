@@ -32,28 +32,30 @@ function useTableRows(period: string) {
   return { rows, quarters };
 }
 
-function Head({ unit }: { unit: Unit }) {
+type Show = { muscleDaily: boolean; monthly: boolean };
+
+function Head({ unit, show }: { unit: Unit; show: Show }) {
   return (
     <thead>
-      <tr><th>Date</th><th>Weight ({unit})</th><th>Muscle gain ({unit})</th><th>Muscle gained so far ({unit})</th><th>3-day avg<small>actual / muscle-adjusted</small></th><th>Recent weight loss / month<small>from 15 and 30 day change</small></th><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th><th>Projected / month</th><th>Projected in 1 year</th><th>All average</th><th>Projected all average</th><th>3 day projected all average</th><th></th><th>Complete average<small>every weight column</small></th></tr>
+      <tr><th>Date</th><th>Weight ({unit})</th>{show.muscleDaily && <th>Muscle gain ({unit})</th>}<th>Muscle gained so far ({unit})</th><th>3-day avg<small>actual / muscle-adjusted</small></th><th>Recent weight loss / month<small>from 15 and 30 day change</small></th><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th>{show.monthly && <th>Projected / month</th>}<th>Projected in 1 year</th><th>All average</th><th>Projected all average</th><th>3 day projected all average</th><th></th><th>Complete average<small>every weight column</small></th></tr>
     </thead>
   );
 }
 
-function DayRow({ d, f }: { d: (typeof dailyRows)[number]; f: Format }) {
+function DayRow({ d, f, show }: { d: (typeof dailyRows)[number]; f: Format; show: Show }) {
   const two = (a: number | null, b: number | null, fmt = f.w, bandOf?: BandOf) => <Two actual={a} adjusted={b} fmt={fmt} bandOf={bandOf} />;
   return (
     <tr className={d.estimated ? "estimated" : ""}>
       <td>{pretty(d.date)}</td>
       <td><span className={band(d.weight, false)}>{f.w(d.weight)}</span></td>
-      <td>{f.w(d.muscleDaily, 3)}</td>
+      {show.muscleDaily && <td>{f.w(d.muscleDaily, 3)}</td>}
       <td>{f.w(d.muscleTotal, 2)}</td>
       <td>{two(d.avg3, d.adj.avg3)}</td>
       <td>{two(d.recent, d.recentAdj, f.signed, deltaBand)}</td>
       <td>{two(d.avg30, d.adj.avg30)}</td>
       <td>{two(d.avg365, d.adj.avg365)}</td>
       <td>{two(d.blended, d.adj.blended)}</td>
-      <td>{two(d.monthly, d.adj.monthly, f.signed, deltaBand)}</td>
+      {show.monthly && <td>{two(d.monthly, d.adj.monthly, f.signed, deltaBand)}</td>}
       <td>{two(yearly(d.blended, d.monthly), yearly(d.adj.blended, d.adj.monthly))}</td>
       <td>{two(d.allAvg, d.allAvgAdj)}</td>
       <td>{two(d.allProj, d.allProjAdj)}</td>
@@ -66,6 +68,7 @@ function DayRow({ d, f }: { d: (typeof dailyRows)[number]; f: Format }) {
 
 export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
   const [period, setPeriod] = useState("default");
+  const [show, setShow] = useState<Show>({ muscleDaily: false, monthly: false });
   const { rows, quarters } = useTableRows(period);
   return (
     <>
@@ -79,11 +82,22 @@ export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
             ))}
           </select>
         </div>
+        <div className="control-group">
+          <span className="control-label">Extra columns</span>
+          <div className="toggles">
+            <label className="toggle">
+              <input type="checkbox" checked={show.muscleDaily} onChange={(e) => setShow({ ...show, muscleDaily: e.target.checked })} /> Muscle gain
+            </label>
+            <label className="toggle">
+              <input type="checkbox" checked={show.monthly} onChange={(e) => setShow({ ...show, monthly: e.target.checked })} /> Projected / month
+            </label>
+          </div>
+        </div>
       </div>
       <table>
-        <Head unit={unit} />
+        <Head unit={unit} show={show} />
         <tbody>
-          {rows.map((d) => <DayRow key={d.date} d={d} f={f} />)}
+          {rows.map((d) => <DayRow key={d.date} d={d} f={f} show={show} />)}
         </tbody>
       </table>
     </>
