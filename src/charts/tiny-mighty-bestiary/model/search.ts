@@ -2,8 +2,6 @@ import { model } from "./data";
 import type { Creature } from "./types";
 
 /** Lowercase with everything but letters and digits removed, so "AT-AT", "at at" and "ATAT" all look the same. */
-
-// Lowercase and drop everything but letters and digits so spacing and punctuation do not affect matching.
 const squash = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
 
 /** True when every word of the query appears somewhere in the creature's searchable text. Names and aliases also match ignoring spacing and punctuation. */
@@ -31,7 +29,6 @@ export function matches(creature: Creature, query: string) {
 
   return query
     .toLowerCase()
-
     // Split the search text on any run of whitespace.
     .split(/\s+/)
     .filter(Boolean)
