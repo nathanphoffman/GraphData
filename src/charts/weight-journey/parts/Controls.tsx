@@ -36,6 +36,7 @@ interface ToolProps {
 
 function ProjectionToolBox({ unit, f, tool, onTool, tapered }: ToolProps) {
   const last = tapered?.[tapered.length - 1];
+
   return (
     <div className="control-group">
       <span className="control-label">Projection tool</span>

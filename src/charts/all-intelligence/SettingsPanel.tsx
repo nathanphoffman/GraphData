@@ -12,6 +12,7 @@ function DivisorSlider({ value, disabled, onChange }: { value: number; disabled?
 
 function MissingControl({ settings, set }: Pick<Props, "settings" | "set">) {
   const floor = settings.missingMode === "floor";
+
   return (
     <div className="allint-slider">
       <span>Not measured:</span>

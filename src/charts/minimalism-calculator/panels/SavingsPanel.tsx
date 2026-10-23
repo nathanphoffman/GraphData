@@ -51,10 +51,12 @@ export default function SavingsPanel({
     cost: bought * price,
     saved: todayCost - bought * price,
   }));
+
   const yearsToTarget = owned < target ? yearsToReach(owned, target, yearlyUses, minPlays, maxPlays) : 0;
   const totalSaved = rows.reduce((sum, r) => sum + r.saved, 0);
   const totalSpent = rows.reduce((sum, r) => sum + r.cost, 0);
   const totalToday = todayCost * YEARS;
+
   return (
     <details className="panel mini-savings">
       <summary>Savings (optional)</summary>

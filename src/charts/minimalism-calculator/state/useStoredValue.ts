@@ -24,6 +24,7 @@ export function useStoredValue<T>(key: string, fallback: T, parse: (raw: string)
       return fallback;
     }
   });
+
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, String(value));
@@ -32,6 +33,7 @@ export function useStoredValue<T>(key: string, fallback: T, parse: (raw: string)
       console.warn(`Could not save ${storageKey}`, error);
     }
   }, [storageKey, value]);
+
   return [value, setValue] as const;
 }
 

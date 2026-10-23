@@ -26,6 +26,7 @@ function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target):
   c.width = w;
   c.height = h;
   const g = c.getContext("2d");
+
   if (!g) return { mean: 0.05, bg: 0 };
   g.drawImage(img, 0, 0, w, h);
   const px = g.getImageData(0, 0, w, h).data;
@@ -37,25 +38,31 @@ function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target):
   let sum = 0;
   let n = 0;
   const all: number[] = [];
+
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       const i = (y * w + x) * 4;
       const lum = ((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255) ** 2.2;
       all.push(lum);
+
       if (f) {
         const dx = x - f.cx * w;
         const dy = y - f.cy * h;
         const u = dx * Math.cos(angle) + dy * Math.sin(angle);
         const v = -dx * Math.sin(angle) + dy * Math.cos(angle);
+
         if ((u / a) ** 2 + (v / b) ** 2 > 1) continue;
       }
+
       sum += lum;
       n++;
     }
   }
+
   // The photo's own sky level (its dim 10th percentile) is not part of the target, so it is taken off before brightening.
   all.sort((p, q) => p - q);
   const bg = all[Math.floor(all.length * 0.1)] ?? 0;
+
   return { mean: Math.max(0.005, (n ? sum / n : 0.05) - bg), bg };
 }
 
@@ -67,12 +74,14 @@ const CIRCLE_MIN = 0.03;
 /** A red outline around the target on the photo, when the target is only a small part of what the photo shows. */
 function TargetCircle({ target, info, img }: { target: Target; info: TargetImage; img: HTMLImageElement }) {
   const f = info.footprint;
+
   if (!f || info.noCircle || target.major <= 0 || target.major / info.widthArcmin >= CIRCLE_BELOW) return null;
   const w = info.widthArcmin;
   const h = w * (img.naturalHeight / img.naturalWidth);
   const min = (w * CIRCLE_MIN) / 2;
   const cx = f.cx * w;
   const cy = f.cy * h;
+
   return (
     <svg className="astro-circle" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
       <ellipse cx={cx} cy={cy} rx={Math.max(target.major / 2, min)} ry={Math.max(target.minor / 2, min)} transform={`rotate(${f.angleDeg} ${cx} ${cy})`} />
@@ -95,32 +104,40 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
   const frame = g.createImageData(size, size);
   const d = frame.data;
   const half = size / 2;
+
   // Poor optics smear a star into a bigger, hazier dot; good optics keep it tight.
   const poor = Math.max(0, -quality);
   const skyLevel = skyGlow ** 2.5 * 0.3 + 0.015 * poor;
   const base = [0.86, 0.93, 1.0];
   const skyTint = [1, 0.82, 0.62];
+
   return (averted: number) => {
     // Brighter points bloom bigger; one that is only just brighter than the faintest star shows as a tiny dot.
     const reach = Math.max(0, Math.min(0.6 * (pointMargin + AVERTED_BOOST * averted), 8));
     const glowRadius = (2 + 2.5 * reach) * SCALE * (1 + 0.6 * poor);
+
     // Only things far brighter than the faintest star bloom; faint points (small planetary nebulae, dim stars) stay sharp pinpoints.
     const bloom = Math.max(0, Math.min(1, (pointMargin + AVERTED_BOOST * averted - BLOOM_START) / BLOOM_RANGE));
+
     for (let p = 0; p < size * size; p++) {
       const i = p * 4;
       const dist = Math.hypot((p % size) - half, Math.floor(p / size) - half);
       d[i + 3] = 255;
+
       if (dist > half) {
         d[i] = d[i + 1] = d[i + 2] = 0;
         continue;
       }
+
       const level = Math.min(1, Math.exp(-((dist / (1.2 * SCALE * (1 + 0.5 * poor))) ** 2)) + bloom * (0.35 + 0.2 * poor) * Math.exp(-dist / glowRadius));
       const vignette = 1 - 0.25 * (dist / half) ** 2;
+
       for (let c = 0; c < 3; c++) {
         const v = Math.min(1, skyLevel * skyTint[c] + level * base[c]) * vignette;
         d[i + c] = Math.round(255 * v ** (1 / 2.2));
       }
     }
+
     g.putImageData(frame, 0, 0);
   };
 }
@@ -151,7 +168,9 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
   const size = VIEW_SIZE * SCALE;
   canvas.width = canvas.height = size;
   const g = canvas.getContext("2d", { willReadFrequently: true });
+
   if (!g) return null;
+
   if (point) return preparePoint(g, size, pointMargin, skyGlow, quality);
   const pxPerArcmin = size / fov;
   const w = widthArcmin * pxPerArcmin;
@@ -159,15 +178,18 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
   g.fillStyle = "#000";
   g.fillRect(0, 0, size, size);
   g.imageSmoothingQuality = "high";
+
   // Put the target (when we know where it is in the photo) in the middle of the field.
   const left = size / 2 - (center?.cx ?? 0.5) * w;
   const top = size / 2 - (center?.cy ?? 0.5) * h;
   g.drawImage(img, left, top, w, h);
   const sharp = g.getImageData(0, 0, size, size).data;
+
   // A softened copy, blended in for averted vision (skipped where the browser can't blur a canvas).
   const soft = document.createElement("canvas");
   soft.width = soft.height = size;
   const sg = soft.getContext("2d", { willReadFrequently: true });
+
   if (!sg) return null;
   sg.filter = "blur(3px)";
   sg.drawImage(canvas, 0, 0);
@@ -176,22 +198,27 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
   const frame = g.createImageData(size, size);
   const d = frame.data;
   const half = size / 2;
+
   // Per-pixel factors that don't change between frames: inside the round field, soft photo edge, and vignette.
   // Photos smaller than the field (planets in a wide view) get a proportionally smaller soft edge so they don't fade away.
   const feather = Math.max(0.5, Math.min(12, Math.min(w, h) / 4));
   const weight = new Float32Array(size * size);
   const vignette = new Float32Array(size * size);
+
   for (let p = 0; p < size * size; p++) {
     const px = p % size;
     const py = Math.floor(p / size);
     const r = Math.hypot(px - half, py - half) / half;
+
     if (r > 1) continue;
     const ex = Math.min(1, Math.max(0, Math.min(px - left, left + w - px) / feather));
     const ey = Math.min(1, Math.max(0, Math.min(py - top, top + h - py) / feather));
     weight[p] = ex * ey;
     vignette[p] = 1 - 0.25 * r * r;
   }
+
   const lut = new Float32Array(256).map((_, v) => (v / 255) ** 2.2);
+
   // Optical quality: good optics add contrast and colour; poor optics flatten them, lift the sky with scattered light and soften the image.
   const poor = Math.max(0, -quality);
   const skyLevel = skyGlow ** 2.5 * 0.3 + 0.015 * poor;
@@ -200,23 +227,28 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
   return (averted: number) => {
     const gain = 10 ** (0.4 * (margin + AVERTED_BOOST * averted)) / mean;
     const soften = Math.min(1, 0.6 * averted + 0.6 * poor);
+
     // The eye sees almost no colour in the dark and none at all in averted vision; good optics keep more of the photo's colour.
     const colour = Math.max(0, (0.175 + 0.25 * quality) * (1 - averted));
     const contrast = 8 * (1 - 0.3 * quality);
     const tone = (x: number, w: number) => 1 - Math.exp(-Math.max(0, x * gain * w - 2.5) / contrast);
     const tint = [0.86 + 0.14 * colour, 0.93 + 0.07 * colour, 1.0];
+
     for (let p = 0; p < size * size; p++) {
       const i = p * 4;
       d[i + 3] = 255;
+
       if (vignette[p] === 0) {
         d[i] = d[i + 1] = d[i + 2] = 0;
         continue;
       }
+
       const lin0 = (lut[sharp[i]] + (lut[blur[i]] - lut[sharp[i]]) * soften) * COOL_BALANCE[0];
       const lin1 = (lut[sharp[i + 1]] + (lut[blur[i + 1]] - lut[sharp[i + 1]]) * soften) * COOL_BALANCE[1];
       const lin2 = (lut[sharp[i + 2]] + (lut[blur[i + 2]] - lut[sharp[i + 2]]) * soften) * COOL_BALANCE[2];
       const w = weight[p];
       const grey = tone(Math.max(0, 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2 - bg), w);
+
       for (let c = 0; c < 3; c++) {
         const chan = tone(Math.max(0, (c === 0 ? lin0 : c === 1 ? lin1 : lin2) - bg), w);
         const level = grey + (chan - grey) * colour;
@@ -224,6 +256,7 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
         d[i + c] = Math.round(255 * v ** (1 / 2.2));
       }
     }
+
     g.putImageData(frame, 0, 0);
   };
 }
@@ -237,6 +270,7 @@ const TILE_MAX = 28;
 function PreviewHead({ row, settings }: { row: ScoredTarget; settings: Settings }) {
   const t = row.target;
   const level = isNakedEye(t, settings.bortle) ? { label: "Naked Eye", level: 1 } : difficulty(row.score);
+
   return (
     <div className="astro-preview-head">
       <div>
@@ -261,12 +295,16 @@ function previewStats(row: ScoredTarget) {
     ["Magnitude", t.magnitude.toFixed(1)],
     ["Size", formatSize(t.major, t.minor)],
   ];
+
   if (t.type !== "Star" && !t.planet && t.type !== "Moon") tiles.push(["Surface br.", `${surfaceBrightness(t).toFixed(1)}`]);
+
   if (extra) tiles.push(["Distance", extra.distance]);
   tiles.push(["Best time", `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${row.bestHour === null ? "" : `, ${formatHour(row.bestHour)}`}`]);
   tiles.push(["Peak altitude", row.peakAltitude > 0 ? `${row.peakAltitude.toFixed(0)}°` : "below horizon"]);
   const notes: { label: string; value: string }[] = [];
+
   for (const f of extra?.facts ?? []) (f.value.length <= TILE_MAX ? tiles.push([f.label, f.value]) : notes.push(f));
+
   return { tiles, notes, extra };
 }
 
@@ -281,6 +319,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   const [loaded, setLoaded] = useState<{ img: HTMLImageElement; mean: number; bg: number } | null>(null);
   const alt = row.peakAltitude > 0 ? Math.max(20, row.peakAltitude) : 45;
   const view = viewConditions(row.target, settings, alt);
+
   // The preview eyepiece: more magnification shows a smaller patch of sky, bigger and dimmer.
   const eyepiece = previewOptics(settings);
   const fov = eyepiece.fov;
@@ -337,6 +376,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     const el = boxRef.current;
     if (el && (el.offsetWidth !== box.w || el.offsetHeight !== box.h)) setBox({ w: el.offsetWidth, h: el.offsetHeight });
   });
+
   const GAP = 16;
   const EDGE = 8;
   const left = x + GAP + box.w > window.innerWidth - EDGE ? x - GAP - box.w : x + GAP;

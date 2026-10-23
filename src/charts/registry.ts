@@ -12,7 +12,8 @@ import AstronomyTargets from "./astronomy-targets/AstronomyTargets";
 import WeightJourney from "./weight-journey/WeightJourney";
 
 /** Home page sections, in display order. */
-export const categories = ["Calculators", "Tabletop RPGs", "Tech & economics", "Science"] as const;
+const SCIENCE_CATEGORY = "Science";
+export const categories = ["Calculators", "Tabletop RPGs", "Tech & economics", SCIENCE_CATEGORY] as const;
 export type Category = (typeof categories)[number];
 
 export interface ChartEntry {
@@ -66,7 +67,7 @@ export const charts: ChartEntry[] = [
   {
     id: "neuron-intelligence",
     title: "Neuron Intelligence Explorer",
-    category: "Science",
+    category: SCIENCE_CATEGORY,
     description:
       "Ranks animals by neuron count against body weight, with adjustable exponents: Neurons^x / Weight^w, then Score^k.",
     component: NeuronIntelligence,
@@ -98,7 +99,7 @@ export const charts: ChartEntry[] = [
   {
     id: "all-intelligence",
     title: "All Intelligence",
-    category: "Science",
+    category: SCIENCE_CATEGORY,
     description:
       "A universal intelligence table for AI models and humans: 15 columns in 7 groups (thinking, knowledge, perception, action, learning, people, efficiency), combined with a geometric mean. Starts from BenchLM data, with adjustable handling of zero and unmeasured scores.",
     component: AllIntelligence,
@@ -106,7 +107,7 @@ export const charts: ChartEntry[] = [
   {
     id: "astronomy-targets",
     title: "Amateur Astronomy Targets",
-    category: "Science",
+    category: SCIENCE_CATEGORY,
     description:
       "Popular northern hemisphere deep-sky targets ranked for a season, adjusted for your telescope's focal length and mirror or lens size.",
     component: AstronomyTargets,
@@ -114,7 +115,7 @@ export const charts: ChartEntry[] = [
   {
     id: "weight-journey",
     title: "Weight Journey",
-    category: "Science",
+    category: SCIENCE_CATEGORY,
     description: "Personal daily weight table, gap-filled, with a trend curve and projection.",
     component: WeightJourney,
     unlisted: true,

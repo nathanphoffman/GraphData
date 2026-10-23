@@ -18,6 +18,7 @@ function formatRange(low: number, high: number) {
 function EncounterResult({ result }: { result: Result }) {
   const total = result.picks.reduce((sum, c) => sum + difficultyOf(c), 0);
   const groups = groupPicks(result.picks);
+
   return (
     <div className="bestiary-encounter-result">
       <p>
@@ -45,6 +46,7 @@ export default function EncounterGenerator({ pool }: { pool: Creature[] }) {
   const [players, setPlayers] = useState<[number, number]>([3, 3]);
   const [levels, setLevels] = useState<[number, number]>([0, 0]);
   const [result, setResult] = useState<Result | null>(null);
+
   // Target difficulty range = players + levels gained, at the low and high ends.
   const low = players[0] + 1 + levels[0] / 2;
   const high = players[1] + 1 + levels[1] / 2;

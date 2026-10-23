@@ -24,6 +24,7 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
     }
     return acc;
   }, []);
+
   const buckets = merged.filter((b) => Math.round(b.p * owned) > 0);
   const tallest = Math.max(...buckets.map((b) => b.p));
 

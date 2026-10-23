@@ -22,14 +22,17 @@ function scale({ min, max, log }: Pick<ZoneSliderProps, "min" | "max" | "log">) 
   const toPos = (v: number) => (log ? Math.log(v / min) / Math.log(max / min) : (v - min) / (max - min));
   const fromPos = (p: number) => {
     const v = log ? min * (max / min) ** p : min + p * (max - min);
+
     return log && v < 10 ? Math.round(v * 2) / 2 : Math.round(v);
   };
+
   return { toPos, fromPos };
 }
 
 /** Start and end (as percentages) of each coloured stretch under the slider. */
 function zoneStops(zones: Zone[], toPos: (v: number) => number) {
   let from = 0;
+
   return zones.map((z) => {
     const start = from;
     from = Math.min(1, toPos(z.to));
@@ -42,6 +45,7 @@ export function ZoneSlider({ label, value, min, max, zones, log, unit, onChange 
   const { toPos, fromPos } = scale({ min, max, log });
   const stops = zoneStops(zones, toPos);
   const bar = stops.map((z) => `hsl(${z.hue} 65% 50% / 0.7) ${z.start}% ${z.end}%`).join(", ");
+
   return (
     <label>
       <span>{label} ({value} {unit})</span>

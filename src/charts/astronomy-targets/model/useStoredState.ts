@@ -15,6 +15,7 @@ export function useStoredState<T>(key: string, fallback: T, parse: (saved: unkno
       return fallback;
     }
   });
+
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify(value));
@@ -23,5 +24,6 @@ export function useStoredState<T>(key: string, fallback: T, parse: (saved: unkno
       console.warn(`Could not save ${storageKey}`, error);
     }
   }, [storageKey, value]);
+
   return [value, setValue] as const;
 }

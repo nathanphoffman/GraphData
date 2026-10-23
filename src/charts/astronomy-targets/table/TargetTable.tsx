@@ -16,6 +16,7 @@ const DIFFICULTY_TITLE = "How hard it is to see, from the score: Excellent 75+, 
 function ScoreCell({ row, settings }: { row: ScoredTarget; settings: Settings }) {
   const naked = isNakedEye(row.target, settings.bortle);
   const { label, level } = naked ? { label: "Naked Eye", level: 1 } : difficulty(row.score);
+
   return (
     <td className="astro-score">
       <div className="astro-difficulty">
@@ -32,6 +33,7 @@ function ScoreCell({ row, settings }: { row: ScoredTarget; settings: Settings })
 function TargetCell({ row, onHover }: { row: ScoredTarget; onHover: (h: Hover | null) => void }) {
   const t = row.target;
   const preview = hasPreview(t.id);
+
   return (
     <td
       className="astro-target"

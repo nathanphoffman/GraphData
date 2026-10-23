@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../core/artStyle";
+import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
 
-const card = "var(--b-card)";
+const card = CARD_COLOR;
 
 /** Shared hound silhouette: rail-thin body in profile facing right. */
 function HoundBody({ eye = "dot" }: { eye?: "dot" | "ring" }) {

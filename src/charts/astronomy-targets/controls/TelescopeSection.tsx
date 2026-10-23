@@ -5,6 +5,7 @@ import type { SectionProps } from "./SkySection";
 
 function PresetSelect({ settings, set }: SectionProps) {
   const preset = activePreset(settings);
+
   return (
     <label>
       <span>Select a preset</span>
@@ -53,6 +54,7 @@ function ScopeFields({ settings, set }: SectionProps) {
       </>
     );
   }
+
   return (
     <>
       <OptionSelect label="Focal length" value={settings.focalLength} options={FOCAL_LENGTHS} onChange={(v) => set({ focalLength: v as FocalLength })} />
@@ -63,6 +65,7 @@ function ScopeFields({ settings, set }: SectionProps) {
 
 export function TelescopeSection({ settings, set }: SectionProps) {
   const quality = effectiveQuality(settings);
+
   return (
     <section className="astro-group">
       <h3>Your telescope</h3>

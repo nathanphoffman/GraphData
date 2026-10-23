@@ -35,13 +35,16 @@ const format = (ms: number) => new Date(ms).toISOString().slice(0, 10);
 /** One row per calendar day; gaps between weigh-ins are filled in a straight line. */
 export function fillDays(weights: [string, number][]): Day[] {
   const days: Day[] = [];
+
   for (let i = 0; i < weights.length; i++) {
     const [date, weight] = weights[i];
     days.push({ date, weight, estimated: false });
     const next = weights[i + 1];
+
     if (!next) break;
     const start = parse(date);
     const gap = (parse(next[0]) - start) / DAY_MS;
+
     for (let step = 1; step < gap; step++) {
       days.push({
         date: format(start + step * DAY_MS),
@@ -50,27 +53,36 @@ export function fillDays(weights: [string, number][]): Day[] {
       });
     }
   }
+
   return days;
 }
 
 /** Solve a 3x3 system (normal equations for a quadratic fit) by Gaussian elimination. */
 function solve3(m: number[][], v: number[]): number[] {
   const a = m.map((row, i) => [...row, v[i]]);
+
   for (let col = 0; col < 3; col++) {
     let pivot = col;
+
     for (let r = col + 1; r < 3; r++) if (Math.abs(a[r][col]) > Math.abs(a[pivot][col])) pivot = r;
     [a[col], a[pivot]] = [a[pivot], a[col]];
+
     for (let r = col + 1; r < 3; r++) {
       const f = a[r][col] / a[col][col];
+
       for (let c = col; c < 4; c++) a[r][c] -= f * a[col][c];
     }
   }
+
   const x = [0, 0, 0];
+
   for (let r = 2; r >= 0; r--) {
     let sum = a[r][3];
+
     for (let c = r + 1; c < 3; c++) sum -= a[r][c] * x[c];
     x[r] = sum / a[r][r];
   }
+
   return x;
 }
 
@@ -88,8 +100,10 @@ export function project(days: Day[], fitDays: number, aheadDays: number): { fit:
     ],
     [weighted(0), weighted(1), weighted(2)],
   );
+
   const at = (i: number) => Math.round((c + b * i + a * i * i) * 10) / 10;
   const last = parse(recent[n - 1].date);
+
   return {
     fit: recent.map((d, i) => ({ date: d.date, weight: at(i) })),
     future: Array.from({ length: aheadDays }, (_, k) => ({
@@ -109,12 +123,16 @@ export function addAverages<T extends Day>(
   step = 1,
 ): (T & Averages)[] {
   const prefix = [0];
+
   for (const d of days) prefix.push(prefix[prefix.length - 1] + d.weight);
   const trailing = (i: number, size: number) => {
     const from = Math.max(0, i - size + 1);
+
     return (prefix[i + 1] - prefix[from]) / (i + 1 - from);
   };
+
   const blended = days.map((_, i) => (3 * trailing(i, windows.short) + 2 * trailing(i, windows.medium) + trailing(i, windows.long)) / 6);
+
   return days.map((d, i) => ({
     ...d,
     avg3: round1(trailing(i, windows.short)),
@@ -134,8 +152,10 @@ const MUSCLE_TAPER = 0.5;
 export function addMuscle<T extends Day>(days: T[]): (T & Muscle)[] {
   const start = days.findIndex((d) => d.date >= MUSCLE_START);
   const span = days.length - 1 - start;
+
   // Cumulative share of the total at position u (0..1): a line bent slightly flat toward the end.
   const share = (u: number) => (u - (MUSCLE_TAPER * u * u) / 2) / (1 - MUSCLE_TAPER / 2);
+
   return days.map((d, i) => {
     const total = i < start ? 0 : MUSCLE_TOTAL * share((i - start) / span);
     const before = i <= start ? 0 : MUSCLE_TOTAL * share((i - 1 - start) / span);
@@ -167,12 +187,14 @@ export function projectTapering(
   let weight = startWeight;
   let muscle = startMuscle;
   const points: TargetPoint[] = [];
+
   for (let k = 1; k <= aheadDays; k++) {
     const factor = (11 / 12) ** (k / 30);
     weight -= (monthlyLoss / 30) * factor;
     muscle += muscleDaily * factor;
     points.push({ date: format(start + k * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle) });
   }
+
   return points;
 }
 
@@ -182,6 +204,7 @@ export function projectTapering(
  */
 export function taperToTotal(startDate: string, startWeight: number, totalLoss: number, aheadDays: number): Projection[] {
   const start = parse(startDate);
+
   return Array.from({ length: aheadDays }, (_, i) => ({
     date: format(start + (i + 1) * DAY_MS),
     weight: round1(startWeight - totalLoss * (1 - (11 / 12) ** ((i + 1) / 30))),

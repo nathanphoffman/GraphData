@@ -7,6 +7,7 @@ export function opticalQualityLabel(v: number): string {
 /** Keeps what you type as text so you can pass through out-of-range values (typing "900" starts with "9"); only valid numbers are applied. */
 export function NumberField({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
   const [draft, setDraft] = useState<string | null>(null);
+
   return (
     <label>
       <span>{label}</span>

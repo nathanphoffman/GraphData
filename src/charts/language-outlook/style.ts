@@ -47,8 +47,11 @@ export const HIDDEN_BY_DEFAULT_PREFIXES = ["Backtest", "Healthiness backtest", "
 /** Years go from near black (oldest) to white (newest); the Historical Fix projection is purple, the plain projection pink. */
 export function seriesColor(series: string, index: number): string {
   if (series.startsWith(FIX_PREFIX)) return "#b45cff";
+
   if (series.startsWith(HEALTH_PREDICTION_PREFIX)) return "#ffe14d";
+
   if (series.startsWith(PROJECTION_PREFIX)) return "#ff7ad9";
+
   return YEAR_GREYS[Math.min(index, YEAR_GREYS.length - 1)];
 }
 

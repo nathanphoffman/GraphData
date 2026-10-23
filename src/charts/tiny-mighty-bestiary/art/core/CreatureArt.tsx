@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ink } from "./artStyle";
+import { ink, CARD_COLOR } from "./artStyle";
 import { fantasyArt } from "../fantasy/FantasyArt";
 import { fantasyArtDK } from "../fantasy/FantasyArtDK";
 import { fantasyArtLP } from "../fantasy/FantasyArtLP";
@@ -33,7 +33,7 @@ function Fly({ x, y }: { x: number; y: number }) {
     <g transform={`translate(${x} ${y})`}>
       <ellipse cx="0" cy="0" rx="7" ry="4" fill="currentColor" />
       <circle cx="8" cy="0" r="3" fill="currentColor" />
-      <ellipse cx="-2" cy="-7" rx="8" ry="4" fill="var(--b-card)" {...ink} strokeWidth={2.5} transform="rotate(-25 -2 -7)" />
+      <ellipse cx="-2" cy="-7" rx="8" ry="4" fill={CARD_COLOR} {...ink} strokeWidth={2.5} transform="rotate(-25 -2 -7)" />
     </g>
   );
 }
@@ -43,7 +43,7 @@ function MaggotSwarm() {
     <svg viewBox="0 0 400 240" role="img" aria-label="Drawing of a heap of maggots with flies above it">
       {maggots.map((m, i) => (
         <g key={i} transform={`translate(${m.x} ${m.y}) rotate(${m.angle})`}>
-          <rect x="-11" y="-5" width="22" height="10" rx="5" fill="var(--b-card)" {...ink} strokeWidth={3} />
+          <rect x="-11" y="-5" width="22" height="10" rx="5" fill={CARD_COLOR} {...ink} strokeWidth={3} />
           <path d="M-3 -4 V4 M3 -4 V4" fill="none" {...ink} strokeWidth={2} />
           <circle cx="7" cy="0" r="1.5" fill="currentColor" />
         </g>
@@ -72,6 +72,7 @@ function EyeTyrant() {
   const cx = 200;
   const cy = 150;
   const r = 66;
+
   return (
     <svg viewBox="0 0 400 240" role="img" aria-label="Drawing of a floating orb with one large eye, teeth and eye-stalks">
       {stalks.map(([deg, len], i) => {
@@ -89,15 +90,15 @@ function EyeTyrant() {
               {...ink}
               strokeWidth={4}
             />
-            <circle cx={x1} cy={y1} r="8" fill="var(--b-card)" {...ink} strokeWidth={3} />
+            <circle cx={x1} cy={y1} r="8" fill={CARD_COLOR} {...ink} strokeWidth={3} />
             <circle cx={x1} cy={y1} r="3" fill="currentColor" />
           </g>
         );
       })}
-      <circle cx={cx} cy={cy} r={r} fill="var(--b-card)" {...ink} />
-      <ellipse cx={cx} cy={cy - 14} rx="34" ry="24" fill="var(--b-card)" {...ink} strokeWidth={4} />
+      <circle cx={cx} cy={cy} r={r} fill={CARD_COLOR} {...ink} />
+      <ellipse cx={cx} cy={cy - 14} rx="34" ry="24" fill={CARD_COLOR} {...ink} strokeWidth={4} />
       <circle cx={cx} cy={cy - 14} r="14" fill="currentColor" />
-      <circle cx={cx - 5} cy={cy - 19} r="4" fill="var(--b-card)" />
+      <circle cx={cx - 5} cy={cy - 19} r="4" fill={CARD_COLOR} />
       <path
         d="M146 172 Q200 200 254 172"
         fill="none"
@@ -138,6 +139,7 @@ const art: Record<string, () => ReactNode> = {
 
 export default function CreatureArt({ id }: { id: string }) {
   const Art = art[id];
+
   return Art ? (
     <div className="bestiary-art">
       <Art />

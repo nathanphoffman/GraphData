@@ -13,6 +13,7 @@ export function useCalculatorState() {
     3,
     (v) => v >= PER_WEEK_MIN && v <= PER_WEEK_MAX && v / PER_WEEK_STEP === Math.round(v / PER_WEEK_STEP),
   );
+
   const [owned, setOwned] = useStoredNumber("owned", 10, (v) => OWNED_STOPS.includes(v));
   const [perYear, setPerYear] = useStoredNumber("per-year", 52, (v) => PER_YEAR_STOPS.includes(v));
   const [sharePct, setSharePct] = useStoredNumber("share-pct", 100, (v) => Number.isInteger(v) && v >= 1 && v <= 100);

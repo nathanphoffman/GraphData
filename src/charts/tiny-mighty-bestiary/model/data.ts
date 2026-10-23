@@ -13,7 +13,9 @@ export const model = {
 
 export function tierFor(creature: Creature) {
   const tier = model.tiers.find((t) => t.difficulty === creature.tier);
+
   if (!tier) throw new Error(`No combat tier ${creature.tier} for ${creature.name}`);
+
   return tier;
 }
 
@@ -55,6 +57,7 @@ const byDifficultyThenName = (a: Creature, b: Creature) =>
 
 export function compareBy(sort: string): (a: Creature, b: Creature) => number {
   const typeOrder = (c: Creature) => model.creatureTypes.findIndex((t) => t.id === c.type);
+
   switch (sort) {
     case "az":
       return (a, b) => a.name.localeCompare(b.name);

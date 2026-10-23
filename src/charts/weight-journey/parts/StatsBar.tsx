@@ -19,6 +19,7 @@ export function StatsBar({ unit, f }: { unit: Unit; f: Format }) {
   const today = dailyRows[dailyRows.length - 1];
   const yearOut = today.monthly === null ? null : Math.round((today.blended + today.monthly * 12) * 10) / 10;
   const show = (lb: number) => `${f.w(lb)} ${unit}`;
+
   return (
     <div className="weight-stats">
       <Stat label={`Start (${pretty(first.date)})`} value={show(first.weight)} />

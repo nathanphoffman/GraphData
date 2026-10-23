@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../core/artStyle";
+import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
 import { Figure } from "../core/figure";
 
-const card = "var(--b-card)";
+const card = CARD_COLOR;
 
 /** Short radiation burst lines around a point. */
 function Glow({ x, y, r = 30 }: { x: number; y: number; r?: number }) {
@@ -10,6 +10,7 @@ function Glow({ x, y, r = 30 }: { x: number; y: number; r?: number }) {
     const a = (i / 8) * Math.PI * 2;
     return `M${x + Math.cos(a) * r} ${y + Math.sin(a) * r} l${Math.cos(a) * 10} ${Math.sin(a) * 10}`;
   }).join(" ");
+
   return <Line d={rays} w={3} />;
 }
 

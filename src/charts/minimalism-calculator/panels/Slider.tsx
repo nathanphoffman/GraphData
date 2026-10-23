@@ -23,6 +23,7 @@ const SWEEP = 270;
 
 function point(deg: number, r = R) {
   const rad = (deg * Math.PI) / 180;
+
   return { x: C + r * Math.cos(rad), y: C + r * Math.sin(rad) };
 }
 
@@ -30,6 +31,7 @@ function arc(fromDeg: number, toDeg: number) {
   const a = point(fromDeg);
   const b = point(toDeg);
   const large = toDeg - fromDeg > 180 ? 1 : 0;
+
   return `M ${a.x} ${a.y} A ${R} ${R} 0 ${large} 1 ${b.x} ${b.y}`;
 }
 
@@ -71,6 +73,7 @@ export default function Slider({
     const y = e.clientY - (rect.top + rect.height / 2);
     let deg = (Math.atan2(y, x) * 180) / Math.PI - START;
     deg = ((deg % 360) + 360) % 360;
+
     // Inside the bottom gap: snap to whichever end is closer.
     if (deg > SWEEP) deg = deg - SWEEP < (360 - SWEEP) / 2 ? SWEEP : 0;
     setFromFraction(deg / SWEEP);
@@ -78,6 +81,7 @@ export default function Slider({
 
   const handleKey = (e: React.KeyboardEvent) => {
     let next = value;
+
     if (e.key === "ArrowRight" || e.key === "ArrowUp") next = value + step;
     else if (e.key === "ArrowLeft" || e.key === "ArrowDown") next = value - step;
     else if (e.key === "Home") next = min;

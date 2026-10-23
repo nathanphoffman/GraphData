@@ -24,6 +24,7 @@ function fmt(value: number | null | undefined): string {
 
 function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllIntelligenceData }) {
   const arrow = (key: SortKey) => (key === sortKey ? (ascending ? " ▲" : " ▼") : "");
+
   return (
     <thead>
       <tr>
@@ -45,6 +46,7 @@ function ColumnScore({ model, row, settings, column }: { model: AllIntelligenceD
   const isProxy = row.subject.scores[column] === undefined && real !== undefined;
   const guess = settings.missingMode === "estimate" ? estimateScore(model, row.subject, column) : null;
   const text = real !== undefined ? `${real.toFixed(0)}${isProxy ? " (from price)" : ""}` : guess !== null ? `~${guess.toFixed(0)} (guess)` : "not measured";
+
   return (
     <span>
       {model.columns[column]}: <strong>{text}</strong>
@@ -71,6 +73,7 @@ function DetailRow({ model, row, settings }: { model: AllIntelligenceData; row: 
 
 function SubjectRow({ model, row, index, onToggle }: { model: AllIntelligenceData; row: ScoredSubject; index: number; onToggle: (name: string) => void }) {
   const { name, kind, maker } = row.subject;
+
   return (
     <tr className={`allint-row allint-${kind}`} onClick={() => onToggle(name)}>
       <td>{index + 1}</td>

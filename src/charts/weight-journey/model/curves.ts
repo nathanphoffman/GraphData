@@ -22,6 +22,7 @@ export function buildAllTrend(rows: Row[], ahead: number) {
     const actual = taperCurve(row.date, row.avg3, row.allProj3, ahead);
     return [{ back, actual, adjusted: taperCurve(row.date, row.adj.avg3, row.allProj3Adj, ahead) }];
   });
+
   return trends.length ? { trends, date: trends[0].actual[trends[0].actual.length - 1].date } : null;
 }
 
@@ -30,13 +31,16 @@ function spreadSide(rows7: Row[], start: (r: Row) => number, target: (r: Row) =>
   const curves = rows7
     .map((r) => ({ target: target(r), points: taperCurve(r.date, start(r), target(r), ahead) }))
     .sort((a, b) => a.target - b.target);
+
   return { curves, mean: taperCurve(rows7[rows7.length - 1].date, meanOf(rows7, start), meanOf(rows7, target), ahead) };
 }
 
 /** The last 7 rows each give a tapering curve to their own 3 day projected all average; used for the shaded range. */
 export function buildSpread(rows: Row[], ahead: number) {
   const rows7 = rows.slice(-7).filter((r) => r.allProj3 !== null && r.allProj3Adj !== null);
+
   if (rows7.length < 2) return null;
+
   return {
     actual: spreadSide(rows7, (r) => r.avg3, (r) => r.allProj3!, ahead),
     adjusted: spreadSide(rows7, (r) => r.adj.avg3, (r) => r.allProj3Adj!, ahead),
@@ -49,9 +53,11 @@ export function buildSpread(rows: Row[], ahead: number) {
  */
 export function buildGeneral(rows: Row[], ahead: number, quadratic: Point[]) {
   const rows7 = rows.slice(-7).filter((r) => r.allProj3 !== null);
+
   if (!rows7.length) return null;
   const meanCurve = taperCurve(rows7[rows7.length - 1].date, meanOf(rows7, (r) => r.avg3), meanOf(rows7, (r) => r.allProj3!), ahead);
   const byDate = new Map(quadratic.map((d) => [d.date, d.weight]));
+
   return meanCurve.flatMap((d) => {
     const q = byDate.get(d.date);
     return q === undefined ? [] : [{ date: d.date, weight: (d.weight + q) / 2 }];

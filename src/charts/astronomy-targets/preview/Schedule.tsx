@@ -13,6 +13,7 @@ type OnHover = (hover: { id: string; x: number; y: number } | null) => void;
 function Item({ item, onHover }: { item: ScheduleItem; onHover: OnHover }) {
   const t = item.row.target;
   const preview = hasPreview(t.id);
+
   return (
     <li
       onMouseMove={preview ? (e) => onHover({ id: t.id, x: e.clientX, y: e.clientY }) : undefined}

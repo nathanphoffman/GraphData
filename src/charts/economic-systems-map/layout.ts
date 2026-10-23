@@ -20,12 +20,14 @@ export const cellNameWidth = (text: string): number => text.length * 8.6 + 18;
 function overlapArea(a: Box, b: Box): number {
   const ox = Math.min(a.cx + a.w / 2, b.cx + b.w / 2) - Math.max(a.cx - a.w / 2, b.cx - b.w / 2);
   const oy = Math.min(a.cy + a.h / 2, b.cy + b.h / 2) - Math.max(a.cy - a.h / 2, b.cy - b.h / 2);
+
   return ox > -PAD && oy > -PAD ? (ox + PAD) * (oy + PAD) : 0;
 }
 
 /** Boxes that labels must stay clear of: cell names. */
 export function fixedObstacles(data: EconomicSystemsData, showNames = true): Box[] {
   const boxes: Box[] = [];
+
   if (showNames) {
     for (const cell of data.cells) {
       boxes.push({
@@ -36,17 +38,20 @@ export function fixedObstacles(data: EconomicSystemsData, showNames = true): Box
       });
     }
   }
+
   return boxes;
 }
 
 /** Candidate label centers around a dot, nearest first. */
 function candidates(w: number): Array<[number, number]> {
   const out: Array<[number, number]> = [];
+
   for (const extra of [0, 14, 30]) {
     const dy = DOT_R + LABEL_H / 2 + 2 + extra;
     const dx = DOT_R + w / 2 + 3 + extra;
     out.push([0, dy], [0, -dy], [dx, 0], [-dx, 0], [dx * 0.7, dy], [-dx * 0.7, dy], [dx * 0.7, -dy], [-dx * 0.7, -dy]);
   }
+
   return out;
 }
 

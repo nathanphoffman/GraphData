@@ -15,6 +15,7 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
 
   const copyLink = async () => {
     const url = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(shareParams())}`;
+
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);

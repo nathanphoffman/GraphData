@@ -13,6 +13,7 @@ export function recommendedCount(needed: number): number {
 /** Where the "you own" arrow sits on the scale (0-100%): each doubling moves it a third of the width, 1x at the middle. */
 export function arrowPosition(owned: number, needed: number): number {
   if (owned <= 0) return 0;
+
   return Math.min(100, Math.max(0, 50 + (100 / 3) * Math.log2(owned / needed)));
 }
 

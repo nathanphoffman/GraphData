@@ -17,6 +17,7 @@ const EYEPIECE_AFOV_ZONES: Zone[] = [
 
 export function PreviewSection({ settings, set }: SectionProps) {
   const optics = previewOptics(settings);
+
   return (
     <section className="astro-group">
       <h3>Hover preview</h3>

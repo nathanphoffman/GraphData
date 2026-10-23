@@ -21,17 +21,22 @@ function poissonBuckets(lambda: number): Bucket[] {
   let lnFactorial = 0; // ln(k!)
   let k = 0;
   let used = 0;
+
   for (let i = 0; i < bins - 1; i++) {
     let p = 0;
+
     for (let j = 0; j < width; j++, k++) {
       if (k > 0) lnFactorial += Math.log(k);
       p += Math.exp(-lambda + k * Math.log(lambda) - lnFactorial);
     }
+
     used += p;
     const lo = i * width;
     buckets.push({ label: width === 1 ? `${i}` : `${lo}–${lo + width - 1}`, mid: lo + (width - 1) / 2, p });
   }
+
   buckets.push({ label: `${k}+`, mid: k, p: Math.max(0, 1 - used) });
+
   return buckets;
 }
 
@@ -39,23 +44,31 @@ function poissonBuckets(lambda: number): Bucket[] {
 export function goalColor(mid: number, goal: number): string {
   const g = Math.max(goal, 0.1);
   const hue = mid >= g ? 120 - Math.min(1, (mid - g) / g) * 50 : 50 * (mid / g);
+
   return `hsl(${Math.round(hue)}, 70%, 45%)`;
 }
 
 /** Roughly how long you wait between plays of an item used this often (open-ended last bucket gets a "≤"). */
 export function gapLabel(b: Bucket): string {
   if (b.gap) return b.gap;
+
   if (b.mid <= 0) return "Over a year";
   const days = 365 / b.mid;
+
   if (days >= 548) return "Over a year";
+
   if (days >= 330) return "Yearly";
   const bound = b.label.endsWith("+") ? "≤ " : "~";
   const plural = (n: number, unit: string) => `${n} ${unit}${n === 1 ? "" : "s"}`;
+
   // Shorter waits are grouped into a few week buckets rather than counted day by day.
   if (days < 7) return "Every < 1 week";
+
   if (days < 17.5) return "Every 1–2 weeks";
+
   if (days < 45) return "Every 2–4 weeks";
   const months = Math.round(days / 30.4);
+
   return `Every ${bound}${plural(months, "month")}`;
 }
 
@@ -75,6 +88,7 @@ const YEAR_GROUPS: [number, number, string][] = [
  */
 export function waitBuckets(lambda: number): Bucket[] {
   const [first, ...rest] = poissonBuckets(lambda);
+
   if (first.label !== "0") return [first, ...rest];
   const longWaits = YEAR_GROUPS.map(([from, to, gap]) => {
     const p = Math.exp(-lambda * from) - (to === Infinity ? 0 : Math.exp(-lambda * to));
@@ -82,5 +96,6 @@ export function waitBuckets(lambda: number): Bucket[] {
     const years = to === Infinity ? from : (from + to) / 2;
     return { label: `wait-${from}`, mid: 1 / years, p, gap };
   });
+
   return [...longWaits.reverse(), ...rest];
 }

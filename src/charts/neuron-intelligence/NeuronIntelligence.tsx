@@ -33,6 +33,7 @@ export default function NeuronIntelligence() {
     () => sortAnimals(scoreAnimals(model.animals, exponents), sortKey, ascending),
     [exponents, sortKey, ascending],
   );
+
   const maxScore = Math.max(...rows.map((r) => r.score));
 
   const set = (key: keyof Exponents) => (value: number) => setExponents((prev) => ({ ...prev, [key]: value }));

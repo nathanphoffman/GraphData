@@ -79,14 +79,18 @@ export function effectiveQuality(settings: Settings): number {
 /** Magnification and true field of view (arcminutes) of a manually entered telescope and eyepiece. */
 export function manualOptics(settings: Settings) {
   const magnification = scopeFocalLength(settings) / settings.eyepieceMm;
+
   return { magnification, fov: (settings.eyepieceAfov * 60) / magnification };
 }
 
 /** Field of view (arcminutes) and aperture (mm) in use, from the size classes or the manual telescope. */
 export function optics(settings: Settings): { fov: number; mm: number } {
   const preset = activePreset(settings);
+
   if (preset) return { fov: manualOptics(settings).fov, mm: preset.mm };
+
   if (settings.manual) return { fov: manualOptics(settings).fov, mm: settings.apertureIn * 25.4 };
+
   return { fov: FOCAL_LENGTHS[settings.focalLength].fov, mm: APERTURES[settings.aperture].mm };
 }
 
@@ -104,6 +108,7 @@ function altitude(ra: number, dec: number, lst: number, lat: number): number {
   const hourAngle = (lst - ra) * 15 * RAD;
   const sinAlt =
     Math.sin(lat * RAD) * Math.sin(dec * RAD) + Math.cos(lat * RAD) * Math.cos(dec * RAD) * Math.cos(hourAngle);
+
   return Math.asin(clamp(sinAlt, -1, 1)) / RAD;
 }
 
@@ -134,6 +139,7 @@ function sampleWindow(latitude: number, season: Season, start: number, end: numb
       samples.push({ lst, hour: t, date, sunLon: (((doy - 79) * 360) / 365.2422 + 360) % 360, dark: sunAlt < -12 });
     }
   });
+
   return samples;
 }
 
@@ -151,12 +157,14 @@ interface Position {
 /** Angles from the sun to try for a planet: all the way round for outer planets, back and forth for inner ones. */
 function planetOffsets(maxElongation: number): number[] {
   if (maxElongation >= 180) return Array.from({ length: 12 }, (_, i) => i * 30);
+
   return Array.from({ length: 7 }, (_, i) => -maxElongation + (i * 2 * maxElongation) / 6);
 }
 
 /** A planet is always on the ecliptic, so averaging over offsets from the sun averages over its orbit. */
 function positionsAt(target: Target, sample: Sample): Position[] {
   if (!target.planet) return [{ ra: target.ra, dec: target.dec }];
+
   return planetOffsets(target.planet.maxElongation).map((offset) => {
     const lon = (sample.sunLon + offset) * RAD;
     const dec = Math.asin(Math.sin(OBLIQUITY * RAD) * Math.sin(lon)) / RAD;
@@ -178,6 +186,7 @@ function limitingSurfaceBrightness(mm: number): number {
 /** Average brightness per square arcminute: total light spread over the target's area (higher number = dimmer). */
 export function surfaceBrightness(t: Target): number {
   const area = Math.max(0.01, (Math.PI / 4) * t.major * t.minor);
+
   return t.magnitude + 2.5 * Math.log10(area);
 }
 
@@ -186,6 +195,7 @@ function sizeFit(t: Target, fov: number): number {
   const ratio = t.major / fov;
   const sigma = ratio > 0.33 ? 1.2 : 0.65;
   const x = Math.log(ratio / 0.33);
+
   return Math.max(0.01, Math.exp(-(x * x) / (2 * sigma * sigma)));
 }
 
@@ -198,6 +208,7 @@ function skyGlowPenalty(bortle: number, alt: number): number {
   const airmass = Math.min(10, 1 / Math.sin(clamp(alt, 1, 90) * RAD));
   const base = (bortle - 3) * 0.5;
   const glow = base > 0 ? base * (1 + 2 * (airmass - 1)) : base;
+
   return glow + 0.25 * (airmass - 1);
 }
 
@@ -208,6 +219,7 @@ const STAR_CORE_OFFSET = 1.5;
 export function coreSurfaceBrightness(t: Target): number {
   // A cluster's bright stars stand out as points, so rate the core by its brightest members instead of by area.
   if (t.brightStar !== undefined) return t.brightStar + STAR_CORE_OFFSET;
+
   return surfaceBrightness(t) - (t.coreBoost ?? 0);
 }
 
@@ -247,6 +259,7 @@ function lightScore(sb: number, mm: number, glow: number): number {
 export function viewConditions(t: Target, settings: Settings, alt: number) {
   const { fov, mm } = optics(settings);
   const glow = skyGlowPenalty(settings.bortle, alt);
+
   return {
     fov,
     // Point-like things (stars, planets) saturate their photo and bloom into a huge blob, so cap how much brighter than the limit they can look.
@@ -260,7 +273,9 @@ export function viewConditions(t: Target, settings: Settings, alt: number) {
 /** Telescope focal length in mm: the preset's, the manual entry, or the typical value for the size class. */
 export function scopeFocalLength(settings: Settings): number {
   const preset = activePreset(settings);
+
   if (preset) return preset.focalMm;
+
   return settings.manual ? settings.scopeFocalMm : FOCAL_LENGTHS[settings.focalLength].mm;
 }
 
@@ -278,6 +293,7 @@ export function previewOptics(settings: Settings) {
   const { mm } = optics(settings);
   const magnification = focal / settings.eyepieceMm;
   const referenceDimming = pupilDimming(mm / (focal / REFERENCE_EYEPIECE_MM));
+
   return {
     magnification,
     fov: (settings.eyepieceAfov * 60) / magnification,
@@ -302,6 +318,7 @@ const QUALITY_SENSITIVITY: Record<string, number> = {
 /** Score points for good or poor optics: up to +25 for the best, down to -25 for the worst, scaled by how much the target type cares. */
 export function qualityAdjust(t: Target, settings: Settings): number {
   const q = (effectiveQuality(settings) - 50) / 50;
+
   return (QUALITY_SENSITIVITY[t.type] ?? 0.3) * 25 * q;
 }
 
@@ -312,7 +329,9 @@ export function qualityAdjust(t: Target, settings: Settings): number {
  */
 export function bortleScale(adjust: number, bortle: number): number {
   const b = clamp(bortle, 1, 9);
+
   if (adjust >= 0) return b <= 5 ? 1 + (5 - b) * 0.125 : 1 - (b - 5) * 0.25;
+
   return 1 + (b - 5) * 0.125;
 }
 
@@ -328,13 +347,18 @@ function adjustPoints(value: number, weight: number, bortle: number): number {
 function bestHour(target: Target, season: Season, latitude: number): number | null {
   if (target.planet) return null;
   const best: { alt: number; hour: number }[] = [];
+
   for (const s of sampleWindow(latitude, season, NIGHT_START, NIGHT_END)) {
     if (!s.dark) continue;
     const alt = altitude(target.ra, target.dec, s.lst, latitude);
+
     if (!best[s.date] || alt > best[s.date].alt) best[s.date] = { alt, hour: s.hour };
   }
+
   const found = best.filter(Boolean);
+
   if (!found.length) return null;
+
   return Math.round(found.reduce((sum, b) => sum + b.hour, 0) / found.length) % 24;
 }
 
@@ -343,6 +367,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
 
   const evaluate = (target: Target, season: Season) => {
     const hour = bestHour(target, season, settings.latitude);
+
     // Score the few hours around the ideal one (around midnight for planets, and for anything that is never up in the dark).
     const centre = hour === null ? 24 : hour < NIGHT_START - 12 ? hour + 24 : hour;
     const samples = sampleWindow(settings.latitude, season, centre - VIEW_HALF_WINDOW, centre + VIEW_HALF_WINDOW);
@@ -352,16 +377,22 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     let peakAltitude = -90;
     let aboveHorizon = 0;
     let count = 0;
+
     for (const s of samples) {
       let positions = positionsAt(target, s).map((pos) => altitude(pos.ra, pos.dec, s.lst, settings.latitude));
+
       // A planet can be anywhere along the ecliptic, so use the spot where it is highest at this moment.
       if (target.planet) positions = [Math.max(...positions)];
+
       for (const alt of positions) {
         count++;
+
         if (!s.dark) continue;
         skyTotal += altitudeQuality(alt);
         peakAltitude = Math.max(peakAltitude, alt);
+
         if (alt <= 0) continue;
+
         // Every moment it is up counts equally here, so time spent low in the glow drags Light and Core down.
         aboveHorizon++;
         const glow = skyGlowPenalty(settings.bortle, alt);
@@ -369,12 +400,14 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
         coreTotal += coreScore(coreSurfaceBrightness(target), mm, glow);
       }
     }
+
     const sky = count ? skyTotal / count : 0;
     const fit = sizeFit(target, fov);
     const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
     const raw = 100 * sky ** 0.1 * fit ** 0.4 * light ** 0.2 * core ** 0.3;
     const score = Math.min(100, raw - SCORE_OFFSET + adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) + adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) + qualityAdjust(target, settings));
+
     return { target, score, sky, fit, light, core, peakAltitude, bestHour: hour };
   };
 
@@ -392,8 +425,10 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
 /** Apparent size as text: "point", arcseconds under 1′, or arcminutes. */
 export function formatSize(major: number, minor: number): string {
   if (major === 0) return "point";
+
   if (major < 1) return `${Math.round(major * 60)}″`;
   const fmt = (v: number) => (v >= 10 ? v.toFixed(0) : v.toFixed(1));
+
   return major === minor ? `${fmt(major)}′` : `${fmt(major)}′ × ${fmt(minor)}′`;
 }
 
@@ -408,6 +443,7 @@ function upWindow(target: Target, season: Season, latitude: number): [number, nu
   const hours = sampleWindow(latitude, season, NIGHT_START, NIGHT_END)
     .filter((s) => s.date === 1 && s.dark && altitude(target.ra, target.dec, s.lst, latitude) >= UP_ALTITUDE)
     .map((s) => s.hour);
+
   return hours.length ? [Math.round(Math.min(...hours)) % 24, Math.round(Math.max(...hours)) % 24] : null;
 }
 
@@ -451,22 +487,29 @@ export function buildSchedule(rows: ScoredTarget[], season: Season, settings: Se
   const stars = inSeason.filter((r) => r.target.type === "Star" && r.score > 0);
   const byHour = new Map<number, ScheduleSlot>();
   const veryHard: ScheduleItem[] = [];
+
   for (const row of inSeason) {
     if (row.target.type === "Star" || row.bestHour === null || row.score <= 0) continue;
     const up = upWindow(row.target, season, settings.latitude);
+
     if (!up) continue;
+
     if (row.score < 10) {
       veryHard.push({ row, up });
       continue;
     }
+
     const level: ScheduleLevel = row.score >= 35 ? "easy" : row.score >= 20 ? "moderate" : "hard";
     const start = row.bestHour - (row.bestHour % WINDOW_HOURS);
     const slot = byHour.get(start) ?? { hour: start, items: { easy: [], moderate: [], hard: [] }, more: 0 };
     byHour.set(start, slot);
+
     if (slot.items[level].length < SLOT_LIMITS[level]) slot.items[level].push({ row, up });
     else slot.more++;
   }
+
   const evening = (h: number) => (h < NIGHT_START - 12 ? h + 24 : h);
+
   return {
     season,
     slots: [...byHour.values()].sort((a, b) => evening(a.hour) - evening(b.hour)),
@@ -489,16 +532,23 @@ export function isNakedEye(t: Target, bortle: number): boolean {
   const pos = clamp(bortle, 1, 9) - 1;
   const lo = Math.floor(pos);
   const limit = NAKED_EYE_LIMIT[lo] + (NAKED_EYE_LIMIT[Math.min(8, lo + 1)] - NAKED_EYE_LIMIT[lo]) * (pos - lo);
+
   return t.type === "Star" && t.magnitude <= limit - 1.5;
 }
 
 /** Plain-words difficulty to see a target, from its score. */
 export function difficulty(score: number): Difficulty {
   if (score >= 75) return { label: "Excellent", level: 1 };
+
   if (score >= 50) return { label: "Very easy", level: 0.85 };
+
   if (score >= 35) return { label: "Easy", level: 0.65 };
+
   if (score >= 20) return { label: "Moderate", level: 0.45 };
+
   if (score >= 10) return { label: "Hard", level: 0.25 };
+
   if (score > 0) return { label: "Very hard", level: 0.1 };
+
   return { label: "Extreme", level: 0 };
 }

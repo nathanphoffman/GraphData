@@ -10,6 +10,7 @@ const FIST = 10;
 /** A round scale length (degrees) that fits in about a third of the chart. */
 function niceScale(radius: number): number {
   const target = radius / 3;
+
   return [1, 2, 5, 10, 20, 30].reduce((best, v) => (Math.abs(v - target) < Math.abs(best - target) ? v : best));
 }
 
@@ -26,21 +27,26 @@ export function FindingChart({ stars, target }: { stars: GuideStar[]; target: { 
     x: CENTRE - Math.sin((s.bearing * Math.PI) / 180) * s.separation * px,
     y: CENTRE - Math.cos((s.bearing * Math.PI) / 180) * s.separation * px,
   });
+
   const points = stars.map(place);
   const scale = niceScale(maxSep);
   const rings = [scale, scale * 2, scale * 3].filter((r) => r * px < CENTRE - 6);
+
   // Faint stick figures for any constellation with a star inside the chart. Anything past the edge is clipped by the svg.
   const reach = CENTRE / px;
   const project = (p: { ra: number; dec: number }) => {
     const m = measure(target, p);
+
     return { sep: m.separation, x: CENTRE - Math.sin((m.bearing * Math.PI) / 180) * m.separation * px, y: CENTRE - Math.cos((m.bearing * Math.PI) / 180) * m.separation * px };
   };
+
   const figures = CONSTELLATIONS.map((c) => ({ name: c.name, lines: c.lines.map((chain) => chain.map(project)) }))
     .filter((c) => c.lines.some((chain) => chain.some((p) => p.sep < reach)))
     .map((c) => {
       const inside = c.lines.flat().filter((p) => p.sep < reach);
       return { ...c, labelX: inside.reduce((t, p) => t + p.x, 0) / inside.length, labelY: inside.reduce((t, p) => t + p.y, 0) / inside.length };
     });
+
   const barLeft = 12;
   const barY = SIZE - 12;
 

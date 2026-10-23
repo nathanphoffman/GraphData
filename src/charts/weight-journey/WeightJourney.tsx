@@ -17,6 +17,7 @@ export default function WeightJourney() {
   const [lines, setLines] = useState(ALL_LINES);
   const f = makeFormat(unit);
   const proj = useProjections(tool, f.k, lines);
+
   return (
     <div className="weight">
       <StatsBar unit={unit} f={f} />

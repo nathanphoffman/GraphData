@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, ink, Line, Shape, Solid } from "../core/artStyle";
+import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
 
-const card = "var(--b-card)";
+const card = CARD_COLOR;
 
 /** Ghostly hem: a wavy bottom edge for sheet-like spirits. */
 const ghostBody = (x0: number, x1: number, top: number, bottom: number) =>

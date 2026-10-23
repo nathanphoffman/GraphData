@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, ink, Line, Shape, Solid } from "../core/artStyle";
+import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
 import { Figure } from "../core/figure";
 
-const card = "var(--b-card)";
+const card = CARD_COLOR;
 
 const Waves = ({ y = 214, w = 3 }: { y?: number; w?: number }) => (
   <Line d={`M0 ${y} q15 -10 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0`} w={w} />

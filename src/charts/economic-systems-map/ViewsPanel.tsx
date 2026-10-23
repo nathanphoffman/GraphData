@@ -26,6 +26,7 @@ function ViewsList({ views, categories }: { views: Record<string, string>; categ
 /** The panel under the map: a cell's common views, or a combo of two neighbors. */
 export default function ViewsPanel({ model, viewsModel, selectedCell, neighbors, activeCombo, onPickPartner }: Props) {
   const selectedViews = viewsModel.cells[selectedCell.name];
+
   if (!selectedViews) return null;
 
   return (

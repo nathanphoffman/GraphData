@@ -13,6 +13,7 @@ export default function LanguageOutlook() {
   const [visible, setVisible] = useState<Record<string, boolean>>(() =>
     Object.fromEntries([...model.series, ...model.lines].map((key) => [key, !HIDDEN_BY_DEFAULT_PREFIXES.some((prefix) => key.startsWith(prefix))])),
   );
+
   const [sortKey, setSortKey] = useState("Year 2026");
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 

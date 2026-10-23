@@ -10,6 +10,7 @@ export function makeFormat(unit: Unit) {
   const k = unit === "kg" ? KG_PER_LB : 1;
   const w = (lb: number, digits = 1) => (lb * k).toFixed(digits);
   const signed = (lb: number) => `${lb > 0 ? "+" : ""}${w(lb)}`;
+
   return { k, w, signed };
 }
 

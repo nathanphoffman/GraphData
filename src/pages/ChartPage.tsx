@@ -15,6 +15,7 @@ export default function ChartPage() {
   }
 
   const Chart = chart.component;
+
   return (
     <section>
       <Link to="/">&larr; All charts</Link>

@@ -10,8 +10,11 @@ const model = data as AllIntelligenceData;
 
 function sortValue(row: ScoredSubject, key: SortKey): number | string {
   if (key === "name") return row.subject.name;
+
   if (key === "overall") return row.overall ?? -1;
+
   if (key === "measured") return row.measured;
+
   return row.groups[key] ?? -1;
 }
 
@@ -19,6 +22,7 @@ function compareRows(a: ScoredSubject, b: ScoredSubject, key: SortKey, ascending
   const av = sortValue(a, key);
   const bv = sortValue(b, key);
   const cmp = typeof av === "string" ? av.localeCompare(bv as string) : (av as number) - (bv as number);
+
   return ascending ? cmp : -cmp;
 }
 
@@ -36,6 +40,7 @@ export default function AllIntelligence() {
       setAscending(key === "name");
     }
   };
+
   const toggleOpen = (name: string) =>
     setOpen((prev) => {
       const next = new Set(prev);

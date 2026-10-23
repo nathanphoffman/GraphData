@@ -119,11 +119,13 @@ export function measure(a: { ra: number; dec: number }, b: { ra: number; dec: nu
   const cosSep = Math.sin(d1) * Math.sin(d2) + Math.cos(d1) * Math.cos(d2) * Math.cos(dRa);
   const separation = Math.acos(Math.min(1, Math.max(-1, cosSep))) / RAD;
   const bearing = Math.atan2(Math.sin(dRa) * Math.cos(d2), Math.cos(d1) * Math.sin(d2) - Math.sin(d1) * Math.cos(d2) * Math.cos(dRa)) / RAD;
+
   return { separation, bearing: (bearing + 360) % 360 };
 }
 
 function bearingGap(a: number, b: number): number {
   const d = Math.abs(a - b) % 360;
+
   return d > 180 ? 360 - d : d;
 }
 
@@ -134,14 +136,19 @@ export function guideStarsFor(target: Target): GuideStar[] {
     .filter((s) => s.separation > SAME_OBJECT)
     .sort((a, b) => a.separation - b.separation);
   const picked: GuideStar[] = [];
+
   for (const c of candidates) {
     if (picked.every((p) => bearingGap(p.bearing, c.bearing) >= MIN_BEARING_GAP)) picked.push(c);
+
     if (picked.length === 3) break;
   }
+
   for (const c of candidates) {
     if (picked.length === 3) break;
+
     if (!picked.includes(c)) picked.push(c);
   }
+
   return picked;
 }
 

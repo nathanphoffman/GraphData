@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../core/artStyle";
+import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
 
-const card = "var(--b-card)";
+const card = CARD_COLOR;
 
 /** Cowboy hat in front view, centered on x=200 with the brim at `y`. */
 function Hat({ y = 62, w = 60 }: { y?: number; w?: number }) {

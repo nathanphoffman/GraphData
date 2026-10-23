@@ -5,22 +5,26 @@ export const DEFAULT_SETTINGS: Settings = { zeroDivisor: 4, missingMode: "estima
 function geometricMean(values: number[]): number | null {
   if (values.length === 0) return null;
   const logSum = values.reduce((sum, v) => sum + Math.log(v), 0);
+
   return Math.exp(logSum / values.length);
 }
 
 /** Lowest positive score in each column, used as the base for floor values. */
 function worstScores(subjects: Subject[], columns: string[]): Record<string, number> {
   const worst: Record<string, number> = {};
+
   for (const col of columns) {
     const positives = subjects.map((s) => s.scores[col]).filter((v): v is number => v !== undefined && v > 0);
     worst[col] = positives.length ? Math.min(...positives) : 1;
   }
+
   return worst;
 }
 
 /** Price-based stand-in for energy per task: $0.50 scores about 67, $20 about 27, $180 about 3. */
 function priceEfficiency(subject: Subject): number | undefined {
   if (subject.outputPrice === undefined) return undefined;
+
   return Math.max(1, Math.min(100, 60 - 25 * Math.log10(subject.outputPrice)));
 }
 
@@ -34,7 +38,9 @@ export function estimateScore(data: AllIntelligenceData, subject: Subject, col: 
   if (col === "efficiency") return null;
   const measured = Object.values(subject.scores).filter((v) => v > 0);
   const base = geometricMean(measured);
+
   if (base === null) return null;
+
   return Math.min(100, base * (data.estimateFactors[col] ?? 1));
 }
 

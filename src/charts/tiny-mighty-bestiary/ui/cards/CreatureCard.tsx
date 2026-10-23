@@ -14,6 +14,7 @@ function StatBlock({ tier }: { tier: Tier }) {
     ["Bonus", sign(tier.bonus)],
     ["Turns", tier.turns],
   ];
+
   return (
     <dl className="bestiary-stats">
       {stats.map(([label, value]) => (

@@ -19,6 +19,7 @@ const model = data as AstronomyTargetsData;
 /** Targets matching the season filter and the search box (id, nickname, constellation or type). */
 function filterRows(scored: ScoredTarget[], season: SeasonFilter | null, query: string) {
   const needle = query.trim().toLowerCase();
+
   return scored.filter(
     (row) =>
       (!season || row.target.bestSeason === season) &&
@@ -32,6 +33,7 @@ function useColumns() {
   const hidden = useMemo(() => new Set(hiddenList), [hiddenList]);
   const toggle = (id: string) => setHiddenList((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]));
   const visible = COLUMNS.filter((c) => !hidden.has(c.id));
+
   return { hidden, toggle, columns: [...visible.filter((c) => c.afterScore), ...visible.filter((c) => !c.afterScore)] };
 }
 

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../core/artStyle";
+import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
 import { Figure } from "../core/figure";
 
-const card = "var(--b-card)";
+const card = CARD_COLOR;
 
 function ChromeTrooper() {
   return (

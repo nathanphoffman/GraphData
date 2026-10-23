@@ -10,6 +10,7 @@ export default function DifficultyDots({ value }: { value: number }) {
   const rest = value - doubles * 2;
   const whole = Math.floor(rest);
   const fraction = rest - whole;
+
   return (
     <span className="bestiary-difficulty" aria-label={`Difficulty ${value}`}>
       <span className="bestiary-difficulty-label" aria-hidden="true">

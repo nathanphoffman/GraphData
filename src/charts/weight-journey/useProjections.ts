@@ -26,8 +26,10 @@ export function useProjections(tool: ProjectionTool, k: number, lines: Lines) {
     const lastMuscle = withMuscle[withMuscle.length - 1];
     return projectTapering(lastRow.date, lastRow.avg3, lastMuscle.muscleTotal, monthlyLoss, lastMuscle.muscleDaily, aheadDays);
   }, [tool.lossInput, monthlyLoss, aheadDays]);
+
   const allTrend = useMemo(() => (lines.allTrend ? buildAllTrend(dailyRows, ahead) : null), [lines.allTrend, ahead]);
   const spread = useMemo(() => (lines.spread ? buildSpread(dailyRows, ahead) : null), [lines.spread, ahead]);
   const general = useMemo(() => buildGeneral(dailyRows, ahead, [fit[fit.length - 1], ...future]), [ahead]);
+
   return { tapered, allTrend, spread, general };
 }

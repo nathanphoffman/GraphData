@@ -51,6 +51,7 @@ interface TableProps {
 function RoleRow({ role, lines, mult, shift }: { role: TableProps["roles"][number] } & Omit<TableProps, "roles">) {
   const n = role.base + shift;
   const s = spans(n);
+
   return (
     <tr>
       <td className="role">

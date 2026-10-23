@@ -9,6 +9,7 @@ type BandOf = (lb: number | null, adjusted: boolean) => string;
 /** Actual value on top, muscle-adjusted value underneath, each highlighted by its target band. */
 function Two({ actual, adjusted, fmt, bandOf = band }: { actual: number | null; adjusted: number | null; fmt: (lb: number) => string; bandOf?: BandOf }) {
   const show = (n: number | null) => (n === null ? "—" : fmt(n));
+
   return (
     <>
       <span className={bandOf(actual, false)}>{show(actual)}</span>
@@ -29,6 +30,7 @@ function useTableRows(period: string) {
     const cutoff = new Date(toDate(newestFirst[0].date).getTime() - 89 * 86_400_000).toISOString().slice(0, 10);
     return newestFirst.filter((r) => r.date >= cutoff);
   }, [newestFirst, period]);
+
   return { rows, quarters };
 }
 
@@ -44,6 +46,7 @@ function Head({ unit, show }: { unit: Unit; show: Show }) {
 
 function DayRow({ d, f, show }: { d: (typeof dailyRows)[number]; f: Format; show: Show }) {
   const two = (a: number | null, b: number | null, fmt = f.w, bandOf?: BandOf) => <Two actual={a} adjusted={b} fmt={fmt} bandOf={bandOf} />;
+
   return (
     <tr className={d.estimated ? "estimated" : ""}>
       <td>{pretty(d.date)}</td>
@@ -70,6 +73,7 @@ export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
   const [period, setPeriod] = useState("default");
   const [show, setShow] = useState<Show>({ muscleDaily: false, monthly: false });
   const { rows, quarters } = useTableRows(period);
+
   return (
     <>
       <div className="weight-controls table-controls">

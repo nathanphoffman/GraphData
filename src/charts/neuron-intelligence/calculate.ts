@@ -11,8 +11,10 @@ export function scoreAnimals(animals: Animal[], { x, w, k }: Exponents): ScoredA
     ...a,
     score: (a.neuronsBillions * 1e9) ** x / a.weightKg ** w,
   }));
+
   const human = scored.find((a) => a.name === "Human");
   const humanFinal = human ? human.score ** k : NaN;
+
   return scored.map((a) => ({ ...a, humanPercent: (a.score ** k / humanFinal) * 100 }));
 }
 

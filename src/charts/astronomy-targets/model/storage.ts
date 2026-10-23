@@ -19,6 +19,7 @@ export function parseSettings(saved: unknown): Settings | null {
   if (typeof saved !== "object" || saved === null) return null;
   const s = saved as Record<string, unknown>;
   const d = DEFAULT_SETTINGS;
+
   return {
     latitude: number(s.latitude, 0, 80, d.latitude),
     focalLength: pick(renamedFocal(s.focalLength), FOCAL_LENGTHS, d.focalLength),
@@ -38,6 +39,7 @@ export function parseSettings(saved: unknown): Settings | null {
 
 export function parseHidden(saved: unknown): string[] | null {
   if (!Array.isArray(saved)) return null;
+
   return saved.filter((id): id is string => COLUMNS.some((c) => c.id === id));
 }
 

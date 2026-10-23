@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 
 /** Shared line-art styling for the creature drawings. */
+export const CARD_COLOR = "var(--b-card)";
+
 export const ink = { stroke: "currentColor", strokeWidth: 5, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
 /** Open stroke, no fill. */
@@ -10,7 +12,7 @@ export const Line = ({ d, w = 5, dash }: { d: string; w?: number; dash?: string 
 
 /** Outlined shape filled with the card color. */
 export const Shape = ({ d, w = 5 }: { d: string; w?: number }) => (
-  <path d={d} fill="var(--b-card)" {...ink} strokeWidth={w} />
+  <path d={d} fill={CARD_COLOR} {...ink} strokeWidth={w} />
 );
 
 /** Solid ink shape. */

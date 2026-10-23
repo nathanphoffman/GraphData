@@ -19,6 +19,7 @@ export default function SharingCurve({ soloNeeded, people, item, onPeople }: Pro
   const [frozenMax, setFrozenMax] = useState<number | null>(null);
   const xMax = frozenMax ?? Math.min(20, Math.max(10, Math.ceil(people)));
   const at = (n: number) => soloNeeded / n;
+
   // Past 10 people only every fifth dot is labeled, to keep the numbers readable.
   const marks = Array.from({ length: xMax }, (_, i) => i + 1).filter((n) => xMax <= 10 || n === 1 || n % 5 === 0);
 

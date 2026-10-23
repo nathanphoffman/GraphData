@@ -27,6 +27,7 @@ export function line(points: { x: number; y: number }[]): string {
 function allWeights(shown: Point[], shownFuture: Point[], { tapered, allTrend, spread }: ChartInput) {
   const spreadEnds = spread ? [spread.actual, spread.adjusted].flatMap((g) => [...g.curves[0].points, ...g.curves[g.curves.length - 1].points]) : [];
   const shownAvg = dailyRows.filter((d) => d.date >= shown[0].date).map((d) => ({ weight: d.adj.avg3 }));
+
   return [
     ...shown,
     ...shownFuture,
@@ -46,6 +47,7 @@ function buildScales(shown: Point[], shownFuture: Point[], input: ChartInput) {
   const y = scaleLinear()
     .domain([Math.floor(Math.min(...weights) - 2), Math.ceil(Math.max(...weights) + 2)])
     .range([H - M.bottom, M.top]);
+
   return { x, y };
 }
 
@@ -55,6 +57,7 @@ type Pt = (d: Point) => { x: number; y: number };
 function shade(g: Spread["actual"], pt: Pt) {
   const gaps = g.curves.slice(1).map((c, i) => Math.max(Math.abs(c.target - g.curves[i].target), 0.1));
   const densest = Math.max(...gaps.map((gap) => 1 / gap));
+
   return {
     bands: gaps.map((gap, i) => {
       const a = g.curves[i].points.map(pt);
@@ -71,6 +74,7 @@ function shade(g: Spread["actual"], pt: Pt) {
 function actualLines(shown: Day[], pt: Pt) {
   const shownAvg = dailyRows.filter((d) => d.date >= shown[0].date);
   const firstShown = shown[0].date;
+
   return {
     actual: line(shown.map(pt)),
     avg3: line(shownAvg.map((d) => pt({ date: d.date, weight: d.avg3 }))),
@@ -96,6 +100,7 @@ function taperLines(pt: Pt, tapered: Tapered | null) {
   const lastRow = dailyRows[dailyRows.length - 1];
   const anchor = pt({ date: lastRow.date, weight: lastRow.avg3 });
   const anchorAdjusted = pt({ date: lastRow.date, weight: lastRow.adj.avg3 });
+
   return {
     taper: line([anchor, ...tapered.map(pt)]),
     taperAdjusted: line([anchorAdjusted, ...tapered.map((d) => pt({ date: d.date, weight: d.adjusted }))]),
@@ -108,6 +113,7 @@ export function buildChart(input: ChartInput) {
   const shownFuture = tapered ? [...future, ...tapered] : future;
   const { x, y } = buildScales(shown, shownFuture, input);
   const pt: Pt = (d) => ({ x: x(toDate(d.date)), y: y(d.weight * k) });
+
   return {
     x,
     y,

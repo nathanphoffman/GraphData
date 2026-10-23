@@ -10,6 +10,7 @@ function step(stock: number, target: number, yearlyUses: number, minPlays: numbe
   const worn = yearlyUses / Math.max(Math.max(1, minPlays), maxPlays);
   const remaining = Math.max(0, stock - worn);
   const buy = Math.min(Math.max(0, target - remaining), earned);
+
   return { buy, stock: remaining + buy };
 }
 
@@ -24,11 +25,13 @@ export function purchasePlan(
 ): number[] {
   const bought: number[] = [];
   let stock = owned;
+
   for (let y = 0; y < years; y++) {
     const next = step(stock, target, yearlyUses, minPlays, maxPlays);
     bought.push(next.buy);
     stock = next.stock;
   }
+
   return bought;
 }
 
@@ -41,9 +44,12 @@ export function yearsToReach(
   maxPlays: number,
 ): number | null {
   let stock = owned;
+
   for (let y = 1; y <= 100; y++) {
     stock = step(stock, target, yearlyUses, minPlays, maxPlays).stock;
+
     if (stock >= target - 1e-9) return y;
   }
+
   return null;
 }

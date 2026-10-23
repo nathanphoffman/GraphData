@@ -16,6 +16,7 @@ export interface Column {
 
 function SeasonCell({ row }: { row: ScoredTarget }) {
   const season = row.target.bestSeason;
+
   return (
     <>
       <span className={`astro-tag astro-tag-${season}`}>{season === "any" ? "Any" : SEASONS[season].label.split(" ")[0]}</span>
@@ -42,6 +43,7 @@ function Chip({ value, scale, title, suffix = "" }: { value: number; scale: numb
 function AdjustCell({ row, settings }: { row: ScoredTarget; settings: Settings }) {
   const quality = Math.round(qualityAdjust(row.target, settings) * 10) / 10;
   const { simAdjust: sim, authorAdjust: author } = row.target;
+
   return (
     <div className="astro-chips">
       {sim === undefined ? "—" : <Chip value={sim} scale={60} title="Simulator adjustment" suffix="%" />}

@@ -23,6 +23,9 @@ const SCIFI_THEMES = new Set(["scifi", "science-fantasy", "space-wars", "space-h
 const SCIFI_OPTIONS = model.themes.filter((t) => SCIFI_THEMES.has(t.id));
 const OTHER_OPTIONS = model.themes.filter((t) => !SCIFI_THEMES.has(t.id));
 
+const THEME_CHIP_CLASS = "bestiary-theme-chip";
+const themeChipClass = () => THEME_CHIP_CLASS;
+
 export default function FilterBar({ filters, onChange, canClear, onClear }: Props) {
   const set = (patch: Partial<Filters>) => onChange({ ...filters, ...patch });
 
@@ -33,7 +36,7 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         options={SCIFI_OPTIONS}
         active={filters.theme}
         onChange={(theme) => theme && set({ theme })}
-        chipClass={() => "bestiary-theme-chip"}
+        chipClass={themeChipClass}
       />
       <FilterChips
         label=""
@@ -41,7 +44,7 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         options={OTHER_OPTIONS}
         active={filters.theme}
         onChange={(theme) => theme && set({ theme })}
-        chipClass={() => "bestiary-theme-chip"}
+        chipClass={themeChipClass}
       />
       <FilterChips
         label="Type"
@@ -62,21 +65,21 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         options={DIFFICULTY_BANDS}
         active={filters.difficulty}
         onChange={(difficulty) => set({ difficulty })}
-        chipClass={() => "bestiary-theme-chip"}
+        chipClass={themeChipClass}
       />
       <FilterChips
         label="Tone"
         options={TONE_BANDS}
         active={filters.tone}
         onChange={(tone) => set({ tone })}
-        chipClass={() => "bestiary-theme-chip"}
+        chipClass={themeChipClass}
       />
       <FilterChips
         label="Sort"
         options={SORTS}
         active={filters.sort}
         onChange={(sort) => sort && set({ sort })}
-        chipClass={() => "bestiary-theme-chip"}
+        chipClass={themeChipClass}
       />
       <input
         type="search"

@@ -8,6 +8,7 @@ const squash = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
 export function matches(creature: Creature, query: string) {
   const names = [creature.name, ...creature.aliases].map(squash);
   const inNames = (word: string) => word !== "" && names.some((n) => n.includes(word));
+
   if (inNames(squash(query))) return true;
 
   const text = [
@@ -25,6 +26,7 @@ export function matches(creature: Creature, query: string) {
   ]
     .join(" ")
     .toLowerCase();
+
   return query
     .toLowerCase()
     .split(/\s+/)

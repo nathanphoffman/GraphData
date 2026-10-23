@@ -55,6 +55,7 @@ function AllTrends({ trends }: { trends: Chart["allTrends"] }) {
 export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines }) {
   const { rangeDays, k, tapered, allTrend, spread, general } = input;
   const chart = useMemo(() => buildChart(input), [rangeDays, k, tapered, allTrend, spread, general]);
+
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="weight-chart" role="img" aria-label="Weight over time">
       <Axes chart={chart} />

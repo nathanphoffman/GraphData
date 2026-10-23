@@ -33,6 +33,7 @@ export default function TinyMightyBestiary() {
 
   const sorted = [...model.creatures].sort(compareBy(sort));
   const creatures = sorted.filter((c) => c.themes.includes(theme) && passesFilters(c));
+
   // With nothing found in the selected theme, a search falls back to every other theme.
   const otherThemes =
     creatures.length === 0 && query.trim() !== ""

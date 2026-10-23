@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../core/artStyle";
+import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
 import { Figure } from "../core/figure";
 
-const card = "var(--b-card)";
+const card = CARD_COLOR;
 
 const Steam = ({ x, y }: { x: number; y: number }) => (
   <Line d={`M${x} ${y} q-8 -10 2 -18 q10 -8 0 -18 M${x + 14} ${y} q-8 -10 2 -18`} w={3} dash="3 5" />
