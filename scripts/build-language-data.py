@@ -54,7 +54,6 @@ LINES = [
 ]
 NAME_FIXES = {"Javascript": "JavaScript", "Typescript": "TypeScript"}
 
-
 def export_csv(ods: Path, out_dir: Path) -> Path:
     cmd = [
         "soffice", "--headless", "--convert-to",
@@ -67,18 +66,15 @@ def export_csv(ods: Path, out_dir: Path) -> Path:
         sys.exit("Could not find the 'Languages' sheet in the exported CSV files.")
     return found[0]
 
-
 def num(text: str):
     try:
         return float(text)
     except ValueError:
         return None
 
-
 def avg(values):
     vals = [v for v in values if v is not None]
     return sum(vals) / len(vals) if vals else None
-
 
 def combined_year(v, t, year):
     outlook, tio = v.get(f"Year {year}"), t.get(str(year))
@@ -86,14 +82,12 @@ def combined_year(v, t, year):
         return None
     return outlook * OUTLOOK_WEIGHT + tio * TIOBE_WEIGHT
 
-
 def slope(points):
     """Least-squares slope of (x, y) points."""
     n = len(points)
     mx, my = sum(x for x, _ in points) / n, sum(y for _, y in points) / n
     var = sum((x - mx) ** 2 for x, _ in points)
     return sum((x - mx) * (y - my) for x, y in points) / var
-
 
 def project(base, per_year, steps):
     """Damped trend: each year's change shrinks by DAMPING. Declines are applied as a
@@ -104,14 +98,12 @@ def project(base, per_year, steps):
         value = value * (1 + step / base) if per_year < 0 else value + step
     return value
 
-
 def window_avgs(v, t, years):
     """(outlook avg, combined avg) over the years; None where data is missing."""
     outlook = avg([v.get(f"Year {y}") for y in years])
     tio = avg([t.get(str(y)) for y in years])
     combined = outlook * OUTLOOK_WEIGHT + tio * TIOBE_WEIGHT if None not in (outlook, tio) else None
     return outlook, combined
-
 
 def forecast(v, t, cutoff, steps):
     """Projects each of `steps` (years after `cutoff`) using only data up to `cutoff`: two 3-year
@@ -130,7 +122,6 @@ def forecast(v, t, cutoff, steps):
     base = (outlook + latest) / 2  # same scale as the chart dots
     return [project(base, per_year, n) if base > 0 else base for n in steps]
 
-
 def historical_fix(v, projected):
     """Nudges `projected` by FIX_WEIGHT of the average backtest miss, as a share of the actual value
     (underestimated by 5% -> raise by 2.5%). Returns `projected` unchanged without backtest data."""
@@ -141,12 +132,10 @@ def historical_fix(v, projected):
             misses.append((actual - backtest) / actual)
     return projected * (1 + FIX_WEIGHT * avg(misses)) if misses else projected
 
-
 def usage_combined(t, pop, years):
     """Opinion-free score: raw Stack Overflow usage mixed with TIOBE. None where data is missing."""
     raw_pop, tio = avg([pop.get(str(y)) for y in years]), avg([t.get(str(y)) for y in years])
     return raw_pop * POP_WEIGHT + tio * POP_TIOBE_WEIGHT if None not in (raw_pop, tio) else None
-
 
 def health_items(v, t, pop, cutoff):
     """The 5 measured healthiness metrics from the 3 years ending at `cutoff`: the three year dots,
@@ -155,17 +144,14 @@ def health_items(v, t, pop, cutoff):
     _, combined = window_avgs(v, t, years)
     return [v.get(f"Year {y}") for y in years] + [combined, usage_combined(t, pop, years)]
 
-
 def healthiness_at(v, t, pop, cutoff, predictions):
     """Healthiness: the plain average of the 5 measured metrics plus two prediction points."""
     return avg(health_items(v, t, pop, cutoff) + list(predictions))
-
 
 def health_score(v, t, pop, year):
     """Healthiness without predictions, for the 3 years ending `year`; None if any metric is missing."""
     items = health_items(v, t, pop, year)
     return None if None in items else sum(items) / len(items)
-
 
 def health_outlook(scores, last, steps):
     """Same trend math as forecast(), applied to yearly health scores {year: score}."""
@@ -173,7 +159,6 @@ def health_outlook(scores, last, steps):
     per_year = TREND_WEIGHT * slope(recent) + (1 - TREND_WEIGHT) * (scores[last] - scores[last - 3]) / YEARS_PER_WINDOW_GAP
     base = scores[last]
     return [project(base, per_year, n) if base > 0 else base for n in steps]
-
 
 def predicted_health(v, t, pop):
     """10-year healthiness: trend of the yearly health score, nudged by half of how far the same
@@ -189,10 +174,8 @@ def predicted_health(v, t, pop):
     ]
     return raw * (1 + FIX_WEIGHT * avg(misses))
 
-
 def rnd(value):
     return None if value is None else round(value, 3)
-
 
 def main() -> None:
     ods = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else DEFAULT_ODS
@@ -269,7 +252,6 @@ def main() -> None:
     }
     OUT.write_text(json.dumps(data, indent=1) + "\n")
     print(f"Wrote {OUT.relative_to(ROOT)} ({len(languages)} languages)")
-
 
 if __name__ == "__main__":
     main()

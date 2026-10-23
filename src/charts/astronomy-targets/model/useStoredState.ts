@@ -10,15 +10,17 @@ export function useStoredState<T>(key: string, fallback: T, parse: (saved: unkno
     try {
       const raw = localStorage.getItem(storageKey);
       return raw === null ? fallback : (parse(JSON.parse(raw)) ?? fallback);
-    } catch {
+    } catch (error) {
+      console.warn(`Could not read saved ${storageKey}, using default`, error);
       return fallback;
     }
   });
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify(value));
-    } catch {
+    } catch (error) {
       // storage unavailable (private mode, blocked): it still works, it just won't be remembered
+      console.warn(`Could not save ${storageKey}`, error);
     }
   }, [storageKey, value]);
   return [value, setValue] as const;

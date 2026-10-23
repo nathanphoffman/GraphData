@@ -15,7 +15,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "misc" / "weight-journey.json"
 
-
 def main():
     ahead = int(sys.argv[1]) if len(sys.argv) > 1 else 60
     data = json.loads(DATA.read_text())
@@ -31,7 +30,6 @@ def main():
         day += timedelta(days=1)
     DATA.write_text(json.dumps(data))
     print(f"Added {added} placeholder days (last date: {weights[-1][0]})")
-
 
 if __name__ == "__main__":
     main()

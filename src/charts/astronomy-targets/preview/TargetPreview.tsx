@@ -292,7 +292,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     let cancelled = false;
     loadImage(info.src).then((img) => {
       if (!cancelled) setLoaded({ img, ...measurePhoto(img, info, row.target) });
-    }).catch(() => {});
+    }).catch((error) => console.warn(`Could not load image ${info.src}`, error));
     return () => { cancelled = true; };
   }, [info, row.target]);
 

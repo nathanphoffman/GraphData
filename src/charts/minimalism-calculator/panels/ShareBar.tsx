@@ -19,7 +19,8 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
       await navigator.clipboard.writeText(url);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
-    } catch {
+    } catch (error) {
+      console.warn("Clipboard copy failed, falling back to prompt", error);
       window.prompt("Copy this link:", url);
     }
   };

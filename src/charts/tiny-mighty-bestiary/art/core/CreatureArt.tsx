@@ -63,7 +63,6 @@ function MaggotSwarm() {
   );
 }
 
-
 /** Ten stalks fanned over the top of the orb: [angle in degrees from straight up, length]. */
 const stalks: [number, number][] = [
   [-80, 62], [-62, 78], [-44, 58], [-26, 80], [-9, 60], [9, 74], [26, 58], [44, 80], [62, 62], [80, 72],

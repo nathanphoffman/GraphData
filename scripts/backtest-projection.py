@@ -13,7 +13,6 @@ spec = importlib.util.spec_from_file_location("build", ROOT / "scripts" / "build
 build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
-
 def main() -> None:
     data = json.loads(build.OUT.read_text())
     cutoff = build.BACKTEST_CUTOFF
@@ -35,7 +34,6 @@ def main() -> None:
         e25 = sum(abs(r[idx] - r[1]) for r in rows) / n
         e26 = sum(abs(r[idx + 3] - r[4]) for r in rows) / n
         print(f"avg error, {label}: 2025 = {e25:.2f}, 2026 = {e26:.2f}")
-
 
 if __name__ == "__main__":
     main()
