@@ -1,15 +1,15 @@
 import type { ComponentType } from "react";
-import LanguageOutlook from "./language-outlook/LanguageOutlook";
-import EconomicSystemsMap from "./economic-systems-map/EconomicSystemsMap";
-import NeuronIntelligence from "./neuron-intelligence/NeuronIntelligence";
-import RuleOfAuthorship from "./rule-of-authorship/RuleOfAuthorship";
-import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
-import MinimalismCalculator from "./minimalism-calculator/MinimalismCalculator";
-import DndSales from "./dnd-sales/DndSales";
-import TinyMightyBestiary from "./tiny-mighty-bestiary/TinyMightyBestiary";
-import AllIntelligence from "./all-intelligence/AllIntelligence";
-import AstronomyTargets from "./astronomy-targets/AstronomyTargets";
-import WeightJourney from "./weight-journey/WeightJourney";
+import LanguageOutlook from "./tech/language-outlook/LanguageOutlook";
+import EconomicSystemsMap from "./tech/economic-systems-map/EconomicSystemsMap";
+import NeuronIntelligence from "./science/neuron-intelligence/NeuronIntelligence";
+import RuleOfAuthorship from "./tabletop/rule-of-authorship/RuleOfAuthorship";
+import MaintainabilityCalculator from "./calculators/maintainability-calculator/MaintainabilityCalculator";
+import MinimalismCalculator from "./calculators/minimalism-calculator/MinimalismCalculator";
+import DndSales from "./tabletop/dnd-sales/DndSales";
+import TinyMightyBestiary from "./tabletop/tiny-mighty-bestiary/TinyMightyBestiary";
+import AllIntelligence from "./science/all-intelligence/AllIntelligence";
+import AstronomyTargets from "./science/astronomy-targets/AstronomyTargets";
+import WeightJourney from "./science/weight-journey/WeightJourney";
 
 /** Home page sections, in display order. */
 const SCIENCE_CATEGORY = "Science";
@@ -29,7 +29,7 @@ export interface ChartEntry {
 
 /**
  * Every chart in the project is listed here.
- * To add a chart: create a component under src/charts/<name>/, import it, and add one entry below.
+ * To add a chart: create a component under src/charts/<category>/<name>/, import it, and add one entry below.
  */
 export const charts: ChartEntry[] = [
   {

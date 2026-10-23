@@ -16,7 +16,8 @@ npm run build      # type-check + production build into dist/
 data/                  JSON data sets used by the charts
   sources/             Hand-collected inputs (e.g. TIOBE 2019 ratings)
 scripts/               Scripts that build the JSON files
-src/charts/            One folder per chart
+src/charts/            Charts grouped by category (calculators, science, tabletop, tech), one folder per chart
+tests/                Unit tests, mirroring src/charts
 src/charts/registry.ts The list of all charts (home page is built from this)
 src/pages/             Home page and the chart page wrapper
 ```
@@ -32,7 +33,7 @@ npm run data       # rewrites data/language-outlook/language-outlook.json (needs
 ## Add a chart
 
 1. Put the data in `data/<name>.json` (or add a script in `scripts/` that builds it).
-2. Create `src/charts/<name>/<Name>.tsx` with a default-exported React component.
+2. Create `src/charts/<category>/<name>/<Name>.tsx` with a default-exported React component.
 3. Add one entry to `src/charts/registry.ts`.
 
 The chart then shows up on the home page and at `/<id>`.

@@ -1,0 +1,52 @@
+import type { ReactNode } from "react";
+import { ScrapGolem, TinCanPup, JunkyardGuardBot, WarMachineRemnant, VendingBuddy, RotorScavenger, PocketWatchSentinel, GlowRat } from "./Part1";
+import { AtomicRoach, RadHound, RadBear, DoomHoundAlpha, WastelandVulture, IrradiatedAurochs, JunkScavenger, WastelandRaider, WastelandMerchant, GlowHusk } from "./Part2";
+import { MutantBrute, WastelandWarlord, BottlecapHermit, VaultTyrant, ScrapKid, TinkeringGranny, ScrapNurse, AshRoadPreacher, WastelandGunslinger } from "./Part3";
+import { DustTitan, HighwayBehemoth, MutantGrub, SumpLeech, GlowTroll, PlagueMammoth, NuclearColossus, MutantHedgehog, RadMothMatriarch } from "./Part4";
+import { GlowWraith, DustOracle, LanternGhost, FallPoutRevenant, AshenHerald, GlowingMemory, FalloutBanshee } from "./Part5";
+
+export const postApocArt: Record<string, () => ReactNode> = {
+  "scrap-golem": ScrapGolem,
+  "tin-can-pup": TinCanPup,
+  "junkyard-guard-bot": JunkyardGuardBot,
+  "war-machine-remnant": WarMachineRemnant,
+  "vending-buddy": VendingBuddy,
+  "rotor-scavenger": RotorScavenger,
+  "pocket-watch-sentinel": PocketWatchSentinel,
+  "glow-rat": GlowRat,
+  "atomic-roach": AtomicRoach,
+  "rad-hound": RadHound,
+  "rad-bear": RadBear,
+  "doom-hound-alpha": DoomHoundAlpha,
+  "wasteland-vulture": WastelandVulture,
+  "irradiated-aurochs": IrradiatedAurochs,
+  "junk-scavenger": JunkScavenger,
+  "wasteland-raider": WastelandRaider,
+  "wasteland-merchant": WastelandMerchant,
+  "glow-husk": GlowHusk,
+  "mutant-brute": MutantBrute,
+  "wasteland-warlord": WastelandWarlord,
+  "bottlecap-hermit": BottlecapHermit,
+  "vault-tyrant": VaultTyrant,
+  "scrap-kid": ScrapKid,
+  "tinkering-granny": TinkeringGranny,
+  "scrap-nurse": ScrapNurse,
+  "ash-road-preacher": AshRoadPreacher,
+  "wasteland-gunslinger": WastelandGunslinger,
+  "dust-titan": DustTitan,
+  "highway-behemoth": HighwayBehemoth,
+  "mutant-grub": MutantGrub,
+  "sump-leech": SumpLeech,
+  "glow-troll": GlowTroll,
+  "plague-mammoth": PlagueMammoth,
+  "nuclear-colossus": NuclearColossus,
+  "mutant-hedgehog": MutantHedgehog,
+  "rad-moth-matriarch": RadMothMatriarch,
+  "glow-wraith": GlowWraith,
+  "dust-oracle": DustOracle,
+  "lantern-ghost": LanternGhost,
+  "fallout-revenant": FallPoutRevenant,
+  "ashen-herald": AshenHerald,
+  "glowing-memory": GlowingMemory,
+  "fallout-banshee": FalloutBanshee,
+};
