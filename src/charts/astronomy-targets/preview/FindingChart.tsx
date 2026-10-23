@@ -11,6 +11,7 @@ const FIST = 10;
 function niceScale(radius: number): number {
   const target = radius / 3;
 
+  // Pick the nicest round field size closest to the target by keeping whichever candidate is nearest so far.
   return [1, 2, 5, 10, 20, 30].reduce((best, v) => (Math.abs(v - target) < Math.abs(best - target) ? v : best));
 }
 
@@ -44,6 +45,8 @@ export function FindingChart({ stars, target }: { stars: GuideStar[]; target: { 
     .filter((c) => c.lines.some((chain) => chain.some((p) => p.sep < reach)))
     .map((c) => {
       const inside = c.lines.flat().filter((p) => p.sep < reach);
+
+      // Label sits at the average position of the points inside the view, so it stays near the visible part.
       return { ...c, labelX: inside.reduce((t, p) => t + p.x, 0) / inside.length, labelY: inside.reduce((t, p) => t + p.y, 0) / inside.length };
     });
 

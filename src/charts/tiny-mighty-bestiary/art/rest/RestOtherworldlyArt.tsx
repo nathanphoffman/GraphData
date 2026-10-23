@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
+import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR, Spokes } from "../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -206,10 +206,7 @@ function CogSprite() {
       <Line d="M200 200 C190 170 220 160 200 130" w={4} dash="4 4" />
       <Line d="M180 196 C168 168 190 150 176 126 M220 196 C232 168 210 150 224 126" w={3} dash="3 5" />
       <circle cx="200" cy="90" r="34" fill={card} {...ink} strokeWidth={5} />
-      {Array.from({ length: 10 }, (_, i) => {
-        const a = (i / 10) * Math.PI * 2;
-        return <path key={i} d={`M${200 + Math.cos(a) * 34} ${90 + Math.sin(a) * 34} l${Math.cos(a) * 12} ${Math.sin(a) * 12}`} stroke="currentColor" strokeWidth="9" strokeLinecap="round" />;
-      })}
+      <Spokes cx={200} cy={90} r={34} count={10} length={12} width={9} />
       <circle cx="200" cy="90" r="14" fill="none" {...ink} strokeWidth={3} />
       <Dot x={192} y={88} r={3} />
       <Dot x={208} y={88} r={3} />
@@ -288,16 +285,10 @@ function AetherSovereign() {
   return (
     <Drawing label="Drawing of an ancient spirit of lightning and brass enthroned between cogs, crackling with bolts">
       <circle cx="70" cy="150" r="56" fill={card} {...ink} strokeWidth={5} />
-      {Array.from({ length: 10 }, (_, i) => {
-        const a = (i / 10) * Math.PI * 2;
-        return <path key={i} d={`M${70 + Math.cos(a) * 56} ${150 + Math.sin(a) * 56} l${Math.cos(a) * 12} ${Math.sin(a) * 12}`} stroke="currentColor" strokeWidth="9" strokeLinecap="round" />;
-      })}
+      <Spokes cx={70} cy={150} r={56} count={10} length={12} width={9} />
       <circle cx="70" cy="150" r="16" fill="none" {...ink} strokeWidth={3} />
       <circle cx="330" cy="150" r="56" fill={card} {...ink} strokeWidth={5} />
-      {Array.from({ length: 10 }, (_, i) => {
-        const a = (i / 10) * Math.PI * 2 + 0.3;
-        return <path key={i} d={`M${330 + Math.cos(a) * 56} ${150 + Math.sin(a) * 56} l${Math.cos(a) * 12} ${Math.sin(a) * 12}`} stroke="currentColor" strokeWidth="9" strokeLinecap="round" />;
-      })}
+      <Spokes cx={330} cy={150} r={56} count={10} length={12} width={9} offset={0.3} />
       <circle cx="330" cy="150" r="16" fill="none" {...ink} strokeWidth={3} />
       <Shape d="M176 60 C170 20 230 20 224 60 C230 90 170 90 176 60 Z" />
       <Shape d="M170 36 L178 6 L192 30 L200 0 L208 30 L222 6 L230 36 Z" w={4} />

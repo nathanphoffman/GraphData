@@ -11,6 +11,7 @@ export default function CellNames({ cells, showExamples }: { cells: Cell[]; show
         const top = GRID_Y0 + cell.row * CELL_H;
         const w = cellNameWidth(cell.name);
         const split = (text: string): [string, string | undefined] => {
+          // Split a name into the main text and a trailing parenthesised note, e.g. "Name (note)".
           const m = text.match(/^(.*?)\s*(\(.*\))$/);
           return m ? [m[1], m[2]] : [text, undefined];
         };

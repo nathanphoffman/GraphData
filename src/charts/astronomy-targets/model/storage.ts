@@ -12,6 +12,8 @@ const number = (v: unknown, lo: number, hi: number, fallback: number) =>
   typeof v === "number" && v >= lo && v <= hi ? v : fallback;
 
 /** Older saved settings used "medium-long" and "long" for what are now Medium-Large and Large. */
+
+// Old saved settings used longer names; map them to the current ones so saved choices still load.
 const renamedFocal = (v: unknown) => (v === "medium-long" ? "medium-large" : v === "long" ? "large" : v);
 
 /** Keeps only valid saved fields, so an old or edited save can never break the page. */

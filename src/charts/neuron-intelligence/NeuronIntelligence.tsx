@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
+import { useSort } from "../useSort";
 import data from "../../../data/intelligence/neuron-intelligence.json";
 import type { Exponents, NeuronIntelligenceData, SortKey } from "./types";
 import { DEFAULT_EXPONENTS, PLAUSIBLE_X, formatNeurons, scoreAnimals, sortAnimals } from "./calculate";
@@ -26,8 +27,7 @@ function Slider({ label, value, min, max, onChange }: SliderProps) {
 
 export default function NeuronIntelligence() {
   const [exponents, setExponents] = useState<Exponents>(DEFAULT_EXPONENTS);
-  const [sortKey, setSortKey] = useState<SortKey>("score");
-  const [ascending, setAscending] = useState(false);
+  const { sortKey, ascending, sortBy } = useSort<SortKey>("score");
 
   const rows = useMemo(
     () => sortAnimals(scoreAnimals(model.animals, exponents), sortKey, ascending),
@@ -37,14 +37,6 @@ export default function NeuronIntelligence() {
   const maxScore = Math.max(...rows.map((r) => r.score));
 
   const set = (key: keyof Exponents) => (value: number) => setExponents((prev) => ({ ...prev, [key]: value }));
-
-  const sortBy = (key: SortKey) => {
-    if (key === sortKey) setAscending(!ascending);
-    else {
-      setSortKey(key);
-      setAscending(key === "name");
-    }
-  };
 
   const outOfRange = exponents.x < PLAUSIBLE_X[0] || exponents.x > PLAUSIBLE_X[1];
 

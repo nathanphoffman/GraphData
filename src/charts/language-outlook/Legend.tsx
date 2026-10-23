@@ -47,6 +47,8 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
         const dash = LINE_DASHES[key];
         const color = LINE_COLORS[key];
         // dotted lines: draw dots spaced like the chart's dash pattern (dot + gap)
+
+        // Total length of one dash cycle (dash + gap lengths added up), used to size the swatch.
         const period = dash ? dash.split(" ").reduce((sum, n) => sum + Number(n), 0) : 0;
         return (
           <span

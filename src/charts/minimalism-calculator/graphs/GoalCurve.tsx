@@ -27,6 +27,8 @@ export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
   const double = goal * 2;
 
   const nearestStop = (n: number) =>
+
+    // Snap to the closest allowed stop by ratio (log distance), since the stops are spaced on a multiplicative scale.
     PER_YEAR_STOPS.reduce((best, v) => (Math.abs(Math.log(v / n)) < Math.abs(Math.log(best / n)) ? v : best));
 
   return (

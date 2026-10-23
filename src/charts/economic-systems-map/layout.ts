@@ -70,6 +70,8 @@ export function placeLabels(data: EconomicSystemsData, figures: Figure[]): Place
 
     for (const [dx, dy] of candidates(w)) {
       const box: Box = { cx: dot.cx + dx, cy: dot.cy + dy, w, h: LABEL_H };
+
+      // Cost of a label position is how much it overlaps the other labels.
       let cost = others.reduce((sum, o) => sum + overlapArea(box, o), 0);
       // Keep labels inside the grid.
       if (box.cx - w / 2 < GRID_X0 + 2) cost += 1000;

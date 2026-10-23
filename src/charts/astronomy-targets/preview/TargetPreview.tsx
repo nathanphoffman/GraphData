@@ -250,6 +250,7 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
       const grey = tone(Math.max(0, 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2 - bg), w);
 
       for (let c = 0; c < 3; c++) {
+        // Pick the red, green or blue channel by index, subtract the sky background, and never go below zero.
         const chan = tone(Math.max(0, (c === 0 ? lin0 : c === 1 ? lin1 : lin2) - bg), w);
         const level = grey + (chan - grey) * colour;
         const v = Math.min(1, skyLevel * skyTint[c] + level * tint[c]) * vignette[p];

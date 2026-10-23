@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../core/artStyle";
+import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR, Spokes } from "../core/artStyle";
 import { Figure } from "../core/figure";
 
 const card = CARD_COLOR;
@@ -688,10 +688,7 @@ function MutantHedgehog() {
       <Line d="M20 120 L380 224" w={4} />
       <Glow x={190} y={140} r={78} />
       <circle cx="190" cy="136" r="54" fill={card} {...ink} />
-      {Array.from({ length: 16 }, (_, i) => {
-        const a = (i / 16) * Math.PI * 2 + 0.2;
-        return <path key={i} d={`M${190 + Math.cos(a) * 54} ${136 + Math.sin(a) * 54} l${Math.cos(a) * 20} ${Math.sin(a) * 20}`} stroke="currentColor" strokeWidth="5" strokeLinecap="round" />;
-      })}
+      <Spokes cx={190} cy={136} r={54} count={16} length={20} width={5} offset={0.2} />
       <Shape d="M222 128 C240 118 262 122 266 138 C264 154 236 156 222 148 Z" w={4} />
       <Dot x={250} y={134} r={3} />
       <Dot x={266} y={140} r={3} />

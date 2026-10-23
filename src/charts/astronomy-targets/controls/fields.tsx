@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export function opticalQualityLabel(v: number): string {
+  // Chain of cutoffs: the first range the value falls under gives the label.
   return v < 20 ? "Poor" : v < 40 ? "Below average" : v < 60 ? "Average" : v < 80 ? "Good" : "Excellent";
 }
 

@@ -4,6 +4,8 @@ export const DEFAULT_SETTINGS: Settings = { zeroDivisor: 4, missingMode: "estima
 
 function geometricMean(values: number[]): number | null {
   if (values.length === 0) return null;
+
+  // Geometric mean is done in log space (sum of logs) to avoid overflow from multiplying many scores.
   const logSum = values.reduce((sum, v) => sum + Math.log(v), 0);
 
   return Math.exp(logSum / values.length);

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
+import { useSort } from "../useSort";
 import data from "../../../data/intelligence/all-intelligence.json";
 import type { AllIntelligenceData, ScoredSubject, Settings } from "./types";
 import { DEFAULT_SETTINGS, scoreSubjects } from "./calculate";
@@ -28,18 +29,9 @@ function compareRows(a: ScoredSubject, b: ScoredSubject, key: SortKey, ascending
 
 export default function AllIntelligence() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
-  const [sortKey, setSortKey] = useState<SortKey>("overall");
-  const [ascending, setAscending] = useState(false);
+  const { sortKey, ascending, sortBy } = useSort<SortKey>("overall");
   const [open, setOpen] = useState<Set<string>>(new Set());
   const rows = useMemo(() => scoreSubjects(model, settings).sort((a, b) => compareRows(a, b, sortKey, ascending)), [settings, sortKey, ascending]);
-
-  const sortBy = (key: SortKey) => {
-    if (key === sortKey) setAscending(!ascending);
-    else {
-      setSortKey(key);
-      setAscending(key === "name");
-    }
-  };
 
   const toggleOpen = (name: string) =>
     setOpen((prev) => {

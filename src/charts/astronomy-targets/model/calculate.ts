@@ -359,6 +359,7 @@ function bestHour(target: Target, season: Season, latitude: number): number | nu
 
   if (!found.length) return null;
 
+  // Mean hour of the visible spots, wrapped back into 0-23.
   return Math.round(found.reduce((sum, b) => sum + b.hour, 0) / found.length) % 24;
 }
 
@@ -369,6 +370,7 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const hour = bestHour(target, season, settings.latitude);
 
     // Score the few hours around the ideal one (around midnight for planets, and for anything that is never up in the dark).
+    // Hours before the night window start belong to after-midnight, so push them past 24 to keep the night continuous.
     const centre = hour === null ? 24 : hour < NIGHT_START - 12 ? hour + 24 : hour;
     const samples = sampleWindow(settings.latitude, season, centre - VIEW_HALF_WINDOW, centre + VIEW_HALF_WINDOW);
     let skyTotal = 0;
@@ -417,6 +419,8 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
       // Planets: score every season and keep the one where it is best placed.
       return (Object.keys(SEASONS) as Season[])
         .map((season) => evaluate(target, season))
+
+        // Keep the highest scoring row.
         .reduce((best, r) => (r.score > best.score ? r : best));
     })
     .sort((a, b) => b.score - a.score);
@@ -499,6 +503,7 @@ export function buildSchedule(rows: ScoredTarget[], season: Season, settings: Se
       continue;
     }
 
+    // Score cutoffs for how easy the target is to schedule.
     const level: ScheduleLevel = row.score >= 35 ? "easy" : row.score >= 20 ? "moderate" : "hard";
     const start = row.bestHour - (row.bestHour % WINDOW_HOURS);
     const slot = byHour.get(start) ?? { hour: start, items: { easy: [], moderate: [], hard: [] }, more: 0 };

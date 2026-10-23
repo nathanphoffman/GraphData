@@ -13,6 +13,8 @@ function Stat({ label, value }: { label: string; value: string }) {
 export function StatsBar({ unit, f }: { unit: Unit; f: Format }) {
   const first = days[0];
   const latest = days[days.length - 1];
+
+  // Keep the day with the lowest weight.
   const lowest = days.reduce((min, d) => (d.weight < min.weight ? d : min));
   const end = future[future.length - 1];
   const endAdjusted = projectedAdjusted.future[projectedAdjusted.future.length - 1];

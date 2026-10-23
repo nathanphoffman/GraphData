@@ -29,3 +29,14 @@ export const Drawing = ({ label, children }: { label: string; children: ReactNod
     {children}
   </svg>
 );
+
+/** Evenly spaced strokes pointing out from a circle's edge, like gear teeth or sun rays. */
+export const Spokes = ({ cx, cy, r, count, length, width, offset = 0 }: { cx: number; cy: number; r: number; count: number; length: number; width: number; offset?: number }) => (
+  <>
+    {Array.from({ length: count }, (_, i) => {
+      const a = (i / count) * Math.PI * 2 + offset;
+
+      return <path key={i} d={`M${cx + Math.cos(a) * r} ${cy + Math.sin(a) * r} l${Math.cos(a) * length} ${Math.sin(a) * length}`} stroke="currentColor" strokeWidth={width} strokeLinecap="round" />;
+    })}
+  </>
+);

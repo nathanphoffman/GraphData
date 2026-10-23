@@ -21,6 +21,7 @@ export function tierFor(creature: Creature) {
 
 /** Final difficulty: base tier + 0.5 per 1-use power. */
 export function difficultyOf(creature: Creature) {
+  // Each power use adds half a tier of difficulty.
   return creature.tier + creature.powers.reduce((sum, p) => sum + 0.5 * p.uses, 0);
 }
 

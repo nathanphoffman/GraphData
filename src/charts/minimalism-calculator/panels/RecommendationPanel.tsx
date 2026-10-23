@@ -30,6 +30,8 @@ interface Props {
 export default function RecommendationPanel({ owned, needed }: Props) {
   const recommendedCount = countFor(needed);
   const onTarget = owned === recommendedCount || Math.abs(owned - needed) <= needed * 0.1;
+
+  // Green when on target, red when you own too many, yellow when you own too few.
   const diffColor = onTarget ? "#16a34a" : owned > needed ? "#dc2626" : "#eab308";
   const arrowPct = arrowPosition(owned, needed);
   const diff = owned - recommendedCount;

@@ -28,6 +28,7 @@ export function position(lines: number, n: number): number {
 
 export function tierFor(p: number): Tier {
   for (const tier of TIERS) {
+    // Normal is inclusive at its upper edge; negative tiers are exclusive so a boundary value moves to the harder tier.
     if (tier.name === "Normal" ? p <= tier.upTo : tier.upTo < 0 ? p < tier.upTo : p <= tier.upTo) return tier;
   }
 
@@ -42,6 +43,7 @@ export function formatCount(v: number): string {
     if (v >= divisor) {
       const q = v / divisor;
 
+      // Fewer decimals as the number grows, so every count shows about three significant digits.
       return (q >= 100 ? q.toFixed(0) : q >= 10 ? q.toFixed(1) : q.toFixed(2)) + suffix;
     }
   }
@@ -64,6 +66,8 @@ export function letterGrade(pct: number): string {
   if (pct <= 50) return "F−";
 
   if (pct < 60) return "F";
+
+  // Pick the letter from the tens digit.
   const letter = pct >= 90 ? "A" : pct >= 80 ? "B" : pct >= 70 ? "C" : "D";
   const r = pct % 10;
 

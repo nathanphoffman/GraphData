@@ -90,6 +90,8 @@ function solve3(m: number[][], v: number[]): number[] {
 export function project(days: Day[], fitDays: number, aheadDays: number): { fit: Projection[]; future: Projection[] } {
   const recent = days.slice(-fitDays);
   const n = recent.length;
+
+  // Sums used for a least-squares fit over the recent days (x is the day index).
   const power = (k: number) => recent.reduce((sum, _, i) => sum + i ** k, 0);
   const weighted = (k: number) => recent.reduce((sum, d, i) => sum + d.weight * i ** k, 0);
   const [c, b, a] = solve3(

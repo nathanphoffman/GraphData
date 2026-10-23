@@ -12,6 +12,7 @@ export const taperCurve = (date: string, start: number, target: number, ahead: n
   ...taperToTotal(date, start, start - target, ahead),
 ];
 
+// Average of f over all rows.
 const meanOf = (rows: Row[], f: (r: Row) => number) => rows.reduce((sum, r) => sum + f(r), 0) / rows.length;
 
 /** Tapering curve from a row's 3-day average down to its 3 day projected all average (first month = 1/12 of the loss). Today, yesterday and the day before. */
