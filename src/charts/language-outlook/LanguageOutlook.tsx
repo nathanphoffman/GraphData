@@ -19,6 +19,8 @@ export default function LanguageOutlook() {
 
   const sorted = useMemo(() => {
     const value = (lang: LanguageRecord) => lang.values[sortKey] ?? null;
+
+    // Highest value first; languages with no value always go to the end.
     const byValue = (a: LanguageRecord, b: LanguageRecord) => {
       const [x, y] = [value(a), value(b)];
       if (x === null || y === null) return x === y ? 0 : x === null ? 1 : -1; // no value goes last

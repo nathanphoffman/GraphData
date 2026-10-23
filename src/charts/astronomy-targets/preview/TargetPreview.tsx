@@ -111,6 +111,7 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
   const base = [0.86, 0.93, 1.0];
   const skyTint = [1, 0.82, 0.62];
 
+  // Returns a renderer for a given averted-vision level (0 = looking straight at it, 1 = looking beside it), for point-like targets.
   return (averted: number) => {
     // Brighter points bloom bigger; one that is only just brighter than the faintest star shows as a tiny dot.
     const reach = Math.max(0, Math.min(0.6 * (pointMargin + AVERTED_BOOST * averted), 8));
@@ -162,6 +163,7 @@ interface ViewParams {
   point: boolean;
 }
 
+/** Sets up the canvas and returns a render function for the target: a point of light if it is too small to resolve, otherwise the photo. */
 function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams) {
   const { widthArcmin, mean, bg, center } = photo;
   const { fov, margin, pointMargin, quality } = optics;
@@ -224,6 +226,7 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
   const skyLevel = skyGlow ** 2.5 * 0.3 + 0.015 * poor;
   const skyTint = [1, 0.82, 0.62];
 
+  // Returns a renderer for a given averted-vision level that turns the photo into what the eye would see through the eyepiece.
   return (averted: number) => {
     const gain = 10 ** (0.4 * (margin + AVERTED_BOOST * averted)) / mean;
     const soften = Math.min(1, 0.6 * averted + 0.6 * poor);
@@ -313,6 +316,7 @@ export function hasPreview(id: string): boolean {
   return id in TARGET_IMAGES;
 }
 
+/** Floating preview of what the target looks like through the chosen eyepiece, placed next to the mouse. */
 export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; settings: Settings; x: number; y: number }) {
   const info = TARGET_IMAGES[row.target.id];
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -336,6 +340,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     return () => { cancelled = true; };
   }, [info, row.target]);
 
+  // Draw the preview and animate the averted-vision effect; people who prefer reduced motion get a fixed middle setting.
   useEffect(() => {
     if (!loaded || !canvasRef.current) return;
     const render = prepareView({
@@ -373,6 +378,8 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   // Measure the real box so it can be moved fully on screen: beside the cursor, flipped to its left or lifted up when it would overflow.
   const boxRef = useRef<HTMLDivElement>(null);
   const [box, setBox] = useState({ w: 700, h: VIEW_SIZE + 190 });
+
+  // Measure the box after each render, then keep it on screen by flipping it to the other side of the pointer or sliding it up.
   useLayoutEffect(() => {
     const el = boxRef.current;
     if (el && (el.offsetWidth !== box.w || el.offsetHeight !== box.h)) setBox({ w: el.offsetWidth, h: el.offsetHeight });

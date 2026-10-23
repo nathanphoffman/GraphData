@@ -107,6 +107,7 @@ function taperLines(pt: Pt, tapered: Tapered | null) {
   };
 }
 
+/** Work out everything the chart draws (scales, paths, dots) for the chosen range and options. */
 export function buildChart(input: ChartInput) {
   const { rangeDays, k, tapered, allTrend, spread, general } = input;
   const shown = days.slice(-Math.min(rangeDays, days.length));

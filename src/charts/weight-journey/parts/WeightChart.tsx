@@ -52,6 +52,7 @@ function AllTrends({ trends }: { trends: Chart["allTrends"] }) {
   );
 }
 
+/** The weight chart; recalculated only when the chart inputs change, since it is a lot of drawing. */
 export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines }) {
   const { rangeDays, k, tapered, allTrend, spread, general } = input;
   const chart = useMemo(() => buildChart(input), [rangeDays, k, tapered, allTrend, spread, general]);

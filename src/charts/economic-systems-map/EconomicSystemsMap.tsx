@@ -11,6 +11,7 @@ const model = data as EconomicSystemsData;
 const viewsModel = views as EconomicSystemsViewsData;
 const combos = (combosData as unknown as EconomicSystemsCombosData).combos;
 
+/** The economic systems grid: pick a system, optionally pick a neighbouring cell to see how the two combine. */
 export default function EconomicSystemsMap() {
   const [showExamples, setShowExamples] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);

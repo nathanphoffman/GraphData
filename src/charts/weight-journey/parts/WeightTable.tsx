@@ -44,6 +44,7 @@ function Head({ unit, show }: { unit: Unit; show: Show }) {
   );
 }
 
+/** One day in the table; columns shown depend on the chosen options, and estimated days are styled differently. */
 function DayRow({ d, f, show }: { d: (typeof dailyRows)[number]; f: Format; show: Show }) {
   const two = (a: number | null, b: number | null, fmt = f.w, bandOf?: BandOf) => <Two actual={a} adjusted={b} fmt={fmt} bandOf={bandOf} />;
 

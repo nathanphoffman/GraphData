@@ -11,6 +11,8 @@ function sharedParam(key: string): string | null {
  */
 export function useStoredValue<T>(key: string, fallback: T, parse: (raw: string) => T | null) {
   const storageKey = `minimalism-calculator:${key}`;
+
+  // Start from a value in the shared link, else the saved one, else the default.
   const [value, setValue] = useState<T>(() => {
     const shared = sharedParam(key);
     const fromLink = shared === null ? null : parse(shared);

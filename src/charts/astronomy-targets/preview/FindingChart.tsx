@@ -53,6 +53,7 @@ export function FindingChart({ stars, target }: { stars: GuideStar[]; target: { 
   const barLeft = 12;
   const barY = SIZE - 12;
 
+  // Draw the constellation outlines first, then the guide stars and distances on top.
   return (
     <svg className="astro-guide" viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label="Triangulation chart: distances from the three nearest bright stars to the target">
       {figures.map((c) => (

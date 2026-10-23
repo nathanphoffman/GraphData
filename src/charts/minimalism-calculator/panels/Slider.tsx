@@ -35,6 +35,7 @@ function arc(fromDeg: number, toDeg: number) {
   return `M ${a.x} ${a.y} A ${R} ${R} 0 ${large} 1 ${b.x} ${b.y}`;
 }
 
+/** Slider with a number box and keyboard control; the value can be shown as text and snapped to allowed stops. */
 export default function Slider({
   id,
   label,
@@ -79,6 +80,7 @@ export default function Slider({
     setFromFraction(deg / SWEEP);
   };
 
+  // Arrow keys step by one, Home and End jump to the ends; anything else is left alone.
   const handleKey = (e: React.KeyboardEvent) => {
     let next = value;
 

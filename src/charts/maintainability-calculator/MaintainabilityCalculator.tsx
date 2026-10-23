@@ -7,6 +7,7 @@ import { RoleTable, SliderPanel, TierLegend } from "./Sections";
 
 const model = data as MaintainabilityData;
 
+/** Maintainability calculator page: turns lines of code, team size, quality and AI use into a stability tier. */
 export default function MaintainabilityCalculator() {
   const [loc, setLoc] = useState("10000");
   const [team, setTeam] = useState("1");

@@ -62,6 +62,7 @@ export function placeLabels(data: EconomicSystemsData, figures: Figure[]): Place
   const placed: PlacedLabel[] = [];
   const taken: Box[] = [];
 
+  // Place each label at the candidate position that overlaps the other labels least.
   figures.forEach((figure, i) => {
     const w = labelWidth(figure.name);
     const dot = dots[i];

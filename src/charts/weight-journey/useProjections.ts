@@ -20,6 +20,8 @@ export function useProjections(tool: ProjectionTool, k: number, lines: Lines) {
   const monthlyLoss = Number(tool.lossInput) / k;
   const aheadDays = Math.round(Number(tool.months) * 30);
   const ahead = aheadDays > 0 ? aheadDays : 365;
+
+  // Tapering projection: only when a monthly loss was entered, starting from the latest average and muscle gain.
   const tapered = useMemo(() => {
     if (!tool.lossInput || !(monthlyLoss > 0) || !(aheadDays > 0)) return null;
     const lastRow = dailyRows[dailyRows.length - 1];

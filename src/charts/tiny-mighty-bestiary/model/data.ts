@@ -56,6 +56,7 @@ export const SORTS = [
 const byDifficultyThenName = (a: Creature, b: Creature) =>
   difficultyOf(a) - difficultyOf(b) || a.name.localeCompare(b.name);
 
+/** Sort function for the chosen sort name; ties fall back to difficulty and then name. */
 export function compareBy(sort: string): (a: Creature, b: Creature) => number {
   const typeOrder = (c: Creature) => model.creatureTypes.findIndex((t) => t.id === c.type);
 

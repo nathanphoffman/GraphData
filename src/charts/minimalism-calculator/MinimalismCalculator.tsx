@@ -12,6 +12,7 @@ import { useCalculatorState } from "./state/state";
 import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_BENCHMARKS, PER_YEAR_STOPS } from "./logic/stops";
 import WaitChart from "./graphs/WaitChart";
 
+/** Minimalism calculator page: how many of an item you need compared with how many you own. */
 export default function MinimalismCalculator() {
   const s = useCalculatorState();
   const item = findItemType(s.typeId) ?? DEFAULT_ITEM_TYPE;

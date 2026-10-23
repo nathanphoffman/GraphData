@@ -17,6 +17,7 @@ const meanOf = (rows: Row[], f: (r: Row) => number) => rows.reduce((sum, r) => s
 
 /** Tapering curve from a row's 3-day average down to its 3 day projected all average (first month = 1/12 of the loss). Today, yesterday and the day before. */
 export function buildAllTrend(rows: Row[], ahead: number) {
+  // Up to three past trend lines (today, 1 and 2 steps back) so you can see how the projection has shifted.
   const trends = [0, 1, 2].flatMap((back) => {
     const row = rows[rows.length - 1 - back];
     if (!row || row.allProj3 === null || row.allProj3Adj === null) return [];

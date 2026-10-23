@@ -28,6 +28,7 @@ function StatBlock({ tier }: { tier: Tier }) {
 }
 
 function SkillList({ creature }: { creature: Creature }) {
+  // Comma-separated skills, each with a + or − marker and an optional note.
   return (
     <p>
       <strong>Skills:</strong>{" "}

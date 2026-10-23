@@ -9,6 +9,7 @@ import { SettingsPanel } from "./SettingsPanel";
 
 const model = data as AllIntelligenceData;
 
+/** The value a row is sorted by for a column; missing scores sort as -1 so they land at the bottom. */
 function sortValue(row: ScoredSubject, key: SortKey): number | string {
   if (key === "name") return row.subject.name;
 

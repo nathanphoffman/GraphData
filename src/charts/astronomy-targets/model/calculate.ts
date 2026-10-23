@@ -366,6 +366,7 @@ function bestHour(target: Target, season: Season, latitude: number): number | nu
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {
   const { fov, mm } = optics(settings);
 
+  // Score one target in one season by averaging conditions across the hours around its best time.
   const evaluate = (target: Target, season: Season) => {
     const hour = bestHour(target, season, settings.latitude);
 

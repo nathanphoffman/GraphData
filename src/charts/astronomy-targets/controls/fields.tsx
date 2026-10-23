@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+/** Plain-words rating for an optical quality percentage. */
 export function opticalQualityLabel(v: number): string {
   // Chain of cutoffs: the first range the value falls under gives the label.
   return v < 20 ? "Poor" : v < 40 ? "Below average" : v < 60 ? "Average" : v < 80 ? "Good" : "Excellent";
@@ -9,6 +10,7 @@ export function opticalQualityLabel(v: number): string {
 export function NumberField({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
   const [draft, setDraft] = useState<string | null>(null);
 
+  // Show the text being typed if there is any, otherwise the real value.
   return (
     <label>
       <span>{label}</span>

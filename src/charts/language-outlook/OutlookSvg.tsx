@@ -18,6 +18,7 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
   const xAt = makeXAt(languages.length);
   const gridValues = yScale.ticks(Math.round(yScale.domain()[1] / 10));
 
+  // Draw the gridlines, then each language's lines, projection arrows and labels.
   return (
     <svg className="chart-surface" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={model.title}>
       {gridValues.map((v) => (

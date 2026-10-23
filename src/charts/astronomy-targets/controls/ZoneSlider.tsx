@@ -20,6 +20,8 @@ interface ZoneSliderProps {
 /** Position (0 to 1) along the slider for a value, and back again. */
 function scale({ min, max, log }: Pick<ZoneSliderProps, "min" | "max" | "log">) {
   const toPos = (v: number) => (log ? Math.log(v / min) / Math.log(max / min) : (v - min) / (max - min));
+
+  // Slider position back to a value; log sliders round to half steps below 10 so small values stay selectable.
   const fromPos = (p: number) => {
     const v = log ? min * (max / min) ** p : min + p * (max - min);
 

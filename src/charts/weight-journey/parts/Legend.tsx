@@ -1,5 +1,6 @@
 import type { Lines } from "../useProjections";
 
+/** Colour key for the chart; entries only show for lines that are switched on. */
 export function Legend({ lines, tapered }: { lines: Lines; tapered: boolean }) {
   return (
     <p className="muted weight-legend">

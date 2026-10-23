@@ -4,6 +4,7 @@ import type { Cell } from "./types";
 
 /** Layer 3: cell names, plus the historical examples when toggled on. */
 export default function CellNames({ cells, showExamples }: { cells: Cell[]; showExamples: boolean }) {
+  // Draw each cell's name; with examples on, also its authoritarian and democratic examples, each with any bracketed note on its own line.
   return (
     <>
       {cells.map((cell) => {

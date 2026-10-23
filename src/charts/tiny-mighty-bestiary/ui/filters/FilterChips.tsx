@@ -15,6 +15,7 @@ interface Props {
 
 /** One row of single-select filter chips. Clicking the active chip turns it off. */
 export default function FilterChips({ label, groupName = label, options, active, onChange, chipClass, swatch, children }: Props) {
+  // One toggle button per option; the active one is marked pressed.
   return (
     <div className="bestiary-key" role="group" aria-label={`Filter by ${groupName.toLowerCase()}`}>
       <span className="bestiary-key-label">{label}</span>

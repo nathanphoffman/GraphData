@@ -20,6 +20,7 @@ const model = data as AstronomyTargetsData;
 function filterRows(scored: ScoredTarget[], season: SeasonFilter | null, query: string) {
   const needle = query.trim().toLowerCase();
 
+  // Keep rows that match the chosen season and whose id, nickname, constellation or type contains the search text.
   return scored.filter(
     (row) =>
       (!season || row.target.bestSeason === season) &&
@@ -37,6 +38,7 @@ function useColumns() {
   return { hidden, toggle, columns: [...visible.filter((c) => c.afterScore), ...visible.filter((c) => !c.afterScore)] };
 }
 
+/** The astronomy targets page: holds the settings, filters and hover state, and wires them to the table and previews. */
 export default function AstronomyTargets() {
   const [settings, setSettings] = useStoredState<Settings>("settings", DEFAULT_SETTINGS, parseSettings);
   const set = (patch: Partial<Settings>) => setSettings((prev) => ({ ...prev, ...patch }));

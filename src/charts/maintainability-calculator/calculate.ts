@@ -26,6 +26,7 @@ export function position(lines: number, n: number): number {
   return d <= 0 ? d / s.down : d / s.up;
 }
 
+/** The difficulty tier a position falls in. */
 export function tierFor(p: number): Tier {
   for (const tier of TIERS) {
     // Normal is inclusive at its upper edge; negative tiers are exclusive so a boundary value moves to the harder tier.
@@ -51,6 +52,7 @@ export function formatCount(v: number): string {
   return Math.round(v).toString();
 }
 
+/** Label for how much of the code was written by AI (0 = none, 1 = all of it). */
 export function aiName(a: number): string {
   if (a === 0) return "No AI";
 

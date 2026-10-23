@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
  */
 export function useStoredState<T>(key: string, fallback: T, parse: (saved: unknown) => T | null) {
   const storageKey = `astronomy-targets:${key}`;
+
+  // Start from the saved value when it loads and passes `parse`; any problem falls back to the default.
   const [value, setValue] = useState<T>(() => {
     try {
       const raw = localStorage.getItem(storageKey);

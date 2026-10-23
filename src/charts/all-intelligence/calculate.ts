@@ -49,6 +49,7 @@ export function estimateScore(data: AllIntelligenceData, subject: Subject, col: 
 export function scoreSubjects(data: AllIntelligenceData, settings: Settings): ScoredSubject[] {
   const worst = worstScores(data.subjects, Object.keys(data.columns));
 
+  // Score each subject: per group, use real scores and fill in missing ones (floor or estimate), then combine the groups.
   return data.subjects.map((subject) => {
     const groups: Record<string, number | null> = {};
     let measured = 0;

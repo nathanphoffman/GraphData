@@ -19,6 +19,7 @@ export function scoreAnimals(animals: Animal[], { x, w, k }: Exponents): ScoredA
 }
 
 export function sortAnimals(rows: ScoredAnimal[], key: SortKey, ascending: boolean): ScoredAnimal[] {
+  // Names sort alphabetically; everything else sorts by number.
   return [...rows].sort((a, b) => {
     if (key === "name") return ascending ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
     return ascending ? a[key] - b[key] : b[key] - a[key];

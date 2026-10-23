@@ -10,6 +10,7 @@ const LEVELS: { level: ScheduleLevel; label: string; hue: number }[] = [
 
 type OnHover = (hover: { id: string; x: number; y: number } | null) => void;
 
+/** One target in the schedule list; hovering it shows its preview if it has one. */
 function Item({ item, onHover }: { item: ScheduleItem; onHover: OnHover }) {
   const t = item.row.target;
   const preview = hasPreview(t.id);
@@ -26,6 +27,7 @@ function Item({ item, onHover }: { item: ScheduleItem; onHover: OnHover }) {
   );
 }
 
+/** Popup listing what to observe in each two-hour slot; Escape or clicking outside closes it. */
 export function ScheduleModal({ schedule, onClose, onHover }: { schedule: Schedule; onClose: () => void; onHover: OnHover }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -33,6 +35,7 @@ export function ScheduleModal({ schedule, onClose, onHover }: { schedule: Schedu
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  // Clicks inside the popup are stopped so only the backdrop closes it.
   return (
     <div className="astro-modal-backdrop" onClick={onClose}>
       <div className="astro-modal" role="dialog" aria-modal="true" aria-label="Observing schedule" onClick={(e) => e.stopPropagation()}>

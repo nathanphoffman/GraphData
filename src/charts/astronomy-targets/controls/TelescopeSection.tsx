@@ -3,6 +3,7 @@ import type { Aperture, FocalLength } from "../model/types";
 import { NumberField, opticalQualityLabel, SliderField } from "./fields";
 import type { SectionProps } from "./SkySection";
 
+/** Dropdown of telescope presets plus "manual" and "generic" entries; picking one rewrites the matching settings. */
 function PresetSelect({ settings, set }: SectionProps) {
   const preset = activePreset(settings);
 

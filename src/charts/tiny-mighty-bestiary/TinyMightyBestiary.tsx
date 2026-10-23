@@ -17,6 +17,7 @@ const DEFAULT_FILTERS: Filters = {
   sort: "difficulty",
 };
 
+/** Creature browser page: filters, search and sorting for the creature cards. */
 export default function TinyMightyBestiary() {
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
   const { query, theme, type, difficulty, tone, sort } = filters;
@@ -25,6 +26,7 @@ export default function TinyMightyBestiary() {
   const band = DIFFICULTY_BANDS.find((b) => b.id === difficulty);
   const toneBand = TONE_BANDS.find((b) => b.id === tone);
 
+  // A creature must match every active filter.
   const passesFilters = (c: Creature) =>
     (type === null || c.type === type) &&
     (!band || (difficultyOf(c) >= band.min && difficultyOf(c) <= band.max)) &&

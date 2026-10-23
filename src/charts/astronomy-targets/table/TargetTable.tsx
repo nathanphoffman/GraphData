@@ -30,6 +30,7 @@ function ScoreCell({ row, settings }: { row: ScoredTarget; settings: Settings })
   );
 }
 
+/** Target name cell; hovering it shows the preview if the target has an image. */
 function TargetCell({ row, onHover }: { row: ScoredTarget; onHover: (h: Hover | null) => void }) {
   const t = row.target;
   const preview = hasPreview(t.id);

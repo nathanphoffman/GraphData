@@ -13,6 +13,7 @@ interface Props {
 
 /** One-row colour key for a group: overlapping circles for dot series, thick bars for lines. */
 function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[] }) {
+  // One legend entry per series: projections get an arrow swatch, the rest a plain colour swatch.
   return (
     <div className="legend-key" aria-hidden="true">
       {keys.map((key) => {
