@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./styles.css";
-import data from "../../../../data/misc/maintainability-calculator.json";
+import data from "../../../../data/maintainability-calculator/maintainability-calculator.json";
 import type { MaintainabilityData } from "./types";
 import { aiName, letterGrade } from "./calculate";
 import { RoleTable, SliderPanel, TierLegend } from "./Sections";

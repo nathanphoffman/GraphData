@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Adds 0-weight placeholder rows to data/misc/weight-journey.json so you only have to fill in the numbers.
+"""Adds 0-weight placeholder rows to data/weight-journey/weight-journey.json so you only have to fill in the numbers.
 
 Usage (from the GraphData folder):
     python3 scripts/add-weight-placeholders.py [days]
@@ -13,7 +13,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "misc" / "weight-journey.json"
+DATA = ROOT / "data" / "weight-journey" / "weight-journey.json"
 
 def main():
     ahead = int(sys.argv[1]) if len(sys.argv) > 1 else 60

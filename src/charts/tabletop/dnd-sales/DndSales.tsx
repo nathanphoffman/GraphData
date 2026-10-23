@@ -1,4 +1,4 @@
-import data from "../../../../data/misc/dnd-sales.json";
+import data from "../../../../data/dnd-sales/dnd-sales.json";
 import type { Confidence, DndSalesData } from "./types";
 
 const model = data as DndSalesData;

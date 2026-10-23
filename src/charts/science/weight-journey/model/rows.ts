@@ -1,5 +1,5 @@
 import { type Averages, addAverages, addMuscle, fillDays, project } from "../calculate";
-import data from "../../../../../data/misc/weight-journey.json";
+import data from "../../../../../data/weight-journey/weight-journey.json";
 import { allAverage, completeAverage, last3, projectAll, recentRate, yearly } from "./averages";
 
 const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time

@@ -1,4 +1,4 @@
-import data from "../../../../data/misc/rule-of-authorship.json";
+import data from "../../../../data/rule-of-authorship/rule-of-authorship.json";
 import "./styles.css";
 import type { Owner, RuleOfAuthorshipData, Segment } from "./types";
 import { OWNER_LABELS } from "./style";
