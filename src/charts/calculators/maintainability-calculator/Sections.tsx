@@ -3,6 +3,7 @@ import { formatCount, position, spans, tierFor } from "./calculate";
 import { TIERS } from "./style";
 import type { MaintainabilityData, Tier } from "./types";
 
+/** Coloured label for a stability tier, so the tier reads the same everywhere it appears. */
 function Badge({ tier }: { tier: Tier }) {
   return (
     <span className="badge" style={{ background: tier.background, color: tier.color }}>
@@ -19,7 +20,7 @@ interface SliderPanelProps {
   max: number;
   step: number;
   current: number;
-  onChange: (v: number) => void;
+  onChange: (value: number) => void;
   ticks: string[];
 }
 
@@ -31,9 +32,9 @@ export function SliderPanel({ id, label, value, min, max, step, current, onChang
         <label htmlFor={id}>{label}</label>
         <strong>{value}</strong>
       </div>
-      <input id={id} type="range" min={min} max={max} step={step} value={current} onChange={(e) => onChange(Number(e.target.value))} />
+      <input id={id} type="range" min={min} max={max} step={step} value={current} onChange={(event) => onChange(Number(event.target.value))} />
       <div className="calc-ticks">
-        {ticks.map((t) => <span key={t}>{t}</span>)}
+        {ticks.map((tick) => <span key={tick}>{tick}</span>)}
       </div>
     </div>
   );
@@ -48,6 +49,7 @@ interface TableProps {
   shift: number;
 }
 
+/** One row of the role table: the recommended line counts for a role, shifted by the chosen multiplier. */
 function RoleRow({ role, lines, mult, shift }: { role: TableProps["roles"][number] } & Omit<TableProps, "roles">) {
   const n = role.base + shift;
   const s = spans(n);
@@ -67,6 +69,7 @@ function RoleRow({ role, lines, mult, shift }: { role: TableProps["roles"][numbe
   );
 }
 
+/** Table of recommended line counts for each team role. */
 export function RoleTable({ roles, ...rest }: TableProps) {
   return (
     <div className="panel calc-table">
@@ -90,6 +93,7 @@ export function RoleTable({ roles, ...rest }: TableProps) {
   );
 }
 
+/** Key explaining what each stability tier means. */
 export function TierLegend() {
   return (
     <div className="panel">

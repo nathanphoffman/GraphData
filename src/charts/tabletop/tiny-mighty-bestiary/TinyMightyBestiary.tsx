@@ -27,19 +27,19 @@ export default function TinyMightyBestiary() {
   const toneBand = TONE_BANDS.find((b) => b.id === tone);
 
   // A creature must match every active filter.
-  const passesFilters = (c: Creature) =>
-    (type === null || c.type === type) &&
-    (!band || (difficultyOf(c) >= band.min && difficultyOf(c) <= band.max)) &&
-    (!toneBand || toneBand.tones.includes(c.tone)) &&
-    matches(c, query);
+  const passesFilters = (creature: Creature) =>
+    (type === null || creature.type === type) &&
+    (!band || (difficultyOf(creature) >= band.min && difficultyOf(creature) <= band.max)) &&
+    (!toneBand || toneBand.tones.includes(creature.tone)) &&
+    matches(creature, query);
 
   const sorted = [...model.creatures].sort(compareBy(sort));
-  const creatures = sorted.filter((c) => c.themes.includes(theme) && passesFilters(c));
+  const creatures = sorted.filter((creature) => creature.themes.includes(theme) && passesFilters(creature));
 
   // With nothing found in the selected theme, a search falls back to every other theme.
   const otherThemes =
     creatures.length === 0 && query.trim() !== ""
-      ? sorted.filter((c) => !c.themes.includes(theme) && passesFilters(c))
+      ? sorted.filter((creature) => !creature.themes.includes(theme) && passesFilters(creature))
       : [];
 
   return (
@@ -62,6 +62,7 @@ export default function TinyMightyBestiary() {
       </div>
       {creatures.length === 0 && otherThemes.length === 0 && <p className="muted">No creatures match these filters.</p>}
       <div className="bestiary-grid">
+        {/* One card per creature that matches the filters. */}
         {creatures.map((creature) => (
           <CreatureCard key={creature.id} creature={creature} />
         ))}
@@ -72,6 +73,7 @@ export default function TinyMightyBestiary() {
             <span>In Other Themes: ({otherThemes.length})</span>
           </div>
           <div className="bestiary-grid">
+            {/* One card per creature from other themes, shown when this theme has no match. */}
             {otherThemes.map((creature) => (
               <CreatureCard key={creature.id} creature={creature} />
             ))}

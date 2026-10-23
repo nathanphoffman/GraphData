@@ -18,7 +18,7 @@ export default function MaintainabilityCalculator() {
   const people = Math.max(1, Math.floor(Number(team) || 1));
   const q = Math.min(100, Math.max(0, qualityPct)) / 100;
   const qMod = q - 0.75;
-  const pct = Math.round(q * 100);
+  const percent = Math.round(q * 100);
 
   return (
     <div className="calc">
@@ -29,18 +29,18 @@ export default function MaintainabilityCalculator() {
       <div className="panel calc-grid">
         <label>
           Application line count
-          <input type="number" min={0} step={1} value={loc} onChange={(e) => setLoc(e.target.value)} />
+          <input type="number" min={0} step={1} value={loc} onChange={(event) => setLoc(event.target.value)} />
         </label>
         <label>
           Team members
-          <input type="number" min={1} step={1} value={team} onChange={(e) => setTeam(e.target.value)} />
+          <input type="number" min={1} step={1} value={team} onChange={(event) => setTeam(event.target.value)} />
         </label>
       </div>
 
       <SliderPanel
         id="quality"
         label="Code Quality Letter Grade"
-        value={`${letterGrade(pct)} · ${pct}% (${qMod >= 0 ? "+" : "−"}${Math.abs(qMod).toFixed(2)})`}
+        value={`${letterGrade(percent)} · ${percent}% (${qMod >= 0 ? "+" : "−"}${Math.abs(qMod).toFixed(2)})`}
         min={0}
         max={100}
         step={1}
@@ -56,7 +56,7 @@ export default function MaintainabilityCalculator() {
         max={1}
         step={0.1}
         current={ai}
-        onChange={(v) => setAi(Math.round(v * 10) / 10)}
+        onChange={(value) => setAi(Math.round(value * 10) / 10)}
         ticks={["0 No AI", "0.5 AI‑Written", "1 Full Vibe AI"]}
       />
 

@@ -16,6 +16,7 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
   // One legend entry per series: projections get an arrow swatch, the rest a plain colour swatch.
   return (
     <div className="legend-key" aria-hidden="true">
+      {/* One legend entry per series. */}
       {keys.map((key) => {
         if (key.startsWith(PROJECTION_PREFIX)) {
           // projection dots come with a faint arrow, as on the chart
@@ -54,7 +55,7 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
         // dotted lines: draw dots spaced like the chart's dash pattern (dot + gap)
 
         // Total length of one dash cycle (dash + gap lengths added up), used to size the swatch.
-        const period = dash ? dash.split(" ").reduce((sum, n) => sum + Number(n), 0) : 0;
+        const period = dash ? dash.split(" ").reduce((total, n) => total + Number(n), 0) : 0;
 
         return (
           <span
@@ -77,10 +78,12 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
 export default function Legend({ model, visible, onToggle, sortKey, onSort }: Props) {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const allKeys = [...model.series, ...model.lines];
+
+  // Collect the keys that belong to each legend group.
   const sections = LEGEND_GROUPS.map((group) => ({
     title: group.title,
     description: group.description,
-    keys: allKeys.filter((key) => LEGEND_GROUPS.find((g) => g.test(key)) === group),
+    keys: allKeys.filter((allKey) => LEGEND_GROUPS.find((g) => g.test(allKey)) === group),
   })).filter((section) => section.keys.length > 0);
 
   const labelOf = (key: string) => LINE_LABELS[key] ?? key;
@@ -92,9 +95,11 @@ export default function Legend({ model, visible, onToggle, sortKey, onSort }: Pr
         <p className="legend-description">
           Orders the languages from left to right, highest first, by any one metric. Languages with no value for it go last.
         </p>
-        <select className="sort-select" value={sortKey} onChange={(e) => onSort(e.target.value)}>
+        <select className="sort-select" value={sortKey} onChange={(event) => onSort(event.target.value)}>
+          {/* One dropdown group per legend group. */}
           {sections.map(({ title, keys }) => (
             <optgroup key={title} label={title}>
+              {/* One dropdown entry per series. */}
               {keys.map((key) => (
                 <option key={key} value={key}>
                   {labelOf(key)}
@@ -104,6 +109,7 @@ export default function Legend({ model, visible, onToggle, sortKey, onSort }: Pr
           ))}
         </select>
       </fieldset>
+      {/* One box of checkboxes per legend group. */}
       {sections.map(({ title, description, keys }) => (
         <fieldset key={title} className="legend-group">
           <legend>{title}</legend>
@@ -120,9 +126,10 @@ export default function Legend({ model, visible, onToggle, sortKey, onSort }: Pr
           </button>
           <div className={open[title] ? "legend-panel open" : "legend-panel"}>
             <div className="legend-panel-inner">
+              {/* One checkbox per series. */}
               {keys.map((key) => (
                 <label key={key}>
-                  <input type="checkbox" checked={visible[key]} onChange={(e) => onToggle(key, e.target.checked)} />
+                  <input type="checkbox" checked={visible[key]} onChange={(event) => onToggle(key, event.target.checked)} />
                   {model.series.includes(key) ? (
                     <>
                       <span className="swatch dot" style={{ background: seriesColor(key, model.series.indexOf(key)) }} />

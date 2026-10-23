@@ -114,8 +114,9 @@ export function ArcologyWarden() {
   return (
     <Drawing label="Drawing of a mega-tower with a glowing eye at its core, lines running to every elevator, door and gun turret">
       <Shape d="M140 20 H260 V224 H140 Z" />
-      {Array.from({ length: 10 }, (_, i) => (
-        <Line key={i} d={`M140 ${44 + i * 18} H260`} w={2} />
+      {/* Evenly spaced horizontal lines. */}
+      {Array.from({ length: 10 }, (_unused, index) => (
+        <Line key={index} d={`M140 ${44 + index * 18} H260`} w={2} />
       ))}
       <circle cx="200" cy="110" r="30" fill={card} {...ink} strokeWidth={5} />
       <circle cx="200" cy="110" r="12" fill="currentColor" />

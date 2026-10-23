@@ -1,5 +1,6 @@
 import { useRef } from "react";
 
+/** Notice that the bestiary is AI-made and not endorsed by the Tiny Mighty RPG team, plus a credits dialog. */
 export default function Credits() {
   const dialog = useRef<HTMLDialogElement>(null);
 
@@ -25,7 +26,7 @@ export default function Credits() {
         ref={dialog}
         className="bestiary-credits"
         aria-labelledby="bestiary-credits-title"
-        onClick={(e) => e.target === dialog.current && dialog.current.close()}
+        onClick={(event) => event.target === dialog.current && dialog.current.close()}
       >
         <h2 id="bestiary-credits-title">Tiny Mighty Attribution Credit</h2>
         <p>The original Tiny Mighty RPG was made entirely by humans, this bestiary was not, and <strong>the contributors listed below had no part in making it</strong>. This was exclusively a project of Nathan Hoffman, the original author of the game.</p>

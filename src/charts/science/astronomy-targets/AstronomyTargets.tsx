@@ -22,9 +22,10 @@ function filterRows(scored: ScoredTarget[], season: SeasonFilter | null, query: 
 
   // Keep rows that match the chosen season and whose id, nickname, constellation or type contains the search text.
   return scored.filter(
-    (row) =>
-      (!season || row.target.bestSeason === season) &&
-      (!needle || [row.target.id, row.target.nickname, row.target.constellation, row.target.type].some((v) => v.toLowerCase().includes(needle))),
+    // Match the season, and the search text against id, nickname, constellation and type.
+    (scoredTarget) =>
+      (!season || scoredTarget.target.bestSeason === season) &&
+      (!needle || [scoredTarget.target.id, scoredTarget.target.nickname, scoredTarget.target.constellation, scoredTarget.target.type].some((value) => value.toLowerCase().includes(needle))),
   );
 }
 
@@ -32,10 +33,10 @@ function filterRows(scored: ScoredTarget[], season: SeasonFilter | null, query: 
 function useColumns() {
   const [hiddenList, setHiddenList] = useStoredState<string[]>("hidden-columns", defaultHidden, parseHidden);
   const hidden = useMemo(() => new Set(hiddenList), [hiddenList]);
-  const toggle = (id: string) => setHiddenList((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]));
-  const visible = COLUMNS.filter((c) => !hidden.has(c.id));
+  const toggle = (identifier: string) => setHiddenList((prev) => (prev.includes(identifier) ? prev.filter((height) => height !== identifier) : [...prev, identifier]));
+  const visible = COLUMNS.filter((column) => !hidden.has(column.id));
 
-  return { hidden, toggle, columns: [...visible.filter((c) => c.afterScore), ...visible.filter((c) => !c.afterScore)] };
+  return { hidden, toggle, columns: [...visible.filter((column) => column.afterScore), ...visible.filter((column) => !column.afterScore)] };
 }
 
 /** The astronomy targets page: holds the settings, filters and hover state, and wires them to the table and previews. */
@@ -49,7 +50,7 @@ export default function AstronomyTargets() {
   const [query, setQuery] = useState("");
   const scored = useMemo(() => scoreTargets(model.targets, settings), [settings]);
   const rows = filterRows(scored, seasonFilter, query);
-  const hovered = hover && rows.find((r) => r.target.id === hover.id);
+  const hovered = hover && rows.find((scoredTarget) => scoredTarget.target.id === hover.id);
 
   return (
     <div className="astro">

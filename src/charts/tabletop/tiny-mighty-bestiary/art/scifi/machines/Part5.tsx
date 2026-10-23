@@ -76,8 +76,9 @@ export function VoidKrillSwarm() {
       <Shape d="M0 200 H400 V230 H0 Z" w={4} />
       <Line d="M40 200 V230 M160 200 V230 M280 200 V230" w={3} />
       <path d="M150 200 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0" fill="none" stroke={card} strokeWidth="4" />
-      {[[70, 60], [130, 90], [200, 50], [260, 100], [320, 70], [110, 140], [180, 130], [250, 150], [310, 130], [350, 170], [60, 170], [200, 180], [150, 175]].map(([x, y], i) => (
-        <g key={i} transform={`translate(${x} ${y}) rotate(${(i * 47) % 60 - 30})`}>
+      {/* Repeat the shape at each listed position, turned a little differently each time. */}
+      {[[70, 60], [130, 90], [200, 50], [260, 100], [320, 70], [110, 140], [180, 130], [250, 150], [310, 130], [350, 170], [60, 170], [200, 180], [150, 175]].map(([x, y], index) => (
+        <g key={index} transform={`translate(${x} ${y}) rotate(${(index * 47) % 60 - 30})`}>
           <path d="M-14 0 C-14 -8 6 -8 12 -2 L20 0 L12 3 C6 8 -14 8 -14 0 Z" fill={card} stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
           <Line d="M-8 -4 V4 M-2 -5 V5 M4 -4 V4" w={2} />
           <Line d="M-6 6 l-2 8 M0 7 l0 8 M6 6 l2 8" w={2} />

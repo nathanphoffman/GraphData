@@ -25,12 +25,12 @@ describe("sortAnimals", () => {
   const rows = scoreAnimals([human, mouse], linear);
 
   it("sorts names alphabetically in either direction", () => {
-    expect(sortAnimals(rows, "name", true).map((a) => a.name)).toEqual(["Human", "Mouse"]);
-    expect(sortAnimals(rows, "name", false).map((a) => a.name)).toEqual(["Mouse", "Human"]);
+    expect(sortAnimals(rows, "name", true).map((scoredAnimal) => scoredAnimal.name)).toEqual(["Human", "Mouse"]);
+    expect(sortAnimals(rows, "name", false).map((scoredAnimal) => scoredAnimal.name)).toEqual(["Mouse", "Human"]);
   });
 
   it("sorts numbers and leaves the input untouched", () => {
-    expect(sortAnimals(rows, "weightKg", true).map((a) => a.name)).toEqual(["Mouse", "Human"]);
+    expect(sortAnimals(rows, "weightKg", true).map((scoredAnimal) => scoredAnimal.name)).toEqual(["Mouse", "Human"]);
     expect(rows[0].name).toBe("Human");
   });
 });

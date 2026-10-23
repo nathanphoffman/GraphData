@@ -82,8 +82,9 @@ export function ZeppelinDread() {
       <Line d="M60 60 V140 M110 50 V150 M160 46 V154 M210 44 V156 M260 46 V154 M310 54 V146" w={3} />
       <Shape d="M110 156 H290 V196 H110 Z" w={4} />
       <Line d="M110 170 H290" w={2} />
-      {[130, 160, 190, 220, 250].map((x) => (
-        <Shape key={x} d={`M${x - 8} 196 h16 v14 h-16 Z`} w={3} />
+      {/* Repeat the shape at each listed position. */}
+      {[130, 160, 190, 220, 250].map((xPos) => (
+        <Shape key={xPos} d={`M${xPos - 8} 196 h16 v14 h-16 Z`} w={3} />
       ))}
       <Shape d="M30 100 L0 70 L10 100 L0 130 Z" w={4} />
       <Line d="M340 160 L360 186 M360 186 L392 176" w={5} />

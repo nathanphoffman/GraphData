@@ -9,8 +9,9 @@ export function GrotHoundPack() {
     <Drawing label="Drawing of a gangly pack of flying xenos hounds howling through the ceiling vents">
       <Shape d="M20 20 H380 V50 H20 Z" w={5} />
       <Line d="M40 50 V30 M80 50 V30 M120 50 V30 M160 50 V30 M200 50 V30" w={3} />
-      {[[110, 140, 1], [250, 110, 0.8], [300, 180, 0.7]].map(([x, y, s], i) => (
-        <g key={i} transform={`translate(${x} ${y}) scale(${s})`}>
+      {/* Repeat the shape at each listed position and scale. */}
+      {[[110, 140, 1], [250, 110, 0.8], [300, 180, 0.7]].map(([x, y, s], index) => (
+        <g key={index} transform={`translate(${x} ${y}) scale(${s})`}>
           <Shape d="M-60 20 C-60 -10 40 -10 50 20 Z" w={5} />
           <Shape d="M40 8 L48 -14 L66 -2 L96 -2 L100 24 L52 26 Z" w={5} />
           <Dot x={78} y={6} r={3} />
@@ -28,8 +29,9 @@ export function ChaosHydra() {
   return (
     <Drawing label="Drawing of a many-headed horror breathing fire and spitting warp-spawn from every neck">
       <Shape d="M100 224 C80 170 140 130 200 134 C260 130 320 170 300 224 Z" />
-      {[[-80, 70], [-40, 40], [0, 20], [40, 44], [80, 76]].map(([dx, top], i) => (
-        <g key={i}>
+      {/* One arm per offset, reaching a different height. */}
+      {[[-80, 70], [-40, 40], [0, 20], [40, 44], [80, 76]].map(([dx, top], index) => (
+        <g key={index}>
           <Line d={`M200 150 C${200 + dx * 0.4} 120 ${200 + dx} ${top + 60} ${200 + dx} ${top + 24}`} w={12} />
           <Shape d={`M${200 + dx - 20} ${top + 24} C${200 + dx - 20} ${top - 8} ${200 + dx + 20} ${top - 8} ${200 + dx + 20} ${top + 24} L${200 + dx + 10} ${top + 38} H${200 + dx - 10} Z`} w={4} />
           <Dot x={200 + dx - 7} y={top + 14} r={3} />
@@ -95,8 +97,9 @@ export function HiveWyvern() {
 export function NeonPigeonFlock() {
   return (
     <Drawing label="Drawing of a flock of cybernetic pigeons with LED-lit wings, one carrying an ad banner, one stealing a data chip">
-      {[[120, 100, 1], [220, 70, 0.8], [290, 130, 0.9], [180, 170, 0.7]].map(([x, y, s], i) => (
-        <g key={i} transform={`translate(${x} ${y}) scale(${s})`}>
+      {/* Repeat the shape at each listed position and scale. */}
+      {[[120, 100, 1], [220, 70, 0.8], [290, 130, 0.9], [180, 170, 0.7]].map(([x, y, s], index) => (
+        <g key={index} transform={`translate(${x} ${y}) scale(${s})`}>
           <Shape d="M-40 10 C-40 -20 30 -22 44 4 C50 20 20 30 -10 28 C-30 26 -40 22 -40 10 Z" w={5} />
           <Shape d="M30 -4 C34 -26 62 -26 62 -8 C62 4 44 8 36 4 Z" w={5} />
           <Shape d="M62 -14 L78 -8 L62 -4 Z" w={3} />

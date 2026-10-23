@@ -10,9 +10,9 @@ export function useStoredState<T>(key: string, fallback: T, parse: (saved: unkno
   // Start from the saved value when it loads and passes `parse`; any problem falls back to the default.
   const [value, setValue] = useState<T>(() => {
     try {
-      const raw = localStorage.getItem(storageKey);
+      const rawValue = localStorage.getItem(storageKey);
 
-      return raw === null ? fallback : (parse(JSON.parse(raw)) ?? fallback);
+      return rawValue === null ? fallback : (parse(JSON.parse(rawValue)) ?? fallback);
     } catch (error) {
       console.warn(`Could not read saved ${storageKey}, using default`, error);
 
@@ -20,6 +20,7 @@ export function useStoredState<T>(key: string, fallback: T, parse: (saved: unkno
     }
   });
 
+  // Remember the value so it is still there after a reload.
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify(value));

@@ -17,14 +17,17 @@ export default function DifficultyDots({ value }: { value: number }) {
         Difficulty:
       </span>
       <span className="bestiary-dots" aria-hidden="true">
-        {Array.from({ length: doubles }, (_, i) => (
-          <span key={`d${i}`} className="bestiary-dot-double">
+        {/* One double dot for each pair of difficulty points. */}
+        {Array.from({ length: doubles }, (_unused, index) => (
+          <span key={`d${index}`} className="bestiary-dot-double">
             <span className="bestiary-dot bestiary-dot-full" />
             <span className="bestiary-dot bestiary-dot-full" />
           </span>
         ))}
-        {Array.from({ length: whole }, (_, i) => (
-          <span key={i} className="bestiary-dot bestiary-dot-full" />
+
+        {/* One full dot per whole difficulty point. */}
+        {Array.from({ length: whole }, (_unused, index) => (
+          <span key={index} className="bestiary-dot bestiary-dot-full" />
         ))}
         {fraction > 0 && <span className="bestiary-dot" style={{ ["--fill" as string]: fraction }} />}
       </span>

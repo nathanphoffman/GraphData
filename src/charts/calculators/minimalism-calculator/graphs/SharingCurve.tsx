@@ -21,7 +21,7 @@ export default function SharingCurve({ soloNeeded, people, item, onPeople }: Pro
   const at = (n: number) => soloNeeded / n;
 
   // Past 10 people only every fifth dot is labeled, to keep the numbers readable.
-  const marks = Array.from({ length: xMax }, (_, i) => i + 1).filter((n) => xMax <= 10 || n === 1 || n % 5 === 0);
+  const marks = Array.from({ length: xMax }, (_unused, index) => index + 1).filter((n) => xMax <= 10 || n === 1 || n % 5 === 0);
 
   return (
     <div className="panel mini-chart">
@@ -38,7 +38,7 @@ export default function SharingCurve({ soloNeeded, people, item, onPeople }: Pro
         at={at}
         yMax={Math.max(soloNeeded, 1)}
         toFrac={(n) => (n - 1) / (xMax - 1)}
-        samples={Array.from({ length: (xMax - 1) * 4 + 1 }, (_, i) => 1 + i / 4)}
+        samples={Array.from({ length: (xMax - 1) * 4 + 1 }, (_unused, index) => 1 + index / 4)}
         marks={marks}
         current={Math.min(people, xMax)}
         onDragStart={() => setFrozenMax(xMax)}

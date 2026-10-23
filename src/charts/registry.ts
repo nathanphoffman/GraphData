@@ -122,6 +122,7 @@ export const charts: ChartEntry[] = [
   },
 ];
 
-export function findChart(id: string | undefined): ChartEntry | undefined {
-  return charts.find((chart) => chart.id === id);
+/** Find the chart for a URL id; undefined for an unknown address so the page can show a not-found message. */
+export function findChart(identifier: string | undefined): ChartEntry | undefined {
+  return charts.find((chart) => chart.id === identifier);
 }

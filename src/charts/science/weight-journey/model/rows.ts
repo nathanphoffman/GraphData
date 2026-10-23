@@ -19,34 +19,37 @@ export const { fit, future } = project(days, 90, 90);
 
 const DAILY_WINDOWS = { short: 3, medium: 30, long: 365 };
 
-const weightColumns = (a: Averages, all: number, proj: number | null, proj3: number | null) =>
-  [a.avg3, a.avg30, a.avg365, a.blended, yearly(a.blended, a.monthly), all, proj, proj3];
+/** Add the averages, rates and projections to every day. */
+const weightColumns = (averages: Averages, all: number, proj: number | null, proj3: number | null) =>
+  [averages.avg3, averages.avg30, averages.avg365, averages.blended, yearly(averages.blended, averages.monthly), all, proj, proj3];
 
+/** The weight columns that are averaged into the complete average. */
 function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step: number) {
   const actual = addAverages(rows, windows, step);
 
   // Same averages again on weight minus the muscle gained so far.
   const adjusted = addAverages(rows.map((d) => ({ ...d, weight: d.weight - d.muscleTotal })), windows, step);
-  const baseRows = actual.map((d, i) => ({ ...d, adj: adjusted[i] }));
-  const allActual = baseRows.map((d) => allAverage(d));
-  const allAdjusted = baseRows.map((d) => allAverage(d.adj));
-  const projActual = allActual.map((_, i) => projectAll(allActual, i, windows.medium, step));
-  const projAdjusted = allAdjusted.map((_, i) => projectAll(allAdjusted, i, windows.medium, step));
-  const avg3 = baseRows.map((d) => d.avg3);
-  const avg3Adj = baseRows.map((d) => d.adj.avg3);
+  const baseRows = actual.map((d, index) => ({ ...d, adj: adjusted[index] }));
+  const allActual = baseRows.map((baseRow) => allAverage(baseRow));
+  const allAdjusted = baseRows.map((baseRow) => allAverage(baseRow.adj));
+  const projActual = allActual.map((_unused, index) => projectAll(allActual, index, windows.medium, step));
+  const projAdjusted = allAdjusted.map((_unused, index) => projectAll(allAdjusted, index, windows.medium, step));
+  const avg3 = baseRows.map((baseRow) => baseRow.avg3);
+  const avg3Adj = baseRows.map((baseRow) => baseRow.adj.avg3);
 
-  return baseRows.map((d, i) => ({
-    ...d,
-    recent: recentRate(avg3, i, step),
-    recentAdj: recentRate(avg3Adj, i, step),
-    allAvg: allActual[i],
-    allAvgAdj: allAdjusted[i],
-    allProj: projActual[i],
-    allProjAdj: projAdjusted[i],
-    allProj3: last3(projActual, i),
-    allProj3Adj: last3(projAdjusted, i),
-    complete: completeAverage([d.weight, ...weightColumns(d, allActual[i], projActual[i], last3(projActual, i))]),
-    completeAdj: completeAverage([d.weight - d.muscleTotal, ...weightColumns(d.adj, allAdjusted[i], projAdjusted[i], last3(projAdjusted, i))]),
+  // Attach the rates and averages to each day.
+  return baseRows.map((baseRow, index) => ({
+    ...baseRow,
+    recent: recentRate(avg3, index, step),
+    recentAdj: recentRate(avg3Adj, index, step),
+    allAvg: allActual[index],
+    allAvgAdj: allAdjusted[index],
+    allProj: projActual[index],
+    allProjAdj: projAdjusted[index],
+    allProj3: last3(projActual, index),
+    allProj3Adj: last3(projAdjusted, index),
+    complete: completeAverage([baseRow.weight, ...weightColumns(baseRow, allActual[index], projActual[index], last3(projActual, index))]),
+    completeAdj: completeAverage([baseRow.weight - baseRow.muscleTotal, ...weightColumns(baseRow.adj, allAdjusted[index], projAdjusted[index], last3(projAdjusted, index))]),
   }));
 }
 

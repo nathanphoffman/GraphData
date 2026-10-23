@@ -15,22 +15,27 @@ export default function GridCells({ model, onSelect }: Props) {
       <text x={GRID_LEFT + HEADER_COL_W / 2} y={GRID_TOP + 26} textAnchor="middle" fontSize={14} fontWeight={700} fill={COLORS.headerText}>
         Size
       </text>
-      {model.columns.map((name, c) => (
+      {/* One header cell per column. */}
+      {model.columns.map((name, index) => (
         <g key={name}>
-          <rect x={GRID_X0 + c * CELL_W} y={GRID_TOP} width={CELL_W} height={HEADER_ROW_H} fill={COLORS.header} stroke={COLORS.border} />
-          <text x={GRID_X0 + (c + 0.5) * CELL_W} y={GRID_TOP + 26} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.headerText}>
+          <rect x={GRID_X0 + index * CELL_W} y={GRID_TOP} width={CELL_W} height={HEADER_ROW_H} fill={COLORS.header} stroke={COLORS.border} />
+          <text x={GRID_X0 + (index + 0.5) * CELL_W} y={GRID_TOP + 26} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.headerText}>
             {name}
           </text>
         </g>
       ))}
-      {model.rows.map((name, r) => (
+
+      {/* One header cell per row. */}
+      {model.rows.map((name, index) => (
         <g key={name}>
-          <rect x={GRID_LEFT} y={GRID_Y0 + r * CELL_H} width={HEADER_COL_W} height={CELL_H} fill={COLORS.header} stroke={COLORS.border} />
-          <text x={GRID_LEFT + HEADER_COL_W / 2} y={GRID_Y0 + (r + 0.5) * CELL_H + 5} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.headerText}>
+          <rect x={GRID_LEFT} y={GRID_Y0 + index * CELL_H} width={HEADER_COL_W} height={CELL_H} fill={COLORS.header} stroke={COLORS.border} />
+          <text x={GRID_LEFT + HEADER_COL_W / 2} y={GRID_Y0 + (index + 0.5) * CELL_H + 5} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.headerText}>
             {name}
           </text>
         </g>
       ))}
+
+      {/* One clickable cell per system. */}
       {model.cells.map((cell) => (
         <rect
           key={cell.name}
@@ -46,9 +51,11 @@ export default function GridCells({ model, onSelect }: Props) {
           tabIndex={0}
           aria-label={`${cell.name}: show common views`}
           onClick={() => onSelect(cell.name)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
+
+          // Let keyboard users pick a cell with Enter or Space.
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
               onSelect(cell.name);
             }
           }}

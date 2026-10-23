@@ -108,8 +108,9 @@ export function PlagueMammoth() {
       <Dot x={110} y={100} r={3} />
       <Dot x={230} y={100} r={4} />
       <Line d="M90 200 V226 M150 200 V226 M210 200 V226 M290 200 V226" w={12} />
-      {[[60, 40], [100, 24], [150, 40], [210, 30], [260, 44], [320, 30]].map(([x, y], i) => (
-        <path key={i} d={`M${x} ${y} q4 -6 8 0 q-4 6 -8 0 Z`} fill="currentColor" />
+      {/* Repeat the shape at each listed position. */}
+      {[[60, 40], [100, 24], [150, 40], [210, 30], [260, 44], [320, 30]].map(([x, y], index) => (
+        <path key={index} d={`M${x} ${y} q4 -6 8 0 q-4 6 -8 0 Z`} fill="currentColor" />
       ))}
     </Drawing>
   );

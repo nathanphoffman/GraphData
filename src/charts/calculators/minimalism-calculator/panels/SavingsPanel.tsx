@@ -7,23 +7,26 @@ interface Props {
   yearlyUses: number;
   item: ItemType;
   buyPerYear: number;
-  onBuyPerYear: (v: number) => void;
+  onBuyPerYear: (value: number) => void;
   price: number;
-  onPrice: (v: number) => void;
+  onPrice: (value: number) => void;
   minPlays: number;
-  onMinPlays: (v: number) => void;
+  onMinPlays: (value: number) => void;
   maxPlays: number;
-  onMaxPlays: (v: number) => void;
+  onMaxPlays: (value: number) => void;
 }
 
 const YEARS = 10;
-const money = (v: number) => `$${Math.round(v).toLocaleString()}`;
 
-function NumberField({ id, label, value, onChange }: { id: string; label: string; value: number; onChange: (v: number) => void }) {
+/** Dollar amounts rounded to whole dollars, since the estimates are too rough for cents. */
+const money = (value: number) => `$${Math.round(value).toLocaleString()}`;
+
+/** Number input that only accepts non-negative amounts. */
+function NumberField({ id, label, value, onChange }: { id: string; label: string; value: number; onChange: (value: number) => void }) {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
-      <input id={id} type="number" min={0} step="any" value={value} onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))} />
+      <input id={id} type="number" min={0} step="any" value={value} onChange={(event) => onChange(Math.max(0, Number(event.target.value) || 0))} />
     </div>
   );
 }
@@ -45,16 +48,22 @@ export default function SavingsPanel({
 }: Props) {
   const todayCost = buyPerYear * price;
   const plan = purchasePlan(owned, target, yearlyUses, minPlays, maxPlays, YEARS);
-  const rows = plan.map((bought, i) => ({
-    label: i === YEARS - 1 ? `Year ${YEARS} and beyond` : `Year ${i + 1}`,
+
+  // One row per year of the plan, with the last row standing for every later year.
+  const rows = plan.map((bought, index) => ({
+    label: index === YEARS - 1 ? `Year ${YEARS} and beyond` : `Year ${index + 1}`,
     bought,
     cost: bought * price,
     saved: todayCost - bought * price,
   }));
 
   const yearsToTarget = owned < target ? yearsToReach(owned, target, yearlyUses, minPlays, maxPlays) : 0;
-  const totalSaved = rows.reduce((sum, r) => sum + r.saved, 0);
-  const totalSpent = rows.reduce((sum, r) => sum + r.cost, 0);
+
+  // Add up every year's savings.
+  const totalSaved = rows.reduce((total, r) => total + r.saved, 0);
+
+  // Add up every year's spending.
+  const totalSpent = rows.reduce((total, r) => total + r.cost, 0);
   const totalToday = todayCost * YEARS;
 
   return (
@@ -76,6 +85,7 @@ export default function SavingsPanel({
           </tr>
         </thead>
         <tbody>
+          {/* One table row per year. */}
           {rows.map((r) => (
             <tr key={r.label}>
               <td>{r.label}</td>

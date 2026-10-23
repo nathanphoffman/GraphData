@@ -2,11 +2,12 @@ import type { AllIntelligenceData, ScoredSubject, Settings, Subject } from "./ty
 
 export const DEFAULT_SETTINGS: Settings = { zeroDivisor: 4, missingMode: "estimate", missingDivisor: 2 };
 
+/** Geometric mean, which rewards balance: one very low score pulls the result down more than an arithmetic mean would. */
 function geometricMean(values: number[]): number | null {
   if (values.length === 0) return null;
 
   // Geometric mean is done in log space (sum of logs) to avoid overflow from multiplying many scores.
-  const logSum = values.reduce((sum, v) => sum + Math.log(v), 0);
+  const logSum = values.reduce((total, value) => total + Math.log(value), 0);
 
   return Math.exp(logSum / values.length);
 }
@@ -15,9 +16,9 @@ function geometricMean(values: number[]): number | null {
 function worstScores(subjects: Subject[], columns: string[]): Record<string, number> {
   const worst: Record<string, number> = {};
 
-  for (const col of columns) {
-    const positives = subjects.map((s) => s.scores[col]).filter((v): v is number => v !== undefined && v > 0);
-    worst[col] = positives.length ? Math.min(...positives) : 1;
+  for (const column of columns) {
+    const positives = subjects.map((subject) => subject.scores[column]).filter((subject): subject is number => subject !== undefined && subject > 0);
+    worst[column] = positives.length ? Math.min(...positives) : 1;
   }
 
   return worst;
@@ -31,21 +32,22 @@ function priceEfficiency(subject: Subject): number | undefined {
 }
 
 /** A real score, or the price proxy for efficiency when there is no real score. */
-export function knownScore(subject: Subject, col: string): number | undefined {
-  return subject.scores[col] ?? (col === "efficiency" ? priceEfficiency(subject) : undefined);
+export function knownScore(subject: Subject, column: string): number | undefined {
+  return subject.scores[column] ?? (column === "efficiency" ? priceEfficiency(subject) : undefined);
 }
 
 /** Guess for an unmeasured column: the subject's own average times the column's factor. */
-export function estimateScore(data: AllIntelligenceData, subject: Subject, col: string): number | null {
-  if (col === "efficiency") return null;
-  const measured = Object.values(subject.scores).filter((v) => v > 0);
+export function estimateScore(data: AllIntelligenceData, subject: Subject, column: string): number | null {
+  if (column === "efficiency") return null;
+  const measured = Object.values(subject.scores).filter((value) => value > 0);
   const base = geometricMean(measured);
 
   if (base === null) return null;
 
-  return Math.min(100, base * (data.estimateFactors[col] ?? 1));
+  return Math.min(100, base * (data.estimateFactors[column] ?? 1));
 }
 
+/** Score every subject across the groups, combining real, estimated and floor values by the chosen settings. */
 export function scoreSubjects(data: AllIntelligenceData, settings: Settings): ScoredSubject[] {
   const worst = worstScores(data.subjects, Object.keys(data.columns));
 
@@ -57,13 +59,13 @@ export function scoreSubjects(data: AllIntelligenceData, settings: Settings): Sc
     for (const group of data.groups) {
       const values: number[] = [];
 
-      for (const col of group.columns) {
-        const raw = knownScore(subject, col);
+      for (const column of group.columns) {
+        const rawValue = knownScore(subject, column);
 
-        if (raw === undefined) {
-          if (settings.missingMode === "floor") values.push(worst[col] / settings.missingDivisor);
+        if (rawValue === undefined) {
+          if (settings.missingMode === "floor") values.push(worst[column] / settings.missingDivisor);
           else if (settings.missingMode === "estimate") {
-            const guess = estimateScore(data, subject, col);
+            const guess = estimateScore(data, subject, column);
 
             if (guess !== null) values.push(guess);
           }
@@ -71,14 +73,14 @@ export function scoreSubjects(data: AllIntelligenceData, settings: Settings): Sc
           continue;
         }
 
-        if (subject.scores[col] !== undefined) measured += 1;
-        values.push(raw > 0 ? raw : worst[col] / settings.zeroDivisor);
+        if (subject.scores[column] !== undefined) measured += 1;
+        values.push(rawValue > 0 ? rawValue : worst[column] / settings.zeroDivisor);
       }
 
       groups[group.id] = geometricMean(values);
     }
 
-    const present = Object.values(groups).filter((v): v is number => v !== null);
+    const present = Object.values(groups).filter((value): value is number => value !== null);
 
     return { subject, overall: geometricMean(present), groups, measured };
   });

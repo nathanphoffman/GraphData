@@ -15,8 +15,9 @@ export function NeonShrineFox() {
       <Shape d="M196 104 C196 74 226 66 244 76 L270 100 L240 112 C226 118 204 116 196 104 Z" w={5} />
       <Shape d="M210 76 L204 50 L226 68 Z M232 74 L242 50 L248 80 Z" w={4} />
       <Dot x={236} y={90} r={3} />
-      {[-70, -50, -30, -10, 10, 30, 50, 70, 90].map((a, i) => (
-        <path key={i} d={`M150 140 C${100 + i * 2} ${140 - a} ${70 + i * 4} ${120 - a * 0.8} ${60 + i * 6} ${110 - a * 0.9}`} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray={i % 2 ? "2 4" : undefined} />
+      {/* Fan out one curve per offset. */}
+      {[-70, -50, -30, -10, 10, 30, 50, 70, 90].map((a, index) => (
+        <path key={index} d={`M150 140 C${100 + index * 2} ${140 - a} ${70 + index * 4} ${120 - a * 0.8} ${60 + index * 6} ${110 - a * 0.9}`} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray={index % 2 ? "2 4" : undefined} />
       ))}
       <Line d="M160 150 V170 M190 150 V170" w={4} />
     </Drawing>

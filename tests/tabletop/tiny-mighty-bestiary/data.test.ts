@@ -22,23 +22,23 @@ const creature = (overrides: Partial<Creature>): Creature => ({
 
 describe("model", () => {
   it("has a combat tier for every creature", () => {
-    for (const c of model.creatures) expect(() => tierFor(c)).not.toThrow();
+    for (const creature of model.creatures) expect(() => tierFor(creature)).not.toThrow();
   });
 
   it("gives every creature a unique id", () => {
-    const ids = model.creatures.map((c) => c.id);
+    const ids = model.creatures.map((creature) => creature.id);
 
     expect(new Set(ids).size).toBe(ids.length);
   });
 
   it("only uses themes and types that exist", () => {
-    const themes = new Set(model.themes.map((t) => t.id));
-    const types = new Set(model.creatureTypes.map((t) => t.id));
+    const themes = new Set(model.themes.map((theme) => theme.id));
+    const types = new Set(model.creatureTypes.map((creatureType) => creatureType.id));
 
-    for (const c of model.creatures) {
-      expect(types.has(c.type)).toBe(true);
+    for (const creature of model.creatures) {
+      expect(types.has(creature.type)).toBe(true);
 
-      for (const theme of c.themes) expect(themes.has(theme)).toBe(true);
+      for (const theme of creature.themes) expect(themes.has(theme)).toBe(true);
     }
   });
 });
@@ -73,7 +73,7 @@ describe("compareBy", () => {
     creature({ id: "c", name: "Cat", tier: 1, tone: 3 }),
   ];
 
-  const names = (sort: string) => [...list].sort(compareBy(sort)).map((c) => c.name);
+  const names = (sort: string) => [...list].sort(compareBy(sort)).map((creature) => creature.name);
 
   it("sorts by name in both directions", () => {
     expect(names("az")).toEqual(["Ant", "Bat", "Cat"]);

@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { findChart } from "../charts/registry";
 
+/** Page for one chart, found by the address; shows a message for an unknown chart. */
 export default function ChartPage() {
   const { id } = useParams();
   const chart = findChart(id);

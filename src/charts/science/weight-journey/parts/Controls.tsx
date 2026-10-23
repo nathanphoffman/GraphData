@@ -11,14 +11,16 @@ export const RANGES = [
 
 type Range = (typeof RANGES)[number];
 
+/** Segmented buttons for picking one of a few options. */
 function Segmented<T>({ label, options, value, name, onPick }: { label: string; options: T[]; value: T; name: (o: T) => string; onPick: (o: T) => void }) {
   return (
     <div className="control-group">
       <span className="control-label">{label}</span>
       <div className="segmented">
-        {options.map((o) => (
-          <button type="button" key={name(o)} className={o === value ? "active" : ""} onClick={() => onPick(o)}>
-            {name(o)}
+        {/* One button per choice; the current one is marked active. */}
+        {options.map((option) => (
+          <button type="button" key={name(option)} className={option === value ? "active" : ""} onClick={() => onPick(option)}>
+            {name(option)}
           </button>
         ))}
       </div>
@@ -30,10 +32,11 @@ interface ToolProps {
   unit: Unit;
   f: Format;
   tool: ProjectionTool;
-  onTool: (t: ProjectionTool) => void;
+  onTool: (projectionTool: ProjectionTool) => void;
   tapered: Tapered | null;
 }
 
+/** Inputs for a projection from a monthly loss figure. */
 function ProjectionToolBox({ unit, f, tool, onTool, tapered }: ToolProps) {
   const last = tapered?.[tapered.length - 1];
 
@@ -43,11 +46,11 @@ function ProjectionToolBox({ unit, f, tool, onTool, tapered }: ToolProps) {
       <div className="field-row">
         <label className="field">
           Loss per month ({unit})
-          <input type="number" min="0" step="0.5" value={tool.lossInput} placeholder="e.g. 4" onChange={(e) => onTool({ ...tool, lossInput: e.target.value })} />
+          <input type="number" min="0" step="0.5" value={tool.lossInput} placeholder="e.g. 4" onChange={(event) => onTool({ ...tool, lossInput: event.target.value })} />
         </label>
         <label className="field">
           Show for (months)
-          <input type="number" min="1" step="1" value={tool.months} onChange={(e) => onTool({ ...tool, months: e.target.value })} />
+          <input type="number" min="1" step="1" value={tool.months} onChange={(event) => onTool({ ...tool, months: event.target.value })} />
         </label>
       </div>
       {last && (
@@ -66,14 +69,16 @@ const LINE_LABELS: [keyof Lines, string][] = [
   ["spread", "Best / worst range (last week)"],
 ];
 
-function LineToggles({ lines, onLines }: { lines: Lines; onLines: (l: Lines) => void }) {
+/** Checkboxes for switching optional chart lines on and off. */
+function LineToggles({ lines, onLines }: { lines: Lines; onLines: (lines: Lines) => void }) {
   return (
     <div className="control-group control-wide">
       <span className="control-label">Lines</span>
       <div className="toggles">
+        {/* One checkbox per optional chart line. */}
         {LINE_LABELS.map(([key, label]) => (
           <label key={key} className="toggle">
-            <input type="checkbox" checked={lines[key]} onChange={(e) => onLines({ ...lines, [key]: e.target.checked })} /> {label}
+            <input type="checkbox" checked={lines[key]} onChange={(event) => onLines({ ...lines, [key]: event.target.checked })} /> {label}
           </label>
         ))}
       </div>
@@ -82,20 +87,21 @@ function LineToggles({ lines, onLines }: { lines: Lines; onLines: (l: Lines) => 
 }
 
 export interface ControlsProps extends ToolProps {
-  onUnit: (u: Unit) => void;
+  onUnit: (unit: Unit) => void;
   range: Range;
-  onRange: (r: Range) => void;
+  onRange: (range: Range) => void;
   lines: Lines;
-  onLines: (l: Lines) => void;
+  onLines: (lines: Lines) => void;
 }
 
-export function Controls(p: ControlsProps) {
+/** All the controls above the chart. */
+export function Controls(controlsProps: ControlsProps) {
   return (
     <div className="weight-controls">
-      <Segmented label="Units" options={["lb", "kg"] as Unit[]} value={p.unit} name={(u) => u} onPick={p.onUnit} />
-      <Segmented label="Chart range" options={RANGES} value={p.range} name={(r) => r.label} onPick={p.onRange} />
-      <ProjectionToolBox unit={p.unit} f={p.f} tool={p.tool} onTool={p.onTool} tapered={p.tapered} />
-      <LineToggles lines={p.lines} onLines={p.onLines} />
+      <Segmented label="Units" options={["lb", "kg"] as Unit[]} value={controlsProps.unit} name={(unit) => unit} onPick={controlsProps.onUnit} />
+      <Segmented label="Chart range" options={RANGES} value={controlsProps.range} name={(r) => r.label} onPick={controlsProps.onRange} />
+      <ProjectionToolBox unit={controlsProps.unit} f={controlsProps.f} tool={controlsProps.tool} onTool={controlsProps.onTool} tapered={controlsProps.tapered} />
+      <LineToggles lines={controlsProps.lines} onLines={controlsProps.onLines} />
     </div>
   );
 }

@@ -7,7 +7,7 @@ export type SortKey = "name" | "overall" | "measured" | string;
 interface SortProps {
   sortKey: SortKey;
   ascending: boolean;
-  onSort: (key: SortKey) => void;
+  onSort: (sortKey: SortKey) => void;
 }
 
 interface TableProps extends SortProps {
@@ -18,10 +18,12 @@ interface TableProps extends SortProps {
   onToggle: (name: string) => void;
 }
 
+/** Format a score as a whole number, or a dash when it is missing. */
 function fmt(value: number | null | undefined): string {
   return value === null || value === undefined ? "—" : value.toFixed(1);
 }
 
+/** Table header with one sortable column per group of scores. */
 function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllIntelligenceData }) {
   const arrow = (key: SortKey) => (key === sortKey ? (ascending ? " ▲" : " ▼") : "");
 
@@ -31,8 +33,9 @@ function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllI
         <th>#</th>
         <th className="sortable" onClick={() => onSort("name")}>Name{arrow("name")}</th>
         <th className="sortable" onClick={() => onSort("overall")}>Score{arrow("overall")}</th>
-        {model.groups.map((g) => (
-          <th key={g.id} className="sortable allint-group-th" onClick={() => onSort(g.id)}>{g.name.replace("& ", "&\n")}{arrow(g.id)}</th>
+        {/* One sortable header cell per group of columns. */}
+        {model.groups.map((group) => (
+          <th key={group.id} className="sortable allint-group-th" onClick={() => onSort(group.id)}>{group.name.replace("& ", "&\n")}{arrow(group.id)}</th>
         ))}
         <th className="sortable" onClick={() => onSort("measured")}>Measured{arrow("measured")}</th>
       </tr>
@@ -45,6 +48,8 @@ function ColumnScore({ model, row, settings, column }: { model: AllIntelligenceD
   const real = knownScore(row.subject, column);
   const isProxy = row.subject.scores[column] === undefined && real !== undefined;
   const guess = settings.missingMode === "estimate" ? estimateScore(model, row.subject, column) : null;
+
+  // Show the real score if there is one, else the estimate marked with "~", else "not measured".
   const text = real !== undefined ? `${real.toFixed(0)}${isProxy ? " (from price)" : ""}` : guess !== null ? `~${guess.toFixed(0)} (guess)` : "not measured";
 
   return (
@@ -54,15 +59,17 @@ function ColumnScore({ model, row, settings, column }: { model: AllIntelligenceD
   );
 }
 
+/** Expanded view of a subject showing each underlying score. */
 function DetailRow({ model, row, settings }: { model: AllIntelligenceData; row: ScoredSubject; settings: Settings }) {
   return (
     <tr className="allint-detail">
       <td colSpan={4 + model.groups.length}>
         <div className="allint-detail-grid">
-          {model.groups.map((g) => (
-            <div key={g.id} className="allint-detail-group">
-              <h4>{g.name}</h4>
-              {g.columns.map((key) => <ColumnScore key={key} model={model} row={row} settings={settings} column={key} />)}
+          {/* One block of detail per group, shown when the row is expanded. */}
+          {model.groups.map((group) => (
+            <div key={group.id} className="allint-detail-group">
+              <h4>{group.name}</h4>
+              {group.columns.map((key) => <ColumnScore key={key} model={model} row={row} settings={settings} column={key} />)}
             </div>
           ))}
         </div>
@@ -71,6 +78,7 @@ function DetailRow({ model, row, settings }: { model: AllIntelligenceData; row: 
   );
 }
 
+/** Summary row for one subject; clicking it opens the detail row. */
 function SubjectRow({ model, row, index, onToggle }: { model: AllIntelligenceData; row: ScoredSubject; index: number; onToggle: (name: string) => void }) {
   const { name, kind, maker } = row.subject;
 
@@ -79,22 +87,24 @@ function SubjectRow({ model, row, index, onToggle }: { model: AllIntelligenceDat
       <td>{index + 1}</td>
       <td className="allint-name">{name} <span className="allint-maker">{maker}</span></td>
       <td className="allint-score">{fmt(row.overall)}</td>
-      {model.groups.map((g) => <td key={g.id}>{fmt(row.groups[g.id])}</td>)}
+      {model.groups.map((group) => <td key={group.id}>{fmt(row.groups[group.id])}</td>)}
       <td>{row.measured}/{Object.keys(model.columns).length}</td>
     </tr>
   );
 }
 
+/** Table of all subjects with sortable columns and expandable detail rows. */
 export function ResultsTable({ model, rows, settings, open, onToggle, ...sort }: TableProps) {
   return (
     <div className="panel calc-table">
       <table>
         <Header model={model} {...sort} />
         <tbody>
-          {rows.map((row, i) => (
-            <Fragment key={row.subject.name}>
-              <SubjectRow model={model} row={row} index={i} onToggle={onToggle} />
-              {open.has(row.subject.name) && <DetailRow model={model} row={row} settings={settings} />}
+          {/* One summary row per subject, followed by its detail row when open. */}
+          {rows.map((scoredSubject, i) => (
+            <Fragment key={scoredSubject.subject.name}>
+              <SubjectRow model={model} row={scoredSubject} index={i} onToggle={onToggle} />
+              {open.has(scoredSubject.subject.name) && <DetailRow model={model} row={scoredSubject} settings={settings} />}
             </Fragment>
           ))}
         </tbody>

@@ -4,8 +4,8 @@ import type { AllTrend, General, Point, Spread } from "./curves";
 import { dailyRows, days, fit, future, projectedAdjusted } from "./rows";
 import { toDate } from "./units";
 
-export const W = 1000;
-export const H = 420;
+export const CHART_WIDTH = 1000;
+export const CHART_HEIGHT = 420;
 export const M = { top: 16, right: 20, bottom: 32, left: 48 };
 
 export type Tapered = ReturnType<typeof projectTapering>;
@@ -19,92 +19,95 @@ export interface ChartInput {
   general: General | null;
 }
 
+/** SVG path for a list of points. */
 export function line(points: { x: number; y: number }[]): string {
-  return points.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join("");
+  return points.map((point, index) => `${index ? "L" : "M"}${point.x.toFixed(1)},${point.y.toFixed(1)}`).join("");
 }
 
 /** Every weight the chart has to fit (in lb), so the y axis can be sized to it. */
 function allWeights(shown: Point[], shownFuture: Point[], { tapered, allTrend, spread }: ChartInput) {
   const spreadEnds = spread ? [spread.actual, spread.adjusted].flatMap((g) => [...g.curves[0].points, ...g.curves[g.curves.length - 1].points]) : [];
-  const shownAvg = dailyRows.filter((d) => d.date >= shown[0].date).map((d) => ({ weight: d.adj.avg3 }));
+  const shownAvg = dailyRows.filter((dailyRow) => dailyRow.date >= shown[0].date).map((dailyRow) => ({ weight: dailyRow.adj.avg3 }));
 
   return [
     ...shown,
     ...shownFuture,
     ...projectedAdjusted.future,
-    ...(tapered ?? []).flatMap((d) => [{ weight: d.weight }, { weight: d.adjusted }]),
-    ...(allTrend ? allTrend.trends.flatMap((t) => [...t.actual, ...t.adjusted]) : []),
+    ...(tapered ?? []).flatMap((targetPoint) => [{ weight: targetPoint.weight }, { weight: targetPoint.adjusted }]),
+    ...(allTrend ? allTrend.trends.flatMap((trend) => [...trend.actual, ...trend.adjusted]) : []),
     ...spreadEnds,
     ...shownAvg,
   ].map((d) => d.weight);
 }
 
+/** Pick the date and weight scales so the chart fits the data being shown. */
 function buildScales(shown: Point[], shownFuture: Point[], input: ChartInput) {
   const { allTrend, spread, k } = input;
   const lastDates = [shownFuture[shownFuture.length - 1].date, allTrend?.date ?? "", spread ? spread.actual.mean[spread.actual.mean.length - 1].date : ""];
-  const x = scaleTime().domain([toDate(shown[0].date), toDate(lastDates.sort().pop()!)]).range([M.left, W - M.right]);
-  const weights = allWeights(shown, shownFuture, input).map((w) => w * k);
-  const y = scaleLinear()
+  const xScale = scaleTime().domain([toDate(shown[0].date), toDate(lastDates.sort().pop()!)]).range([M.left, CHART_WIDTH - M.right]);
+  const weights = allWeights(shown, shownFuture, input).map((width) => width * k);
+  const yScale = scaleLinear()
     .domain([Math.floor(Math.min(...weights) - 2), Math.ceil(Math.max(...weights) + 2)])
-    .range([H - M.bottom, M.top]);
+    .range([CHART_HEIGHT - M.bottom, M.top]);
 
-  return { x, y };
+  return { x: xScale, y: yScale };
 }
 
-type Pt = (d: Point) => { x: number; y: number };
+type Pt = (point: Point) => { x: number; y: number };
 
 /** Shaded bands between neighbouring curves: the closer two curves sit at the end, the more opaque the band (that's where the projections concentrate). */
-function shade(g: Spread["actual"], pt: Pt) {
-  const gaps = g.curves.slice(1).map((c, i) => Math.max(Math.abs(c.target - g.curves[i].target), 0.1));
+function shade(g: Spread["actual"], point: Pt) {
+  const gaps = g.curves.slice(1).map((curve, index) => Math.max(Math.abs(curve.target - g.curves[index].target), 0.1));
   const densest = Math.max(...gaps.map((gap) => 1 / gap));
 
   return {
-    bands: gaps.map((gap, i) => {
-      const a = g.curves[i].points.map(pt);
-      const b = g.curves[i + 1].points.map(pt).reverse();
+    // Shade the gap between each pair of neighbouring curves.
+    bands: gaps.map((gap, index) => {
+      const a = g.curves[index].points.map(point);
+      const b = g.curves[index + 1].points.map(point).reverse();
 
       return { d: `${line(a)}L${line(b).slice(1)}Z`, opacity: 0.06 + (0.5 * (1 / gap)) / densest };
     }),
-    best: line(g.curves[0].points.map(pt)),
-    worst: line(g.curves[g.curves.length - 1].points.map(pt)),
-    mean: line(g.mean.map(pt)),
+    best: line(g.curves[0].points.map(point)),
+    worst: line(g.curves[g.curves.length - 1].points.map(point)),
+    mean: line(g.mean.map(point)),
   };
 }
 
 /** Paths for the lines that follow the weight data itself (not the projections). */
-function actualLines(shown: Day[], pt: Pt) {
-  const shownAvg = dailyRows.filter((d) => d.date >= shown[0].date);
+function actualLines(shown: Day[], point: Pt) {
+  const shownAvg = dailyRows.filter((dailyRow) => dailyRow.date >= shown[0].date);
   const firstShown = shown[0].date;
 
   return {
-    actual: line(shown.map(pt)),
-    avg3: line(shownAvg.map((d) => pt({ date: d.date, weight: d.avg3 }))),
-    avg3Adjusted: line(shownAvg.map((d) => pt({ date: d.date, weight: d.adj.avg3 }))),
-    fitAdjusted: line(projectedAdjusted.fit.filter((d) => d.date >= firstShown).map(pt)),
-    fit: line(fit.filter((d) => d.date >= firstShown).map(pt)),
-    measured: shown.filter((d) => !d.estimated).map(pt),
+    actual: line(shown.map(point)),
+    avg3: line(shownAvg.map((d) => point({ date: d.date, weight: d.avg3 }))),
+    avg3Adjusted: line(shownAvg.map((d) => point({ date: d.date, weight: d.adj.avg3 }))),
+    fitAdjusted: line(projectedAdjusted.fit.filter((projection) => projection.date >= firstShown).map(point)),
+    fit: line(fit.filter((projection) => projection.date >= firstShown).map(point)),
+    measured: shown.filter((d) => !d.estimated).map(point),
   };
 }
 
 /** Paths for the quadratic projections and the "general" blend of them. */
-function projectionLines(pt: Pt, general: General | null) {
+function projectionLines(point: Pt, general: General | null) {
   return {
-    futureAdjusted: line([pt(projectedAdjusted.fit[projectedAdjusted.fit.length - 1]), ...projectedAdjusted.future.map(pt)]),
-    future: line([pt(fit[fit.length - 1]), ...future.map(pt)]),
-    general: general ? line(general.map(pt)) : "",
+    futureAdjusted: line([point(projectedAdjusted.fit[projectedAdjusted.fit.length - 1]), ...projectedAdjusted.future.map(point)]),
+    future: line([point(fit[fit.length - 1]), ...future.map(point)]),
+    general: general ? line(general.map(point)) : "",
   };
 }
 
 /** Paths for the tapering projection from the user's monthly loss. */
-function taperLines(pt: Pt, tapered: Tapered | null) {
+function taperLines(point: Pt, tapered: Tapered | null) {
   if (!tapered) return { taper: "", taperAdjusted: "" };
   const lastRow = dailyRows[dailyRows.length - 1];
-  const anchor = pt({ date: lastRow.date, weight: lastRow.avg3 });
-  const anchorAdjusted = pt({ date: lastRow.date, weight: lastRow.adj.avg3 });
+  const anchor = point({ date: lastRow.date, weight: lastRow.avg3 });
+  const anchorAdjusted = point({ date: lastRow.date, weight: lastRow.adj.avg3 });
 
   return {
-    taper: line([anchor, ...tapered.map(pt)]),
-    taperAdjusted: line([anchorAdjusted, ...tapered.map((d) => pt({ date: d.date, weight: d.adjusted }))]),
+    taper: line([anchor, ...tapered.map(point)]),
+    taperAdjusted: line([anchorAdjusted, ...tapered.map((targetPoint) => point({ date: targetPoint.date, weight: targetPoint.adjusted }))]),
   };
 }
 
@@ -114,7 +117,7 @@ export function buildChart(input: ChartInput) {
   const shown = days.slice(-Math.min(rangeDays, days.length));
   const shownFuture = tapered ? [...future, ...tapered] : future;
   const { x, y } = buildScales(shown, shownFuture, input);
-  const pt: Pt = (d) => ({ x: x(toDate(d.date)), y: y(d.weight * k) });
+  const pt: Pt = (point) => ({ x: x(toDate(point.date)), y: y(point.weight * k) });
 
   return {
     x,

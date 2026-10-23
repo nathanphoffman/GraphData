@@ -44,8 +44,9 @@ export function TunnelSpawn() {
     <Drawing label="Drawing of toothy larval horrors crawling in a swarm out of a hull breach">
       <Shape d="M0 0 H140 L110 80 L150 110 L100 150 L140 224 H0 Z" w={5} />
       <Line d="M20 40 H100 M20 100 H70 M20 160 H90" w={2} />
-      {[[190, 100], [250, 140], [310, 90], [220, 190], [300, 190], [350, 150]].map(([x, y], i) => (
-        <g key={i} transform={`translate(${x} ${y}) rotate(${(i * 23) % 40 - 20})`}>
+      {/* Repeat the shape at each listed position, turned a little differently each time. */}
+      {[[190, 100], [250, 140], [310, 90], [220, 190], [300, 190], [350, 150]].map(([x, y], index) => (
+        <g key={index} transform={`translate(${x} ${y}) rotate(${(index * 23) % 40 - 20})`}>
           <Shape d="M-30 0 C-30 -16 20 -16 24 0 C20 14 -30 14 -30 0 Z" w={4} />
           <Shape d="M18 -6 C30 -10 38 -4 38 0 C38 6 30 10 18 6 Z" w={3} />
           <Solid d="M22 -3 l3 4 l3 -4 Z M22 3 l3 -4 l3 4 Z" />

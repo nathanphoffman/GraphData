@@ -9,8 +9,8 @@ import CellNames from "./CellNames";
 import FigureLabels from "./FigureLabels";
 import Legend from "../panels/Legend";
 
-const W = GRID_X0 + GRID_W + 8;
-const H = GRID_Y0 + GRID_H + 94;
+const CHART_WIDTH = GRID_X0 + GRID_W + 8;
+const CHART_HEIGHT = GRID_Y0 + GRID_H + 94;
 const FONT = "system-ui, -apple-system, Segoe UI, sans-serif";
 
 interface Props {
@@ -26,7 +26,7 @@ export default function MapSvg({ model, showExamples, highlight, onSelect }: Pro
   const labels = useMemo(() => placeLabels(model, model.figures), [model]);
 
   return (
-    <svg className="map-surface" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={model.title} fontFamily={FONT}>
+    <svg className="map-surface" viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} role="img" aria-label={model.title} fontFamily={FONT}>
       <text x={GRID_X0} y={34} fontSize={22} fontWeight={700} fill="#222">
         {model.title}
       </text>

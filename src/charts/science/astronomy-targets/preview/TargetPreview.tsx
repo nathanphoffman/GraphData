@@ -9,7 +9,9 @@ import { FindingChart, GuideList } from "./FindingChart";
 const VIEW_SIZE = 280;
 const SCALE = 2;
 
+/** Load an image as a promise so the preview can wait for it. */
 function loadImage(src: string): Promise<HTMLImageElement> {
+  // Wrap the browser's image loading in a promise so it can be awaited.
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => resolve(img);
@@ -29,41 +31,41 @@ function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target):
 
   if (!g) return { mean: 0.05, bg: 0 };
   g.drawImage(img, 0, 0, w, h);
-  const px = g.getImageData(0, 0, w, h).data;
+  const pixels = g.getImageData(0, 0, w, h).data;
   const f = info.footprint;
   const pxPerArcmin = w / info.widthArcmin;
   const a = (target.major / 2) * pxPerArcmin;
   const b = (target.minor / 2) * pxPerArcmin;
   const angle = ((f?.angleDeg ?? 0) * Math.PI) / 180;
-  let sum = 0;
+  let total = 0;
   let n = 0;
   const all: number[] = [];
 
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x++) {
-      const i = (y * w + x) * 4;
-      const lum = ((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255) ** 2.2;
+  for (let yPos = 0; yPos < h; yPos++) {
+    for (let xPos = 0; xPos < w; xPos++) {
+      const index = (yPos * w + xPos) * 4;
+      const lum = ((0.3 * pixels[index] + 0.59 * pixels[index + 1] + 0.11 * pixels[index + 2]) / 255) ** 2.2;
       all.push(lum);
 
       if (f) {
-        const dx = x - f.cx * w;
-        const dy = y - f.cy * h;
-        const u = dx * Math.cos(angle) + dy * Math.sin(angle);
-        const v = -dx * Math.sin(angle) + dy * Math.cos(angle);
+        const deltaX = xPos - f.cx * w;
+        const deltaY = yPos - f.cy * h;
+        const u = deltaX * Math.cos(angle) + deltaY * Math.sin(angle);
+        const value = -deltaX * Math.sin(angle) + deltaY * Math.cos(angle);
 
-        if ((u / a) ** 2 + (v / b) ** 2 > 1) continue;
+        if ((u / a) ** 2 + (value / b) ** 2 > 1) continue;
       }
 
-      sum += lum;
+      total += lum;
       n++;
     }
   }
 
   // The photo's own sky level (its dim 10th percentile) is not part of the target, so it is taken off before brightening.
-  all.sort((p, q) => p - q);
-  const bg = all[Math.floor(all.length * 0.1)] ?? 0;
+  all.sort((p, index) => p - index);
+  const background = all[Math.floor(all.length * 0.1)] ?? 0;
 
-  return { mean: Math.max(0.005, (n ? sum / n : 0.05) - bg), bg };
+  return { mean: Math.max(0.005, (n ? total / n : 0.05) - background), bg: background };
 }
 
 /** Targets smaller than this share of the photo's width get a red circle on the photo, so you can tell which thing in the picture is the target. */
@@ -77,15 +79,15 @@ function TargetCircle({ target, info, img }: { target: Target; info: TargetImage
   const f = info.footprint;
 
   if (!f || info.noCircle || target.major <= 0 || target.major / info.widthArcmin >= CIRCLE_BELOW) return null;
-  const w = info.widthArcmin;
-  const h = w * (img.naturalHeight / img.naturalWidth);
-  const min = (w * CIRCLE_MIN) / 2;
-  const cx = f.cx * w;
-  const cy = f.cy * h;
+  const width = info.widthArcmin;
+  const height = width * (img.naturalHeight / img.naturalWidth);
+  const lowest = (width * CIRCLE_MIN) / 2;
+  const centerX = f.cx * width;
+  const centerY = f.cy * height;
 
   return (
-    <svg className="astro-circle" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
-      <ellipse cx={cx} cy={cy} rx={Math.max(target.major / 2, min)} ry={Math.max(target.minor / 2, min)} transform={`rotate(${f.angleDeg} ${cx} ${cy})`} />
+    <svg className="astro-circle" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" aria-hidden="true">
+      <ellipse cx={centerX} cy={centerY} rx={Math.max(target.major / 2, lowest)} ry={Math.max(target.minor / 2, lowest)} transform={`rotate(${f.angleDeg} ${centerX} ${centerY})`} />
     </svg>
   );
 }
@@ -104,8 +106,8 @@ const BLOOM_RANGE = 6;
 const CYCLE_SECONDS = 8;
 
 /** Stars and planets are far smaller than a pixel of the field, so they are drawn as a glowing dot, not from the photo. */
-function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: number, skyGlow: number, quality: number) {
-  const frame = g.createImageData(size, size);
+function preparePoint(context: CanvasRenderingContext2D, size: number, pointMargin: number, skyGlow: number, quality: number) {
+  const frame = context.createImageData(size, size);
   const d = frame.data;
   const half = size / 2;
 
@@ -125,12 +127,12 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
     const bloom = Math.max(0, Math.min(1, (pointMargin + AVERTED_BOOST * averted - BLOOM_START) / BLOOM_RANGE));
 
     for (let p = 0; p < size * size; p++) {
-      const i = p * 4;
+      const index = p * 4;
       const dist = Math.hypot((p % size) - half, Math.floor(p / size) - half);
-      d[i + 3] = 255;
+      d[index + 3] = 255;
 
       if (dist > half) {
-        d[i] = d[i + 1] = d[i + 2] = 0;
+        d[index] = d[index + 1] = d[index + 2] = 0;
         continue;
       }
 
@@ -138,12 +140,12 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
       const vignette = 1 - 0.25 * (dist / half) ** 2;
 
       for (let c = 0; c < 3; c++) {
-        const v = Math.min(1, skyLevel * skyTint[c] + level * base[c]) * vignette;
-        d[i + c] = Math.round(255 * v ** (1 / 2.2));
+        const value = Math.min(1, skyLevel * skyTint[c] + level * base[c]) * vignette;
+        d[index + c] = Math.round(255 * value ** (1 / 2.2));
       }
     }
 
-    g.putImageData(frame, 0, 0);
+    context.putImageData(frame, 0, 0);
   };
 }
 
@@ -187,8 +189,8 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
 
   // Put the target (when we know where it is in the photo) in the middle of the field.
   const left = size / 2 - (center?.cx ?? 0.5) * w;
-  const top = size / 2 - (center?.cy ?? 0.5) * h;
-  g.drawImage(img, left, top, w, h);
+  const topEdge = size / 2 - (center?.cy ?? 0.5) * h;
+  g.drawImage(img, left, topEdge, w, h);
   const sharp = g.getImageData(0, 0, size, size).data;
 
   // A softened copy, blended in for averted vision (skipped where the browser can't blur a canvas).
@@ -212,18 +214,18 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
   const vignette = new Float32Array(size * size);
 
   for (let p = 0; p < size * size; p++) {
-    const px = p % size;
+    const pixels = p % size;
     const py = Math.floor(p / size);
-    const r = Math.hypot(px - half, py - half) / half;
+    const r = Math.hypot(pixels - half, py - half) / half;
 
     if (r > 1) continue;
-    const ex = Math.min(1, Math.max(0, Math.min(px - left, left + w - px) / feather));
-    const ey = Math.min(1, Math.max(0, Math.min(py - top, top + h - py) / feather));
+    const ex = Math.min(1, Math.max(0, Math.min(pixels - left, left + w - pixels) / feather));
+    const ey = Math.min(1, Math.max(0, Math.min(py - topEdge, topEdge + h - py) / feather));
     weight[p] = ex * ey;
     vignette[p] = 1 - 0.25 * r * r;
   }
 
-  const lut = new Float32Array(256).map((_, v) => (v / 255) ** 2.2);
+  const lut = new Float32Array(256).map((_unused, index) => (index / 255) ** 2.2);
 
   // Optical quality: good optics add contrast and colour; poor optics flatten them, lift the sky with scattered light and soften the image.
   const poor = Math.max(0, -quality);
@@ -238,30 +240,30 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
     // The eye sees almost no colour in the dark and none at all in averted vision; good optics keep more of the photo's colour.
     const colour = Math.max(0, (0.175 + 0.25 * quality) * (1 - averted));
     const contrast = 8 * (1 - 0.3 * quality);
-    const tone = (x: number, w: number) => 1 - Math.exp(-Math.max(0, x * gain * w - 2.5) / contrast);
+    const tone = (xPos: number, width: number) => 1 - Math.exp(-Math.max(0, xPos * gain * width - 2.5) / contrast);
     const tint = [0.86 + 0.14 * colour, 0.93 + 0.07 * colour, 1.0];
 
     for (let p = 0; p < size * size; p++) {
-      const i = p * 4;
-      d[i + 3] = 255;
+      const index = p * 4;
+      d[index + 3] = 255;
 
       if (vignette[p] === 0) {
-        d[i] = d[i + 1] = d[i + 2] = 0;
+        d[index] = d[index + 1] = d[index + 2] = 0;
         continue;
       }
 
-      const lin0 = (lut[sharp[i]] + (lut[blur[i]] - lut[sharp[i]]) * soften) * COOL_BALANCE[0];
-      const lin1 = (lut[sharp[i + 1]] + (lut[blur[i + 1]] - lut[sharp[i + 1]]) * soften) * COOL_BALANCE[1];
-      const lin2 = (lut[sharp[i + 2]] + (lut[blur[i + 2]] - lut[sharp[i + 2]]) * soften) * COOL_BALANCE[2];
-      const w = weight[p];
-      const grey = tone(Math.max(0, 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2 - bg), w);
+      const lin0 = (lut[sharp[index]] + (lut[blur[index]] - lut[sharp[index]]) * soften) * COOL_BALANCE[0];
+      const lin1 = (lut[sharp[index + 1]] + (lut[blur[index + 1]] - lut[sharp[index + 1]]) * soften) * COOL_BALANCE[1];
+      const lin2 = (lut[sharp[index + 2]] + (lut[blur[index + 2]] - lut[sharp[index + 2]]) * soften) * COOL_BALANCE[2];
+      const width = weight[p];
+      const grey = tone(Math.max(0, 0.3 * lin0 + 0.59 * lin1 + 0.11 * lin2 - bg), width);
 
       for (let c = 0; c < 3; c++) {
         // Pick the red, green or blue channel by index, subtract the sky background, and never go below zero.
-        const chan = tone(Math.max(0, (c === 0 ? lin0 : c === 1 ? lin1 : lin2) - bg), w);
+        const chan = tone(Math.max(0, (c === 0 ? lin0 : c === 1 ? lin1 : lin2) - bg), width);
         const level = grey + (chan - grey) * colour;
-        const v = Math.min(1, skyLevel * skyTint[c] + level * tint[c]) * vignette[p];
-        d[i + c] = Math.round(255 * v ** (1 / 2.2));
+        const value = Math.min(1, skyLevel * skyTint[c] + level * tint[c]) * vignette[p];
+        d[index + c] = Math.round(255 * value ** (1 / 2.2));
       }
     }
 
@@ -296,8 +298,8 @@ function PreviewHead({ row, settings }: { row: ScoredTarget; settings: Settings 
 }
 
 /** Stat tiles for the numbers, then the description and how to find it. */
-function previewStats(row: ScoredTarget) {
-  const t = row.target;
+function previewStats(scoredTarget: ScoredTarget) {
+  const t = scoredTarget.target;
   const extra = DETAILS[t.id];
   const tiles: [string, string][] = [
     ["Magnitude", t.magnitude.toFixed(1)],
@@ -307,8 +309,8 @@ function previewStats(row: ScoredTarget) {
   if (t.type !== "Star" && !t.planet && t.type !== "Moon") tiles.push(["Surface br.", `${surfaceBrightness(t).toFixed(1)}`]);
 
   if (extra) tiles.push(["Distance", extra.distance]);
-  tiles.push(["Best time", `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${row.bestHour === null ? "" : `, ${formatHour(row.bestHour)}`}`]);
-  tiles.push(["Peak altitude", row.peakAltitude > 0 ? `${row.peakAltitude.toFixed(0)}°` : "below horizon"]);
+  tiles.push(["Best time", `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${scoredTarget.bestHour === null ? "" : `, ${formatHour(scoredTarget.bestHour)}`}`]);
+  tiles.push(["Peak altitude", scoredTarget.peakAltitude > 0 ? `${scoredTarget.peakAltitude.toFixed(0)}°` : "below horizon"]);
   const notes: { label: string; value: string }[] = [];
 
   for (const f of extra?.facts ?? []) (f.value.length <= TILE_MAX ? tiles.push([f.label, f.value]) : notes.push(f));
@@ -316,8 +318,9 @@ function previewStats(row: ScoredTarget) {
   return { tiles, notes, extra };
 }
 
-export function hasPreview(id: string): boolean {
-  return id in TARGET_IMAGES;
+/** True when the target has a photo, so only those targets get a hover preview. */
+export function hasPreview(identifier: string): boolean {
+  return identifier in TARGET_IMAGES;
 }
 
 /** Floating preview of what the target looks like through the chosen eyepiece, placed next to the mouse. */
@@ -326,18 +329,21 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const thumbRef = useRef<HTMLSpanElement>(null);
   const [loaded, setLoaded] = useState<{ img: HTMLImageElement; mean: number; bg: number } | null>(null);
-  const alt = row.peakAltitude > 0 ? Math.max(20, row.peakAltitude) : 45;
-  const view = viewConditions(row.target, settings, alt);
+  const altitude = row.peakAltitude > 0 ? Math.max(20, row.peakAltitude) : 45;
+  const view = viewConditions(row.target, settings, altitude);
 
   // The preview eyepiece: more magnification shows a smaller patch of sky, bigger and dimmer.
   const eyepiece = previewOptics(settings);
-  const fov = eyepiece.fov;
+  const fieldOfView = eyepiece.fov;
   const margin = view.margin - eyepiece.dimming;
   const skyGlow = view.skyGlow;
-  const unresolved = row.target.major * ((VIEW_SIZE * SCALE) / fov) < 6;
+  const unresolved = row.target.major * ((VIEW_SIZE * SCALE) / fieldOfView) < 6;
 
+  // Load the photo, and ignore the result if the preview was closed before it finished.
   useEffect(() => {
     let cancelled = false;
+
+    // Measure the photo once loaded so it can be scaled to the eyepiece view.
     loadImage(info.src).then((img) => {
       if (!cancelled) setLoaded({ img, ...measurePhoto(img, info, row.target) });
     }).catch((error) => console.warn(`Could not load image ${info.src}`, error));
@@ -352,13 +358,15 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
       canvas: canvasRef.current,
       img: loaded.img,
       photo: { widthArcmin: info.widthArcmin, mean: loaded.mean, bg: loaded.bg, center: info.footprint },
-      optics: { fov, margin, pointMargin: view.pointMargin, quality: (effectiveQuality(settings) - 50) / 50 },
+      optics: { fov: fieldOfView, margin, pointMargin: view.pointMargin, quality: (effectiveQuality(settings) - 50) / 50 },
       skyGlow,
       point: unresolved,
     });
 
     if (!render) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Draw one frame and move the slider thumb to match the averted-vision level.
     const show = (averted: number) => {
       render(averted);
 
@@ -373,6 +381,8 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
 
     let frame = 0;
     let last = 0;
+
+    // Animation step: only redraw when enough time has passed since the last frame.
     const tick = (now: number) => {
       // About 20 frames a second is plenty for a slow fade and keeps the per-pixel work light.
       if (now - last > 50) {
@@ -386,7 +396,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     frame = requestAnimationFrame(tick);
 
     return () => cancelAnimationFrame(frame);
-  }, [loaded, info.widthArcmin, info.footprint, fov, margin, skyGlow, unresolved, effectiveQuality(settings)]);
+  }, [loaded, info.widthArcmin, info.footprint, fieldOfView, margin, skyGlow, unresolved, effectiveQuality(settings)]);
 
   // Measure the real box so it can be moved fully on screen: beside the cursor, flipped to its left or lifted up when it would overflow.
   const boxRef = useRef<HTMLDivElement>(null);
@@ -402,15 +412,16 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   const GAP = 16;
   const EDGE = 8;
   const left = x + GAP + box.w > window.innerWidth - EDGE ? x - GAP - box.w : x + GAP;
-  const top = Math.min(y + GAP, window.innerHeight - EDGE - box.h);
+  const topEdge = Math.min(y + GAP, window.innerHeight - EDGE - box.h);
 
   const { tiles, notes, extra } = previewStats(row);
   const guideStars = guideStarsFor(row.target);
 
   return (
-    <div ref={boxRef} className="astro-preview" style={{ left: Math.max(EDGE, left), top: Math.max(EDGE, top) }}>
+    <div ref={boxRef} className="astro-preview" style={{ left: Math.max(EDGE, left), top: Math.max(EDGE, topEdge) }}>
       <PreviewHead row={row} settings={settings} />
       <dl className="astro-stats">
+        {/* One row per fact about the target. */}
         {tiles.map(([label, value]) => (
           <div key={label}>
             <dt>{label}</dt>
@@ -441,7 +452,7 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
           <>
             <h5>About</h5>
             <p>{extra.about}</p>
-            {notes.length > 0 && <ul>{notes.map((n) => <li key={n.label}><strong>{n.label}:</strong> {n.value}</li>)}</ul>}
+            {notes.length > 0 && <ul>{notes.map((note) => <li key={note.label}><strong>{note.label}:</strong> {note.value}</li>)}</ul>}
             <h5>How to find it</h5>
             <p>{extra.howToFind}</p>
             {guideStars.length > 0 && (

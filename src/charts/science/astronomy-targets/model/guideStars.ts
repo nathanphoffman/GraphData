@@ -1,6 +1,6 @@
 import type { Target } from "./types";
 
-const RAD = Math.PI / 180;
+const DEGREES_TO_RADIANS = Math.PI / 180;
 
 /** Bright stars (magnitude 3 or brighter) that show up even from a suburban sky. Right ascension in hours, declination in degrees (J2000). */
 const GUIDE_STARS: { name: string; ra: number; dec: number; mag: number }[] = [
@@ -114,16 +114,17 @@ export interface GuideStar {
 
 /** Angular distance and compass direction (east of north) from a to b. */
 export function measure(a: { ra: number; dec: number }, b: { ra: number; dec: number }): { separation: number; bearing: number } {
-  const d1 = a.dec * RAD;
-  const d2 = b.dec * RAD;
-  const dRa = (b.ra - a.ra) * 15 * RAD;
+  const d1 = a.dec * DEGREES_TO_RADIANS;
+  const d2 = b.dec * DEGREES_TO_RADIANS;
+  const dRa = (b.ra - a.ra) * 15 * DEGREES_TO_RADIANS;
   const cosSep = Math.sin(d1) * Math.sin(d2) + Math.cos(d1) * Math.cos(d2) * Math.cos(dRa);
-  const separation = Math.acos(Math.min(1, Math.max(-1, cosSep))) / RAD;
-  const bearing = Math.atan2(Math.sin(dRa) * Math.cos(d2), Math.cos(d1) * Math.sin(d2) - Math.sin(d1) * Math.cos(d2) * Math.cos(dRa)) / RAD;
+  const separation = Math.acos(Math.min(1, Math.max(-1, cosSep))) / DEGREES_TO_RADIANS;
+  const bearing = Math.atan2(Math.sin(dRa) * Math.cos(d2), Math.cos(d1) * Math.sin(d2) - Math.sin(d1) * Math.cos(d2) * Math.cos(dRa)) / DEGREES_TO_RADIANS;
 
   return { separation, bearing: (bearing + 360) % 360 };
 }
 
+/** Smallest angle between two bearings, so 350 degrees and 10 degrees count as 20 apart. */
 function bearingGap(a: number, b: number): number {
   const d = Math.abs(a - b) % 360;
 
@@ -135,11 +136,11 @@ export function guideStarsFor(target: Target): GuideStar[] {
   if (target.planet || target.type === "Moon") return [];
   const candidates = GUIDE_STARS.map((s) => ({ name: s.name, mag: s.mag, ...measure(target, s) }))
     .filter((s) => s.separation > SAME_OBJECT)
-    .sort((a, b) => a.separation - b.separation);
+    .sort((first, second) => first.separation - second.separation);
   const picked: GuideStar[] = [];
 
   for (const c of candidates) {
-    if (picked.every((p) => bearingGap(p.bearing, c.bearing) >= MIN_BEARING_GAP)) picked.push(c);
+    if (picked.every((guideStar) => bearingGap(guideStar.bearing, c.bearing) >= MIN_BEARING_GAP)) picked.push(c);
 
     if (picked.length === 3) break;
   }

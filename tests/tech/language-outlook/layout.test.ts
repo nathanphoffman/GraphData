@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { H, MARGIN, W, arrowPoints, buildYScale, lineSegments, makeXAt } from "../../../src/charts/tech/language-outlook/model/layout";
+import { CHART_HEIGHT, MARGIN, CHART_WIDTH, arrowPoints, buildYScale, lineSegments, makeXAt } from "../../../src/charts/tech/language-outlook/model/layout";
 import type { LanguageOutlookData, LanguageRecord } from "../../../src/charts/tech/language-outlook/model/types";
 
 const language = (name: string, values: Record<string, number | null>) => ({ name, values, tiobe: {}, pop: {} }) as LanguageRecord;
@@ -21,7 +21,7 @@ describe("buildYScale", () => {
   });
 
   it("maps zero to the bottom of the plot", () => {
-    expect(buildYScale(model, { a: true }).range()).toEqual([H - MARGIN.bottom, MARGIN.top]);
+    expect(buildYScale(model, { a: true }).range()).toEqual([CHART_HEIGHT - MARGIN.bottom, MARGIN.top]);
   });
 });
 
@@ -45,22 +45,22 @@ describe("makeXAt", () => {
 
     expect(xAt(1) - xAt(0)).toBeCloseTo(xAt(2) - xAt(1));
     expect(xAt(0)).toBeGreaterThan(MARGIN.left);
-    expect(xAt(3)).toBeLessThan(W - MARGIN.right);
+    expect(xAt(3)).toBeLessThan(CHART_WIDTH - MARGIN.right);
   });
 });
 
 describe("lineSegments", () => {
-  const xAt = (i: number) => i * 10;
-  const yAt = (v: number) => v;
+  const xAt = (index: number) => index * 10;
+  const yAt = (value: number) => value;
 
   it("splits a line wherever a value is missing", () => {
-    const langs = [1, 2, null, 3, 4].map((v, i) => language(`L${i}`, { k: v }));
+    const langs = [1, 2, null, 3, 4].map((value, index) => language(`L${index}`, { k: value }));
 
     expect(lineSegments(langs, "k", xAt, yAt)).toEqual(["0,1 10,2", "30,3 40,4"]);
   });
 
   it("drops stretches that are a single point", () => {
-    const langs = [1, null, 3].map((v, i) => language(`L${i}`, { k: v }));
+    const langs = [1, null, 3].map((value, index) => language(`L${index}`, { k: value }));
 
     expect(lineSegments(langs, "k", xAt, yAt)).toEqual([]);
   });

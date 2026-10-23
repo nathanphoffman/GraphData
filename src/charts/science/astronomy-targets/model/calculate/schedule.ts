@@ -37,37 +37,37 @@ export const SLOT_LIMITS: Record<ScheduleLevel, number> = { easy: 6, moderate: 4
  * best score first. Very hard objects are not listed except for one random Reach. Stars (and planets) get their own list.
  */
 export function buildSchedule(rows: ScoredTarget[], season: Season, settings: Settings): Schedule {
-  const inSeason = rows.filter((r) => r.target.bestSeason === season);
-  const stars = inSeason.filter((r) => r.target.type === "Star" && r.score > 0);
+  const inSeason = rows.filter((scoredTarget) => scoredTarget.target.bestSeason === season);
+  const stars = inSeason.filter((scoredTarget) => scoredTarget.target.type === "Star" && scoredTarget.score > 0);
   const byHour = new Map<number, ScheduleSlot>();
   const veryHard: ScheduleItem[] = [];
 
-  for (const row of inSeason) {
-    if (row.target.type === "Star" || row.bestHour === null || row.score <= 0) continue;
-    const up = upWindow(row.target, season, settings.latitude);
+  for (const scoredTarget of inSeason) {
+    if (scoredTarget.target.type === "Star" || scoredTarget.bestHour === null || scoredTarget.score <= 0) continue;
+    const up = upWindow(scoredTarget.target, season, settings.latitude);
 
     if (!up) continue;
 
-    if (row.score < 10) {
-      veryHard.push({ row, up });
+    if (scoredTarget.score < 10) {
+      veryHard.push({ row: scoredTarget, up });
       continue;
     }
 
     // Score cutoffs for how easy the target is to schedule.
-    const level: ScheduleLevel = row.score >= 35 ? "easy" : row.score >= 20 ? "moderate" : "hard";
-    const start = row.bestHour - (row.bestHour % WINDOW_HOURS);
+    const level: ScheduleLevel = scoredTarget.score >= 35 ? "easy" : scoredTarget.score >= 20 ? "moderate" : "hard";
+    const start = scoredTarget.bestHour - (scoredTarget.bestHour % WINDOW_HOURS);
     const slot = byHour.get(start) ?? { hour: start, items: { easy: [], moderate: [], hard: [] }, more: 0 };
     byHour.set(start, slot);
 
-    if (slot.items[level].length < SLOT_LIMITS[level]) slot.items[level].push({ row, up });
+    if (slot.items[level].length < SLOT_LIMITS[level]) slot.items[level].push({ row: scoredTarget, up });
     else slot.more++;
   }
 
-  const evening = (h: number) => (h < NIGHT_START - 12 ? h + 24 : h);
+  const evening = (height: number) => (height < NIGHT_START - 12 ? height + 24 : height);
 
   return {
     season,
-    slots: [...byHour.values()].sort((a, b) => evening(a.hour) - evening(b.hour)),
+    slots: [...byHour.values()].sort((scheduleSlot, second) => evening(scheduleSlot.hour) - evening(second.hour)),
     reach: veryHard.length ? veryHard[Math.floor(Math.random() * veryHard.length)] : null,
     stars,
   };

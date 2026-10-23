@@ -4,10 +4,10 @@ import { yearly } from "../model/averages";
 import { dailyRows } from "../model/rows";
 import { type Format, type Unit, pretty, toDate } from "../model/units";
 
-type BandOf = (lb: number | null, adjusted: boolean) => string;
+type BandOf = (pounds: number | null, adjusted: boolean) => string;
 
 /** Actual value on top, muscle-adjusted value underneath, each highlighted by its target band. */
-function Two({ actual, adjusted, fmt, bandOf = band }: { actual: number | null; adjusted: number | null; fmt: (lb: number) => string; bandOf?: BandOf }) {
+function Two({ actual, adjusted, fmt, bandOf = band }: { actual: number | null; adjusted: number | null; fmt: (pounds: number) => string; bandOf?: BandOf }) {
   const show = (n: number | null) => (n === null ? "—" : fmt(n));
 
   return (
@@ -19,12 +19,15 @@ function Two({ actual, adjusted, fmt, bandOf = band }: { actual: number | null; 
   );
 }
 
-const quarterOf = (iso: string) => `${iso.slice(0, 4)}-Q${Math.floor((Number(iso.slice(5, 7)) - 1) / 3) + 1}`;
+/** Year and quarter of a date, for the period filter. */
+const quarterOf = (isoDate: string) => `${isoDate.slice(0, 4)}-Q${Math.floor((Number(isoDate.slice(5, 7)) - 1) / 3) + 1}`;
 
 /** Table shows the last 90 days by default, or one chosen quarter (e.g. "2025-Q3"). */
 function useTableRows(period: string) {
   const newestFirst = useMemo(() => [...dailyRows].reverse(), []);
   const quarters = useMemo(() => [...new Set(newestFirst.map((r) => quarterOf(r.date)))], [newestFirst]);
+
+  // Show the chosen quarter, or by default the last 90 days.
   const rows = useMemo(() => {
     if (period !== "default") return newestFirst.filter((r) => quarterOf(r.date) === period);
     const cutoff = new Date(toDate(newestFirst[0].date).getTime() - 89 * 86_400_000).toISOString().slice(0, 10);
@@ -37,6 +40,7 @@ function useTableRows(period: string) {
 
 type Show = { muscleDaily: boolean; monthly: boolean };
 
+/** Table header; columns follow the options that are switched on. */
 function Head({ unit, show }: { unit: Unit; show: Show }) {
   return (
     <thead>
@@ -71,6 +75,7 @@ function DayRow({ d, f, show }: { d: (typeof dailyRows)[number]; f: Format; show
   );
 }
 
+/** Daily table with a period filter, showing the last 90 days by default. */
 export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
   const [period, setPeriod] = useState("default");
   const [show, setShow] = useState<Show>({ muscleDaily: false, monthly: false });
@@ -81,10 +86,11 @@ export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
       <div className="weight-controls table-controls">
         <div className="control-group">
           <span className="control-label">Table period</span>
-          <select value={period} onChange={(e) => setPeriod(e.target.value)}>
+          <select value={period} onChange={(event) => setPeriod(event.target.value)}>
             <option value="default">[default] last 90 days</option>
-            {quarters.map((q) => (
-              <option key={q} value={q}>{q.replace("-", " ")}</option>
+            {/* One dropdown entry per quarter that has data. */}
+            {quarters.map((quarter) => (
+              <option key={quarter} value={quarter}>{quarter.replace("-", " ")}</option>
             ))}
           </select>
         </div>
@@ -92,10 +98,10 @@ export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
           <span className="control-label">Extra columns</span>
           <div className="toggles">
             <label className="toggle">
-              <input type="checkbox" checked={show.muscleDaily} onChange={(e) => setShow({ ...show, muscleDaily: e.target.checked })} /> Muscle gain
+              <input type="checkbox" checked={show.muscleDaily} onChange={(event) => setShow({ ...show, muscleDaily: event.target.checked })} /> Muscle gain
             </label>
             <label className="toggle">
-              <input type="checkbox" checked={show.monthly} onChange={(e) => setShow({ ...show, monthly: e.target.checked })} /> Projected / month
+              <input type="checkbox" checked={show.monthly} onChange={(event) => setShow({ ...show, monthly: event.target.checked })} /> Projected / month
             </label>
           </div>
         </div>

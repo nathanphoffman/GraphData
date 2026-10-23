@@ -8,8 +8,9 @@ export function FleetAdmiral() {
     <Drawing label="Drawing of a grim commander in a black glass helmet before a bridge window full of ships">
       <Shape d="M20 20 H380 V110 H20 Z" w={4} />
       <Line d="M20 110 L120 20 M200 110 L300 20" w={2} />
-      {[[60, 60], [120, 80], [170, 48], [240, 70], [300, 50], [340, 84]].map(([x, y], i) => (
-        <path key={i} d={`M${x} ${y} l14 -4 l12 4 l-12 4 Z`} fill="currentColor" />
+      {/* Repeat the shape at each listed position. */}
+      {[[60, 60], [120, 80], [170, 48], [240, 70], [300, 50], [340, 84]].map(([x, y], index) => (
+        <path key={index} d={`M${x} ${y} l14 -4 l12 4 l-12 4 Z`} fill="currentColor" />
       ))}
       <Shape d="M166 120 C160 82 240 82 234 120 L228 140 H172 Z" />
       <Solid d="M176 108 H224 V128 H176 Z" />

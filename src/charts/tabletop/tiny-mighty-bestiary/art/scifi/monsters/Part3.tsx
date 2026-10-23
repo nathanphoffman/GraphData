@@ -9,14 +9,15 @@ export function DuneGullet() {
       <ellipse cx="200" cy="154" rx="130" ry="58" fill={card} {...ink} />
       <ellipse cx="200" cy="154" rx="96" ry="38" fill="none" {...ink} strokeWidth={4} />
       <ellipse cx="200" cy="154" rx="50" ry="18" fill="currentColor" />
-      {Array.from({ length: 18 }, (_, i) => {
-        const a = (i / 18) * Math.PI * 2;
-        const x = 200 + Math.cos(a) * 124;
-        const y = 154 + Math.sin(a) * 52;
-        const x2 = 200 + Math.cos(a) * 96;
-        const y2 = 154 + Math.sin(a) * 38;
+      {/* Teeth evenly spaced around the ellipse. */}
+      {Array.from({ length: 18 }, (_unused, index) => {
+        const a = (index / 18) * Math.PI * 2;
+        const xPos = 200 + Math.cos(a) * 124;
+        const yPos = 154 + Math.sin(a) * 52;
+        const endX = 200 + Math.cos(a) * 96;
+        const endY = 154 + Math.sin(a) * 38;
 
-        return <path key={i} d={`M${x - 5} ${y} L${x2} ${y2} L${x + 5} ${y} Z`} fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />;
+        return <path key={index} d={`M${xPos - 5} ${yPos} L${endX} ${endY} L${xPos + 5} ${yPos} Z`} fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />;
       })}
       <Line d="M200 140 C200 100 240 90 240 50 C240 30 260 20 276 28" w={12} />
       <Line d="M200 140 C200 100 240 90 240 50 C240 30 260 20 276 28" w={6} />

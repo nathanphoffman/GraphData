@@ -4,7 +4,7 @@ import { buildAllTrend, buildSpread, taperCurve } from "../../../src/charts/scie
 import type { Row } from "../../../src/charts/science/weight-journey/model/rows";
 
 describe("addAverages", () => {
-  const days = [10, 20, 30].map((weight, i) => ({ date: `2024-01-0${i + 1}`, weight, estimated: false }));
+  const days = [10, 20, 30].map((weight, index) => ({ date: `2024-01-0${index + 1}`, weight, estimated: false }));
   const windows = { short: 2, medium: 3, long: 3 };
 
   it("averages the day itself and the days before it", () => {
@@ -32,7 +32,7 @@ describe("addMuscle", () => {
 
   it("adds up to the full total by the last day, with gains that taper off", () => {
     expect(result[result.length - 1].muscleTotal).toBeCloseTo(14.5);
-    expect(result.reduce((sum, d) => sum + d.muscleDaily, 0)).toBeCloseTo(14.5);
+    expect(result.reduce((total, d) => total + d.muscleDaily, 0)).toBeCloseTo(14.5);
     expect(result[3].muscleDaily).toBeGreaterThan(result[5].muscleDaily);
   });
 });
@@ -84,7 +84,7 @@ describe("buildAllTrend", () => {
     const rows = [row(1, 100, 90), row(2, 100, 90), row(3, 100, 90), row(4, 100, 90)];
     const result = buildAllTrend(rows, 10);
 
-    expect(result?.trends.map((t) => t.back)).toEqual([0, 1, 2]);
+    expect(result?.trends.map((trend) => trend.back)).toEqual([0, 1, 2]);
   });
 });
 
@@ -96,6 +96,6 @@ describe("buildSpread", () => {
   it("sorts curves from lowest target to highest", () => {
     const result = buildSpread([row(1, 100, 95), row(2, 100, 85), row(3, 100, 90)], 10);
 
-    expect(result?.actual.curves.map((c) => c.target)).toEqual([85, 90, 95]);
+    expect(result?.actual.curves.map((curve) => curve.target)).toEqual([85, 90, 95]);
   });
 });

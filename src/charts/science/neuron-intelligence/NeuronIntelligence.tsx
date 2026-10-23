@@ -15,16 +15,18 @@ interface SliderProps {
   onChange: (value: number) => void;
 }
 
+/** Labelled slider for one of the two exponents. */
 function Slider({ label, value, min, max, onChange }: SliderProps) {
   return (
     <label className="neuron-slider">
       <span>{label}</span>
-      <input type="range" min={min} max={max} step={0.05} value={value} onChange={(e) => onChange(Number(e.target.value))} />
+      <input type="range" min={min} max={max} step={0.05} value={value} onChange={(event) => onChange(Number(event.target.value))} />
       <strong>{value.toFixed(2)}</strong>
     </label>
   );
 }
 
+/** Neuron intelligence page: the exponent sliders and a ranked table of animals. */
 export default function NeuronIntelligence() {
   const [exponents, setExponents] = useState<Exponents>(DEFAULT_EXPONENTS);
   const { sortKey, ascending, sortBy } = useSort<SortKey>("score");
@@ -34,7 +36,7 @@ export default function NeuronIntelligence() {
     [exponents, sortKey, ascending],
   );
 
-  const maxScore = Math.max(...rows.map((r) => r.score));
+  const maxScore = Math.max(...rows.map((scoredAnimal) => scoredAnimal.score));
 
   const set = (key: keyof Exponents) => (value: number) => setExponents((prev) => ({ ...prev, [key]: value }));
 
@@ -74,19 +76,20 @@ export default function NeuronIntelligence() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, i) => (
-              <tr key={row.name}>
-                <td className="neuron-rank">{i + 1}</td>
-                <td className="neuron-name">{row.name}</td>
-                <td>{formatNeurons(row.neuronsBillions)}</td>
-                <td>{row.weightKg}</td>
+            {/* One table row per animal, numbered by rank. */}
+            {rows.map((scoredAnimal, index) => (
+              <tr key={scoredAnimal.name}>
+                <td className="neuron-rank">{index + 1}</td>
+                <td className="neuron-name">{scoredAnimal.name}</td>
+                <td>{formatNeurons(scoredAnimal.neuronsBillions)}</td>
+                <td>{scoredAnimal.weightKg}</td>
                 <td className="neuron-bar-cell">
                   <div className="neuron-bar-bg">
-                    <div className="neuron-bar-fill" style={{ width: `${(row.score / maxScore) * 100}%` }} />
+                    <div className="neuron-bar-fill" style={{ width: `${(scoredAnimal.score / maxScore) * 100}%` }} />
                   </div>
                 </td>
-                <td className="neuron-score">{row.score.toExponential(2)}</td>
-                <td className="neuron-score">{row.humanPercent.toFixed(2)}%</td>
+                <td className="neuron-score">{scoredAnimal.score.toExponential(2)}</td>
+                <td className="neuron-score">{scoredAnimal.humanPercent.toFixed(2)}%</td>
               </tr>
             ))}
           </tbody>

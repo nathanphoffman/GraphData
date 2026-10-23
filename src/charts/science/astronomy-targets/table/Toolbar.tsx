@@ -4,14 +4,16 @@ import { COLUMNS } from "./columns";
 
 interface SeasonProps {
   value: SeasonFilter | null;
-  onToggle: (s: SeasonFilter) => void;
-  onSchedule: (s: Exclude<SeasonFilter, "any">) => void;
+  onToggle: (seasonFilter: SeasonFilter) => void;
+  onSchedule: (exclude: Exclude<SeasonFilter, "any">) => void;
 }
 
+/** Buttons for narrowing the table to one season or opening the night schedule. */
 function SeasonButtons({ value, onToggle, onSchedule }: SeasonProps) {
   return (
     <div className="astro-seasons">
       <span>Best season</span>
+      {/* One button per season filter. */}
       {SEASON_FILTERS.map((season) => (
         <button
           key={season}
@@ -30,15 +32,17 @@ function SeasonButtons({ value, onToggle, onSchedule }: SeasonProps) {
   );
 }
 
-function ColumnsMenu({ hidden, onToggle }: { hidden: Set<string>; onToggle: (id: string) => void }) {
+/** Menu of checkboxes for showing and hiding table columns. */
+function ColumnsMenu({ hidden, onToggle }: { hidden: Set<string>; onToggle: (identifier: string) => void }) {
   return (
     <details className="astro-columns-menu">
       <summary>Columns</summary>
       <div>
-        {COLUMNS.map((c) => (
-          <label key={c.id}>
-            <input type="checkbox" checked={!hidden.has(c.id)} onChange={() => onToggle(c.id)} />
-            {c.label}
+        {/* One checkbox per column for showing or hiding it. */}
+        {COLUMNS.map((column) => (
+          <label key={column.id}>
+            <input type="checkbox" checked={!hidden.has(column.id)} onChange={() => onToggle(column.id)} />
+            {column.label}
           </label>
         ))}
       </div>
@@ -50,14 +54,15 @@ interface ToolbarProps extends SeasonProps {
   query: string;
   onQuery: (q: string) => void;
   hidden: Set<string>;
-  onToggleColumn: (id: string) => void;
+  onToggleColumn: (identifier: string) => void;
   count: string;
 }
 
+/** Search box, season filter and column menu above the table. */
 export function Toolbar({ query, onQuery, hidden, onToggleColumn, count, ...season }: ToolbarProps) {
   return (
     <div className="astro-toolbar">
-      <input type="search" placeholder="Search name, nickname, constellation or type" value={query} onChange={(e) => onQuery(e.target.value)} aria-label="Search targets" />
+      <input type="search" placeholder="Search name, nickname, constellation or type" value={query} onChange={(event) => onQuery(event.target.value)} aria-label="Search targets" />
       <SeasonButtons {...season} />
       <ColumnsMenu hidden={hidden} onToggle={onToggleColumn} />
       <small>{count}</small>

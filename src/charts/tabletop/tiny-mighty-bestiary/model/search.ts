@@ -7,7 +7,7 @@ const squash = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
 /** True when every word of the query appears somewhere in the creature's searchable text. Names and aliases also match ignoring spacing and punctuation. */
 export function matches(creature: Creature, query: string) {
   const names = [creature.name, ...creature.aliases].map(squash);
-  const inNames = (word: string) => word !== "" && names.some((n) => n.includes(word));
+  const inNames = (word: string) => word !== "" && names.some((name) => name.includes(word));
 
   if (inNames(squash(query))) return true;
 
@@ -22,7 +22,7 @@ export function matches(creature: Creature, query: string) {
     creature.skillNote ?? "",
     creature.tactics,
     creature.flying ? "flying" : "",
-    ...creature.powers.flatMap((p) => [p.name, p.text, model.powerTypes[p.type].label]),
+    ...creature.powers.flatMap((power) => [power.name, power.text, model.powerTypes[power.type].label]),
   ]
     .join(" ")
     .toLowerCase();

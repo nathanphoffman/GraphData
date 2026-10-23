@@ -71,21 +71,21 @@ describe("scoreTargets", () => {
   it("scores every target with a finite number of at most 100 (faint ones can go slightly negative)", () => {
     expect(rows).toHaveLength(targets.length);
 
-    for (const row of rows) {
-      expect(Number.isFinite(row.score)).toBe(true);
-      expect(row.score).toBeLessThanOrEqual(100);
+    for (const scoredTarget of rows) {
+      expect(Number.isFinite(scoredTarget.score)).toBe(true);
+      expect(scoredTarget.score).toBeLessThanOrEqual(100);
     }
   });
 
   it("sorts best first", () => {
-    const scores = rows.map((r) => r.score);
+    const scores = rows.map((scoredTarget) => scoredTarget.score);
 
-    expect(scores).toEqual([...scores].sort((a, b) => b - a));
+    expect(scores).toEqual([...scores].sort((first, second) => second - first));
   });
 
   it("scores the same targets lower under a brighter sky", () => {
     const city = scoreTargets(targets, { ...settings, bortle: 9 });
-    const total = (list: typeof rows) => list.reduce((sum, r) => sum + r.score, 0);
+    const total = (list: typeof rows) => list.reduce((total, scoredTarget) => total + scoredTarget.score, 0);
 
     expect(total(city)).toBeLessThan(total(rows));
   });
@@ -96,18 +96,18 @@ describe("buildSchedule", () => {
   const schedule = buildSchedule(rows, "autumn", settings);
 
   it("only lists targets from the chosen season, with stars kept in their own list", () => {
-    const listed = schedule.slots.flatMap((s) => Object.values(s.items).flat());
+    const listed = schedule.slots.flatMap((scheduleSlot) => Object.values(scheduleSlot.items).flat());
 
-    expect(listed.every((i) => i.row.target.bestSeason === "autumn" && i.row.target.type !== "Star")).toBe(true);
-    expect(schedule.stars.every((r) => r.target.type === "Star")).toBe(true);
+    expect(listed.every((scheduleItem) => scheduleItem.row.target.bestSeason === "autumn" && scheduleItem.row.target.type !== "Star")).toBe(true);
+    expect(schedule.stars.every((scoredTarget) => scoredTarget.target.type === "Star")).toBe(true);
   });
 
   it("groups slots on window boundaries, in evening-first order", () => {
-    expect(schedule.slots.every((s) => s.hour % WINDOW_HOURS === 0)).toBe(true);
-    const evening = (h: number) => (h < 10 ? h + 24 : h);
-    const hours = schedule.slots.map((s) => evening(s.hour));
+    expect(schedule.slots.every((scheduleSlot) => scheduleSlot.hour % WINDOW_HOURS === 0)).toBe(true);
+    const evening = (height: number) => (height < 10 ? height + 24 : height);
+    const hours = schedule.slots.map((scheduleSlot) => evening(scheduleSlot.hour));
 
-    expect(hours).toEqual([...hours].sort((a, b) => a - b));
+    expect(hours).toEqual([...hours].sort((first, second) => first - second));
   });
 
   it("keeps each slot within its list limits", () => {

@@ -6,33 +6,36 @@ interface Props {
   groupCount: number;
 }
 
-function DivisorSlider({ value, disabled, onChange }: { value: number; disabled?: boolean; onChange: (v: number) => void }) {
-  return <input type="range" min={1} max={20} step={0.5} disabled={disabled} value={value} onChange={(e) => onChange(Number(e.target.value))} />;
+/** Slider for the divisor, disabled when the chosen mode does not use it. */
+function DivisorSlider({ value, disabled, onChange }: { value: number; disabled?: boolean; onChange: (value: number) => void }) {
+  return <input type="range" min={1} max={20} step={0.5} disabled={disabled} value={value} onChange={(event) => onChange(Number(event.target.value))} />;
 }
 
+/** Choose how missing scores are treated: ignored, estimated or set to a floor. */
 function MissingControl({ settings, set }: Pick<Props, "settings" | "set">) {
   const floor = settings.missingMode === "floor";
 
   return (
     <div className="allint-slider">
       <span>Not measured:</span>
-      <select value={settings.missingMode} onChange={(e) => set({ missingMode: e.target.value as Settings["missingMode"] })}>
+      <select value={settings.missingMode} onChange={(event) => set({ missingMode: event.target.value as Settings["missingMode"] })}>
         <option value="skip">Skip it (score only what was tested)</option>
         <option value="floor">Count as a low score</option>
         <option value="estimate">Guess from its other scores</option>
       </select>
-      <DivisorSlider value={settings.missingDivisor} disabled={!floor} onChange={(v) => set({ missingDivisor: v })} />
+      <DivisorSlider value={settings.missingDivisor} disabled={!floor} onChange={(value) => set({ missingDivisor: value })} />
       <strong>{floor ? `${settings.missingDivisor.toFixed(1)}×` : settings.missingMode}</strong>
     </div>
   );
 }
 
+/** Settings that control how zero and unmeasured scores are handled. */
 export function SettingsPanel({ settings, set, groupCount }: Props) {
   return (
     <div className="panel">
       <label className="allint-slider">
         <span>Real zero counts as worst score ÷</span>
-        <DivisorSlider value={settings.zeroDivisor} onChange={(v) => set({ zeroDivisor: v })} />
+        <DivisorSlider value={settings.zeroDivisor} onChange={(value) => set({ zeroDivisor: value })} />
         <strong>{settings.zeroDivisor.toFixed(1)}×</strong>
       </label>
       <MissingControl settings={settings} set={set} />

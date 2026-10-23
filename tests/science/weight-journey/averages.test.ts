@@ -30,7 +30,7 @@ describe("recentRate", () => {
   });
 
   it("combines the 15 and 30 day changes", () => {
-    const series = Array.from({ length: 31 }, (_, i) => 200 - i);
+    const series = Array.from({ length: 31 }, (_unused, index) => 200 - index);
     expect(recentRate(series, 30, 1)).toBe(-30);
   });
 });

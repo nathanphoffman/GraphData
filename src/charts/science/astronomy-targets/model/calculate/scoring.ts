@@ -21,10 +21,10 @@ export const QUALITY_SENSITIVITY: Record<string, number> = {
 };
 
 /** Score points for good or poor optics: up to +25 for the best, down to -25 for the worst, scaled by how much the target type cares. */
-export function qualityAdjust(t: Target, settings: Settings): number {
+export function qualityAdjust(target: Target, settings: Settings): number {
   const q = (effectiveQuality(settings) - 50) / 50;
 
-  return (QUALITY_SENSITIVITY[t.type] ?? 0.3) * 25 * q;
+  return (QUALITY_SENSITIVITY[target.type] ?? 0.3) * 25 * q;
 }
 
 /**
@@ -45,6 +45,7 @@ export function adjustPoints(value: number, weight: number, bortle: number): num
   return ((value * weight) / 100) * bortleScale(value, bortle);
 }
 
+/** Score every target for the chosen settings and sort best first. */
 export function scoreTargets(targets: Target[], settings: Settings): ScoredTarget[] {
   const { fov, mm } = optics(settings);
 
@@ -63,24 +64,24 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     let aboveHorizon = 0;
     let count = 0;
 
-    for (const s of samples) {
-      let positions = positionsAt(target, s).map((pos) => altitude(pos.ra, pos.dec, s.lst, settings.latitude));
+    for (const sample of samples) {
+      let positions = positionsAt(target, sample).map((position) => altitude(position.ra, position.dec, sample.lst, settings.latitude));
 
       // A planet can be anywhere along the ecliptic, so use the spot where it is highest at this moment.
       if (target.planet) positions = [Math.max(...positions)];
 
-      for (const alt of positions) {
+      for (const altitude of positions) {
         count++;
 
-        if (!s.dark) continue;
-        skyTotal += altitudeQuality(alt);
-        peakAltitude = Math.max(peakAltitude, alt);
+        if (!sample.dark) continue;
+        skyTotal += altitudeQuality(altitude);
+        peakAltitude = Math.max(peakAltitude, altitude);
 
-        if (alt <= 0) continue;
+        if (altitude <= 0) continue;
 
         // Every moment it is up counts equally here, so time spent low in the glow drags Light and Core down.
         aboveHorizon++;
-        const glow = skyGlowPenalty(settings.bortle, alt);
+        const glow = skyGlowPenalty(settings.bortle, altitude);
         lightTotal += lightScore(surfaceBrightness(target), mm, glow);
         coreTotal += coreScore(coreSurfaceBrightness(target), mm, glow);
       }
@@ -90,13 +91,15 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const fit = sizeFit(target, fov);
     const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
-    const raw = 100 * sky ** 0.1 * fit ** 0.4 * light ** 0.2 * core ** 0.3;
-    const score = Math.min(100, raw - SCORE_OFFSET + adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) + adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) + qualityAdjust(target, settings));
+    const rawValue = 100 * sky ** 0.1 * fit ** 0.4 * light ** 0.2 * core ** 0.3;
+    const score = Math.min(100, rawValue - SCORE_OFFSET + adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) + adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) + qualityAdjust(target, settings));
 
     return { target, score, sky, fit, light, core, peakAltitude, bestHour: hour };
   };
 
   return targets
+
+    // Planets have no fixed best season, so they are scored in every season and the best one is kept.
     .map((target) => {
       if (target.bestSeason !== "any") return evaluate(target, target.bestSeason);
 
@@ -107,5 +110,5 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
         // Keep the highest scoring row.
         .reduce((best, r) => (r.score > best.score ? r : best));
     })
-    .sort((a, b) => b.score - a.score);
+    .sort((target, second) => second.score - target.score);
 }

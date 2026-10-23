@@ -95,8 +95,9 @@ export function BrassWarlord() {
       <Line d="M90 150 L56 190 M310 150 L344 170 L376 140" w={13} />
       <Shape d="M110 200 H190 V226 H110 Z M210 200 H290 V226 H210 Z" w={5} />
       <Line d="M376 140 L396 120" w={4} />
-      {[26, 52].map((x) => (
-        <g key={x}><Shape d={`M${x} 170 h18 v30 h-18 Z`} w={3} /><Shape d={`M${x + 2} 150 h14 v20 h-14 Z`} w={3} /></g>
+      {/* Repeat the shape at each listed position. */}
+      {[26, 52].map((xPos) => (
+        <g key={xPos}><Shape d={`M${xPos} 170 h18 v30 h-18 Z`} w={3} /><Shape d={`M${xPos + 2} 150 h14 v20 h-14 Z`} w={3} /></g>
       ))}
     </Drawing>
   );

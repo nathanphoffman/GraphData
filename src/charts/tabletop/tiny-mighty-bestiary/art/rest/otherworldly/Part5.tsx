@@ -16,8 +16,9 @@ export function WarpJester() {
       <Shape d="M152 106 H248 L262 190 H138 Z" />
       <Line d="M150 120 L200 190 L250 120 M150 190 L200 120" w={3} />
       <Line d="M156 114 L110 80 M244 114 L290 80" w={7} />
-      {[[150, 30], [200, 12], [250, 30]].map(([x, y], i) => (
-        <g key={i}>
+      {/* Repeat the shape at each listed position. */}
+      {[[150, 30], [200, 12], [250, 30]].map(([x, y], index) => (
+        <g key={index}>
           <Shape d={`M${x - 14} ${y + 4} C${x - 14} ${y - 18} ${x + 14} ${y - 18} ${x + 14} ${y + 4} L${x + 8} ${y + 14} H${x - 8} Z`} w={3} />
           <Dot x={x - 5} y={y - 2} r={2.5} />
           <Dot x={x + 5} y={y - 2} r={2.5} />

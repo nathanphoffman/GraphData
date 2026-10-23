@@ -12,7 +12,7 @@ interface SliderProps {
   low: string;
   high: string;
   learnMore?: string;
-  onChange: (v: number) => void;
+  onChange: (value: number) => void;
 }
 
 const SIZE = 160;
@@ -21,12 +21,14 @@ const R = 62;
 const START = 135; // degrees, clockwise from 3 o'clock; the gap sits at the bottom
 const SWEEP = 270;
 
-function point(deg: number, r = R) {
-  const rad = (deg * Math.PI) / 180;
+/** Point on the dial's circle at the given angle, so the arc and the knob share one calculation. */
+function point(degrees: number, r = R) {
+  const rad = (degrees * Math.PI) / 180;
 
   return { x: C + r * Math.cos(rad), y: C + r * Math.sin(rad) };
 }
 
+/** SVG path for the arc between two angles, drawn on the dial. */
 function arc(fromDeg: number, toDeg: number) {
   const a = point(fromDeg);
   const b = point(toDeg);
@@ -52,9 +54,10 @@ export default function Slider({
 }: SliderProps) {
   const [open, setOpen] = useState(false);
 
+  // Close the open slider popup when Escape is pressed, and stop listening once it is closed.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (keyboardEvent: KeyboardEvent) => keyboardEvent.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
 
     return () => window.removeEventListener("keydown", onKey);
@@ -63,34 +66,36 @@ export default function Slider({
   const frac = max > min ? (value - min) / (max - min) : 0;
   const knob = point(START + frac * SWEEP);
 
+  // Turn a 0-1 position along the slider into a value snapped to the step size.
   const setFromFraction = (f: number) => {
-    const raw = min + Math.min(1, Math.max(0, f)) * (max - min);
-    const snapped = Math.round((raw - min) / step) * step + min;
+    const rawValue = min + Math.min(1, Math.max(0, f)) * (max - min);
+    const snapped = Math.round((rawValue - min) / step) * step + min;
     onChange(Math.min(max, Math.max(min, Number(snapped.toFixed(6)))));
   };
 
-  const handlePointer = (e: React.PointerEvent<SVGSVGElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - (rect.left + rect.width / 2);
-    const y = e.clientY - (rect.top + rect.height / 2);
-    let deg = (Math.atan2(y, x) * 180) / Math.PI - START;
-    deg = ((deg % 360) + 360) % 360;
+  // Work out where on the dial the pointer is and set the value from it.
+  const handlePointer = (event: React.PointerEvent<SVGSVGElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const xPos = event.clientX - (rect.left + rect.width / 2);
+    const yPos = event.clientY - (rect.top + rect.height / 2);
+    let degrees = (Math.atan2(yPos, xPos) * 180) / Math.PI - START;
+    degrees = ((degrees % 360) + 360) % 360;
 
     // Inside the bottom gap: snap to whichever end is closer.
-    if (deg > SWEEP) deg = deg - SWEEP < (360 - SWEEP) / 2 ? SWEEP : 0;
-    setFromFraction(deg / SWEEP);
+    if (degrees > SWEEP) degrees = degrees - SWEEP < (360 - SWEEP) / 2 ? SWEEP : 0;
+    setFromFraction(degrees / SWEEP);
   };
 
   // Arrow keys step by one, Home and End jump to the ends; anything else is left alone.
-  const handleKey = (e: React.KeyboardEvent) => {
+  const handleKey = (event: React.KeyboardEvent) => {
     let next = value;
 
-    if (e.key === "ArrowRight" || e.key === "ArrowUp") next = value + step;
-    else if (e.key === "ArrowLeft" || e.key === "ArrowDown") next = value - step;
-    else if (e.key === "Home") next = min;
-    else if (e.key === "End") next = max;
+    if (event.key === "ArrowRight" || event.key === "ArrowUp") next = value + step;
+    else if (event.key === "ArrowLeft" || event.key === "ArrowDown") next = value - step;
+    else if (event.key === "Home") next = min;
+    else if (event.key === "End") next = max;
     else return;
-    e.preventDefault();
+    event.preventDefault();
     onChange(Math.min(max, Math.max(min, next)));
   };
 
@@ -117,12 +122,16 @@ export default function Slider({
         aria-valuenow={value}
         aria-valuetext={display}
         onKeyDown={handleKey}
-        onPointerDown={(e) => {
-          e.currentTarget.setPointerCapture(e.pointerId);
-          handlePointer(e);
+
+        // Capture the pointer so the dial keeps following a drag outside its edge.
+        onPointerDown={(event) => {
+          event.currentTarget.setPointerCapture(event.pointerId);
+          handlePointer(event);
         }}
-        onPointerMove={(e) => {
-          if (e.currentTarget.hasPointerCapture(e.pointerId)) handlePointer(e);
+
+        // Only react to moves while dragging, not to plain hovering.
+        onPointerMove={(event) => {
+          if (event.currentTarget.hasPointerCapture(event.pointerId)) handlePointer(event);
         }}
       >
         <path className="mini-dial-track" d={arc(START, START + SWEEP)} />
@@ -150,7 +159,7 @@ export default function Slider({
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={`${id}-modal-title`}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(event) => event.stopPropagation()}
               >
                 <h3 id={`${id}-modal-title`}>{label}</h3>
                 <p>{learnMore}</p>

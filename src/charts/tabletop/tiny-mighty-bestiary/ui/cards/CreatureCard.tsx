@@ -3,10 +3,12 @@ import DifficultyDots from "./DifficultyDots";
 import { difficultyOf, model, tierFor } from "../../model/data";
 import type { Creature, Tier } from "../../model/types";
 
+/** Number with an explicit plus sign for positive values. */
 function sign(n: number) {
   return n >= 0 ? `+${n}` : `${n}`;
 }
 
+/** The tier's statistics in a block. */
 function StatBlock({ tier }: { tier: Tier }) {
   const stats: [string, string | number][] = [
     ["Health", tier.health],
@@ -17,6 +19,7 @@ function StatBlock({ tier }: { tier: Tier }) {
 
   return (
     <dl className="bestiary-stats">
+      {/* One label and value per statistic. */}
       {stats.map(([label, value]) => (
         <div key={label}>
           <dt>{label}</dt>
@@ -27,14 +30,16 @@ function StatBlock({ tier }: { tier: Tier }) {
   );
 }
 
+/** The creature's skills with their advantage markers. */
 function SkillList({ creature }: { creature: Creature }) {
   // Comma-separated skills, each with a + or − marker and an optional note.
   return (
     <p>
       <strong>Skills:</strong>{" "}
-      {creature.skills.map((s, i) => (
+      {/* List the skills separated by commas. */}
+      {creature.skills.map((s, index) => (
         <span key={s.skill}>
-          {i > 0 && ", "}
+          {index > 0 && ", "}
           {s.skill}
           <span className={s.mod === "+" ? "bestiary-adv" : "bestiary-dis"}>{s.mod === "+" ? "+" : "−"}</span>
           {s.note && ` (${s.note})`}
@@ -45,9 +50,11 @@ function SkillList({ creature }: { creature: Creature }) {
   );
 }
 
+/** The creature's powers with their dice and uses. */
 function PowerList({ creature }: { creature: Creature }) {
   return (
     <>
+      {/* One paragraph per power. */}
       {creature.powers.map((power) => (
         <p key={power.name} className="bestiary-power">
           <strong>{power.name}</strong> ({model.powerTypes[power.type].label}, {power.uses} use
@@ -58,6 +65,7 @@ function PowerList({ creature }: { creature: Creature }) {
   );
 }
 
+/** Card showing everything about one creature. */
 export default function CreatureCard({ creature }: { creature: Creature }) {
   const tier = tierFor(creature);
 

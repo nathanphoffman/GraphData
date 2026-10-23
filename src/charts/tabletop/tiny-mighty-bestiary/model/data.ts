@@ -11,6 +11,7 @@ export const model = {
   creatures: [...beasts, ...humanoids, ...animated, ...otherworldly, ...monsters],
 } as BestiaryData;
 
+/** The combat tier for a creature; throws if the data names a tier that does not exist. */
 export function tierFor(creature: Creature) {
   const tier = model.tiers.find((t) => t.difficulty === creature.tier);
 
@@ -22,7 +23,7 @@ export function tierFor(creature: Creature) {
 /** Final difficulty: base tier + 0.5 per 1-use power. */
 export function difficultyOf(creature: Creature) {
   // Each power use adds half a tier of difficulty.
-  return creature.tier + creature.powers.reduce((sum, p) => sum + 0.5 * p.uses, 0);
+  return creature.tier + creature.powers.reduce((total, power) => total + 0.5 * power.uses, 0);
 }
 
 /** Difficulty filter buttons, grouped by the combat table tiers (0.25-0.5, 1-2, 3-4, 5). Powers can add half steps. */
@@ -41,8 +42,8 @@ export const TONE_BANDS = [
 ];
 
 /** Slider stops for the encounter builder: 1-12 players, 0-10 levels gained in half steps. */
-export const PLAYER_STOPS = Array.from({ length: 12 }, (_, i) => String(i + 1));
-export const LEVEL_STOPS = Array.from({ length: 21 }, (_, i) => String(i / 2));
+export const PLAYER_STOPS = Array.from({ length: 12 }, (_unused, index) => String(index + 1));
+export const LEVEL_STOPS = Array.from({ length: 21 }, (_unused, index) => String(index / 2));
 
 /** Sort buttons. Ties always fall back to difficulty, then name. */
 export const SORTS = [
@@ -53,22 +54,23 @@ export const SORTS = [
   { id: "tone", label: "Tone" },
 ];
 
-const byDifficultyThenName = (a: Creature, b: Creature) =>
-  difficultyOf(a) - difficultyOf(b) || a.name.localeCompare(b.name);
+/** Order by difficulty first and then name, which is the tie-break for every sort. */
+const byDifficultyThenName = (creature: Creature, second: Creature) =>
+  difficultyOf(creature) - difficultyOf(second) || creature.name.localeCompare(second.name);
 
 /** Sort function for the chosen sort name; ties fall back to difficulty and then name. */
-export function compareBy(sort: string): (a: Creature, b: Creature) => number {
-  const typeOrder = (c: Creature) => model.creatureTypes.findIndex((t) => t.id === c.type);
+export function compareBy(sort: string): (creature: Creature, second: Creature) => number {
+  const typeOrder = (creature: Creature) => model.creatureTypes.findIndex((creatureType) => creatureType.id === creature.type);
 
   switch (sort) {
     case "az":
-      return (a, b) => a.name.localeCompare(b.name);
+      return (creature, second) => creature.name.localeCompare(second.name);
     case "za":
-      return (a, b) => b.name.localeCompare(a.name);
+      return (creature, second) => second.name.localeCompare(creature.name);
     case "type":
-      return (a, b) => typeOrder(a) - typeOrder(b) || byDifficultyThenName(a, b);
+      return (creature, second) => typeOrder(creature) - typeOrder(second) || byDifficultyThenName(creature, second);
     case "tone":
-      return (a, b) => a.tone - b.tone || byDifficultyThenName(a, b);
+      return (creature, second) => creature.tone - second.tone || byDifficultyThenName(creature, second);
     default:
       return byDifficultyThenName;
   }

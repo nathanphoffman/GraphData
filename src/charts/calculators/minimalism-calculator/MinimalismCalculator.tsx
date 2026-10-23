@@ -60,7 +60,7 @@ export default function MinimalismCalculator() {
             low="1"
             high="1000"
             learnMore={`How many ${item.many} you have today. The calculator compares this with how many you actually need and tells you if you have too many, too few, or about right.`}
-            onChange={(i) => s.setOwned(OWNED_STOPS[i])}
+            onChange={(index) => s.setOwned(OWNED_STOPS[index])}
           />
           <Slider
             id="per-year"
@@ -72,7 +72,7 @@ export default function MinimalismCalculator() {
             low="0.1 (decadely)"
             high="365 (daily)"
             learnMore={`How much use you want out of each single ${item.one} per year. A higher number means each one is worked harder (e.g. ${item.yearExample}), so you need fewer of them. A lower number means they sit idle more and you need more.`}
-            onChange={(i) => s.setPerYear(PER_YEAR_STOPS[i])}
+            onChange={(index) => s.setPerYear(PER_YEAR_STOPS[index])}
           />
           <Slider
             id="share"

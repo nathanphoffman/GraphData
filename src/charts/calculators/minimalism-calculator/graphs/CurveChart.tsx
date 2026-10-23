@@ -1,8 +1,8 @@
 import { useRef, type PointerEvent } from "react";
 import { recommendedCount } from "../logic/calculate";
 
-const W = 400;
-const H = 190;
+const CHART_WIDTH = 400;
+const CHART_HEIGHT = 190;
 const LEFT = 40;
 const RIGHT = 14;
 const TOP = 22;
@@ -45,54 +45,58 @@ export default function CurveChart({
   onDragEnd,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const x = (n: number) => LEFT + toFrac(n) * (W - LEFT - RIGHT);
-  const y = (v: number) => TOP + (1 - v / yMax) * (H - TOP - BOTTOM);
+  const xScale = (n: number) => LEFT + toFrac(n) * (CHART_WIDTH - LEFT - RIGHT);
+  const yScale = (value: number) => TOP + (1 - value / yMax) * (CHART_HEIGHT - TOP - BOTTOM);
 
-  const path = samples.map((n, i) => `${i === 0 ? "M" : "L"}${x(n).toFixed(1)},${y(at(n)).toFixed(1)}`).join(" ");
+  const path = samples.map((sample, index) => `${index === 0 ? "M" : "L"}${xScale(sample).toFixed(1)},${yScale(at(sample)).toFixed(1)}`).join(" ");
 
-  const drag = (e: PointerEvent) => {
-    if (!e.currentTarget.hasPointerCapture(e.pointerId) || !svgRef.current) return;
+  // Only follow the pointer while it is captured by this chart, so a stray hover does not move the curve.
+  const drag = (pointerEvent: PointerEvent) => {
+    if (!pointerEvent.currentTarget.hasPointerCapture(pointerEvent.pointerId) || !svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
-    const frac = (((e.clientX - rect.left) / rect.width) * W - LEFT) / (W - LEFT - RIGHT);
+    const frac = (((pointerEvent.clientX - rect.left) / rect.width) * CHART_WIDTH - LEFT) / (CHART_WIDTH - LEFT - RIGHT);
     onDrag(Math.min(1, Math.max(0, frac)));
   };
 
   return (
-    <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} className="mini-curve" role="img" aria-label={ariaLabel}>
-      <line x1={LEFT} x2={W - RIGHT} y1={y(0)} y2={y(0)} stroke="currentColor" opacity={0.3} />
-      <line x1={LEFT} x2={LEFT} y1={y(0)} y2={y(yMax)} stroke="currentColor" opacity={0.3} />
-      <text x={LEFT - 6} y={y(0) + 4} fontSize={11} textAnchor="end" fill="currentColor">
+    <svg ref={svgRef} viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} className="mini-curve" role="img" aria-label={ariaLabel}>
+      <line x1={LEFT} x2={CHART_WIDTH - RIGHT} y1={yScale(0)} y2={yScale(0)} stroke="currentColor" opacity={0.3} />
+      <line x1={LEFT} x2={LEFT} y1={yScale(0)} y2={yScale(yMax)} stroke="currentColor" opacity={0.3} />
+      <text x={LEFT - 6} y={yScale(0) + 4} fontSize={11} textAnchor="end" fill="currentColor">
         0
       </text>
       <path d={path} fill="none" stroke={color} strokeWidth={2.5} />
-      {marks.map((n) => (
-        <g key={n}>
-          <circle cx={x(n)} cy={y(at(n))} r={3} fill={color} />
-          <text x={x(n)} y={y(at(n)) - 8} fontSize={11} textAnchor="middle" fill="currentColor">
-            {recommendedCount(at(n))}
+      {/* One dot and label per marked point on the curve. */}
+      {marks.map((mark) => (
+        <g key={mark}>
+          <circle cx={xScale(mark)} cy={yScale(at(mark))} r={3} fill={color} />
+          <text x={xScale(mark)} y={yScale(at(mark)) - 8} fontSize={11} textAnchor="middle" fill="currentColor">
+            {recommendedCount(at(mark))}
           </text>
-          <text x={x(n)} y={H - BOTTOM + 15} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.7}>
-            {n}
+          <text x={xScale(mark)} y={CHART_HEIGHT - BOTTOM + 15} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.7}>
+            {mark}
           </text>
         </g>
       ))}
-      <line x1={x(current)} x2={x(current)} y1={y(at(current))} y2={y(0)} stroke="var(--fg)" strokeDasharray="4 3" />
-      <circle cx={x(current)} cy={y(at(current))} r={6} fill="none" stroke="var(--fg)" strokeWidth={2} />
+      <line x1={xScale(current)} x2={xScale(current)} y1={yScale(at(current))} y2={yScale(0)} stroke="var(--fg)" strokeDasharray="4 3" />
+      <circle cx={xScale(current)} cy={yScale(at(current))} r={6} fill="none" stroke="var(--fg)" strokeWidth={2} />
       <circle
-        cx={x(current)}
-        cy={y(at(current))}
+        cx={xScale(current)}
+        cy={yScale(at(current))}
         r={16}
         fill="transparent"
         style={{ cursor: "grab", touchAction: "none" }}
-        onPointerDown={(e) => {
-          e.currentTarget.setPointerCapture(e.pointerId);
+
+        // Capture the pointer so the drag keeps working when the mouse leaves the chart.
+        onPointerDown={(event) => {
+          event.currentTarget.setPointerCapture(event.pointerId);
           onDragStart();
         }}
         onPointerMove={drag}
         onPointerUp={onDragEnd}
         onPointerCancel={onDragEnd}
       />
-      <text x={W / 2} y={H - 4} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.7}>
+      <text x={CHART_WIDTH / 2} y={CHART_HEIGHT - 4} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.7}>
         {xLabel}
       </text>
     </svg>

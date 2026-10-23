@@ -12,14 +12,15 @@ export default function Legend({ model, showExamples }: Props) {
   return (
     <>
       {!showExamples &&
-        model.groups.map((group, i) => {
-          const x = GRID_X0 + 10 + i * 168;
-          const y = GRID_Y0 + GRID_H + 28;
+        // One colour key per group of figures.
+        model.groups.map((group, index) => {
+          const xPos = GRID_X0 + 10 + index * 168;
+          const yPos = GRID_Y0 + GRID_H + 28;
 
           return (
             <g key={group.id}>
-              <circle cx={x} cy={y} r={6} fill={GROUP_COLORS[group.id]} />
-              <text x={x + 12} y={y + 4} fontSize={13} fill="#333">
+              <circle cx={xPos} cy={yPos} r={6} fill={GROUP_COLORS[group.id]} />
+              <text x={xPos + 12} y={yPos + 4} fontSize={13} fill="#333">
                 {group.label}
               </text>
             </g>

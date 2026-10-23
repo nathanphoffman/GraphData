@@ -124,9 +124,10 @@ export function BatSwarmColossus() {
         [160, 100], [200, 80], [240, 100], [140, 130], [180, 120], [220, 120], [260, 130],
         [130, 160], [170, 156], [210, 154], [250, 158], [150, 190], [190, 186], [230, 190],
         [110, 124], [290, 124], [100, 160], [300, 160], [130, 210], [270, 210],
-      ].map(([x, y], i) => (
+      // Repeat the shape at each listed position.
+      ].map(([x, y], index) => (
         <path
-          key={i}
+          key={index}
           d={`M${x - 14} ${y - 4} q7 -10 14 2 q7 -12 14 -2 q-7 2 -14 12 q-7 -10 -14 -8 Z`}
           fill="currentColor"
           stroke="currentColor"

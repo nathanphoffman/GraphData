@@ -65,6 +65,7 @@ export const PRESETS: Record<string, Preset> = {
   ed80cf: { label: "Explore Scientific ED80CF (80 mm f/6 triplet apo)", mm: 80, focalMm: 480, quality: 95 },
 };
 
+/** The preset picked in the settings, if any. */
 export function activePreset(settings: Settings): Preset | undefined {
   return PRESETS[settings.preset];
 }

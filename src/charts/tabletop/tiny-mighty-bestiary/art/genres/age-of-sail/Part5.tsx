@@ -134,14 +134,15 @@ export function GhostTide() {
       <Line d="M110 130 V100 M110 104 L136 114 L110 124" w={3} />
       <Shape d="M110 70 C106 40 150 40 146 70 Z" w={3} />
       <Line d="M118 78 V96 M138 78 V96" w={5} />
-      {Array.from({ length: 11 }, (_, i) => {
-        const x = 30 + i * 34;
-        const h = 36 + ((i * 17) % 30);
+      {/* One bar per step across the drawing, with varied heights. */}
+      {Array.from({ length: 11 }, (_unused, index) => {
+        const xPos = 30 + index * 34;
+        const height = 36 + ((index * 17) % 30);
 
         return (
-          <g key={i} transform={`translate(${x} ${200})`}>
-            <Line d={`M0 0 V${-h}`} w={5} />
-            <Line d={`M0 ${-h} l-8 -12 M0 ${-h} l-3 -14 M0 ${-h} l3 -14 M0 ${-h} l8 -12`} w={3} />
+          <g key={index} transform={`translate(${xPos} ${200})`}>
+            <Line d={`M0 0 V${-height}`} w={5} />
+            <Line d={`M0 ${-height} l-8 -12 M0 ${-height} l-3 -14 M0 ${-height} l3 -14 M0 ${-height} l8 -12`} w={3} />
           </g>
         );
       })}

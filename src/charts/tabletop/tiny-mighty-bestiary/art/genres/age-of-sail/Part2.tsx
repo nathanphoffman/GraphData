@@ -131,8 +131,9 @@ export function DrownedPack() {
     <Drawing label="Drawing of three drowned hounds following a ship through fog, howling up through the hull">
       <Shape d="M120 100 L350 90 L320 150 H150 Z" w={5} />
       <Line d="M220 90 V30 M220 36 L270 56 L220 80" w={4} />
-      {[[100, 190], [200, 200], [290, 190]].map(([x, y], i) => (
-        <g key={i} transform={`translate(${x} ${y})`}>
+      {/* Repeat the shape at each listed position. */}
+      {[[100, 190], [200, 200], [290, 190]].map(([x, y], index) => (
+        <g key={index} transform={`translate(${x} ${y})`}>
           <Shape d="M-30 6 C-30 -18 30 -18 30 6 Z" w={4} />
           <Shape d="M18 -8 C16 -28 44 -34 54 -20 L68 -12 L52 -2 C40 6 22 4 18 -8 Z" w={4} />
           <Dot x={44} y={-18} r={3} />

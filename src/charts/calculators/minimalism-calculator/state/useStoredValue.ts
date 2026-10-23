@@ -9,7 +9,7 @@ function sharedParam(key: string): string | null {
  * useState that starts from a shared link, else localStorage, else the fallback, and remembers
  * changes in localStorage. `parse` turns saved text back into a value, or null if it is not valid.
  */
-export function useStoredValue<T>(key: string, fallback: T, parse: (raw: string) => T | null) {
+export function useStoredValue<T>(key: string, fallback: T, parse: (rawValue: string) => T | null) {
   const storageKey = `minimalism-calculator:${key}`;
 
   // Start from a value in the shared link, else the saved one, else the default.
@@ -31,6 +31,7 @@ export function useStoredValue<T>(key: string, fallback: T, parse: (raw: string)
     }
   });
 
+  // Remember the value so it is still there after a reload.
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, String(value));
@@ -43,9 +44,11 @@ export function useStoredValue<T>(key: string, fallback: T, parse: (raw: string)
   return [value, setValue] as const;
 }
 
-export function useStoredNumber(key: string, fallback: number, isValid: (v: number) => boolean) {
-  return useStoredValue(key, fallback, (raw) => {
-    const n = raw.trim() === "" ? NaN : Number(raw);
+/** Like useStoredValue but for numbers; text that is not a valid number is ignored. */
+export function useStoredNumber(key: string, fallback: number, isValid: (value: number) => boolean) {
+  // Read the saved or shared text as a number, treating empty text as missing.
+  return useStoredValue(key, fallback, (rawValue) => {
+    const n = rawValue.trim() === "" ? NaN : Number(rawValue);
 
     return isValid(n) ? n : null;
   });

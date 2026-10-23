@@ -26,7 +26,7 @@ export function purchasePlan(
   const bought: number[] = [];
   let stock = owned;
 
-  for (let y = 0; y < years; y++) {
+  for (let yPos = 0; yPos < years; yPos++) {
     const next = step(stock, target, yearlyUses, minPlays, maxPlays);
     bought.push(next.buy);
     stock = next.stock;
@@ -45,10 +45,10 @@ export function yearsToReach(
 ): number | null {
   let stock = owned;
 
-  for (let y = 1; y <= 100; y++) {
+  for (let yPos = 1; yPos <= 100; yPos++) {
     stock = step(stock, target, yearlyUses, minPlays, maxPlays).stock;
 
-    if (stock >= target - 1e-9) return y;
+    if (stock >= target - 1e-9) return yPos;
   }
 
   return null;

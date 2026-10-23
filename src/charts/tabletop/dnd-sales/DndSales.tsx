@@ -16,15 +16,20 @@ const CONFIDENCE_LABEL: Record<Confidence, string> = {
   medium: "Medium: some hard data",
 };
 
-const maxValue = Math.ceil(Math.max(...model.editions.map((e) => e.high)));
+const maxValue = Math.ceil(Math.max(...model.editions.map((edition) => edition.high)));
 
 /** Editions are spaced evenly (oldest first) so close release years don't overlap. */
 const SLOT = PLOT_W / model.editions.length;
-const x = (index: number) => MARGIN.left + SLOT * (index + 0.5);
-const y = (value: number) => MARGIN.top + PLOT_H - (value / maxValue) * PLOT_H;
 
+/** Horizontal position for each edition, evenly spaced. */
+const xScale = (index: number) => MARGIN.left + SLOT * (index + 0.5);
+
+/** Vertical position for a sales number. */
+const yScale = (value: number) => MARGIN.top + PLOT_H - (value / maxValue) * PLOT_H;
+
+/** D&D sales page: a bar for each edition with the range of estimates. */
 export default function DndSales() {
-  const ticks = Array.from({ length: maxValue + 1 }, (_, i) => i);
+  const ticks = Array.from({ length: maxValue + 1 }, (_unused, index) => index);
   const barWidth = 44;
 
   return (
@@ -34,54 +39,60 @@ export default function DndSales() {
         mean less reliable data.
       </p>
       <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label="D&D sales by edition" style={{ width: "100%", maxWidth: WIDTH }}>
-        {ticks.map((t) => (
-          <g key={t}>
-            <line x1={MARGIN.left} x2={WIDTH - MARGIN.right} y1={y(t)} y2={y(t)} stroke="currentColor" opacity={0.12} />
-            <text x={MARGIN.left - 8} y={y(t) + 4} textAnchor="end" fontSize={12} fill="currentColor">
-              {t}M
+        {/* One horizontal grid line per sales tick. */}
+        {ticks.map((tick) => (
+          <g key={tick}>
+            <line x1={MARGIN.left} x2={WIDTH - MARGIN.right} y1={yScale(tick)} y2={yScale(tick)} stroke="currentColor" opacity={0.12} />
+            <text x={MARGIN.left - 8} y={yScale(tick) + 4} textAnchor="end" fontSize={12} fill="currentColor">
+              {tick}M
             </text>
           </g>
         ))}
-        {model.editions.map((e, i) => (
-          <g key={e.id}>
+
+        {/* One bar with its low-to-high range for each edition. */}
+        {model.editions.map((edition, index) => (
+          <g key={edition.id}>
             <rect
-              x={x(i) - barWidth / 2}
-              y={y(e.best)}
+              x={xScale(index) - barWidth / 2}
+              y={yScale(edition.best)}
               width={barWidth}
-              height={y(0) - y(e.best)}
+              height={yScale(0) - yScale(edition.best)}
               fill="#b45cff"
-              opacity={CONFIDENCE_OPACITY[e.confidence]}
+              opacity={CONFIDENCE_OPACITY[edition.confidence]}
             />
-            <line x1={x(i)} x2={x(i)} y1={y(e.low)} y2={y(e.high)} stroke="currentColor" strokeWidth={2} />
-            <line x1={x(i) - 6} x2={x(i) + 6} y1={y(e.low)} y2={y(e.low)} stroke="currentColor" strokeWidth={2} />
-            <line x1={x(i) - 6} x2={x(i) + 6} y1={y(e.high)} y2={y(e.high)} stroke="currentColor" strokeWidth={2} />
-            <text x={x(i)} y={y(e.high) - 6} textAnchor="middle" fontSize={12} fill="currentColor">
-              {e.best}M
+            <line x1={xScale(index)} x2={xScale(index)} y1={yScale(edition.low)} y2={yScale(edition.high)} stroke="currentColor" strokeWidth={2} />
+            <line x1={xScale(index) - 6} x2={xScale(index) + 6} y1={yScale(edition.low)} y2={yScale(edition.low)} stroke="currentColor" strokeWidth={2} />
+            <line x1={xScale(index) - 6} x2={xScale(index) + 6} y1={yScale(edition.high)} y2={yScale(edition.high)} stroke="currentColor" strokeWidth={2} />
+            <text x={xScale(index)} y={yScale(edition.high) - 6} textAnchor="middle" fontSize={12} fill="currentColor">
+              {edition.best}M
             </text>
-            <text x={x(i)} y={y(0) + 18} textAnchor="middle" fontSize={12} fontWeight={600} fill="currentColor">
-              {e.name}
+            <text x={xScale(index)} y={yScale(0) + 18} textAnchor="middle" fontSize={12} fontWeight={600} fill="currentColor">
+              {edition.name}
             </text>
-            <text x={x(i)} y={y(0) + 33} textAnchor="middle" fontSize={11} fill="currentColor" opacity={0.7}>
-              {e.year}
+            <text x={xScale(index)} y={yScale(0) + 33} textAnchor="middle" fontSize={11} fill="currentColor" opacity={0.7}>
+              {edition.year}
             </text>
           </g>
         ))}
       </svg>
 
       <h2>How each number was reached</h2>
-      {model.editions.map((e) => (
-        <div key={e.id} style={{ marginBottom: "1rem" }}>
-          <strong>{e.name}</strong> ({e.year}): {e.best}M best guess, range {e.low}-{e.high}M.{" "}
-          <span className="muted">{CONFIDENCE_LABEL[e.confidence]}.</span>
-          <div>{e.note}</div>
-          {e.sources.length > 0 && (
+      {/* One line of explanation per edition. */}
+      {model.editions.map((edition) => (
+        <div key={edition.id} style={{ marginBottom: "1rem" }}>
+          <strong>{edition.name}</strong> ({edition.year}): {edition.best}M best guess, range {edition.low}-{edition.high}M.{" "}
+          <span className="muted">{CONFIDENCE_LABEL[edition.confidence]}.</span>
+          <div>{edition.note}</div>
+          {edition.sources.length > 0 && (
             <div className="muted">
               Sources:{" "}
-              {e.sources.map((key, i) => (
-                <span key={key}>
-                  {i > 0 && ", "}
-                  <a href={model.sources[key].url} target="_blank" rel="noreferrer">
-                    {model.sources[key].label}
+
+              {/* List an edition's sources separated by commas. */}
+              {edition.sources.map((source, index) => (
+                <span key={source}>
+                  {index > 0 && ", "}
+                  <a href={model.sources[source].url} target="_blank" rel="noreferrer">
+                    {model.sources[source].label}
                   </a>
                 </span>
               ))}

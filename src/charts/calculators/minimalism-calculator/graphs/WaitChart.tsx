@@ -1,6 +1,7 @@
 import type { ItemType } from "../logic/items";
 import { gapLabel, goalColor, waitBuckets, type Bucket } from "../logic/waiting";
 
+/** Counts with the right singular or plural wording for the chosen item type. */
 const count = (n: number, item: ItemType) => `${n} ${n === 1 ? item.one : item.many}`;
 
 interface Props {
@@ -13,22 +14,22 @@ interface Props {
 /** Bar chart of how many items wait how long between plays, colored by closeness to the goal. */
 export default function WaitChart({ owned, avgUses, goal, item }: Props) {
   // Neighboring buckets that round to the same wait label (e.g. "Every ~2 months") become one bar.
-  const merged = waitBuckets(avgUses).reduce<Bucket[]>((acc, b) => {
-    const last = acc[acc.length - 1];
+  const merged = waitBuckets(avgUses).reduce<Bucket[]>((bucket, second) => {
+    const last = bucket[bucket.length - 1];
 
-    if (last && gapLabel(last) === gapLabel(b)) {
-      const p = last.p + b.p;
-      const mid = p > 0 ? (last.mid * last.p + b.mid * b.p) / p : last.mid;
-      acc[acc.length - 1] = { ...last, label: `${last.label}+${b.label}`, mid, p };
+    if (last && gapLabel(last) === gapLabel(second)) {
+      const p = last.p + second.p;
+      const middle = p > 0 ? (last.mid * last.p + second.mid * second.p) / p : last.mid;
+      bucket[bucket.length - 1] = { ...last, label: `${last.label}+${second.label}`, mid: middle, p };
     } else {
-      acc.push(b);
+      bucket.push(second);
     }
 
-    return acc;
+    return bucket;
   }, []);
 
-  const buckets = merged.filter((b) => Math.round(b.p * owned) > 0);
-  const tallest = Math.max(...buckets.map((b) => b.p));
+  const buckets = merged.filter((bucket) => Math.round(bucket.p * owned) > 0);
+  const tallest = Math.max(...buckets.map((bucket) => bucket.p));
 
   return (
     <div className="panel">
@@ -37,21 +38,24 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
         Picking at random, your {owned} {item.many} average {avgUses.toFixed(1)} {item.uses} a year each.
       </p>
       <div className="mini-bars">
-        {buckets.map((b) => (
-          <div key={b.label} className="mini-bar">
-            <div>{count(Math.round(b.p * owned), item)}</div>
+        {/* One bar per bucket, sized by how many of your items land in it. */}
+        {buckets.map((bucket) => (
+          <div key={bucket.label} className="mini-bar">
+            <div>{count(Math.round(bucket.p * owned), item)}</div>
             <div
               className="mini-bar-fill"
-              title={`${(b.p * 100).toFixed(1)}% of ${item.many}`}
-              style={{ height: Math.max(2, (b.p / tallest) * 90), background: goalColor(b.mid, goal) }}
+              title={`${(bucket.p * 100).toFixed(1)}% of ${item.many}`}
+              style={{ height: Math.max(2, (bucket.p / tallest) * 90), background: goalColor(bucket.mid, goal) }}
             />
           </div>
         ))}
       </div>
       <div className="mini-bar-labels">
-        {buckets.map((b) => (
-          <div key={b.label} className="muted">
-            {gapLabel(b).replace(/^Every /, "Every\n")}
+        {/* One label per bucket under the bars; the line break lets "Every ..." wrap onto two lines. */}
+        {buckets.map((bucket) => (
+          <div key={bucket.label} className="muted">
+            {/* Put a line break after "Every" so the label wraps onto two lines (the regex only matches at the start). */}
+            {gapLabel(bucket).replace(/^Every /, "Every\n")}
           </div>
         ))}
       </div>

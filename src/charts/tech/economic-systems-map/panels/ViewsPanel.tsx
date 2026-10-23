@@ -10,9 +10,11 @@ interface Props {
   onPickPartner: (name: string | null) => void;
 }
 
+/** List of the views with the label for each. */
 function ViewsList({ views, categories }: { views: Record<string, string>; categories: string[] }) {
   return (
     <dl className="views-list">
+      {/* One heading per category of views. */}
       {categories.map((category) => (
         <div key={category}>
           <dt>{category}</dt>
@@ -64,6 +66,7 @@ export default function ViewsPanel({ model, viewsModel, selectedCell, neighbors,
           </p>
           <div className="views-combo">
             <strong>Combo with:</strong>
+            {/* One button per neighbouring cell you can combine with. */}
             {neighbors.map((cell) => (
               <button key={cell.name} type="button" className="combo-button" onClick={() => onPickPartner(cell.name)}>
                 {cell.name}

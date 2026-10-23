@@ -19,7 +19,7 @@ export function buildEncounter(pool: Creature[], low: number, high: number): Cre
     let left = target;
 
     for (;;) {
-      const fits = pool.filter((c) => difficultyOf(c) <= left);
+      const fits = pool.filter((creature) => difficultyOf(creature) <= left);
 
       if (fits.length === 0) break;
       const next = fits[Math.floor(Math.random() * fits.length)];
@@ -51,5 +51,5 @@ export function groupPicks(picks: Creature[]) {
     else counts.set(c.id, { creature: c, count: 1 });
   }
 
-  return [...counts.values()].sort((a, b) => difficultyOf(b.creature) - difficultyOf(a.creature));
+  return [...counts.values()].sort((first, second) => difficultyOf(second.creature) - difficultyOf(first.creature));
 }

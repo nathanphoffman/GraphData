@@ -5,6 +5,7 @@ import type { PlacedLabel } from "../model/types";
 export default function FigureLabels({ labels }: { labels: PlacedLabel[] }) {
   return (
     <>
+      {/* Draw each figure's dot, line and label. */}
       {labels.map(({ figure, dotX, dotY, box }) => {
         const color = GROUP_COLORS[figure.group];
 

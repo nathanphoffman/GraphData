@@ -4,8 +4,9 @@ const card = CARD_COLOR;
 
 /** Short radiation burst lines around a point. */
 export function Glow({ x, y, r = 30 }: { x: number; y: number; r?: number }) {
-  const rays = Array.from({ length: 8 }, (_, i) => {
-    const a = (i / 8) * Math.PI * 2;
+  // Evenly spaced rays around the centre.
+  const rays = Array.from({ length: 8 }, (_unused, index) => {
+    const a = (index / 8) * Math.PI * 2;
 
     return `M${x + Math.cos(a) * r} ${y + Math.sin(a) * r} l${Math.cos(a) * 10} ${Math.sin(a) * 10}`;
   }).join(" ");

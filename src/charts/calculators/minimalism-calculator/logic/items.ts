@@ -79,6 +79,8 @@ export const ITEM_TYPES: ItemType[] = [
 
 export const DEFAULT_ITEM_TYPE = ITEM_TYPES[0];
 
-export const findItemType = (id: string): ItemType | undefined => ITEM_TYPES.find((t) => t.id === id);
+/** Look an item type up by id; undefined when a shared link names one that no longer exists. */
+export const findItemType = (identifier: string): ItemType | undefined => ITEM_TYPES.find((itemType) => itemType.id === identifier);
 
+/** Capitalise the first letter, for sentences that start with an item name. */
 export const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);

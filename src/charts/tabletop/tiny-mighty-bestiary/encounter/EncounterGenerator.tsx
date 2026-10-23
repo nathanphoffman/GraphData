@@ -11,12 +11,15 @@ interface Result {
   picks: Creature[];
 }
 
+/** A range as text, e.g. "2 to 4", or a single number when both ends match. */
 function formatRange(low: number, high: number) {
   return low === high ? `${low}` : `${low} to ${high}`;
 }
 
+/** Result of the encounter generator: the creatures picked and their total difficulty. */
 function EncounterResult({ result }: { result: Result }) {
-  const total = result.picks.reduce((sum, c) => sum + difficultyOf(c), 0);
+  // Total difficulty of the picked creatures.
+  const total = result.picks.reduce((total, creature) => total + difficultyOf(creature), 0);
   const groups = groupPicks(result.picks);
 
   return (
@@ -29,6 +32,7 @@ function EncounterResult({ result }: { result: Result }) {
       </p>
       {groups.length === 0 && <p className="muted">Nothing in the filtered list fits under that difficulty.</p>}
       <div className="bestiary-grid">
+        {/* One line per kind of creature in the encounter, with how many there are. */}
         {groups.map(({ creature, count }) => (
           <div key={creature.id} className="bestiary-encounter-item">
             <span className="bestiary-encounter-count">x{count}</span>

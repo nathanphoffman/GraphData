@@ -17,15 +17,16 @@ import { westernArt } from "../genres/western";
 import { pixelArt } from "../genres/PixelArt";
 
 /** Maggots packed into a dome: rows of short capsules, tilted by a fixed pseudo-random angle. */
-const maggots = Array.from({ length: 6 }, (_, row) => {
-  const y = 196 - row * 20;
+const maggots = Array.from({ length: 6 }, (_unused, row) => {
+  const yPos = 196 - row * 20;
   const half = Math.sqrt(Math.max(0, 1 - (row / 6) ** 2)) * 130;
   const count = Math.max(1, Math.round(half / 15));
 
-  return Array.from({ length: count }, (_, i) => ({
-    x: 200 + (count === 1 ? 0 : (i / (count - 1) - 0.5) * 2 * half),
-    y,
-    angle: ((row * 37 + i * 71) % 120) - 60,
+  // Spread the maggots evenly across the drawing.
+  return Array.from({ length: count }, (_unused, index) => ({
+    x: 200 + (count === 1 ? 0 : (index / (count - 1) - 0.5) * 2 * half),
+    y: yPos,
+    angle: ((row * 37 + index * 71) % 120) - 60,
   }));
 }).flat();
 
@@ -42,8 +43,9 @@ function Fly({ x, y }: { x: number; y: number }) {
 function MaggotSwarm() {
   return (
     <svg viewBox="0 0 400 240" role="img" aria-label="Drawing of a heap of maggots with flies above it">
-      {maggots.map((m, i) => (
-        <g key={i} transform={`translate(${m.x} ${m.y}) rotate(${m.angle})`}>
+      {/* Draw each maggot at its spot, turned to its angle. */}
+      {maggots.map((maggot, index) => (
+        <g key={index} transform={`translate(${maggot.x} ${maggot.y}) rotate(${maggot.angle})`}>
           <rect x="-11" y="-5" width="22" height="10" rx="5" fill={CARD_COLOR} {...ink} strokeWidth={3} />
           <path d="M-3 -4 V4 M3 -4 V4" fill="none" {...ink} strokeWidth={2} />
           <circle cx="7" cy="0" r="1.5" fill="currentColor" />
@@ -70,24 +72,25 @@ const stalks: [number, number][] = [
 ];
 
 function EyeTyrant() {
-  const cx = 200;
-  const cy = 150;
+  const centerX = 200;
+  const centerY = 150;
   const r = 66;
 
   return (
     <svg viewBox="0 0 400 240" role="img" aria-label="Drawing of a floating orb with one large eye, teeth and eye-stalks">
-      {stalks.map(([deg, len], i) => {
+      {/* One eye stalk per angle and length. */}
+      {stalks.map(([deg, len], index) => {
         const a = (deg * Math.PI) / 180;
-        const x0 = cx + Math.sin(a) * (r - 4);
-        const y0 = cy - Math.cos(a) * (r - 4);
-        const x1 = cx + Math.sin(a) * (r + len);
-        const y1 = cy - Math.cos(a) * (r + len) * 0.9;
-        const bend = i % 2 ? 14 : -14;
+        const startX = centerX + Math.sin(a) * (r - 4);
+        const startY = centerY - Math.cos(a) * (r - 4);
+        const x1 = centerX + Math.sin(a) * (r + len);
+        const y1 = centerY - Math.cos(a) * (r + len) * 0.9;
+        const bend = index % 2 ? 14 : -14;
 
         return (
-          <g key={i}>
+          <g key={index}>
             <path
-              d={`M${x0} ${y0} Q${(x0 + x1) / 2 + bend} ${(y0 + y1) / 2} ${x1} ${y1}`}
+              d={`M${startX} ${startY} Q${(startX + x1) / 2 + bend} ${(startY + y1) / 2} ${x1} ${y1}`}
               fill="none"
               {...ink}
               strokeWidth={4}
@@ -97,10 +100,10 @@ function EyeTyrant() {
           </g>
         );
       })}
-      <circle cx={cx} cy={cy} r={r} fill={CARD_COLOR} {...ink} />
-      <ellipse cx={cx} cy={cy - 14} rx="34" ry="24" fill={CARD_COLOR} {...ink} strokeWidth={4} />
-      <circle cx={cx} cy={cy - 14} r="14" fill="currentColor" />
-      <circle cx={cx - 5} cy={cy - 19} r="4" fill={CARD_COLOR} />
+      <circle cx={centerX} cy={centerY} r={r} fill={CARD_COLOR} {...ink} />
+      <ellipse cx={centerX} cy={centerY - 14} rx="34" ry="24" fill={CARD_COLOR} {...ink} strokeWidth={4} />
+      <circle cx={centerX} cy={centerY - 14} r="14" fill="currentColor" />
+      <circle cx={centerX - 5} cy={centerY - 19} r="4" fill={CARD_COLOR} />
       <path
         d="M146 172 Q200 200 254 172"
         fill="none"

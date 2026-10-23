@@ -51,6 +51,7 @@ export default function RecommendationPanel({ owned, needed }: Props) {
         <div className="mini-gradient" />
       </div>
       <div className="mini-levels">
+        {/* One coloured band per level so the table reads as a scale. */}
         {LEVELS.map((level) => (
           <div key={level.name} className="mini-level" style={{ background: level.background }}>
             <div className="mini-level-name">{level.name}</div>

@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 import { cap, DEFAULT_ITEM_TYPE, findItemType, ITEM_TYPES } from "../../../src/charts/calculators/minimalism-calculator/logic/items";
 import { OWNED_STOPS, PER_YEAR_BENCHMARKS, PER_YEAR_STOPS } from "../../../src/charts/calculators/minimalism-calculator/logic/stops";
 
-const strictlyIncreasing = (list: number[]) => list.every((v, i) => i === 0 || v > list[i - 1]);
+const strictlyIncreasing = (list: number[]) => list.every((value, index) => index === 0 || value > list[index - 1]);
 
 describe("slider stops", () => {
   it("only go up, with no repeats or floating point noise", () => {
     expect(strictlyIncreasing(PER_YEAR_STOPS)).toBe(true);
     expect(strictlyIncreasing(OWNED_STOPS)).toBe(true);
-    expect(PER_YEAR_STOPS.every((v) => Number(v.toFixed(1)) === v)).toBe(true);
+    expect(PER_YEAR_STOPS.every((value) => Number(value.toFixed(1)) === value)).toBe(true);
   });
 
   it("cover the full ranges", () => {
@@ -25,7 +25,7 @@ describe("slider stops", () => {
 
 describe("item types", () => {
   it("have unique ids and a usable default", () => {
-    const ids = ITEM_TYPES.map((t) => t.id);
+    const ids = ITEM_TYPES.map((itemType) => itemType.id);
 
     expect(new Set(ids).size).toBe(ids.length);
     expect(findItemType(DEFAULT_ITEM_TYPE.id)).toBe(DEFAULT_ITEM_TYPE);

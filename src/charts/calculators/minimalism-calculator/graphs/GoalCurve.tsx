@@ -26,10 +26,11 @@ export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
   const at = (n: number) => yearlyUses / n;
   const double = goal * 2;
 
+  // Closest stop to n, measured as a ratio because the stops are spaced multiplicatively.
   const nearestStop = (n: number) =>
 
     // Snap to the closest allowed stop by ratio (log distance), since the stops are spaced on a multiplicative scale.
-    PER_YEAR_STOPS.reduce((best, v) => (Math.abs(Math.log(v / n)) < Math.abs(Math.log(best / n)) ? v : best));
+    PER_YEAR_STOPS.reduce((best, value) => (Math.abs(Math.log(value / n)) < Math.abs(Math.log(best / n)) ? value : best));
 
   return (
     <div className="panel mini-chart">
@@ -45,7 +46,7 @@ export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
         at={at}
         yMax={Math.max(yearlyUses / xMin, 1)}
         toFrac={(n) => Math.log(n / xMin) / Math.log(X_MAX / xMin)}
-        samples={Array.from({ length: SAMPLES + 1 }, (_, i) => xMin * (X_MAX / xMin) ** (i / SAMPLES))}
+        samples={Array.from({ length: SAMPLES + 1 }, (_unused, index) => xMin * (X_MAX / xMin) ** (index / SAMPLES))}
         marks={MARKS.filter((m) => m >= xMin)}
         current={goal}
         onDragStart={() => setFrozenMin(xMin)}

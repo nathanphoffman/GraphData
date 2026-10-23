@@ -30,8 +30,9 @@ export function SkyPikeBrood() {
       <Shape d="M300 80 L384 110 L300 140 Z" w={4} />
       <Dot x={270} y={92} r={5} />
       <Shape d="M120 50 L150 10 L170 56 Z M120 150 L150 190 L170 146 Z" w={4} />
-      {[[250, 190, 0.8], [310, 210, 0.6], [180, 214, 0.7]].map(([x, y, s], i) => (
-        <g key={i} transform={`translate(${x} ${y}) scale(${s})`}>
+      {/* Repeat the shape at each listed position and scale. */}
+      {[[250, 190, 0.8], [310, 210, 0.6], [180, 214, 0.7]].map(([x, y, s], index) => (
+        <g key={index} transform={`translate(${x} ${y}) scale(${s})`}>
           <Shape d="M-30 0 C-20 -14 20 -14 36 0 C20 14 -20 14 -30 0 Z" w={5} />
           <Line d="M36 0 L70 0" w={4} />
           <Shape d="M-30 0 L-46 -12 L-46 12 Z" w={4} />
@@ -46,8 +47,9 @@ export function SmogDrake() {
   return (
     <Drawing label="Drawing of a pollution-black drake nesting in the exhaust vent of a mega-tower, wheezing toxic breath">
       <Shape d="M240 20 H390 V224 H240 Z" w={4} />
-      {Array.from({ length: 8 }, (_, i) => (
-        <Line key={i} d={`M240 ${50 + i * 22} H390`} w={2} />
+      {/* Evenly spaced horizontal lines. */}
+      {Array.from({ length: 8 }, (_unused, index) => (
+        <Line key={index} d={`M240 ${50 + index * 22} H390`} w={2} />
       ))}
       <Shape d="M250 130 H310 V170 H250 Z" w={4} />
       <Line d="M258 140 H302 M258 150 H302 M258 160 H302" w={2} />

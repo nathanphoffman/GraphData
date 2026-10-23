@@ -2,6 +2,7 @@ import { PreviewSection, ScoringSection } from "./ScoringSections";
 import { type SectionProps, SkySection } from "./SkySection";
 import { TelescopeSection } from "./TelescopeSection";
 
+/** All the settings sections stacked in one panel. */
 export function ControlsPanel(props: SectionProps) {
   return (
     <div className="panel astro-controls">

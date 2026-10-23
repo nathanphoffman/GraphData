@@ -31,8 +31,9 @@ export function PirateKing() {
       <Solid d="M60 40 a16 16 0 1 0 0.1 0 Z" />
       <path d="M46 72 L94 92 M94 72 L46 92" stroke={card} strokeWidth="3" />
       <Line d="M20 20 V224" w={5} />
-      {[[250, 60], [310, 50], [350, 70], [280, 80]].map(([x, y], i) => (
-        <g key={i} transform={`translate(${x} ${y})`}>
+      {/* Repeat the shape at each listed position. */}
+      {[[250, 60], [310, 50], [350, 70], [280, 80]].map(([x, y], index) => (
+        <g key={index} transform={`translate(${x} ${y})`}>
           <Line d="M0 0 V-18 M0 -18 L12 -8 L0 -4" w={2} />
           <Shape d="M-16 0 H16 L12 8 H-12 Z" w={2} />
         </g>

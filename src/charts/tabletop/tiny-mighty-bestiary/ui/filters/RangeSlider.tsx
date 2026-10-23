@@ -29,7 +29,7 @@ export default function RangeSlider({ stops, value, onChange, labelPrefix }: Pro
           aria-label={`Minimum ${labelPrefix}`}
           // When both handles sit at the top end, the min handle must be on top or it can't be dragged back.
           style={{ zIndex: lo > last / 2 ? 3 : 1 }}
-          onChange={(e) => onChange([Math.min(Number(e.target.value), hi), hi])}
+          onChange={(event) => onChange([Math.min(Number(event.target.value), hi), hi])}
         />
         <input
           type="range"
@@ -39,7 +39,7 @@ export default function RangeSlider({ stops, value, onChange, labelPrefix }: Pro
           value={hi}
           aria-label={`Maximum ${labelPrefix}`}
           style={{ zIndex: 2 }}
-          onChange={(e) => onChange([lo, Math.max(Number(e.target.value), lo)])}
+          onChange={(event) => onChange([lo, Math.max(Number(event.target.value), lo)])}
         />
       </div>
       <span className="bestiary-range-label">{lo === hi ? stops[lo] : `${stops[lo]} to ${stops[hi]}`}</span>

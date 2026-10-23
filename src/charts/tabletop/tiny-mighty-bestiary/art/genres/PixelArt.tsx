@@ -557,17 +557,20 @@ function Pixels({ id }: { id: string }) {
     <svg
       viewBox="0 0 400 240"
       role="img"
+      // Hyphens in the id become spaces so the label reads as words.
       aria-label={`Pixel art drawing of a ${id.replace(/-/g, " ")}`}
       shapeRendering="crispEdges"
     >
-      {sprites[id].split("/").flatMap((row, y) => {
-        let x = 0;
+      {/* Sprite rows are written as run-length text; draw each run of colour as one rectangle. */}
+      {sprites[id].split("/").flatMap((row, index) => {
+        let xPos = 0;
 
+        // Each match is a colour letter followed by how many pixels in a row use it (one if missing).
         return [...row.matchAll(/(.)(\d*)/g)].flatMap(([, color, count]) => {
           const width = count ? Number(count) : 1;
           const rect =
-            color === "." ? [] : [<rect key={`${y}-${x}`} x={x * 10} y={y * 10} width={width * 10} height={10} fill={palette[color]} />];
-          x += width;
+            color === "." ? [] : [<rect key={`${index}-${xPos}`} x={xPos * 10} y={index * 10} width={width * 10} height={10} fill={palette[color]} />];
+          xPos += width;
 
           return rect;
         });
@@ -577,5 +580,5 @@ function Pixels({ id }: { id: string }) {
 }
 
 export const pixelArt: Record<string, () => ReactNode> = Object.fromEntries(
-  Object.keys(sprites).map((id) => [id, () => <Pixels id={id} />]),
+  Object.keys(sprites).map((identifier) => [identifier, () => <Pixels id={identifier} />]),
 );

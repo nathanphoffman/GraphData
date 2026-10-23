@@ -19,6 +19,7 @@ export default function EconomicSystemsMap() {
   /** The adjacent cell chosen under "Combo with", if any. */
   const [partner, setPartner] = useState<string | null>(null);
 
+  // Picking a system clears the partner, since combos only make sense for the new system.
   const select = (name: string) => {
     setSelected(name);
     setPartner(null);
@@ -31,7 +32,7 @@ export default function EconomicSystemsMap() {
       )
     : [];
   const activeCombo: Combo | undefined =
-    selected && partner ? combos.find((c) => c.cells.includes(selected) && c.cells.includes(partner)) : undefined;
+    selected && partner ? combos.find((combo) => combo.cells.includes(selected) && combo.cells.includes(partner)) : undefined;
 
   // The outline sits on the selected cell, or centered between both cells while a combo is shown.
   const partnerCell = activeCombo ? model.cells.find((cell) => cell.name === partner) : undefined;
@@ -44,6 +45,7 @@ export default function EconomicSystemsMap() {
     <div>
       <section className="theory">
         <h2>{model.theory.heading}</h2>
+        {/* One paragraph per theory note. */}
         {model.theory.paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -51,7 +53,7 @@ export default function EconomicSystemsMap() {
       </section>
 
       <label className="map-toggle">
-        <input type="checkbox" checked={showExamples} onChange={(e) => setShowExamples(e.target.checked)} />
+        <input type="checkbox" checked={showExamples} onChange={(event) => setShowExamples(event.target.checked)} />
         Show historical examples instead of figures
       </label>
 

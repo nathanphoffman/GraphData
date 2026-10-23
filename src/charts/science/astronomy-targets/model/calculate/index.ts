@@ -11,13 +11,13 @@ export function formatSize(major: number, minor: number): string {
   if (major === 0) return "point";
 
   if (major < 1) return `${Math.round(major * 60)}″`;
-  const fmt = (v: number) => (v >= 10 ? v.toFixed(0) : v.toFixed(1));
+  const fmt = (value: number) => (value >= 10 ? value.toFixed(0) : value.toFixed(1));
 
   return major === minor ? `${fmt(major)}′` : `${fmt(major)}′ × ${fmt(minor)}′`;
 }
 
 /** 22 becomes "10 PM", 0 becomes "12 AM". */
-export const formatHour = (h: number) => `${h % 12 === 0 ? 12 : h % 12} ${h < 12 ? "AM" : "PM"}`;
+export const formatHour = (height: number) => `${height % 12 === 0 ? 12 : height % 12} ${height < 12 ? "AM" : "PM"}`;
 
 export interface Difficulty {
   label: string;
@@ -29,12 +29,12 @@ export interface Difficulty {
 const NAKED_EYE_LIMIT = [7.6, 7.1, 6.6, 6.2, 5.6, 5.1, 4.6, 4.1, 4.0];
 
 /** A star counts as "Naked Eye" when it is at least 1.5 magnitudes brighter than the faintest star you can see at this Bortle. */
-export function isNakedEye(t: Target, bortle: number): boolean {
+export function isNakedEye(target: Target, bortle: number): boolean {
   const pos = clamp(bortle, 1, 9) - 1;
-  const lo = Math.floor(pos);
-  const limit = NAKED_EYE_LIMIT[lo] + (NAKED_EYE_LIMIT[Math.min(8, lo + 1)] - NAKED_EYE_LIMIT[lo]) * (pos - lo);
+  const lowest = Math.floor(pos);
+  const limit = NAKED_EYE_LIMIT[lowest] + (NAKED_EYE_LIMIT[Math.min(8, lowest + 1)] - NAKED_EYE_LIMIT[lowest]) * (pos - lowest);
 
-  return t.type === "Star" && t.magnitude <= limit - 1.5;
+  return target.type === "Star" && target.magnitude <= limit - 1.5;
 }
 
 /** Plain-words difficulty to see a target, from its score. */

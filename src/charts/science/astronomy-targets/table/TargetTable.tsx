@@ -13,6 +13,7 @@ export interface Hover {
 
 const DIFFICULTY_TITLE = "How hard it is to see, from the score: Excellent 75+, Very easy 50+, Easy 35+, Moderate 20+, Hard 10+, Very hard above 0, Extreme at 0 or below.";
 
+/** Score cell with a bar sized to the score and a difficulty label. */
 function ScoreCell({ row, settings }: { row: ScoredTarget; settings: Settings }) {
   const naked = isNakedEye(row.target, settings.bortle);
   const { label, level } = naked ? { label: "Naked Eye", level: 1 } : difficulty(row.score);
@@ -30,8 +31,8 @@ function ScoreCell({ row, settings }: { row: ScoredTarget; settings: Settings })
   );
 }
 
-/** Target name cell; hovering it shows the preview if the target has an image. */
-function TargetCell({ row, onHover }: { row: ScoredTarget; onHover: (h: Hover | null) => void }) {
+/** Only targets with a photo react to hover, because there is nothing to preview for the others. */
+function TargetCell({ row, onHover }: { row: ScoredTarget; onHover: (height: Hover | null) => void }) {
   const t = row.target;
   const preview = hasPreview(t.id);
 
@@ -39,7 +40,7 @@ function TargetCell({ row, onHover }: { row: ScoredTarget; onHover: (h: Hover | 
     <td
       className="astro-target"
       title={t.nickname ? `${t.id} ${t.nickname}` : t.id}
-      onMouseMove={preview ? (e) => onHover({ id: t.id, x: e.clientX, y: e.clientY }) : undefined}
+      onMouseMove={preview ? (event) => onHover({ id: t.id, x: event.clientX, y: event.clientY }) : undefined}
       onMouseLeave={preview ? () => onHover(null) : undefined}
     >
       <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong>{t.nickname && <div className="astro-nick">{t.nickname}</div>}
@@ -52,9 +53,10 @@ interface TableProps {
   settings: Settings;
   /** Visible columns, already in display order. */
   columns: Column[];
-  onHover: (h: Hover | null) => void;
+  onHover: (height: Hover | null) => void;
 }
 
+/** The table of targets, ranked by score. */
 export function TargetTable({ rows, settings, columns, onHover }: TableProps) {
   return (
     <div className="panel calc-table">
@@ -64,16 +66,17 @@ export function TargetTable({ rows, settings, columns, onHover }: TableProps) {
             <th>#</th>
             <th>Target</th>
             <th title={DIFFICULTY_TITLE}>Difficulty / Score</th>
-            {columns.map((c) => <th key={c.id} title={c.title}>{c.label}</th>)}
+            {columns.map((column) => <th key={column.id} title={column.title}>{column.label}</th>)}
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, i) => (
-            <tr key={row.target.id} className={row.score <= 0 ? "astro-hidden" : undefined}>
-              <td>{i + 1}</td>
-              <TargetCell row={row} onHover={onHover} />
-              <ScoreCell row={row} settings={settings} />
-              {columns.map((c) => <td key={c.id}>{c.cell(row, settings)}</td>)}
+          {/* One table row per target, numbered by rank; targets with no score are hidden. */}
+          {rows.map((scoredTarget, index) => (
+            <tr key={scoredTarget.target.id} className={scoredTarget.score <= 0 ? "astro-hidden" : undefined}>
+              <td>{index + 1}</td>
+              <TargetCell row={scoredTarget} onHover={onHover} />
+              <ScoreCell row={scoredTarget} settings={settings} />
+              {columns.map((column) => <td key={column.id}>{column.cell(scoredTarget, settings)}</td>)}
             </tr>
           ))}
         </tbody>

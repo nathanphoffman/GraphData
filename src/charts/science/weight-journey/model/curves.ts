@@ -13,7 +13,7 @@ export const taperCurve = (date: string, start: number, target: number, ahead: n
 ];
 
 // Average of f over all rows.
-const meanOf = (rows: Row[], f: (r: Row) => number) => rows.reduce((sum, r) => sum + f(r), 0) / rows.length;
+const meanOf = (rows: Row[], f: (r: Row) => number) => rows.reduce((total, r) => total + f(r), 0) / rows.length;
 
 /** Tapering curve from a row's 3-day average down to its 3 day projected all average (first month = 1/12 of the loss). Today, yesterday and the day before. */
 export function buildAllTrend(rows: Row[], ahead: number) {
@@ -34,7 +34,7 @@ export function buildAllTrend(rows: Row[], ahead: number) {
 function spreadSide(rows7: Row[], start: (r: Row) => number, target: (r: Row) => number, ahead: number) {
   const curves = rows7
     .map((r) => ({ target: target(r), points: taperCurve(r.date, start(r), target(r), ahead) }))
-    .sort((a, b) => a.target - b.target);
+    .sort((first, second) => first.target - second.target);
 
   return { curves, mean: taperCurve(rows7[rows7.length - 1].date, meanOf(rows7, start), meanOf(rows7, target), ahead) };
 }
@@ -60,12 +60,13 @@ export function buildGeneral(rows: Row[], ahead: number, quadratic: Point[]) {
 
   if (!rows7.length) return null;
   const meanCurve = taperCurve(rows7[rows7.length - 1].date, meanOf(rows7, (r) => r.avg3), meanOf(rows7, (r) => r.allProj3!), ahead);
-  const byDate = new Map(quadratic.map((d) => [d.date, d.weight]));
+  const byDate = new Map(quadratic.map((point) => [point.date, point.weight]));
 
-  return meanCurve.flatMap((d) => {
-    const q = byDate.get(d.date);
+  // Average the two projections on days where both exist.
+  return meanCurve.flatMap((point) => {
+    const q = byDate.get(point.date);
 
-    return q === undefined ? [] : [{ date: d.date, weight: (d.weight + q) / 2 }];
+    return q === undefined ? [] : [{ date: point.date, weight: (point.weight + q) / 2 }];
   });
 }
 

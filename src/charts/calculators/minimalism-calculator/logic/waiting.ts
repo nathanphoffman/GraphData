@@ -18,21 +18,23 @@ function poissonBuckets(lambda: number): Bucket[] {
   const width = lambda <= 8 ? 1 : Math.ceil(lambda / 6);
   const bins = lambda <= 8 ? 11 : 12;
   const buckets: Bucket[] = [];
-  let lnFactorial = 0; // ln(k!)
+
+  // Kept as a running log so large counts do not overflow the factorial.
+  let lnFactorial = 0;
   let k = 0;
   let used = 0;
 
-  for (let i = 0; i < bins - 1; i++) {
+  for (let index = 0; index < bins - 1; index++) {
     let p = 0;
 
-    for (let j = 0; j < width; j++, k++) {
+    for (let innerIndex = 0; innerIndex < width; innerIndex++, k++) {
       if (k > 0) lnFactorial += Math.log(k);
       p += Math.exp(-lambda + k * Math.log(lambda) - lnFactorial);
     }
 
     used += p;
-    const lo = i * width;
-    buckets.push({ label: width === 1 ? `${i}` : `${lo}–${lo + width - 1}`, mid: lo + (width - 1) / 2, p });
+    const lowest = index * width;
+    buckets.push({ label: width === 1 ? `${index}` : `${lowest}–${lowest + width - 1}`, mid: lowest + (width - 1) / 2, p });
   }
 
   buckets.push({ label: `${k}+`, mid: k, p: Math.max(0, 1 - used) });
@@ -41,24 +43,24 @@ function poissonBuckets(lambda: number): Bucket[] {
 }
 
 /** At or above the goal: green fading to yellow-green. Below it: yellow through orange to red at zero. */
-export function goalColor(mid: number, goal: number): string {
+export function goalColor(middle: number, goal: number): string {
   const g = Math.max(goal, 0.1);
-  const hue = mid >= g ? 120 - Math.min(1, (mid - g) / g) * 50 : 50 * (mid / g);
+  const hue = middle >= g ? 120 - Math.min(1, (middle - g) / g) * 50 : 50 * (middle / g);
 
   return `hsl(${Math.round(hue)}, 70%, 45%)`;
 }
 
 /** Roughly how long you wait between plays of an item used this often (open-ended last bucket gets a "≤"). */
-export function gapLabel(b: Bucket): string {
-  if (b.gap) return b.gap;
+export function gapLabel(bucket: Bucket): string {
+  if (bucket.gap) return bucket.gap;
 
-  if (b.mid <= 0) return "Over a year";
-  const days = 365 / b.mid;
+  if (bucket.mid <= 0) return "Over a year";
+  const days = 365 / bucket.mid;
 
   if (days >= 548) return "Over a year";
 
   if (days >= 330) return "Yearly";
-  const bound = b.label.endsWith("+") ? "≤ " : "~";
+  const bound = bucket.label.endsWith("+") ? "≤ " : "~";
   const plural = (n: number, unit: string) => `${n} ${unit}${n === 1 ? "" : "s"}`;
 
   // Shorter waits are grouped into a few week buckets rather than counted day by day.
@@ -90,6 +92,8 @@ export function waitBuckets(lambda: number): Bucket[] {
   const [first, ...rest] = poissonBuckets(lambda);
 
   if (first.label !== "0") return [first, ...rest];
+
+  // Turn each year range into a bucket with its chance of waiting that long.
   const longWaits = YEAR_GROUPS.map(([from, to, gap]) => {
     const p = Math.exp(-lambda * from) - (to === Infinity ? 0 : Math.exp(-lambda * to));
 

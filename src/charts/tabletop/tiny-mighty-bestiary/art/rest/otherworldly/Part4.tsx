@@ -49,8 +49,9 @@ export function PocketPetGhost() {
       <Shape d="M126 44 H274 V140 H126 Z" w={4} />
       {[
         [190, 70], [210, 70], [170, 90], [190, 90], [210, 90], [230, 90], [170, 110], [190, 110], [210, 110], [230, 110], [150, 110], [250, 110],
-      ].map(([x, y], i) => (
-        <rect key={i} x={x - 9} y={y - 9} width="18" height="18" fill="currentColor" stroke={card} strokeWidth="2" />
+      // Repeat the shape at each listed position.
+      ].map(([x, y], index) => (
+        <rect key={index} x={x - 9} y={y - 9} width="18" height="18" fill="currentColor" stroke={card} strokeWidth="2" />
       ))}
       <rect x="182" y="86" width="8" height="8" fill={card} />
       <rect x="210" y="86" width="8" height="8" fill={card} />

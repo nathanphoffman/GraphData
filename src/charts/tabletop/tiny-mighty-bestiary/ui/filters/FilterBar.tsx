@@ -20,12 +20,15 @@ interface Props {
 
 /** Themes shown on the first row; the rest go on a second row. */
 const SCIFI_THEMES = new Set(["scifi", "science-fantasy", "space-wars", "space-hammer", "space-jammer", "cyberpunk", "post-apocalypse"]);
-const SCIFI_OPTIONS = model.themes.filter((t) => SCIFI_THEMES.has(t.id));
-const OTHER_OPTIONS = model.themes.filter((t) => !SCIFI_THEMES.has(t.id));
+const SCIFI_OPTIONS = model.themes.filter((theme) => SCIFI_THEMES.has(theme.id));
+const OTHER_OPTIONS = model.themes.filter((theme) => !SCIFI_THEMES.has(theme.id));
 
 const THEME_CHIP_CLASS = "bestiary-theme-chip";
+
+/** Class used for the theme chips so they share one style. */
 const themeChipClass = () => THEME_CHIP_CLASS;
 
+/** Search, theme, type, difficulty and tone filters with a button to clear them. */
 export default function FilterBar({ filters, onChange, canClear, onClear }: Props) {
   const set = (patch: Partial<Filters>) => onChange({ ...filters, ...patch });
 
@@ -51,7 +54,7 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         options={model.creatureTypes}
         active={filters.type}
         onChange={(type) => set({ type })}
-        chipClass={(id) => `bestiary-type-${id}`}
+        chipClass={(identifier) => `bestiary-type-${identifier}`}
         swatch
       >
         {canClear && (
@@ -87,7 +90,7 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         placeholder="Search creatures, powers, skills, classic names..."
         aria-label="Search creatures"
         value={filters.query}
-        onChange={(e) => set({ query: e.target.value })}
+        onChange={(event) => set({ query: event.target.value })}
       />
     </>
   );

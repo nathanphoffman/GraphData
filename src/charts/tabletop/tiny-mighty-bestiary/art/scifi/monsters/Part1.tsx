@@ -44,14 +44,15 @@ export function SandMaw() {
       <ellipse cx="200" cy="150" rx="120" ry="50" fill={card} {...ink} />
       <ellipse cx="200" cy="150" rx="84" ry="32" fill="none" {...ink} strokeWidth={4} />
       <ellipse cx="200" cy="150" rx="40" ry="14" fill="currentColor" />
-      {Array.from({ length: 14 }, (_, i) => {
-        const a = (i / 14) * Math.PI * 2;
-        const x = 200 + Math.cos(a) * 112;
-        const y = 150 + Math.sin(a) * 42;
-        const x2 = 200 + Math.cos(a) * 84;
-        const y2 = 150 + Math.sin(a) * 32;
+      {/* Teeth evenly spaced around the ellipse. */}
+      {Array.from({ length: 14 }, (_unused, index) => {
+        const a = (index / 14) * Math.PI * 2;
+        const xPos = 200 + Math.cos(a) * 112;
+        const yPos = 150 + Math.sin(a) * 42;
+        const endX = 200 + Math.cos(a) * 84;
+        const endY = 150 + Math.sin(a) * 32;
 
-        return <path key={i} d={`M${x - 5} ${y} L${x2} ${y2} L${x + 5} ${y} Z`} fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />;
+        return <path key={index} d={`M${xPos - 5} ${yPos} L${endX} ${endY} L${xPos + 5} ${yPos} Z`} fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />;
       })}
       <Line d="M40 210 q20 -12 40 0 M300 214 q20 -12 40 0 M160 224 q20 -12 40 0" w={3} />
       <circle cx="340" cy="44" r="20" fill="none" {...ink} strokeWidth={3} />

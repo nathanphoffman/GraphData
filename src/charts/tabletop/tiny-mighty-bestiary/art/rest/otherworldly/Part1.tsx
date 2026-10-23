@@ -3,8 +3,8 @@ import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/ar
 const card = CARD_COLOR;
 
 /** Ghostly hem: a wavy bottom edge for sheet-like spirits. */
-export const ghostBody = (x0: number, x1: number, top: number, bottom: number) =>
-  `M${x0} ${bottom} C${x0 - 10} ${top + 40} ${x0 + 10} ${top} ${(x0 + x1) / 2} ${top} C${x1 - 10} ${top} ${x1 + 10} ${top + 40} ${x1} ${bottom} q-14 14 -28 0 q-14 14 -28 0 q-14 14 -28 0 q-14 14 -28 0 Z`;
+export const ghostBody = (startX: number, x1: number, topEdge: number, bottom: number) =>
+  `M${startX} ${bottom} C${startX - 10} ${topEdge + 40} ${startX + 10} ${topEdge} ${(startX + x1) / 2} ${topEdge} C${x1 - 10} ${topEdge} ${x1 + 10} ${topEdge + 40} ${x1} ${bottom} q-14 14 -28 0 q-14 14 -28 0 q-14 14 -28 0 q-14 14 -28 0 Z`;
 
 export function WarpFiend() {
   return (

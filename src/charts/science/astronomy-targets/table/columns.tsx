@@ -11,9 +11,10 @@ export interface Column {
   show: boolean;
   /** Placed right after the Score column, ahead of the other columns. */
   afterScore?: boolean;
-  cell: (row: ScoredTarget, settings: Settings) => ReactNode;
+  cell: (scoredTarget: ScoredTarget, settings: Settings) => ReactNode;
 }
 
+/** Cell showing when in the year the target is best placed. */
 function SeasonCell({ row }: { row: ScoredTarget }) {
   const season = row.target.bestSeason;
 
@@ -25,6 +26,7 @@ function SeasonCell({ row }: { row: ScoredTarget }) {
   );
 }
 
+/** Two lines of text stacked in one table cell. */
 function Stack({ top, bottom }: { top: ReactNode; bottom: ReactNode }) {
   return (
     <div className="astro-stack">
@@ -34,12 +36,15 @@ function Stack({ top, bottom }: { top: ReactNode; bottom: ReactNode }) {
   );
 }
 
-const fmtAdjust = (v: number) => (v >= 0 ? `+${v}` : `−${-v}`);
+/** Format an adjustment with a plus or minus sign. */
+const fmtAdjust = (value: number) => (value >= 0 ? `+${value}` : `−${-value}`);
 
+/** Small coloured badge whose shade shows how big the value is on its scale. */
 function Chip({ value, scale, title, suffix = "" }: { value: number; scale: number; title: string; suffix?: string }) {
   return <span className="astro-tag" style={{ "--tag": heat(0.5 + value / scale, 1) } as CSSProperties} title={title}>{fmtAdjust(value)}{suffix}</span>;
 }
 
+/** Cell showing the simulator and author adjustments. */
 function AdjustCell({ row, settings }: { row: ScoredTarget; settings: Settings }) {
   const quality = Math.round(qualityAdjust(row.target, settings) * 10) / 10;
   const { simAdjust: sim, authorAdjust: author } = row.target;
@@ -58,32 +63,32 @@ const ADJUST_TITLE = "First chip: how much better (+) or worse (-), in percentag
 
 /** Optional columns, in display order. The rank, target name and score are always shown. */
 export const COLUMNS: Column[] = [
-  { id: "constellation", label: "Constellation", show: false, cell: (r) => r.target.constellation },
-  { id: "season", label: "Best time", title: SEASON_TITLE, show: true, cell: (r) => <SeasonCell row={r} /> },
+  { id: "constellation", label: "Constellation", show: false, cell: (scoredTarget) => scoredTarget.target.constellation },
+  { id: "season", label: "Best time", title: SEASON_TITLE, show: true, cell: (scoredTarget) => <SeasonCell row={scoredTarget} /> },
   {
     id: "magsize",
     label: "Mag / Size",
     title: "Top: total magnitude (smaller is brighter). Bottom: apparent size.",
     show: true,
-    cell: (r) => <Stack top={r.target.magnitude.toFixed(1)} bottom={formatSize(r.target.major, r.target.minor)} />,
+    cell: (scoredTarget) => <Stack top={scoredTarget.target.magnitude.toFixed(1)} bottom={formatSize(scoredTarget.target.major, scoredTarget.target.minor)} />,
   },
   {
     id: "sbalt",
     label: "Surf. br. / Peak alt",
     title: "Top: magnitude per square arcminute, the light spread over the target (higher = dimmer). Bottom: highest altitude it reaches while it is dark.",
     show: true,
-    cell: (r) => (
+    cell: (scoredTarget) => (
       <Stack
-        top={r.target.type === "Star" || r.target.planet ? "—" : surfaceBrightness(r.target).toFixed(1)}
-        bottom={r.peakAltitude > 0 ? `${r.peakAltitude.toFixed(0)}°` : "below horizon"}
+        top={scoredTarget.target.type === "Star" || scoredTarget.target.planet ? "—" : surfaceBrightness(scoredTarget.target).toFixed(1)}
+        bottom={scoredTarget.peakAltitude > 0 ? `${scoredTarget.peakAltitude.toFixed(0)}°` : "below horizon"}
       />
     ),
   },
-  { id: "sky", label: "Sky", show: true, cell: (r) => <Percent value={r.sky} /> },
-  { id: "fit", label: "Size fit", show: true, cell: (r) => <Percent value={r.fit} /> },
-  { id: "light", label: "Light", show: true, cell: (r) => <Percent value={r.light} /> },
-  { id: "core", label: "Core", show: true, cell: (r) => <Percent value={r.core} /> },
-  { id: "adjust", label: "Sim / Author / Quality", title: ADJUST_TITLE, show: true, afterScore: true, cell: (r, s) => <AdjustCell row={r} settings={s} /> },
+  { id: "sky", label: "Sky", show: true, cell: (scoredTarget) => <Percent value={scoredTarget.sky} /> },
+  { id: "fit", label: "Size fit", show: true, cell: (scoredTarget) => <Percent value={scoredTarget.fit} /> },
+  { id: "light", label: "Light", show: true, cell: (scoredTarget) => <Percent value={scoredTarget.light} /> },
+  { id: "core", label: "Core", show: true, cell: (scoredTarget) => <Percent value={scoredTarget.core} /> },
+  { id: "adjust", label: "Sim / Author / Quality", title: ADJUST_TITLE, show: true, afterScore: true, cell: (scoredTarget, s) => <AdjustCell row={scoredTarget} settings={s} /> },
 ];
 
-export const defaultHidden = COLUMNS.filter((c) => !c.show).map((c) => c.id);
+export const defaultHidden = COLUMNS.filter((column) => !column.show).map((column) => column.id);

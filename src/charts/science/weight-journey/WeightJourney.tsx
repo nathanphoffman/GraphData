@@ -10,6 +10,7 @@ import { makeFormat, type Unit } from "./model/units";
 
 const ALL_LINES: Lines = { quadratic: true, general: true, allTrend: true, spread: true };
 
+/** Weight journey page: units, chart, table and projections. */
 export default function WeightJourney() {
   const [range, setRange] = useState(RANGES[0]);
   const [unit, setUnit] = useState<Unit>("lb");

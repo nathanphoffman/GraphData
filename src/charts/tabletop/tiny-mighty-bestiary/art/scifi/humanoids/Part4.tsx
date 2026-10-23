@@ -6,8 +6,9 @@ export function MegacorpChairman() {
   return (
     <Drawing label="Drawing of a pale immaculate billionaire in front of a hundred-floor tower">
       <Shape d="M270 224 V40 H380 V224 Z" w={4} />
-      {Array.from({ length: 10 }, (_, i) => (
-        <Line key={i} d={`M280 ${56 + i * 16} H370`} w={2} />
+      {/* Evenly spaced horizontal lines. */}
+      {Array.from({ length: 10 }, (_unused, index) => (
+        <Line key={index} d={`M280 ${56 + index * 16} H370`} w={2} />
       ))}
       <Line d="M325 40 V16 M318 16 H332" w={3} />
       <Shape d="M170 74 C170 34 230 34 230 74 C230 100 170 100 170 74 Z" />

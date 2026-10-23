@@ -5,8 +5,9 @@ const card = CARD_COLOR;
 export function Swarmling() {
   return (
     <Drawing label="Drawing of a crowd of claw-limbed carapaced hunters pouring in from the dark">
-      {[[90, 150, 1], [180, 130, 1.2], [270, 150, 1], [60, 210, 0.8], [140, 200, 0.9], [230, 205, 0.9], [330, 200, 0.8], [330, 120, 0.7]].map(([x, y, s], i) => (
-        <g key={i} transform={`translate(${x} ${y}) scale(${s})`}>
+      {/* Repeat the shape at each listed position and scale. */}
+      {[[90, 150, 1], [180, 130, 1.2], [270, 150, 1], [60, 210, 0.8], [140, 200, 0.9], [230, 205, 0.9], [330, 200, 0.8], [330, 120, 0.7]].map(([x, y, s], index) => (
+        <g key={index} transform={`translate(${x} ${y}) scale(${s})`}>
           <Shape d="M-30 0 C-30 -24 30 -24 30 0 C30 14 -30 14 -30 0 Z" w={5} />
           <Line d="M-30 6 L-46 26 M-16 12 L-22 32 M16 12 L22 32 M30 6 L46 26" w={5} />
           <Line d="M-30 -6 L-48 -20 l10 2 M30 -6 L48 -20 l-10 2" w={5} />

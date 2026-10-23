@@ -9,7 +9,9 @@ import OutlookSvg from "./OutlookSvg";
 
 const model = data as LanguageOutlookData;
 
+/** Language outlook page: the chart, the legend and the sort. */
 export default function LanguageOutlook() {
+  // Start with every line visible except those hidden by default.
   const [visible, setVisible] = useState<Record<string, boolean>>(() =>
     Object.fromEntries([...model.series, ...model.lines].map((key) => [key, !HIDDEN_BY_DEFAULT_PREFIXES.some((prefix) => key.startsWith(prefix))])),
   );
@@ -17,12 +19,13 @@ export default function LanguageOutlook() {
   const [sortKey, setSortKey] = useState("Year 2026");
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
+  // Sort by the chosen column, highest first, with languages that have no value last.
   const sorted = useMemo(() => {
     const value = (lang: LanguageRecord) => lang.values[sortKey] ?? null;
 
     // Highest value first; languages with no value always go to the end.
-    const byValue = (a: LanguageRecord, b: LanguageRecord) => {
-      const [x, y] = [value(a), value(b)];
+    const byValue = (languageRecord: LanguageRecord, second: LanguageRecord) => {
+      const [x, y] = [value(languageRecord), value(second)];
 
       if (x === null || y === null) return x === y ? 0 : x === null ? 1 : -1; // no value goes last
 

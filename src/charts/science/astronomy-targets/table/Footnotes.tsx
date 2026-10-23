@@ -1,5 +1,6 @@
 import { TYPE_SYMBOLS } from "./heat";
 
+/** Footnotes under the table, including where the data came from. */
 export function Footnotes({ source }: { source: string }) {
   return (
     <>

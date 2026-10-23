@@ -36,7 +36,7 @@ describe("placeLabels", () => {
       { name: "Charlie", group: "g", x: 2, y: 1.5 },
     ];
 
-    const boxes = placeLabels({ ...model, cells: [] }, figures).map((p) => p.box);
+    const boxes = placeLabels({ ...model, cells: [] }, figures).map((placedLabel) => placedLabel.box);
 
     expect(boxes).toHaveLength(3);
     expect(overlaps(boxes[0], boxes[1])).toBe(false);
@@ -49,9 +49,9 @@ describe("placeLabels", () => {
 
     expect(placed).toHaveLength(model.figures.length);
 
-    for (const p of placed) {
-      expect(p.box.cy).toBeGreaterThan(GRID_Y0);
-      expect(p.box.cy).toBeLessThan(GRID_Y0 + GRID_H);
+    for (const placedLabel of placed) {
+      expect(placedLabel.box.cy).toBeGreaterThan(GRID_Y0);
+      expect(placedLabel.box.cy).toBeLessThan(GRID_Y0 + GRID_H);
     }
   });
 });

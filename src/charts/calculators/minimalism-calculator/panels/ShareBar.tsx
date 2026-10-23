@@ -3,9 +3,9 @@ import { ITEM_TYPES } from "../logic/items";
 
 interface Props {
   title: string;
-  onTitle: (v: string) => void;
+  onTitle: (value: string) => void;
   typeId: string;
-  onType: (v: string) => void;
+  onType: (value: string) => void;
   shareParams: () => Record<string, string>;
 }
 
@@ -13,6 +13,7 @@ interface Props {
 export default function ShareBar({ title, onTitle, typeId, onType, shareParams }: Props) {
   const [copied, setCopied] = useState(false);
 
+  // Build a share link from the current settings; fall back to a prompt if the clipboard is blocked.
   const copyLink = async () => {
     const url = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(shareParams())}`;
 
@@ -30,14 +31,15 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
     <div className="panel mini-sharebar">
       <div>
         <label htmlFor="mini-title">Title (optional)</label>
-        <input id="mini-title" type="text" maxLength={80} placeholder="e.g. Jack Smith's Board Games" value={title} onChange={(e) => onTitle(e.target.value)} />
+        <input id="mini-title" type="text" maxLength={80} placeholder="e.g. Jack Smith's Board Games" value={title} onChange={(event) => onTitle(event.target.value)} />
       </div>
       <div>
         <label htmlFor="mini-type">What are you minimizing?</label>
-        <select id="mini-type" value={typeId} onChange={(e) => onType(e.target.value)}>
-          {ITEM_TYPES.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.name}
+        <select id="mini-type" value={typeId} onChange={(event) => onType(event.target.value)}>
+          {/* One dropdown entry per kind of item. */}
+          {ITEM_TYPES.map((itemType) => (
+            <option key={itemType.id} value={itemType.id}>
+              {itemType.name}
             </option>
           ))}
         </select>

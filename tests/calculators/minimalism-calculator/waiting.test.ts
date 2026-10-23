@@ -4,13 +4,13 @@ import { gapLabel, goalColor, waitBuckets } from "../../../src/charts/calculator
 describe("waitBuckets", () => {
   it("has probabilities that add up to 1", () => {
     for (const lambda of [0.3, 2, 12, 80]) {
-      const total = waitBuckets(lambda).reduce((sum, b) => sum + b.p, 0);
+      const total = waitBuckets(lambda).reduce((total, bucket) => total + bucket.p, 0);
       expect(total).toBeCloseTo(1, 5);
     }
   });
 
   it("breaks the never-used bucket into year groups", () => {
-    const labels = waitBuckets(0.5).map((b) => b.gap).filter(Boolean);
+    const labels = waitBuckets(0.5).map((bucket) => bucket.gap).filter(Boolean);
     expect(labels).toContain("10+ years");
   });
 });
