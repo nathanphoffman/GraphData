@@ -3,7 +3,7 @@ import { TIERS } from "./style";
 import type { Spans, Tier } from "./types";
 
 /** n^n, with 0^0 (and anything below) treated as 1. */
-const f = (x: number): number => (x <= 0 ? 1 : Math.pow(x, x));
+const f = (x: number): number => (x <= 0 ? 1 : x ** x);
 
 /** Log-scale distances below and above Stable. */
 export function spans(n: number): Spans {

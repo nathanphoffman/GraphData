@@ -43,11 +43,11 @@ export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
         at={at}
         yMax={Math.max(yearlyUses / xMin, 1)}
         toFrac={(n) => Math.log(n / xMin) / Math.log(X_MAX / xMin)}
-        samples={Array.from({ length: SAMPLES + 1 }, (_, i) => xMin * Math.pow(X_MAX / xMin, i / SAMPLES))}
+        samples={Array.from({ length: SAMPLES + 1 }, (_, i) => xMin * (X_MAX / xMin) ** (i / SAMPLES))}
         marks={MARKS.filter((m) => m >= xMin)}
         current={goal}
         onDragStart={() => setFrozenMin(xMin)}
-        onDrag={(frac) => onGoal(nearestStop(xMin * Math.pow(X_MAX / xMin, frac)))}
+        onDrag={(frac) => onGoal(nearestStop(xMin * (X_MAX / xMin) ** frac))}
         onDragEnd={() => setFrozenMin(null)}
       />
     </div>

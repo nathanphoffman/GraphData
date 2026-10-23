@@ -1,5 +1,5 @@
 import { scaleLinear, scaleTime } from "d3-scale";
-import { type Day, projectTapering } from "../calculate";
+import type { Day, projectTapering } from "../calculate";
 import type { AllTrend, General, Point, Spread } from "./curves";
 import { dailyRows, days, fit, future, projectedAdjusted } from "./rows";
 import { toDate } from "./units";

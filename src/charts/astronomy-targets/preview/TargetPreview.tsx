@@ -40,7 +40,7 @@ function measurePhoto(img: HTMLImageElement, info: TargetImage, target: Target):
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       const i = (y * w + x) * 4;
-      const lum = Math.pow((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255, 2.2);
+      const lum = ((0.3 * px[i] + 0.59 * px[i + 1] + 0.11 * px[i + 2]) / 255) ** 2.2;
       all.push(lum);
       if (f) {
         const dx = x - f.cx * w;
@@ -97,7 +97,7 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
   const half = size / 2;
   // Poor optics smear a star into a bigger, hazier dot; good optics keep it tight.
   const poor = Math.max(0, -quality);
-  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3 + 0.015 * poor;
+  const skyLevel = skyGlow ** 2.5 * 0.3 + 0.015 * poor;
   const base = [0.86, 0.93, 1.0];
   const skyTint = [1, 0.82, 0.62];
   return (averted: number) => {
@@ -118,7 +118,7 @@ function preparePoint(g: CanvasRenderingContext2D, size: number, pointMargin: nu
       const vignette = 1 - 0.25 * (dist / half) ** 2;
       for (let c = 0; c < 3; c++) {
         const v = Math.min(1, skyLevel * skyTint[c] + level * base[c]) * vignette;
-        d[i + c] = Math.round(255 * Math.pow(v, 1 / 2.2));
+        d[i + c] = Math.round(255 * v ** (1 / 2.2));
       }
     }
     g.putImageData(frame, 0, 0);
@@ -191,14 +191,14 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
     weight[p] = ex * ey;
     vignette[p] = 1 - 0.25 * r * r;
   }
-  const lut = new Float32Array(256).map((_, v) => Math.pow(v / 255, 2.2));
+  const lut = new Float32Array(256).map((_, v) => (v / 255) ** 2.2);
   // Optical quality: good optics add contrast and colour; poor optics flatten them, lift the sky with scattered light and soften the image.
   const poor = Math.max(0, -quality);
-  const skyLevel = Math.pow(skyGlow, 2.5) * 0.3 + 0.015 * poor;
+  const skyLevel = skyGlow ** 2.5 * 0.3 + 0.015 * poor;
   const skyTint = [1, 0.82, 0.62];
 
   return (averted: number) => {
-    const gain = Math.pow(10, 0.4 * (margin + AVERTED_BOOST * averted)) / mean;
+    const gain = 10 ** (0.4 * (margin + AVERTED_BOOST * averted)) / mean;
     const soften = Math.min(1, 0.6 * averted + 0.6 * poor);
     // The eye sees almost no colour in the dark and none at all in averted vision; good optics keep more of the photo's colour.
     const colour = Math.max(0, (0.175 + 0.25 * quality) * (1 - averted));
@@ -221,7 +221,7 @@ function prepareView({ canvas, img, photo, optics, skyGlow, point }: ViewParams)
         const chan = tone(Math.max(0, (c === 0 ? lin0 : c === 1 ? lin1 : lin2) - bg), w);
         const level = grey + (chan - grey) * colour;
         const v = Math.min(1, skyLevel * skyTint[c] + level * tint[c]) * vignette[p];
-        d[i + c] = Math.round(255 * Math.pow(v, 1 / 2.2));
+        d[i + c] = Math.round(255 * v ** (1 / 2.2));
       }
     }
     g.putImageData(frame, 0, 0);

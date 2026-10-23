@@ -17,7 +17,7 @@ function Segmented<T>({ label, options, value, name, onPick }: { label: string; 
       <span className="control-label">{label}</span>
       <div className="segmented">
         {options.map((o) => (
-          <button key={name(o)} className={o === value ? "active" : ""} onClick={() => onPick(o)}>
+          <button type="button" key={name(o)} className={o === value ? "active" : ""} onClick={() => onPick(o)}>
             {name(o)}
           </button>
         ))}

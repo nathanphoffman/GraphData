@@ -9,11 +9,11 @@ export const PLAUSIBLE_X: [number, number] = [1.0, 2.0];
 export function scoreAnimals(animals: Animal[], { x, w, k }: Exponents): ScoredAnimal[] {
   const scored = animals.map((a) => ({
     ...a,
-    score: Math.pow(a.neuronsBillions * 1e9, x) / Math.pow(a.weightKg, w),
+    score: (a.neuronsBillions * 1e9) ** x / a.weightKg ** w,
   }));
   const human = scored.find((a) => a.name === "Human");
-  const humanFinal = human ? Math.pow(human.score, k) : NaN;
-  return scored.map((a) => ({ ...a, humanPercent: (Math.pow(a.score, k) / humanFinal) * 100 }));
+  const humanFinal = human ? human.score ** k : NaN;
+  return scored.map((a) => ({ ...a, humanPercent: (a.score ** k / humanFinal) * 100 }));
 }
 
 export function sortAnimals(rows: ScoredAnimal[], key: SortKey, ascending: boolean): ScoredAnimal[] {

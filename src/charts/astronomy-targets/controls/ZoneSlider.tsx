@@ -21,7 +21,7 @@ interface ZoneSliderProps {
 function scale({ min, max, log }: Pick<ZoneSliderProps, "min" | "max" | "log">) {
   const toPos = (v: number) => (log ? Math.log(v / min) / Math.log(max / min) : (v - min) / (max - min));
   const fromPos = (p: number) => {
-    const v = log ? min * Math.pow(max / min, p) : min + p * (max - min);
+    const v = log ? min * (max / min) ** p : min + p * (max - min);
     return log && v < 10 ? Math.round(v * 2) / 2 : Math.round(v);
   };
   return { toPos, fromPos };

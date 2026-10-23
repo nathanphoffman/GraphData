@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { difficulty, isNakedEye } from "../model/calculate";
 import type { ScoredTarget, Settings } from "../model/types";
 import { hasPreview } from "../preview/TargetPreview";
-import { type Column } from "./columns";
+import type { Column } from "./columns";
 import { heat, TYPE_SYMBOLS } from "./heat";
 
 export interface Hover {
