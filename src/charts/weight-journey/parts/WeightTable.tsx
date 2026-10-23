@@ -35,7 +35,7 @@ function useTableRows(period: string) {
 function Head({ unit }: { unit: Unit }) {
   return (
     <thead>
-      <tr><th>Date</th><th>Weight ({unit})</th><th>Muscle gain ({unit})</th><th>Muscle gained so far ({unit})</th><th>3-day avg<small>actual / muscle-adjusted</small></th><th>Recent weight loss / month<small>from 15 and 30 day change</small></th><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th><th>Projected / month</th><th>Projected in 1 year</th><th>All average</th><th>Projected all average</th><th>3 day projected all average</th><th></th></tr>
+      <tr><th>Date</th><th>Weight ({unit})</th><th>Muscle gain ({unit})</th><th>Muscle gained so far ({unit})</th><th>3-day avg<small>actual / muscle-adjusted</small></th><th>Recent weight loss / month<small>from 15 and 30 day change</small></th><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th><th>Projected / month</th><th>Projected in 1 year</th><th>All average</th><th>Projected all average</th><th>3 day projected all average</th><th></th><th>Complete average<small>every weight column</small></th></tr>
     </thead>
   );
 }
@@ -59,6 +59,7 @@ function DayRow({ d, f }: { d: (typeof dailyRows)[number]; f: Format }) {
       <td>{two(d.allProj, d.allProjAdj)}</td>
       <td>{two(d.allProj3, d.allProj3Adj)}</td>
       <td>{d.estimated ? "estimated" : ""}</td>
+      <td>{two(d.complete, d.completeAdj)}</td>
     </tr>
   );
 }

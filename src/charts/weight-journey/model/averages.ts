@@ -10,6 +10,12 @@ export function allAverage(a: Averages): number {
   return values.reduce((sum, v) => sum + v, 0) / values.length;
 }
 
+/** Mean of every weight column in the table (not the monthly change or muscle ones); columns with no value yet are skipped. */
+export function completeAverage(values: (number | null)[]): number {
+  const present = values.filter((v): v is number => v !== null);
+  return present.reduce((sum, v) => sum + v, 0) / present.length;
+}
+
 /** All average now plus 12 times its change over the last `lag` rows, like the blended projection (change per 30 real days x 12). */
 export const projectAll = (series: number[], i: number, lag: number, step: number) =>
   i >= lag ? series[i] + ((series[i] - series[i - lag]) / step) * 12 : null;

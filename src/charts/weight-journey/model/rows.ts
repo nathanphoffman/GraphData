@@ -1,6 +1,6 @@
-import { addAverages, addMuscle, fillDays, project } from "../calculate";
+import { type Averages, addAverages, addMuscle, fillDays, project } from "../calculate";
 import data from "../../../../data/misc/weight-journey.json";
-import { allAverage, last3, projectAll, recentRate } from "./averages";
+import { allAverage, completeAverage, last3, projectAll, recentRate, yearly } from "./averages";
 
 const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
 // Placeholder rows (weight 0) and future dates are skipped.
@@ -16,6 +16,9 @@ export const projectedAdjusted = project(
 export const { fit, future } = project(days, 90, 90);
 
 const DAILY_WINDOWS = { short: 3, medium: 30, long: 365 };
+
+const weightColumns = (a: Averages, all: number, proj: number | null, proj3: number | null) =>
+  [a.avg3, a.avg30, a.avg365, a.blended, yearly(a.blended, a.monthly), all, proj, proj3];
 
 function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step: number) {
   const actual = addAverages(rows, windows, step);
@@ -38,6 +41,8 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     allProjAdj: projAdjusted[i],
     allProj3: last3(projActual, i),
     allProj3Adj: last3(projAdjusted, i),
+    complete: completeAverage([d.weight, ...weightColumns(d, allActual[i], projActual[i], last3(projActual, i))]),
+    completeAdj: completeAverage([d.weight - d.muscleTotal, ...weightColumns(d.adj, allAdjusted[i], projAdjusted[i], last3(projAdjusted, i))]),
   }));
 }
 
