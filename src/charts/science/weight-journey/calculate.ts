@@ -182,6 +182,8 @@ export interface TargetPoint {
   weight: number;
   /** weight minus all muscle gained so far, including the projected gain */
   adjusted: number;
+  /** total muscle gained by this day, including the projected gain */
+  muscle: number;
 }
 
 /**
@@ -206,7 +208,7 @@ export function projectTapering(
     const factor = (11 / 12) ** (k / 30);
     weight -= (monthlyLoss / 30) * factor;
     muscle += muscleDaily * factor;
-    points.push({ date: format(start + k * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle) });
+    points.push({ date: format(start + k * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle), muscle });
   }
 
   return points;

@@ -1,5 +1,5 @@
 import { taperToTotal } from "../calculate";
-import type { Row } from "./rows";
+import type { Fat, Row } from "./rows";
 
 export interface Point {
   date: string;
@@ -16,7 +16,7 @@ export const taperCurve = (date: string, start: number, target: number, ahead: n
 const meanOf = (rows: Row[], f: (r: Row) => number) => rows.reduce((total, r) => total + f(r), 0) / rows.length;
 
 /** Tapering curve from a row's 3-day average down to its 3 day projected all average (first month = 1/12 of the loss). Today, yesterday and the day before. */
-export function buildAllTrend(rows: Row[], ahead: number) {
+export function buildAllTrend(rows: Row[], ahead: number, fat: Fat | null = null) {
   // Up to three past trend lines (today, 1 and 2 steps back) so you can see how the projection has shifted.
   const trends = [0, 1, 2].flatMap((back) => {
     const row = rows[rows.length - 1 - back];
@@ -24,7 +24,10 @@ export function buildAllTrend(rows: Row[], ahead: number) {
     if (!row || row.allProj3 === null || row.allProj3Adj === null) return [];
     const actual = taperCurve(row.date, row.avg3, row.allProj3, ahead);
 
-    return [{ back, actual, adjusted: taperCurve(row.date, row.adj.avg3, row.allProj3Adj, ahead) }];
+    const fatRow = fat?.rows[rows.length - 1 - back];
+    const fatCurve = fatRow && fatRow.allProj3 !== null ? taperCurve(row.date, fatRow.avg3, fatRow.allProj3, ahead) : null;
+
+    return [{ back, actual, adjusted: taperCurve(row.date, row.adj.avg3, row.allProj3Adj, ahead), fat: fatCurve }];
   });
 
   return trends.length ? { trends, date: trends[0].actual[trends[0].actual.length - 1].date } : null;

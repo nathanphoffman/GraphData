@@ -55,3 +55,22 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
 
 export const dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
 export type Row = (typeof dailyRows)[number];
+
+/**
+ * Weight minus the muscle gained and the extra fat that muscle allows (`ratio` lb of fat per lb of muscle),
+ * with the same averages, quadratic projection and 3 day projected all average as the other series.
+ */
+export function buildFat(ratio: number) {
+  const series = withMuscle.map((d) => ({ ...d, weight: d.weight - d.muscleTotal * (1 + ratio) }));
+  const averages = addAverages(series, DAILY_WINDOWS, 1);
+  const allAvg = averages.map((a) => allAverage(a));
+  const projAll = allAvg.map((_unused, index) => projectAll(allAvg, index, DAILY_WINDOWS.medium, 1));
+
+  return {
+    ratio,
+    rows: averages.map((a, index) => ({ date: a.date, avg3: a.avg3, allProj3: last3(projAll, index) })),
+    ...project(series, 90, 90),
+  };
+}
+
+export type Fat = ReturnType<typeof buildFat>;

@@ -1,11 +1,16 @@
 import type { Lines } from "../useProjections";
 
 /** Colour key for the chart; entries only show for lines that are switched on. */
-export function Legend({ lines, tapered }: { lines: Lines; tapered: boolean }) {
+export function Legend({ lines, tapered, fatRatio }: { lines: Lines; tapered: boolean; fatRatio: number | null }) {
   return (
     <p className="muted weight-legend">
       <span className="key actual" /> weight (gaps filled in a straight line) <span className="key avg3" /> 3-day average
       <span className="key avg3-adjusted" /> 3-day average minus muscle gained <span className="key fit" /> trend curve <span className="key future-adjusted" /> muscle-adjusted trend and projection
+      {fatRatio !== null && (
+        <>
+          <span className="key avg3-fat" /> 3-day average minus muscle gained minus {fatRatio}x that muscle again (fat allowed per lb of muscle); its trend, quadratic and tapering projections use the same purple
+        </>
+      )}
       {lines.spread && (
         <>
           <span className="key spread-key" /> last week of projections: shaded range (darker where they bunch up), solid = best (lowest) and worst (highest), dotted = average. Purple is actual, cyan is muscle-adjusted

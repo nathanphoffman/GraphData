@@ -405,3 +405,22 @@
 .weight-controls .table-controls {
   margin-top: 0;
 }
+
+.weight-chart .line-avg3-fat,
+.weight-chart .line-fit-fat,
+.weight-chart .line-future-fat,
+.weight-chart .line-taper-fat,
+.weight-chart .line-all-trend-fat {
+  stroke: #8e5bd6;
+  stroke-width: 2.5;
+}
+
+.weight-chart .line-future-fat,
+.weight-chart .line-taper-fat,
+.weight-chart .line-all-trend-fat {
+  stroke-dasharray: 6 5;
+}
+
+.weight-legend .key.avg3-fat {
+  border-color: #8e5bd6;
+}

@@ -53,6 +53,7 @@ function AllTrends({ trends }: { trends: Chart["allTrends"] }) {
       {/* Draw the last few trend lines, fading older ones. */}
       {trends.map((trend) => (
         <g key={trend.back} opacity={1 - trend.back * 0.3}>
+          <path d={trend.fat} className="line-all-trend-fat" />
           <path d={trend.adjusted} className="line-all-trend-adjusted" />
           <path d={trend.actual} className="line-all-trend" />
         </g>
@@ -63,24 +64,28 @@ function AllTrends({ trends }: { trends: Chart["allTrends"] }) {
 
 /** The weight chart; recalculated only when the chart inputs change, since it is a lot of drawing. */
 export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines }) {
-  const { rangeDays, k, tapered, allTrend, spread, general } = input;
-  const chart = useMemo(() => buildChart(input), [rangeDays, k, tapered, allTrend, spread, general]);
+  const { rangeDays, k, tapered, allTrend, spread, general, fat } = input;
+  const chart = useMemo(() => buildChart(input), [rangeDays, k, tapered, allTrend, spread, general, fat]);
 
   return (
     <svg viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} className="weight-chart" role="img" aria-label="Weight over time">
       <Axes chart={chart} />
       <path d={chart.actual} className="line-actual" />
       {rangeDays <= 365 && chart.measured.map((p, index) => <circle key={index} cx={p.x} cy={p.y} r={2.5} className="dot" />)}
+      <path d={chart.avg3Fat} className="line-avg3-fat" />
       <path d={chart.avg3Adjusted} className="line-avg3-adjusted" />
       <path d={chart.avg3} className="line-avg3" />
       <path d={chart.fitAdjusted} className="line-fit-adjusted" />
       {lines.quadratic && <path d={chart.futureAdjusted} className="line-future-adjusted" />}
+      <path d={chart.fitFat} className="line-fit-fat" />
+      {lines.quadratic && <path d={chart.futureFat} className="line-future-fat" />}
       <path d={chart.fit} className="line-fit" />
       {lines.quadratic && <path d={chart.future} className="line-future" />}
       {lines.general && <path d={chart.general} className="line-general" />}
       {chart.spread && <SpreadBands spread={chart.spread} />}
       <AllTrends trends={chart.allTrends} />
       <path d={chart.taperAdjusted} className="line-taper-adjusted" />
+      <path d={chart.taperFat} className="line-taper-fat" />
       <path d={chart.taper} className="line-taper" />
     </svg>
   );

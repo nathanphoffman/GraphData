@@ -86,7 +86,32 @@ function LineToggles({ lines, onLines }: { lines: Lines; onLines: (lines: Lines)
   );
 }
 
+export interface FatRatio {
+  enabled: boolean;
+  value: string;
+}
+
+/** Switch and input for the fat:muscle growth ratio (lb of fat tolerated per lb of muscle gained). */
+function FatRatioBox({ fatRatio, onFatRatio }: { fatRatio: FatRatio; onFatRatio: (fatRatio: FatRatio) => void }) {
+  return (
+    <div className="control-group">
+      <span className="control-label">Fat:Muscle Growth Ratio</span>
+      <div className="field-row">
+        <label className="toggle">
+          <input type="checkbox" checked={fatRatio.enabled} onChange={(event) => onFatRatio({ ...fatRatio, enabled: event.target.checked })} /> Enable
+        </label>
+        <label className="field">
+          Ratio: {Number(fatRatio.value).toFixed(1)}x
+          <input type="range" min="0" max="2" step="0.1" value={fatRatio.value} disabled={!fatRatio.enabled} onChange={(event) => onFatRatio({ ...fatRatio, value: event.target.value })} />
+        </label>
+      </div>
+    </div>
+  );
+}
+
 export interface ControlsProps extends ToolProps {
+  fatRatio: FatRatio;
+  onFatRatio: (fatRatio: FatRatio) => void;
   onUnit: (unit: Unit) => void;
   range: Range;
   onRange: (range: Range) => void;
@@ -101,6 +126,7 @@ export function Controls(controlsProps: ControlsProps) {
       <Segmented label="Units" options={["lb", "kg"] as Unit[]} value={controlsProps.unit} name={(unit) => unit} onPick={controlsProps.onUnit} />
       <Segmented label="Chart range" options={RANGES} value={controlsProps.range} name={(r) => r.label} onPick={controlsProps.onRange} />
       <ProjectionToolBox unit={controlsProps.unit} f={controlsProps.f} tool={controlsProps.tool} onTool={controlsProps.onTool} tapered={controlsProps.tapered} />
+      <FatRatioBox fatRatio={controlsProps.fatRatio} onFatRatio={controlsProps.onFatRatio} />
       <LineToggles lines={controlsProps.lines} onLines={controlsProps.onLines} />
     </div>
   );

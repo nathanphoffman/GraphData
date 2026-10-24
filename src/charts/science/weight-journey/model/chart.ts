@@ -1,7 +1,7 @@
 import { scaleLinear, scaleTime } from "d3-scale";
 import type { Day, projectTapering } from "../calculate";
 import type { AllTrend, General, Point, Spread } from "./curves";
-import { dailyRows, days, fit, future, projectedAdjusted } from "./rows";
+import { type Fat, dailyRows, days, fit, future, projectedAdjusted } from "./rows";
 import { toDate } from "./units";
 
 export const CHART_WIDTH = 1000;
@@ -17,6 +17,7 @@ export interface ChartInput {
   allTrend: AllTrend | null;
   spread: Spread | null;
   general: General | null;
+  fat: Fat | null;
 }
 
 /** SVG path for a list of points. */
@@ -25,7 +26,7 @@ export function line(points: { x: number; y: number }[]): string {
 }
 
 /** Every weight the chart has to fit (in lb), so the y axis can be sized to it. */
-function allWeights(shown: Point[], shownFuture: Point[], { tapered, allTrend, spread }: ChartInput) {
+function allWeights(shown: Point[], shownFuture: Point[], { tapered, allTrend, spread, fat }: ChartInput) {
   const spreadEnds = spread ? [spread.actual, spread.adjusted].flatMap((g) => [...g.curves[0].points, ...g.curves[g.curves.length - 1].points]) : [];
   const shownAvg = dailyRows.filter((dailyRow) => dailyRow.date >= shown[0].date).map((dailyRow) => ({ weight: dailyRow.adj.avg3 }));
 
@@ -36,6 +37,9 @@ function allWeights(shown: Point[], shownFuture: Point[], { tapered, allTrend, s
     ...(tapered ?? []).flatMap((targetPoint) => [{ weight: targetPoint.weight }, { weight: targetPoint.adjusted }]),
     ...(allTrend ? allTrend.trends.flatMap((trend) => [...trend.actual, ...trend.adjusted]) : []),
     ...spreadEnds,
+    ...(fat ? [...fat.future, ...fat.rows.filter((r) => r.date >= shown[0].date).map((r) => ({ weight: r.avg3 }))] : []),
+    ...(tapered && fat ? tapered.map((targetPoint) => ({ weight: targetPoint.weight - targetPoint.muscle * (1 + fat.ratio) })) : []),
+    ...(allTrend ? allTrend.trends.flatMap((trend) => trend.fat ?? []) : []),
     ...shownAvg,
   ].map((d) => d.weight);
 }
@@ -98,6 +102,24 @@ function projectionLines(point: Pt, general: General | null) {
   };
 }
 
+/** Paths for the muscle-and-fat-adjusted series: 3-day average, quadratic fit and projection, and the tapering projection. */
+function fatLines(shown: Day[], point: Pt, fat: Fat | null, tapered: Tapered | null) {
+  if (!fat) return { avg3Fat: "", fitFat: "", futureFat: "", taperFat: "" };
+  const firstShown = shown[0].date;
+  const shownAvg = fat.rows.filter((r) => r.date >= firstShown);
+  const lastFit = fat.fit[fat.fit.length - 1];
+  const lastAvg = fat.rows[fat.rows.length - 1];
+
+  return {
+    avg3Fat: line(shownAvg.map((r) => point({ date: r.date, weight: r.avg3 }))),
+    fitFat: line(fat.fit.filter((projection) => projection.date >= firstShown).map(point)),
+    futureFat: line([point(lastFit), ...fat.future.map(point)]),
+    taperFat: tapered
+      ? line([point({ date: lastAvg.date, weight: lastAvg.avg3 }), ...tapered.map((targetPoint) => point({ date: targetPoint.date, weight: targetPoint.weight - targetPoint.muscle * (1 + fat.ratio) }))])
+      : "",
+  };
+}
+
 /** Paths for the tapering projection from the user's monthly loss. */
 function taperLines(point: Pt, tapered: Tapered | null) {
   if (!tapered) return { taper: "", taperAdjusted: "" };
@@ -113,7 +135,7 @@ function taperLines(point: Pt, tapered: Tapered | null) {
 
 /** Work out everything the chart draws (scales, paths, dots) for the chosen range and options. */
 export function buildChart(input: ChartInput) {
-  const { rangeDays, k, tapered, allTrend, spread, general } = input;
+  const { rangeDays, k, tapered, allTrend, spread, general, fat } = input;
   const shown = days.slice(-Math.min(rangeDays, days.length));
   const shownFuture = tapered ? [...future, ...tapered] : future;
   const { x, y } = buildScales(shown, shownFuture, input);
@@ -125,7 +147,8 @@ export function buildChart(input: ChartInput) {
     ...actualLines(shown, pt),
     ...projectionLines(pt, general),
     ...taperLines(pt, tapered),
+    ...fatLines(shown, pt, fat, tapered),
     spread: spread ? { actual: shade(spread.actual, pt), adjusted: shade(spread.adjusted, pt) } : null,
-    allTrends: (allTrend?.trends ?? []).map((t) => ({ back: t.back, actual: line(t.actual.map(pt)), adjusted: line(t.adjusted.map(pt)) })),
+    allTrends: (allTrend?.trends ?? []).map((t) => ({ back: t.back, actual: line(t.actual.map(pt)), adjusted: line(t.adjusted.map(pt)), fat: t.fat ? line(t.fat.map(pt)) : "" })),
   };
 }
