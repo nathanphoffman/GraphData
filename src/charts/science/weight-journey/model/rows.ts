@@ -29,6 +29,9 @@ const project12 = (weight: number | null, monthly: number | null) => (weight ===
 /** Sum of two values, or null when either is missing. */
 const add = (a: number | null, b: number | null) => (a === null || b === null ? null : a + b);
 
+/** Half of a value, or null when it is missing. */
+const half = (value: number | null) => (value === null ? null : value / 2);
+
 /** The weight columns that are averaged into the complete average. */
 function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step: number) {
   const actual = addAverages(rows, windows, step);
@@ -56,9 +59,11 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
   const wmaProjAdj = weightWmaAdj.map((w, index) => project12(w, recentWmaAdj[index]));
   const wmaLoss = wmaProj.map((_unused, index) => recentRate(wmaProj, index, step));
   const wmaLossAdj = wmaProjAdj.map((_unused, index) => recentRate(wmaProjAdj, index, step));
+  const wmaProj2 = wmaProj.map((w, index) => add(w, wmaLoss[index]));
+  const wmaProj2Adj = wmaProjAdj.map((w, index) => add(w, wmaLossAdj[index]));
 
   // Attach the rates and averages to each day.
-  return baseRows.map((baseRow, index) => ({
+  const withRates = baseRows.map((baseRow, index) => ({
     ...baseRow,
     recent: recent[index],
     recentAdj: recentAdj[index],
@@ -72,8 +77,10 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     wmaProjAdj: wmaProjAdj[index],
     wmaLoss: wmaLoss[index],
     wmaLossAdj: wmaLossAdj[index],
-    wmaProj2: add(wmaProj[index], wmaLoss[index]),
-    wmaProj2Adj: add(wmaProjAdj[index], wmaLossAdj[index]),
+    wmaProj2: wmaProj2[index],
+    wmaProj2Adj: wmaProj2Adj[index],
+    wmaAvg: half(add(wmaProj[index], wmaProj2[index])),
+    wmaAvgAdj: half(add(wmaProjAdj[index], wmaProj2Adj[index])),
     allAvg: allActual[index],
     allAvgAdj: allAdjusted[index],
     allProj: projActual[index],
@@ -82,6 +89,13 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     allProj3Adj: last3(projAdjusted, index),
     complete: completeAverage([baseRow.weight, ...weightColumns(baseRow, allActual[index], projActual[index], last3(projActual, index))]),
     completeAdj: completeAverage([baseRow.weight - baseRow.muscleTotal, ...weightColumns(baseRow.adj, allAdjusted[index], projAdjusted[index], last3(projAdjusted, index))]),
+  }));
+
+  // Last column: the complete average and the average of the WMA projections, averaged together.
+  return withRates.map((r) => ({
+    ...r,
+    finalAvg: half(add(r.complete, r.wmaAvg)),
+    finalAvgAdj: half(add(r.completeAdj, r.wmaAvgAdj)),
   }));
 }
 

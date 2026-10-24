@@ -63,7 +63,8 @@ function Head({ unit, show }: { unit: Unit; show: Show }) {
         {show.allAverages && <><th>All average</th><th>Projected all average</th><th>3 day projected all average</th></>}
         <th></th>
         {show.allAverages && <th>Complete average<small>every weight column</small></th>}
-        {show.wma && <><th>Weight loss WMA / month<small>14-day weighted moving average, newest counts most</small></th><th>WMA Projection<small>weight WMA + 12 × loss WMA / month</small></th><th>WMA Projection Projection<small>WMA Projection + WMA Projection Loss</small></th></>}
+        {show.wma && <><th>Weight loss WMA / month<small>14-day weighted moving average, newest counts most</small></th><th>WMA Projection<small>weight WMA + 12 × loss WMA / month</small></th><th>WMA Projection Projection<small>WMA Projection + WMA Projection Loss</small></th><th>Average of WMA Projections<small>WMA Projection and WMA Projection Projection</small></th></>}
+        <th>Average of Complete &amp; WMA<small>Complete average and Average of WMA Projections</small></th>
       </tr>
     </thead>
   );
@@ -76,6 +77,8 @@ function bandClasses(d: Row, show: Show) {
 
   return [
     band(d.weight, false),
+    band(d.finalAvg, false),
+    band(d.finalAvgAdj, true),
     ...(show.dayAverages
       ? [
           ...weightClasses(
@@ -90,7 +93,7 @@ function bandClasses(d: Row, show: Show) {
       ? weightClasses([d.allAvg, d.allProj, d.allProj3, d.complete], [d.allAvgAdj, d.allProjAdj, d.allProj3Adj, d.completeAdj])
       : []),
     ...(show.wma
-      ? [...weightClasses([d.weightWma, d.wmaProj, d.wmaProj2], [d.weightWmaAdj, d.wmaProjAdj, d.wmaProj2Adj]), ...changeClasses(d.recentWma, d.recentWmaAdj)]
+      ? [...weightClasses([d.weightWma, d.wmaProj, d.wmaProj2, d.wmaAvg], [d.weightWmaAdj, d.wmaProjAdj, d.wmaProj2Adj, d.wmaAvgAdj]), ...changeClasses(d.recentWma, d.recentWmaAdj)]
       : []),
   ];
 }
@@ -138,8 +141,10 @@ function DayRow({ d, f, show }: { d: (typeof dailyRows)[number]; f: Format; show
           <td>{two(d.recentWma, d.recentWmaAdj, f.signed, deltaBand)}</td>
           <td>{two(d.wmaProj, d.wmaProjAdj)}</td>
           <td>{two(d.wmaProj2, d.wmaProj2Adj)}</td>
+          <td>{two(d.wmaAvg, d.wmaAvgAdj)}</td>
         </>
       )}
+      <td>{two(d.finalAvg, d.finalAvgAdj)}</td>
     </tr>
   );
 }
