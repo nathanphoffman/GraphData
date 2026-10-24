@@ -1,6 +1,6 @@
 import { type Averages, addAverages, addMuscle, fillDays, project } from "../calculate";
 import data from "../../../../../data/weight-journey/weight-journey.json";
-import { allAverage, completeAverage, last3, projectAll, recentRate, yearly } from "./averages";
+import { allAverage, completeAverage, last3, projectAll, recentRate, weightedAverage, yearly } from "./averages";
 
 const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
 
@@ -23,6 +23,12 @@ const DAILY_WINDOWS = { short: 3, medium: 30, long: 365 };
 const weightColumns = (averages: Averages, all: number, proj: number | null, proj3: number | null) =>
   [averages.avg3, averages.avg30, averages.avg365, averages.blended, yearly(averages.blended, averages.monthly), all, proj, proj3];
 
+/** Weight now plus 12 times the monthly change, i.e. where it lands in a year. */
+const project12 = (weight: number | null, monthly: number | null) => (weight === null || monthly === null ? null : weight + 12 * monthly);
+
+/** Sum of two values, or null when either is missing. */
+const add = (a: number | null, b: number | null) => (a === null || b === null ? null : a + b);
+
 /** The weight columns that are averaged into the complete average. */
 function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step: number) {
   const actual = addAverages(rows, windows, step);
@@ -36,12 +42,38 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
   const projAdjusted = allAdjusted.map((_unused, index) => projectAll(allAdjusted, index, windows.medium, step));
   const avg3 = baseRows.map((baseRow) => baseRow.avg3);
   const avg3Adj = baseRows.map((baseRow) => baseRow.adj.avg3);
+  const recent = avg3.map((_unused, index) => recentRate(avg3, index, step));
+  const recentAdj = avg3Adj.map((_unused, index) => recentRate(avg3Adj, index, step));
+  const weightWma = baseRows.map((_unused, index) => weightedAverage(baseRows.map((r) => r.weight), index, Math.round(14 / step)));
+  const weightWmaAdj = baseRows.map((_unused, index) => weightedAverage(baseRows.map((r) => r.weight - r.muscleTotal), index, Math.round(14 / step)));
+  const recent3s = recent.map((_unused, index) => last3(recent, index));
+  const recent3sAdj = recentAdj.map((_unused, index) => last3(recentAdj, index));
+
+  const recentWma = recent3s.map((_unused, index) => weightedAverage(recent3s, index, Math.round(14 / step)));
+  const recentWmaAdj = recent3sAdj.map((_unused, index) => weightedAverage(recent3sAdj, index, Math.round(14 / step)));
+
+  const wmaProj = weightWma.map((w, index) => project12(w, recentWma[index]));
+  const wmaProjAdj = weightWmaAdj.map((w, index) => project12(w, recentWmaAdj[index]));
+  const wmaLoss = wmaProj.map((_unused, index) => recentRate(wmaProj, index, step));
+  const wmaLossAdj = wmaProjAdj.map((_unused, index) => recentRate(wmaProjAdj, index, step));
 
   // Attach the rates and averages to each day.
   return baseRows.map((baseRow, index) => ({
     ...baseRow,
-    recent: recentRate(avg3, index, step),
-    recentAdj: recentRate(avg3Adj, index, step),
+    recent: recent[index],
+    recentAdj: recentAdj[index],
+    recent3: recent3s[index],
+    recent3Adj: recent3sAdj[index],
+    recentWma: recentWma[index],
+    recentWmaAdj: recentWmaAdj[index],
+    weightWma: weightWma[index],
+    weightWmaAdj: weightWmaAdj[index],
+    wmaProj: wmaProj[index],
+    wmaProjAdj: wmaProjAdj[index],
+    wmaLoss: wmaLoss[index],
+    wmaLossAdj: wmaLossAdj[index],
+    wmaProj2: add(wmaProj[index], wmaLoss[index]),
+    wmaProj2Adj: add(wmaProjAdj[index], wmaLossAdj[index]),
     allAvg: allActual[index],
     allAvgAdj: allAdjusted[index],
     allProj: projActual[index],

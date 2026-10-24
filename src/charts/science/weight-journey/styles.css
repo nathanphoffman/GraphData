@@ -378,6 +378,60 @@
   cursor: pointer;
 }
 
+.weight-controls .period-picker {
+  position: relative;
+  min-width: 190px;
+}
+
+.weight-controls .period-button,
+.weight-controls .period-list button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.weight-controls .period-list {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 4px 0 0;
+  padding: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.weight-controls .period-list button {
+  border-color: transparent;
+}
+
+.weight-controls .period-list button:hover,
+.weight-controls .period-list button.active {
+  background: color-mix(in srgb, var(--link) 12%, var(--bg));
+}
+
+.weight-controls .period-square {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
 .weight-controls .toggles {
   display: flex;
   flex-wrap: wrap;

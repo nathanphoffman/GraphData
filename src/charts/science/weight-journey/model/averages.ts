@@ -26,7 +26,7 @@ export function completeAverage(values: (number | null)[]): number {
 export const projectAll = (series: number[], index: number, lag: number, step: number) =>
   index >= lag ? series[index] + ((series[index] - series[index - lag]) / step) * 12 : null;
 
-/** Mean of the projected all average over this row and the 2 before it (rows with no projection yet are skipped). */
+/** Mean of a series (projected all average, recent rate) over this row and the 2 before it (rows with no projection yet are skipped). */
 export function last3(series: (number | null)[], index: number) {
   const values = series.slice(Math.max(0, index - 2), index + 1).filter((entry): entry is number => entry !== null);
 
@@ -34,12 +34,33 @@ export function last3(series: (number | null)[], index: number) {
   return values.length ? values.reduce((total, value) => total + value, 0) / values.length : null;
 }
 
+/** Weighted moving average over the last `window` rows: newest counts `window` times, the one before `window - 1`, down to 1 (rows with no value are skipped). */
+export function weightedAverage(series: (number | null)[], index: number, window: number) {
+  let total = 0;
+  let weights = 0;
+
+  for (let back = 0; back < window && back <= index; back++) {
+    const value = series[index - back];
+
+    if (value === null) continue;
+    total += value * (window - back);
+    weights += window - back;
+  }
+
+  return weights ? round1(total / weights) : null;
+}
+
 /** Monthly rate from the 3-day average: change over 15 days doubled, averaged with the change over 30 days. */
-export function recentRate(series: number[], index: number, step: number) {
+export function recentRate(series: (number | null)[], index: number, step: number) {
   const lag15 = Math.round(15 / step);
   const lag30 = Math.round(30 / step);
 
   if (index < lag30) return null;
 
-  return round1((2 * (series[index] - series[index - lag15]) + (series[index] - series[index - lag30])) / 2);
+  const [now, back15, back30] = [series[index], series[index - lag15], series[index - lag30]];
+
+  // No rate until all three values exist.
+  if (now === null || back15 === null || back30 === null) return null;
+
+  return round1((2 * (now - back15) + (now - back30)) / 2);
 }
