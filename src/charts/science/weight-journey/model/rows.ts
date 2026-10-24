@@ -91,7 +91,7 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     completeAdj: completeAverage([baseRow.weight - baseRow.muscleTotal, ...weightColumns(baseRow.adj, allAdjusted[index], projAdjusted[index], last3(projAdjusted, index))]),
   }));
 
-  // Last column: the complete average and the average of the WMA projections, averaged together.
+  // Last column: the complete average and the WMA Projection Projected, averaged together.
   return withRates.map((r) => ({
     ...r,
     finalAvg: half(add(r.complete, r.wmaAvg)),

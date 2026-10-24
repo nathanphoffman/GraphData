@@ -39,7 +39,7 @@ function useTableRows(period: string) {
   return { newestFirst, rows, quarters };
 }
 
-type Show = { muscleDaily: boolean; dayAverages: boolean; weightLoss: boolean; allAverages: boolean; wma: boolean };
+type Show = { muscleDaily: boolean; muscleTotal: boolean; dayAverages: boolean; weightLoss: boolean; allAverages: boolean; wma: boolean };
 
 const GROUPS: { key: keyof Show; label: string }[] = [
   { key: "dayAverages", label: "Day Averages" },
@@ -47,24 +47,97 @@ const GROUPS: { key: keyof Show; label: string }[] = [
   { key: "wma", label: "WMA" },
   { key: "allAverages", label: "All Averages" },
   { key: "muscleDaily", label: "Muscle gain" },
+  { key: "muscleTotal", label: "Muscle gained so far" },
 ];
 
-/** Table header; columns follow the options that are switched on. */
-function Head({ unit, show }: { unit: Unit; show: Show }) {
+/** How a column's numbers are written and coloured: weights by target band, changes by delta band, muscle with 2 or 3 decimals. */
+type Kind = "weight" | "change" | "muscle2" | "muscle3";
+
+type Column = {
+  /** Group that switches the column on; always shown when missing. */
+  group?: keyof Show;
+  title: (unit: Unit) => string;
+  note?: string;
+  kind: Kind;
+  actual: (d: Row) => number | null;
+  /** Muscle-adjusted value shown under the actual one. */
+  adjusted?: (d: Row) => number | null;
+};
+
+const COLUMNS: Column[] = [
+  { title: (unit) => `Weight (${unit})`, kind: "weight", actual: (d) => d.weight },
+  { group: "wma", title: () => "Weight WMA", note: "14-day weighted moving average", kind: "weight", actual: (d) => d.weightWma, adjusted: (d) => d.weightWmaAdj },
+  { group: "muscleDaily", title: (unit) => `Muscle gain (${unit})`, kind: "muscle3", actual: (d) => d.muscleDaily },
+  { group: "muscleTotal", title: (unit) => `Muscle gained so far (${unit})`, kind: "muscle2", actual: (d) => d.muscleTotal },
+  { group: "dayAverages", title: () => "3-day avg", note: "actual / muscle-adjusted", kind: "weight", actual: (d) => d.avg3, adjusted: (d) => d.adj.avg3 },
+  { group: "weightLoss", title: () => "Recent weight loss / month", note: "from 15 and 30 day change", kind: "change", actual: (d) => d.recent, adjusted: (d) => d.recentAdj },
+  { group: "weightLoss", title: () => "Weight loss 3-day / month", note: "3-day avg of the column before", kind: "change", actual: (d) => d.recent3, adjusted: (d) => d.recent3Adj },
+  { group: "dayAverages", title: () => "30-day avg", kind: "weight", actual: (d) => d.avg30, adjusted: (d) => d.adj.avg30 },
+  { group: "dayAverages", title: () => "365-day avg", kind: "weight", actual: (d) => d.avg365, adjusted: (d) => d.adj.avg365 },
+  { group: "dayAverages", title: () => "Blended avg", kind: "weight", actual: (d) => d.blended, adjusted: (d) => d.adj.blended },
+  { group: "dayAverages", title: () => "Projected / month", kind: "change", actual: (d) => d.monthly, adjusted: (d) => d.adj.monthly },
+  { group: "dayAverages", title: () => "Projected in 1 year", kind: "weight", actual: (d) => yearly(d.blended, d.monthly), adjusted: (d) => yearly(d.adj.blended, d.adj.monthly) },
+  { group: "allAverages", title: () => "All average", kind: "weight", actual: (d) => d.allAvg, adjusted: (d) => d.allAvgAdj },
+  { group: "allAverages", title: () => "Projected all average", kind: "weight", actual: (d) => d.allProj, adjusted: (d) => d.allProjAdj },
+  { group: "allAverages", title: () => "3 day projected all average", kind: "weight", actual: (d) => d.allProj3, adjusted: (d) => d.allProj3Adj },
+  { group: "allAverages", title: () => "Complete average", note: "every weight column", kind: "weight", actual: (d) => d.complete, adjusted: (d) => d.completeAdj },
+  { group: "wma", title: () => "Weight loss WMA / month", note: "14-day weighted moving average, newest counts most", kind: "change", actual: (d) => d.recentWma, adjusted: (d) => d.recentWmaAdj },
+  { group: "wma", title: () => "WMA Projection", note: "weight WMA + 12 × loss WMA / month", kind: "weight", actual: (d) => d.wmaProj, adjusted: (d) => d.wmaProjAdj },
+  { group: "wma", title: () => "WMA Projection Projected", note: "average of WMA Projection and WMA Projection + its monthly change", kind: "weight", actual: (d) => d.wmaAvg, adjusted: (d) => d.wmaAvgAdj },
+  { title: () => "Average of Complete & WMA", note: "Complete average and WMA Projection Projected", kind: "weight", actual: (d) => d.finalAvg, adjusted: (d) => d.finalAvgAdj },
+];
+
+/** Writes a number the way its column shows it. */
+const formatter = (kind: Kind, f: Format) => {
+  if (kind === "change") return f.signed;
+  if (kind === "muscle2") return (pounds: number) => f.w(pounds, 2);
+  if (kind === "muscle3") return (pounds: number) => f.w(pounds, 3);
+
+  return f.w;
+};
+
+type Range = { high: number; low: number } | null;
+
+/** Highest and lowest value a column takes over the rows (null when it has none). */
+function rangeOf(rows: Row[], column: Column): Range {
+  const values = rows.map(column.actual).filter((value): value is number => value !== null);
+
+  // Math.max/min spread would overflow the stack on a long history, so loop.
+  return values.length ? { high: values.reduce((a, b) => Math.max(a, b)), low: values.reduce((a, b) => Math.min(a, b)) } : null;
+}
+
+/** Small print block: the label, then the high, then the low, each on its own line. */
+const rangeBlock = (label: string, range: Range, fmt: (pounds: number) => string) => (
+  <small className="range">
+    {label}
+    <br />
+    {range ? `↑${fmt(range.high)}` : "—"}
+    <br />
+    {range ? `↓${fmt(range.low)}` : "—"}
+  </small>
+);
+
+/** Table header; columns follow the options that are switched on, with the high and low of each for the period and for all time. */
+function Head({ unit, f, columns, periodRanges, allTimeRanges }: { unit: Unit; f: Format; columns: Column[]; periodRanges: Range[]; allTimeRanges: Range[] }) {
   return (
     <thead>
-      <tr>
-        <th>Date</th><th>Weight ({unit})</th>
-        {show.wma && <th>Weight WMA<small>14-day weighted moving average</small></th>}
-        {show.muscleDaily && <th>Muscle gain ({unit})</th>}<th>Muscle gained so far ({unit})</th>
-        {show.dayAverages && <th>3-day avg<small>actual / muscle-adjusted</small></th>}
-        {show.weightLoss && <><th>Recent weight loss / month<small>from 15 and 30 day change</small></th><th>Weight loss 3-day / month<small>3-day avg of the column before</small></th></>}
-        {show.dayAverages && <><th>30-day avg</th><th>365-day avg</th><th>Blended avg</th><th>Projected / month</th><th>Projected in 1 year</th></>}
-        {show.allAverages && <><th>All average</th><th>Projected all average</th><th>3 day projected all average</th></>}
-        <th></th>
-        {show.allAverages && <th>Complete average<small>every weight column</small></th>}
-        {show.wma && <><th>Weight loss WMA / month<small>14-day weighted moving average, newest counts most</small></th><th>WMA Projection<small>weight WMA + 12 × loss WMA / month</small></th><th>WMA Projection Projection<small>WMA Projection + WMA Projection Loss</small></th><th>Average of WMA Projections<small>WMA Projection and WMA Projection Projection</small></th></>}
-        <th>Average of Complete &amp; WMA<small>Complete average and Average of WMA Projections</small></th>
+      <tr className="titles">
+        <th>Date</th>
+        {columns.map((column) => <th key={column.title(unit)} title={column.note}>{column.title(unit)}</th>)}
+      </tr>
+      {/* Own row so the highs and lows line up across columns whatever the title length. */}
+      <tr className="ranges">
+        <th />
+        {columns.map((column, index) => {
+          const fmt = formatter(column.kind, f);
+
+          return (
+            <th key={column.title(unit)}>
+              {rangeBlock("period:", periodRanges[index], fmt)}
+              {rangeBlock("all time:", allTimeRanges[index], fmt)}
+            </th>
+          );
+        })}
       </tr>
     </thead>
   );
@@ -93,58 +166,30 @@ function bandClasses(d: Row, show: Show) {
       ? weightClasses([d.allAvg, d.allProj, d.allProj3, d.complete], [d.allAvgAdj, d.allProjAdj, d.allProj3Adj, d.completeAdj])
       : []),
     ...(show.wma
-      ? [...weightClasses([d.weightWma, d.wmaProj, d.wmaProj2, d.wmaAvg], [d.weightWmaAdj, d.wmaProjAdj, d.wmaProj2Adj, d.wmaAvgAdj]), ...changeClasses(d.recentWma, d.recentWmaAdj)]
+      ? [...weightClasses([d.weightWma, d.wmaProj, d.wmaAvg], [d.weightWmaAdj, d.wmaProjAdj, d.wmaAvgAdj]), ...changeClasses(d.recentWma, d.recentWmaAdj)]
       : []),
   ];
 }
 
-/** One day in the table; columns shown depend on the chosen options, and estimated days are styled differently. */
-function DayRow({ d, f, show }: { d: (typeof dailyRows)[number]; f: Format; show: Show }) {
-  const two = (a: number | null, b: number | null, fmt = f.w, bandOf?: BandOf) => <Two actual={a} adjusted={b} fmt={fmt} bandOf={bandOf} />;
+/** One cell: actual value with the muscle-adjusted one under it when the column has one. */
+function Cell({ column, d, f }: { column: Column; d: Row; f: Format }) {
+  const fmt = formatter(column.kind, f);
 
+  if (column.adjusted) return <Two actual={column.actual(d)} adjusted={column.adjusted(d)} fmt={fmt} bandOf={column.kind === "change" ? deltaBand : band} />;
+  if (column.kind === "weight") return <span className={band(d.weight, false)}>{fmt(d.weight)}</span>;
+
+  return <>{fmt(column.actual(d) ?? 0)}</>;
+}
+
+/** One day in the table; columns shown depend on the chosen options, and estimated days are styled differently. */
+function DayRow({ d, f, show, columns }: { d: Row; f: Format; show: Show; columns: Column[] }) {
   const tint = averageTint(bandClasses(d, show));
 
   return (
     <tr className={d.estimated ? "estimated" : ""} style={{ backgroundColor: tint }}>
       <td>{pretty(d.date)}</td>
-      <td><span className={band(d.weight, false)}>{f.w(d.weight)}</span></td>
-      {show.wma && <td>{two(d.weightWma, d.weightWmaAdj)}</td>}
-      {show.muscleDaily && <td>{f.w(d.muscleDaily, 3)}</td>}
-      <td>{f.w(d.muscleTotal, 2)}</td>
-      {show.dayAverages && <td>{two(d.avg3, d.adj.avg3)}</td>}
-      {show.weightLoss && (
-        <>
-          <td>{two(d.recent, d.recentAdj, f.signed, deltaBand)}</td>
-          <td>{two(d.recent3, d.recent3Adj, f.signed, deltaBand)}</td>
-        </>
-      )}
-      {show.dayAverages && (
-        <>
-          <td>{two(d.avg30, d.adj.avg30)}</td>
-          <td>{two(d.avg365, d.adj.avg365)}</td>
-          <td>{two(d.blended, d.adj.blended)}</td>
-          <td>{two(d.monthly, d.adj.monthly, f.signed, deltaBand)}</td>
-          <td>{two(yearly(d.blended, d.monthly), yearly(d.adj.blended, d.adj.monthly))}</td>
-        </>
-      )}
-      {show.allAverages && (
-        <>
-          <td>{two(d.allAvg, d.allAvgAdj)}</td>
-          <td>{two(d.allProj, d.allProjAdj)}</td>
-          <td>{two(d.allProj3, d.allProj3Adj)}</td>
-        </>
-      )}
+      {columns.map((column) => <td key={column.title("lb")}><Cell column={column} d={d} f={f} /></td>)}
       <td>{d.estimated ? "estimated" : ""}</td>
-      {show.allAverages && <td>{two(d.complete, d.completeAdj)}</td>}
-      {show.wma && (
-        <>
-          <td>{two(d.recentWma, d.recentWmaAdj, f.signed, deltaBand)}</td>
-          <td>{two(d.wmaProj, d.wmaProjAdj)}</td>
-          <td>{two(d.wmaProj2, d.wmaProj2Adj)}</td>
-          <td>{two(d.wmaAvg, d.wmaAvgAdj)}</td>
-        </>
-      )}
-      <td>{two(d.finalAvg, d.finalAvgAdj)}</td>
     </tr>
   );
 }
@@ -155,7 +200,7 @@ function PeriodPicker({ period, onChange, options }: { period: string; onChange:
   const current = options.find((option) => option.value === period) ?? options[0];
 
   return (
-    <div className="period-picker" onBlur={(event) => !event.currentTarget.contains(event.relatedTarget) && setOpen(false)}>
+    <fieldset className="period-picker" onBlur={(event) => !event.currentTarget.contains(event.relatedTarget) && setOpen(false)}>
       <button type="button" className="period-button" onClick={() => setOpen(!open)}>
         <span className="period-square" style={{ background: current.color }} /> {current.label}
       </button>
@@ -170,15 +215,20 @@ function PeriodPicker({ period, onChange, options }: { period: string; onChange:
           ))}
         </ul>
       )}
-    </div>
+    </fieldset>
   );
 }
 
 /** Daily table with a period filter, showing the last 90 days by default. */
 export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
   const [period, setPeriod] = useState("default");
-  const [show, setShow] = useState<Show>({ muscleDaily: false, dayAverages: false, weightLoss: false, allAverages: true, wma: true });
+  const [show, setShow] = useState<Show>({ muscleDaily: false, muscleTotal: false, dayAverages: false, weightLoss: false, allAverages: true, wma: true });
   const { newestFirst, rows, quarters } = useTableRows(period);
+
+  // Columns on screen, with each one's high and low for the period and for all time.
+  const columns = useMemo(() => COLUMNS.filter((column) => !column.group || show[column.group]), [show]);
+  const allTimeRanges = useMemo(() => columns.map((column) => rangeOf(newestFirst, column)), [columns, newestFirst]);
+  const periodRanges = useMemo(() => columns.map((column) => rangeOf(rows, column)), [columns, rows]);
 
   // Average colour of every shown value over each period, for the dropdown squares.
   const options = [{ value: "default", label: "[default] last 90 days" }, ...quarters.map((quarter) => ({ value: quarter, label: quarter.replace("-", " ") }))].map((option) => ({
@@ -205,9 +255,9 @@ export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
         </div>
       </div>
       <table>
-        <Head unit={unit} show={show} />
+        <Head unit={unit} f={f} columns={columns} periodRanges={periodRanges} allTimeRanges={allTimeRanges} />
         <tbody>
-          {rows.map((d) => <DayRow key={d.date} d={d} f={f} show={show} />)}
+          {rows.map((d) => <DayRow key={d.date} d={d} f={f} show={show} columns={columns} />)}
         </tbody>
       </table>
     </>

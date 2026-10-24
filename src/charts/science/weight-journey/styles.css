@@ -162,6 +162,28 @@
   color: var(--muted);
 }
 
+.weight tr.titles th {
+  vertical-align: bottom;
+}
+
+.weight tr.ranges th {
+  vertical-align: top;
+}
+
+.weight tr.ranges th small.range:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.weight th small.range {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+  font-size: 0.75em;
+  white-space: nowrap;
+}
+
 .weight td .adjusted {
   color: var(--muted);
 }
@@ -380,6 +402,9 @@
 
 .weight-controls .period-picker {
   position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
   min-width: 190px;
 }
 
