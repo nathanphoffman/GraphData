@@ -1,21 +1,29 @@
-import { type Averages, addAverages, addMuscle, fillDays, project } from "../calculate";
-import data from "../../../../../data/weight-journey/weight-journey.json";
+import { type Averages, type Day, type Muscle, type Projection, addAverages, addMuscle, fillDays, project } from "../calculate";
 import { allAverage, completeAverage, last3, projectAll, recentRate, weightedAverage, yearly } from "./averages";
 
-const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
+// Everything below is filled in by setWeights once the weights have been fetched from the API.
+export let days: Day[] = [];
+export let withMuscle: (Day & Muscle)[] = [];
+export let projectedAdjusted: { fit: Projection[]; future: Projection[] } = { fit: [], future: [] };
+export let fit: Projection[] = [];
+export let future: Projection[] = [];
+export let dailyRows: Row[] = [];
 
-// Placeholder rows (weight 0) and future dates are skipped.
-const weighIns = (data.weights as [string, number][]).filter(([date, weight]) => weight > 0 && date <= today);
+/** Build the days, muscle, projections and daily rows from the weigh-ins. */
+export function setWeights(weights: [string, number][]) {
+  const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
 
-export const days = fillDays(weighIns);
-export const withMuscle = addMuscle(days);
-export const projectedAdjusted = project(
-  withMuscle.map((d) => ({ ...d, weight: d.weight - d.muscleTotal })),
-  90,
-  90,
-);
-
-export const { fit, future } = project(days, 90, 90);
+  // Placeholder rows (weight 0) and future dates are skipped.
+  days = fillDays(weights.filter(([date, weight]) => weight > 0 && date <= today));
+  withMuscle = addMuscle(days);
+  projectedAdjusted = project(
+    withMuscle.map((d) => ({ ...d, weight: d.weight - d.muscleTotal })),
+    90,
+    90,
+  );
+  ({ fit, future } = project(days, 90, 90));
+  dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
+}
 
 const DAILY_WINDOWS = { short: 3, medium: 30, long: 365 };
 
@@ -99,8 +107,7 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
   }));
 }
 
-export const dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
-export type Row = (typeof dailyRows)[number];
+export type Row = ReturnType<typeof buildRows>[number];
 
 /**
  * Weight minus the muscle gained and the extra fat that muscle allows (`ratio` lb of fat per lb of muscle),

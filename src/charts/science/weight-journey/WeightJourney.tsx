@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles.css";
 import { Controls, RANGES } from "./parts/Controls";
 import { Legend } from "./parts/Legend";
@@ -6,12 +6,13 @@ import { StatsBar } from "./parts/StatsBar";
 import { WeightChart } from "./parts/WeightChart";
 import { WeightTable } from "./parts/WeightTable";
 import { type Lines, type ProjectionTool, useProjections } from "./useProjections";
+import { setWeights } from "./model/rows";
 import { makeFormat, type Unit } from "./model/units";
 
 const ALL_LINES: Lines = { quadratic: true, general: true, allTrend: true, spread: true };
 
 /** Weight journey page: units, chart, table and projections. */
-export default function WeightJourney() {
+function Journey() {
   const [range, setRange] = useState(RANGES[0]);
   const [unit, setUnit] = useState<Unit>("lb");
   const [tool, setTool] = useState<ProjectionTool>({ lossInput: "", months: "12" });
@@ -30,4 +31,24 @@ export default function WeightJourney() {
       <WeightTable unit={unit} f={f} />
     </div>
   );
+}
+
+/** Fetches the weigh-ins from the API, then shows the journey. */
+export default function WeightJourney() {
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+
+  useEffect(() => {
+    fetch("/api/weights")
+      .then((response) => (response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`))))
+      .then((data: { weights: [string, number][] }) => {
+        setWeights(data.weights);
+        setStatus("ready");
+      })
+      .catch(() => setStatus("error"));
+  }, []);
+
+  if (status === "loading") return <p>Loading weights…</p>;
+  if (status === "error") return <p>Could not load the weights.</p>;
+
+  return <Journey />;
 }
