@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { type Ranking, fractionBetween, rankItems, score } from "../../../src/charts/tech/top-rankings/score";
+import { type Ranking, fractionBetween, grade, maxScore, minScore, rankItems, score } from "../../../src/charts/tech/top-rankings/score";
 
 const columns = [{ label: "Year" }, { label: "Syntax", weight: 10 }, { label: "Skill", weight: 1 }];
 
@@ -52,5 +52,41 @@ describe("fractionBetween", () => {
 
   it("is the middle when low and high are the same", () => {
     expect(fractionBetween(4, 4, 4)).toBe(0.5);
+  });
+});
+
+describe("grade", () => {
+  // Weights 3, 2, 1: the best possible score is (3 + 2 + 1) x 25 and the lowest is (3 + 2 + 1) x 1.
+  const rated = [{ label: "A", weight: 3 }, { label: "B", weight: 2 }, { label: "C", weight: 1 }];
+  const gradeOfAll = (rating: number) => grade(rated.reduce((total, column) => total + rating ** 2 * (column.weight ?? 0), 0), rated);
+
+  it("knows the best and lowest possible scores", () => {
+    expect(maxScore(rated)).toBe(150);
+    expect(minScore(rated)).toBe(6);
+  });
+
+  it("is 0 for all 1s and 100 for all 5s", () => {
+    expect(gradeOfAll(1)).toBe(0);
+    expect(gradeOfAll(5)).toBeCloseTo(100);
+  });
+
+  it("never goes below 0", () => {
+    expect(grade(0, rated)).toBe(0);
+  });
+
+  it("keeps a lot of 4s a decent grade", () => {
+    expect(gradeOfAll(4)).toBeGreaterThan(88);
+    expect(gradeOfAll(4)).toBeLessThan(92);
+  });
+
+  it("falls faster the lower the score gets", () => {
+    const dropNearTop = gradeOfAll(5) - gradeOfAll(4);
+    const dropLower = gradeOfAll(3) - gradeOfAll(2);
+
+    expect(dropLower).toBeGreaterThan(dropNearTop * 2);
+  });
+
+  it("is 0 when nothing is rated", () => {
+    expect(grade(10, [{ label: "Year" }])).toBe(0);
   });
 });

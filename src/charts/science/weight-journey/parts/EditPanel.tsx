@@ -1,6 +1,8 @@
 import { type FormEvent, useState } from "react";
 import { api } from "../../../../api";
+import { EditButtons } from "../../../../auth/EditButtons";
 import { EditGear } from "../../../../auth/EditGear";
+import { useEditor } from "../../../../auth/useEditor";
 import { days } from "../model/rows";
 
 const todayDate = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
@@ -8,34 +10,23 @@ const todayDate = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in
 /** Pick a date and add, change or remove its weigh-in. */
 function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
   const [date, setDate] = useState(todayDate);
-  const [typed, setTyped] = useState<string | null>(null);
-  const [message, setMessage] = useState("");
 
   // Estimated days have no real weigh-in, so only real ones count as existing.
   const existing = days.find((d) => d.date === date && !d.estimated)?.weight;
-  const weight = typed ?? (existing === undefined ? "" : String(existing));
-
-  const run = (action: Promise<unknown>, done: string) =>
-    action
-      .then(onSaved)
-      .then(() => {
-        setTyped(null);
-        setMessage(done);
-      })
-      .catch((problem: Error) => setMessage(problem.message));
+  const editor = useEditor(existing === undefined ? undefined : { weight: String(existing) }, onSaved);
+  const weight = editor.field("weight");
+  const url = `/api/weights/${date}`;
 
   const save = (event: FormEvent) => {
     event.preventDefault();
-    run(api(`/api/weights/${date}`, "PUT", { weight: Number(weight) }), existing === undefined ? "Added" : "Changed");
+    editor.save(api(url, "PUT", { weight: Number(weight) }));
   };
 
   return (
     <form className="edit-form" onSubmit={save}>
-      <input type="date" value={date} max={todayDate()} onChange={(e) => { setDate(e.target.value); setTyped(null); setMessage(""); }} />
-      <input type="number" step="0.1" min="0" value={weight} onChange={(e) => setTyped(e.target.value)} placeholder="Weight (lb)" />
-      <button type="submit" disabled={!date || !(Number(weight) > 0)}>{existing === undefined ? "Add" : "Change"}</button>
-      <button type="button" disabled={existing === undefined} onClick={() => run(api(`/api/weights/${date}`, "DELETE"), "Removed")}>Remove</button>
-      {message && <span className="edit-message">{message}</span>}
+      <input type="date" value={date} max={todayDate()} onChange={(e) => { setDate(e.target.value); editor.reset(); }} />
+      <input type="number" step="0.1" min="0" value={weight} onChange={(e) => editor.set("weight", e.target.value)} placeholder="Weight (lb)" />
+      <EditButtons exists={editor.exists} canSave={!!date && Number(weight) > 0} onRemove={() => editor.remove(api(url, "DELETE"))} message={editor.message} />
     </form>
   );
 }

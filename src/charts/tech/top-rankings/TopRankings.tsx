@@ -3,10 +3,7 @@ import { api } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { RankingEditor } from "./RankingEditor";
 import "./styles.css";
-import { type Ranking, fractionBetween, rankItems } from "./score";
-
-const LOWEST_RATING = 1;
-const HIGHEST_RATING = 5;
+import { HIGHEST_RATING, LOWEST_RATING, type Ranking, fractionBetween, rankItems } from "./score";
 
 /** Show a value, or nothing when it is missing. */
 const show = (value: number | string | null | undefined) => (value === null || value === undefined ? "" : String(value));
@@ -33,6 +30,7 @@ function RankingTable({ ranking }: { ranking: Ranking }) {
             <th key={column.label} title={column.label}>{column.short ?? column.label}</th>
           ))}
           <th title="Each rating squared times its weight, added up">Score</th>
+          <th title="The score as a grade out of 100 on a curve: it eases off near the top and drops faster further down">Grade</th>
           {rated.map(({ column }) => (
             <th key={column.label} title={`${column.label} (weight ×${column.weight})`}>
               {column.short ?? column.label}
@@ -42,7 +40,7 @@ function RankingTable({ ranking }: { ranking: Ranking }) {
         </tr>
       </thead>
       <tbody>
-        {rows.map(({ item, score, rank }) => (
+        {rows.map(({ item, score, grade, rank }) => (
           <tr key={item.name}>
             <td>{rank}</td>
             <td>{item.name}</td>
@@ -50,6 +48,7 @@ function RankingTable({ ranking }: { ranking: Ranking }) {
               <td key={column.label}>{show(item.values[index])}</td>
             ))}
             <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>
+            <td style={heat(grade / 100)}>{Math.round(grade)}</td>
             {rated.map(({ column, index }) => {
               const rating = item.values[index];
 
@@ -99,7 +98,7 @@ export default function TopRankings() {
         ))}
       </div>
       <p className="muted">
-        Score is each rating squared times its column's weight, added up. The weight is shown under each column name.
+        Score is each rating squared times its column's weight, added up. The weight is shown under each column name. Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
       </p>
       <RankingTable ranking={ranking} />
     </div>

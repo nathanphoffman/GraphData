@@ -25,25 +25,68 @@ if (!db.prepare("PRAGMA table_info(ranking_columns)").all().some((column) => col
   db.exec("ALTER TABLE ranking_columns ADD COLUMN short TEXT");
 }
 
-/** Load any ranking from the JSON file that the database does not have yet, and fill in short names it is missing. */
+/** Delete the database columns the JSON file no longer has (matched by label), along with that value in every item. */
+function dropRemovedColumns(ranking) {
+  const keep = new Set(ranking.columns.map((column) => column.label));
+  const current = db.prepare("SELECT position, label FROM ranking_columns WHERE ranking_id = ? ORDER BY position").all(ranking.id);
+  const removed = current.filter((column) => !keep.has(column.label)).map((column) => column.position);
+  if (!removed.length) return;
+
+  db.exec("BEGIN");
+  const deleteColumn = db.prepare("DELETE FROM ranking_columns WHERE ranking_id = ? AND position = ?");
+  for (const position of removed) deleteColumn.run(ranking.id, position);
+
+  // Close the gaps, lowest first so a column never moves onto one that is still there.
+  current.filter((column) => !removed.includes(column.position)).forEach((column, index) => {
+    db.prepare("UPDATE ranking_columns SET position = ? WHERE ranking_id = ? AND position = ?").run(index, ranking.id, column.position);
+  });
+
+  const items = db.prepare("SELECT position, values_json FROM ranking_items WHERE ranking_id = ?").all(ranking.id);
+  items.forEach((item) => {
+    const values = JSON.parse(item.values_json).filter((_value, index) => !removed.includes(index));
+    db.prepare("UPDATE ranking_items SET values_json = ? WHERE ranking_id = ? AND position = ?").run(JSON.stringify(values), ranking.id, item.position);
+  });
+  db.exec("COMMIT");
+  console.log(`Removed column(s) ${removed.join(", ")} from ranking "${ranking.title}"`);
+}
+
+/**
+ * Load any ranking from the JSON file that the database does not have yet. For rankings the database already has,
+ * the columns (names and weights) are re-read from the file every start, since they are edited there; the items stay as the database has them.
+ */
 function seed() {
   const { rankings } = JSON.parse(readFileSync(SEED_PATH, "utf8"));
   const exists = db.prepare("SELECT 1 FROM rankings WHERE id = ?");
   const insertRanking = db.prepare("INSERT INTO rankings (id, title, position) VALUES (?, ?, ?)");
   const insertColumn = db.prepare("INSERT INTO ranking_columns (ranking_id, position, label, short, weight) VALUES (?, ?, ?, ?, ?)");
-  const fillShort = db.prepare("UPDATE ranking_columns SET short = ? WHERE ranking_id = ? AND position = ? AND short IS NULL");
+  const updateColumn = db.prepare("UPDATE ranking_columns SET label = ?, short = ?, weight = ? WHERE ranking_id = ? AND position = ?");
+  const columnCount = db.prepare("SELECT COUNT(*) AS count FROM ranking_columns WHERE ranking_id = ?");
   const insertItem = db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json) VALUES (?, ?, ?, ?)");
 
   rankings.forEach((ranking, position) => {
     if (exists.get(ranking.id)) {
-      ranking.columns.forEach((column, index) => column.short && fillShort.run(column.short, ranking.id, index));
+      dropRemovedColumns(ranking);
+
+      // Items line up with the columns by position, so a different number of columns cannot be applied safely.
+      if (columnCount.get(ranking.id).count !== ranking.columns.length) {
+        console.warn(`Ranking "${ranking.title}" has a different number of columns than the database, so its columns were not updated`);
+        return;
+      }
+
+      ranking.columns.forEach((column, index) => {
+        updateColumn.run(column.label, column.short ?? null, column.weight ?? null, ranking.id, index);
+      });
       return;
     }
 
     db.exec("BEGIN");
     insertRanking.run(ranking.id, ranking.title, position);
-    ranking.columns.forEach((column, index) => insertColumn.run(ranking.id, index, column.label, column.short ?? null, column.weight ?? null));
-    ranking.items.forEach((item, index) => insertItem.run(ranking.id, index, item.name, JSON.stringify(item.values)));
+    ranking.columns.forEach((column, index) => {
+      insertColumn.run(ranking.id, index, column.label, column.short ?? null, column.weight ?? null);
+    });
+    ranking.items.forEach((item, index) => {
+      insertItem.run(ranking.id, index, item.name, JSON.stringify(item.values));
+    });
     db.exec("COMMIT");
     console.log(`Seeded ranking "${ranking.title}" with ${ranking.items.length} items from ${SEED_PATH}`);
   });
