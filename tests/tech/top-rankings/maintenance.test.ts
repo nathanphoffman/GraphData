@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { maintenance, maintenancePercent, nFactor } from "../../../src/charts/tech/top-rankings/maintenance";
+import { maintenance, maintenancePercent, nFactor, withQuality, withScaffolding } from "../../../src/charts/tech/top-rankings/maintenance";
 
 const columns = [{ label: "Completed Lines" }, { label: "Familiarity" }, { label: "Computed Quality" }];
 
@@ -71,5 +71,21 @@ describe("manualLines", () => {
     const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 75, 75, 3] }] });
     const n = (result?.combinedNFactor ?? 0) - 0.66;
     expect(result?.manualLines).toBeCloseTo(n ** n, 6);
+  });
+});
+
+describe("withQuality", () => {
+  it("sets Quality to the average of familiarity and computed quality", () => {
+    const ranking = { id: "x", title: "x", columns: [{ label: "Familiarity" }, { label: "Computed Quality" }, { label: "Quality" }], items: [{ name: "a", values: [80, 91, 0] }] };
+    expect(withQuality(ranking).items[0].values).toEqual([80, 91, 85.5]);
+  });
+});
+
+describe("withScaffolding", () => {
+  it("adds 256 to each project's Completed Lines and leaves other columns alone", () => {
+    const ranking = { id: "x", title: "x", columns: [{ label: "Completed Lines" }, { label: "Other" }], items: [{ name: "a", values: [100, 5] }, { name: "b", values: [null, 5] }] };
+    const result = withScaffolding(ranking);
+    expect(result.items.map((item) => item.values)).toEqual([[356, 5], [null, 5]]);
+    expect(ranking.items[0].values[0]).toBe(100);
   });
 });

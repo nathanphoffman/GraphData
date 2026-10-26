@@ -1,9 +1,15 @@
 import type { Ranking } from "./score";
 
-const LINES_LABEL = "Completed Lines";
+export const LINES_LABEL = "Completed Lines";
 const FAMILIARITY_LABEL = "Familiarity";
 const COMPUTED_LABEL = "Computed Quality";
+
+/** The rated column holding each item's final quality, the average of the two above. It is worked out whenever the ranking loads. */
+export const QUALITY_LABEL = "Quality";
 const GROWTH_LABEL = "xLines";
+
+/** Lines added to every project's Completed Lines when the page shows and scores them, as the minimum scaffolding any project needs. Never saved. */
+export const SCAFFOLDING_LINES = 256;
 
 /** The quality that leaves the n-factor as it is; better lifts it down, worse pushes it up. */
 const NEUTRAL_QUALITY = 75;
@@ -103,4 +109,31 @@ export function maintenance(ranking: Ranking): Maintenance | null {
     equivalentLines: ungraded ** ungraded,
     manualLines: (ungraded - MANUAL_ADJUSTMENT) ** (ungraded - MANUAL_ADJUSTMENT),
   };
+}
+
+/** The ranking with each item's Quality value set to the average of its Familiarity and Computed Quality (left as it is when it has neither). */
+export function withQuality(ranking: Ranking): Ranking {
+  const [quality, familiarity, computed] = [QUALITY_LABEL, FAMILIARITY_LABEL, COMPUTED_LABEL].map((label) => ranking.columns.findIndex((column) => column.label === label));
+  if (quality < 0 || familiarity < 0 || computed < 0) return ranking;
+
+  const items = ranking.items.map((item) => {
+    const average = qualityOf(item.values, familiarity, computed);
+
+    return average === null ? item : { ...item, values: item.values.map((value, index) => (index === quality ? Math.round(average * 10) / 10 : value)) };
+  });
+
+  return { ...ranking, items };
+}
+
+/** The ranking with SCAFFOLDING_LINES added to each item's Completed Lines, for showing and scoring only. */
+export function withScaffolding(ranking: Ranking): Ranking {
+  const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
+  if (lines < 0) return ranking;
+
+  const items = ranking.items.map((item) => ({
+    ...item,
+    values: item.values.map((value, index) => (index === lines && typeof value === "number" ? value + SCAFFOLDING_LINES : value)),
+  }));
+
+  return { ...ranking, items };
 }

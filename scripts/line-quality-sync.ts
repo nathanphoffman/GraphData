@@ -33,6 +33,7 @@ const PROJECTS: Project[] = [
   { name: "Food Comparison", folder: "FoodComparisonMicroServices" },
   { name: "3d Space Game (Descent)", folder: "3dSpaceGameWT/3dSpaceGame" },
   { name: "Deor Pico", folder: "DeorPico" },
+  { name: "DeorPi", folder: "DeorPi" },
   { name: "Weather", folder: "WeatherSite" },
   { name: "Fairy Tale: An Adventure", folder: "FairyTaleAnAdventure" },
   { name: "Tzaar Net (AI)", folder: "TzaarNet" },
@@ -133,6 +134,8 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality }
   const labels = db.prepare("SELECT label FROM ranking_columns WHERE ranking_id = ? ORDER BY position").all(RANKING) as { label: string }[];
   const linesAt = labels.findIndex((c) => c.label === "Completed Lines");
   const qualityAt = labels.findIndex((c) => c.label === "Computed Quality");
+  const familiarityAt = labels.findIndex((c) => c.label === "Familiarity");
+  const finalAt = labels.findIndex((c) => c.label === "Quality"); // the average of familiarity and computed quality
   if (linesAt < 0 || qualityAt < 0) throw new Error("project-priority is missing its Completed Lines or Computed Quality column");
 
   const find = db.prepare("SELECT values_json FROM ranking_items WHERE ranking_id = ? AND name = ?");
@@ -147,6 +150,9 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality }
     values[linesAt] = r.lines;
     // keep the old quality when the checker failed
     if (r.quality) values[qualityAt] = Math.round(r.quality.score * 10) / 10;
+    // the page works this out itself; storing it keeps the saved copy from going stale
+    const [fam, computed] = [values[familiarityAt], values[qualityAt]].filter((v) => typeof v === "number");
+    if (finalAt >= 0 && fam !== undefined) values[finalAt] = Math.round(((fam + (computed ?? fam)) / 2) * 10) / 10;
     save.run(JSON.stringify(values), Date.now(), RANKING, r.name);
   }
   console.log(`Saved lines and quality for ${rows.length} projects to the local database`);

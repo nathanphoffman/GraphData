@@ -178,3 +178,13 @@ describe("peak curve with a knee", () => {
     expect(effectiveRating(column, 3.75)).toBeCloseTo(2.25);
   });
 });
+
+describe("linear curve", () => {
+  it("runs from 1 at from to 5 at to, and stays inside", () => {
+    const column = { label: "Q", weight: 1, curve: { type: "linear" as const, from: 60, to: 100 } };
+    expect(effectiveRating(column, 60)).toBe(1);
+    expect(effectiveRating(column, 80)).toBe(3);
+    expect(effectiveRating(column, 100)).toBe(5);
+    expect(effectiveRating(column, 120)).toBe(5);
+  });
+});
