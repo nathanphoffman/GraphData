@@ -1,0 +1,33 @@
+{
+  "id": "project-priority",
+  "title": "Project Priority",
+  "columns": [
+    {"label": "Stack", "short": "Stack"},
+    {"label": "Fun", "short": "Fun", "weight": 10},
+    {"label": "Useful", "short": "Useful", "weight": 8},
+    {"label": "Job", "short": "Job", "weight": 3},
+    {"label": "Hard", "short": "Hard", "weight": 5, "best": 1},
+    {"label": "Logic : Assets", "short": "Logic", "weight": 2},
+    {"label": "Completed Lines", "short": "Lines", "weight": 6, "curve": {"type": "log", "from": 40000, "to": 500}},
+    {"label": "Link", "short": "Link"}
+  ],
+  "items": [
+    {"name": "Deor Lang", "values": ["Rust, Bun, Biome, TS, VS Code Ext", 5, 5, 5, 5, 5, 44000, "https://github.com/nathanphoffman/DeorLang"]},
+    {"name": "Code Quality Script", "values": ["Python, tree-sitter (rewrite in Deor?)", 5, 5, 4, 3, 5, 10000, "https://github.com/nathanphoffman/CodeQualityChecker"]},
+    {"name": "GraphData", "values": ["React, TS, Vite, Vitest, d3, React Router, Biome", 5, 5, 2, 3, 3, 26000, "https://github.com/nathanphoffman/GraphData"]},
+    {"name": "Food Comparison", "values": ["Next.js, C# Core, WASM Rust, Python, Playright, SQLLite", 5, 5, 4, 4, 2, 20000, "https://github.com/nathanphoffman/FoodComparisonMicroServices"]},
+    {"name": "3d Space Game (Descent)", "values": ["Rust, macroquad, zig", 5, 4, 4, 5, 3, 40000, "https://github.com/nathanphoffman/3dSpaceGame"]},
+    {"name": "Deor Pico", "values": ["Deor", 4, 5, 4, 4, 5, 17000, "https://github.com/nathanphoffman/DeorPico"]},
+    {"name": "Weather", "values": ["Next.js, React, TS, Tailwind, SqlLite, Vitest, Netlify Blob", 4, 5, 4, 3, 4, 4000, "https://github.com/nathanphoffman/weathersite"]},
+    {"name": "Fairy Tale: An Adventure", "values": ["Rust, C, Amiga Assembly", 5, 4.5, 3, 5, 4, 12000, "https://github.com/nathanphoffman/FairyTaleAnAdventure"]},
+    {"name": "Tzaar Net (AI)", "values": ["Python, numpy", 5, 2.5, 5, 4, 5, 3200, "https://github.com/nathanphoffman/TzaarNeuralNet"]},
+    {"name": "Space Game (Ogame)", "values": ["Next.js, React. Three.js, Postgres, Docker", 5, 4, 3, 4, 2, 5000, "https://github.com/nathanphoffman/SpaceGame"]},
+    {"name": "Tiny Mighty", "values": ["Nuxt, Tailwind, Vitest", 4, 4, 3, 2, 2, 2000, "https://github.com/nathanphoffman/TinyMightyRPG"]},
+    {"name": "New Web", "values": ["WASM (Rust), Node, Docker, Railway, Electron", 4, 4, 3, 3, 4, 14000, "https://github.com/nathanphoffman/NewWeb"]},
+    {"name": "Coding Astronomer", "values": ["Python, ReactPY, Tailwind, FeedParser", 3, 4, 5, 2, 1, 4200, "https://github.com/nathanphoffman/PersonalPythonSite"]},
+    {"name": "BGG Scraper", "values": ["TS, Puppeteer, Cheerio", 3, 5, 2, 2, 3, 500, "https://github.com/nathanphoffman/BGGScraper"]},
+    {"name": "Proton Drive Sync", "values": ["Node, TS, Chokidar", 1, 5, 1, 1, 5, 1426, "https://github.com/nathanphoffman/ProtonDriveSync"]},
+    {"name": "ValOutcast", "values": ["C# (Valheim), C for OpenJK, Python", 4.5, 4, 3, 5, 4, 7000, "https://github.com/nathanphoffman/ValOutcast"]},
+    {"name": "Family History Astro", "values": ["Astro, TS", 4, 4, 1, 2, 2, 8000, null]}
+  ]
+}

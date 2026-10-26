@@ -14,6 +14,9 @@ const heat = (fraction: number) => ({ backgroundColor: `hsl(${Math.round(fractio
 
 const PAGE_SIZE = 100;
 
+/** A column with this label holds each item's web address: it is not shown, and the item's name links to it instead. */
+const LINK_LABEL = "Link";
+
 type SortKey = "rank" | "name" | "grade";
 interface Sort {
   key: SortKey;
@@ -40,7 +43,8 @@ function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; so
 /** One ranking as a table: rank, name, information columns, score, then the rated columns heaviest first. */
 function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: Ranking; showScore: boolean; search: string; sort: Sort; onSort: (key: SortKey) => void }) {
   const indexed = ranking.columns.map((column, index) => ({ column, index }));
-  const info = indexed.filter(({ column }) => column.weight === undefined);
+  const linkIndex = ranking.columns.findIndex((column) => column.label === LINK_LABEL);
+  const info = indexed.filter(({ column }) => column.weight === undefined && column.label !== LINK_LABEL);
   const rated = indexed.filter(({ column }) => column.weight !== undefined).sort((a, b) => (b.column.weight ?? 0) - (a.column.weight ?? 0));
   const [shown, setShown] = useState(PAGE_SIZE);
   const rows = rankItems(ranking);
@@ -78,7 +82,13 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
           {sorted.slice(0, shown).map(({ item, score, grade, rank }) => (
             <tr key={item.name}>
               <td>{rank}</td>
-              <td>{item.name}</td>
+              <td>
+                {typeof item.values[linkIndex] === "string" && item.values[linkIndex] !== "" ? (
+                  <a href={String(item.values[linkIndex])} target="_blank" rel="noreferrer">{item.name}</a>
+                ) : (
+                  item.name
+                )}
+              </td>
               {info.map(({ column, index }) => (
                 <td key={column.label}>{show(item.values[index])}</td>
               ))}
