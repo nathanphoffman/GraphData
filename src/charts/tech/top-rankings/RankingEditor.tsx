@@ -2,10 +2,8 @@ import { type FormEvent, useState } from "react";
 import { api } from "../../../api";
 import { EditButtons } from "../../../auth/EditButtons";
 import { useEditor } from "../../../auth/useEditor";
+import { infoValue } from "./InlineCell";
 import type { Ranking } from "./score";
-
-/** A typed information value: empty is nothing, plain numbers (years) stay numbers, anything else (like "2027?") stays text. */
-const infoValue = (text: string) => (text.trim() === "" ? null : /^-?\d+(\.\d+)?$/.test(text.trim()) ? Number(text) : text.trim());
 
 /** Pick an item by name (or type a new one) and add, change or remove it. */
 export function RankingEditor({ ranking, onSaved }: { ranking: Ranking; onSaved: () => Promise<void> }) {

@@ -1,7 +1,8 @@
 import type { Ranking } from "./score";
 
 const LINES_LABEL = "Completed Lines";
-const QUALITY_LABEL = "Quality";
+const FAMILIARITY_LABEL = "Familiarity";
+const COMPUTED_LABEL = "Computed Quality";
 const GROWTH_LABEL = "xLines";
 
 /** The quality that leaves the n-factor as it is; better lifts it down, worse pushes it up. */
@@ -50,25 +51,32 @@ export function nFactor(total: number): number {
   return (low + high) / 2;
 }
 
+/** A project's quality: its familiarity and computed quality averaged, or whichever one it has. */
+export function qualityOf(values: Ranking["items"][number]["values"], familiarity: number, computed: number): number | null {
+  const found = [values[familiarity], values[computed]].filter((value): value is number => typeof value === "number");
+  return found.length ? found.reduce((sum, value) => sum + value, 0) / found.length : null;
+}
+
 /** The code maintenance numbers for a ranking with lines and quality columns, or null when it has neither or no lines. */
 export function maintenance(ranking: Ranking): Maintenance | null {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
-  const quality = ranking.columns.findIndex((column) => column.label === QUALITY_LABEL);
+  const familiarity = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
+  const computed = ranking.columns.findIndex((column) => column.label === COMPUTED_LABEL);
   const growth = ranking.columns.findIndex((column) => column.label === GROWTH_LABEL);
-  if (lines < 0 || quality < 0) return null;
+  if (lines < 0 || (familiarity < 0 && computed < 0)) return null;
 
   let totalLines = 0;
   let futureLines = 0;
   let qualityLines = 0;
   let weighted = 0;
   for (const { values } of ranking.items) {
-    const [count, rating] = [values[lines], values[quality]];
+    const [count, rating] = [values[lines], qualityOf(values, familiarity, computed)];
     if (typeof count !== "number") continue;
     totalLines += count;
     // A project with no growth number is expected to stay the size it is.
     const times = growth < 0 ? undefined : values[growth];
     futureLines += count * (typeof times === "number" ? times : 1);
-    if (typeof rating !== "number") continue;
+    if (rating === null) continue;
     qualityLines += count;
     weighted += count * rating;
   }
@@ -80,6 +88,8 @@ export function maintenance(ranking: Ranking): Maintenance | null {
   const futureN = nFactor(futureLines);
   const [graded, gradedFuture] = [n - adjustment, futureN - adjustment];
   const combined = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
+  // The lines figures ignore quality, as if it were the neutral 75.
+  const ungraded = n * (1 - FUTURE_WEIGHT) + futureN * FUTURE_WEIGHT;
   return {
     totalLines,
     nFactor: n,
@@ -90,7 +100,7 @@ export function maintenance(ranking: Ranking): Maintenance | null {
     gradedFutureNFactor: gradedFuture,
     combinedNFactor: combined,
     maintenancePercent: maintenancePercent(combined),
-    equivalentLines: combined ** combined,
-    manualLines: (combined - MANUAL_ADJUSTMENT) ** (combined - MANUAL_ADJUSTMENT),
+    equivalentLines: ungraded ** ungraded,
+    manualLines: (ungraded - MANUAL_ADJUSTMENT) ** (ungraded - MANUAL_ADJUSTMENT),
   };
 }

@@ -53,6 +53,15 @@ if (!db.prepare("PRAGMA table_info(ranking_items)").all().some((column) => colum
 const insertColumn = db.prepare(`INSERT INTO ranking_columns (ranking_id, position, ${COLUMN_FIELDS.join(", ")}) VALUES (?, ?, ${placeholders(COLUMN_FIELDS.length)})`);
 const updateColumn = db.prepare(`UPDATE ranking_columns SET ${COLUMN_FIELDS.map((field) => `${field} = ?`).join(", ")} WHERE ranking_id = ? AND position = ?`);
 
+/** Rename database columns the JSON file marks with `was` (the old label), keeping every item's value. A label the database already has is left alone. */
+function renameColumns(ranking) {
+  const has = db.prepare("SELECT 1 FROM ranking_columns WHERE ranking_id = ? AND label = ?");
+  for (const column of ranking.columns) {
+    if (column.was === undefined || has.get(ranking.id, column.label)) continue;
+    db.prepare("UPDATE ranking_columns SET label = ? WHERE ranking_id = ? AND label = ?").run(column.label, ranking.id, column.was);
+  }
+}
+
 /** Delete the database columns the JSON file no longer has (matched by label), along with that value in every item. */
 function dropRemovedColumns(ranking) {
   const keep = new Set(ranking.columns.map((column) => column.label));
@@ -113,6 +122,7 @@ function seed() {
 
     if (exists.get(ranking.id)) {
       updateRanking.run(ranking.title, position, gradeCurveText(ranking), ranking.id);
+      renameColumns(ranking);
       dropRemovedColumns(ranking);
       addNewColumns(ranking);
 

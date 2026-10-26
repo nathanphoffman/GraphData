@@ -2,8 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
+import { useAuth } from "../../../auth/useAuth";
+import { InlineCell } from "./InlineCell";
 import { RankingEditor } from "./RankingEditor";
-import { maintenance, maintenancePercent } from "./maintenance";
+import { maintenance, maintenancePercent, qualityOf } from "./maintenance";
 import "./styles.css";
 import { HIGHEST_RATING, LOWEST_RATING, type Ranking, effectiveRating, fractionBetween, letterGrade, rankItems } from "./score";
 
@@ -21,6 +23,10 @@ const LINK_LABEL = "Link";
 /** A column with this label marks the items whose Seasons count is halved: it is not shown, and those items get an asterisk after their seasons. */
 const EPISODIC_LABEL = "Episodic";
 const SEASONS_LABEL = "Seasons";
+
+/** Rankings with both of these columns also show each item's Quality, the average of the two. It is worked out, not stored. */
+const FAMILIARITY_LABEL = "Familiarity";
+const COMPUTED_LABEL = "Computed Quality";
 
 type SortKey = "rank" | "name" | "grade";
 interface Sort {
@@ -46,12 +52,15 @@ function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; so
 }
 
 /** One ranking as a table: rank, name, information columns, score, then the rated columns heaviest first. */
-function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: Ranking; showScore: boolean; search: string; sort: Sort; onSort: (key: SortKey) => void }) {
+function RankingTable({ ranking, showScore, search, sort, onSort, canEdit, onSaved }: { ranking: Ranking; showScore: boolean; search: string; sort: Sort; onSort: (key: SortKey) => void; canEdit: boolean; onSaved: () => Promise<void> }) {
   const indexed = ranking.columns.map((column, index) => ({ column, index }));
   const linkIndex = ranking.columns.findIndex((column) => column.label === LINK_LABEL);
   const episodicIndex = ranking.columns.findIndex((column) => column.label === EPISODIC_LABEL);
   const info = indexed.filter(({ column }) => column.weight === undefined && column.label !== LINK_LABEL && column.label !== EPISODIC_LABEL);
   const rated = indexed.filter(({ column }) => column.weight !== undefined).sort((a, b) => (b.column.weight ?? 0) - (a.column.weight ?? 0));
+  const familiarityIndex = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
+  const computedIndex = ranking.columns.findIndex((column) => column.label === COMPUTED_LABEL);
+  const showQuality = familiarityIndex >= 0 && computedIndex >= 0;
   const [shown, setShown] = useState(PAGE_SIZE);
   const rows = rankItems(ranking);
   const matching = rows.filter(({ item }) => item.name.toLowerCase().includes(search.trim().toLowerCase()));
@@ -61,6 +70,12 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
     grade: (a: (typeof rows)[number], b: (typeof rows)[number]) => a.grade - b.grade,
   }[sort.key];
   const sorted = [...matching].sort((a, b) => (sort.descending ? compare(b, a) : compare(a, b)));
+  // Saves one changed value of an item, keeping the rest of its values.
+  const saveCell = (item: Ranking["items"][number], index: number) => async (value: number | string | null) => {
+    const values = item.values.map((old, i) => (i === index ? value : old));
+    await api(`/api/rankings/${ranking.id}/items/${encodeURIComponent(item.name)}`, "PUT", { values });
+    await onSaved();
+  };
   const scores = rows.map((row) => row.score);
   const [lowScore, highScore] = [Math.min(...scores), Math.max(...scores)];
 
@@ -74,6 +89,7 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
             {info.map(({ column }) => (
               <th key={column.label} title={column.label}>{column.short ?? column.label}</th>
             ))}
+            {showQuality && <th title="Familiarity and Computed Quality averaged; this is the quality used for the Code Maintenance Index">Quality</th>}
             {showScore && <th title="Each rating squared times its weight, added up">Score</th>}
             <SortHeader label="Grade" sortKey="grade" sort={sort} onSort={onSort} title="The score as a grade out of 100 on a curve: it eases off near the top and drops faster further down" />
             {rated.map(({ column }) => (
@@ -96,8 +112,9 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
                 )}
               </td>
               {info.map(({ column, index }) => (
-                <td key={column.label}>{show(item.values[index])}</td>
+                <InlineCell key={column.label} column={column} value={item.values[index]} canEdit={canEdit} onSave={saveCell(item, index)}>{show(item.values[index])}</InlineCell>
               ))}
+              {showQuality && <td>{show(qualityOf(item.values, familiarityIndex, computedIndex)?.toFixed(1))}</td>}
               {showScore && <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>}
               <td style={heat(grade / 100)}>
                 {grade.toFixed(1)}
@@ -108,11 +125,11 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
                 const used = typeof rating === "number" ? effectiveRating(column, rating) : null;
 
                 return (
-                  <td key={column.label} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
+                  <InlineCell key={column.label} column={column} value={rating} canEdit={canEdit} onSave={saveCell(item, index)} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
                     {show(rating)}
                     {column.label === SEASONS_LABEL && item.values[episodicIndex] ? "*" : ""}
                     {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
-                  </td>
+                  </InlineCell>
                 );
               })}
             </tr>
@@ -137,7 +154,7 @@ function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
     <section className="rankings-index">
       <h3>Code Maintenance Index</h3>
       <dl>
-        <div style={heat(fractionBetween(result.averageQuality, 50, 100))} title="Quality averaged with each project weighted by its lines">
+        <div style={heat(fractionBetween(result.averageQuality, 50, 100))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines">
           <dt>Average Quality</dt>
           <dd>{result.averageQuality.toFixed(1)}%</dd>
         </div>
@@ -151,7 +168,7 @@ function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
           <dd>{result.gradedFutureNFactor.toFixed(3)}</dd>
           <small>{Math.round(result.futureLines).toLocaleString()} lines</small>
         </div>
-        <div style={heat(result.maintenancePercent / 100)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent on a curve. The lines are that average n-Factor turned back into lines (n^n). Manual takes 0.66 off the n-Factor first">
+        <div style={heat(result.maintenancePercent / 100)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent on a curve. The lines are the same average without the quality adjustment (as if quality were 75) turned back into lines (n^n). Manual takes 0.66 off the n-Factor first">
           <dt>Code Maintenance</dt>
           <dd>{result.maintenancePercent.toFixed(1)}%</dd>
           <small>{Math.round(result.equivalentLines).toLocaleString()} lines equivalent</small>
@@ -173,6 +190,8 @@ export default function TopRankings() {
   const [showScore, setShowScore] = useState(false);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<Sort>(firstSort("rank"));
+  // Logged in means the table cells can be clicked and edited in place.
+  const auth = useAuth();
 
   const load = useCallback(async () => {
     const data = await api<{ rankings: Ranking[] }>("/api/rankings");
@@ -190,7 +209,7 @@ export default function TopRankings() {
 
   return (
     <div className="rankings">
-      <EditGear label="Edit rankings">
+      <EditGear label="Edit rankings" auth={auth}>
         <RankingEditor ranking={ranking} onSaved={load} />
       </EditGear>
       <div className="rankings-tabs">
@@ -212,7 +231,7 @@ export default function TopRankings() {
       </label>
       <input type="search" className="rankings-search" placeholder="Search by name…" value={search} onChange={(e) => setSearch(e.target.value)} />
       <RankingTable key={`${ranking.id}|${search}`} ranking={ranking} showScore={showScore} search={search}
-        sort={sort}
+        sort={sort} canEdit={typeof auth.user === "string"} onSaved={load}
         onSort={(key) => setSort((prev) => (prev.key === key ? { key, descending: !prev.descending } : firstSort(key)))}
       />
     </div>

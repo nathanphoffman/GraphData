@@ -127,3 +127,27 @@
 .rankings-index dl div small {
   display: block;
 }
+
+.rankings td.rankings-editable {
+  cursor: text;
+}
+
+.rankings td.rankings-editable:hover {
+  outline: 1px dashed color-mix(in srgb, var(--fg) 40%, transparent);
+  outline-offset: -2px;
+}
+
+.rankings td.rankings-cell-error {
+  outline: 2px solid #d33;
+  outline-offset: -2px;
+}
+
+.rankings-cell-input {
+  width: 100%;
+  min-width: 6ch;
+  padding: 2px 4px;
+  border: 1px solid var(--link);
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+}

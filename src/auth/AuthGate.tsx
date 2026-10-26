@@ -24,8 +24,9 @@ function LoginForm({ onLogin }: { onLogin: (username: string, password: string) 
 }
 
 /** Shows the login form until someone is logged in, then shows `children` with the username and a way to log out. */
-export function AuthGate({ children }: { children: (user: string, logout: () => void) => ReactNode }) {
-  const { user, login, logout } = useAuth();
+export function AuthGate({ auth, children }: { auth?: ReturnType<typeof useAuth>; children: (user: string, logout: () => void) => ReactNode }) {
+  const own = useAuth();
+  const { user, login, logout } = auth ?? own;
 
   if (user === undefined) return null;
   if (user === null) return <LoginForm onLogin={login} />;
