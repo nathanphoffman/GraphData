@@ -1,3 +1,4 @@
+import { PERCENT } from "../logic/constants";
 import { arrowPosition, recommendedCount as countFor } from "../logic/calculate";
 
 const LEVELS = [
@@ -26,10 +27,16 @@ interface Props {
   needed: number;
 }
 
+/** Owning within this share of the recommendation counts as on target. */
+const ON_TARGET_TOLERANCE = 0.1;
+
+/** Past this share of the scale the arrow's label moves to the other side of the arrow, so it stays on screen. */
+const LABEL_FLIPS_AT = 60;
+
 /** Gradient scale with an arrow at how many you own, then the minimal / recommended / maximal boxes. */
 export default function RecommendationPanel({ owned, needed }: Props) {
   const recommendedCount = countFor(needed);
-  const onTarget = owned === recommendedCount || Math.abs(owned - needed) <= needed * 0.1;
+  const onTarget = owned === recommendedCount || Math.abs(owned - needed) <= needed * ON_TARGET_TOLERANCE;
 
   // Green when on target, red when you own too many, yellow when you own too few.
   const diffColor = onTarget ? "#16a34a" : owned > needed ? "#dc2626" : "#eab308";
@@ -44,7 +51,7 @@ export default function RecommendationPanel({ owned, needed }: Props) {
         <div className="mini-arrow" title={`You own ${owned}`} style={{ left: `${arrowPct}%` }} />
         <div
           className="mini-arrow-label"
-          style={arrowPct <= 60 ? { left: `calc(${arrowPct}% + 14px)` } : { right: `calc(${100 - arrowPct}% + 14px)` }}
+          style={arrowPct <= LABEL_FLIPS_AT ? { left: `calc(${arrowPct}% + 14px)` } : { right: `calc(${PERCENT - arrowPct}% + 14px)` }}
         >
           <strong>You own {owned}</strong> <strong style={{ color: diffColor }}>({diffText})</strong>
         </div>

@@ -1,5 +1,12 @@
 /** Pure scoring math for the neuron intelligence explorer. */
+import { NAME_KEY } from "../../useSort";
 import type { Animal, Exponents, ScoredAnimal, SortKey } from "./types";
+
+const NEURONS_PER_BILLION = 1e9;
+const PERCENT = 100;
+
+/** Neuron counts below this many billions are written in exponent form. */
+const EXPONENT_FORM_BELOW = 0.001;
 
 export const DEFAULT_EXPONENTS: Exponents = { x: 1.5, w: 1.0, k: 2.0 };
 
@@ -11,20 +18,20 @@ export function scoreAnimals(animals: Animal[], { x, w, k }: Exponents): ScoredA
   // Stage 1 score for each animal: neurons raised to x, divided by weight raised to w.
   const scored = animals.map((animal) => ({
     ...animal,
-    score: (animal.neuronsBillions * 1e9) ** x / animal.weightKg ** w,
+    score: (animal.neuronsBillions * NEURONS_PER_BILLION) ** x / animal.weightKg ** w,
   }));
 
   const human = scored.find((a) => a.name === "Human");
   const humanFinal = human ? human.score ** k : NaN;
 
-  return scored.map((a) => ({ ...a, humanPercent: (a.score ** k / humanFinal) * 100 }));
+  return scored.map((a) => ({ ...a, humanPercent: (a.score ** k / humanFinal) * PERCENT }));
 }
 
 /** Sort animals by the chosen column in the chosen direction, without changing the original list. */
 export function sortAnimals(rows: ScoredAnimal[], sortKey: SortKey, ascending: boolean): ScoredAnimal[] {
   // Names sort alphabetically; everything else sorts by number.
   return [...rows].sort((scoredAnimal, second) => {
-    if (sortKey === "name") return ascending ? scoredAnimal.name.localeCompare(second.name) : second.name.localeCompare(scoredAnimal.name);
+    if (sortKey === NAME_KEY) return ascending ? scoredAnimal.name.localeCompare(second.name) : second.name.localeCompare(scoredAnimal.name);
 
     return ascending ? scoredAnimal[sortKey] - second[sortKey] : second[sortKey] - scoredAnimal[sortKey];
   });
@@ -32,5 +39,5 @@ export function sortAnimals(rows: ScoredAnimal[], sortKey: SortKey, ascending: b
 
 /** Neuron count as plain text, using exponent form for very small counts. */
 export function formatNeurons(billions: number): string {
-  return billions < 0.001 ? billions.toExponential(1) : String(billions);
+  return billions < EXPONENT_FORM_BELOW ? billions.toExponential(1) : String(billions);
 }

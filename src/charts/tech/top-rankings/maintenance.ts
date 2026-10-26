@@ -1,4 +1,4 @@
-import type { Ranking } from "./score";
+import { type Ranking, isNumber } from "./score";
 
 export const LINES_LABEL = "Completed Lines";
 const FAMILIARITY_LABEL = "Familiarity";
@@ -10,6 +10,20 @@ const GROWTH_LABEL = "xLines";
 
 /** Lines added to every project's Completed Lines when the page shows and scores them, as the minimum scaffolding any project needs. Never saved. */
 export const SCAFFOLDING_LINES = 256;
+
+/** Percent scale, used for qualities and for the maintenance percent. */
+export const PERCENT = 100;
+
+/** The shape of the maintenance percent curve: its steepness, where it crosses its midpoint, and how it is skewed. */
+const CURVE_STEEPNESS = 3.85;
+const CURVE_MIDPOINT = 7.14;
+const CURVE_SKEW = 0.9;
+
+/** How many times nFactor halves its range, which is plenty to settle on the answer. */
+const HALVINGS = 60;
+
+/** Qualities are rounded to one decimal place. */
+const TENTH = 10;
 
 /** The quality that leaves the n-factor as it is; better lifts it down, worse pushes it up. */
 const NEUTRAL_QUALITY = 75;
@@ -25,8 +39,8 @@ const FUTURE_WEIGHT = 0.75;
  * It is a stretched S-curve: nearly flat at the top, then falling steeply between 6.5 and 8. It lands within about 4 points of each mark.
  */
 export function maintenancePercent(combined: number): number {
-  if (combined <= 1) return 100;
-  return 100 / (1 + Math.exp(3.85 * (combined - 7.14))) ** 0.9;
+  if (combined <= 1) return PERCENT;
+  return PERCENT / (1 + Math.exp(CURVE_STEEPNESS * (combined - CURVE_MIDPOINT))) ** CURVE_SKEW;
 }
 
 export interface Maintenance {
@@ -49,7 +63,7 @@ export function nFactor(total: number): number {
   const target = Math.log(total);
   let [low, high] = [1, 2];
   while (high * Math.log(high) < target) high *= 2;
-  for (let step = 0; step < 60; step++) {
+  for (let step = 0; step < HALVINGS; step++) {
     const middle = (low + high) / 2;
     if (middle * Math.log(middle) < target) low = middle;
     else high = middle;
@@ -59,7 +73,7 @@ export function nFactor(total: number): number {
 
 /** A project's quality: its familiarity and computed quality averaged, or whichever one it has. */
 export function qualityOf(values: Ranking["items"][number]["values"], familiarity: number, computed: number): number | null {
-  const found = [values[familiarity], values[computed]].filter((value): value is number => typeof value === "number");
+  const found = [values[familiarity], values[computed]].filter(isNumber);
   return found.length ? found.reduce((sum, value) => sum + value, 0) / found.length : null;
 }
 
@@ -77,11 +91,11 @@ export function maintenance(ranking: Ranking): Maintenance | null {
   let weighted = 0;
   for (const { values } of ranking.items) {
     const [count, rating] = [values[lines], qualityOf(values, familiarity, computed)];
-    if (typeof count !== "number") continue;
+    if (!isNumber(count)) continue;
     totalLines += count;
     // A project with no growth number is expected to stay the size it is.
     const times = growth < 0 ? undefined : values[growth];
-    futureLines += count * (typeof times === "number" ? times : 1);
+    futureLines += count * (isNumber(times) ? times : 1);
     if (rating === null) continue;
     qualityLines += count;
     weighted += count * rating;
@@ -90,7 +104,7 @@ export function maintenance(ranking: Ranking): Maintenance | null {
 
   const averageQuality = weighted / qualityLines;
   const n = nFactor(totalLines);
-  const adjustment = (averageQuality - NEUTRAL_QUALITY) / 100;
+  const adjustment = (averageQuality - NEUTRAL_QUALITY) / PERCENT;
   const futureN = nFactor(futureLines);
   const [graded, gradedFuture] = [n - adjustment, futureN - adjustment];
   const combined = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
@@ -119,7 +133,7 @@ export function withQuality(ranking: Ranking): Ranking {
   const items = ranking.items.map((item) => {
     const average = qualityOf(item.values, familiarity, computed);
 
-    return average === null ? item : { ...item, values: item.values.map((value, index) => (index === quality ? Math.round(average * 10) / 10 : value)) };
+    return average === null ? item : { ...item, values: item.values.map((value, index) => (index === quality ? Math.round(average * TENTH) / TENTH : value)) };
   });
 
   return { ...ranking, items };
@@ -132,7 +146,7 @@ export function withScaffolding(ranking: Ranking): Ranking {
 
   const items = ranking.items.map((item) => ({
     ...item,
-    values: item.values.map((value, index) => (index === lines && typeof value === "number" ? value + SCAFFOLDING_LINES : value)),
+    values: item.values.map((value, index) => (index === lines && isNumber(value) ? value + SCAFFOLDING_LINES : value)),
   }));
 
   return { ...ranking, items };

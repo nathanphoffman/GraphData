@@ -1,5 +1,9 @@
 import type { Settings } from "./types";
 
+/** The divisor slider goes up to this, in steps of this. */
+const DIVISOR_MAX = 20;
+const DIVISOR_STEP = 0.5;
+
 interface Props {
   settings: Settings;
   set: (patch: Partial<Settings>) => void;
@@ -8,7 +12,7 @@ interface Props {
 
 /** Slider for the divisor, disabled when the chosen mode does not use it. */
 function DivisorSlider({ value, disabled, onChange }: { value: number; disabled?: boolean; onChange: (value: number) => void }) {
-  return <input type="range" min={1} max={20} step={0.5} disabled={disabled} value={value} onChange={(event) => onChange(Number(event.target.value))} />;
+  return <input type="range" min={1} max={DIVISOR_MAX} step={DIVISOR_STEP} disabled={disabled} value={value} onChange={(event) => onChange(Number(event.target.value))} />;
 }
 
 /** Choose how missing scores are treated: ignored, estimated or set to a floor. */

@@ -57,11 +57,18 @@ function buildScales(shown: Point[], shownFuture: Point[], input: ChartInput) {
   return { x: xScale, y: yScale };
 }
 
+/** Curves closer than this count as this far apart, so the shading stays finite. */
+const MIN_GAP = 0.1;
+
+/** A band is at least this opaque, and up to this much more where the curves bunch together. */
+const BAND_OPACITY_BASE = 0.06;
+const BAND_OPACITY_RANGE = 0.5;
+
 type Pt = (point: Point) => { x: number; y: number };
 
 /** Shaded bands between neighbouring curves: the closer two curves sit at the end, the more opaque the band (that's where the projections concentrate). */
 function shade(g: Spread["actual"], point: Pt) {
-  const gaps = g.curves.slice(1).map((curve, index) => Math.max(Math.abs(curve.target - g.curves[index].target), 0.1));
+  const gaps = g.curves.slice(1).map((curve, index) => Math.max(Math.abs(curve.target - g.curves[index].target), MIN_GAP));
   const densest = Math.max(...gaps.map((gap) => 1 / gap));
 
   return {
@@ -70,7 +77,7 @@ function shade(g: Spread["actual"], point: Pt) {
       const a = g.curves[index].points.map(point);
       const b = g.curves[index + 1].points.map(point).reverse();
 
-      return { d: `${line(a)}L${line(b).slice(1)}Z`, opacity: 0.06 + (0.5 * (1 / gap)) / densest };
+      return { d: `${line(a)}L${line(b).slice(1)}Z`, opacity: BAND_OPACITY_BASE + (BAND_OPACITY_RANGE * (1 / gap)) / densest };
     }),
     best: line(g.curves[0].points.map(point)),
     worst: line(g.curves[g.curves.length - 1].points.map(point)),

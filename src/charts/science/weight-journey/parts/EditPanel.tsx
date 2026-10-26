@@ -5,6 +5,9 @@ import { EditGear } from "../../../../auth/EditGear";
 import { useEditor } from "../../../../auth/useEditor";
 import { days } from "../model/rows";
 
+/** The name the weight is kept under while it is edited. */
+const WEIGHT_FIELD = "weight";
+
 const todayDate = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
 
 /** Pick a date and add, change or remove its weigh-in. */
@@ -14,7 +17,7 @@ function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
   // Estimated days have no real weigh-in, so only real ones count as existing.
   const existing = days.find((d) => d.date === date && !d.estimated)?.weight;
   const editor = useEditor(existing === undefined ? undefined : { weight: String(existing) }, onSaved);
-  const weight = editor.field("weight");
+  const weight = editor.field(WEIGHT_FIELD);
   const url = `/api/weights/${date}`;
 
   const save = (event: FormEvent) => {
@@ -25,7 +28,7 @@ function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
   return (
     <form className="edit-form" onSubmit={save}>
       <input type="date" value={date} max={todayDate()} onChange={(e) => { setDate(e.target.value); editor.reset(); }} />
-      <input type="number" step="0.1" min="0" value={weight} onChange={(e) => editor.set("weight", e.target.value)} placeholder="Weight (lb)" />
+      <input type="number" step="0.1" min="0" value={weight} onChange={(e) => editor.set(WEIGHT_FIELD, e.target.value)} placeholder="Weight (lb)" />
       <EditButtons exists={editor.exists} canSave={!!date && Number(weight) > 0} onRemove={() => editor.remove(api(url, "DELETE"))} message={editor.message} />
     </form>
   );

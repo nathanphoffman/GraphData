@@ -2,20 +2,30 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
+import { ACTIVE_CLASS } from "../../classNames";
 import { useAuth } from "../../../auth/useAuth";
 import { InlineCell } from "./InlineCell";
 import { RankingEditor } from "./RankingEditor";
-import { LINES_LABEL, QUALITY_LABEL, SCAFFOLDING_LINES, maintenance, maintenancePercent, withQuality, withScaffolding } from "./maintenance";
+import { LINES_LABEL, PERCENT, QUALITY_LABEL, SCAFFOLDING_LINES, maintenance, maintenancePercent, withQuality, withScaffolding } from "./maintenance";
 import "./styles.css";
-import { HIGHEST_RATING, LOWEST_RATING, type Ranking, effectiveRating, fractionBetween, letterGrade, rankItems } from "./score";
+import { HIGHEST_RATING, LOWEST_RATING, type Ranking, effectiveRating, fractionBetween, letterGrade, rankItems, isNumber, isText } from "./score";
 
 /** Show a value, or nothing when it is missing. */
 const show = (value: number | string | null | undefined) => (value === null || value === undefined ? "" : String(value));
 
 /** Background from red (0) through yellow to green (1); see-through so it works on light and dark pages. */
-const heat = (fraction: number) => ({ backgroundColor: `hsl(${Math.round(fraction * 120)} 65% 45% / 0.35)` });
+const heat = (fraction: number) => ({ backgroundColor: `hsl(${Math.round(fraction * GREEN_HUE)} 65% 45% / 0.35)` });
 
 const PAGE_SIZE = 100;
+
+/** Heat colours run from hue 0 (red) to this (green). */
+const GREEN_HUE = 120;
+
+/** The n-Factor is shown to this many decimals. */
+const N_FACTOR_DIGITS = 3;
+
+/** The Average Quality card is red at this quality. */
+const LOWEST_QUALITY_HEAT = 50;
 
 /** A column with this label holds each item's web address: it is not shown, and the item's name links to it instead. */
 const LINK_LABEL = "Link";
@@ -66,7 +76,7 @@ function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdi
   // Saves one changed value of an item, keeping the rest of its saved values. Completed Lines is shown with the scaffolding added, so that comes back off.
   const saveCell = (item: Ranking["items"][number], index: number) => async (value: number | string | null) => {
     const saved = source.items.find((candidate) => candidate.name === item.name) ?? item;
-    const isLines = ranking.columns[index].label === LINES_LABEL && typeof value === "number";
+    const isLines = ranking.columns[index].label === LINES_LABEL && isNumber(value);
     const changed = { ...saved, values: saved.values.map((old, i) => (i === index ? (isLines ? value - SCAFFOLDING_LINES : value) : old)) };
     // Quality is worked out from the other two, so save it fresh along with the change.
     const { values } = withQuality({ ...source, items: [changed] }).items[0];
@@ -101,7 +111,7 @@ function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdi
             <tr key={item.name}>
               <td>{rank}</td>
               <td>
-                {typeof item.values[linkIndex] === "string" && item.values[linkIndex] !== "" ? (
+                {isText(item.values[linkIndex]) && item.values[linkIndex] !== "" ? (
                   <a href={String(item.values[linkIndex])} target="_blank" rel="noreferrer">{item.name}</a>
                 ) : (
                   item.name
@@ -111,13 +121,13 @@ function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdi
                 <InlineCell key={column.label} column={column} itemName={item.name} value={item.values[index]} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)}>{show(item.values[index])}</InlineCell>
               ))}
               {showScore && <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>}
-              <td style={heat(grade / 100)}>
+              <td style={heat(grade / PERCENT)}>
                 {grade.toFixed(1)}
                 <small> ({letterGrade(grade)})</small>
               </td>
               {rated.map(({ column, index }) => {
                 const rating = item.values[index];
-                const used = typeof rating === "number" ? effectiveRating(column, rating) : null;
+                const used = isNumber(rating) ? effectiveRating(column, rating) : null;
 
                 return (
                   <InlineCell key={column.label} column={column} itemName={item.name} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
@@ -149,21 +159,21 @@ function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
     <section className="rankings-index">
       <h3>Code Maintenance Index</h3>
       <dl>
-        <div style={heat(fractionBetween(result.averageQuality, 50, 100))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines">
+        <div style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines">
           <dt>Average Quality</dt>
           <dd>{result.averageQuality.toFixed(1)}%</dd>
         </div>
-        <div style={heat(maintenancePercent(result.gradedNFactor) / 100)} title="Total n-Factor minus (average quality - 75) / 100">
+        <div style={heat(maintenancePercent(result.gradedNFactor) / PERCENT)} title="Total n-Factor minus (average quality - 75) / 100">
           <dt>Graded n-Factor</dt>
-          <dd>{result.gradedNFactor.toFixed(3)}</dd>
+          <dd>{result.gradedNFactor.toFixed(N_FACTOR_DIGITS)}</dd>
           <small>{result.totalLines.toLocaleString()} lines</small>
         </div>
-        <div style={heat(maintenancePercent(result.gradedFutureNFactor) / 100)} title="The n-Factor if every project grows by its xLines, minus (average quality - 75) / 100">
+        <div style={heat(maintenancePercent(result.gradedFutureNFactor) / PERCENT)} title="The n-Factor if every project grows by its xLines, minus (average quality - 75) / 100">
           <dt>Graded Future n-Factor</dt>
-          <dd>{result.gradedFutureNFactor.toFixed(3)}</dd>
+          <dd>{result.gradedFutureNFactor.toFixed(N_FACTOR_DIGITS)}</dd>
           <small>{Math.round(result.futureLines).toLocaleString()} lines</small>
         </div>
-        <div style={heat(result.maintenancePercent / 100)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent on a curve. The lines are the same average without the quality adjustment (as if quality were 75) turned back into lines (n^n). Manual takes 0.66 off the n-Factor first">
+        <div style={heat(result.maintenancePercent / PERCENT)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent on a curve. The lines are the same average without the quality adjustment (as if quality were 75) turned back into lines (n^n). Manual takes 0.66 off the n-Factor first">
           <dt>Code Maintenance</dt>
           <dd>{result.maintenancePercent.toFixed(1)}%</dd>
           <small>{Math.round(result.equivalentLines).toLocaleString()} lines equivalent</small>
@@ -211,7 +221,7 @@ export default function TopRankings() {
       </EditGear>
       <div className="rankings-tabs">
         {rankings.map((r) => (
-          <button type="button" key={r.id} className={r.id === ranking.id ? "active" : ""} onClick={() => navigate({ hash: r.id })}>
+          <button type="button" key={r.id} className={r.id === ranking.id ? ACTIVE_CLASS : ""} onClick={() => navigate({ hash: r.id })}>
             {r.title}
           </button>
         ))}
@@ -231,7 +241,7 @@ export default function TopRankings() {
       </label>
       <input type="search" className="rankings-search" placeholder="Search by name…" value={search} onChange={(e) => setSearch(e.target.value)} />
       <RankingTable key={`${ranking.id}|${search}`} ranking={shown} source={ranking} showScore={showScore} search={search}
-        sort={sort} canEdit={typeof auth.user === "string"} onSaved={load}
+        sort={sort} canEdit={isText(auth.user)} onSaved={load}
         onSort={(key) => setSort((prev) => (prev.key === key ? { key, descending: !prev.descending } : firstSort(key)))}
       />
     </div>

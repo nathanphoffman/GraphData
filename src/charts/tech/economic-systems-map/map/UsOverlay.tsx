@@ -1,4 +1,4 @@
-import { COLORS } from "../model/style";
+import { COLORS, OVERLAY_OPACITY, OVERLAY_STROKE } from "../model/style";
 import { toX, toY } from "../model/layout";
 import type { EconomicSystemsData } from "../model/types";
 
@@ -8,9 +8,9 @@ export default function UsOverlay({ overlay }: { overlay: EconomicSystemsData["o
     <polygon
       points={overlay.polygon.map(([x, y]) => `${toX(x)},${toY(y)}`).join(" ")}
       fill={COLORS.overlay}
-      fillOpacity={0.1}
+      fillOpacity={OVERLAY_OPACITY}
       stroke={COLORS.overlay}
-      strokeWidth={2.2}
+      strokeWidth={OVERLAY_STROKE}
       strokeDasharray="8 5"
     />
   );

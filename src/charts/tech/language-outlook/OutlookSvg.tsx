@@ -1,8 +1,26 @@
 import type { MouseEvent } from "react";
 import type { ScaleLinear } from "d3-scale";
-import { LINE_COLORS, LINE_DASHES, PROJECTION_PREFIX, changeKey, seriesColor } from "./model/style";
-import { CHART_HEIGHT, MARGIN, CHART_WIDTH, arrowPoints, lineSegments, makeXAt } from "./model/layout";
+import { LINE_COLORS, LINE_DASHES, NEWEST_YEAR_SERIES, PROJECTION_PREFIX, changeKey, seriesColor } from "./model/style";
+import { ARROW_STYLE, CHART_HEIGHT, MARGIN, CHART_WIDTH, PROJECTION_DOT_RADIUS, Y_ROUND_STEP, arrowPoints, lineSegments, makeXAt } from "./model/layout";
 import type { LanguageOutlookData } from "./model/types";
+
+/** Grid labels sit this far left of the axis and this far below their line, at this size. */
+const GRID_LABEL_GAP = 6;
+const GRID_LABEL_BASELINE = 4;
+const GRID_FONT_SIZE = 12;
+
+/** The lines between a language's dots. */
+const LINE_WIDTH = 1.5;
+const LINE_OPACITY = 0.45;
+
+/** Language names run at an angle below the axis. */
+const NAME_DROP = 16;
+const NAME_FONT_SIZE = 13;
+const NAME_ANGLE = -45;
+
+/** Dots are this big, and the newest year's dots are a little bigger. */
+const DOT_RADIUS = 5;
+const FEATURED_DOT_RADIUS = 7;
 
 interface Props {
   model: LanguageOutlookData;
@@ -16,7 +34,7 @@ interface Props {
 export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }: Props) {
   const { languages, series, lines } = model;
   const xAt = makeXAt(languages.length);
-  const gridValues = yScale.ticks(Math.round(yScale.domain()[1] / 10));
+  const gridValues = yScale.ticks(Math.round(yScale.domain()[1] / Y_ROUND_STEP));
 
   // Draw the gridlines, then each language's lines, projection arrows and labels.
   return (
@@ -25,7 +43,7 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
       {gridValues.map((gridValue) => (
         <g key={gridValue}>
           <line x1={MARGIN.left} x2={CHART_WIDTH - MARGIN.right} y1={yScale(gridValue)} y2={yScale(gridValue)} stroke="#ffffff40" />
-          <text x={MARGIN.left - 6} y={yScale(gridValue) + 4} textAnchor="end" fontSize={12} fill="#fff">
+          <text x={MARGIN.left - GRID_LABEL_GAP} y={yScale(gridValue) + GRID_LABEL_BASELINE} textAnchor="end" fontSize={GRID_FONT_SIZE} fill="#fff">
             {gridValue}
           </text>
         </g>
@@ -41,8 +59,8 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
                 points={points}
                 fill="none"
                 stroke={LINE_COLORS[line]}
-                strokeWidth={1.5}
-                strokeOpacity={0.45}
+                strokeWidth={LINE_WIDTH}
+                strokeOpacity={LINE_OPACITY}
                 strokeDasharray={LINE_DASHES[line]}
                 strokeLinecap={LINE_DASHES[line] ? "round" : undefined}
                 strokeLinejoin="round"
@@ -56,11 +74,11 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
         <g key={lang.name}>
           <text
             x={xAt(index)}
-            y={CHART_HEIGHT - MARGIN.bottom + 16}
+            y={CHART_HEIGHT - MARGIN.bottom + NAME_DROP}
             textAnchor="end"
-            fontSize={13}
+            fontSize={NAME_FONT_SIZE}
             fill="#fff"
-            transform={`rotate(-45 ${xAt(index)} ${CHART_HEIGHT - MARGIN.bottom + 16})`}
+            transform={`rotate(${NAME_ANGLE} ${xAt(index)} ${CHART_HEIGHT - MARGIN.bottom + NAME_DROP})`}
           >
             {lang.name}
           </text>
@@ -81,16 +99,16 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
                   <polygon
                     points={arrowPoints(centerX, centerY, change)}
                     fill={seriesColor(seriesName, s)}
-                    fillOpacity={0.5}
-                    stroke="#4c4c4c"
-                    strokeOpacity={0.5}
-                    strokeWidth={0.8}
+                    fillOpacity={ARROW_STYLE.fillOpacity}
+                    stroke={ARROW_STYLE.stroke}
+                    strokeOpacity={ARROW_STYLE.strokeOpacity}
+                    strokeWidth={ARROW_STYLE.strokeWidth}
                     pointerEvents="none"
                   />
                   <circle
                     cx={centerX}
                     cy={centerY}
-                    r={6}
+                    r={PROJECTION_DOT_RADIUS}
                     fill={seriesColor(seriesName, s)}
                     stroke="#4c4c4c"
                     strokeWidth={1}
@@ -110,7 +128,7 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
                 key={seriesName}
                 cx={centerX}
                 cy={centerY}
-                r={seriesName === "Year 2026" ? 7 : 5}
+                r={seriesName === NEWEST_YEAR_SERIES ? FEATURED_DOT_RADIUS : DOT_RADIUS}
                 fill={seriesColor(seriesName, s)}
                 stroke="#4c4c4c"
                 strokeWidth={1}

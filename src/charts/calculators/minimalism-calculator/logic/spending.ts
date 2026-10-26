@@ -1,5 +1,8 @@
 /** What buying costs year by year when you only buy once your stuff has paid off. */
 
+/** The longest the plan looks ahead. */
+const MAX_YEARS = 100;
+
 /**
  * One year of buying. Items wear out after about `maxPlays` uses (yearlyUses / maxPlays a year), and you
  * may only buy once your stuff has paid off: every `minPlays` uses earns one purchase. So you buy what is
@@ -45,7 +48,7 @@ export function yearsToReach(
 ): number | null {
   let stock = owned;
 
-  for (let yPos = 1; yPos <= 100; yPos++) {
+  for (let yPos = 1; yPos <= MAX_YEARS; yPos++) {
     stock = step(stock, target, yearlyUses, minPlays, maxPlays).stock;
 
     if (stock >= target - 1e-9) return yPos;

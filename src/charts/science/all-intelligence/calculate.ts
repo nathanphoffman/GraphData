@@ -1,5 +1,12 @@
 import type { AllIntelligenceData, ScoredSubject, Settings, Subject } from "./types";
 
+/** The best score any column can have. */
+const MAX_SCORE = 100;
+
+/** Efficiency stand-in from price: this score at $1, minus this much for each tenfold rise in price. */
+const EFFICIENCY_AT_ONE_DOLLAR = 60;
+const EFFICIENCY_LOST_PER_TENFOLD = 25;
+
 export const DEFAULT_SETTINGS: Settings = { zeroDivisor: 4, missingMode: "estimate", missingDivisor: 2 };
 
 /** Geometric mean, which rewards balance: one very low score pulls the result down more than an arithmetic mean would. */
@@ -28,7 +35,7 @@ function worstScores(subjects: Subject[], columns: string[]): Record<string, num
 function priceEfficiency(subject: Subject): number | undefined {
   if (subject.outputPrice === undefined) return undefined;
 
-  return Math.max(1, Math.min(100, 60 - 25 * Math.log10(subject.outputPrice)));
+  return Math.max(1, Math.min(MAX_SCORE, EFFICIENCY_AT_ONE_DOLLAR - EFFICIENCY_LOST_PER_TENFOLD * Math.log10(subject.outputPrice)));
 }
 
 /** A real score, or the price proxy for efficiency when there is no real score. */
@@ -44,7 +51,7 @@ export function estimateScore(data: AllIntelligenceData, subject: Subject, colum
 
   if (base === null) return null;
 
-  return Math.min(100, base * (data.estimateFactors[column] ?? 1));
+  return Math.min(MAX_SCORE, base * (data.estimateFactors[column] ?? 1));
 }
 
 /** Score every subject across the groups, combining real, estimated and floor values by the chosen settings. */

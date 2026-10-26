@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { CELL_H, CELL_W, COLORS } from "../model/style";
+import { BOLD, CELL_H, CELL_W, COLORS, FONT_SIZE, HIGHLIGHT_INSET, HIGHLIGHT_STROKE, TITLE_BASELINE } from "../model/style";
 import { GRID_H, GRID_W, GRID_X0, GRID_Y0, placeLabels } from "../model/layout";
 import type { EconomicSystemsData } from "../model/types";
 import GridCells from "./GridCells";
@@ -27,7 +27,7 @@ export default function MapSvg({ model, showExamples, highlight, onSelect }: Pro
 
   return (
     <svg className="map-surface" viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} role="img" aria-label={model.title} fontFamily={FONT}>
-      <text x={GRID_X0} y={34} fontSize={22} fontWeight={700} fill="#222">
+      <text x={GRID_X0} y={TITLE_BASELINE} fontSize={FONT_SIZE.title} fontWeight={BOLD} fill="#222">
         {model.title}
       </text>
 
@@ -37,13 +37,13 @@ export default function MapSvg({ model, showExamples, highlight, onSelect }: Pro
       <g pointerEvents="none">
         {highlight && (
           <rect
-            x={GRID_X0 + highlight.col * CELL_W + 2}
-            y={GRID_Y0 + highlight.row * CELL_H + 2}
-            width={CELL_W - 4}
-            height={CELL_H - 4}
+            x={GRID_X0 + highlight.col * CELL_W + HIGHLIGHT_INSET}
+            y={GRID_Y0 + highlight.row * CELL_H + HIGHLIGHT_INSET}
+            width={CELL_W - 2 * HIGHLIGHT_INSET}
+            height={CELL_H - 2 * HIGHLIGHT_INSET}
             fill="none"
             stroke={COLORS.header}
-            strokeWidth={3.5}
+            strokeWidth={HIGHLIGHT_STROKE}
           />
         )}
         <StabilityBand stability={model.stability} />

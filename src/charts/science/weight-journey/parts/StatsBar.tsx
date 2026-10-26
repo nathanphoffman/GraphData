@@ -1,3 +1,5 @@
+import { round1 } from "../calculate";
+import { yearly } from "../model/averages";
 import { dailyRows, days, future, projectedAdjusted } from "../model/rows";
 import { type Format, type Unit, pretty } from "../model/units";
 
@@ -21,7 +23,7 @@ export function StatsBar({ unit, f }: { unit: Unit; f: Format }) {
   const projection = future[future.length - 1];
   const endAdjusted = projectedAdjusted.future[projectedAdjusted.future.length - 1];
   const today = dailyRows[dailyRows.length - 1];
-  const yearOut = today.monthly === null ? null : Math.round((today.blended + today.monthly * 12) * 10) / 10;
+  const yearOut = today.monthly === null ? null : round1(yearly(today.blended, today.monthly)!);
   const show = (pounds: number) => `${f.w(pounds)} ${unit}`;
 
   return (

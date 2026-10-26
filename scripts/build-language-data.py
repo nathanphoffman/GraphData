@@ -29,7 +29,11 @@ RECENT, PRIOR = (2024, 2026), (2021, 2023)  # inclusive windows
 OUTLOOK_WEIGHT, TIOBE_WEIGHT = 2 / 3, 1 / 3
 POP_WEIGHT, POP_TIOBE_WEIGHT = 1 / 2, 1 / 2  # raw Stack Overflow usage vs TIOBE, opinion removed
 PROJECTION_YEARS = 10
-YEARS_PER_WINDOW_GAP = 3  # distance between the centres of the two 3-year windows
+WINDOW_YEARS = 3  # each trend window covers this many years
+YEARS_PER_WINDOW_GAP = WINDOW_YEARS  # distance between the centres of the two windows
+TIOBE_YEARS = range(2020, 2027)
+ROUND_DIGITS = 3
+EXPORT_TIMEOUT_SECONDS = 120
 TREND_WEIGHT = 0.5  # share of the slope taken from the recent trend (rest from the gap between the two windows)
 DAMPING = 0.85  # each future year's change is this much of the previous year's
 LAST_YEAR = 2026
@@ -52,6 +56,7 @@ LINES = [
     *BACKTEST_KEYS,
     *HEALTH_BACKTEST_KEYS,
 ]
+NAME_FIELD, VALUES_FIELD, TIOBE_FIELD = "name", "values", "tiobe"
 NAME_FIXES = {"Javascript": "JavaScript", "Typescript": "TypeScript"}
 
 def export_csv(ods: Path, out_dir: Path) -> Path:
@@ -60,7 +65,7 @@ def export_csv(ods: Path, out_dir: Path) -> Path:
         "csv:Text - txt - csv (StarCalc):44,34,76,1,,0,false,true,false,false,false,-1",
         "--outdir", str(out_dir), str(ods),
     ]
-    subprocess.run(cmd, check=True, timeout=120, capture_output=True)
+    subprocess.run(cmd, check=True, timeout=EXPORT_TIMEOUT_SECONDS, capture_output=True)
     found = list(out_dir.glob("*-Languages.csv"))
     if not found:
         sys.exit("Could not find the 'Languages' sheet in the exported CSV files.")
@@ -109,7 +114,7 @@ def forecast(v, t, cutoff, steps):
     """Projects each of `steps` (years after `cutoff`) using only data up to `cutoff`: two 3-year
     windows ending at the cutoff give the long-run slope, the last 3 years give the recent slope.
     Returns None when the data is missing."""
-    recent, prior = range(cutoff - 2, cutoff + 1), range(cutoff - 5, cutoff - 2)
+    recent, prior = range(cutoff - 2, cutoff + 1), range(cutoff - 2 * WINDOW_YEARS + 1, cutoff - WINDOW_YEARS + 1)
     outlook, recent_avg = window_avgs(v, t, recent)
     _, prior_avg = window_avgs(v, t, prior)
     latest = v.get(f"Year {cutoff}")
@@ -156,7 +161,7 @@ def health_score(v, t, pop, year):
 def health_outlook(scores, last, steps):
     """Same trend math as forecast(), applied to yearly health scores {year: score}."""
     recent = [(y, scores[y]) for y in range(last - 2, last + 1)]
-    per_year = TREND_WEIGHT * slope(recent) + (1 - TREND_WEIGHT) * (scores[last] - scores[last - 3]) / YEARS_PER_WINDOW_GAP
+    per_year = TREND_WEIGHT * slope(recent) + (1 - TREND_WEIGHT) * (scores[last] - scores[last - WINDOW_YEARS]) / YEARS_PER_WINDOW_GAP
     base = scores[last]
     return [project(base, per_year, n) if base > 0 else base for n in steps]
 
@@ -164,7 +169,7 @@ def predicted_health(v, t, pop):
     """10-year healthiness: trend of the yearly health score, nudged by half of how far the same
     method missed 2025 and 2026 when it only had data through BACKTEST_CUTOFF. None if data is missing."""
     scores = {y: health_score(v, t, pop, y) for y in range(YEARS[0] + 2, LAST_YEAR + 1)}
-    if any(scores.get(y) is None for y in range(BACKTEST_CUTOFF - 3, LAST_YEAR + 1)):
+    if any(scores.get(y) is None for y in range(BACKTEST_CUTOFF - WINDOW_YEARS, LAST_YEAR + 1)):
         return None
     raw = health_outlook(scores, LAST_YEAR, [PROJECTION_YEARS])[0]
     steps = [y - BACKTEST_CUTOFF for y in BACKTEST_YEARS]
@@ -175,7 +180,7 @@ def predicted_health(v, t, pop):
     return raw * (1 + FIX_WEIGHT * avg(misses))
 
 def rnd(value):
-    return None if value is None else round(value, 3)
+    return None if value is None else round(value, ROUND_DIGITS)
 
 def main() -> None:
     ods = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else DEFAULT_ODS
@@ -195,16 +200,16 @@ def main() -> None:
             continue
         name = NAME_FIXES.get(row[0], row[0])
         values = {f"Year {y}": rnd(num(row[col[f"Year {y}"]])) for y in YEARS}
-        tiobe = {str(y): num(row[col[f"{y} TIndex"]]) for y in range(2020, 2027)}
+        tiobe = {str(y): num(row[col[f"{y} TIndex"]]) for y in TIOBE_YEARS}
         pop = {str(y): num(row[col[f"{y} Pop"]]) for y in YEARS if f"{y} Pop" in col}
         tiobe["2019"] = tiobe_2019.get(name)
         for year, rating in tiobe_sept.get(name, {}).items():
             if rating is not None:
                 tiobe[year] = rating
-        languages.append({"name": name, "values": values, "tiobe": tiobe, "pop": pop})
+        languages.append({NAME_FIELD: name, VALUES_FIELD: values, TIOBE_FIELD: tiobe, "pop": pop})
 
     for lang in languages:
-        v, t, pop = lang["values"], lang["tiobe"], lang["pop"]
+        v, t, pop = lang[VALUES_FIELD], lang[TIOBE_FIELD], lang["pop"]
         for label, (start, end) in (("2024-2026", RECENT), ("2021-2023", PRIOR)):
             years = range(start, end + 1)
             outlook = avg([v[f"Year {y}"] for y in years])
@@ -234,16 +239,16 @@ def main() -> None:
         v[f"{FIX_KEY} change"] = rnd(fixed - latest) if projected else None
 
     for lang in languages:
-        v = lang["values"]
+        v = lang[VALUES_FIELD]
         if v[PROJECTION_KEY] is not None:
-            v[HEALTH_KEY] = rnd(healthiness_at(v, lang["tiobe"], lang["pop"], LAST_YEAR, [v[PROJECTION_KEY], v[FIX_KEY]]))
+            v[HEALTH_KEY] = rnd(healthiness_at(v, lang[TIOBE_FIELD], lang["pop"], LAST_YEAR, [v[PROJECTION_KEY], v[FIX_KEY]]))
         else:
             v[HEALTH_KEY] = None
-        predicted = predicted_health(v, lang["tiobe"], lang["pop"])
+        predicted = predicted_health(v, lang[TIOBE_FIELD], lang["pop"])
         v[HEALTH_PRED_KEY] = rnd(predicted)
         v[f"{HEALTH_PRED_KEY} change"] = rnd(predicted - v[HEALTH_KEY]) if predicted is not None and v[HEALTH_KEY] is not None else None
 
-    languages.sort(key=lambda l: -(l["values"]["Year 2026"] or 0))
+    languages.sort(key=lambda l: -(l[VALUES_FIELD]["Year 2026"] or 0))
     data = {
         "title": "Language Outlook (Popularity weighted by Opinion)",
         "series": SERIES,

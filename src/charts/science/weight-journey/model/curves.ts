@@ -1,4 +1,5 @@
 import { taperToTotal } from "../calculate";
+import { SPREAD_ROWS } from "../constants";
 import type { Fat, Row } from "./rows";
 
 export interface Point {
@@ -44,7 +45,7 @@ function spreadSide(rows7: Row[], start: (r: Row) => number, target: (r: Row) =>
 
 /** The last 7 rows each give a tapering curve to their own 3 day projected all average; used for the shaded range. */
 export function buildSpread(rows: Row[], ahead: number) {
-  const rows7 = rows.slice(-7).filter((r) => r.allProj3 !== null && r.allProj3Adj !== null);
+  const rows7 = rows.slice(-SPREAD_ROWS).filter((r) => r.allProj3 !== null && r.allProj3Adj !== null);
 
   if (rows7.length < 2) return null;
 
@@ -59,7 +60,7 @@ export function buildSpread(rows: Row[], ahead: number) {
  * (only the days both cover, which is the quadratic's 90 days ahead).
  */
 export function buildGeneral(rows: Row[], ahead: number, quadratic: Point[]) {
-  const rows7 = rows.slice(-7).filter((r) => r.allProj3 !== null);
+  const rows7 = rows.slice(-SPREAD_ROWS).filter((r) => r.allProj3 !== null);
 
   if (!rows7.length) return null;
   const meanCurve = taperCurve(rows7[rows7.length - 1].date, meanOf(rows7, (r) => r.avg3), meanOf(rows7, (r) => r.allProj3!), ahead);

@@ -1,10 +1,8 @@
-import type { Averages } from "../calculate";
-
-/** Round to one decimal place. */
-export const round1 = (n: number) => Math.round(n * 10) / 10;
+import { type Averages, round1 } from "../calculate";
+import { DAYS_PER_MONTH, HALF_MONTH_DAYS, MONTHS_PER_YEAR } from "../constants";
 
 /** The blended average projected a year ahead, using the monthly change. */
-export const yearly = (blended: number, monthly: number | null) => (monthly === null ? null : blended + monthly * 12);
+export const yearly = (blended: number, monthly: number | null) => (monthly === null ? null : blended + monthly * MONTHS_PER_YEAR);
 
 /** Mean of the 3-day, 30-day, 365-day, blended and 1-year projected values (projection is missing for the first 30 days). */
 export function allAverage(averages: Averages): number {
@@ -24,7 +22,7 @@ export function completeAverage(values: (number | null)[]): number {
 
 /** All average now plus 12 times its change over the last `lag` rows, like the blended projection (change per 30 real days x 12). */
 export const projectAll = (series: number[], index: number, lag: number, step: number) =>
-  index >= lag ? series[index] + ((series[index] - series[index - lag]) / step) * 12 : null;
+  index >= lag ? series[index] + ((series[index] - series[index - lag]) / step) * MONTHS_PER_YEAR : null;
 
 /** Mean of a series (projected all average, recent rate) over this row and the 2 before it (rows with no projection yet are skipped). */
 export function last3(series: (number | null)[], index: number) {
@@ -52,8 +50,8 @@ export function weightedAverage(series: (number | null)[], index: number, window
 
 /** Monthly rate from the 3-day average: change over 15 days doubled, averaged with the change over 30 days. */
 export function recentRate(series: (number | null)[], index: number, step: number) {
-  const lag15 = Math.round(15 / step);
-  const lag30 = Math.round(30 / step);
+  const lag15 = Math.round(HALF_MONTH_DAYS / step);
+  const lag30 = Math.round(DAYS_PER_MONTH / step);
 
   if (index < lag30) return null;
 

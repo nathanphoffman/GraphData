@@ -1,7 +1,11 @@
+import { PERCENT } from "../logic/constants";
 import type { ItemType } from "../logic/items";
 import { gapLabel, goalColor, waitBuckets, type Bucket } from "../logic/waiting";
 
 /** Counts with the right singular or plural wording for the chosen item type. */
+/** The tallest bar is this many pixels high. */
+const TALLEST_BAR_PX = 90;
+
 const count = (n: number, item: ItemType) => `${n} ${n === 1 ? item.one : item.many}`;
 
 interface Props {
@@ -44,8 +48,8 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
             <div>{count(Math.round(bucket.p * owned), item)}</div>
             <div
               className="mini-bar-fill"
-              title={`${(bucket.p * 100).toFixed(1)}% of ${item.many}`}
-              style={{ height: Math.max(2, (bucket.p / tallest) * 90), background: goalColor(bucket.mid, goal) }}
+              title={`${(bucket.p * PERCENT).toFixed(1)}% of ${item.many}`}
+              style={{ height: Math.max(2, (bucket.p / tallest) * TALLEST_BAR_PX), background: goalColor(bucket.mid, goal) }}
             />
           </div>
         ))}

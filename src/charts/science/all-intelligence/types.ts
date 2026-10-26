@@ -1,3 +1,7 @@
+/** Sort keys for the columns that are not groups. */
+export const OVERALL_KEY = "overall";
+export const MEASURED_KEY = "measured";
+
 export interface Group {
   id: string;
   name: string;

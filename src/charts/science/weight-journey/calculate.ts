@@ -28,12 +28,31 @@ export interface Projection {
 }
 
 const DAY_MS = 86_400_000;
+import { DAYS_PER_MONTH, DAYS_PER_YEAR, ISO_DATE_LENGTH, TENTH } from "./constants";
+
+const SHORT_WINDOW_DAYS = 3;
+
+/** Weights for blending the short, medium and long averages. */
+const BLEND_SHORT = 3;
+const BLEND_MEDIUM = 2;
+const BLEND_LONG = 1;
+const BLEND_TOTAL = BLEND_SHORT + BLEND_MEDIUM + BLEND_LONG;
+
+/** A month keeps this share of the last month's rate. */
+const MONTHLY_KEEP = 11 / 12;
+
+/** A quadratic has this many coefficients, which is the size of its equation system. */
+const QUADRATIC_TERMS = 3;
+const AUGMENTED_COLUMNS = QUADRATIC_TERMS + 1;
+
+/** Round to one decimal place. */
+export const round1 = (n: number) => Math.round(n * TENTH) / TENTH;
 
 /** Date as milliseconds, read as UTC so the time zone cannot shift the day. */
 const parse = (isoDate: string) => Date.parse(isoDate + "T00:00:00Z");
 
 /** Milliseconds back to a YYYY-MM-DD date. */
-const format = (ms: number) => new Date(ms).toISOString().slice(0, 10);
+const format = (ms: number) => new Date(ms).toISOString().slice(0, ISO_DATE_LENGTH);
 
 /** One row per calendar day; gaps between weigh-ins are filled in a straight line. */
 export function fillDays(weights: [string, number][]): Day[] {
@@ -51,7 +70,7 @@ export function fillDays(weights: [string, number][]): Day[] {
     for (let step = 1; step < gap; step++) {
       days.push({
         date: format(start + step * DAY_MS),
-        weight: Math.round((weight + ((next[1] - weight) * step) / gap) * 10) / 10,
+        weight: round1(weight + ((next[1] - weight) * step) / gap),
         estimated: true,
       });
     }
@@ -64,25 +83,25 @@ export function fillDays(weights: [string, number][]): Day[] {
 function solve3(m: number[][], value: number[]): number[] {
   const a = m.map((row, index) => [...row, value[index]]);
 
-  for (let column = 0; column < 3; column++) {
+  for (let column = 0; column < QUADRATIC_TERMS; column++) {
     let pivot = column;
 
-    for (let r = column + 1; r < 3; r++) if (Math.abs(a[r][column]) > Math.abs(a[pivot][column])) pivot = r;
+    for (let r = column + 1; r < QUADRATIC_TERMS; r++) if (Math.abs(a[r][column]) > Math.abs(a[pivot][column])) pivot = r;
     [a[column], a[pivot]] = [a[pivot], a[column]];
 
-    for (let r = column + 1; r < 3; r++) {
+    for (let r = column + 1; r < QUADRATIC_TERMS; r++) {
       const f = a[r][column] / a[column][column];
 
-      for (let c = column; c < 4; c++) a[r][c] -= f * a[column][c];
+      for (let c = column; c < AUGMENTED_COLUMNS; c++) a[r][c] -= f * a[column][c];
     }
   }
 
   const xPos = [0, 0, 0];
 
   for (let r = 2; r >= 0; r--) {
-    let total = a[r][3];
+    let total = a[r][QUADRATIC_TERMS];
 
-    for (let c = r + 1; c < 3; c++) total -= a[r][c] * xPos[c];
+    for (let c = r + 1; c < QUADRATIC_TERMS; c++) total -= a[r][c] * xPos[c];
     xPos[r] = total / a[r][r];
   }
 
@@ -99,15 +118,12 @@ export function project(days: Day[], fitDays: number, aheadDays: number): { fit:
   // Weighted sum used by the curve fit: each day's weight times its index to the power k.
   const weighted = (k: number) => recent.reduce((total, d, index) => total + d.weight * index ** k, 0);
   const [c, b, a] = solve3(
-    [
-      [n, power(1), power(2)],
-      [power(1), power(2), power(3)],
-      [power(2), power(3), power(4)],
-    ],
-    [weighted(0), weighted(1), weighted(2)],
+    // Row i, column j of the normal equations is the sum of x to the power i + j (power 0 is just n).
+    Array.from({ length: QUADRATIC_TERMS }, (_row, row) => Array.from({ length: QUADRATIC_TERMS }, (_column, column) => power(row + column))),
+    Array.from({ length: QUADRATIC_TERMS }, (_term, k) => weighted(k)),
   );
 
-  const at = (index: number) => Math.round((c + b * index + a * index * index) * 10) / 10;
+  const at = (index: number) => round1(c + b * index + a * index * index);
   const last = parse(recent[n - 1].date);
 
   return {
@@ -120,13 +136,10 @@ export function project(days: Day[], fitDays: number, aheadDays: number): { fit:
   };
 }
 
-/** Round to one decimal place. */
-const round1 = (n: number) => Math.round(n * 10) / 10;
-
 /** Trailing averages (the day itself plus the days before it) and the blended number built from them. */
 export function addAverages<T extends Day>(
   days: T[],
-  windows = { short: 3, medium: 30, long: 365 },
+  windows = { short: SHORT_WINDOW_DAYS, medium: DAYS_PER_MONTH, long: DAYS_PER_YEAR },
   /** real days per row; the 30-row change is divided by it so `monthly` is always per 30 real days */
   step = 1,
 ): (T & Averages)[] {
@@ -141,7 +154,7 @@ export function addAverages<T extends Day>(
     return (prefix[index + 1] - prefix[from]) / (index + 1 - from);
   };
 
-  const blended = days.map((_unused, index) => (3 * trailing(index, windows.short) + 2 * trailing(index, windows.medium) + trailing(index, windows.long)) / 6);
+  const blended = days.map((_unused, index) => (BLEND_SHORT * trailing(index, windows.short) + BLEND_MEDIUM * trailing(index, windows.medium) + BLEND_LONG * trailing(index, windows.long)) / BLEND_TOTAL);
 
   // Attach every average to its day, plus the monthly change once there is enough history.
   return days.map((d, index) => ({
@@ -205,8 +218,8 @@ export function projectTapering(
   const points: TargetPoint[] = [];
 
   for (let k = 1; k <= aheadDays; k++) {
-    const factor = (11 / 12) ** (k / 30);
-    weight -= (monthlyLoss / 30) * factor;
+    const factor = MONTHLY_KEEP ** (k / DAYS_PER_MONTH);
+    weight -= (monthlyLoss / DAYS_PER_MONTH) * factor;
     muscle += muscleDaily * factor;
     points.push({ date: format(start + k * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle), muscle });
   }
@@ -224,6 +237,6 @@ export function taperToTotal(startDate: string, startWeight: number, totalLoss: 
   // One point per future day on the tapering curve.
   return Array.from({ length: aheadDays }, (_unused, index) => ({
     date: format(start + (index + 1) * DAY_MS),
-    weight: round1(startWeight - totalLoss * (1 - (11 / 12) ** ((index + 1) / 30))),
+    weight: round1(startWeight - totalLoss * (1 - MONTHLY_KEEP ** ((index + 1) / DAYS_PER_MONTH))),
   }));
 }

@@ -1,4 +1,28 @@
 /** How long items wait between plays when uses land on them at random. */
+import { DAYS_PER_YEAR } from "./constants";
+
+/** Up to this average, each count of uses gets its own bar; above it, counts are grouped into ranges. */
+const SINGLE_COUNT_LAMBDA = 8;
+const SINGLE_COUNT_BARS = 11;
+const GROUPED_BARS = 12;
+const GROUPS_ACROSS = 6;
+
+/** Average days in a month. */
+const DAYS_PER_AVERAGE_MONTH = 30.4;
+
+/** A wait of this many days or more is shown as "Over a year", "Yearly", and so on down. */
+const OVER_A_YEAR_DAYS = 548;
+const YEARLY_DAYS = 330;
+const MONTHLY_DAYS = 45;
+const FORTNIGHTLY_DAYS = 17.5;
+const WEEKLY_DAYS = 7;
+
+/** Bar colour: hue 120 is green, down to 70 (yellow-green) past the goal, and from 50 (yellow) down to 0 (red) below it. */
+const GOOD_HUE = 120;
+const HUE_SPAN = 50;
+
+/** Goals below this are treated as this, so the colour math never divides by zero. */
+const MIN_GOAL = 0.1;
 
 export interface Bucket {
   label: string;
@@ -15,8 +39,8 @@ export interface Bucket {
  * average is `lambda`. Small averages get one bar per count; large ones are grouped into ranges.
  */
 function poissonBuckets(lambda: number): Bucket[] {
-  const width = lambda <= 8 ? 1 : Math.ceil(lambda / 6);
-  const bins = lambda <= 8 ? 11 : 12;
+  const width = lambda <= SINGLE_COUNT_LAMBDA ? 1 : Math.ceil(lambda / GROUPS_ACROSS);
+  const bins = lambda <= SINGLE_COUNT_LAMBDA ? SINGLE_COUNT_BARS : GROUPED_BARS;
   const buckets: Bucket[] = [];
 
   // Kept as a running log so large counts do not overflow the factorial.
@@ -44,8 +68,8 @@ function poissonBuckets(lambda: number): Bucket[] {
 
 /** At or above the goal: green fading to yellow-green. Below it: yellow through orange to red at zero. */
 export function goalColor(middle: number, goal: number): string {
-  const g = Math.max(goal, 0.1);
-  const hue = middle >= g ? 120 - Math.min(1, (middle - g) / g) * 50 : 50 * (middle / g);
+  const g = Math.max(goal, MIN_GOAL);
+  const hue = middle >= g ? GOOD_HUE - Math.min(1, (middle - g) / g) * HUE_SPAN : HUE_SPAN * (middle / g);
 
   return `hsl(${Math.round(hue)}, 70%, 45%)`;
 }
@@ -55,21 +79,21 @@ export function gapLabel(bucket: Bucket): string {
   if (bucket.gap) return bucket.gap;
 
   if (bucket.mid <= 0) return "Over a year";
-  const days = 365 / bucket.mid;
+  const days = DAYS_PER_YEAR / bucket.mid;
 
-  if (days >= 548) return "Over a year";
+  if (days >= OVER_A_YEAR_DAYS) return "Over a year";
 
-  if (days >= 330) return "Yearly";
+  if (days >= YEARLY_DAYS) return "Yearly";
   const bound = bucket.label.endsWith("+") ? "≤ " : "~";
   const plural = (n: number, unit: string) => `${n} ${unit}${n === 1 ? "" : "s"}`;
 
   // Shorter waits are grouped into a few week buckets rather than counted day by day.
-  if (days < 7) return "Every < 1 week";
+  if (days < WEEKLY_DAYS) return "Every < 1 week";
 
-  if (days < 17.5) return "Every 1–2 weeks";
+  if (days < FORTNIGHTLY_DAYS) return "Every 1–2 weeks";
 
-  if (days < 45) return "Every 2–4 weeks";
-  const months = Math.round(days / 30.4);
+  if (days < MONTHLY_DAYS) return "Every 2–4 weeks";
+  const months = Math.round(days / DAYS_PER_AVERAGE_MONTH);
 
   return `Every ${bound}${plural(months, "month")}`;
 }

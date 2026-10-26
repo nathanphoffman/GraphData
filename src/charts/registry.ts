@@ -14,7 +14,10 @@ import TopRankings from "./tech/top-rankings/TopRankings";
 
 /** Home page sections, in display order. */
 const SCIENCE_CATEGORY = "Science";
-export const categories = ["Calculators", "Tabletop RPGs", "Tech & economics", SCIENCE_CATEGORY] as const;
+const CALCULATORS_CATEGORY = "Calculators";
+const TABLETOP_CATEGORY = "Tabletop RPGs";
+const TECH_CATEGORY = "Tech & economics";
+export const categories = [CALCULATORS_CATEGORY, TABLETOP_CATEGORY, TECH_CATEGORY, SCIENCE_CATEGORY] as const;
 export type Category = (typeof categories)[number];
 
 export interface ChartEntry {
@@ -36,7 +39,7 @@ export const charts: ChartEntry[] = [
   {
     id: "language-outlook",
     title: "Language Outlook",
-    category: "Tech & economics",
+    category: TECH_CATEGORY,
     description:
       "Programming language popularity weighted by developer opinion, 2019-2026, with 4-year trend lines and a 10-year projection.",
     component: LanguageOutlook,
@@ -44,7 +47,7 @@ export const charts: ChartEntry[] = [
   {
     id: "maintainability-calculator",
     title: "Maintainability Calculator",
-    category: "Calculators",
+    category: CALCULATORS_CATEGORY,
     description:
       "How hard a codebase is to maintain, by line count, team size, code quality, AI involvement and developer skill level.",
     component: MaintainabilityCalculator,
@@ -52,7 +55,7 @@ export const charts: ChartEntry[] = [
   {
     id: "minimalism-calculator",
     title: "The Minimalism Calculator",
-    category: "Calculators",
+    category: CALCULATORS_CATEGORY,
     description:
       "How many of a thing you should own (board games, books, tools and more), based on how often you use it, how much you share, and what it costs to keep buying. Includes sharing and goal charts, a 10-year savings table and a link you can share.",
     component: MinimalismCalculator,
@@ -60,7 +63,7 @@ export const charts: ChartEntry[] = [
   {
     id: "rule-of-authorship",
     title: "True Authors of DND",
-    category: "Tabletop RPGs",
+    category: TABLETOP_CATEGORY,
     description:
       "Who wrote which rules and products of original Dungeons & Dragons (pre-1e): Gygax, Arneson, Kuntz, Kask, Ernie Gygax and others, based on the Arneson v. Gygax case file and TSR credits.",
     component: RuleOfAuthorship,
@@ -76,7 +79,7 @@ export const charts: ChartEntry[] = [
   {
     id: "economic-systems-map",
     title: "Economic Systems Map",
-    category: "Tech & economics",
+    category: TECH_CATEGORY,
     description:
       "A two-axis map of economic systems (orientation vs. size of power) with a band of historical stability, the U.S. 1865-present, and where well-known figures sit.",
     component: EconomicSystemsMap,
@@ -84,7 +87,7 @@ export const charts: ChartEntry[] = [
   {
     id: "dnd-sales",
     title: "DND Sales over Time",
-    category: "Tabletop RPGs",
+    category: TABLETOP_CATEGORY,
     description:
       "Estimated lifetime Player's Handbook sales for each edition of D&D, from OD&D to the 2024 (5.5e) rules, with confidence ranges and sources.",
     component: DndSales,
@@ -92,7 +95,7 @@ export const charts: ChartEntry[] = [
   {
     id: "tiny-mighty-bestiary",
     title: "Unofficial Bestiary for Tiny Mighty",
-    category: "Tabletop RPGs",
+    category: TABLETOP_CATEGORY,
     description:
       "A bestiary created by Nathan Hoffman with AI, this is not an official Tiny Mighty project or endorsed in any way by my contributors. Classic fantasy creatures statted with the Tiny Mighty RPG combat table: health, defense, bonus, turns and powers.",
     component: TinyMightyBestiary,
@@ -124,7 +127,7 @@ export const charts: ChartEntry[] = [
   {
     id: "top-rankings",
     title: "Top Rankings",
-    category: "Tech & economics",
+    category: TECH_CATEGORY,
     description:
       "Personal ranking lists (programming languages, board games, video games, project priority, favorite TV and movies, RPGs) scored on syntax, scaffolding, readability and more. Switch between lists with the buttons at the top.",
     component: TopRankings,

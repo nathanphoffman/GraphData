@@ -1,0 +1,4 @@
+# Files and folders the code quality checker skips, one wildcard pattern per line (like .gitignore).
+# Drawing coordinates and sky positions are data, not settings worth naming.
+src/charts/tabletop/tiny-mighty-bestiary/art/
+src/charts/science/astronomy-targets/

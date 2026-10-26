@@ -1,22 +1,19 @@
 /** Allowed slider values, so the sliders can take bigger steps as the numbers grow. */
 
+/** The values from `from` to `to` (inclusive), `step` apart. Rounded so 0.1 steps do not pick up float noise like 0.30000000000000004. */
+function stopsBetween(from: number, to: number, step: number): number[] {
+  const count = Math.round((to - from) / step);
+
+  return Array.from({ length: count + 1 }, (_unused, index) => Number((from + index * step).toFixed(ROUND_DIGITS)));
+}
+
+const ROUND_DIGITS = 6;
+
 /** Slider stops for uses per year: 0.1 steps below 5, 1 steps to 100, then 5 steps to 365. */
-export const PER_YEAR_STOPS: number[] = [];
-
-for (let index = 1; index < 50; index++) PER_YEAR_STOPS.push(index / 10);
-
-for (let value = 5; value <= 100; value++) PER_YEAR_STOPS.push(value);
-
-for (let value = 105; value <= 365; value += 5) PER_YEAR_STOPS.push(value);
+export const PER_YEAR_STOPS: number[] = [...stopsBetween(0.1, 4.9, 0.1), ...stopsBetween(5, 100, 1), ...stopsBetween(105, 365, 5)];
 
 /** Slider stops for things owned: 1 steps to 30, 5 steps to 300, then 10 steps to 1000. */
-export const OWNED_STOPS: number[] = [];
-
-for (let value = 1; value <= 30; value++) OWNED_STOPS.push(value);
-
-for (let value = 35; value <= 300; value += 5) OWNED_STOPS.push(value);
-
-for (let value = 310; value <= 1000; value += 10) OWNED_STOPS.push(value);
+export const OWNED_STOPS: number[] = [...stopsBetween(1, 30, 1), ...stopsBetween(35, 300, 5), ...stopsBetween(310, 1000, 10)];
 
 export const PER_WEEK_MIN = 0.25;
 export const PER_WEEK_MAX = 21;

@@ -20,10 +20,13 @@ export function tierFor(creature: Creature) {
   return tier;
 }
 
+/** Each power use adds this much difficulty. */
+const POWER_USE_DIFFICULTY = 0.5;
+
 /** Final difficulty: base tier + 0.5 per 1-use power. */
 export function difficultyOf(creature: Creature) {
   // Each power use adds half a tier of difficulty.
-  return creature.tier + creature.powers.reduce((total, power) => total + 0.5 * power.uses, 0);
+  return creature.tier + creature.powers.reduce((total, power) => total + POWER_USE_DIFFICULTY * power.uses, 0);
 }
 
 /** Difficulty filter buttons, grouped by the combat table tiers (0.25-0.5, 1-2, 3-4, 5). Powers can add half steps. */

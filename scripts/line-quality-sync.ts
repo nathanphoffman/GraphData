@@ -24,6 +24,19 @@ const ROOT = dirname(dirname(SCRIPT_DIR));
 const CHECKER_DIR = join(ROOT, "CodeQuality");
 const PYTHON = join(CHECKER_DIR, ".venv", "bin", "python");
 
+// text encoding for everything the child processes print
+const ENCODING = "utf8";
+
+// every child process may print this much before node gives up on it
+const MAX_BUFFER_BYTES = 256 * 1024 * 1024;
+
+// one decimal place: multiply by this, round, divide by it
+const TENTH = 10;
+
+// column widths in the table: the quality column, and the least the lines column is wide
+const QUALITY_WIDTH = 8;
+const MIN_LINES_WIDTH = 5;
+
 type Project = { name: string; folder: string; exclude?: string[] };
 
 const PROJECTS: Project[] = [
@@ -78,8 +91,8 @@ async function qualityOf(dir: string): Promise<Quality> {
   try {
     const { stdout } = await execFileAsync(PYTHON, ["-m", "codequality", dir, "--json"], {
       cwd: CHECKER_DIR,
-      encoding: "utf8",
-      maxBuffer: 256 * 1024 * 1024,
+      encoding: ENCODING,
+      maxBuffer: MAX_BUFFER_BYTES,
     });
     const { score, grade } = JSON.parse(stdout) as { score: number; grade: string };
     return { score, grade };
@@ -105,7 +118,7 @@ async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promis
 function repoOf(dir: string): string {
   try {
     return execFileSync("git", ["-C", dir, "remote", "get-url", "origin"], {
-      encoding: "utf8",
+      encoding: ENCODING,
       stdio: ["ignore", "pipe", "ignore"],
     })
       .trim()
@@ -120,7 +133,7 @@ function count(p: Project): { total: number; langs: Record<string, number> } {
   const args = [dir, "-o", "json"];
   for (const e of [...GLOBAL_EXCLUDE, ...(p.exclude ?? [])]) args.push("-e", e);
 
-  const out = execFileSync("tokei", args, { encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
+  const out = execFileSync("tokei", args, { encoding: ENCODING, maxBuffer: MAX_BUFFER_BYTES });
   const json = JSON.parse(out) as Record<string, TokeiLang>;
 
   const langs: Record<string, number> = {};
@@ -158,10 +171,10 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality }
     const values = JSON.parse(item.values_json) as (string | number | null)[];
     values[linesAt] = r.lines;
     // keep the old quality when the checker failed
-    if (r.quality) values[qualityAt] = Math.round(r.quality.score * 10) / 10;
+    if (r.quality) values[qualityAt] = Math.round(r.quality.score * TENTH) / TENTH;
     // the page works this out itself; storing it keeps the saved copy from going stale
     const [fam, computed] = [values[familiarityAt], values[qualityAt]].filter((v) => typeof v === "number");
-    if (finalAt >= 0 && fam !== undefined) values[finalAt] = Math.round(((fam + (computed ?? fam)) / 2) * 10) / 10;
+    if (finalAt >= 0 && fam !== undefined) values[finalAt] = Math.round(((fam + (computed ?? fam)) / 2) * TENTH) / TENTH;
     save.run(JSON.stringify(values), Date.now(), RANKING, r.name);
   }
   console.log(`Saved lines and quality for ${rows.length} projects to the local database`);
@@ -193,11 +206,11 @@ if (asJson) {
   const nw = w("name");
   const fw = w("folder");
   const fmt = (n: number) => n.toLocaleString("en-US");
-  const lw = Math.max(...rows.map((r) => fmt(r.lines).length), 5);
+  const lw = Math.max(...rows.map((r) => fmt(r.lines).length), MIN_LINES_WIDTH);
   const qual = (r: (typeof rows)[number]) =>
-    (r.quality ? `${r.quality.score.toFixed(1)} ${r.quality.grade}` : "n/a").padEnd(8);
+    (r.quality ? `${r.quality.score.toFixed(1)} ${r.quality.grade}` : "n/a").padEnd(QUALITY_WIDTH);
 
-  console.log(`${"Project".padEnd(nw)}  ${"Lines".padStart(lw)}  ${"Quality".padEnd(8)}  ${"Folder".padEnd(fw)}  Repo`);
+  console.log(`${"Project".padEnd(nw)}  ${"Lines".padStart(lw)}  ${"Quality".padEnd(QUALITY_WIDTH)}  ${"Folder".padEnd(fw)}  Repo`);
   for (const r of rows) {
     console.log(`${r.name.padEnd(nw)}  ${fmt(r.lines).padStart(lw)}  ${qual(r)}  ${r.folder.padEnd(fw)}  ${r.repo}`);
     if (showLangs) {
@@ -209,7 +222,7 @@ if (asJson) {
   const scored = rows.filter((r) => r.quality);
   const scoredLines = scored.reduce((sum, r) => sum + r.lines, 0);
   const weighted = scored.reduce((sum, r) => sum + r.quality!.score * r.lines, 0) / scoredLines;
-  const totalQual = (scored.length ? weighted.toFixed(1) : "n/a").padEnd(8);
+  const totalQual = (scored.length ? weighted.toFixed(1) : "n/a").padEnd(QUALITY_WIDTH);
   const totalLines = fmt(rows.reduce((sum, r) => sum + r.lines, 0)).padStart(lw);
   console.log(`${"TOTAL".padEnd(nw)}  ${totalLines}  ${totalQual}`);
 }

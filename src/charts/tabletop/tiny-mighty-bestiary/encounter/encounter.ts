@@ -1,6 +1,10 @@
 import { difficultyOf } from "../model/data";
 import type { Creature } from "../model/types";
 
+/** The random target moves in quarter steps, and the fill is retried this many times. */
+const TARGET_STEP = 0.25;
+const ATTEMPTS = 300;
+
 /**
  * Random fill: pick a random target inside [low, high], then keep adding random creatures that
  * still fit under it. Retries many times; an attempt that lands inside the range wins right away,
@@ -9,11 +13,11 @@ import type { Creature } from "../model/types";
 export function buildEncounter(pool: Creature[], low: number, high: number): Creature[] {
   const targets: number[] = [];
 
-  for (let t = low; t <= high; t += 0.25) targets.push(t);
+  for (let t = low; t <= high; t += TARGET_STEP) targets.push(t);
   let best: Creature[] = [];
   let bestGap = Infinity;
 
-  for (let attempt = 0; attempt < 300; attempt++) {
+  for (let attempt = 0; attempt < ATTEMPTS; attempt++) {
     const target = targets[Math.floor(Math.random() * targets.length)];
     const picks: Creature[] = [];
     let left = target;

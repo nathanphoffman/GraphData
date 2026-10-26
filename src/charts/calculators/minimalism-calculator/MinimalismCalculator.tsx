@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./styles.css";
+import { PERCENT, WEEKS_PER_YEAR } from "./logic/constants";
 import { averageUses, recommended, recommendedCount } from "./logic/calculate";
 import { cap, findItemType, DEFAULT_ITEM_TYPE } from "./logic/items";
 import RecommendationPanel from "./panels/RecommendationPanel";
@@ -25,8 +26,8 @@ export default function MinimalismCalculator() {
   }, []);
 
   const needed = recommended(s.perWeek, s.perYear, s.sharePct);
-  const people = 100 / s.sharePct;
-  const yearlyUses = s.perWeek * 52 * (s.sharePct / 100);
+  const people = PERCENT / s.sharePct;
+  const yearlyUses = s.perWeek * WEEKS_PER_YEAR * (s.sharePct / PERCENT);
 
   return (
     <div className="mini-calc">
@@ -79,7 +80,7 @@ export default function MinimalismCalculator() {
             label="Your share"
             value={s.sharePct}
             min={1}
-            max={100}
+            max={PERCENT}
             display={`${s.sharePct}% (1 in ${people.toFixed(people % 1 ? 1 : 0)})`}
             low="1% (mostly borrow)"
             high="100% (all mine)"
@@ -95,10 +96,10 @@ export default function MinimalismCalculator() {
           <RecommendationPanel owned={s.owned} needed={needed} />
           <WaitChart owned={s.owned} avgUses={averageUses(s.perWeek, s.sharePct, s.owned)} goal={s.perYear} item={item} />
           <SharingCurve
-            soloNeeded={recommended(s.perWeek, s.perYear, 100)}
+            soloNeeded={recommended(s.perWeek, s.perYear, PERCENT)}
             people={people}
             item={item}
-            onPeople={(n) => s.setSharePct(Math.min(100, Math.max(1, Math.round(100 / n))))}
+            onPeople={(n) => s.setSharePct(Math.min(PERCENT, Math.max(1, Math.round(PERCENT / n))))}
           />
         </div>
       </div>

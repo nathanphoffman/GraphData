@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { arrowPoints } from "./model/layout";
+import { ARROW_STYLE, PROJECTION_DOT_RADIUS, arrowPoints } from "./model/layout";
 import { LEGEND_GROUPS, LINE_COLORS, LINE_DASHES, LINE_LABELS, PROJECTION_PREFIX, seriesColor } from "./model/style";
 import type { LanguageOutlookData } from "./model/types";
+
+/** The small arrow-and-dot picture in the key: its size and where the arrow and dot sit in it. */
+const KEY_ARROW = { width: 16, height: 30, centerX: 8, centerY: 22 };
 
 interface Props {
   model: LanguageOutlookData;
@@ -23,17 +26,17 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
           const color = seriesColor(key, model.series.indexOf(key));
 
           return (
-            <svg key={key} className="key-arrow" width={16} height={30} viewBox="0 0 16 30">
+            <svg key={key} className="key-arrow" width={KEY_ARROW.width} height={KEY_ARROW.height} viewBox={`0 0 ${KEY_ARROW.width} ${KEY_ARROW.height}`}>
               <title>{key}</title>
               <polygon
-                points={arrowPoints(8, 22, 1)}
+                points={arrowPoints(KEY_ARROW.centerX, KEY_ARROW.centerY, 1)}
                 fill={color}
-                fillOpacity={0.5}
-                stroke="#4c4c4c"
-                strokeOpacity={0.5}
-                strokeWidth={0.8}
+                fillOpacity={ARROW_STYLE.fillOpacity}
+                stroke={ARROW_STYLE.stroke}
+                strokeOpacity={ARROW_STYLE.strokeOpacity}
+                strokeWidth={ARROW_STYLE.strokeWidth}
               />
-              <circle cx={8} cy={22} r={6} fill={color} stroke="#4c4c4c" strokeWidth={1} />
+              <circle cx={KEY_ARROW.centerX} cy={KEY_ARROW.centerY} r={PROJECTION_DOT_RADIUS} fill={color} stroke="#4c4c4c" strokeWidth={1} />
             </svg>
           );
         }

@@ -1,19 +1,38 @@
 import { KG_PER_LB } from "./units";
 
+const BAND_GREEN = "band-green";
+
+/** Muscle-adjusted weights add this back, since the targets sit this much lower. */
+const MUSCLE_ADJUSTMENT_KG = 5;
+
+/** Each band ends below its limit, in kg. */
+const VIOLET_BELOW_KG = 85;
+const FIRST_GREEN_BELOW_KG = 90;
+const BLUE_BELOW_KG = 95;
+const SECOND_GREEN_BELOW_KG = 100;
+const YELLOW_BELOW_KG = 110;
+
+/** A monthly loss of more than this is orange, and one between these two is blue. */
+const ORANGE_LOSS_KG = 3;
+const BLUE_LOSS_MAX_KG = 1.5;
+const BLUE_LOSS_MIN_KG = 0.5;
+
+const DEFAULT_TINT_ALPHA = 0.25;
+
 /** Colour band for a weight, using the kg targets. Muscle-adjusted values add back 5 kg (the targets sit 5 kg lower). */
 export function band(pounds: number | null, adjusted: boolean): string {
   if (pounds === null) return "";
-  const kilograms = pounds * KG_PER_LB + (adjusted ? 5 : 0);
+  const kilograms = pounds * KG_PER_LB + (adjusted ? MUSCLE_ADJUSTMENT_KG : 0);
 
-  if (kilograms < 85) return "band-violet";
+  if (kilograms < VIOLET_BELOW_KG) return "band-violet";
 
-  if (kilograms < 90) return "band-green";
+  if (kilograms < FIRST_GREEN_BELOW_KG) return BAND_GREEN;
 
-  if (kilograms < 95) return "band-blue";
+  if (kilograms < BLUE_BELOW_KG) return "band-blue";
 
-  if (kilograms < 100) return "band-green";
+  if (kilograms < SECOND_GREEN_BELOW_KG) return BAND_GREEN;
 
-  if (kilograms < 110) return "band-yellow";
+  if (kilograms < YELLOW_BELOW_KG) return "band-yellow";
 
   return "band-red";
 }
@@ -23,11 +42,11 @@ export function deltaBand(pounds: number | null): string {
   if (pounds === null) return "";
   const kilograms = pounds * KG_PER_LB;
 
-  if (kilograms < -3) return "band-orange";
+  if (kilograms < -ORANGE_LOSS_KG) return "band-orange";
 
-  if (kilograms >= -1.5 && kilograms <= -0.5) return "band-blue";
+  if (kilograms >= -BLUE_LOSS_MAX_KG && kilograms <= -BLUE_LOSS_MIN_KG) return "band-blue";
 
-  if (kilograms < 0) return "band-green";
+  if (kilograms < 0) return BAND_GREEN;
 
   if (kilograms < 1) return "band-yellow";
 
@@ -38,14 +57,14 @@ export function deltaBand(pounds: number | null): string {
 const BAND_RGB: Record<string, [number, number, number]> = {
   "band-orange": [0xf4, 0xa2, 0x59],
   "band-yellow": [0xf2, 0xd9, 0x5c],
-  "band-green": [0x7b, 0xc9, 0x7b],
+  [BAND_GREEN]: [0x7b, 0xc9, 0x7b],
   "band-violet": [0xb4, 0x8b, 0xe0],
   "band-blue": [0x7f, 0xb2, 0xf0],
   "band-red": [0xe5, 0x67, 0x5f],
 };
 
 /** Average colour of the given band classes (empty classes are ignored) at the given opacity, or undefined when there are none. */
-export function averageTint(classes: string[], alpha = 0.25): string | undefined {
+export function averageTint(classes: string[], alpha = DEFAULT_TINT_ALPHA): string | undefined {
   const colors = classes.map((name) => BAND_RGB[name]).filter((rgb) => rgb !== undefined);
 
   if (!colors.length) return undefined;

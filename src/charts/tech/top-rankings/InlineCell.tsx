@@ -1,6 +1,9 @@
 import { type CSSProperties, type KeyboardEvent, type ReactNode, useState } from "react";
 import { type Column, HIGHEST_RATING } from "./score";
 
+/** The key that saves an edit or starts one. */
+const ENTER_KEY = "Enter";
+
 /** A typed information value: empty is nothing, plain numbers (years) stay numbers, anything else (like "2027?") stays text. */
 export const infoValue = (text: string) => (text.trim() === "" ? null : /^-?\d+(\.\d+)?$/.test(text.trim()) ? Number(text) : text.trim());
 
@@ -45,14 +48,14 @@ export function InlineCell({ column, itemName, value, canEdit, onSave, style, ch
   const start = () => text === null && setText(String(value ?? ""));
 
   const keys = (event: KeyboardEvent) => {
-    if (event.key === "Enter") void finish();
+    if (event.key === ENTER_KEY) void finish();
     if (event.key === "Escape") setText(null);
   };
 
   if (!canEdit) return <td style={style}>{children}</td>;
 
   return (
-    <td style={style} className={`rankings-editable${error ? " rankings-cell-error" : ""}`} title={error || undefined} tabIndex={text === null ? 0 : undefined} onClick={start} onKeyDown={(e) => e.target === e.currentTarget && e.key === "Enter" && start()}>
+    <td style={style} className={`rankings-editable${error ? " rankings-cell-error" : ""}`} title={error || undefined} tabIndex={text === null ? 0 : undefined} onClick={start} onKeyDown={(e) => e.target === e.currentTarget && e.key === ENTER_KEY && start()}>
       {text === null ? children : (
         <>
           {/* far below the header the column is out of sight, so name it next to the box */}

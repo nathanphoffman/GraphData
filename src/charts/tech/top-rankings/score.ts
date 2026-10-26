@@ -26,7 +26,7 @@ export type Curve =
   | { type: "log"; from: number; to: number }
   | { type: "log1p"; to: number }
   | { type: "linear"; from: number; to: number }
-  | { type: "halving"; start: 1 | 5 }
+  | { type: "halving"; start: typeof LOWEST_RATING | typeof HIGHEST_RATING }
   | { type: "age"; oldest: number; offset: number; steepness: number };
 
 export interface Item {
@@ -44,6 +44,19 @@ export interface Ranking {
   items: Item[];
   gradeCurve?: Partial<GradeCurve>;
 }
+
+/** A grade runs from 0 to this. */
+export const MAX_GRADE = 100;
+
+/** Halving: every +1 closes this share of the distance to the other end. */
+const HALVING_SHARE = 0.5;
+
+/** Where a value sits when the low and high are the same. */
+const MIDDLE_FRACTION = 0.5;
+
+/** Type checks for the values in a ranking, where a cell may be a number, text or empty. */
+export const isNumber = (value: unknown): value is number => typeof value === "number";
+export const isText = (value: unknown): value is string => typeof value === "string";
 
 export const LOWEST_RATING = 1;
 export const HIGHEST_RATING = 5;
@@ -95,7 +108,7 @@ function applyCurve(curve: Curve, value: number): number {
     case "halving": {
       const other = HIGHEST_RATING + LOWEST_RATING - curve.start;
 
-      return other + (curve.start - other) * 0.5 ** value;
+      return other + (curve.start - other) * HALVING_SHARE ** value;
     }
     case "age": {
       const falloff = (age: number) => (1 + age / curve.offset) ** -curve.steepness;
@@ -122,7 +135,7 @@ export function score(columns: Column[], item: Item): number {
   return columns.reduce((total, column, index) => {
     const rating = item.values[index];
 
-    return column.weight === undefined || typeof rating !== "number" ? total : total + effectiveRating(column, rating) ** 2 * column.weight;
+    return column.weight === undefined || !isNumber(rating) ? total : total + effectiveRating(column, rating) ** 2 * column.weight;
   }, 0);
 }
 
@@ -148,10 +161,10 @@ export function grade(scoreValue: number, columns: Column[], shape: Partial<Grad
   const curveShape = { ...DEFAULT_GRADE_CURVE, ...shape };
   const share = Math.max(0, (scoreValue - low) / (high - low));
 
-  const curve = (100 * (1 - Math.exp(-curveShape.steepness * share ** curveShape.bottomBend))) / (1 - Math.exp(-curveShape.steepness));
+  const curve = (MAX_GRADE * (1 - Math.exp(-curveShape.steepness * share ** curveShape.bottomBend))) / (1 - Math.exp(-curveShape.steepness));
   const lift = middleLift(share, curveShape) - (1 - share) * middleLift(0, curveShape) - share * middleLift(1, curveShape);
 
-  return Math.min(100, curve + lift);
+  return Math.min(MAX_GRADE, curve + lift);
 }
 
 /** Items best score first, each with its grade and rank; items with the same score share a rank. */
@@ -166,7 +179,7 @@ export function rankItems(ranking: Ranking) {
 
 /** Where a value sits between a low and a high, from 0 to 1; 0.5 when they are the same. */
 export function fractionBetween(value: number, low: number, high: number): number {
-  if (high === low) return 0.5;
+  if (high === low) return MIDDLE_FRACTION;
 
   return Math.min(1, Math.max(0, (value - low) / (high - low)));
 }

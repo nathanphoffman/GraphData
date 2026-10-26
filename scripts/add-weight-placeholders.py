@@ -12,11 +12,13 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+DEFAULT_DAYS_AHEAD = 60
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "weight-journey" / "weight-journey.json"
 
 def main():
-    ahead = int(sys.argv[1]) if len(sys.argv) > 1 else 60
+    ahead = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_DAYS_AHEAD
     data = json.loads(DATA.read_text())
     weights = data["weights"]
     existing = {d for d, _ in weights}

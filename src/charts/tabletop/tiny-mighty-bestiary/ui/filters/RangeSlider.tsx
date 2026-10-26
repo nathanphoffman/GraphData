@@ -6,6 +6,11 @@ interface Props {
   labelPrefix: string;
 }
 
+const PERCENT = 100;
+
+/** When both handles are past the middle the min handle sits on top (z-index 3), otherwise it sits below the max handle. */
+const TOP_Z_INDEX = 3;
+
 /** Two-handle range slider built from two stacked range inputs. `value` holds stop indexes. */
 export default function RangeSlider({ stops, value, onChange, labelPrefix }: Props) {
   const last = stops.length - 1;
@@ -17,7 +22,7 @@ export default function RangeSlider({ stops, value, onChange, labelPrefix }: Pro
         <div className="bestiary-range-track">
           <div
             className="bestiary-range-fill"
-            style={{ left: `${(lo / last) * 100}%`, right: `${100 - (hi / last) * 100}%` }}
+            style={{ left: `${(lo / last) * PERCENT}%`, right: `${PERCENT - (hi / last) * PERCENT}%` }}
           />
         </div>
         <input
@@ -28,7 +33,7 @@ export default function RangeSlider({ stops, value, onChange, labelPrefix }: Pro
           value={lo}
           aria-label={`Minimum ${labelPrefix}`}
           // When both handles sit at the top end, the min handle must be on top or it can't be dragged back.
-          style={{ zIndex: lo > last / 2 ? 3 : 1 }}
+          style={{ zIndex: lo > last / 2 ? TOP_Z_INDEX : 1 }}
           onChange={(event) => onChange([Math.min(Number(event.target.value), hi), hi])}
         />
         <input

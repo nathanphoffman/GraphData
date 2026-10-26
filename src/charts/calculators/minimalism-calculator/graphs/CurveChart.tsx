@@ -8,6 +8,19 @@ const RIGHT = 14;
 const TOP = 22;
 const BOTTOM = 34;
 
+/** Sizes and spacing for what is drawn on the chart. */
+const AXIS_OPACITY = 0.3;
+const LABEL_SIZE = 11;
+const LABEL_OPACITY = 0.7;
+const ZERO_LABEL_GAP = 6;
+const TEXT_BASELINE = 4;
+const CURVE_WIDTH = 2.5;
+const MARK_RADIUS = 3;
+const MARK_LABEL_GAP = 8;
+const AXIS_LABEL_DROP = 15;
+const CURRENT_RING_RADIUS = 6;
+const DRAG_RADIUS = 16;
+
 interface Props {
   ariaLabel: string;
   xLabel: string;
@@ -60,30 +73,30 @@ export default function CurveChart({
 
   return (
     <svg ref={svgRef} viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} className="mini-curve" role="img" aria-label={ariaLabel}>
-      <line x1={LEFT} x2={CHART_WIDTH - RIGHT} y1={yScale(0)} y2={yScale(0)} stroke="currentColor" opacity={0.3} />
-      <line x1={LEFT} x2={LEFT} y1={yScale(0)} y2={yScale(yMax)} stroke="currentColor" opacity={0.3} />
-      <text x={LEFT - 6} y={yScale(0) + 4} fontSize={11} textAnchor="end" fill="currentColor">
+      <line x1={LEFT} x2={CHART_WIDTH - RIGHT} y1={yScale(0)} y2={yScale(0)} stroke="currentColor" opacity={AXIS_OPACITY} />
+      <line x1={LEFT} x2={LEFT} y1={yScale(0)} y2={yScale(yMax)} stroke="currentColor" opacity={AXIS_OPACITY} />
+      <text x={LEFT - ZERO_LABEL_GAP} y={yScale(0) + TEXT_BASELINE} fontSize={LABEL_SIZE} textAnchor="end" fill="currentColor">
         0
       </text>
-      <path d={path} fill="none" stroke={color} strokeWidth={2.5} />
+      <path d={path} fill="none" stroke={color} strokeWidth={CURVE_WIDTH} />
       {/* One dot and label per marked point on the curve. */}
       {marks.map((mark) => (
         <g key={mark}>
-          <circle cx={xScale(mark)} cy={yScale(at(mark))} r={3} fill={color} />
-          <text x={xScale(mark)} y={yScale(at(mark)) - 8} fontSize={11} textAnchor="middle" fill="currentColor">
+          <circle cx={xScale(mark)} cy={yScale(at(mark))} r={MARK_RADIUS} fill={color} />
+          <text x={xScale(mark)} y={yScale(at(mark)) - MARK_LABEL_GAP} fontSize={LABEL_SIZE} textAnchor="middle" fill="currentColor">
             {recommendedCount(at(mark))}
           </text>
-          <text x={xScale(mark)} y={CHART_HEIGHT - BOTTOM + 15} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.7}>
+          <text x={xScale(mark)} y={CHART_HEIGHT - BOTTOM + AXIS_LABEL_DROP} fontSize={LABEL_SIZE} textAnchor="middle" fill="currentColor" opacity={LABEL_OPACITY}>
             {mark}
           </text>
         </g>
       ))}
       <line x1={xScale(current)} x2={xScale(current)} y1={yScale(at(current))} y2={yScale(0)} stroke="var(--fg)" strokeDasharray="4 3" />
-      <circle cx={xScale(current)} cy={yScale(at(current))} r={6} fill="none" stroke="var(--fg)" strokeWidth={2} />
+      <circle cx={xScale(current)} cy={yScale(at(current))} r={CURRENT_RING_RADIUS} fill="none" stroke="var(--fg)" strokeWidth={2} />
       <circle
         cx={xScale(current)}
         cy={yScale(at(current))}
-        r={16}
+        r={DRAG_RADIUS}
         fill="transparent"
         style={{ cursor: "grab", touchAction: "none" }}
 
@@ -96,7 +109,7 @@ export default function CurveChart({
         onPointerUp={onDragEnd}
         onPointerCancel={onDragEnd}
       />
-      <text x={CHART_WIDTH / 2} y={CHART_HEIGHT - 4} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.7}>
+      <text x={CHART_WIDTH / 2} y={CHART_HEIGHT - TEXT_BASELINE} fontSize={LABEL_SIZE} textAnchor="middle" fill="currentColor" opacity={LABEL_OPACITY}>
         {xLabel}
       </text>
     </svg>

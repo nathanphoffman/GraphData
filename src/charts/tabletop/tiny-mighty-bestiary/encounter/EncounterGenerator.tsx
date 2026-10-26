@@ -44,10 +44,13 @@ function EncounterResult({ result }: { result: Result }) {
   );
 }
 
+/** A party starts at this many players, for both ends of the range. */
+const DEFAULT_PLAYERS: [number, number] = [3, 3];
+
 /** Collapsible box that rolls a random encounter from the creatures passed in. */
 export default function EncounterGenerator({ pool }: { pool: Creature[] }) {
   const [open, setOpen] = useState(true);
-  const [players, setPlayers] = useState<[number, number]>([3, 3]);
+  const [players, setPlayers] = useState<[number, number]>(DEFAULT_PLAYERS);
   const [levels, setLevels] = useState<[number, number]>([0, 0]);
   const [result, setResult] = useState<Result | null>(null);
 

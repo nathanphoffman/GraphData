@@ -1,3 +1,4 @@
+import { ACTIVE_CLASS } from "../../../classNames";
 import type { Lines, ProjectionTool } from "../useProjections";
 import type { Tapered } from "../model/chart";
 import type { Format, Unit } from "../model/units";
@@ -19,7 +20,7 @@ function Segmented<T>({ label, options, value, name, onPick }: { label: string; 
       <div className="segmented">
         {/* One button per choice; the current one is marked active. */}
         {options.map((option) => (
-          <button type="button" key={name(option)} className={option === value ? "active" : ""} onClick={() => onPick(option)}>
+          <button type="button" key={name(option)} className={option === value ? ACTIVE_CLASS : ""} onClick={() => onPick(option)}>
             {name(option)}
           </button>
         ))}

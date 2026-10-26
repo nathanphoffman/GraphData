@@ -1,3 +1,4 @@
+import { TENTH } from "../logic/constants";
 import { purchasePlan, yearsToReach } from "../logic/spending";
 import { cap, type ItemType } from "../logic/items";
 
@@ -91,7 +92,7 @@ export default function SavingsPanel({
               <td>{r.label}</td>
               <td>{money(todayCost)}</td>
               <td>
-                {money(r.cost)} <span className="muted">({Math.round(r.bought * 10) / 10} bought)</span>
+                {money(r.cost)} <span className="muted">({Math.round(r.bought * TENTH) / TENTH} bought)</span>
               </td>
               <td style={{ color: r.saved >= 0 ? "#16a34a" : "#dc2626" }}>
                 <strong>

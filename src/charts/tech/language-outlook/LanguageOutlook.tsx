@@ -2,12 +2,15 @@ import { useMemo, useState } from "react";
 import "./styles.css";
 import data from "../../../../data/language-outlook/language-outlook.json";
 import type { LanguageOutlookData, LanguageRecord, Tooltip } from "./model/types";
-import { HIDDEN_BY_DEFAULT_PREFIXES } from "./model/style";
+import { HIDDEN_BY_DEFAULT_PREFIXES, NEWEST_YEAR_SERIES } from "./model/style";
 import { buildYScale } from "./model/layout";
 import Legend from "./Legend";
 import OutlookSvg from "./OutlookSvg";
 
 const model = data as LanguageOutlookData;
+
+/** The tooltip sits this far right of and below the pointer. */
+const TOOLTIP_OFFSET = 12;
 
 /** Language outlook page: the chart, the legend and the sort. */
 export default function LanguageOutlook() {
@@ -16,7 +19,7 @@ export default function LanguageOutlook() {
     Object.fromEntries([...model.series, ...model.lines].map((key) => [key, !HIDDEN_BY_DEFAULT_PREFIXES.some((prefix) => key.startsWith(prefix))])),
   );
 
-  const [sortKey, setSortKey] = useState("Year 2026");
+  const [sortKey, setSortKey] = useState(NEWEST_YEAR_SERIES);
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   // Sort by the chosen column, highest first, with languages that have no value last.
@@ -50,7 +53,7 @@ export default function LanguageOutlook() {
         model={sorted}
         visible={visible}
         yScale={yScale}
-        onTip={(event, text) => setTooltip({ x: event.clientX + 12, y: event.clientY + 12, text })}
+        onTip={(event, text) => setTooltip({ x: event.clientX + TOOLTIP_OFFSET, y: event.clientY + TOOLTIP_OFFSET, text })}
         onTipHide={() => setTooltip(null)}
       />
       {tooltip && (

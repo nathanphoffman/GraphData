@@ -1,24 +1,35 @@
 import { useMemo } from "react";
+import { DAYS_PER_YEAR } from "../constants";
 import { type ChartInput, CHART_HEIGHT, M, CHART_WIDTH, buildChart } from "../model/chart";
 import type { Lines } from "../useProjections";
 
 type Chart = ReturnType<typeof buildChart>;
+
+/** About this many ticks on each axis, and how far the labels sit from the chart. */
+const TICK_COUNT = 8;
+const LABEL_GAP = 8;
+const LABEL_BASELINE = 4;
+const DATE_LABEL_BOTTOM = 10;
+
+/** Each older trend line fades by this much, and weigh-in dots are drawn at this size. */
+const TREND_FADE = 0.3;
+const DOT_RADIUS = 2.5;
 
 /** Grid lines and tick labels for the chart. */
 function Axes({ chart }: { chart: Chart }) {
   return (
     <>
       {/* One horizontal grid line and label per weight tick. */}
-      {chart.y.ticks(8).map((t) => (
+      {chart.y.ticks(TICK_COUNT).map((t) => (
         <g key={t}>
           <line x1={M.left} x2={CHART_WIDTH - M.right} y1={chart.y(t)} y2={chart.y(t)} className="grid" />
-          <text x={M.left - 8} y={chart.y(t) + 4} textAnchor="end">{t.toFixed(0)}</text>
+          <text x={M.left - LABEL_GAP} y={chart.y(t) + LABEL_BASELINE} textAnchor="end">{t.toFixed(0)}</text>
         </g>
       ))}
 
       {/* One date label per time tick. */}
-      {chart.x.ticks(8).map((t) => (
-        <text key={t.getTime()} x={chart.x(t)} y={CHART_HEIGHT - 10} textAnchor="middle">
+      {chart.x.ticks(TICK_COUNT).map((t) => (
+        <text key={t.getTime()} x={chart.x(t)} y={CHART_HEIGHT - DATE_LABEL_BOTTOM} textAnchor="middle">
           {t.toLocaleDateString(undefined, { month: "short", year: "2-digit", timeZone: "UTC" })}
         </text>
       ))}
@@ -52,7 +63,7 @@ function AllTrends({ trends }: { trends: Chart["allTrends"] }) {
     <>
       {/* Draw the last few trend lines, fading older ones. */}
       {trends.map((trend) => (
-        <g key={trend.back} opacity={1 - trend.back * 0.3}>
+        <g key={trend.back} opacity={1 - trend.back * TREND_FADE}>
           <path d={trend.fat} className="line-all-trend-fat" />
           <path d={trend.adjusted} className="line-all-trend-adjusted" />
           <path d={trend.actual} className="line-all-trend" />
@@ -71,7 +82,7 @@ export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines 
     <svg viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} className="weight-chart" role="img" aria-label="Weight over time">
       <Axes chart={chart} />
       <path d={chart.actual} className="line-actual" />
-      {rangeDays <= 365 && chart.measured.map((p, index) => <circle key={index} cx={p.x} cy={p.y} r={2.5} className="dot" />)}
+      {rangeDays <= DAYS_PER_YEAR && chart.measured.map((p, index) => <circle key={index} cx={p.x} cy={p.y} r={DOT_RADIUS} className="dot" />)}
       <path d={chart.avg3Fat} className="line-avg3-fat" />
       <path d={chart.avg3Adjusted} className="line-avg3-adjusted" />
       <path d={chart.avg3} className="line-avg3" />

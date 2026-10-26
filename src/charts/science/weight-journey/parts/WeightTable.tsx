@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
+import { ACTIVE_CLASS } from "../../../classNames";
 import { averageTint, band, deltaBand } from "../model/bands";
+import { ISO_DATE_LENGTH } from "../constants";
 import { yearly } from "../model/averages";
 import type { Row } from "../model/rows";
 import { type Format, type Unit, pretty, toDate } from "../model/units";
@@ -20,12 +22,13 @@ function Two({ actual, adjusted, fmt, bandOf = band }: { actual: number | null; 
 }
 
 /** Year and quarter of a date, for the period filter. */
-const quarterOf = (isoDate: string) => `${isoDate.slice(0, 4)}-Q${Math.floor((Number(isoDate.slice(5, 7)) - 1) / 3) + 1}`;
+const quarterOf = (isoDate: string) =>
+  `${isoDate.slice(0, YEAR_END)}-Q${Math.floor((Number(isoDate.slice(MONTH_START, MONTH_END)) - 1) / MONTHS_PER_QUARTER) + 1}`;
 
 /** Rows of one period: a quarter (e.g. "2025-Q3"), or by default the last 90 days. */
 function periodRows(newestFirst: Row[], period: string) {
-  if (period !== "default") return newestFirst.filter((r) => quarterOf(r.date) === period);
-  const cutoff = new Date(toDate(newestFirst[0].date).getTime() - 89 * 86_400_000).toISOString().slice(0, 10);
+  if (period !== DEFAULT_PERIOD) return newestFirst.filter((r) => quarterOf(r.date) === period);
+  const cutoff = new Date(toDate(newestFirst[0].date).getTime() - (DEFAULT_PERIOD_DAYS - 1) * DAY_MS).toISOString().slice(0, ISO_DATE_LENGTH);
 
   return newestFirst.filter((r) => r.date >= cutoff);
 }
@@ -87,11 +90,27 @@ const COLUMNS: Column[] = [
   { title: () => "Average of Complete & WMA", note: "Complete average and WMA Projection Projected", kind: "weight", actual: (d) => d.finalAvg, adjusted: (d) => d.finalAvgAdj },
 ];
 
+/** The period filter value that means "the last 90 days". */
+const DEFAULT_PERIOD = "default";
+
+/** Where the year and the month sit in YYYY-MM-DD, and how many months make a quarter. */
+const YEAR_END = 4;
+const MONTH_START = 5;
+const MONTH_END = 7;
+const MONTHS_PER_QUARTER = 3;
+
+/** The table shows this many days by default. */
+const DEFAULT_PERIOD_DAYS = 90;
+const DAY_MS = 86_400_000;
+
+/** Decimal places shown for the muscle columns. */
+const MUSCLE3_DIGITS = 3;
+
 /** Writes a number the way its column shows it. */
 const formatter = (kind: Kind, f: Format) => {
   if (kind === "change") return f.signed;
   if (kind === "muscle2") return (pounds: number) => f.w(pounds, 2);
-  if (kind === "muscle3") return (pounds: number) => f.w(pounds, 3);
+  if (kind === "muscle3") return (pounds: number) => f.w(pounds, MUSCLE3_DIGITS);
 
   return f.w;
 };
@@ -208,7 +227,7 @@ function PeriodPicker({ period, onChange, options }: { period: string; onChange:
         <ul className="period-list">
           {options.map((option) => (
             <li key={option.value}>
-              <button type="button" className={option.value === period ? "active" : ""} onClick={() => { onChange(option.value); setOpen(false); }}>
+              <button type="button" className={option.value === period ? ACTIVE_CLASS : ""} onClick={() => { onChange(option.value); setOpen(false); }}>
                 <span className="period-square" style={{ background: option.color }} /> {option.label}
               </button>
             </li>
@@ -221,7 +240,7 @@ function PeriodPicker({ period, onChange, options }: { period: string; onChange:
 
 /** Daily table with a period filter, showing the last 90 days by default. */
 export function WeightTable({ unit, f, dailyRows }: { unit: Unit; f: Format; dailyRows: Row[] }) {
-  const [period, setPeriod] = useState("default");
+  const [period, setPeriod] = useState(DEFAULT_PERIOD);
   const [show, setShow] = useState<Show>({ muscleDaily: false, muscleTotal: false, dayAverages: false, weightLoss: false, allAverages: true, wma: true });
   const { newestFirst, rows, quarters } = useTableRows(period, dailyRows);
 
@@ -231,7 +250,7 @@ export function WeightTable({ unit, f, dailyRows }: { unit: Unit; f: Format; dai
   const periodRanges = useMemo(() => columns.map((column) => rangeOf(rows, column)), [columns, rows]);
 
   // Average colour of every shown value over each period, for the dropdown squares.
-  const options = [{ value: "default", label: "[default] last 90 days" }, ...quarters.map((quarter) => ({ value: quarter, label: quarter.replace("-", " ") }))].map((option) => ({
+  const options = [{ value: DEFAULT_PERIOD, label: "[default] last 90 days" }, ...quarters.map((quarter) => ({ value: quarter, label: quarter.replace("-", " ") }))].map((option) => ({
     ...option,
     color: averageTint(periodRows(newestFirst, option.value).flatMap((r) => bandClasses(r, show)), 1),
   }));

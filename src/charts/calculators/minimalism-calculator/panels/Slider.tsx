@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FULL_TURN_DEGREES, HALF_TURN_DEGREES } from "../logic/constants";
 
 interface SliderProps {
   id: string;
@@ -21,9 +22,14 @@ const R = 62;
 const START = 135; // degrees, clockwise from 3 o'clock; the gap sits at the bottom
 const SWEEP = 270;
 
+/** The knob and the value text on the dial, and how many decimals a snapped value keeps. */
+const KNOB_RADIUS = 9;
+const VALUE_BASELINE = 6;
+const SNAP_DIGITS = 6;
+
 /** Point on the dial's circle at the given angle, so the arc and the knob share one calculation. */
 function point(degrees: number, r = R) {
-  const rad = (degrees * Math.PI) / 180;
+  const rad = (degrees * Math.PI) / HALF_TURN_DEGREES;
 
   return { x: C + r * Math.cos(rad), y: C + r * Math.sin(rad) };
 }
@@ -32,7 +38,7 @@ function point(degrees: number, r = R) {
 function arc(fromDeg: number, toDeg: number) {
   const a = point(fromDeg);
   const b = point(toDeg);
-  const large = toDeg - fromDeg > 180 ? 1 : 0;
+  const large = toDeg - fromDeg > HALF_TURN_DEGREES ? 1 : 0;
 
   return `M ${a.x} ${a.y} A ${R} ${R} 0 ${large} 1 ${b.x} ${b.y}`;
 }
@@ -70,7 +76,7 @@ export default function Slider({
   const setFromFraction = (f: number) => {
     const rawValue = min + Math.min(1, Math.max(0, f)) * (max - min);
     const snapped = Math.round((rawValue - min) / step) * step + min;
-    onChange(Math.min(max, Math.max(min, Number(snapped.toFixed(6)))));
+    onChange(Math.min(max, Math.max(min, Number(snapped.toFixed(SNAP_DIGITS)))));
   };
 
   // Work out where on the dial the pointer is and set the value from it.
@@ -78,11 +84,11 @@ export default function Slider({
     const rect = event.currentTarget.getBoundingClientRect();
     const xPos = event.clientX - (rect.left + rect.width / 2);
     const yPos = event.clientY - (rect.top + rect.height / 2);
-    let degrees = (Math.atan2(yPos, xPos) * 180) / Math.PI - START;
-    degrees = ((degrees % 360) + 360) % 360;
+    let degrees = (Math.atan2(yPos, xPos) * HALF_TURN_DEGREES) / Math.PI - START;
+    degrees = ((degrees % FULL_TURN_DEGREES) + FULL_TURN_DEGREES) % FULL_TURN_DEGREES;
 
     // Inside the bottom gap: snap to whichever end is closer.
-    if (degrees > SWEEP) degrees = degrees - SWEEP < (360 - SWEEP) / 2 ? SWEEP : 0;
+    if (degrees > SWEEP) degrees = degrees - SWEEP < (FULL_TURN_DEGREES - SWEEP) / 2 ? SWEEP : 0;
     setFromFraction(degrees / SWEEP);
   };
 
@@ -138,8 +144,8 @@ export default function Slider({
         {frac > 0 && (
           <path className="mini-dial-fill" d={arc(START, START + frac * SWEEP)} />
         )}
-        <circle className="mini-dial-knob" cx={knob.x} cy={knob.y} r={9} />
-        <text className="mini-dial-value" x={C} y={C + 6} textAnchor="middle">
+        <circle className="mini-dial-knob" cx={knob.x} cy={knob.y} r={KNOB_RADIUS} />
+        <text className="mini-dial-value" x={C} y={C + VALUE_BASELINE} textAnchor="middle">
           {display}
         </text>
       </svg>

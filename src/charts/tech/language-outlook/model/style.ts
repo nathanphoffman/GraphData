@@ -2,6 +2,9 @@
 
 const YEAR_GREYS = ["#111111", "#333333", "#555555", "#777777", "#999999", "#bbbbbb", "#dddddd", "#ffffff"];
 
+/** The newest year of data: the chart sorts by it first and draws its dots bigger. */
+export const NEWEST_YEAR_SERIES = "Year 2026";
+
 export const PROJECTION_PREFIX = "Projection";
 export const PROJECTION_CHANGE_KEY = "Projection change";
 export const FIX_PREFIX = "Projection with";

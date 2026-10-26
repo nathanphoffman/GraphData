@@ -1,6 +1,10 @@
 import { Fragment } from "react";
 import { estimateScore, knownScore } from "./calculate";
-import type { AllIntelligenceData, ScoredSubject, Settings } from "./types";
+import { NAME_KEY } from "../../useSort";
+import { MEASURED_KEY, OVERALL_KEY, type AllIntelligenceData, type ScoredSubject, type Settings } from "./types";
+
+/** Columns in the table besides the groups: the expander, name, and so on. */
+const FIXED_COLUMNS = 4;
 
 export type SortKey = "name" | "overall" | "measured" | string;
 
@@ -31,13 +35,13 @@ function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllI
     <thead>
       <tr>
         <th>#</th>
-        <th className="sortable" onClick={() => onSort("name")}>Name{arrow("name")}</th>
-        <th className="sortable" onClick={() => onSort("overall")}>Score{arrow("overall")}</th>
+        <th className="sortable" onClick={() => onSort(NAME_KEY)}>Name{arrow(NAME_KEY)}</th>
+        <th className="sortable" onClick={() => onSort(OVERALL_KEY)}>Score{arrow(OVERALL_KEY)}</th>
         {/* One sortable header cell per group of columns. */}
         {model.groups.map((group) => (
           <th key={group.id} className="sortable allint-group-th" onClick={() => onSort(group.id)}>{group.name.replace("& ", "&\n")}{arrow(group.id)}</th>
         ))}
-        <th className="sortable" onClick={() => onSort("measured")}>Measured{arrow("measured")}</th>
+        <th className="sortable" onClick={() => onSort(MEASURED_KEY)}>Measured{arrow(MEASURED_KEY)}</th>
       </tr>
     </thead>
   );
@@ -63,7 +67,7 @@ function ColumnScore({ model, row, settings, column }: { model: AllIntelligenceD
 function DetailRow({ model, row, settings }: { model: AllIntelligenceData; row: ScoredSubject; settings: Settings }) {
   return (
     <tr className="allint-detail">
-      <td colSpan={4 + model.groups.length}>
+      <td colSpan={FIXED_COLUMNS + model.groups.length}>
         <div className="allint-detail-grid">
           {/* One block of detail per group, shown when the row is expanded. */}
           {model.groups.map((group) => (

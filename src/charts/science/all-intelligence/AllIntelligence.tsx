@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
-import { useSort } from "../../useSort";
+import { NAME_KEY, useSort } from "../../useSort";
 import data from "../../../../data/intelligence/all-intelligence.json";
-import type { AllIntelligenceData, ScoredSubject, Settings } from "./types";
+import { MEASURED_KEY, OVERALL_KEY, type AllIntelligenceData, type ScoredSubject, type Settings } from "./types";
 import { DEFAULT_SETTINGS, scoreSubjects } from "./calculate";
 import { ResultsTable, type SortKey } from "./ResultsTable";
 import { SettingsPanel } from "./SettingsPanel";
@@ -11,11 +11,11 @@ const model = data as AllIntelligenceData;
 
 /** Missing scores count as -1 so they always land at the bottom when sorting highest first. */
 function sortValue(scoredSubject: ScoredSubject, sortKey: SortKey): number | string {
-  if (sortKey === "name") return scoredSubject.subject.name;
+  if (sortKey === NAME_KEY) return scoredSubject.subject.name;
 
-  if (sortKey === "overall") return scoredSubject.overall ?? -1;
+  if (sortKey === OVERALL_KEY) return scoredSubject.overall ?? -1;
 
-  if (sortKey === "measured") return scoredSubject.measured;
+  if (sortKey === MEASURED_KEY) return scoredSubject.measured;
 
   return scoredSubject.groups[sortKey] ?? -1;
 }
@@ -32,7 +32,7 @@ function compareRows(scoredSubject: ScoredSubject, second: ScoredSubject, sortKe
 /** All intelligence page: holds the settings, sort and open rows and passes them to the table. */
 export default function AllIntelligence() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
-  const { sortKey, ascending, sortBy } = useSort<SortKey>("overall");
+  const { sortKey, ascending, sortBy } = useSort<SortKey>(OVERALL_KEY);
   const [open, setOpen] = useState<Set<string>>(new Set());
   const rows = useMemo(() => scoreSubjects(model, settings).sort((scoredSubject, second) => compareRows(scoredSubject, second, sortKey, ascending)), [settings, sortKey, ascending]);
 

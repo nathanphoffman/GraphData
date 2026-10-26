@@ -1,4 +1,4 @@
-import { COLORS, CELL_H } from "../model/style";
+import { BOLD, CELL_CENTER, CELL_H, CELL_NAME_BOX, COLORS, EXAMPLE_Y, FONT_SIZE } from "../model/style";
 import { GRID_Y0, cellNameWidth, toX } from "../model/layout";
 import type { Cell } from "../model/types";
 
@@ -9,7 +9,7 @@ export default function CellNames({ cells, showExamples }: { cells: Cell[]; show
     <>
       {/* Draw each cell's name; with examples on, also its authoritarian and democratic examples. */}
       {cells.map((cell) => {
-        const centerX = toX(cell.col + 0.5);
+        const centerX = toX(cell.col + CELL_CENTER);
         const topEdge = GRID_Y0 + cell.row * CELL_H;
         const w = cellNameWidth(cell.name);
 
@@ -23,31 +23,31 @@ export default function CellNames({ cells, showExamples }: { cells: Cell[]; show
 
         const [authName, authNote] = split(cell.auth);
         const [demName, demNote] = split(cell.dem);
-        const demY = authNote ? topEdge + 88 : topEdge + 70;
+        const demY = topEdge + (authNote ? EXAMPLE_Y.demAfterNote : EXAMPLE_Y.dem);
 
         return (
           <g key={cell.name}>
-            <rect x={centerX - w / 2} y={topEdge + 5} width={w} height={24} rx={5} fill="#fff" fillOpacity={0.75} />
-            <text x={centerX} y={topEdge + 23} textAnchor="middle" fontSize={15} fontWeight={700} fill={COLORS.cellName}>
+            <rect x={centerX - w / 2} y={topEdge + CELL_NAME_BOX.top} width={w} height={CELL_NAME_BOX.height} rx={CELL_NAME_BOX.radius} fill="#fff" fillOpacity={CELL_NAME_BOX.opacity} />
+            <text x={centerX} y={topEdge + CELL_NAME_BOX.top + CELL_NAME_BOX.textBaseline} textAnchor="middle" fontSize={FONT_SIZE.cellName} fontWeight={BOLD} fill={COLORS.cellName}>
               {cell.name}
             </text>
             {showExamples && (
               <>
-                <text x={centerX} y={topEdge + 50} textAnchor="middle" fontSize={13}>
-                  <tspan fontWeight={700} fill={COLORS.auth}>Auth: </tspan>
+                <text x={centerX} y={topEdge + EXAMPLE_Y.auth} textAnchor="middle" fontSize={FONT_SIZE.example}>
+                  <tspan fontWeight={BOLD} fill={COLORS.auth}>Auth: </tspan>
                   <tspan fill="#333">{authName}</tspan>
                 </text>
                 {authNote && (
-                  <text x={centerX} y={topEdge + 68} textAnchor="middle" fontSize={12} fill="#555">
+                  <text x={centerX} y={topEdge + EXAMPLE_Y.authNote} textAnchor="middle" fontSize={FONT_SIZE.note} fill="#555">
                     {authNote}
                   </text>
                 )}
-                <text x={centerX} y={demY} textAnchor="middle" fontSize={13}>
-                  <tspan fontWeight={700} fill={COLORS.dem}>Dem: </tspan>
+                <text x={centerX} y={demY} textAnchor="middle" fontSize={FONT_SIZE.example}>
+                  <tspan fontWeight={BOLD} fill={COLORS.dem}>Dem: </tspan>
                   <tspan fill="#333">{demName}</tspan>
                 </text>
                 {demNote && (
-                  <text x={centerX} y={demY + 18} textAnchor="middle" fontSize={12} fill="#555">
+                  <text x={centerX} y={demY + EXAMPLE_Y.noteGap} textAnchor="middle" fontSize={FONT_SIZE.note} fill="#555">
                     {demNote}
                   </text>
                 )}

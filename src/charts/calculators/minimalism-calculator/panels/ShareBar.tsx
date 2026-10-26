@@ -1,5 +1,9 @@
 import { useState } from "react";
+import { MAX_TITLE_LENGTH } from "../logic/constants";
 import { ITEM_TYPES } from "../logic/items";
+
+/** How long the "Copied" message stays. */
+const COPIED_MESSAGE_MS = 2000;
 
 interface Props {
   title: string;
@@ -20,7 +24,7 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
+      window.setTimeout(() => setCopied(false), COPIED_MESSAGE_MS);
     } catch (error) {
       console.warn("Clipboard copy failed, falling back to prompt", error);
       window.prompt("Copy this link:", url);
@@ -31,7 +35,7 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
     <div className="panel mini-sharebar">
       <div>
         <label htmlFor="mini-title">Title (optional)</label>
-        <input id="mini-title" type="text" maxLength={80} placeholder="e.g. Jack Smith's Board Games" value={title} onChange={(event) => onTitle(event.target.value)} />
+        <input id="mini-title" type="text" maxLength={MAX_TITLE_LENGTH} placeholder="e.g. Jack Smith's Board Games" value={title} onChange={(event) => onTitle(event.target.value)} />
       </div>
       <div>
         <label htmlFor="mini-type">What are you minimizing?</label>
