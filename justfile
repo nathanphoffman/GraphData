@@ -8,3 +8,7 @@ sync-prod *args:
 # Recount lines and re-score code quality for every project, then save them in the local database. Run sync-prod afterwards to push them live.
 refresh-local-line-quality:
     node scripts/line-quality-sync.ts --write-db
+
+# Rewrite the ranking and weight-journey JSON files from the local database and the live site (the newer copy of each item or weigh-in wins), as a backup in git. Pass --local-only to skip the live site.
+backup-json *args:
+    node scripts/backup-to-json.mjs {{args}}

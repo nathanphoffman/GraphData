@@ -9,39 +9,18 @@
 import { db } from "../server/db.js";
 import "../server/rankings.js";
 import "../server/weights.js";
+import { connectToProd } from "./prod.mjs";
 
-const { PROD_URL, PROD_USERNAME, PROD_PASSWORD } = process.env;
 const dryRun = process.argv.includes("--dry-run");
 const preferAt = process.argv.indexOf("--prefer");
 const prefer = preferAt === -1 ? undefined : process.argv[preferAt + 1];
 
-if (!PROD_URL || !PROD_USERNAME || !PROD_PASSWORD) {
-  console.error("Set PROD_URL, PROD_USERNAME and PROD_PASSWORD first.");
-  process.exit(1);
-}
 if (prefer !== undefined && prefer !== "local" && prefer !== "remote") {
   console.error("--prefer must be local or remote.");
   process.exit(1);
 }
 
-const base = PROD_URL.replace(/\/+$/, "");
-let cookie = "";
-
-/** Call the live site's API; throws with the server's message when it says no. */
-async function call(method, path, body) {
-  const response = await fetch(base + path, {
-    method,
-    headers: { "Content-Type": "application/json", ...(cookie && { Cookie: cookie }) },
-    body: body && JSON.stringify(body),
-  });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error ?? data.message ?? `${response.status} ${response.statusText}`);
-
-  return { data, response };
-}
-
-const { response: login } = await call("POST", "/api/login", { username: PROD_USERNAME, password: PROD_PASSWORD });
-cookie = login.headers.get("set-cookie").split(";")[0];
+const call = await connectToProd();
 
 const stats = { pushed: 0, pulled: 0, same: 0, conflicts: 0, failed: 0 };
 
