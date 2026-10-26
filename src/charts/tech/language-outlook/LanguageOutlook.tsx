@@ -62,6 +62,7 @@ export default function LanguageOutlook() {
           {tooltip.text}
         </div>
       )}
+
     </div>
   );
 }

@@ -49,6 +49,7 @@ describe("maintenancePercent", () => {
     for (const [n, percent] of [[1, 100], [6, 95], [6.75, 85], [7, 65], [8, 5], [10, 0]]) {
       expect(Math.abs(maintenancePercent(n) - percent)).toBeLessThan(5);
     }
+
     expect(maintenancePercent(7.5)).toBeLessThan(maintenancePercent(7));
   });
 });

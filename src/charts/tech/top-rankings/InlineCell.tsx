@@ -12,7 +12,9 @@ export function parseCell(column: Column, text: string): number | string | null 
   if (column.weight === undefined) return infoValue(text);
 
   const number = Number(text);
+
   if (text.trim() === "" || !Number.isFinite(number)) throw new Error(`${column.label} must be a number`);
+
   if (column.curve === undefined && (number < 0 || number > HIGHEST_RATING)) throw new Error(`${column.label} must be from 0 to ${HIGHEST_RATING}`);
 
   return number;
@@ -31,10 +33,12 @@ export function InlineCell({ column, itemName, value, canEdit, onSave, style, ch
   const [text, setText] = useState<string | null>(null);
   const [error, setError] = useState("");
 
+  // Save only when the text changed, so clicking in and out of a cell does not send a request; a bad value keeps its red outline instead of being lost.
   const finish = async () => {
     if (text === null) return;
     const typed = text;
     setText(null);
+
     if (typed === String(value ?? "")) return;
 
     try {
@@ -49,6 +53,7 @@ export function InlineCell({ column, itemName, value, canEdit, onSave, style, ch
 
   const keys = (event: KeyboardEvent) => {
     if (event.key === ENTER_KEY) void finish();
+
     if (event.key === "Escape") setText(null);
   };
 
@@ -64,6 +69,7 @@ export function InlineCell({ column, itemName, value, canEdit, onSave, style, ch
           <input className="rankings-cell-input" ref={(input) => input?.focus()} value={text} onChange={(changeEvent) => setText(changeEvent.target.value)} onKeyDown={keys} onBlur={() => void finish()} />
         </>
       )}
+
     </td>
   );
 }

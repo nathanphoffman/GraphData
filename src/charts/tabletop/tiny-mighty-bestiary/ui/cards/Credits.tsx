@@ -11,6 +11,7 @@ export default function Credits() {
         community. The contributors of Tiny Mighty RPG had nothing to do with this project and do not endorse it.
         The original Tiny Mighty RPG was made entirely by humans. This bestiary is an
         adaptation of Tiny Mighty RPG and contains changes to the original: its creature stats and artwork were generated
+
         with AI. This project is by Nathan Hoffman, the original author
         of Tiny Mighty, who has not profited and will not profit from this bestiary. It is just for fun and free, and is released under{" "}
         <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">

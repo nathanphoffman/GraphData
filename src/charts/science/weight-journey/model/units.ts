@@ -11,7 +11,9 @@ export const pretty = (isoDate: string) =>
 /** Formatters for the chosen unit; weights are stored in lb and converted on display. */
 export function makeFormat(unit: Unit) {
   const unitFactor = unit === "kg" ? KG_PER_LB : 1;
+
   const width = (pounds: number, digits = 1) => (pounds * unitFactor).toFixed(digits);
+
   const signed = (pounds: number) => `${pounds > 0 ? "+" : ""}${width(pounds)}`;
 
   return { k: unitFactor, w: width, signed };

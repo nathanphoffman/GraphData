@@ -51,6 +51,7 @@ describe("makeXAt", () => {
 
 describe("lineSegments", () => {
   const xOfIndex = (index: number) => index * 10;
+
   const yOfValue = (value: number) => value;
 
   it("splits a line wherever a value is missing", () => {

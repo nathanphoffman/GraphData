@@ -27,6 +27,7 @@ export interface ChartEntry {
   category: Category;
   description: string;
   component: ComponentType;
+
   /** Not listed on the home page; only reachable by typing the URL. */
   unlisted?: boolean;
 }
@@ -134,7 +135,7 @@ export const charts: ChartEntry[] = [
   },
 ];
 
-/** Find the chart for a URL id; undefined for an unknown address so the page can show a not-found message. */
+/** Returns undefined instead of throwing for an unknown id, because a mistyped address is normal and the page can show a not-found message. */
 export function findChart(identifier: string | undefined): ChartEntry | undefined {
   return charts.find((chart) => chart.id === identifier);
 }

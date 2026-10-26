@@ -38,6 +38,7 @@ function Journey({ model }: { model: Model }) {
 /** Fetches the weigh-ins from the API, then shows the journey and the editor. */
 export default function WeightJourney() {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+
   // Replaced on every reload so the chart and table recalculate from the new weigh-ins.
   const [model, setModel] = useState<Model | null>(null);
 
@@ -54,6 +55,7 @@ export default function WeightJourney() {
   }, [load]);
 
   if (status === "error") return <p>Could not load the weights.</p>;
+
   if (status === "loading" || !model) return <p>Loading weights…</p>;
 
   return (

@@ -94,6 +94,7 @@ export default function DndSales() {
             </text>
           </g>
         ))}
+
       </svg>
 
       <h2>How each number was reached</h2>
@@ -115,10 +116,13 @@ export default function DndSales() {
                   </a>
                 </span>
               ))}
+
             </div>
           )}
+
         </div>
       ))}
+
     </div>
   );
 }

@@ -66,6 +66,7 @@ export default function NeuronIntelligence() {
             degrades
           </p>
         )}
+
         <Slider label="Functional Exponent (k):" value={exponents.k} min={FUNCTIONAL_RANGE.min} max={FUNCTIONAL_RANGE.max} onChange={updateExponent("k")} />
         <p className="neuron-formula">
           Stage 2: Intelligence ∝ Score<sup>{exponents.k.toFixed(2)}</sup>
@@ -102,6 +103,7 @@ export default function NeuronIntelligence() {
                 <td className="neuron-score">{scoredAnimal.humanPercent.toFixed(2)}%</td>
               </tr>
             ))}
+
           </tbody>
         </table>
       </div>

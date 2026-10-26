@@ -26,6 +26,7 @@ function StatBlock({ tier }: { tier: Tier }) {
           <dd>{value}</dd>
         </div>
       ))}
+
     </dl>
   );
 }
@@ -45,6 +46,7 @@ function SkillList({ creature }: { creature: Creature }) {
           {skill.note && ` (${skill.note})`}
         </span>
       ))}
+
       {creature.skillNote && `. ${creature.skillNote}`}
     </p>
   );
@@ -61,6 +63,7 @@ function PowerList({ creature }: { creature: Creature }) {
           {power.uses === 1 ? "" : "s"}): {power.text}
         </p>
       ))}
+
     </>
   );
 }
@@ -90,6 +93,7 @@ export default function CreatureCard({ creature }: { creature: Creature }) {
           <strong>Flying.</strong> Costs 1 extra use if a player summons or becomes this creature.
         </p>
       )}
+
       <PowerList creature={creature} />
       {tier.extended && <p className="bestiary-extended">Stats extended past the printed combat table.</p>}
       <p className="bestiary-tactics">

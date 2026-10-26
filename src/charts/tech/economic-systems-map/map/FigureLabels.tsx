@@ -25,6 +25,7 @@ export default function FigureLabels({ labels }: { labels: PlacedLabel[] }) {
           </g>
         );
       })}
+
     </>
   );
 }

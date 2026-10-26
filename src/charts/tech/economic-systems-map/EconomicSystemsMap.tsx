@@ -30,6 +30,7 @@ export default function EconomicSystemsMap() {
     ? model.cells.filter(
         (cell) => Math.abs(cell.col - selectedCell.col) + Math.abs(cell.row - selectedCell.row) === 1,
       )
+
     : [];
   const activeCombo: Combo | undefined =
     selected && partner ? combos.find((combo) => combo.cells.includes(selected) && combo.cells.includes(partner)) : undefined;
@@ -49,6 +50,7 @@ export default function EconomicSystemsMap() {
         {model.theory.paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
+
         <p className="views-note">{model.theory.caveat}</p>
       </section>
 
@@ -71,6 +73,7 @@ export default function EconomicSystemsMap() {
       ) : (
         <p className="muted">Click a cell to see the common views of that system by topic.</p>
       )}
+
     </div>
   );
 }

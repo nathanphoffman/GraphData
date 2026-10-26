@@ -1,6 +1,7 @@
 export interface DayWeight {
   date: string;
   weight: number;
+
   /** true when there was no weigh-in and the value is interpolated */
   estimated: boolean;
 }
@@ -9,8 +10,10 @@ export interface Averages {
   avg3: number;
   avg30: number;
   avg365: number;
+
   /** (3 x avg3 + 2 x avg30 + 1 x avg365) / 6 */
   blended: number;
+
   /** blended now minus blended 30 days ago; null for the first 30 days */
   monthly: number | null;
 }
@@ -18,6 +21,7 @@ export interface Averages {
 export interface Muscle {
   /** pounds of muscle gained on this day */
   muscleDaily: number;
+
   /** pounds of muscle gained from MUSCLE_START up to and including this day */
   muscleTotal: number;
 }
@@ -115,6 +119,7 @@ export function project(days: DayWeight[], fitDays: number, aheadDays: number): 
 
   // Sums used for a least-squares fit over the recent days (x is the day index).
   const power = (exponent: number) => recent.reduce((total, _unused, index) => total + index ** exponent, 0);
+
   // Weighted sum used by the curve fit: each day's weight times its index to the power k.
   const weighted = (exponent: number) => recent.reduce((total, dayRecord, index) => total + dayRecord.weight * index ** exponent, 0);
   const [c, b, a] = solve3(
@@ -193,8 +198,10 @@ export function addMuscle<T extends DayWeight>(days: T[]): (T & Muscle)[] {
 export interface TargetPoint {
   date: string;
   weight: number;
+
   /** weight minus all muscle gained so far, including the projected gain */
   adjusted: number;
+
   /** total muscle gained by this day, including the projected gain */
   muscle: number;
 }

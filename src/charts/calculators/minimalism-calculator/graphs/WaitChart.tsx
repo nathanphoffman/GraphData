@@ -53,6 +53,7 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
             />
           </div>
         ))}
+
       </div>
       <div className="mini-bar-labels">
         {/* One label per bucket under the bars; the line break lets "Every ..." wrap onto two lines. */}
@@ -61,6 +62,7 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
             {gapLabel(bucket).replace(/^Every /, "Every\n")} {/* Put a line break after "Every" so the label wraps onto two lines (the regex only matches at the start). */}
           </div>
         ))}
+
       </div>
     </div>
   );

@@ -46,6 +46,7 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
               {itemType.name}
             </option>
           ))}
+
         </select>
       </div>
       <button type="button" onClick={copyLink}>

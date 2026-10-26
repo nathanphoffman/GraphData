@@ -34,6 +34,7 @@ export default function AllIntelligence() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const { sortKey, ascending, sortBy } = useSort<SortKey>(OVERALL_KEY);
   const [open, setOpen] = useState<Set<string>>(new Set());
+
   // Score every subject, then sort the rows by the chosen column in the chosen direction.
   const rows = useMemo(() => scoreSubjects(model, settings).sort((scoredSubject, second) => compareRows(scoredSubject, second, sortKey, ascending)), [settings, sortKey, ascending]);
 

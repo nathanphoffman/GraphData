@@ -22,6 +22,7 @@ export function setWeights(weights: [string, number][]) {
     FIT_DAYS,
     FIT_AHEAD_DAYS,
   );
+
   ({ fit: fittedCurve, future } = project(days, FIT_DAYS, FIT_AHEAD_DAYS));
   dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
 
@@ -61,8 +62,10 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
   const avg3Adj = baseRows.map((baseRow) => baseRow.adj.avg3);
   const recent = avg3.map((_unused, index) => recentRate(avg3, index, step));
   const recentAdj = avg3Adj.map((_unused, index) => recentRate(avg3Adj, index, step));
+
   // Weighted moving average of the weight for each row, using the last few rows.
   const weightWma = baseRows.map((_unused, index) => weightedAverage(baseRows.map((tableRow) => tableRow.weight), index, smoothingRows));
+
   // The same with the muscle gained so far taken off the weight.
   const weightWmaAdj = baseRows.map((_unused, index) => weightedAverage(baseRows.map((tableRow) => tableRow.weight - tableRow.muscleTotal), index, smoothingRows));
   const recent3s = recent.map((_unused, index) => last3(recent, index));

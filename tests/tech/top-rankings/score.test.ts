@@ -58,6 +58,7 @@ describe("fractionBetween", () => {
 describe("grade", () => {
   // Weights 3, 2, 1: the best possible score is (3 + 2 + 1) x 25 and the lowest is (3 + 2 + 1) x 1.
   const rated = [{ label: "A", weight: 3 }, { label: "B", weight: 2 }, { label: "C", weight: 1 }];
+
   const gradeOfAll = (rating: number) => grade(rated.reduce((total, column) => total + rating ** 2 * (column.weight ?? 0), 0), rated);
 
   it("knows the best and lowest possible scores", () => {
@@ -122,6 +123,7 @@ describe("effectiveRating curves", () => {
     cut: { type: "halving", start: 5 },
     first: { type: "halving", start: 1 },
   } as const;
+
   const rate = (name: keyof typeof curves, value: number) => effectiveRating({ label: "A", weight: 1, curve: curves[name] }, value);
 
   it("rates a weight of 2 best, falling off faster below it than above", () => {

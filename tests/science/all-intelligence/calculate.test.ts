@@ -3,6 +3,7 @@ import { estimateScore, knownScore } from "../../../src/charts/science/all-intel
 import type { AllIntelligenceData, Subject } from "../../../src/charts/science/all-intelligence/types";
 
 const subject = (scores: Record<string, number>, outputPrice?: number) => ({ scores, outputPrice }) as unknown as Subject;
+
 const data = (estimateFactors: Record<string, number>) => ({ estimateFactors }) as unknown as AllIntelligenceData;
 
 describe("knownScore", () => {

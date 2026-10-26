@@ -32,6 +32,7 @@ export default function RangeSlider({ stops, value, onChange, labelPrefix }: Pro
           step={1}
           value={lo}
           aria-label={`Minimum ${labelPrefix}`}
+
           // When both handles sit at the top end, the min handle must be on top or it can't be dragged back.
           style={{ zIndex: lo > last / 2 ? TOP_Z_INDEX : 1 }}
           onChange={(event) => onChange([Math.min(Number(event.target.value), hi), hi])}

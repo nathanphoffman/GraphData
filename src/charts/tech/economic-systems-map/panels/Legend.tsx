@@ -26,6 +26,7 @@ export default function Legend({ model, showExamples }: Props) {
             </g>
           );
         })}
+
       <g>
         <rect x={GRID_X0 + LEGEND.swatchX} y={GRID_Y0 + GRID_H + LEGEND.swatchY} width={LEGEND.swatchWidth} height={LEGEND.swatchHeight} fill={COLORS.overlay} fillOpacity={LEGEND.swatchOpacity} stroke={COLORS.overlay} strokeWidth={LEGEND.swatchStroke} strokeDasharray="5 3" />
         <text x={GRID_X0 + LEGEND.overlayLabelX} y={GRID_Y0 + GRID_H + LEGEND.overlayLabelY} fontSize={FONT_SIZE.legend} fill="#333">

@@ -58,8 +58,10 @@ export default function GridCells({ model, onSelect }: Props) {
               onSelect(cell.name);
             }
           }}
+
         />
       ))}
+
     </>
   );
 }

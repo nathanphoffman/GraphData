@@ -3,12 +3,16 @@ export type Point = [number, number];
 
 export interface Cell {
   name: string;
+
   /** 0 = Communal ... 3 = Market. */
   col: number;
+
   /** 0 = Large (top) ... 2 = Small (bottom). */
   row: number;
+
   /** Authoritarian historical example. */
   auth: string;
+
   /** Democratic historical example. */
   dem: string;
 }

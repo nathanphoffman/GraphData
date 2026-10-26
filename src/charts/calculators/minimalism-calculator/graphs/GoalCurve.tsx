@@ -7,9 +7,11 @@ import { PER_YEAR_STOPS } from "../logic/stops";
 interface Props {
   /** Your own uses per year (weekly uses x 52 x your share). */
   yearlyUses: number;
+
   /** Uses per year you want from each item. */
   goal: number;
   item: ItemType;
+
   /** Called while you drag the ring, with the nearest slider value. */
   onGoal: (goal: number) => void;
 }
@@ -23,6 +25,7 @@ export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
   // The left edge of the axis is held still while dragging so the chart doesn't rescale under the pointer.
   const [frozenMin, setFrozenMin] = useState<number | null>(null);
   const xMin = frozenMin ?? Math.min(1, goal);
+
   const countAt = (xValue: number) => yearlyUses / xValue;
   const double = goal * 2;
 

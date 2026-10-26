@@ -5,7 +5,7 @@ import { useEditor } from "../../../auth/useEditor";
 import { infoValue } from "./InlineCell";
 import type { Ranking } from "./score";
 
-/** Rated columns take numbers; information columns take any text. */
+/** Rated columns use a number box so letters cannot be typed, while information columns need free text for values like "2027?". */
 const INPUT_TYPES = { rated: "number", info: "text" };
 
 /** Pick an item by name (or type a new one) and add, change or remove it. */
@@ -15,6 +15,7 @@ export function RankingEditor({ ranking, onSaved }: { ranking: Ranking; onSaved:
   // Fields are keyed by column number.
   const existing = ranking.items.find((item) => item.name === name);
   const editor = useEditor(existing && Object.fromEntries(existing.values.map((value, index) => [index, String(value ?? "")])), onSaved);
+
   // The API address of this item; the name is escaped so any characters are safe.
   const itemUrl = `/api/rankings/${ranking.id}/items/${encodeURIComponent(name)}`;
 
@@ -33,6 +34,7 @@ export function RankingEditor({ ranking, onSaved }: { ranking: Ranking; onSaved:
         {ranking.items.map((item) => (
           <option key={item.name} value={item.name} />
         ))}
+
       </datalist>
       <div className="edit-grid">
         {ranking.columns.map((column, index) => ( // One input per column.
@@ -48,6 +50,7 @@ export function RankingEditor({ ranking, onSaved }: { ranking: Ranking; onSaved:
             />
           </label>
         ))}
+
       </div>
       <EditButtons exists={editor.exists} canSave={complete} onRemove={() => editor.remove(callApi(itemUrl, "DELETE"))} message={editor.message} />
     </form>

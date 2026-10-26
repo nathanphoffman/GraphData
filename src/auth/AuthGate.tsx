@@ -30,6 +30,7 @@ export function AuthGate({ auth, children }: { auth?: ReturnType<typeof useAuth>
   const { user, login, logout } = auth ?? ownAuth;
 
   if (user === undefined) return null;
+
   if (user === null) return <LoginForm onLogin={login} />;
 
   return <>{children(user, () => void logout())}</>;

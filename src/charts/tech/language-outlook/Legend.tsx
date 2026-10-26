@@ -20,6 +20,7 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
   return (
     <div className="legend-key" aria-hidden="true">
       {keys.map((seriesKey) => { // One legend entry per series.
+
         if (seriesKey.startsWith(PROJECTION_PREFIX)) {
           // projection dots come with a faint arrow, as on the chart
           const color = seriesColor(seriesKey, model.series.indexOf(seriesKey));
@@ -68,10 +69,12 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
                 ? { backgroundImage: `radial-gradient(circle, ${color} 2px, transparent 2.5px)`, backgroundSize: `${period + 2}px 100%` }
                 : { background: color }
             }
+
             title={LINE_LABELS[seriesKey] ?? seriesKey}
           />
         );
       })}
+
     </div>
   );
 }
@@ -107,8 +110,10 @@ export default function Legend({ model, visible, onToggle, sortKey, onSort }: Pr
                   {labelOf(seriesKey)}
                 </option>
               ))}
+
             </optgroup>
           ))}
+
         </select>
       </fieldset>
       {sections.map(({ title, description, keys }) => ( // One box of checkboxes per legend group.
@@ -144,12 +149,15 @@ export default function Legend({ model, visible, onToggle, sortKey, onSort }: Pr
                       {labelOf(seriesKey)}
                     </>
                   )}
+
                 </label>
               ))}
+
             </div>
           </div>
         </fieldset>
       ))}
+
     </div>
   );
 }

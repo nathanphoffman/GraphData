@@ -17,9 +17,11 @@ export interface Exhibit {
 export interface Rule {
   name: string;
   owner: Owner;
+
   /** Text of the pill next to the rule name. */
   label: string;
   verdict: string;
+
   /** Extra paragraphs shown after the verdict. */
   body?: string[];
   exhibits?: Exhibit[];
@@ -42,6 +44,7 @@ export interface Product {
   title: string;
   year: string;
   credits: Segment[];
+
   /** What it added to the game. */
   added: string;
 }

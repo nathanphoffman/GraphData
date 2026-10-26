@@ -25,18 +25,24 @@ interface Props {
   ariaLabel: string;
   xLabel: string;
   color: string;
+
   /** Count at x (how many to own); the top of the chart is yMax. */
   at: (xValue: number) => number;
   yMax: number;
+
   /** Where x sits along the axis, 0 (left) to 1 (right). */
   toFrac: (xValue: number) => number;
+
   /** X values the curve is drawn through. */
   samples: number[];
+
   /** X values that get a dot, a count and an axis label. */
   marks: number[];
+
   /** Your setting, marked with a draggable ring. */
   current: number;
   onDragStart: () => void;
+
   /** Called while dragging, with the pointer's position along the axis (0 to 1). */
   onDrag: (frac: number) => void;
   onDragEnd: () => void;
@@ -58,7 +64,9 @@ export default function CurveChart({
   onDragEnd,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
+
   const xScale = (xValue: number) => LEFT + toFrac(xValue) * (CHART_WIDTH - LEFT - RIGHT);
+
   const yScale = (value: number) => TOP_MARGIN + (1 - value / yMax) * (CHART_HEIGHT - TOP_MARGIN - BOTTOM);
 
   const path = samples.map((sample, index) => `${index === 0 ? "M" : "L"}${xScale(sample).toFixed(1)},${yScale(countAt(sample)).toFixed(1)}`).join(" ");
@@ -91,6 +99,7 @@ export default function CurveChart({
           </text>
         </g>
       ))}
+
       <line x1={xScale(current)} x2={xScale(current)} y1={yScale(countAt(current))} y2={yScale(0)} stroke="var(--fg)" strokeDasharray="4 3" />
       <circle cx={xScale(current)} cy={yScale(countAt(current))} r={CURRENT_RING_RADIUS} fill="none" stroke="var(--fg)" strokeWidth={2} />
       <circle
@@ -105,6 +114,7 @@ export default function CurveChart({
           event.currentTarget.setPointerCapture(event.pointerId);
           onDragStart();
         }}
+
         onPointerMove={drag}
         onPointerUp={onDragEnd}
         onPointerCancel={onDragEnd}

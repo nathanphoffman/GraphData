@@ -7,9 +7,11 @@ import type { ItemType } from "../logic/items";
 interface Props {
   /** Exact recommendation if you supplied everything yourself (100% share). */
   soloNeeded: number;
+
   /** How many people share, counting you (100 / your share %). */
   people: number;
   item: ItemType;
+
   /** Called while you drag the ring, with a whole number of people. */
   onPeople: (people: number) => void;
 }
@@ -22,6 +24,7 @@ export default function SharingCurve({ soloNeeded, people, item, onPeople }: Pro
   // The right edge of the axis is held still while dragging so the chart doesn't rescale under the pointer.
   const [frozenMax, setFrozenMax] = useState<number | null>(null);
   const xMax = frozenMax ?? Math.min(SHARING_MAX_PEOPLE, Math.max(SHARING_MIN_PEOPLE, Math.ceil(people)));
+
   const countAt = (peopleCount: number) => soloNeeded / peopleCount;
 
   // Past 10 people only every fifth dot is labeled, to keep the numbers readable.

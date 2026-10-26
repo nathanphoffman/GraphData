@@ -66,6 +66,7 @@ export default function TinyMightyBestiary() {
         {creatures.map((creature) => (
           <CreatureCard key={creature.id} creature={creature} />
         ))}
+
       </div>
       {otherThemes.length > 0 && (
         <>
@@ -77,9 +78,11 @@ export default function TinyMightyBestiary() {
             {otherThemes.map((creature) => (
               <CreatureCard key={creature.id} creature={creature} />
             ))}
+
           </div>
         </>
       )}
+
     </div>
   );
 }

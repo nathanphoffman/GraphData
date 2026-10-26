@@ -36,6 +36,7 @@ function periodRows(newestFirst: WeightRow[], period: string) {
 /** Table shows the last 90 days by default, or one chosen quarter. */
 function useTableRows(period: string, dailyRows: WeightRow[]) {
   const newestFirst = useMemo(() => [...dailyRows].reverse(), [dailyRows]);
+
   // Each distinct quarter in the data (like 2025-Q3), for the period filter.
   const quarters = useMemo(() => [...new Set(newestFirst.map((tableRow) => quarterOf(tableRow.date)))], [newestFirst]);
   const rows = useMemo(() => periodRows(newestFirst, period), [newestFirst, period]);
@@ -64,6 +65,7 @@ type Column = {
   note?: string;
   kind: Kind;
   actual: (tableRow: WeightRow) => number | null;
+
   /** Muscle-adjusted value shown under the actual one. */
   adjusted?: (tableRow: WeightRow) => number | null;
 };
@@ -110,7 +112,9 @@ const MUSCLE3_DIGITS = 3;
 /** Writes a number the way its column shows it. */
 const formatter = (kind: Kind, unitFormat: Format) => {
   if (kind === "change") return unitFormat.signed;
+
   if (kind === "muscle2") return (pounds: number) => unitFormat.w(pounds, 2);
+
   if (kind === "muscle3") return (pounds: number) => unitFormat.w(pounds, MUSCLE3_DIGITS);
 
   return unitFormat.w;
@@ -137,7 +141,7 @@ const rangeBlock = (label: string, range: Range, formatWeight: (pounds: number) 
   </small>
 );
 
-/** Table header; columns follow the options that are switched on, with the high and low of each for the period and for all time. */
+/** The header shows each column's high and low for the period and for all time, so you can see where a day sits without scanning the table. */
 function Head({ unit, f: unitFormat, columns, periodRanges, allTimeRanges }: { unit: Unit; f: Format; columns: Column[]; periodRanges: Range[]; allTimeRanges: Range[] }) {
   return (
     <thead>
@@ -158,6 +162,7 @@ function Head({ unit, f: unitFormat, columns, periodRanges, allTimeRanges }: { u
             </th>
           );
         })}
+
       </tr>
     </thead>
   );
@@ -181,6 +186,7 @@ function bandClasses(tableRow: WeightRow, show: Show) {
           ),
           ...changeClasses(tableRow.monthly, tableRow.adj.monthly),
         ]
+
       : []),
     // Only colour the weight loss columns when they are shown.
     ...(show.weightLoss ? changeClasses(tableRow.recent, tableRow.recent3, tableRow.recentAdj, tableRow.recent3Adj) : []),
@@ -198,6 +204,7 @@ function Cell({ column, d: tableRow, f: unitFormat }: { column: Column; d: Weigh
   const formatWeight = formatter(column.kind, unitFormat);
 
   if (column.adjusted) return <ActualAndAdjusted actual={column.actual(tableRow)} adjusted={column.adjusted(tableRow)} fmt={formatWeight} bandOf={column.kind === "change" ? deltaBand : band} />;
+
   if (column.kind === "weight") return <span className={band(tableRow.weight, false)}>{formatWeight(tableRow.weight)}</span>;
 
   return <>{formatWeight(column.actual(tableRow) ?? 0)}</>;
@@ -235,8 +242,10 @@ function PeriodPicker({ period, onChange, options }: { period: string; onChange:
               </button>
             </li>
           ))}
+
         </ul>
       )}
+
     </fieldset>
   );
 }
@@ -249,8 +258,10 @@ export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f:
 
   // Columns on screen, with each one's high and low for the period and for all time.
   const columns = useMemo(() => COLUMNS.filter((column) => !column.group || show[column.group]), [show]);
+
   // The high and low of each column over all time.
   const allTimeRanges = useMemo(() => columns.map((column) => rangeOf(newestFirst, column)), [columns, newestFirst]);
+
   // The high and low of each column over the chosen period.
   const periodRanges = useMemo(() => columns.map((column) => rangeOf(rows, column)), [columns, rows]);
 
@@ -275,6 +286,7 @@ export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f:
                 <input type="checkbox" checked={show[groupKey]} onChange={(event) => setShow({ ...show, [groupKey]: event.target.checked })} /> {label}
               </label>
             ))}
+
           </div>
         </div>
       </div>

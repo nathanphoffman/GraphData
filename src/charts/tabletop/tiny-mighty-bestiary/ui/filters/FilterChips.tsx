@@ -1,13 +1,17 @@
 interface Props {
   label: string;
+
   /** Accessible name suffix when the visible label is blank (a continuation row). */
   groupName?: string;
   options: { id: string; label: string }[];
   active: string | null;
+
   /** Called with the new selection: the clicked id, or null when the active chip is clicked again. */
   onChange: (identifier: string | null) => void;
+
   /** Extra class for each chip, given the option id. */
   chipClass?: (identifier: string) => string;
+
   /** Show a color swatch inside each chip. */
   swatch?: boolean;
   children?: React.ReactNode;
@@ -35,6 +39,7 @@ export default function FilterChips({ label, groupName = label, options, active,
           </button>
         );
       })}
+
       {children}
     </div>
   );

@@ -11,7 +11,7 @@ export const model = {
   creatures: [...beasts, ...humanoids, ...animated, ...otherworldly, ...monsters],
 } as BestiaryData;
 
-/** The combat tier for a creature; throws if the data names a tier that does not exist. */
+/** Throws instead of guessing when the data names a tier that does not exist, so a typo in the data shows up at once rather than quietly giving a wrong difficulty. */
 export function tierFor(creature: Creature) {
   const tier = model.tiers.find((tierEntry) => tierEntry.difficulty === creature.tier);
 
@@ -69,12 +69,16 @@ export function compareBy(sort: string): (creature: Creature, second: Creature) 
   switch (sort) {
     case "az":
       return (creature, second) => creature.name.localeCompare(second.name);
+
     case "za":
       return (creature, second) => second.name.localeCompare(creature.name);
+
     case "type":
       return (creature, second) => typeOrder(creature) - typeOrder(second) || byDifficultyThenName(creature, second);
+
     case "tone":
       return (creature, second) => creature.tone - second.tone || byDifficultyThenName(creature, second);
+
     default:
       return byDifficultyThenName;
   }

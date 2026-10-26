@@ -5,6 +5,7 @@ interface Props {
   stops: string[];
   value: [number, number];
   onChange: (value: [number, number]) => void;
+
   /** Accessible name for the handles; defaults to the lowercase label. */
   labelPrefix?: string;
 }

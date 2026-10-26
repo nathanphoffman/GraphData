@@ -7,7 +7,7 @@ const SINGLE_COUNT_BARS = 11;
 const GROUPED_BARS = 12;
 const GROUPS_ACROSS = 6;
 
-/** Average days in a month. */
+/** A year split into 12 months, so a wait in days can be shown as a whole number of months. */
 const DAYS_PER_AVERAGE_MONTH = 30.4;
 
 /** A wait of this many days or more is shown as "Over a year", "Yearly", and so on down. */
@@ -26,10 +26,13 @@ const MIN_GOAL = 0.1;
 
 export interface Bucket {
   label: string;
+
   /** Midpoint of the uses-per-year range (the start of the open-ended last bucket). */
   mid: number;
+
   /** Overrides the wait label (used for the long-wait buckets). */
   gap?: string;
+
   /** Share of items (0-1) that land in this bucket. */
   p: number;
 }
@@ -85,6 +88,7 @@ export function gapLabel(bucket: Bucket): string {
 
   if (days >= YEARLY_DAYS) return "Yearly";
   const bound = bucket.label.endsWith("+") ? "≤ " : "~";
+
   const plural = (count: number, unit: string) => `${count} ${unit}${count === 1 ? "" : "s"}`;
 
   // Shorter waits are grouped into a few week buckets rather than counted day by day.

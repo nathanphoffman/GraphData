@@ -3,6 +3,7 @@ import {
   CELL_CENTER, CELL_H, CELL_NAME_BOX, CELL_W, DIAGONAL_SHARE, DOT_RADIUS, FIGURE_LABEL, GRID_COLUMNS, GRID_EDGE_MARGIN, GRID_LEFT, GRID_ROWS, GRID_TOP,
   HEADER_COL_W, HEADER_ROW_H, LABEL_GAP, LABEL_RING_EXTRAS, OFF_GRID_COST,
 } from "./style";
+
 import type { LabelBox, EconomicSystemsData, Figure, PlacedLabel } from "./types";
 
 export const GRID_X0 = GRID_LEFT + HEADER_COL_W;

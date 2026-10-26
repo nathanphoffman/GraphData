@@ -29,6 +29,7 @@ export default function DifficultyDots({ value }: { value: number }) {
         {Array.from({ length: whole }, (_unused, index) => (
           <span key={index} className="bestiary-dot bestiary-dot-full" />
         ))}
+
         {fraction > 0 && <span className="bestiary-dot" style={{ ["--fill" as string]: fraction }} />}
       </span>
       <span className="bestiary-difficulty-num">{value}</span>

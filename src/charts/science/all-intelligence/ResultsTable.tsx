@@ -41,6 +41,7 @@ function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllI
         {model.groups.map((group) => ( // One sortable header cell per group of columns.
           <th key={group.id} className="sortable allint-group-th" onClick={() => onSort(group.id)}>{group.name.replace("& ", "&\n")}{arrow(group.id)}</th>
         ))}
+
         <th className="sortable" onClick={() => onSort(MEASURED_KEY)}>Measured{arrow(MEASURED_KEY)}</th>
       </tr>
     </thead>
@@ -75,6 +76,7 @@ function DetailRow({ model, row: subjectRow, settings }: { model: AllIntelligenc
               {group.columns.map((columnKey) => <ColumnScore key={columnKey} model={model} row={subjectRow} settings={settings} column={columnKey} />)}
             </div>
           ))}
+
         </div>
       </td>
     </tr>
@@ -110,6 +112,7 @@ export function ResultsTable({ model, rows, settings, open, onToggle, ...sort }:
               {open.has(scoredSubject.subject.name) && <DetailRow model={model} row={scoredSubject} settings={settings} />}
             </Fragment>
           ))}
+
         </tbody>
       </table>
     </div>

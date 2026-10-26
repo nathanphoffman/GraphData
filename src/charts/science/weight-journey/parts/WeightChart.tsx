@@ -33,6 +33,7 @@ function Axes({ chart }: { chart: Chart }) {
           {tickDate.toLocaleDateString(undefined, { month: "short", year: "2-digit", timeZone: "UTC" })}
         </text>
       ))}
+
     </>
   );
 }
@@ -47,11 +48,13 @@ function SpreadBands({ spread }: { spread: NonNullable<Chart["spread"]> }) {
           {spread[series].bands.map((band, index) => (
             <path key={index} d={band.d} className="spread-band" fillOpacity={band.opacity} />
           ))}
+
           <path d={spread[series].best} className="spread-best" />
           <path d={spread[series].worst} className="spread-worst" />
           <path d={spread[series].mean} className="spread-mean" />
         </g>
       ))}
+
     </>
   );
 }
@@ -68,6 +71,7 @@ function AllTrends({ trends }: { trends: Chart["allTrends"] }) {
           <path d={trend.actual} className="line-all-trend" />
         </g>
       ))}
+
     </>
   );
 }

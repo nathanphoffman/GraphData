@@ -1,10 +1,12 @@
 /** The kinds of thing you can be minimizing; picking one changes the wording on the page. */
 export interface ItemType {
   id: string;
+
   /** Name in the dropdown. */
   name: string;
   one: string;
   many: string;
+
   /** What a use is called, plural: plays, reads, ... */
   uses: string;
   weekExample: string;

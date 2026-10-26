@@ -85,6 +85,7 @@ describe("scoreTargets", () => {
 
   it("scores the same targets lower under a brighter sky", () => {
     const city = scoreTargets(targets, { ...settings, bortle: 9 });
+
     const total = (list: typeof rows) => list.reduce((total, scoredTarget) => total + scoredTarget.score, 0);
 
     expect(total(city)).toBeLessThan(total(rows));
@@ -104,6 +105,7 @@ describe("buildSchedule", () => {
 
   it("groups slots on window boundaries, in evening-first order", () => {
     expect(schedule.slots.every((scheduleSlot) => scheduleSlot.hour % WINDOW_HOURS === 0)).toBe(true);
+
     const evening = (height: number) => (height < 10 ? height + 24 : height);
     const hours = schedule.slots.map((scheduleSlot) => evening(scheduleSlot.hour));
 

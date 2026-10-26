@@ -102,6 +102,7 @@ export default function SavingsPanel({
               </td>
             </tr>
           ))}
+
         </tbody>
       </table>
       <div className={`mini-total ${totalSaved >= 0 ? "mini-total-save" : "mini-total-spend"}`}>

@@ -13,6 +13,7 @@ export interface Filters {
 interface Props {
   filters: Filters;
   onChange: (next: Filters) => void;
+
   /** True when any filter other than the search box differs from its default. */
   canClear: boolean;
   onClear: () => void;
@@ -62,6 +63,7 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
             Clear filters
           </button>
         )}
+
       </FilterChips>
       <FilterChips
         label="Difficulty"

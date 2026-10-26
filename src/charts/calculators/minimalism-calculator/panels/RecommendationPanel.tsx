@@ -66,6 +66,7 @@ export default function RecommendationPanel({ owned, needed }: Props) {
             <div className="mini-level-note">{level.factor === 1 ? `exactly ${needed.toFixed(1)}` : level.note}</div>
           </div>
         ))}
+
       </div>
     </div>
   );

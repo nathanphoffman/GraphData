@@ -39,6 +39,7 @@ function EncounterResult({ result }: { result: Result }) {
             <CreatureCard creature={creature} />
           </div>
         ))}
+
       </div>
     </div>
   );
@@ -54,7 +55,7 @@ export default function EncounterGenerator({ pool }: { pool: Creature[] }) {
   const [levels, setLevels] = useState<[number, number]>([0, 0]);
   const [result, setResult] = useState<Result | null>(null);
 
-  // Target difficulty range = players + levels gained, at the low and high ends.
+  // Each player adds one tier and each level gained adds half a tier, so the range follows how strong the party is.
   const lowEnd = players[0] + 1 + levels[0] / 2;
   const high = players[1] + 1 + levels[1] / 2;
 
@@ -86,6 +87,7 @@ export default function EncounterGenerator({ pool }: { pool: Creature[] }) {
           {result && <EncounterResult result={result} />}
         </>
       )}
+
     </div>
   );
 }

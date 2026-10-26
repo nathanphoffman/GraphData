@@ -16,6 +16,7 @@ const FONT = "system-ui, -apple-system, Segoe UI, sans-serif";
 interface Props {
   model: EconomicSystemsData;
   showExamples: boolean;
+
   /** Grid position of the outline; fractional while a combo is shown. */
   highlight?: { col: number; row: number };
   onSelect: (name: string) => void;
@@ -46,6 +47,7 @@ export default function MapSvg({ model, showExamples, highlight, onSelect }: Pro
             strokeWidth={HIGHLIGHT_STROKE}
           />
         )}
+
         <StabilityBand stability={model.stability} />
         <UsOverlay overlay={model.overlay} />
         <CellNames cells={model.cells} showExamples={showExamples} />

@@ -10,7 +10,7 @@ interface Props {
   onPickPartner: (name: string | null) => void;
 }
 
-/** List of the views with the label for each. */
+/** Views are grouped under their category so a long list stays scannable. */
 function ViewsList({ views, categories }: { views: Record<string, string>; categories: string[] }) {
   return (
     <dl className="views-list">
@@ -21,6 +21,7 @@ function ViewsList({ views, categories }: { views: Record<string, string>; categ
           <dd>{views[category]}</dd>
         </div>
       ))}
+
     </dl>
   );
 }
@@ -71,9 +72,11 @@ export default function ViewsPanel({ model, viewsModel, selectedCell, neighbors,
                 {cell.name}
               </button>
             ))}
+
           </div>
         </>
       )}
+
     </section>
   );
 }

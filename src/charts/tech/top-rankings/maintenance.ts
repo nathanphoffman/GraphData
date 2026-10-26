@@ -40,6 +40,7 @@ const FUTURE_WEIGHT = 0.75;
  */
 export function maintenancePercent(combined: number): number {
   if (combined <= 1) return PERCENT;
+
   return PERCENT / (1 + Math.exp(CURVE_STEEPNESS * (combined - CURVE_MIDPOINT))) ** CURVE_SKEW;
 }
 
@@ -62,18 +63,23 @@ export function nFactor(total: number): number {
   if (total <= 1) return 1;
   const target = Math.log(total);
   let [low, high] = [1, 2];
+
   while (high * Math.log(high) < target) high *= 2;
+
   for (let step = 0; step < HALVINGS; step++) {
     const middle = (low + high) / 2;
+
     if (middle * Math.log(middle) < target) low = middle;
     else high = middle;
   }
+
   return (low + high) / 2;
 }
 
 /** A project's quality: its familiarity and computed quality averaged, or whichever one it has. */
 export function qualityOf(values: Ranking["items"][number]["values"], familiarity: number, computed: number): number | null {
   const found = [values[familiarity], values[computed]].filter(isNumber);
+
   // Add up the numbers and divide by how many there are.
   return found.length ? found.reduce((runningTotal, value) => runningTotal + value, 0) / found.length : null;
 }
@@ -84,23 +90,29 @@ export function maintenance(ranking: Ranking): Maintenance | null {
   const familiarity = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
   const computed = ranking.columns.findIndex((column) => column.label === COMPUTED_LABEL);
   const growth = ranking.columns.findIndex((column) => column.label === GROWTH_LABEL);
+
   if (lines < 0 || (familiarity < 0 && computed < 0)) return null;
 
   let totalLines = 0;
   let futureLines = 0;
   let qualityLines = 0;
   let weighted = 0;
+
   for (const { values } of ranking.items) {
     const [count, rating] = [values[lines], qualityOf(values, familiarity, computed)];
+
     if (!isNumber(count)) continue;
     totalLines += count;
+
     // A project with no growth number is expected to stay the size it is.
     const times = growth < 0 ? undefined : values[growth];
     futureLines += count * (isNumber(times) ? times : 1);
+
     if (rating === null) continue;
     qualityLines += count;
     weighted += count * rating;
   }
+
   if (totalLines === 0 || qualityLines === 0) return null;
 
   const averageQuality = weighted / qualityLines;
@@ -109,8 +121,10 @@ export function maintenance(ranking: Ranking): Maintenance | null {
   const futureN = nFactor(futureLines);
   const [graded, gradedFuture] = [currentNFactor - adjustment, futureN - adjustment];
   const combined = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
+
   // The lines figures ignore quality, as if it were the neutral 75.
   const ungraded = currentNFactor * (1 - FUTURE_WEIGHT) + futureN * FUTURE_WEIGHT;
+
   return {
     totalLines,
     nFactor: currentNFactor,
@@ -130,6 +144,7 @@ export function maintenance(ranking: Ranking): Maintenance | null {
 export function withQuality(ranking: Ranking): Ranking {
   // The position of each of the three columns in the ranking, or -1 when it is missing.
   const [quality, familiarity, computed] = [QUALITY_LABEL, FAMILIARITY_LABEL, COMPUTED_LABEL].map((label) => ranking.columns.findIndex((column) => column.label === label));
+
   if (quality < 0 || familiarity < 0 || computed < 0) return ranking;
 
   // Give each item the averaged Quality, or leave it as it is when it has no data.
@@ -145,6 +160,7 @@ export function withQuality(ranking: Ranking): Ranking {
 /** The ranking with SCAFFOLDING_LINES added to each item's Completed Lines, for showing and scoring only. */
 export function withScaffolding(ranking: Ranking): Ranking {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
+
   if (lines < 0) return ranking;
 
   // Copy each item with the scaffolding lines added to its Completed Lines.

@@ -43,8 +43,10 @@ export function SliderPanel({ id: sliderId, label, value, min: minValue, max: ma
 interface TableProps {
   roles: MaintainabilityData["roles"];
   lines: number;
+
   /** Square root of the team size. */
   mult: number;
+
   /** AI level plus the quality modifier, added to each role's base. */
   shift: number;
 }

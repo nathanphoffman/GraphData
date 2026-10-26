@@ -18,9 +18,11 @@ export function EditGear({ label, auth, children }: { label: string; auth?: Retu
                 <span className="edit-user">Logged in as {user} <button type="button" onClick={logout}>Log out</button></span>
               </>
             )}
+
           </AuthGate>
         </div>
       )}
+
     </>
   );
 }

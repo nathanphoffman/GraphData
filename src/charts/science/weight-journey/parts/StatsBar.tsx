@@ -24,6 +24,7 @@ export function StatsBar({ unit, f: unitFormat }: { unit: Unit; f: Format }) {
   const endAdjusted = projectedAdjusted.future[projectedAdjusted.future.length - 1];
   const today = dailyRows[dailyRows.length - 1];
   const yearOut = today.monthly === null ? null : round1(yearly(today.blended, today.monthly)!);
+
   const show = (pounds: number) => `${unitFormat.w(pounds)} ${unit}`;
 
   return (

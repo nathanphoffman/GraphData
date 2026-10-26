@@ -147,6 +147,7 @@ export function buildChart(input: ChartInput) {
   const shown = days.slice(-Math.min(rangeDays, days.length));
   const shownFuture = tapered ? [...future, ...tapered] : future;
   const { x, y } = buildScales(shown, shownFuture, input);
+
   const mapPoint: PointMapper = (point) => ({ x: x(toDate(point.date)), y: y(point.weight * k) });
 
   return {

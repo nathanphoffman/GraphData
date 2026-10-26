@@ -1,11 +1,15 @@
 export interface Column {
   label: string;
+
   /** Short name for the table header; the full label shows on hover. */
   short?: string;
+
   /** Rated columns count towards the score; columns without a weight are just information. */
   weight?: number;
+
   /** The rating that is ideal when it is not the highest one; ratings further from it count for less. */
   best?: number;
+
   /** The value is a raw measurement (not a 1 to 5 rating) turned into a 1 to 5 rating by this curve. */
   curve?: Curve;
 }
@@ -31,8 +35,10 @@ export type Curve =
 
 export interface Item {
   name: string;
+
   /** One value per column, in the same order as the columns. */
   values: (number | string | null)[];
+
   /** When the item was last changed, in milliseconds since 1970; used by the sync script, not shown. */
   updatedAt?: number;
 }
@@ -56,6 +62,7 @@ const MIDDLE_FRACTION = 0.5;
 
 /** Type checks for the values in a ranking, where a cell may be a number, text or empty. */
 export const isNumber = (value: unknown): value is number => typeof value === "number";
+
 export const isText = (value: unknown): value is string => typeof value === "string";
 
 export const LOWEST_RATING = 1;
@@ -87,6 +94,7 @@ function applyCurve(curve: Curve, value: number): number {
         if (curve.kneeAt === undefined || curve.kneeRating === undefined) {
           return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.at)) / (curve.to - curve.at));
         }
+
         if (value <= curve.kneeAt) return clamp(HIGHEST_RATING - ((HIGHEST_RATING - curve.kneeRating) * (value - curve.at)) / (curve.kneeAt - curve.at));
 
         return clamp(curve.kneeRating - ((curve.kneeRating - LOWEST_RATING) * (value - curve.kneeAt)) / (curve.to - curve.kneeAt));
@@ -96,20 +104,25 @@ function applyCurve(curve: Curve, value: number): number {
 
       return clamp(curve.fromRating + (HIGHEST_RATING - curve.fromRating) * distance * Math.abs(distance));
     }
+
     case "log": {
       const share = (Math.log(value) - Math.log(curve.from)) / (Math.log(curve.to) - Math.log(curve.from));
 
       return clamp(HIGHEST_RATING - (HIGHEST_RATING - LOWEST_RATING) * share);
     }
+
     case "linear":
       return clamp(LOWEST_RATING + ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.from)) / (curve.to - curve.from));
+
     case "log1p":
       return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * Math.log1p(value)) / Math.log1p(curve.to));
+
     case "halving": {
       const other = HIGHEST_RATING + LOWEST_RATING - curve.start;
 
       return other + (curve.start - other) * HALVING_SHARE ** value;
     }
+
     case "age": {
       const falloff = (yearsOld: number) => (1 + yearsOld / curve.offset) ** -curve.steepness;
       const currentYear = new Date().getFullYear();
@@ -123,6 +136,7 @@ function applyCurve(curve: Curve, value: number): number {
 /** The rating a column counts as: as given, run through its curve, or when the column has a best rating, 5 at that rating down to 1 at the furthest end. */
 export function effectiveRating(column: Column, rating: number): number {
   if (column.curve !== undefined) return applyCurve(column.curve, rating);
+
   if (column.best === undefined) return rating;
 
   const furthest = Math.max(column.best - LOWEST_RATING, HIGHEST_RATING - column.best);
@@ -158,6 +172,7 @@ const middleLift = (share: number, curve: GradeCurve) => curve.middleLift * Math
 /** Grade out of 100 for a score, on an exponential curve: 0 for the lowest possible score and 100 for the best. */
 export function grade(scoreValue: number, columns: Column[], shape: Partial<GradeCurve> = {}): number {
   const [low, high] = [minScore(columns), maxScore(columns)];
+
   if (high === low) return 0;
 
   const curveShape = { ...DEFAULT_GRADE_CURVE, ...shape };

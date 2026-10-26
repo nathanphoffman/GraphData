@@ -4,22 +4,11 @@ import { callApi } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { ACTIVE_CLASS } from "../../classNames";
 import { useAuth } from "../../../auth/useAuth";
-import { InlineCell } from "./InlineCell";
 import { RankingEditor } from "./RankingEditor";
-import { LINES_LABEL, PERCENT, QUALITY_LABEL, SCAFFOLDING_LINES, maintenance, maintenancePercent, withQuality, withScaffolding } from "./maintenance";
+import { EPISODIC_LABEL, RankingTable, type Sort, firstSort, heat } from "./RankingTable";
+import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, maintenance, maintenancePercent, withQuality, withScaffolding } from "./maintenance";
 import "./styles.css";
-import { HIGHEST_RATING, LOWEST_RATING, type Ranking, effectiveRating, fractionBetween, letterGrade, rankItems, isNumber, isText } from "./score";
-
-/** Show a value, or nothing when it is missing. */
-const show = (value: number | string | null | undefined) => (value === null || value === undefined ? "" : String(value));
-
-/** Background from red (0) through yellow to green (1); see-through so it works on light and dark pages. */
-const heat = (fraction: number) => ({ backgroundColor: `hsl(${Math.round(fraction * GREEN_HUE)} 65% 45% / 0.35)` });
-
-const PAGE_SIZE = 100;
-
-/** Heat colours run from hue 0 (red) to this (green). */
-const GREEN_HUE = 120;
+import { type Ranking, fractionBetween, isText } from "./score";
 
 /** The n-Factor is shown to this many decimals. */
 const N_FACTOR_DIGITS = 3;
@@ -27,135 +16,10 @@ const N_FACTOR_DIGITS = 3;
 /** The Average Quality card is red at this quality. */
 const LOWEST_QUALITY_HEAT = 50;
 
-/** A column with this label holds each item's web address: it is not shown, and the item's name links to it instead. */
-const LINK_LABEL = "Link";
-
-/** A column with this label marks the items whose Seasons count is halved: it is not shown, and those items get an asterisk after their seasons. */
-const EPISODIC_LABEL = "Episodic";
-const SEASONS_LABEL = "Seasons";
-
-type SortKey = "rank" | "name" | "grade";
-interface Sort {
-  key: SortKey;
-  descending: boolean;
-}
-
-/** Rank and name read best first and A to Z; the grade starts with the highest. */
-const firstSort = (sortColumn: SortKey): Sort => ({ key: sortColumn, descending: sortColumn === "grade" });
-
-/** A header cell that sorts the table by its column when clicked; a second click reverses it. */
-function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; sortKey: SortKey; sort: Sort; onSort: (sortColumn: SortKey) => void; title?: string }) {
-  const active = sort.key === sortKey;
-
-  return (
-    // aria-sort tells screen readers the direction: ascending or descending on the sorted column, none on the rest.
-    <th title={title} aria-sort={active ? (sort.descending ? "descending" : "ascending") : "none"}>
-      <button type="button" className="rankings-sort" onClick={() => onSort(sortKey)}>
-        {label}
-        {active && (sort.descending ? " ▼" : " ▲")}
-      </button>
-    </th>
-  );
-}
-
-/** One ranking as a table: rank, name, information columns, score, then the rated columns heaviest first. `ranking` is what is shown; `source` is the same data as saved, which edits start from. */
-function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdit, onSaved }: { ranking: Ranking; source: Ranking; showScore: boolean; search: string; sort: Sort; onSort: (sortColumn: SortKey) => void; canEdit: boolean; onSaved: () => Promise<void> }) {
-  const indexed = ranking.columns.map((column, index) => ({ column, index }));
-  const linkIndex = ranking.columns.findIndex((column) => column.label === LINK_LABEL);
-  const episodicIndex = ranking.columns.findIndex((column) => column.label === EPISODIC_LABEL);
-  const info = indexed.filter(({ column }) => column.weight === undefined && column.label !== LINK_LABEL && column.label !== EPISODIC_LABEL);
-  const rated = indexed.filter(({ column }) => column.weight !== undefined).sort((first, second) => (second.column.weight ?? 0) - (first.column.weight ?? 0));
-  const [shown, setShown] = useState(PAGE_SIZE);
-  const rows = rankItems(ranking);
-  const matching = rows.filter(({ item }) => item.name.toLowerCase().includes(search.trim().toLowerCase()));
-  const compare = {
-    rank: (first: (typeof rows)[number], second: (typeof rows)[number]) => first.rank - second.rank,
-    name: (first: (typeof rows)[number], second: (typeof rows)[number]) => first.item.name.localeCompare(second.item.name),
-    grade: (first: (typeof rows)[number], second: (typeof rows)[number]) => first.grade - second.grade,
-  }[sort.key];
-  const sorted = [...matching].sort((first, second) => (sort.descending ? compare(second, first) : compare(first, second)));
-  // Saves one changed value of an item, keeping the rest of its saved values. Completed Lines is shown with the scaffolding added, so that comes back off.
-  const saveCell = (item: Ranking["items"][number], index: number) => async (value: number | string | null) => {
-    const saved = source.items.find((candidate) => candidate.name === item.name) ?? item;
-    const isLines = ranking.columns[index].label === LINES_LABEL && isNumber(value);
-    // Copy the saved item with the one value changed; a Lines value comes back without the scaffolding lines.
-    const changed = { ...saved, values: saved.values.map((oldValue, valueIndex) => (valueIndex === index ? (isLines ? value - SCAFFOLDING_LINES : value) : oldValue)) };
-    // Quality is worked out from the other two, so save it fresh along with the change.
-    const { values } = withQuality({ ...source, items: [changed] }).items[0];
-    // Save the whole item; the server adds it or changes it by name.
-    await callApi(`/api/rankings/${ranking.id}/items/${encodeURIComponent(item.name)}`, "PUT", { values });
-    await onSaved();
-  };
-  const scores = rows.map((rankedRow) => rankedRow.score);
-  const [lowScore, highScore] = [Math.min(...scores), Math.max(...scores)];
-
-  return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            {info.map(({ column }) => (
-              <th key={column.label} title={column.label}>{column.short ?? column.label}</th>
-            ))}
-            {showScore && <th title="Each rating squared times its weight, added up">Score</th>}
-            <SortHeader label="Grade" sortKey="grade" sort={sort} onSort={onSort} title="The score as a grade out of 100 on a curve: it eases off near the top and drops faster further down" />
-            {rated.map(({ column }) => (
-              <th key={column.label} title={`${column.label} (weight ×${column.weight})${column.best === undefined ? "" : `, best rating ${column.best}`}${column.curve === undefined ? "" : `, shown with its 1 to 5 rating`}`}>
-                {column.short ?? column.label}
-                <small>×{column.weight}</small>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.slice(0, shown).map(({ item, score, grade, rank }) => ( // One table row per ranked item.
-            <tr key={item.name}>
-              <td>{rank}</td>
-              <td>
-                {isText(item.values[linkIndex]) && item.values[linkIndex] !== "" ? (
-                  <a href={String(item.values[linkIndex])} target="_blank" rel="noreferrer">{item.name}</a>
-                ) : (
-                  item.name
-                )}
-              </td>
-              {info.map(({ column, index }) => (
-                <InlineCell key={column.label} column={column} itemName={item.name} value={item.values[index]} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)}>{show(item.values[index])}</InlineCell>
-              ))}
-              {showScore && <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>}
-              <td style={heat(grade / PERCENT)}>
-                {grade.toFixed(1)}
-                <small> ({letterGrade(grade)})</small>
-              </td>
-              {rated.map(({ column, index }) => {
-                const rating = item.values[index];
-                const used = isNumber(rating) ? effectiveRating(column, rating) : null;
-
-                return (
-                  <InlineCell key={column.label} column={column} itemName={item.name} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
-                    {show(rating)}
-                    {column.label === SEASONS_LABEL && item.values[episodicIndex] ? "*" : ""}
-                    {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
-                  </InlineCell>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {matching.length > shown && (
-        <button type="button" className="rankings-more" onClick={() => setShown(shown + PAGE_SIZE)}>
-          Show next {Math.min(PAGE_SIZE, matching.length - shown)} ({shown} of {matching.length} shown)
-        </button>
-      )}
-    </>
-  );
-}
-
 /** The code maintenance summary for rankings that have lines and quality columns. */
 function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
   const result = maintenance(ranking);
+
   if (!result) return null;
 
   return (
@@ -191,6 +55,7 @@ function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
 export default function TopRankings() {
   const [rankings, setRankings] = useState<Ranking[] | null>(null);
   const [error, setError] = useState(false);
+
   // The picked ranking lives in the URL hash (#video-games) so a link or a reload lands on the same table.
   const { hash } = useLocation();
   const navigate = useNavigate();
@@ -198,6 +63,7 @@ export default function TopRankings() {
   const [showScore, setShowScore] = useState(false);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<Sort>(firstSort("rank"));
+
   // Logged in means the table cells can be clicked and edited in place.
   const auth = useAuth();
 
@@ -212,9 +78,11 @@ export default function TopRankings() {
   }, [load]);
 
   if (error) return <p>Could not load the rankings.</p>;
+
   if (!rankings) return <p>Loading rankings…</p>;
 
   const ranking = rankings.find((rankingOption) => rankingOption.id === pickedId) ?? rankings[0];
+
   // What the page shows and scores has the scaffolding lines added; the editors work on the saved ranking.
   const shown = withScaffolding(ranking);
 
@@ -229,6 +97,7 @@ export default function TopRankings() {
             {rankingOption.title}
           </button>
         ))}
+
       </div>
       <MaintenanceIndex ranking={shown} />
       <p className="muted">
@@ -237,9 +106,11 @@ export default function TopRankings() {
       {ranking.columns.some((column) => column.label === LINES_LABEL) && (
         <p className="muted">Completed Lines includes {SCAFFOLDING_LINES} extra lines per project, a minimum scaffolding score that every project needs. It is added here on the page, not saved in the data or counted by the line count script.</p>
       )}
+
       {ranking.columns.some((column) => column.label === EPISODIC_LABEL) && (
         <p className="muted">* Episodic shows count half their seasons, because you don't need to watch every season to appreciate the show.</p>
       )}
+
       <label>
         <input type="checkbox" checked={showScore} onChange={(changeEvent) => setShowScore(changeEvent.target.checked)} /> Show score
       </label>

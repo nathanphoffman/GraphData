@@ -44,7 +44,7 @@ export function useStoredValue<T>(settingKey: string, fallback: T, parse: (rawVa
   return [value, setValue] as const;
 }
 
-/** Like useStoredValue but for numbers; text that is not a valid number is ignored. */
+/** Like useStoredValue but for numbers. Saved and shared values arrive as text, so anything that is not a valid number is dropped instead of showing NaN. */
 export function useStoredNumber(settingKey: string, fallback: number, isValid: (value: number) => boolean) {
   // Read the saved or shared text as a number, treating empty text as missing.
   return useStoredValue(settingKey, fallback, (rawValue) => {

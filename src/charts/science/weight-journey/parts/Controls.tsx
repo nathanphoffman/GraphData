@@ -23,6 +23,7 @@ function Segmented<T>({ label, options, value, name, onPick }: { label: string; 
             {name(option)}
           </button>
         ))}
+
       </div>
     </div>
   );
@@ -58,6 +59,7 @@ function ProjectionToolBox({ unit, f: unitFormat, tool, onTool, tapered }: ToolP
           In {tool.months} months: {unitFormat.w(last.weight)} {unit} ({unitFormat.w(last.adjusted)} {unit} muscle-adjusted)
         </span>
       )}
+
     </div>
   );
 }
@@ -80,6 +82,7 @@ function LineToggles({ lines, onLines }: { lines: Lines; onLines: (lines: Lines)
             <input type="checkbox" checked={lines[lineKey]} onChange={(event) => onLines({ ...lines, [lineKey]: event.target.checked })} /> {label}
           </label>
         ))}
+
       </div>
     </div>
   );

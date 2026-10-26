@@ -21,9 +21,11 @@ export default function Home() {
                   <p>{chart.description}</p>
                 </li>
               ))}
+
           </ul>
         </div>
       ))}
+
       </div>
     </section>
   );

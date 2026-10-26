@@ -41,6 +41,7 @@ export default function CellNames({ cells, showExamples }: { cells: Cell[]; show
                     {authNote}
                   </text>
                 )}
+
                 <text x={centerX} y={demY} textAnchor="middle" fontSize={FONT_SIZE.example}>
                   <tspan fontWeight={BOLD} fill={COLORS.dem}>Dem: </tspan>
                   <tspan fill="#333">{demName}</tspan>
@@ -50,11 +51,14 @@ export default function CellNames({ cells, showExamples }: { cells: Cell[]; show
                     {demNote}
                   </text>
                 )}
+
               </>
             )}
+
           </g>
         );
       })}
+
     </>
   );
 }
