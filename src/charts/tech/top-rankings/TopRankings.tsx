@@ -18,6 +18,10 @@ const PAGE_SIZE = 100;
 /** A column with this label holds each item's web address: it is not shown, and the item's name links to it instead. */
 const LINK_LABEL = "Link";
 
+/** A column with this label marks the items whose Seasons count is halved: it is not shown, and those items get an asterisk after their seasons. */
+const EPISODIC_LABEL = "Episodic";
+const SEASONS_LABEL = "Seasons";
+
 type SortKey = "rank" | "name" | "grade";
 interface Sort {
   key: SortKey;
@@ -45,7 +49,8 @@ function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; so
 function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: Ranking; showScore: boolean; search: string; sort: Sort; onSort: (key: SortKey) => void }) {
   const indexed = ranking.columns.map((column, index) => ({ column, index }));
   const linkIndex = ranking.columns.findIndex((column) => column.label === LINK_LABEL);
-  const info = indexed.filter(({ column }) => column.weight === undefined && column.label !== LINK_LABEL);
+  const episodicIndex = ranking.columns.findIndex((column) => column.label === EPISODIC_LABEL);
+  const info = indexed.filter(({ column }) => column.weight === undefined && column.label !== LINK_LABEL && column.label !== EPISODIC_LABEL);
   const rated = indexed.filter(({ column }) => column.weight !== undefined).sort((a, b) => (b.column.weight ?? 0) - (a.column.weight ?? 0));
   const [shown, setShown] = useState(PAGE_SIZE);
   const rows = rankItems(ranking);
@@ -95,7 +100,7 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
               ))}
               {showScore && <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>}
               <td style={heat(grade / 100)}>
-                {Math.round(grade)}
+                {grade.toFixed(1)}
                 <small> ({letterGrade(grade)})</small>
               </td>
               {rated.map(({ column, index }) => {
@@ -105,6 +110,7 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
                 return (
                   <td key={column.label} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
                     {show(rating)}
+                    {column.label === SEASONS_LABEL && item.values[episodicIndex] ? "*" : ""}
                     {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
                   </td>
                 );
@@ -198,6 +204,9 @@ export default function TopRankings() {
       <p className="muted">
         Score is each rating squared times its column's weight, added up. The weight is shown under each column name. Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
       </p>
+      {ranking.columns.some((column) => column.label === EPISODIC_LABEL) && (
+        <p className="muted">* Episodic shows count half their seasons, because you don't need to watch every season to appreciate the show.</p>
+      )}
       <label>
         <input type="checkbox" checked={showScore} onChange={(e) => setShowScore(e.target.checked)} /> Show score
       </label>

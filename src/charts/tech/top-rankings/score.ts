@@ -15,6 +15,7 @@ export interface Column {
  * - peak: `at` is the best value (5). Below it the rating falls quickly to `fromRating` at `from`; above it, in a straight line to 1 at `to`.
  *   With `kneeAt` and `kneeRating`, the line above `at` is gentle down to `kneeRating` at `kneeAt`, then steeper to 1 at `to`.
  * - log: 5 at `from` down to 1 at `to`, on a log scale so a few huge values do not flatten the rest. For things where less is better.
+ * - log1p: 5 at a value of 0 down to 1 at `to`, on a log scale of 1 + the value, so the first few count for much more than later ones. For counts where fewer is better.
  * - halving: `start` (5 or 1) at a value of 0, and every +1 closes half the distance to the other end.
  * - age: years since the current year, so this year is 1 and each year that passes lifts older values. It climbs fast at first and slowly after
  *   (`offset` is how long the fast part lasts, larger `steepness` is faster), reaching 5 only at the `oldest` year.
@@ -22,6 +23,7 @@ export interface Column {
 export type Curve =
   | { type: "peak"; at: number; from: number; fromRating: number; to: number; kneeAt?: number; kneeRating?: number }
   | { type: "log"; from: number; to: number }
+  | { type: "log1p"; to: number }
   | { type: "halving"; start: 1 | 5 }
   | { type: "age"; oldest: number; offset: number; steepness: number };
 
@@ -84,6 +86,8 @@ function applyCurve(curve: Curve, value: number): number {
 
       return clamp(HIGHEST_RATING - (HIGHEST_RATING - LOWEST_RATING) * share);
     }
+    case "log1p":
+      return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * Math.log1p(value)) / Math.log1p(curve.to));
     case "halving": {
       const other = HIGHEST_RATING + LOWEST_RATING - curve.start;
 

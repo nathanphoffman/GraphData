@@ -118,6 +118,7 @@ describe("effectiveRating curves", () => {
     year: { type: "age", oldest: -3000, offset: 7, steepness: 1 },
     weight: { type: "peak", at: 2, from: 1, fromRating: 3, to: 5 },
     time: { type: "log", from: 5, to: 1200 },
+    seasons: { type: "log1p", to: 10 },
     cut: { type: "halving", start: 5 },
     first: { type: "halving", start: 1 },
   } as const;
@@ -133,6 +134,14 @@ describe("effectiveRating curves", () => {
   it("rates the shortest time 5 and the longest 1", () => {
     expect(rate("time", 5)).toBeCloseTo(5);
     expect(rate("time", 1200)).toBeCloseTo(1);
+  });
+
+  it("rates no seasons 5, one season about 4, and ten seasons 1", () => {
+    expect(rate("seasons", 0)).toBe(5);
+    expect(rate("seasons", 0.5)).toBeGreaterThan(rate("seasons", 1));
+    expect(rate("seasons", 0.5)).toBeLessThan(5);
+    expect(rate("seasons", 1)).toBeCloseTo(3.84, 1);
+    expect(rate("seasons", 10)).toBeCloseTo(1);
   });
 
   it("halves the distance for every cut and every #1", () => {
