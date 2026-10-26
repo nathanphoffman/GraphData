@@ -4,7 +4,7 @@
   "gradeCurve": {"steepness": 5.4, "bottomBend": 1.75, "middleLift": 9, "middleAt": 0.42, "middleWidth": 0.16},
   "columns": [
     {"label": "Year", "short": "Year", "weight": 5, "curve": {"type": "age", "oldest": -3000, "offset": 7, "steepness": 1}},
-    {"label": "Weight (out of 5)", "short": "Wt", "weight": 13, "curve": {"type": "peak", "at": 2, "from": 1, "fromRating": 3, "to": 5}},
+    {"label": "Weight (out of 5)", "short": "Wt", "weight": 13, "curve": {"type": "peak", "at": 2, "from": 1, "fromRating": 3, "kneeAt": 3.25, "kneeRating": 3.5, "to": 4.25}},
     {"label": "Time (mins)", "short": "Mins", "weight": 9, "curve": {"type": "log", "from": 5, "to": 1200}},
     {"label": "Cut", "short": "Cut", "weight": 8, "curve": {"type": "halving", "start": 5}},
     {"label": "#1", "short": "#1", "weight": 2, "curve": {"type": "halving", "start": 1}},

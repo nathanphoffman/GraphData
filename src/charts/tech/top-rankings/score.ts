@@ -13,13 +13,14 @@ export interface Column {
 /**
  * How a raw value becomes a rating from 1 to 5, set per column in the ranking's JSON file:
  * - peak: `at` is the best value (5). Below it the rating falls quickly to `fromRating` at `from`; above it, in a straight line to 1 at `to`.
+ *   With `kneeAt` and `kneeRating`, the line above `at` is gentle down to `kneeRating` at `kneeAt`, then steeper to 1 at `to`.
  * - log: 5 at `from` down to 1 at `to`, on a log scale so a few huge values do not flatten the rest. For things where less is better.
  * - halving: `start` (5 or 1) at a value of 0, and every +1 closes half the distance to the other end.
  * - age: years since the current year, so this year is 1 and each year that passes lifts older values. It climbs fast at first and slowly after
  *   (`offset` is how long the fast part lasts, larger `steepness` is faster), reaching 5 only at the `oldest` year.
  */
 export type Curve =
-  | { type: "peak"; at: number; from: number; fromRating: number; to: number }
+  | { type: "peak"; at: number; from: number; fromRating: number; to: number; kneeAt?: number; kneeRating?: number }
   | { type: "log"; from: number; to: number }
   | { type: "halving"; start: 1 | 5 }
   | { type: "age"; oldest: number; offset: number; steepness: number };
@@ -63,7 +64,14 @@ const clamp = (rating: number) => Math.min(HIGHEST_RATING, Math.max(LOWEST_RATIN
 function applyCurve(curve: Curve, value: number): number {
   switch (curve.type) {
     case "peak": {
-      if (value > curve.at) return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.at)) / (curve.to - curve.at));
+      if (value > curve.at) {
+        if (curve.kneeAt === undefined || curve.kneeRating === undefined) {
+          return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.at)) / (curve.to - curve.at));
+        }
+        if (value <= curve.kneeAt) return clamp(HIGHEST_RATING - ((HIGHEST_RATING - curve.kneeRating) * (value - curve.at)) / (curve.kneeAt - curve.at));
+
+        return clamp(curve.kneeRating - ((curve.kneeRating - LOWEST_RATING) * (value - curve.kneeAt)) / (curve.to - curve.kneeAt));
+      }
 
       const distance = (value - curve.from) / (curve.at - curve.from);
 

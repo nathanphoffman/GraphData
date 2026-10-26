@@ -158,3 +158,14 @@ describe("letterGrade", () => {
     expect([100, 96, 90, 85, 75, 61, 59, 0].map(letterGrade)).toEqual(["A+", "A", "A-", "B", "C", "D-", "F", "F"]);
   });
 });
+
+describe("peak curve with a knee", () => {
+  const column = { label: "Weight", weight: 1, curve: { type: "peak" as const, at: 2, from: 1, fromRating: 3, to: 4.25, kneeAt: 3.25, kneeRating: 3.5 } };
+
+  it("falls gently up to the knee and steeply after it", () => {
+    expect(effectiveRating(column, 2)).toBe(5);
+    expect(effectiveRating(column, 3.25)).toBeCloseTo(3.5);
+    expect(effectiveRating(column, 4.25)).toBe(1);
+    expect(effectiveRating(column, 3.75)).toBeCloseTo(2.25);
+  });
+});
