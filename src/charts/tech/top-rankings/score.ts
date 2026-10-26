@@ -8,8 +8,6 @@ export interface Column {
   best?: number;
   /** The value is a raw measurement (not a 1 to 5 rating) turned into a 1 to 5 rating by this curve. */
   curve?: Curve;
-  /** The weight only counts while the viewer ticks a checkbox with this label; the column is rated and shown either way. */
-  toggle?: string;
 }
 
 /**

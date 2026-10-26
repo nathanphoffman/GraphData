@@ -9,7 +9,7 @@ const MAX_RATING = 5;
 const MAX_TEXT = 80;
 
 // Everything a column can have besides its label, with its database type. A curve is an object, kept as JSON text.
-const OPTIONAL_FIELDS = { short: "TEXT", weight: "REAL", best: "REAL", curve: "TEXT", toggle: "TEXT" };
+const OPTIONAL_FIELDS = { short: "TEXT", weight: "REAL", best: "REAL", curve: "TEXT" };
 const COLUMN_FIELDS = ["label", ...Object.keys(OPTIONAL_FIELDS)];
 const placeholders = (count) => Array(count).fill("?").join(", ");
 
