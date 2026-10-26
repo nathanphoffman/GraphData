@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from "react";
 import { api } from "../../../../api";
-import { AuthGate } from "../../../../auth/AuthGate";
+import { EditGear } from "../../../../auth/EditGear";
 import { days } from "../model/rows";
 
 const todayDate = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
@@ -40,25 +40,11 @@ function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
   );
 }
 
-/** Gear in the top right corner of the page that opens the login (if needed) and the weigh-in form. */
+/** Gear in the top right corner of the page for adding, changing and removing weigh-ins. */
 export function EditPanel({ onSaved }: { onSaved: () => Promise<void> }) {
-  const [open, setOpen] = useState(false);
-
   return (
-    <div className="edit-panel">
-      <button type="button" className="edit-gear" onClick={() => setOpen(!open)} aria-label="Edit weights" title="Edit weights">⚙</button>
-      {open && (
-        <div className="edit-popup">
-          <AuthGate>
-            {(user, logout) => (
-              <>
-                <EditForm onSaved={onSaved} />
-                <span className="edit-user">Logged in as {user} <button type="button" onClick={logout}>Log out</button></span>
-              </>
-            )}
-          </AuthGate>
-        </div>
-      )}
-    </div>
+    <EditGear label="Edit weights">
+      <EditForm onSaved={onSaved} />
+    </EditGear>
   );
 }

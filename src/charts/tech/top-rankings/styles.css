@@ -1,0 +1,47 @@
+/* Top rankings */
+.rankings-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.rankings-tabs button {
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.rankings-tabs button.active {
+  background: var(--link);
+  border-color: var(--link);
+  color: var(--bg);
+}
+
+.rankings table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.rankings th,
+.rankings td {
+  padding: 6px 12px;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.rankings th {
+  vertical-align: bottom;
+}
+
+.rankings th small {
+  display: block;
+  font-weight: normal;
+  color: var(--muted);
+}

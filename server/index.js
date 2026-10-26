@@ -2,13 +2,14 @@ import { createServer } from "node:http";
 import sirv from "sirv";
 import { authRoutes } from "./auth.js";
 import { HttpError, sendJson } from "./http.js";
+import { rankingRoutes } from "./rankings.js";
 import { weightRoutes } from "./weights.js";
 
 const PORT = process.env.PORT ?? 3000;
 const serveSite = sirv("dist", { single: true });
 
 // To add a feature, give it a routes file like weights.js and list it here. Protect a route with `requireUser(request)`.
-const routes = [...authRoutes, ...weightRoutes].map((route) => ({
+const routes = [...authRoutes, ...weightRoutes, ...rankingRoutes].map((route) => ({
   ...route,
   pattern: new RegExp(`^${route.path.replace(/:(\w+)/g, "(?<$1>[^/]+)")}$`),
 }));
@@ -27,7 +28,9 @@ async function handleApi(request, response) {
   }
 
   try {
-    await found.route.handler(request, response, found.match.groups ?? {});
+    // Names like "HTML/CSS" travel URL-encoded in the path.
+    const params = Object.fromEntries(Object.entries(found.match.groups ?? {}).map(([key, value]) => [key, decodeURIComponent(value)]));
+    await found.route.handler(request, response, params);
   } catch (error) {
     if (!(error instanceof HttpError)) console.error(error);
     sendJson(response, error instanceof HttpError ? error.status : 500, { error: error instanceof HttpError ? error.message : "Server error" });

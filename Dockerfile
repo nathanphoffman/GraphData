@@ -15,4 +15,5 @@ RUN npm ci --omit=dev
 COPY --from=build /app/dist ./dist
 COPY server ./server
 COPY data/weight-journey/weight-journey.json ./data/weight-journey/weight-journey.json
+COPY data/top-rankings/top-rankings.json ./data/top-rankings/top-rankings.json
 CMD ["node", "server/index.js"]

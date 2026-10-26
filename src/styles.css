@@ -119,3 +119,68 @@ input[type="range"] {
   margin-inline: 8px;
   width: calc(100% - 16px);
 }
+
+/* Editing: the gear in the top right corner, the login and the forms inside it */
+/* Positioned against .page, so the gear sits in the top right corner of the page. */
+.edit-gear {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 2px 8px;
+  font-size: 20px;
+  line-height: 1;
+  background: none;
+  color: var(--muted);
+  border: none;
+  cursor: pointer;
+}
+
+.edit-gear:hover {
+  color: var(--fg);
+}
+
+.edit-popup {
+  position: absolute;
+  top: 48px;
+  right: 16px;
+  z-index: 10;
+  max-width: calc(100% - 32px);
+  padding: 8px 12px 12px;
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  border-radius: 6px;
+}
+
+.edit-form,
+.login-form,
+.edit-user {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.edit-message,
+.edit-user {
+  color: var(--muted);
+}
+
+.login-error {
+  color: #d64545;
+}
+
+.edit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 8px;
+  width: min(520px, 100%);
+}
+
+.edit-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}

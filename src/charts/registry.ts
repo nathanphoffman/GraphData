@@ -10,6 +10,7 @@ import TinyMightyBestiary from "./tabletop/tiny-mighty-bestiary/TinyMightyBestia
 import AllIntelligence from "./science/all-intelligence/AllIntelligence";
 import AstronomyTargets from "./science/astronomy-targets/AstronomyTargets";
 import WeightJourney from "./science/weight-journey/WeightJourney";
+import TopRankings from "./tech/top-rankings/TopRankings";
 
 /** Home page sections, in display order. */
 const SCIENCE_CATEGORY = "Science";
@@ -119,6 +120,14 @@ export const charts: ChartEntry[] = [
     description: "Personal daily weight table, gap-filled, with a trend curve and projection.",
     component: WeightJourney,
     unlisted: true,
+  },
+  {
+    id: "top-rankings",
+    title: "Top Rankings",
+    category: "Tech & economics",
+    description:
+      "Personal ranking lists, starting with programming languages scored on syntax, scaffolding, readability and more. Switch between lists with the buttons at the top.",
+    component: TopRankings,
   },
 ];
 
