@@ -16,8 +16,9 @@ export function parseCell(column: Column, text: string): number | string | null 
 }
 
 /** A table cell that turns into a text box when clicked (if `canEdit`). Enter or clicking away saves, Escape cancels. */
-export function InlineCell({ column, value, canEdit, onSave, style, children }: {
+export function InlineCell({ column, itemName, value, canEdit, onSave, style, children }: {
   column: Column;
+  itemName: string;
   value: number | string | null | undefined;
   canEdit: boolean;
   onSave: (value: number | string | null) => Promise<void>;
@@ -53,8 +54,12 @@ export function InlineCell({ column, value, canEdit, onSave, style, children }: 
   return (
     <td style={style} className={`rankings-editable${error ? " rankings-cell-error" : ""}`} title={error || undefined} tabIndex={text === null ? 0 : undefined} onClick={start} onKeyDown={(e) => e.target === e.currentTarget && e.key === "Enter" && start()}>
       {text === null ? children : (
-        // Escape sets text to null, which removes the box, and blur then does nothing.
-        <input className="rankings-cell-input" ref={(input) => input?.focus()} value={text} onChange={(e) => setText(e.target.value)} onKeyDown={keys} onBlur={() => void finish()} />
+        <>
+          {/* far below the header the column is out of sight, so name it next to the box */}
+          <small className="rankings-cell-label">{itemName} · {column.label}</small>
+          {/* Escape sets text to null, which removes the box, and blur then does nothing. */}
+          <input className="rankings-cell-input" ref={(input) => input?.focus()} value={text} onChange={(e) => setText(e.target.value)} onKeyDown={keys} onBlur={() => void finish()} />
+        </>
       )}
     </td>
   );

@@ -34,6 +34,9 @@
     {"name": "BGG Scraper", "values": ["TS, Puppeteer, Cheerio", 3, 5, 2, 2, 3, 500, "https://github.com/nathanphoffman/BGGScraper", 90, 3, 90, 90.0]},
     {"name": "Proton Drive Sync", "values": ["Node, TS, Chokidar", 1, 5, 1, 1, 5, 1426, "https://github.com/nathanphoffman/ProtonDriveSync", 85, 1.2, 85, 85.0]},
     {"name": "ValOutcast", "values": ["C# (Valheim), C for OpenJK, Python", 4.5, 4, 3, 5, 4, 7000, "https://github.com/nathanphoffman/ValOutcast", 70, 5, 70, 70.0]},
+    {"name": "Contact App", "values": ["TS, Next.js, Expo, pnpm, Docker, Railway", 3, 3, 3, 3, 3, 0, "https://github.com/nathanphoffman/ContactProject", 80, 1.5, 80, 80]},
+    {"name": "Survive Game", "values": ["Rust", 3, 3, 3, 3, 3, 0, "https://github.com/nathanphoffman/SurviveGame", 80, 1.5, 80, 80]},
+    {"name": "Solar Bit Infrastructure", "values": ["C#, Go, Rust, Docker, Caddy, Redis, Mongo", 3, 3, 3, 3, 3, 0, "https://github.com/nathanphoffman/SolarBitInfrastructure", 80, 1.5, 80, 80]},
     {"name": "Family History Astro", "values": ["Astro, TS", 4, 4, 1, 2, 2, 8000, null, 72, 3, 72, 72.0]}
   ]
 }

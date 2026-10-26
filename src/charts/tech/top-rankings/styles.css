@@ -151,3 +151,10 @@
   color: var(--fg);
   font: inherit;
 }
+
+.rankings-cell-label {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--muted);
+  white-space: nowrap;
+}

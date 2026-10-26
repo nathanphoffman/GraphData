@@ -38,6 +38,9 @@ const PROJECTS: Project[] = [
   { name: "Fairy Tale: An Adventure", folder: "FairyTaleAnAdventure" },
   { name: "Tzaar Net (AI)", folder: "TzaarNet" },
   { name: "Space Game (Ogame)", folder: "SpaceGame" },
+  { name: "Contact App", folder: "ContactApp" },
+  { name: "Survive Game", folder: "SurviveGame" },
+  { name: "Solar Bit Infrastructure", folder: "SolarBitInfrastructure" },
   { name: "Tiny Mighty", folder: "TinyMightyRPG" },
   {
     name: "New Web",

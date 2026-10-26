@@ -108,7 +108,7 @@ function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdi
                 )}
               </td>
               {info.map(({ column, index }) => (
-                <InlineCell key={column.label} column={column} value={item.values[index]} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)}>{show(item.values[index])}</InlineCell>
+                <InlineCell key={column.label} column={column} itemName={item.name} value={item.values[index]} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)}>{show(item.values[index])}</InlineCell>
               ))}
               {showScore && <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>}
               <td style={heat(grade / 100)}>
@@ -120,7 +120,7 @@ function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdi
                 const used = typeof rating === "number" ? effectiveRating(column, rating) : null;
 
                 return (
-                  <InlineCell key={column.label} column={column} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
+                  <InlineCell key={column.label} column={column} itemName={item.name} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
                     {show(rating)}
                     {column.label === SEASONS_LABEL && item.values[episodicIndex] ? "*" : ""}
                     {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
