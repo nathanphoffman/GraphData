@@ -1,0 +1,96 @@
+import type { Ranking } from "./score";
+
+const LINES_LABEL = "Completed Lines";
+const QUALITY_LABEL = "Quality";
+const GROWTH_LABEL = "xLines";
+
+/** The quality that leaves the n-factor as it is; better lifts it down, worse pushes it up. */
+const NEUTRAL_QUALITY = 75;
+
+/** Taken off the combined n-Factor to get the lines a hand-written (manual) codebase would be equivalent to. */
+const MANUAL_ADJUSTMENT = 0.66;
+
+/** How much of the combined n-Factor comes from the future one. */
+const FUTURE_WEIGHT = 0.75;
+
+/**
+ * The combined n-Factor as a percent, on a curve fitted by eye to these marks: 1 is 100%, 6 is 95%, 6.75 is 85%, 7 is 65%, 8 is 5% and 10 is about 0%.
+ * It is a stretched S-curve: nearly flat at the top, then falling steeply between 6.5 and 8. It lands within about 4 points of each mark.
+ */
+export function maintenancePercent(combined: number): number {
+  if (combined <= 1) return 100;
+  return 100 / (1 + Math.exp(3.85 * (combined - 7.14))) ** 0.9;
+}
+
+export interface Maintenance {
+  totalLines: number;
+  nFactor: number;
+  averageQuality: number;
+  gradedNFactor: number;
+  futureLines: number;
+  futureNFactor: number;
+  gradedFutureNFactor: number;
+  combinedNFactor: number;
+  maintenancePercent: number;
+  equivalentLines: number;
+  manualLines: number;
+}
+
+/** The n that makes n^n equal the total, found by halving a range until it is close enough. 1 for a total of 1 or less. */
+export function nFactor(total: number): number {
+  if (total <= 1) return 1;
+  const target = Math.log(total);
+  let [low, high] = [1, 2];
+  while (high * Math.log(high) < target) high *= 2;
+  for (let step = 0; step < 60; step++) {
+    const middle = (low + high) / 2;
+    if (middle * Math.log(middle) < target) low = middle;
+    else high = middle;
+  }
+  return (low + high) / 2;
+}
+
+/** The code maintenance numbers for a ranking with lines and quality columns, or null when it has neither or no lines. */
+export function maintenance(ranking: Ranking): Maintenance | null {
+  const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
+  const quality = ranking.columns.findIndex((column) => column.label === QUALITY_LABEL);
+  const growth = ranking.columns.findIndex((column) => column.label === GROWTH_LABEL);
+  if (lines < 0 || quality < 0) return null;
+
+  let totalLines = 0;
+  let futureLines = 0;
+  let qualityLines = 0;
+  let weighted = 0;
+  for (const { values } of ranking.items) {
+    const [count, rating] = [values[lines], values[quality]];
+    if (typeof count !== "number") continue;
+    totalLines += count;
+    // A project with no growth number is expected to stay the size it is.
+    const times = growth < 0 ? undefined : values[growth];
+    futureLines += count * (typeof times === "number" ? times : 1);
+    if (typeof rating !== "number") continue;
+    qualityLines += count;
+    weighted += count * rating;
+  }
+  if (totalLines === 0 || qualityLines === 0) return null;
+
+  const averageQuality = weighted / qualityLines;
+  const n = nFactor(totalLines);
+  const adjustment = (averageQuality - NEUTRAL_QUALITY) / 100;
+  const futureN = nFactor(futureLines);
+  const [graded, gradedFuture] = [n - adjustment, futureN - adjustment];
+  const combined = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
+  return {
+    totalLines,
+    nFactor: n,
+    averageQuality,
+    gradedNFactor: graded,
+    futureLines,
+    futureNFactor: futureN,
+    gradedFutureNFactor: gradedFuture,
+    combinedNFactor: combined,
+    maintenancePercent: maintenancePercent(combined),
+    equivalentLines: combined ** combined,
+    manualLines: (combined - MANUAL_ADJUSTMENT) ** (combined - MANUAL_ADJUSTMENT),
+  };
+}

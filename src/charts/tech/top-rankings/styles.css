@@ -94,3 +94,36 @@
 .rankings-sort:hover {
   color: var(--link);
 }
+
+.rankings-index h3 {
+  margin: 12px 0 8px;
+}
+
+.rankings-index dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+
+.rankings-index dl div {
+  min-width: 140px;
+  padding: 8px 16px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+}
+
+.rankings-index dt {
+  color: var(--muted);
+  font-size: 0.85em;
+}
+
+.rankings-index dd {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.rankings-index dl div small {
+  display: block;
+}

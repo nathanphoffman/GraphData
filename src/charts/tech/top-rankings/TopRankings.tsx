@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { RankingEditor } from "./RankingEditor";
+import { maintenance, maintenancePercent } from "./maintenance";
 import "./styles.css";
 import { HIGHEST_RATING, LOWEST_RATING, type Ranking, effectiveRating, fractionBetween, letterGrade, rankItems } from "./score";
 
@@ -121,6 +122,40 @@ function RankingTable({ ranking, showScore, search, sort, onSort }: { ranking: R
   );
 }
 
+/** The code maintenance summary for rankings that have lines and quality columns. */
+function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
+  const result = maintenance(ranking);
+  if (!result) return null;
+
+  return (
+    <section className="rankings-index">
+      <h3>Code Maintenance Index</h3>
+      <dl>
+        <div style={heat(fractionBetween(result.averageQuality, 50, 100))} title="Quality averaged with each project weighted by its lines">
+          <dt>Average Quality</dt>
+          <dd>{result.averageQuality.toFixed(1)}%</dd>
+        </div>
+        <div style={heat(maintenancePercent(result.gradedNFactor) / 100)} title="Total n-Factor minus (average quality - 75) / 100">
+          <dt>Graded n-Factor</dt>
+          <dd>{result.gradedNFactor.toFixed(3)}</dd>
+          <small>{result.totalLines.toLocaleString()} lines</small>
+        </div>
+        <div style={heat(maintenancePercent(result.gradedFutureNFactor) / 100)} title="The n-Factor if every project grows by its xLines, minus (average quality - 75) / 100">
+          <dt>Graded Future n-Factor</dt>
+          <dd>{result.gradedFutureNFactor.toFixed(3)}</dd>
+          <small>{Math.round(result.futureLines).toLocaleString()} lines</small>
+        </div>
+        <div style={heat(result.maintenancePercent / 100)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent on a curve. The lines are that average n-Factor turned back into lines (n^n). Manual takes 0.66 off the n-Factor first">
+          <dt>Code Maintenance</dt>
+          <dd>{result.maintenancePercent.toFixed(1)}%</dd>
+          <small>{Math.round(result.equivalentLines).toLocaleString()} lines equivalent</small>
+          <small>{Math.round(result.manualLines).toLocaleString()} lines manual</small>
+        </div>
+      </dl>
+    </section>
+  );
+}
+
 /** Top rankings page: buttons along the top swap which ranking table is shown. */
 export default function TopRankings() {
   const [rankings, setRankings] = useState<Ranking[] | null>(null);
@@ -159,6 +194,7 @@ export default function TopRankings() {
           </button>
         ))}
       </div>
+      <MaintenanceIndex ranking={ranking} />
       <p className="muted">
         Score is each rating squared times its column's weight, added up. The weight is shown under each column name. Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
       </p>
