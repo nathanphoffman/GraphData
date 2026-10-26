@@ -3,7 +3,7 @@ import { api } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { RankingEditor } from "./RankingEditor";
 import "./styles.css";
-import { HIGHEST_RATING, LOWEST_RATING, type Ranking, fractionBetween, rankItems } from "./score";
+import { HIGHEST_RATING, LOWEST_RATING, type Ranking, effectiveRating, fractionBetween, letterGrade, rankItems } from "./score";
 
 /** Show a value, or nothing when it is missing. */
 const show = (value: number | string | null | undefined) => (value === null || value === undefined ? "" : String(value));
@@ -12,7 +12,7 @@ const show = (value: number | string | null | undefined) => (value === null || v
 const heat = (fraction: number) => ({ backgroundColor: `hsl(${Math.round(fraction * 120)} 65% 45% / 0.35)` });
 
 /** One ranking as a table: rank, name, information columns, score, then the rated columns heaviest first. */
-function RankingTable({ ranking }: { ranking: Ranking }) {
+function RankingTable({ ranking, showScore }: { ranking: Ranking; showScore: boolean }) {
   const indexed = ranking.columns.map((column, index) => ({ column, index }));
   const info = indexed.filter(({ column }) => column.weight === undefined);
   const rated = indexed.filter(({ column }) => column.weight !== undefined).sort((a, b) => (b.column.weight ?? 0) - (a.column.weight ?? 0));
@@ -29,10 +29,10 @@ function RankingTable({ ranking }: { ranking: Ranking }) {
           {info.map(({ column }) => (
             <th key={column.label} title={column.label}>{column.short ?? column.label}</th>
           ))}
-          <th title="Each rating squared times its weight, added up">Score</th>
+          {showScore && <th title="Each rating squared times its weight, added up">Score</th>}
           <th title="The score as a grade out of 100 on a curve: it eases off near the top and drops faster further down">Grade</th>
           {rated.map(({ column }) => (
-            <th key={column.label} title={`${column.label} (weight ×${column.weight})`}>
+            <th key={column.label} title={`${column.label} (weight ×${column.weight})${column.best === undefined ? "" : `, best rating ${column.best}`}${column.curve === undefined ? "" : `, shown with its 1 to 5 rating`}`}>
               {column.short ?? column.label}
               <small>×{column.weight}</small>
             </th>
@@ -47,14 +47,19 @@ function RankingTable({ ranking }: { ranking: Ranking }) {
             {info.map(({ column, index }) => (
               <td key={column.label}>{show(item.values[index])}</td>
             ))}
-            <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>
-            <td style={heat(grade / 100)}>{Math.round(grade)}</td>
+            {showScore && <td style={heat(fractionBetween(score, lowScore, highScore))}>{Number(score.toFixed(2))}</td>}
+            <td style={heat(grade / 100)}>
+              {Math.round(grade)}
+              <small> ({letterGrade(grade)})</small>
+            </td>
             {rated.map(({ column, index }) => {
               const rating = item.values[index];
+              const used = typeof rating === "number" ? effectiveRating(column, rating) : null;
 
               return (
-                <td key={column.label} style={typeof rating === "number" ? heat(fractionBetween(rating, LOWEST_RATING, HIGHEST_RATING)) : undefined}>
+                <td key={column.label} style={used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING))}>
                   {show(rating)}
+                  {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
                 </td>
               );
             })}
@@ -70,6 +75,7 @@ export default function TopRankings() {
   const [rankings, setRankings] = useState<Ranking[] | null>(null);
   const [error, setError] = useState(false);
   const [pickedId, setPickedId] = useState<string | null>(null);
+  const [showScore, setShowScore] = useState(false);
 
   const load = useCallback(async () => {
     const data = await api<{ rankings: Ranking[] }>("/api/rankings");
@@ -100,7 +106,10 @@ export default function TopRankings() {
       <p className="muted">
         Score is each rating squared times its column's weight, added up. The weight is shown under each column name. Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
       </p>
-      <RankingTable ranking={ranking} />
+      <label>
+        <input type="checkbox" checked={showScore} onChange={(e) => setShowScore(e.target.checked)} /> Show score
+      </label>
+      <RankingTable ranking={ranking} showScore={showScore} />
     </div>
   );
 }

@@ -38,9 +38,9 @@ export function RankingEditor({ ranking, onSaved }: { ranking: Ranking; onSaved:
             {column.label}
             <input
               type={column.weight === undefined ? "text" : "number"}
-              step="0.5"
-              min="0"
-              max="5"
+              step={column.curve === undefined ? "0.5" : "any"}
+              min={column.curve === undefined ? "0" : undefined}
+              max={column.curve === undefined ? "5" : undefined}
               value={editor.field(String(index))}
               onChange={(e) => editor.set(String(index), e.target.value)}
             />

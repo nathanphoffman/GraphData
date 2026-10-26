@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { type Ranking, fractionBetween, grade, maxScore, minScore, rankItems, score } from "../../../src/charts/tech/top-rankings/score";
+import { type Ranking, effectiveRating, fractionBetween, grade, letterGrade, maxScore, minScore, rankItems, score } from "../../../src/charts/tech/top-rankings/score";
 
 const columns = [{ label: "Year" }, { label: "Syntax", weight: 10 }, { label: "Skill", weight: 1 }];
 
@@ -75,8 +75,8 @@ describe("grade", () => {
   });
 
   it("keeps a lot of 4s a decent grade", () => {
-    expect(gradeOfAll(4)).toBeGreaterThan(88);
-    expect(gradeOfAll(4)).toBeLessThan(92);
+    expect(gradeOfAll(4)).toBeGreaterThan(92);
+    expect(gradeOfAll(4)).toBeLessThan(97);
   });
 
   it("falls faster the lower the score gets", () => {
@@ -88,5 +88,66 @@ describe("grade", () => {
 
   it("is 0 when nothing is rated", () => {
     expect(grade(10, [{ label: "Year" }])).toBe(0);
+  });
+});
+
+describe("effectiveRating", () => {
+  it("leaves columns without a best rating alone", () => {
+    expect(effectiveRating({ label: "A", weight: 1 }, 2)).toBe(2);
+  });
+
+  it("is 5 at the best rating and 1 at the furthest end", () => {
+    const column = { label: "Chaos", weight: 1, best: 3 };
+
+    expect(effectiveRating(column, 3)).toBe(5);
+    expect(effectiveRating(column, 1)).toBe(1);
+    expect(effectiveRating(column, 5)).toBe(1);
+    expect(effectiveRating(column, 4)).toBe(3);
+  });
+
+  it("measures from the further end when the best rating is off centre", () => {
+    const column = { label: "Thinky", weight: 1, best: 3.25 };
+
+    expect(effectiveRating(column, 5)).toBeCloseTo(5 - (4 * 1.75) / 2.25);
+    expect(effectiveRating(column, 1)).toBe(1);
+  });
+});
+
+describe("effectiveRating curves", () => {
+  const rate = (curve: "year" | "weight" | "time" | "cut" | "first", value: number) => effectiveRating({ label: "A", weight: 1, curve }, value);
+
+  it("rates a weight of 2 best, falling off faster below it than above", () => {
+    expect(rate("weight", 2)).toBe(5);
+    expect(rate("weight", 1)).toBe(3);
+    expect(rate("weight", 5)).toBe(1);
+    expect(5 - rate("weight", 1.5)).toBeGreaterThan(5 - rate("weight", 2.5));
+  });
+
+  it("rates the shortest time 5 and the longest 1", () => {
+    expect(rate("time", 5)).toBeCloseTo(5);
+    expect(rate("time", 1200)).toBeCloseTo(1);
+  });
+
+  it("halves the distance for every cut and every #1", () => {
+    expect(rate("cut", 0)).toBe(5);
+    expect(rate("cut", 1)).toBe(3);
+    expect(rate("cut", 3)).toBe(1.5);
+    expect(rate("first", 0)).toBe(1);
+    expect(rate("first", 2)).toBe(4);
+  });
+
+  it("rates this year 1, older years higher, and only the oldest year 5", () => {
+    const thisYear = new Date().getFullYear();
+
+    expect(rate("year", thisYear)).toBe(1);
+    expect(rate("year", thisYear - 10)).toBeGreaterThan(rate("year", thisYear - 1));
+    expect(rate("year", 1900)).toBeLessThan(5);
+    expect(rate("year", -3000)).toBeCloseTo(5);
+  });
+});
+
+describe("letterGrade", () => {
+  it("gives the usual letters", () => {
+    expect([100, 96, 90, 85, 75, 61, 59, 0].map(letterGrade)).toEqual(["A+", "A", "A-", "B", "C", "D-", "F", "F"]);
   });
 });
