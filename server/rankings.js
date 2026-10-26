@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { requireUser } from "./auth.js";
 import { db } from "./db.js";
-import { HttpError, readJson, sendJson } from "./http.js";
+import { HttpError, readJson, readStamp, sendJson } from "./http.js";
 
 // One JSON file per ranking: { id, title, columns, items }. The tabs follow the file names.
 const SEED_DIR = "data/top-rankings";
@@ -31,7 +31,7 @@ db.exec(`
     PRIMARY KEY (ranking_id, position)
   );
   CREATE TABLE IF NOT EXISTS ranking_items (
-    ranking_id TEXT NOT NULL, position INTEGER NOT NULL, name TEXT NOT NULL, values_json TEXT NOT NULL,
+    ranking_id TEXT NOT NULL, position INTEGER NOT NULL, name TEXT NOT NULL, values_json TEXT NOT NULL, updated_at INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (ranking_id, position)
   );
 `);
@@ -44,6 +44,11 @@ for (const [field, type] of Object.entries(OPTIONAL_FIELDS)) {
 
 // Databases made before the grade curve existed get its column added.
 if (!db.prepare("PRAGMA table_info(rankings)").all().some((column) => column.name === "grade_curve")) db.exec("ALTER TABLE rankings ADD COLUMN grade_curve TEXT");
+
+// Databases made before items had a change time get it added; older items count as changed at time 0.
+if (!db.prepare("PRAGMA table_info(ranking_items)").all().some((column) => column.name === "updated_at")) {
+  db.exec("ALTER TABLE ranking_items ADD COLUMN updated_at INTEGER NOT NULL DEFAULT 0");
+}
 
 const insertColumn = db.prepare(`INSERT INTO ranking_columns (ranking_id, position, ${COLUMN_FIELDS.join(", ")}) VALUES (?, ?, ${placeholders(COLUMN_FIELDS.length)})`);
 const updateColumn = db.prepare(`UPDATE ranking_columns SET ${COLUMN_FIELDS.map((field) => `${field} = ?`).join(", ")} WHERE ranking_id = ? AND position = ?`);
@@ -135,14 +140,14 @@ seed();
 /** { rankings: [{ id, title, columns, items }] }, each ranking shaped like its JSON file. */
 function getRankings() {
   const columns = db.prepare(`SELECT ${COLUMN_FIELDS.join(", ")} FROM ranking_columns WHERE ranking_id = ? ORDER BY position`);
-  const items = db.prepare("SELECT name, values_json FROM ranking_items WHERE ranking_id = ? ORDER BY position");
+  const items = db.prepare("SELECT name, values_json, updated_at FROM ranking_items WHERE ranking_id = ? ORDER BY position");
 
   const rankings = db.prepare("SELECT id, title, grade_curve FROM rankings ORDER BY position").all().map(({ id, title, grade_curve }) => ({
     id,
     title,
     ...(grade_curve === null ? {} : { gradeCurve: JSON.parse(grade_curve) }),
     columns: columns.all(id).map(rowToColumn),
-    items: items.all(id).map(({ name, values_json }) => ({ name, values: JSON.parse(values_json) })),
+    items: items.all(id).map(({ name, values_json, updated_at }) => ({ name, values: JSON.parse(values_json), updatedAt: updated_at })),
   }));
 
   return { rankings };
@@ -177,15 +182,16 @@ export const rankingRoutes = [
     path: "/api/rankings/:id/items/:name",
     handler: async (request, response, { id, name }) => {
       requireUser(request);
-      const { values } = await readJson(request);
+      const { values, updatedAt } = await readJson(request);
       checkValues(id, name, values);
+      const stamp = readStamp(updatedAt);
 
-      const changed = db.prepare("UPDATE ranking_items SET values_json = ? WHERE ranking_id = ? AND name = ?").run(JSON.stringify(values), id, name);
+      const changed = db.prepare("UPDATE ranking_items SET values_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?").run(JSON.stringify(values), stamp, id, name);
       if (!changed.changes) {
         const { next } = db.prepare("SELECT COALESCE(MAX(position), -1) + 1 AS next FROM ranking_items WHERE ranking_id = ?").get(id);
-        db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json) VALUES (?, ?, ?, ?)").run(id, next, name, JSON.stringify(values));
+        db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json, updated_at) VALUES (?, ?, ?, ?, ?)").run(id, next, name, JSON.stringify(values), stamp);
       }
-      sendJson(response, 200, { name, values });
+      sendJson(response, 200, { name, values, updatedAt: stamp });
     },
   },
   {

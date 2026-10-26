@@ -29,6 +29,8 @@ export interface Item {
   name: string;
   /** One value per column, in the same order as the columns. */
   values: (number | string | null)[];
+  /** When the item was last changed, in milliseconds since 1970; used by the sync script, not shown. */
+  updatedAt?: number;
 }
 
 export interface Ranking {

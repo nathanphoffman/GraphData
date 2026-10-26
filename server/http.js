@@ -28,6 +28,17 @@ export async function readJson(request) {
   }
 }
 
+/**
+ * When a row was last changed, in milliseconds since 1970. Normal edits leave it out and get the current time; the sync script
+ * sends the time from the copy it is bringing over, so a synced row keeps its age and is not mistaken for a new edit.
+ */
+export function readStamp(value) {
+  if (value === undefined) return Date.now();
+  if (!Number.isInteger(value) || value < 0 || value > Date.now() + 24 * 60 * 60 * 1000) throw new HttpError(400, "updatedAt must be a time in milliseconds");
+
+  return value;
+}
+
 /** Value of one cookie from the request, or undefined. */
 export function getCookie(request, name) {
   const pair = (request.headers.cookie ?? "").split(";").map((part) => part.trim().split("=")).find(([key]) => key === name);

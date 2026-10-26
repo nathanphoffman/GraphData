@@ -1,15 +1,20 @@
 import { readFileSync } from "node:fs";
 import { requireUser } from "./auth.js";
 import { db } from "./db.js";
-import { HttpError, readJson, sendJson } from "./http.js";
+import { HttpError, readJson, readStamp, sendJson } from "./http.js";
 
 const SEED_PATH = "data/weight-journey/weight-journey.json";
 const MAX_WEIGHT = 2000;
 
 db.exec(`
-  CREATE TABLE IF NOT EXISTS weights (date TEXT PRIMARY KEY, weight REAL NOT NULL);
+  CREATE TABLE IF NOT EXISTS weights (date TEXT PRIMARY KEY, weight REAL NOT NULL, updated_at INTEGER NOT NULL DEFAULT 0);
   CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
 `);
+
+// Databases made before weigh-ins had a change time get it added; older weigh-ins count as changed at time 0.
+if (!db.prepare("PRAGMA table_info(weights)").all().some((column) => column.name === "updated_at")) {
+  db.exec("ALTER TABLE weights ADD COLUMN updated_at INTEGER NOT NULL DEFAULT 0");
+}
 
 /** On a brand new database, load the weigh-ins from the JSON file. Placeholder rows (weight 0) are skipped. */
 function seed() {
@@ -27,12 +32,12 @@ function seed() {
 
 seed();
 
-/** Same shape as weight-journey.json: { unit, weights: [[date, weight], ...] } oldest first. */
+/** Same shape as weight-journey.json: { unit, weights: [[date, weight], ...] } oldest first, plus when each date last changed: updatedAt { date: ms }. */
 function getWeights() {
   const unit = db.prepare("SELECT value FROM settings WHERE key = 'unit'").get()?.value ?? "lb";
-  const weights = db.prepare("SELECT date, weight FROM weights ORDER BY date").all().map((row) => [row.date, row.weight]);
+  const rows = db.prepare("SELECT date, weight, updated_at FROM weights ORDER BY date").all();
 
-  return { unit, weights };
+  return { unit, weights: rows.map((row) => [row.date, row.weight]), updatedAt: Object.fromEntries(rows.map((row) => [row.date, row.updated_at])) };
 }
 
 /** A real calendar date written YYYY-MM-DD. */
@@ -52,12 +57,14 @@ export const weightRoutes = [
     path: "/api/weights/:date",
     handler: async (request, response, { date }) => {
       requireUser(request);
-      const { weight } = await readJson(request);
+      const { weight, updatedAt } = await readJson(request);
       if (!validDate(date)) throw new HttpError(400, "Date must be a real date like 2026-10-25");
       if (typeof weight !== "number" || !(weight > 0 && weight <= MAX_WEIGHT)) throw new HttpError(400, `Weight must be a number up to ${MAX_WEIGHT}`);
 
-      db.prepare("INSERT OR REPLACE INTO weights (date, weight) VALUES (?, ?)").run(date, weight);
-      sendJson(response, 200, { date, weight });
+      const stamp = readStamp(updatedAt);
+
+      db.prepare("INSERT OR REPLACE INTO weights (date, weight, updated_at) VALUES (?, ?, ?)").run(date, weight, stamp);
+      sendJson(response, 200, { date, weight, updatedAt: stamp });
     },
   },
   {
