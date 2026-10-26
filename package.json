@@ -4,14 +4,14 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "PORT=3001 node server/index.js & trap 'kill $!' EXIT; vite",
+    "dev": "PORT=3001 node --env-file-if-exists=.env server/index.js & trap 'kill $!' EXIT; vite",
     "dev:site": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "data": "python3 scripts/build-language-data.py",
     "start": "node server/index.js",
-    "server": "PORT=3001 node server/index.js",
+    "server": "PORT=3001 node --env-file-if-exists=.env server/index.js",
     "test": "vitest run",
     "lint": "biome lint src"
   },

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { averageTint, band, deltaBand } from "../model/bands";
 import { yearly } from "../model/averages";
-import { type Row, dailyRows } from "../model/rows";
+import type { Row } from "../model/rows";
 import { type Format, type Unit, pretty, toDate } from "../model/units";
 
 type BandOf = (pounds: number | null, adjusted: boolean) => string;
@@ -31,8 +31,8 @@ function periodRows(newestFirst: Row[], period: string) {
 }
 
 /** Table shows the last 90 days by default, or one chosen quarter. */
-function useTableRows(period: string) {
-  const newestFirst = useMemo(() => [...dailyRows].reverse(), []);
+function useTableRows(period: string, dailyRows: Row[]) {
+  const newestFirst = useMemo(() => [...dailyRows].reverse(), [dailyRows]);
   const quarters = useMemo(() => [...new Set(newestFirst.map((r) => quarterOf(r.date)))], [newestFirst]);
   const rows = useMemo(() => periodRows(newestFirst, period), [newestFirst, period]);
 
@@ -220,10 +220,10 @@ function PeriodPicker({ period, onChange, options }: { period: string; onChange:
 }
 
 /** Daily table with a period filter, showing the last 90 days by default. */
-export function WeightTable({ unit, f }: { unit: Unit; f: Format }) {
+export function WeightTable({ unit, f, dailyRows }: { unit: Unit; f: Format; dailyRows: Row[] }) {
   const [period, setPeriod] = useState("default");
   const [show, setShow] = useState<Show>({ muscleDaily: false, muscleTotal: false, dayAverages: false, weightLoss: false, allAverages: true, wma: true });
-  const { newestFirst, rows, quarters } = useTableRows(period);
+  const { newestFirst, rows, quarters } = useTableRows(period, dailyRows);
 
   // Columns on screen, with each one's high and low for the period and for all time.
   const columns = useMemo(() => COLUMNS.filter((column) => !column.group || show[column.group]), [show]);

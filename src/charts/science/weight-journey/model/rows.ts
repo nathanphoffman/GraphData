@@ -9,7 +9,7 @@ export let fit: Projection[] = [];
 export let future: Projection[] = [];
 export let dailyRows: Row[] = [];
 
-/** Build the days, muscle, projections and daily rows from the weigh-ins. */
+/** Build the days, muscle, projections and daily rows from the weigh-ins; returns the parts the hooks depend on. */
 export function setWeights(weights: [string, number][]) {
   const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
 
@@ -23,7 +23,11 @@ export function setWeights(weights: [string, number][]) {
   );
   ({ fit, future } = project(days, 90, 90));
   dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
+
+  return { dailyRows, fit, future, withMuscle };
 }
+
+export type Model = ReturnType<typeof setWeights>;
 
 const DAILY_WINDOWS = { short: 3, medium: 30, long: 365 };
 
@@ -113,8 +117,8 @@ export type Row = ReturnType<typeof buildRows>[number];
  * Weight minus the muscle gained and the extra fat that muscle allows (`ratio` lb of fat per lb of muscle),
  * with the same averages, quadratic projection and 3 day projected all average as the other series.
  */
-export function buildFat(ratio: number) {
-  const series = withMuscle.map((d) => ({ ...d, weight: d.weight - d.muscleTotal * (1 + ratio) }));
+export function buildFat(ratio: number, rows: typeof withMuscle) {
+  const series = rows.map((d) => ({ ...d, weight: d.weight - d.muscleTotal * (1 + ratio) }));
   const averages = addAverages(series, DAILY_WINDOWS, 1);
   const allAvg = averages.map((a) => allAverage(a));
   const projAll = allAvg.map((_unused, index) => projectAll(allAvg, index, DAILY_WINDOWS.medium, 1));

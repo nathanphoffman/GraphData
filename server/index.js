@@ -1,17 +1,41 @@
 import { createServer } from "node:http";
 import sirv from "sirv";
-import { getWeights } from "./db.js";
+import { authRoutes } from "./auth.js";
+import { HttpError, sendJson } from "./http.js";
+import { weightRoutes } from "./weights.js";
 
 const PORT = process.env.PORT ?? 3000;
 const serveSite = sirv("dist", { single: true });
 
-createServer((request, response) => {
-  if (request.url === "/api/weights" && request.method === "GET") {
-    response.setHeader("Content-Type", "application/json");
-    response.setHeader("Cache-Control", "no-store");
-    response.end(JSON.stringify(getWeights()));
-    return;
+// To add a feature, give it a routes file like weights.js and list it here. Protect a route with `requireUser(request)`.
+const routes = [...authRoutes, ...weightRoutes].map((route) => ({
+  ...route,
+  pattern: new RegExp(`^${route.path.replace(/:(\w+)/g, "(?<$1>[^/]+)")}$`),
+}));
+
+/** Run the matching API route, or return false when the URL is not an API route. */
+async function handleApi(request, response) {
+  const { pathname } = new URL(request.url, "http://localhost");
+  if (!pathname.startsWith("/api/")) return false;
+
+  const matches = routes.map((route) => ({ route, match: route.pattern.exec(pathname) })).filter(({ match }) => match);
+  const found = matches.find(({ route }) => route.method === request.method);
+
+  if (!found) {
+    sendJson(response, matches.length ? 405 : 404, { error: matches.length ? "Method not allowed" : "Not found" });
+    return true;
   }
 
-  serveSite(request, response);
+  try {
+    await found.route.handler(request, response, found.match.groups ?? {});
+  } catch (error) {
+    if (!(error instanceof HttpError)) console.error(error);
+    sendJson(response, error instanceof HttpError ? error.status : 500, { error: error instanceof HttpError ? error.message : "Server error" });
+  }
+
+  return true;
+}
+
+createServer(async (request, response) => {
+  if (!(await handleApi(request, response))) serveSite(request, response);
 }).listen(PORT, "0.0.0.0", () => console.log(`Listening on port ${PORT}`));
