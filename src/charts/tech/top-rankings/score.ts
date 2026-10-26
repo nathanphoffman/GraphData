@@ -8,6 +8,8 @@ export interface Column {
   best?: number;
   /** The value is a raw measurement (not a 1 to 5 rating) turned into a 1 to 5 rating by this curve. */
   curve?: Curve;
+  /** The weight only counts while the viewer ticks a checkbox with this label; the column is rated and shown either way. */
+  toggle?: string;
 }
 
 /**
@@ -35,24 +37,27 @@ export interface Ranking {
   title: string;
   columns: Column[];
   items: Item[];
+  gradeCurve?: Partial<GradeCurve>;
 }
 
 export const LOWEST_RATING = 1;
 export const HIGHEST_RATING = 5;
 
 /**
- * How sharply the grade falls away as the score drops. With 5.4, a score near the top barely loses anything and the grade
- * drops faster and faster further down. Higher is steeper.
+ * The shape of the grade curve, set per ranking in its JSON file as `gradeCurve` (any part left out uses the default):
+ * - steepness: how sharply the grade falls away as the score drops. With 5.4, a score near the top barely loses anything and the grade drops faster and faster further down.
+ * - bottomBend: above 1, low scores grade lower while high scores hardly change.
+ * - middleLift, middleAt, middleWidth: lifts the middle of the curve by this many points, centred at this share of the score range and this wide, tapering off either side so the top and bottom stay put.
  */
-const GRADE_STEEPNESS = 5.4;
+export interface GradeCurve {
+  steepness: number;
+  bottomBend: number;
+  middleLift: number;
+  middleAt: number;
+  middleWidth: number;
+}
 
-/** Bends the bottom of the grade curve down: above 1, low scores grade lower while high scores hardly change. */
-const GRADE_BOTTOM_BEND = 1.75;
-
-/** Lifts the middle of the grade curve by this many points, tapering off either side so the top and bottom stay put. */
-const GRADE_MIDDLE_LIFT = 9;
-const GRADE_MIDDLE_AT = 0.42;
-const GRADE_MIDDLE_WIDTH = 0.16;
+export const DEFAULT_GRADE_CURVE: GradeCurve = { steepness: 5.4, bottomBend: 1.75, middleLift: 9, middleAt: 0.42, middleWidth: 0.16 };
 
 const clamp = (rating: number) => Math.min(HIGHEST_RATING, Math.max(LOWEST_RATING, rating));
 
@@ -117,17 +122,18 @@ export const maxScore = (columns: Column[]) => scoreOfAll(columns, HIGHEST_RATIN
 export const minScore = (columns: Column[]) => scoreOfAll(columns, LOWEST_RATING);
 
 /** The points added to the grade at this share: a bump centred on the middle. */
-const middleLift = (share: number) => GRADE_MIDDLE_LIFT * Math.exp(-(((share - GRADE_MIDDLE_AT) / GRADE_MIDDLE_WIDTH) ** 2) / 2);
+const middleLift = (share: number, curve: GradeCurve) => curve.middleLift * Math.exp(-(((share - curve.middleAt) / curve.middleWidth) ** 2) / 2);
 
 /** Grade out of 100 for a score, on an exponential curve: 0 for the lowest possible score and 100 for the best. */
-export function grade(scoreValue: number, columns: Column[]): number {
+export function grade(scoreValue: number, columns: Column[], shape: Partial<GradeCurve> = {}): number {
   const [low, high] = [minScore(columns), maxScore(columns)];
   if (high === low) return 0;
 
+  const curveShape = { ...DEFAULT_GRADE_CURVE, ...shape };
   const share = Math.max(0, (scoreValue - low) / (high - low));
 
-  const curve = (100 * (1 - Math.exp(-GRADE_STEEPNESS * share ** GRADE_BOTTOM_BEND))) / (1 - Math.exp(-GRADE_STEEPNESS));
-  const lift = middleLift(share) - (1 - share) * middleLift(0) - share * middleLift(1);
+  const curve = (100 * (1 - Math.exp(-curveShape.steepness * share ** curveShape.bottomBend))) / (1 - Math.exp(-curveShape.steepness));
+  const lift = middleLift(share, curveShape) - (1 - share) * middleLift(0, curveShape) - share * middleLift(1, curveShape);
 
   return Math.min(100, curve + lift);
 }
@@ -136,7 +142,7 @@ export function grade(scoreValue: number, columns: Column[]): number {
 export function rankItems(ranking: Ranking) {
   const scored = ranking.items
     .map((item) => ({ item, score: score(ranking.columns, item) }))
-    .map((entry) => ({ ...entry, grade: grade(entry.score, ranking.columns) }))
+    .map((entry) => ({ ...entry, grade: grade(entry.score, ranking.columns, ranking.gradeCurve) }))
     .sort((a, b) => b.score - a.score);
 
   return scored.map((entry) => ({ ...entry, rank: scored.findIndex((other) => other.score === entry.score) + 1 }));

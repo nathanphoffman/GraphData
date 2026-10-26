@@ -9,9 +9,12 @@ const MAX_RATING = 5;
 const MAX_TEXT = 80;
 
 // Everything a column can have besides its label, with its database type. A curve is an object, kept as JSON text.
-const OPTIONAL_FIELDS = { short: "TEXT", weight: "REAL", best: "REAL", curve: "TEXT" };
+const OPTIONAL_FIELDS = { short: "TEXT", weight: "REAL", best: "REAL", curve: "TEXT", toggle: "TEXT" };
 const COLUMN_FIELDS = ["label", ...Object.keys(OPTIONAL_FIELDS)];
 const placeholders = (count) => Array(count).fill("?").join(", ");
+
+/** The ranking's grade curve as JSON text for the database, or null to use the default. */
+const gradeCurveText = (ranking) => (ranking.gradeCurve === undefined ? null : JSON.stringify(ranking.gradeCurve));
 
 /** A column as the values for its database fields, in COLUMN_FIELDS order. */
 const columnToRow = (column) => COLUMN_FIELDS.map((field) => (column[field] === undefined ? null : field === "curve" ? JSON.stringify(column.curve) : column[field]));
@@ -21,7 +24,7 @@ const rowToColumn = (row) => Object.fromEntries(COLUMN_FIELDS.filter((field) => 
 
 // A column with a weight is rated; one without is just information. Item values line up with the columns.
 db.exec(`
-  CREATE TABLE IF NOT EXISTS rankings (id TEXT PRIMARY KEY, title TEXT NOT NULL, position INTEGER NOT NULL);
+  CREATE TABLE IF NOT EXISTS rankings (id TEXT PRIMARY KEY, title TEXT NOT NULL, position INTEGER NOT NULL, grade_curve TEXT);
   CREATE TABLE IF NOT EXISTS ranking_columns (
     ranking_id TEXT NOT NULL, position INTEGER NOT NULL, label TEXT NOT NULL,
     ${Object.entries(OPTIONAL_FIELDS).map(([field, type]) => `${field} ${type}`).join(", ")},
@@ -38,6 +41,9 @@ const existingFields = db.prepare("PRAGMA table_info(ranking_columns)").all().ma
 for (const [field, type] of Object.entries(OPTIONAL_FIELDS)) {
   if (!existingFields.includes(field)) db.exec(`ALTER TABLE ranking_columns ADD COLUMN ${field} ${type}`);
 }
+
+// Databases made before the grade curve existed get its column added.
+if (!db.prepare("PRAGMA table_info(rankings)").all().some((column) => column.name === "grade_curve")) db.exec("ALTER TABLE rankings ADD COLUMN grade_curve TEXT");
 
 const insertColumn = db.prepare(`INSERT INTO ranking_columns (ranking_id, position, ${COLUMN_FIELDS.join(", ")}) VALUES (?, ?, ${placeholders(COLUMN_FIELDS.length)})`);
 const updateColumn = db.prepare(`UPDATE ranking_columns SET ${COLUMN_FIELDS.map((field) => `${field} = ?`).join(", ")} WHERE ranking_id = ? AND position = ?`);
@@ -86,14 +92,14 @@ function addNewColumns(ranking) {
 }
 
 /**
- * Load any ranking file the database does not have yet. For rankings the database already has, the title, order and
+ * Load any ranking file the database does not have yet. For rankings the database already has, the title, order, grade curve and
  * columns (names, weights and curves) are re-read from the file every start, since they are edited there; the items stay as the database has them.
  */
 function seed() {
   const files = readdirSync(SEED_DIR).filter((file) => file.endsWith(".json")).sort();
   const exists = db.prepare("SELECT 1 FROM rankings WHERE id = ?");
-  const insertRanking = db.prepare("INSERT INTO rankings (id, title, position) VALUES (?, ?, ?)");
-  const updateRanking = db.prepare("UPDATE rankings SET title = ?, position = ? WHERE id = ?");
+  const insertRanking = db.prepare("INSERT INTO rankings (id, title, position, grade_curve) VALUES (?, ?, ?, ?)");
+  const updateRanking = db.prepare("UPDATE rankings SET title = ?, position = ?, grade_curve = ? WHERE id = ?");
   const columnCount = db.prepare("SELECT COUNT(*) AS count FROM ranking_columns WHERE ranking_id = ?");
   const insertItem = db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json) VALUES (?, ?, ?, ?)");
 
@@ -101,7 +107,7 @@ function seed() {
     const ranking = JSON.parse(readFileSync(`${SEED_DIR}/${file}`, "utf8"));
 
     if (exists.get(ranking.id)) {
-      updateRanking.run(ranking.title, position, ranking.id);
+      updateRanking.run(ranking.title, position, gradeCurveText(ranking), ranking.id);
       dropRemovedColumns(ranking);
       addNewColumns(ranking);
 
@@ -116,7 +122,7 @@ function seed() {
     }
 
     db.exec("BEGIN");
-    insertRanking.run(ranking.id, ranking.title, position);
+    insertRanking.run(ranking.id, ranking.title, position, gradeCurveText(ranking));
     ranking.columns.forEach((column, index) => insertColumn.run(ranking.id, index, ...columnToRow(column)));
     ranking.items.forEach((item, index) => insertItem.run(ranking.id, index, item.name, JSON.stringify(item.values)));
     db.exec("COMMIT");
@@ -131,9 +137,10 @@ function getRankings() {
   const columns = db.prepare(`SELECT ${COLUMN_FIELDS.join(", ")} FROM ranking_columns WHERE ranking_id = ? ORDER BY position`);
   const items = db.prepare("SELECT name, values_json FROM ranking_items WHERE ranking_id = ? ORDER BY position");
 
-  const rankings = db.prepare("SELECT id, title FROM rankings ORDER BY position").all().map(({ id, title }) => ({
+  const rankings = db.prepare("SELECT id, title, grade_curve FROM rankings ORDER BY position").all().map(({ id, title, grade_curve }) => ({
     id,
     title,
+    ...(grade_curve === null ? {} : { gradeCurve: JSON.parse(grade_curve) }),
     columns: columns.all(id).map(rowToColumn),
     items: items.all(id).map(({ name, values_json }) => ({ name, values: JSON.parse(values_json) })),
   }));

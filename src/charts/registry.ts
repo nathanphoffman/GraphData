@@ -126,7 +126,7 @@ export const charts: ChartEntry[] = [
     title: "Top Rankings",
     category: "Tech & economics",
     description:
-      "Personal ranking lists, starting with programming languages scored on syntax, scaffolding, readability and more. Switch between lists with the buttons at the top.",
+      "Personal ranking lists (programming languages, board games, video games) scored on syntax, scaffolding, readability and more. Switch between lists with the buttons at the top.",
     component: TopRankings,
   },
 ];

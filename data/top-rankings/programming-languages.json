@@ -1,6 +1,7 @@
 {
   "id": "programming-languages",
   "title": "Top Programming Languages",
+  "gradeCurve": {"steepness": 5.4, "bottomBend": 1.75, "middleLift": 9, "middleAt": 0.42, "middleWidth": 0.16},
   "columns": [
     {"label": "1st release", "short": "1st"},
     {"label": "Modern release", "short": "Modern"},
