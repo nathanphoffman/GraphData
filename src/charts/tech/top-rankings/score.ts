@@ -10,7 +10,19 @@ export interface Column {
   curve?: Curve;
 }
 
-export type Curve = "year" | "weight" | "time" | "cut" | "first";
+/**
+ * How a raw value becomes a rating from 1 to 5, set per column in the ranking's JSON file:
+ * - peak: `at` is the best value (5). Below it the rating falls quickly to `fromRating` at `from`; above it, in a straight line to 1 at `to`.
+ * - log: 5 at `from` down to 1 at `to`, on a log scale so a few huge values do not flatten the rest. For things where less is better.
+ * - halving: `start` (5 or 1) at a value of 0, and every +1 closes half the distance to the other end.
+ * - age: years since the current year, so this year is 1 and each year that passes lifts older values. It climbs fast at first and slowly after
+ *   (`offset` is how long the fast part lasts, larger `steepness` is faster), reaching 5 only at the `oldest` year.
+ */
+export type Curve =
+  | { type: "peak"; at: number; from: number; fromRating: number; to: number }
+  | { type: "log"; from: number; to: number }
+  | { type: "halving"; start: 1 | 5 }
+  | { type: "age"; oldest: number; offset: number; steepness: number };
 
 export interface Item {
   name: string;
@@ -42,42 +54,41 @@ const GRADE_MIDDLE_LIFT = 9;
 const GRADE_MIDDLE_AT = 0.42;
 const GRADE_MIDDLE_WIDTH = 0.16;
 
-const TIME_RANGE = [5, 1200];
+const clamp = (rating: number) => Math.min(HIGHEST_RATING, Math.max(LOWEST_RATING, rating));
 
-/** The oldest year there is (Backgammon), which is the only thing that rates a perfect 5. */
-const OLDEST_YEAR = -3000;
-const AGE_OFFSET = 7;
-const AGE_STEEPNESS = 1;
-const ageFalloff = (age: number) => (1 + age / AGE_OFFSET) ** -AGE_STEEPNESS;
+/** Raw value to a rating from 1 to 5 by the given curve. */
+function applyCurve(curve: Curve, value: number): number {
+  switch (curve.type) {
+    case "peak": {
+      if (value > curve.at) return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.at)) / (curve.to - curve.at));
 
-/** Raw value to a rating from 1 to 5; each curve is explained at its case. */
-const CURVES: Record<Curve, (value: number) => number> = {
-  // Age is measured from the current year, so this year is 1 and every year that passes lifts older games a little. It climbs fast over
-  // the first decades (a game from 2020 is about 2.9, 2005 is 4) and slowly after (a century is about 4.8), reaching 5 only at the oldest year.
-  year: (year) => {
-    const age = Math.max(0, new Date().getFullYear() - year);
-    const oldest = new Date().getFullYear() - OLDEST_YEAR;
+      const distance = (value - curve.from) / (curve.at - curve.from);
 
-    return Math.min(5, 1 + (4 * (1 - ageFalloff(age))) / (1 - ageFalloff(oldest)));
-  },
-  // 5 at a weight of 2, falling off fast below it to 3 at a weight of 1 and gently above it down to 1 at a weight of 5.
-  weight: (weight) => (weight <= 2 ? Math.max(1, 3 + 2 * (weight - 1) ** 2) : Math.max(1, 5 - (4 * (weight - 2)) / 3)),
-  // 5 for the shortest game and 1 for the longest, on a log scale so a few very long games do not flatten the rest.
-  time: (minutes) => {
-    const [short, long] = TIME_RANGE;
-    const share = (Math.log(minutes) - Math.log(short)) / (Math.log(long) - Math.log(short));
+      return clamp(curve.fromRating + (HIGHEST_RATING - curve.fromRating) * distance * Math.abs(distance));
+    }
+    case "log": {
+      const share = (Math.log(value) - Math.log(curve.from)) / (Math.log(curve.to) - Math.log(curve.from));
 
-    return Math.min(5, Math.max(1, 5 - 4 * share));
-  },
-  // 5 for no cuts, halving the distance above 1 with every cut: 1 cut is 3, 2 is 2, 3 is 1.5.
-  cut: (cuts) => 1 + 4 * 0.5 ** cuts,
-  // 1 for none, closing half the distance to 5 with every one: 1 is 3, 2 is 4, 3 is 4.5.
-  first: (count) => 5 - 4 * 0.5 ** count,
-};
+      return clamp(HIGHEST_RATING - (HIGHEST_RATING - LOWEST_RATING) * share);
+    }
+    case "halving": {
+      const other = HIGHEST_RATING + LOWEST_RATING - curve.start;
+
+      return other + (curve.start - other) * 0.5 ** value;
+    }
+    case "age": {
+      const falloff = (age: number) => (1 + age / curve.offset) ** -curve.steepness;
+      const now = new Date().getFullYear();
+      const share = (1 - falloff(Math.max(0, now - value))) / (1 - falloff(now - curve.oldest));
+
+      return clamp(LOWEST_RATING + (HIGHEST_RATING - LOWEST_RATING) * share);
+    }
+  }
+}
 
 /** The rating a column counts as: as given, run through its curve, or when the column has a best rating, 5 at that rating down to 1 at the furthest end. */
 export function effectiveRating(column: Column, rating: number): number {
-  if (column.curve !== undefined) return CURVES[column.curve](rating);
+  if (column.curve !== undefined) return applyCurve(column.curve, rating);
   if (column.best === undefined) return rating;
 
   const furthest = Math.max(column.best - LOWEST_RATING, HIGHEST_RATING - column.best);

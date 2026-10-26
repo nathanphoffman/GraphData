@@ -114,7 +114,14 @@ describe("effectiveRating", () => {
 });
 
 describe("effectiveRating curves", () => {
-  const rate = (curve: "year" | "weight" | "time" | "cut" | "first", value: number) => effectiveRating({ label: "A", weight: 1, curve }, value);
+  const curves = {
+    year: { type: "age", oldest: -3000, offset: 7, steepness: 1 },
+    weight: { type: "peak", at: 2, from: 1, fromRating: 3, to: 5 },
+    time: { type: "log", from: 5, to: 1200 },
+    cut: { type: "halving", start: 5 },
+    first: { type: "halving", start: 1 },
+  } as const;
+  const rate = (name: keyof typeof curves, value: number) => effectiveRating({ label: "A", weight: 1, curve: curves[name] }, value);
 
   it("rates a weight of 2 best, falling off faster below it than above", () => {
     expect(rate("weight", 2)).toBe(5);

@@ -1,17 +1,30 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { requireUser } from "./auth.js";
 import { db } from "./db.js";
 import { HttpError, readJson, sendJson } from "./http.js";
 
-const SEED_PATH = "data/top-rankings/top-rankings.json";
+// One JSON file per ranking: { id, title, columns, items }. The tabs follow the file names.
+const SEED_DIR = "data/top-rankings";
 const MAX_RATING = 5;
 const MAX_TEXT = 80;
+
+// Everything a column can have besides its label, with its database type. A curve is an object, kept as JSON text.
+const OPTIONAL_FIELDS = { short: "TEXT", weight: "REAL", best: "REAL", curve: "TEXT" };
+const COLUMN_FIELDS = ["label", ...Object.keys(OPTIONAL_FIELDS)];
+const placeholders = (count) => Array(count).fill("?").join(", ");
+
+/** A column as the values for its database fields, in COLUMN_FIELDS order. */
+const columnToRow = (column) => COLUMN_FIELDS.map((field) => (column[field] === undefined ? null : field === "curve" ? JSON.stringify(column.curve) : column[field]));
+
+/** A database row back to a column, leaving out the fields it does not have. */
+const rowToColumn = (row) => Object.fromEntries(COLUMN_FIELDS.filter((field) => row[field] !== null).map((field) => [field, field === "curve" ? JSON.parse(row.curve) : row[field]]));
 
 // A column with a weight is rated; one without is just information. Item values line up with the columns.
 db.exec(`
   CREATE TABLE IF NOT EXISTS rankings (id TEXT PRIMARY KEY, title TEXT NOT NULL, position INTEGER NOT NULL);
   CREATE TABLE IF NOT EXISTS ranking_columns (
-    ranking_id TEXT NOT NULL, position INTEGER NOT NULL, label TEXT NOT NULL, short TEXT, weight REAL, best REAL, curve TEXT,
+    ranking_id TEXT NOT NULL, position INTEGER NOT NULL, label TEXT NOT NULL,
+    ${Object.entries(OPTIONAL_FIELDS).map(([field, type]) => `${field} ${type}`).join(", ")},
     PRIMARY KEY (ranking_id, position)
   );
   CREATE TABLE IF NOT EXISTS ranking_items (
@@ -20,16 +33,14 @@ db.exec(`
   );
 `);
 
-// Databases made before short names existed get the column added; seed() fills it in.
-if (!db.prepare("PRAGMA table_info(ranking_columns)").all().some((column) => column.name === "short")) {
-  db.exec("ALTER TABLE ranking_columns ADD COLUMN short TEXT");
+// Databases made before a field existed get it added; seed() fills it in.
+const existingFields = db.prepare("PRAGMA table_info(ranking_columns)").all().map((column) => column.name);
+for (const [field, type] of Object.entries(OPTIONAL_FIELDS)) {
+  if (!existingFields.includes(field)) db.exec(`ALTER TABLE ranking_columns ADD COLUMN ${field} ${type}`);
 }
-if (!db.prepare("PRAGMA table_info(ranking_columns)").all().some((column) => column.name === "best")) {
-  db.exec("ALTER TABLE ranking_columns ADD COLUMN best REAL");
-}
-if (!db.prepare("PRAGMA table_info(ranking_columns)").all().some((column) => column.name === "curve")) {
-  db.exec("ALTER TABLE ranking_columns ADD COLUMN curve TEXT");
-}
+
+const insertColumn = db.prepare(`INSERT INTO ranking_columns (ranking_id, position, ${COLUMN_FIELDS.join(", ")}) VALUES (?, ?, ${placeholders(COLUMN_FIELDS.length)})`);
+const updateColumn = db.prepare(`UPDATE ranking_columns SET ${COLUMN_FIELDS.map((field) => `${field} = ?`).join(", ")} WHERE ranking_id = ? AND position = ?`);
 
 /** Delete the database columns the JSON file no longer has (matched by label), along with that value in every item. */
 function dropRemovedColumns(ranking) {
@@ -64,10 +75,7 @@ function addNewColumns(ranking) {
 
   const fileValues = new Map(ranking.items.map((item) => [item.name, item.values]));
   db.exec("BEGIN");
-  added.forEach((column, offset) => {
-    db.prepare("INSERT INTO ranking_columns (ranking_id, position, label, short, weight, best, curve) VALUES (?, ?, ?, ?, ?, ?, ?)")
-      .run(ranking.id, current.length + offset, column.label, column.short ?? null, column.weight ?? null, column.best ?? null, column.curve ?? null);
-  });
+  added.forEach((column, offset) => insertColumn.run(ranking.id, current.length + offset, ...columnToRow(column)));
   for (const item of db.prepare("SELECT position, name, values_json FROM ranking_items WHERE ranking_id = ?").all(ranking.id)) {
     const extra = added.map((_column, offset) => fileValues.get(item.name)?.[current.length + offset] ?? null);
     db.prepare("UPDATE ranking_items SET values_json = ? WHERE ranking_id = ? AND position = ?")
@@ -78,20 +86,22 @@ function addNewColumns(ranking) {
 }
 
 /**
- * Load any ranking from the JSON file that the database does not have yet. For rankings the database already has,
- * the columns (names and weights) are re-read from the file every start, since they are edited there; the items stay as the database has them.
+ * Load any ranking file the database does not have yet. For rankings the database already has, the title, order and
+ * columns (names, weights and curves) are re-read from the file every start, since they are edited there; the items stay as the database has them.
  */
 function seed() {
-  const { rankings } = JSON.parse(readFileSync(SEED_PATH, "utf8"));
+  const files = readdirSync(SEED_DIR).filter((file) => file.endsWith(".json")).sort();
   const exists = db.prepare("SELECT 1 FROM rankings WHERE id = ?");
   const insertRanking = db.prepare("INSERT INTO rankings (id, title, position) VALUES (?, ?, ?)");
-  const insertColumn = db.prepare("INSERT INTO ranking_columns (ranking_id, position, label, short, weight, best, curve) VALUES (?, ?, ?, ?, ?, ?, ?)");
-  const updateColumn = db.prepare("UPDATE ranking_columns SET label = ?, short = ?, weight = ?, best = ?, curve = ? WHERE ranking_id = ? AND position = ?");
+  const updateRanking = db.prepare("UPDATE rankings SET title = ?, position = ? WHERE id = ?");
   const columnCount = db.prepare("SELECT COUNT(*) AS count FROM ranking_columns WHERE ranking_id = ?");
   const insertItem = db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json) VALUES (?, ?, ?, ?)");
 
-  rankings.forEach((ranking, position) => {
+  files.forEach((file, position) => {
+    const ranking = JSON.parse(readFileSync(`${SEED_DIR}/${file}`, "utf8"));
+
     if (exists.get(ranking.id)) {
+      updateRanking.run(ranking.title, position, ranking.id);
       dropRemovedColumns(ranking);
       addNewColumns(ranking);
 
@@ -101,36 +111,30 @@ function seed() {
         return;
       }
 
-      ranking.columns.forEach((column, index) => {
-        updateColumn.run(column.label, column.short ?? null, column.weight ?? null, column.best ?? null, column.curve ?? null, ranking.id, index);
-      });
+      ranking.columns.forEach((column, index) => updateColumn.run(...columnToRow(column), ranking.id, index));
       return;
     }
 
     db.exec("BEGIN");
     insertRanking.run(ranking.id, ranking.title, position);
-    ranking.columns.forEach((column, index) => {
-      insertColumn.run(ranking.id, index, column.label, column.short ?? null, column.weight ?? null, column.best ?? null, column.curve ?? null);
-    });
-    ranking.items.forEach((item, index) => {
-      insertItem.run(ranking.id, index, item.name, JSON.stringify(item.values));
-    });
+    ranking.columns.forEach((column, index) => insertColumn.run(ranking.id, index, ...columnToRow(column)));
+    ranking.items.forEach((item, index) => insertItem.run(ranking.id, index, item.name, JSON.stringify(item.values)));
     db.exec("COMMIT");
-    console.log(`Seeded ranking "${ranking.title}" with ${ranking.items.length} items from ${SEED_PATH}`);
+    console.log(`Seeded ranking "${ranking.title}" with ${ranking.items.length} items from ${SEED_DIR}/${file}`);
   });
 }
 
 seed();
 
-/** Same shape as top-rankings.json: { rankings: [{ id, title, columns, items }] }. */
+/** { rankings: [{ id, title, columns, items }] }, each ranking shaped like its JSON file. */
 function getRankings() {
-  const columns = db.prepare("SELECT label, short, weight, best, curve FROM ranking_columns WHERE ranking_id = ? ORDER BY position");
+  const columns = db.prepare(`SELECT ${COLUMN_FIELDS.join(", ")} FROM ranking_columns WHERE ranking_id = ? ORDER BY position`);
   const items = db.prepare("SELECT name, values_json FROM ranking_items WHERE ranking_id = ? ORDER BY position");
 
   const rankings = db.prepare("SELECT id, title FROM rankings ORDER BY position").all().map(({ id, title }) => ({
     id,
     title,
-    columns: columns.all(id).map(({ label, short, weight, best, curve }) => ({ label, ...(short === null ? {} : { short }), ...(weight === null ? {} : { weight }), ...(best === null ? {} : { best }), ...(curve === null ? {} : { curve }) })),
+    columns: columns.all(id).map(rowToColumn),
     items: items.all(id).map(({ name, values_json }) => ({ name, values: JSON.parse(values_json) })),
   }));
 
