@@ -45,6 +45,12 @@ const PROJECTS: Project[] = [
     // synced copies of engine/ plus the vendored TinyGo runtime
     exclude: ["setup/engine", "site/engine", "site/engine.js", "wasm_exec_tiny.js"],
   },
+  {
+    name: "NH Blog",
+    folder: "NHBlog",
+    // static/ is the generated site and engine/ is a copy of the NewWeb engine
+    exclude: ["static", "engine"],
+  },
   { name: "Coding Astronomer", folder: "CodingAstronomer" },
   { name: "BGG Scraper", folder: "BGGScraper" },
   { name: "Proton Drive Sync", folder: "ProtonDriveSync" },

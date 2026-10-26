@@ -3,8 +3,8 @@
   "title": "Project Priority",
   "columns": [
     {"label": "Stack", "short": "Stack"},
-    {"label": "Fun", "short": "Fun", "weight": 7},
-    {"label": "Useful", "short": "Useful", "weight": 6},
+    {"label": "Fun", "short": "Fun", "weight": 6},
+    {"label": "Useful", "short": "Useful", "weight": 7},
     {"label": "Job", "short": "Job", "weight": 2},
     {"label": "Hard", "short": "Hard", "weight": 3, "best": 1},
     {"label": "Logic : Assets", "short": "Logic", "weight": 1},
@@ -29,6 +29,7 @@
     {"name": "Space Game (Ogame)", "values": ["Next.js, React. Three.js, Postgres, Docker", 5, 4, 3, 4, 2, 5000, "https://github.com/nathanphoffman/SpaceGame", 72, 3, 72, 72.0]},
     {"name": "Tiny Mighty", "values": ["Nuxt, Tailwind, Vitest", 4, 4, 3, 2, 2, 2000, "https://github.com/nathanphoffman/TinyMightyRPG", 90, 2, 90, 90.0]},
     {"name": "New Web", "values": ["WASM (Rust), Node, Docker, Railway, Electron", 4, 4, 3, 3, 4, 14000, "https://github.com/nathanphoffman/NewWeb", 83, 2, 83, 83.0]},
+    {"name": "NH Blog", "values": ["NewWeb, Bun, Markdown, Railway", 3, 3, 3, 3, 3, 0, "https://github.com/nathanphoffman/NHBlog", 80, 1.5, 80, 80]},
     {"name": "Coding Astronomer", "values": ["Python, ReactPY, Tailwind, FeedParser", 3, 4, 5, 2, 1, 4200, "https://github.com/nathanphoffman/PersonalPythonSite", 85, 1.5, 85, 85.0]},
     {"name": "BGG Scraper", "values": ["TS, Puppeteer, Cheerio", 3, 5, 2, 2, 3, 500, "https://github.com/nathanphoffman/BGGScraper", 90, 3, 90, 90.0]},
     {"name": "Proton Drive Sync", "values": ["Node, TS, Chokidar", 1, 5, 1, 1, 5, 1426, "https://github.com/nathanphoffman/ProtonDriveSync", 85, 1.2, 85, 85.0]},
