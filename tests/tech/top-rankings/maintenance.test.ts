@@ -16,7 +16,7 @@ describe("nFactor", () => {
 
 describe("maintenance", () => {
   it("weights quality by lines", () => {
-    const items = [...Array(10)].map((_, i) => ({ name: `s${i}`, values: [500, 50, 50] }));
+    const items = [...Array(10)].map((_, index) => ({ name: `s${index}`, values: [500, 50, 50] }));
     items.push({ name: "big", values: [5000, 100, 100] });
     expect(maintenance({ id: "x", title: "x", columns, items })?.averageQuality).toBe(75);
   });
@@ -60,17 +60,17 @@ describe("equivalentLines", () => {
   });
 
   it("ignores quality", () => {
-    const at = (quality: number) => maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, quality, quality, 3] }] });
-    expect(at(100)?.equivalentLines).toBeCloseTo(at(75)?.equivalentLines ?? 0, 6);
-    expect(at(100)?.manualLines).toBeCloseTo(at(75)?.manualLines ?? 0, 6);
+    const maintenanceAt = (quality: number) => maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, quality, quality, 3] }] });
+    expect(maintenanceAt(100)?.equivalentLines).toBeCloseTo(maintenanceAt(75)?.equivalentLines ?? 0, 6);
+    expect(maintenanceAt(100)?.manualLines).toBeCloseTo(maintenanceAt(75)?.manualLines ?? 0, 6);
   });
 });
 
 describe("manualLines", () => {
   it("is the combined n-factor minus 0.66, raised to itself", () => {
     const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 75, 75, 3] }] });
-    const n = (result?.combinedNFactor ?? 0) - 0.66;
-    expect(result?.manualLines).toBeCloseTo(n ** n, 6);
+    const adjusted = (result?.combinedNFactor ?? 0) - 0.66;
+    expect(result?.manualLines).toBeCloseTo(adjusted ** adjusted, 6);
   });
 });
 

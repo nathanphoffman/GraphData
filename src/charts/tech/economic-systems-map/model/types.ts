@@ -39,7 +39,7 @@ export interface EconomicSystemsData {
 }
 
 /** An axis-aligned box in SVG pixels, given by its center. */
-export interface Box {
+export interface LabelBox {
   cx: number;
   cy: number;
   w: number;
@@ -50,7 +50,7 @@ export interface PlacedLabel {
   figure: Figure;
   dotX: number;
   dotY: number;
-  box: Box;
+  box: LabelBox;
 }
 
 /** Shape of data/economic-systems/economic-systems-views.json: common views per cell, by policy category. */

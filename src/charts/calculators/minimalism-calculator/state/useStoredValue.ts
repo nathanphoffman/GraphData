@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 
 /** A value from a shared link's query (the part after "?"), if the link has one. */
-function sharedParam(key: string): string | null {
-  return new URLSearchParams(window.location.search).get(key);
+function sharedParam(storageKey: string): string | null {
+  return new URLSearchParams(window.location.search).get(storageKey);
 }
 
 /**
  * useState that starts from a shared link, else localStorage, else the fallback, and remembers
  * changes in localStorage. `parse` turns saved text back into a value, or null if it is not valid.
  */
-export function useStoredValue<T>(key: string, fallback: T, parse: (rawValue: string) => T | null) {
-  const storageKey = `minimalism-calculator:${key}`;
+export function useStoredValue<T>(settingKey: string, fallback: T, parse: (rawValue: string) => T | null) {
+  const storageKey = `minimalism-calculator:${settingKey}`;
 
   // Start from a value in the shared link, else the saved one, else the default.
   const [value, setValue] = useState<T>(() => {
-    const shared = sharedParam(key);
+    const shared = sharedParam(settingKey);
     const fromLink = shared === null ? null : parse(shared);
 
     if (fromLink !== null) return fromLink;
@@ -45,11 +45,11 @@ export function useStoredValue<T>(key: string, fallback: T, parse: (rawValue: st
 }
 
 /** Like useStoredValue but for numbers; text that is not a valid number is ignored. */
-export function useStoredNumber(key: string, fallback: number, isValid: (value: number) => boolean) {
+export function useStoredNumber(settingKey: string, fallback: number, isValid: (value: number) => boolean) {
   // Read the saved or shared text as a number, treating empty text as missing.
-  return useStoredValue(key, fallback, (rawValue) => {
-    const n = rawValue.trim() === "" ? NaN : Number(rawValue);
+  return useStoredValue(settingKey, fallback, (rawValue) => {
+    const parsed = rawValue.trim() === "" ? NaN : Number(rawValue);
 
-    return isValid(n) ? n : null;
+    return isValid(parsed) ? parsed : null;
   });
 }

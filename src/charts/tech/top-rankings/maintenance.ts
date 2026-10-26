@@ -74,7 +74,8 @@ export function nFactor(total: number): number {
 /** A project's quality: its familiarity and computed quality averaged, or whichever one it has. */
 export function qualityOf(values: Ranking["items"][number]["values"], familiarity: number, computed: number): number | null {
   const found = [values[familiarity], values[computed]].filter(isNumber);
-  return found.length ? found.reduce((sum, value) => sum + value, 0) / found.length : null;
+  // Add up the numbers and divide by how many there are.
+  return found.length ? found.reduce((runningTotal, value) => runningTotal + value, 0) / found.length : null;
 }
 
 /** The code maintenance numbers for a ranking with lines and quality columns, or null when it has neither or no lines. */
@@ -103,16 +104,16 @@ export function maintenance(ranking: Ranking): Maintenance | null {
   if (totalLines === 0 || qualityLines === 0) return null;
 
   const averageQuality = weighted / qualityLines;
-  const n = nFactor(totalLines);
+  const currentNFactor = nFactor(totalLines);
   const adjustment = (averageQuality - NEUTRAL_QUALITY) / PERCENT;
   const futureN = nFactor(futureLines);
-  const [graded, gradedFuture] = [n - adjustment, futureN - adjustment];
+  const [graded, gradedFuture] = [currentNFactor - adjustment, futureN - adjustment];
   const combined = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
   // The lines figures ignore quality, as if it were the neutral 75.
-  const ungraded = n * (1 - FUTURE_WEIGHT) + futureN * FUTURE_WEIGHT;
+  const ungraded = currentNFactor * (1 - FUTURE_WEIGHT) + futureN * FUTURE_WEIGHT;
   return {
     totalLines,
-    nFactor: n,
+    nFactor: currentNFactor,
     averageQuality,
     gradedNFactor: graded,
     futureLines,
@@ -127,9 +128,11 @@ export function maintenance(ranking: Ranking): Maintenance | null {
 
 /** The ranking with each item's Quality value set to the average of its Familiarity and Computed Quality (left as it is when it has neither). */
 export function withQuality(ranking: Ranking): Ranking {
+  // The position of each of the three columns in the ranking, or -1 when it is missing.
   const [quality, familiarity, computed] = [QUALITY_LABEL, FAMILIARITY_LABEL, COMPUTED_LABEL].map((label) => ranking.columns.findIndex((column) => column.label === label));
   if (quality < 0 || familiarity < 0 || computed < 0) return ranking;
 
+  // Give each item the averaged Quality, or leave it as it is when it has no data.
   const items = ranking.items.map((item) => {
     const average = qualityOf(item.values, familiarity, computed);
 
@@ -144,6 +147,7 @@ export function withScaffolding(ranking: Ranking): Ranking {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
   if (lines < 0) return ranking;
 
+  // Copy each item with the scaffolding lines added to its Completed Lines.
   const items = ranking.items.map((item) => ({
     ...item,
     values: item.values.map((value, index) => (index === lines && isNumber(value) ? value + SCAFFOLDING_LINES : value)),

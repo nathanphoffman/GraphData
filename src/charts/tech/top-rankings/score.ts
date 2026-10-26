@@ -111,9 +111,9 @@ function applyCurve(curve: Curve, value: number): number {
       return other + (curve.start - other) * HALVING_SHARE ** value;
     }
     case "age": {
-      const falloff = (age: number) => (1 + age / curve.offset) ** -curve.steepness;
-      const now = new Date().getFullYear();
-      const share = (1 - falloff(Math.max(0, now - value))) / (1 - falloff(now - curve.oldest));
+      const falloff = (yearsOld: number) => (1 + yearsOld / curve.offset) ** -curve.steepness;
+      const currentYear = new Date().getFullYear();
+      const share = (1 - falloff(Math.max(0, currentYear - value))) / (1 - falloff(currentYear - curve.oldest));
 
       return clamp(LOWEST_RATING + (HIGHEST_RATING - LOWEST_RATING) * share);
     }
@@ -132,6 +132,7 @@ export function effectiveRating(column: Column, rating: number): number {
 
 /** Sum of rating squared times the column's weight, over the rated columns. */
 export function score(columns: Column[], item: Item): number {
+  // Add up each rated column's squared rating times its weight, skipping missing values.
   return columns.reduce((total, column, index) => {
     const rating = item.values[index];
 
@@ -141,6 +142,7 @@ export function score(columns: Column[], item: Item): number {
 
 /** The score if every rated column got this rating. */
 function scoreOfAll(columns: Column[], rating: number): number {
+  // Add up every rated column's weight, each times the same squared rating.
   return columns.reduce((total, column) => total + (column.weight ?? 0) * rating ** 2, 0);
 }
 
@@ -172,16 +174,17 @@ export function rankItems(ranking: Ranking) {
   const scored = ranking.items
     .map((item) => ({ item, score: score(ranking.columns, item) }))
     .map((entry) => ({ ...entry, grade: grade(entry.score, ranking.columns, ranking.gradeCurve) }))
-    .sort((a, b) => b.score - a.score);
+    .sort((first, second) => second.score - first.score);
 
+  // An item's rank is one more than the first item with the same score, so ties share a rank.
   return scored.map((entry) => ({ ...entry, rank: scored.findIndex((other) => other.score === entry.score) + 1 }));
 }
 
 /** Where a value sits between a low and a high, from 0 to 1; 0.5 when they are the same. */
-export function fractionBetween(value: number, low: number, high: number): number {
-  if (high === low) return MIDDLE_FRACTION;
+export function fractionBetween(value: number, lowest: number, high: number): number {
+  if (high === lowest) return MIDDLE_FRACTION;
 
-  return Math.min(1, Math.max(0, (value - low) / (high - low)));
+  return Math.min(1, Math.max(0, (value - lowest) / (high - lowest)));
 }
 
 const LETTER_GRADES: [number, string][] = [

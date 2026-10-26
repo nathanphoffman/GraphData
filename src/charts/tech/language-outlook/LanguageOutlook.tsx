@@ -16,7 +16,8 @@ const TOOLTIP_OFFSET = 12;
 export default function LanguageOutlook() {
   // Start with every line visible except those hidden by default.
   const [visible, setVisible] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries([...model.series, ...model.lines].map((key) => [key, !HIDDEN_BY_DEFAULT_PREFIXES.some((prefix) => key.startsWith(prefix))])),
+    // One entry per series and line: visible, unless its name starts with a prefix that is hidden by default.
+    Object.fromEntries([...model.series, ...model.lines].map((seriesKey) => [seriesKey, !HIDDEN_BY_DEFAULT_PREFIXES.some((prefix) => seriesKey.startsWith(prefix))])),
   );
 
   const [sortKey, setSortKey] = useState(NEWEST_YEAR_SERIES);
@@ -45,7 +46,7 @@ export default function LanguageOutlook() {
       <Legend
         model={model}
         visible={visible}
-        onToggle={(key, on) => setVisible({ ...visible, [key]: on })}
+        onToggle={(seriesKey, shown) => setVisible({ ...visible, [seriesKey]: shown })}
         sortKey={sortKey}
         onSort={setSortKey}
       />

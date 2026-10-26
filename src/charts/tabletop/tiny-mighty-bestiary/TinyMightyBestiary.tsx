@@ -23,8 +23,8 @@ export default function TinyMightyBestiary() {
   const { query, theme, type, difficulty, tone, sort } = filters;
 
   const canClear = type !== null || difficulty !== null || tone !== null;
-  const band = DIFFICULTY_BANDS.find((b) => b.id === difficulty);
-  const toneBand = TONE_BANDS.find((b) => b.id === tone);
+  const band = DIFFICULTY_BANDS.find((candidateBand) => candidateBand.id === difficulty);
+  const toneBand = TONE_BANDS.find((candidateBand) => candidateBand.id === tone);
 
   // A creature must match every active filter.
   const passesFilters = (creature: Creature) =>

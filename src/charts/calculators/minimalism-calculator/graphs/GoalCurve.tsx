@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { recommendedCount } from "../logic/calculate";
 import CurveChart from "./CurveChart";
-import { cap, type ItemType } from "../logic/items";
+import { capitalize, type ItemType } from "../logic/items";
 import { PER_YEAR_STOPS } from "../logic/stops";
 
 interface Props {
@@ -23,31 +23,31 @@ export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
   // The left edge of the axis is held still while dragging so the chart doesn't rescale under the pointer.
   const [frozenMin, setFrozenMin] = useState<number | null>(null);
   const xMin = frozenMin ?? Math.min(1, goal);
-  const at = (n: number) => yearlyUses / n;
+  const countAt = (xValue: number) => yearlyUses / xValue;
   const double = goal * 2;
 
   // Closest stop to n, measured as a ratio because the stops are spaced multiplicatively.
-  const nearestStop = (n: number) =>
+  const nearestStop = (xValue: number) =>
 
     // Snap to the closest allowed stop by ratio (log distance), since the stops are spaced on a multiplicative scale.
-    PER_YEAR_STOPS.reduce((best, value) => (Math.abs(Math.log(value / n)) < Math.abs(Math.log(best / n)) ? value : best));
+    PER_YEAR_STOPS.reduce((best, value) => (Math.abs(Math.log(value / xValue)) < Math.abs(Math.log(best / xValue)) ? value : best));
 
   return (
     <div className="panel mini-chart">
       <h3>What your {item.uses}-per-year goal does</h3>
       <p className="muted">
-        Wanting {goal} {item.uses} a year from each {item.one} means {recommendedCount(at(goal))} {item.many}.
-        {double <= X_MAX && ` Double that to ${double} and you need ${recommendedCount(at(double))}.`}
+        Wanting {goal} {item.uses} a year from each {item.one} means {recommendedCount(countAt(goal))} {item.many}.
+        {double <= X_MAX && ` Double that to ${double} and you need ${recommendedCount(countAt(double))}.`}
       </p>
       <CurveChart
         ariaLabel={`${item.many} to own by ${item.uses} per year wanted`}
-        xLabel={`${cap(item.uses)} per year wanted from each ${item.one}`}
+        xLabel={`${capitalize(item.uses)} per year wanted from each ${item.one}`}
         color="#9333ea"
-        at={at}
+        at={countAt}
         yMax={Math.max(yearlyUses / xMin, 1)}
-        toFrac={(n) => Math.log(n / xMin) / Math.log(X_MAX / xMin)}
+        toFrac={(xValue) => Math.log(xValue / xMin) / Math.log(X_MAX / xMin)}
         samples={Array.from({ length: SAMPLES + 1 }, (_unused, index) => xMin * (X_MAX / xMin) ** (index / SAMPLES))}
-        marks={MARKS.filter((m) => m >= xMin)}
+        marks={MARKS.filter((mark) => mark >= xMin)}
         current={goal}
         onDragStart={() => setFrozenMin(xMin)}
         onDrag={(frac) => onGoal(nearestStop(xMin * (X_MAX / xMin) ** frac))}

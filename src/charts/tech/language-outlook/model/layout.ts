@@ -32,10 +32,10 @@ export function buildYScale(model: LanguageOutlookData, visible: Record<string, 
   const shown: number[] = [];
 
   for (const lang of model.languages) {
-    for (const key of [...model.series, ...model.lines]) {
-      const value = lang.values[key];
+    for (const seriesKey of [...model.series, ...model.lines]) {
+      const value = lang.values[seriesKey];
 
-      if (visible[key] && value != null) shown.push(value);
+      if (visible[seriesKey] && value != null) shown.push(value);
     }
   }
 
@@ -50,7 +50,7 @@ export function arrowPoints(centerX: number, centerY: number, change: number): s
   const width = height * ARROW_WIDTH_SHARE;
   const headBase = height - height * ARROW_HEAD_SHARE;
   const direction = change >= 0 ? -1 : 1;
-  const pts: Array<[number, number]> = [
+  const arrowCorners: Array<[number, number]> = [
     [centerX, centerY + direction * height],
     [centerX - width / 2, centerY + direction * headBase],
     [centerX - width / ARROW_STEM_DIVISOR, centerY + direction * headBase],
@@ -60,7 +60,7 @@ export function arrowPoints(centerX: number, centerY: number, change: number): s
     [centerX + width / 2, centerY + direction * headBase],
   ];
 
-  return pts.map((p) => p.join(",")).join(" ");
+  return arrowCorners.map((corner) => corner.join(",")).join(" ");
 }
 
 /** X position of the i-th language, spread evenly across the plot. */
@@ -71,22 +71,22 @@ export function makeXAt(count: number): (index: number) => number {
 /** Polyline point strings for one line, split wherever a language has no value. */
 export function lineSegments(
   languages: LanguageRecord[],
-  key: string,
-  xAt: (index: number) => number,
-  yAt: (value: number) => number,
+  seriesKey: string,
+  xOfIndex: (index: number) => number,
+  yOfValue: (value: number) => number,
 ): string[] {
   const segments: string[] = [];
   let current: string[] = [];
 
   // Break the line wherever a language has no value.
   languages.forEach((lang, index) => {
-    const value = lang.values[key];
+    const value = lang.values[seriesKey];
 
     if (value == null) {
       if (current.length > 1) segments.push(current.join(" "));
       current = [];
     } else {
-      current.push(`${xAt(index)},${yAt(value)}`);
+      current.push(`${xOfIndex(index)},${yOfValue(value)}`);
     }
   });
 

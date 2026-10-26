@@ -12,9 +12,9 @@ function step(stock: number, target: number, yearlyUses: number, minPlays: numbe
   const earned = yearlyUses / Math.max(1, minPlays);
   const worn = yearlyUses / Math.max(Math.max(1, minPlays), maxPlays);
   const remaining = Math.max(0, stock - worn);
-  const buy = Math.min(Math.max(0, target - remaining), earned);
+  const purchase = Math.min(Math.max(0, target - remaining), earned);
 
-  return { buy, stock: remaining + buy };
+  return { buy: purchase, stock: remaining + purchase };
 }
 
 /** Items bought in each of the next `years` years. */

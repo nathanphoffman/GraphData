@@ -6,7 +6,7 @@ import { gapLabel, goalColor, waitBuckets, type Bucket } from "../logic/waiting"
 /** The tallest bar is this many pixels high. */
 const TALLEST_BAR_PX = 90;
 
-const count = (n: number, item: ItemType) => `${n} ${n === 1 ? item.one : item.many}`;
+const count = (quantity: number, item: ItemType) => `${quantity} ${quantity === 1 ? item.one : item.many}`;
 
 interface Props {
   owned: number;
@@ -22,9 +22,9 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
     const last = bucket[bucket.length - 1];
 
     if (last && gapLabel(last) === gapLabel(second)) {
-      const p = last.p + second.p;
-      const middle = p > 0 ? (last.mid * last.p + second.mid * second.p) / p : last.mid;
-      bucket[bucket.length - 1] = { ...last, label: `${last.label}+${second.label}`, mid: middle, p };
+      const combinedShare = last.p + second.p;
+      const middle = combinedShare > 0 ? (last.mid * last.p + second.mid * second.p) / combinedShare : last.mid;
+      bucket[bucket.length - 1] = { ...last, label: `${last.label}+${second.label}`, mid: middle, p: combinedShare };
     } else {
       bucket.push(second);
     }
@@ -58,8 +58,7 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
         {/* One label per bucket under the bars; the line break lets "Every ..." wrap onto two lines. */}
         {buckets.map((bucket) => (
           <div key={bucket.label} className="muted">
-            {/* Put a line break after "Every" so the label wraps onto two lines (the regex only matches at the start). */}
-            {gapLabel(bucket).replace(/^Every /, "Every\n")}
+            {gapLabel(bucket).replace(/^Every /, "Every\n")} {/* Put a line break after "Every" so the label wraps onto two lines (the regex only matches at the start). */}
           </div>
         ))}
       </div>

@@ -26,9 +26,9 @@ describe("model", () => {
   });
 
   it("gives every creature a unique id", () => {
-    const ids = model.creatures.map((creature) => creature.id);
+    const creatureIds = model.creatures.map((creature) => creature.id);
 
-    expect(new Set(ids).size).toBe(ids.length);
+    expect(new Set(creatureIds).size).toBe(creatureIds.length);
   });
 
   it("only uses themes and types that exist", () => {
@@ -59,7 +59,7 @@ describe("difficultyOf", () => {
 
   it("falls inside exactly one difficulty band", () => {
     for (const value of [0.25, 1, 2.5, 4.5, 5, 7]) {
-      const inBands = DIFFICULTY_BANDS.filter((b) => value >= b.min && value <= b.max);
+      const inBands = DIFFICULTY_BANDS.filter((band) => value >= band.min && value <= band.max);
 
       expect(inBands).toHaveLength(1);
     }
@@ -91,26 +91,26 @@ describe("compareBy", () => {
 });
 
 describe("matches", () => {
-  const bat = creature({ name: "Giant Bat", aliases: ["AT-AT"], description: "Hangs upside down", flying: true });
+  const giantBat = creature({ name: "Giant Bat", aliases: ["AT-AT"], description: "Hangs upside down", flying: true });
 
   it("finds a creature by every word of the query in any order", () => {
-    expect(matches(bat, "bat giant")).toBe(true);
-    expect(matches(bat, "bat dragon")).toBe(false);
+    expect(matches(giantBat, "bat giant")).toBe(true);
+    expect(matches(giantBat, "bat dragon")).toBe(false);
   });
 
   it("matches names and aliases ignoring spaces and punctuation", () => {
-    expect(matches(bat, "giantbat")).toBe(true);
-    expect(matches(bat, "at at")).toBe(true);
-    expect(matches(bat, "atat")).toBe(true);
+    expect(matches(giantBat, "giantbat")).toBe(true);
+    expect(matches(giantBat, "at at")).toBe(true);
+    expect(matches(giantBat, "atat")).toBe(true);
   });
 
   it("searches descriptions and the flying flag", () => {
-    expect(matches(bat, "upside")).toBe(true);
-    expect(matches(bat, "flying")).toBe(true);
+    expect(matches(giantBat, "upside")).toBe(true);
+    expect(matches(giantBat, "flying")).toBe(true);
     expect(matches(creature({ name: "Rock" }), "flying")).toBe(false);
   });
 
   it("matches everything for an empty search", () => {
-    expect(matches(bat, "")).toBe(true);
+    expect(matches(giantBat, "")).toBe(true);
   });
 });

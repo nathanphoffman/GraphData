@@ -4,8 +4,8 @@ import { difficultyOf, model, tierFor } from "../../model/data";
 import type { Creature, Tier } from "../../model/types";
 
 /** Number with an explicit plus sign for positive values. */
-function sign(n: number) {
-  return n >= 0 ? `+${n}` : `${n}`;
+function sign(value: number) {
+  return value >= 0 ? `+${value}` : `${value}`;
 }
 
 /** The tier's statistics in a block. */
@@ -37,12 +37,12 @@ function SkillList({ creature }: { creature: Creature }) {
     <p>
       <strong>Skills:</strong>{" "}
       {/* List the skills separated by commas. */}
-      {creature.skills.map((s, index) => (
-        <span key={s.skill}>
+      {creature.skills.map((skill, index) => (
+        <span key={skill.skill}>
           {index > 0 && ", "}
-          {s.skill}
-          <span className={s.mod === "+" ? "bestiary-adv" : "bestiary-dis"}>{s.mod === "+" ? "+" : "−"}</span>
-          {s.note && ` (${s.note})`}
+          {skill.skill}
+          <span className={skill.mod === "+" ? "bestiary-adv" : "bestiary-dis"}>{skill.mod === "+" ? "+" : "−"}</span>
+          {skill.note && ` (${skill.note})`}
         </span>
       ))}
       {creature.skillNote && `. ${creature.skillNote}`}

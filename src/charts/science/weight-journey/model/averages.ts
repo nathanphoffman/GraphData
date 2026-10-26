@@ -21,8 +21,8 @@ export function completeAverage(values: (number | null)[]): number {
 }
 
 /** All average now plus 12 times its change over the last `lag` rows, like the blended projection (change per 30 real days x 12). */
-export const projectAll = (series: number[], index: number, lag: number, step: number) =>
-  index >= lag ? series[index] + ((series[index] - series[index - lag]) / step) * MONTHS_PER_YEAR : null;
+export const projectAll = (series: number[], index: number, lagRows: number, step: number) =>
+  index >= lagRows ? series[index] + ((series[index] - series[index - lagRows]) / step) * MONTHS_PER_YEAR : null;
 
 /** Mean of a series (projected all average, recent rate) over this row and the 2 before it (rows with no projection yet are skipped). */
 export function last3(series: (number | null)[], index: number) {

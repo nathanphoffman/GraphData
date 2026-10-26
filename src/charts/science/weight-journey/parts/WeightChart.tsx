@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { DAYS_PER_YEAR } from "../constants";
-import { type ChartInput, CHART_HEIGHT, M, CHART_WIDTH, buildChart } from "../model/chart";
+import { type ChartInput, CHART_HEIGHT, CHART_MARGIN, CHART_WIDTH, buildChart } from "../model/chart";
 import type { Lines } from "../useProjections";
 
 type Chart = ReturnType<typeof buildChart>;
@@ -20,17 +20,17 @@ function Axes({ chart }: { chart: Chart }) {
   return (
     <>
       {/* One horizontal grid line and label per weight tick. */}
-      {chart.y.ticks(TICK_COUNT).map((t) => (
-        <g key={t}>
-          <line x1={M.left} x2={CHART_WIDTH - M.right} y1={chart.y(t)} y2={chart.y(t)} className="grid" />
-          <text x={M.left - LABEL_GAP} y={chart.y(t) + LABEL_BASELINE} textAnchor="end">{t.toFixed(0)}</text>
+      {chart.y.ticks(TICK_COUNT).map((tickValue) => (
+        <g key={tickValue}>
+          <line x1={CHART_MARGIN.left} x2={CHART_WIDTH - CHART_MARGIN.right} y1={chart.y(tickValue)} y2={chart.y(tickValue)} className="grid" />
+          <text x={CHART_MARGIN.left - LABEL_GAP} y={chart.y(tickValue) + LABEL_BASELINE} textAnchor="end">{tickValue.toFixed(0)}</text>
         </g>
       ))}
 
       {/* One date label per time tick. */}
-      {chart.x.ticks(TICK_COUNT).map((t) => (
-        <text key={t.getTime()} x={chart.x(t)} y={CHART_HEIGHT - DATE_LABEL_BOTTOM} textAnchor="middle">
-          {t.toLocaleDateString(undefined, { month: "short", year: "2-digit", timeZone: "UTC" })}
+      {chart.x.ticks(TICK_COUNT).map((tickDate) => (
+        <text key={tickDate.getTime()} x={chart.x(tickDate)} y={CHART_HEIGHT - DATE_LABEL_BOTTOM} textAnchor="middle">
+          {tickDate.toLocaleDateString(undefined, { month: "short", year: "2-digit", timeZone: "UTC" })}
         </text>
       ))}
     </>
@@ -41,8 +41,7 @@ function Axes({ chart }: { chart: Chart }) {
 function SpreadBands({ spread }: { spread: NonNullable<Chart["spread"]> }) {
   return (
     <>
-      {/* Draw the shaded range for both the actual and the muscle-adjusted weight. */}
-      {(["actual", "adjusted"] as const).map((series) => (
+      {(["actual", "adjusted"] as const).map((series) => ( // Draw the shaded range for both the actual and the muscle-adjusted weight.
         <g key={series} className={`spread spread-${series}`}>
           {/* One shaded band between neighbouring curves. */}
           {spread[series].bands.map((band, index) => (
@@ -82,7 +81,7 @@ export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines 
     <svg viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} className="weight-chart" role="img" aria-label="Weight over time">
       <Axes chart={chart} />
       <path d={chart.actual} className="line-actual" />
-      {rangeDays <= DAYS_PER_YEAR && chart.measured.map((p, index) => <circle key={index} cx={p.x} cy={p.y} r={DOT_RADIUS} className="dot" />)}
+      {rangeDays <= DAYS_PER_YEAR && chart.measured.map((weighInDot, index) => <circle key={index} cx={weighInDot.x} cy={weighInDot.y} r={DOT_RADIUS} className="dot" />)}
       <path d={chart.avg3Fat} className="line-avg3-fat" />
       <path d={chart.avg3Adjusted} className="line-avg3-adjusted" />
       <path d={chart.avg3} className="line-avg3" />

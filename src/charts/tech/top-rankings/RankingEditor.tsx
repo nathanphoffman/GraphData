@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from "react";
-import { api } from "../../../api";
+import { callApi } from "../../../api";
 import { EditButtons } from "../../../auth/EditButtons";
 import { useEditor } from "../../../auth/useEditor";
 import { infoValue } from "./InlineCell";
@@ -15,26 +15,27 @@ export function RankingEditor({ ranking, onSaved }: { ranking: Ranking; onSaved:
   // Fields are keyed by column number.
   const existing = ranking.items.find((item) => item.name === name);
   const editor = useEditor(existing && Object.fromEntries(existing.values.map((value, index) => [index, String(value ?? "")])), onSaved);
-  const url = `/api/rankings/${ranking.id}/items/${encodeURIComponent(name)}`;
+  // The API address of this item; the name is escaped so any characters are safe.
+  const itemUrl = `/api/rankings/${ranking.id}/items/${encodeURIComponent(name)}`;
 
   const values = ranking.columns.map((column, index) => (column.weight === undefined ? infoValue(editor.field(String(index))) : Number(editor.field(String(index)))));
   const complete = name.trim() !== "" && ranking.columns.every((column, index) => column.weight === undefined || editor.field(String(index)) !== "");
 
   const save = (event: FormEvent) => {
     event.preventDefault();
-    editor.save(api(url, "PUT", { values }));
+    editor.save(callApi(itemUrl, "PUT", { values }));
   };
 
   return (
     <form className="edit-form" onSubmit={save}>
-      <input list="ranking-names" value={name} placeholder="Name (pick one or type a new one)" onChange={(e) => { setName(e.target.value); editor.reset(); }} />
+      <input list="ranking-names" value={name} placeholder="Name (pick one or type a new one)" onChange={(changeEvent) => { setName(changeEvent.target.value); editor.reset(); }} />
       <datalist id="ranking-names">
         {ranking.items.map((item) => (
           <option key={item.name} value={item.name} />
         ))}
       </datalist>
       <div className="edit-grid">
-        {ranking.columns.map((column, index) => (
+        {ranking.columns.map((column, index) => ( // One input per column.
           <label key={column.label}>
             {column.label}
             <input
@@ -43,12 +44,12 @@ export function RankingEditor({ ranking, onSaved }: { ranking: Ranking; onSaved:
               min={column.curve === undefined ? "0" : undefined}
               max={column.curve === undefined ? "5" : undefined}
               value={editor.field(String(index))}
-              onChange={(e) => editor.set(String(index), e.target.value)}
+              onChange={(changeEvent) => editor.set(String(index), changeEvent.target.value)}
             />
           </label>
         ))}
       </div>
-      <EditButtons exists={editor.exists} canSave={complete} onRemove={() => editor.remove(api(url, "DELETE"))} message={editor.message} />
+      <EditButtons exists={editor.exists} canSave={complete} onRemove={() => editor.remove(callApi(itemUrl, "DELETE"))} message={editor.message} />
     </form>
   );
 }

@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import ChartPage from "./pages/ChartPage";
 
 // BrowserRouter needs the server to answer every path with index.html (sirv --single does).
-export default function App() {
+export default function Application() {
   return (
     <BrowserRouter>
       <main className="page">

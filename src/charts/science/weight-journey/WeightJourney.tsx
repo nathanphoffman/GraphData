@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { api } from "../../../api";
+import { callApi } from "../../../api";
 import "./styles.css";
 import { Controls, RANGES } from "./parts/Controls";
 import { Legend } from "./parts/Legend";
@@ -20,17 +20,17 @@ function Journey({ model }: { model: Model }) {
   const [tool, setTool] = useState<ProjectionTool>({ lossInput: "", months: "12" });
   const [lines, setLines] = useState(ALL_LINES);
   const [fatRatio, setFatRatio] = useState({ enabled: false, value: "0.3" });
-  const f = makeFormat(unit);
+  const unitFormat = makeFormat(unit);
   const ratio = fatRatio.enabled && fatRatio.value !== "" && Number(fatRatio.value) >= 0 ? Number(fatRatio.value) : null;
-  const proj = useProjections(tool, f.k, lines, ratio, model);
+  const proj = useProjections(tool, unitFormat.k, lines, ratio, model);
 
   return (
     <div className="weight">
-      <StatsBar unit={unit} f={f} />
-      <Controls unit={unit} f={f} onUnit={setUnit} range={range} onRange={setRange} tool={tool} onTool={setTool} tapered={proj.tapered} lines={lines} onLines={setLines} fatRatio={fatRatio} onFatRatio={setFatRatio} />
-      <WeightChart input={{ rangeDays: range.days, k: f.k, ...proj }} lines={lines} />
+      <StatsBar unit={unit} f={unitFormat} />
+      <Controls unit={unit} f={unitFormat} onUnit={setUnit} range={range} onRange={setRange} tool={tool} onTool={setTool} tapered={proj.tapered} lines={lines} onLines={setLines} fatRatio={fatRatio} onFatRatio={setFatRatio} />
+      <WeightChart input={{ rangeDays: range.days, k: unitFormat.k, ...proj }} lines={lines} />
       <Legend lines={lines} tapered={proj.tapered !== null} fatRatio={ratio} />
-      <WeightTable unit={unit} f={f} dailyRows={model.dailyRows} />
+      <WeightTable unit={unit} f={unitFormat} dailyRows={model.dailyRows} />
     </div>
   );
 }
@@ -42,10 +42,11 @@ export default function WeightJourney() {
   const [model, setModel] = useState<Model | null>(null);
 
   const load = useCallback(async () => {
-    const data = await api<{ weights: [string, number][] }>("/api/weights");
+    const data = await callApi<{ weights: [string, number][] }>("/api/weights");
     setModel(setWeights(data.weights));
   }, []);
 
+  // Load the weigh-ins once; show the page when it works and an error message when it does not.
   useEffect(() => {
     load()
       .then(() => setStatus("ready"))

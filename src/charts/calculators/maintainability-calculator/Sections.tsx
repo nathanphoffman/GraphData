@@ -25,14 +25,14 @@ interface SliderPanelProps {
 }
 
 /** A titled range slider with a headline value on top and tick labels underneath. */
-export function SliderPanel({ id, label, value, min, max, step, current, onChange, ticks }: SliderPanelProps) {
+export function SliderPanel({ id: sliderId, label, value, min: minValue, max: maxValue, step, current, onChange, ticks }: SliderPanelProps) {
   return (
     <div className="panel">
       <div className="calc-row">
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={sliderId}>{label}</label>
         <strong>{value}</strong>
       </div>
-      <input id={id} type="range" min={min} max={max} step={step} value={current} onChange={(event) => onChange(Number(event.target.value))} />
+      <input id={sliderId} type="range" min={minValue} max={maxValue} step={step} value={current} onChange={(event) => onChange(Number(event.target.value))} />
       <div className="calc-ticks">
         {ticks.map((tick) => <span key={tick}>{tick}</span>)}
       </div>
@@ -51,8 +51,8 @@ interface TableProps {
 
 /** One row of the role table: the recommended line counts for a role, shifted by the chosen multiplier. */
 function RoleRow({ role, lines, mult, shift }: { role: TableProps["roles"][number] } & Omit<TableProps, "roles">) {
-  const n = role.base + shift;
-  const s = spans(n);
+  const nFactor = role.base + shift;
+  const stabilitySpans = spans(nFactor);
 
   return (
     <tr>
@@ -60,11 +60,11 @@ function RoleRow({ role, lines, mult, shift }: { role: TableProps["roles"][numbe
         {role.name}
         {role.note && <span className="role-note"> ({role.note})</span>}
       </td>
-      <td>{n.toFixed(2)}</td>
-      <td className="edge">{formatCount(s.lo * mult)}</td>
-      <td className="normal">{formatCount(s.mid * mult)}</td>
-      <td className="edge">{formatCount(s.hi * mult)}</td>
-      <td className="normal"><Badge tier={tierFor(position(lines / mult, n))} /></td>
+      <td>{nFactor.toFixed(2)}</td>
+      <td className="edge">{formatCount(stabilitySpans.lo * mult)}</td>
+      <td className="normal">{formatCount(stabilitySpans.mid * mult)}</td>
+      <td className="edge">{formatCount(stabilitySpans.hi * mult)}</td>
+      <td className="normal"><Badge tier={tierFor(position(lines / mult, nFactor))} /></td> {/* The badge names the difficulty tier these lines fall in. */}
     </tr>
   );
 }

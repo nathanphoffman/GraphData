@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { api } from "../../../api";
+import { callApi } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { ACTIVE_CLASS } from "../../classNames";
 import { useAuth } from "../../../auth/useAuth";
@@ -41,13 +41,14 @@ interface Sort {
 }
 
 /** Rank and name read best first and A to Z; the grade starts with the highest. */
-const firstSort = (key: SortKey): Sort => ({ key, descending: key === "grade" });
+const firstSort = (sortColumn: SortKey): Sort => ({ key: sortColumn, descending: sortColumn === "grade" });
 
 /** A header cell that sorts the table by its column when clicked; a second click reverses it. */
-function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; sortKey: SortKey; sort: Sort; onSort: (key: SortKey) => void; title?: string }) {
+function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; sortKey: SortKey; sort: Sort; onSort: (sortColumn: SortKey) => void; title?: string }) {
   const active = sort.key === sortKey;
 
   return (
+    // aria-sort tells screen readers the direction: ascending or descending on the sorted column, none on the rest.
     <th title={title} aria-sort={active ? (sort.descending ? "descending" : "ascending") : "none"}>
       <button type="button" className="rankings-sort" onClick={() => onSort(sortKey)}>
         {label}
@@ -58,32 +59,34 @@ function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; so
 }
 
 /** One ranking as a table: rank, name, information columns, score, then the rated columns heaviest first. `ranking` is what is shown; `source` is the same data as saved, which edits start from. */
-function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdit, onSaved }: { ranking: Ranking; source: Ranking; showScore: boolean; search: string; sort: Sort; onSort: (key: SortKey) => void; canEdit: boolean; onSaved: () => Promise<void> }) {
+function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdit, onSaved }: { ranking: Ranking; source: Ranking; showScore: boolean; search: string; sort: Sort; onSort: (sortColumn: SortKey) => void; canEdit: boolean; onSaved: () => Promise<void> }) {
   const indexed = ranking.columns.map((column, index) => ({ column, index }));
   const linkIndex = ranking.columns.findIndex((column) => column.label === LINK_LABEL);
   const episodicIndex = ranking.columns.findIndex((column) => column.label === EPISODIC_LABEL);
   const info = indexed.filter(({ column }) => column.weight === undefined && column.label !== LINK_LABEL && column.label !== EPISODIC_LABEL);
-  const rated = indexed.filter(({ column }) => column.weight !== undefined).sort((a, b) => (b.column.weight ?? 0) - (a.column.weight ?? 0));
+  const rated = indexed.filter(({ column }) => column.weight !== undefined).sort((first, second) => (second.column.weight ?? 0) - (first.column.weight ?? 0));
   const [shown, setShown] = useState(PAGE_SIZE);
   const rows = rankItems(ranking);
   const matching = rows.filter(({ item }) => item.name.toLowerCase().includes(search.trim().toLowerCase()));
   const compare = {
-    rank: (a: (typeof rows)[number], b: (typeof rows)[number]) => a.rank - b.rank,
-    name: (a: (typeof rows)[number], b: (typeof rows)[number]) => a.item.name.localeCompare(b.item.name),
-    grade: (a: (typeof rows)[number], b: (typeof rows)[number]) => a.grade - b.grade,
+    rank: (first: (typeof rows)[number], second: (typeof rows)[number]) => first.rank - second.rank,
+    name: (first: (typeof rows)[number], second: (typeof rows)[number]) => first.item.name.localeCompare(second.item.name),
+    grade: (first: (typeof rows)[number], second: (typeof rows)[number]) => first.grade - second.grade,
   }[sort.key];
-  const sorted = [...matching].sort((a, b) => (sort.descending ? compare(b, a) : compare(a, b)));
+  const sorted = [...matching].sort((first, second) => (sort.descending ? compare(second, first) : compare(first, second)));
   // Saves one changed value of an item, keeping the rest of its saved values. Completed Lines is shown with the scaffolding added, so that comes back off.
   const saveCell = (item: Ranking["items"][number], index: number) => async (value: number | string | null) => {
     const saved = source.items.find((candidate) => candidate.name === item.name) ?? item;
     const isLines = ranking.columns[index].label === LINES_LABEL && isNumber(value);
-    const changed = { ...saved, values: saved.values.map((old, i) => (i === index ? (isLines ? value - SCAFFOLDING_LINES : value) : old)) };
+    // Copy the saved item with the one value changed; a Lines value comes back without the scaffolding lines.
+    const changed = { ...saved, values: saved.values.map((oldValue, valueIndex) => (valueIndex === index ? (isLines ? value - SCAFFOLDING_LINES : value) : oldValue)) };
     // Quality is worked out from the other two, so save it fresh along with the change.
     const { values } = withQuality({ ...source, items: [changed] }).items[0];
-    await api(`/api/rankings/${ranking.id}/items/${encodeURIComponent(item.name)}`, "PUT", { values });
+    // Save the whole item; the server adds it or changes it by name.
+    await callApi(`/api/rankings/${ranking.id}/items/${encodeURIComponent(item.name)}`, "PUT", { values });
     await onSaved();
   };
-  const scores = rows.map((row) => row.score);
+  const scores = rows.map((rankedRow) => rankedRow.score);
   const [lowScore, highScore] = [Math.min(...scores), Math.max(...scores)];
 
   return (
@@ -107,7 +110,7 @@ function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdi
           </tr>
         </thead>
         <tbody>
-          {sorted.slice(0, shown).map(({ item, score, grade, rank }) => (
+          {sorted.slice(0, shown).map(({ item, score, grade, rank }) => ( // One table row per ranked item.
             <tr key={item.name}>
               <td>{rank}</td>
               <td>
@@ -199,10 +202,11 @@ export default function TopRankings() {
   const auth = useAuth();
 
   const load = useCallback(async () => {
-    const data = await api<{ rankings: Ranking[] }>("/api/rankings");
+    const data = await callApi<{ rankings: Ranking[] }>("/api/rankings");
     setRankings(data.rankings.map(withQuality));
   }, []);
 
+  // Load the rankings once when the page opens, and show an error if that fails.
   useEffect(() => {
     load().catch(() => setError(true));
   }, [load]);
@@ -210,7 +214,7 @@ export default function TopRankings() {
   if (error) return <p>Could not load the rankings.</p>;
   if (!rankings) return <p>Loading rankings…</p>;
 
-  const ranking = rankings.find((r) => r.id === pickedId) ?? rankings[0];
+  const ranking = rankings.find((rankingOption) => rankingOption.id === pickedId) ?? rankings[0];
   // What the page shows and scores has the scaffolding lines added; the editors work on the saved ranking.
   const shown = withScaffolding(ranking);
 
@@ -220,9 +224,9 @@ export default function TopRankings() {
         <RankingEditor ranking={ranking} onSaved={load} />
       </EditGear>
       <div className="rankings-tabs">
-        {rankings.map((r) => (
-          <button type="button" key={r.id} className={r.id === ranking.id ? ACTIVE_CLASS : ""} onClick={() => navigate({ hash: r.id })}>
-            {r.title}
+        {rankings.map((rankingOption) => ( // One tab button per ranking.
+          <button type="button" key={rankingOption.id} className={rankingOption.id === ranking.id ? ACTIVE_CLASS : ""} onClick={() => navigate({ hash: rankingOption.id })}>
+            {rankingOption.title}
           </button>
         ))}
       </div>
@@ -237,12 +241,12 @@ export default function TopRankings() {
         <p className="muted">* Episodic shows count half their seasons, because you don't need to watch every season to appreciate the show.</p>
       )}
       <label>
-        <input type="checkbox" checked={showScore} onChange={(e) => setShowScore(e.target.checked)} /> Show score
+        <input type="checkbox" checked={showScore} onChange={(changeEvent) => setShowScore(changeEvent.target.checked)} /> Show score
       </label>
-      <input type="search" className="rankings-search" placeholder="Search by name…" value={search} onChange={(e) => setSearch(e.target.value)} />
+      <input type="search" className="rankings-search" placeholder="Search by name…" value={search} onChange={(changeEvent) => setSearch(changeEvent.target.value)} />
       <RankingTable key={`${ranking.id}|${search}`} ranking={shown} source={ranking} showScore={showScore} search={search}
         sort={sort} canEdit={isText(auth.user)} onSaved={load}
-        onSort={(key) => setSort((prev) => (prev.key === key ? { key, descending: !prev.descending } : firstSort(key)))}
+        onSort={(sortColumn) => setSort((prev) => (prev.key === sortColumn ? { key: sortColumn, descending: !prev.descending } : firstSort(sortColumn)))} /* Clicking the sorted column flips its direction; a new column starts in its first direction. */
       />
     </div>
   );

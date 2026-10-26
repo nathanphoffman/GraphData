@@ -1,8 +1,8 @@
 /** Allowed slider values, so the sliders can take bigger steps as the numbers grow. */
 
 /** The values from `from` to `to` (inclusive), `step` apart. Rounded so 0.1 steps do not pick up float noise like 0.30000000000000004. */
-function stopsBetween(from: number, to: number, step: number): number[] {
-  const count = Math.round((to - from) / step);
+function stopsBetween(from: number, last: number, step: number): number[] {
+  const count = Math.round((last - from) / step);
 
   return Array.from({ length: count + 1 }, (_unused, index) => Number((from + index * step).toFixed(ROUND_DIGITS)));
 }

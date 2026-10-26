@@ -22,26 +22,26 @@ export default function SharingCurve({ soloNeeded, people, item, onPeople }: Pro
   // The right edge of the axis is held still while dragging so the chart doesn't rescale under the pointer.
   const [frozenMax, setFrozenMax] = useState<number | null>(null);
   const xMax = frozenMax ?? Math.min(SHARING_MAX_PEOPLE, Math.max(SHARING_MIN_PEOPLE, Math.ceil(people)));
-  const at = (n: number) => soloNeeded / n;
+  const countAt = (peopleCount: number) => soloNeeded / peopleCount;
 
   // Past 10 people only every fifth dot is labeled, to keep the numbers readable.
-  const marks = Array.from({ length: xMax }, (_unused, index) => index + 1).filter((n) => xMax <= MARK_ALL_UP_TO || n === 1 || n % MARK_EVERY === 0);
+  const marks = Array.from({ length: xMax }, (_unused, index) => index + 1).filter((peopleCount) => xMax <= MARK_ALL_UP_TO || peopleCount === 1 || peopleCount % MARK_EVERY === 0);
 
   return (
     <div className="panel mini-chart">
       <h3>What sharing does</h3>
       <p className="muted">
         {people > 1
-          ? `Sharing with ${people.toFixed(people % 1 ? 1 : 0)} people, you'd own ${recommendedCount(at(people))} ${item.many} instead of ${recommendedCount(soloNeeded)}.`
+          ? `Sharing with ${people.toFixed(people % 1 ? 1 : 0)} people, you'd own ${recommendedCount(countAt(people))} ${item.many} instead of ${recommendedCount(soloNeeded)}.`
           : `On your own you should own ${recommendedCount(soloNeeded)} ${item.many}. Lower your share to see the drop.`}
       </p>
       <CurveChart
         ariaLabel={`${item.many} to own by number of people sharing`}
         xLabel="People sharing (including you)"
         color="var(--link)"
-        at={at}
+        at={countAt}
         yMax={Math.max(soloNeeded, 1)}
-        toFrac={(n) => (n - 1) / (xMax - 1)}
+        toFrac={(peopleCount) => (peopleCount - 1) / (xMax - 1)}
         samples={Array.from({ length: (xMax - 1) * SAMPLES_PER_PERSON + 1 }, (_unused, index) => 1 + index / SAMPLES_PER_PERSON)}
         marks={marks}
         current={Math.min(people, xMax)}

@@ -45,33 +45,33 @@ function poissonBuckets(lambda: number): Bucket[] {
 
   // Kept as a running log so large counts do not overflow the factorial.
   let lnFactorial = 0;
-  let k = 0;
+  let useCount = 0;
   let used = 0;
 
   for (let index = 0; index < bins - 1; index++) {
-    let p = 0;
+    let probability = 0;
 
-    for (let innerIndex = 0; innerIndex < width; innerIndex++, k++) {
-      if (k > 0) lnFactorial += Math.log(k);
-      p += Math.exp(-lambda + k * Math.log(lambda) - lnFactorial);
+    for (let innerIndex = 0; innerIndex < width; innerIndex++, useCount++) {
+      if (useCount > 0) lnFactorial += Math.log(useCount);
+      probability += Math.exp(-lambda + useCount * Math.log(lambda) - lnFactorial);
     }
 
-    used += p;
+    used += probability;
     const lowest = index * width;
-    buckets.push({ label: width === 1 ? `${index}` : `${lowest}–${lowest + width - 1}`, mid: lowest + (width - 1) / 2, p });
+    buckets.push({ label: width === 1 ? `${index}` : `${lowest}–${lowest + width - 1}`, mid: lowest + (width - 1) / 2, p: probability });
   }
 
-  buckets.push({ label: `${k}+`, mid: k, p: Math.max(0, 1 - used) });
+  buckets.push({ label: `${useCount}+`, mid: useCount, p: Math.max(0, 1 - used) });
 
   return buckets;
 }
 
 /** At or above the goal: green fading to yellow-green. Below it: yellow through orange to red at zero. */
 export function goalColor(middle: number, goal: number): string {
-  const g = Math.max(goal, MIN_GOAL);
-  const hue = middle >= g ? GOOD_HUE - Math.min(1, (middle - g) / g) * HUE_SPAN : HUE_SPAN * (middle / g);
+  const safeGoal = Math.max(goal, MIN_GOAL);
+  const hueAngle = middle >= safeGoal ? GOOD_HUE - Math.min(1, (middle - safeGoal) / safeGoal) * HUE_SPAN : HUE_SPAN * (middle / safeGoal);
 
-  return `hsl(${Math.round(hue)}, 70%, 45%)`;
+  return `hsl(${Math.round(hueAngle)}, 70%, 45%)`;
 }
 
 /** Roughly how long you wait between plays of an item used this often (open-ended last bucket gets a "≤"). */
@@ -85,7 +85,7 @@ export function gapLabel(bucket: Bucket): string {
 
   if (days >= YEARLY_DAYS) return "Yearly";
   const bound = bucket.label.endsWith("+") ? "≤ " : "~";
-  const plural = (n: number, unit: string) => `${n} ${unit}${n === 1 ? "" : "s"}`;
+  const plural = (count: number, unit: string) => `${count} ${unit}${count === 1 ? "" : "s"}`;
 
   // Shorter waits are grouped into a few week buckets rather than counted day by day.
   if (days < WEEKLY_DAYS) return "Every < 1 week";
@@ -118,13 +118,13 @@ export function waitBuckets(lambda: number): Bucket[] {
   if (first.label !== "0") return [first, ...rest];
 
   // Turn each year range into a bucket with its chance of waiting that long.
-  const longWaits = YEAR_GROUPS.map(([from, to, gap]) => {
-    const p = Math.exp(-lambda * from) - (to === Infinity ? 0 : Math.exp(-lambda * to));
+  const longWaits = YEAR_GROUPS.map(([from, upTo, waitLabel]) => {
+    const probability = Math.exp(-lambda * from) - (upTo === Infinity ? 0 : Math.exp(-lambda * upTo));
 
     // mid is in uses per year, so a wait of ~N years counts as 1/N uses a year (comparable with the goal)
-    const years = to === Infinity ? from : (from + to) / 2;
+    const years = upTo === Infinity ? from : (from + upTo) / 2;
 
-    return { label: `wait-${from}`, mid: 1 / years, p, gap };
+    return { label: `wait-${from}`, mid: 1 / years, p: probability, gap: waitLabel };
   });
 
   return [...longWaits.reverse(), ...rest];

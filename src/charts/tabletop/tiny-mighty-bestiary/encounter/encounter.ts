@@ -10,10 +10,10 @@ const ATTEMPTS = 300;
  * still fit under it. Retries many times; an attempt that lands inside the range wins right away,
  * otherwise the attempt closest to the low end is kept.
  */
-export function buildEncounter(pool: Creature[], low: number, high: number): Creature[] {
+export function buildEncounter(pool: Creature[], lowest: number, high: number): Creature[] {
   const targets: number[] = [];
 
-  for (let t = low; t <= high; t += TARGET_STEP) targets.push(t);
+  for (let target = lowest; target <= high; target += TARGET_STEP) targets.push(target);
   let best: Creature[] = [];
   let bestGap = Infinity;
 
@@ -33,11 +33,11 @@ export function buildEncounter(pool: Creature[], low: number, high: number): Cre
 
     const total = target - left;
 
-    if (total >= low) return picks;
+    if (total >= lowest) return picks;
 
-    if (low - total < bestGap) {
+    if (lowest - total < bestGap) {
       best = picks;
-      bestGap = low - total;
+      bestGap = lowest - total;
     }
   }
 
@@ -48,11 +48,11 @@ export function buildEncounter(pool: Creature[], low: number, high: number): Cre
 export function groupPicks(picks: Creature[]) {
   const counts = new Map<string, { creature: Creature; count: number }>();
 
-  for (const c of picks) {
-    const entry = counts.get(c.id);
+  for (const pick of picks) {
+    const entry = counts.get(pick.id);
 
     if (entry) entry.count += 1;
-    else counts.set(c.id, { creature: c, count: 1 });
+    else counts.set(pick.id, { creature: pick, count: 1 });
   }
 
   return [...counts.values()].sort((first, second) => difficultyOf(second.creature) - difficultyOf(first.creature));

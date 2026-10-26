@@ -21,15 +21,15 @@ def main():
     ahead = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_DAYS_AHEAD
     data = json.loads(DATA.read_text())
     weights = data["weights"]
-    existing = {d for d, _ in weights}
-    day = date.fromisoformat(weights[-1][0]) + timedelta(days=1)
-    end = date.today() + timedelta(days=ahead)
+    existing = {date_text for date_text, _ in weights}
+    next_day = date.fromisoformat(weights[-1][0]) + timedelta(days=1)
+    last_day = date.today() + timedelta(days=ahead)
     added = 0
-    while day <= end:
-        if day.isoformat() not in existing:
-            weights.append([day.isoformat(), 0])
+    while next_day <= last_day:
+        if next_day.isoformat() not in existing:
+            weights.append([next_day.isoformat(), 0])
             added += 1
-        day += timedelta(days=1)
+        next_day += timedelta(days=1)
     DATA.write_text(json.dumps(data))
     print(f"Added {added} placeholder days (last date: {weights[-1][0]})")
 

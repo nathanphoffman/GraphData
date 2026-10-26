@@ -65,12 +65,12 @@ const BAND_RGB: Record<string, [number, number, number]> = {
 
 /** Average colour of the given band classes (empty classes are ignored) at the given opacity, or undefined when there are none. */
 export function averageTint(classes: string[], alpha = DEFAULT_TINT_ALPHA): string | undefined {
-  const colors = classes.map((name) => BAND_RGB[name]).filter((rgb) => rgb !== undefined);
+  const colors = classes.map((name) => BAND_RGB[name]).filter((rgbColor) => rgbColor !== undefined);
 
   if (!colors.length) return undefined;
 
   // Average each of red, green and blue across the colours.
-  const [red, green, blue] = [0, 1, 2].map((channel) => Math.round(colors.reduce((total, rgb) => total + rgb[channel], 0) / colors.length));
+  const [red, green, blue] = [0, 1, 2].map((channel) => Math.round(colors.reduce((total, rgbColor) => total + rgbColor[channel], 0) / colors.length));
 
   return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 }

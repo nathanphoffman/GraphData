@@ -25,9 +25,9 @@ export default function MaintainabilityCalculator() {
 
   const lines = Math.max(0, Number(loc) || 0);
   const people = Math.max(1, Math.floor(Number(team) || 1));
-  const q = Math.min(PERCENT, Math.max(0, qualityPct)) / PERCENT;
-  const qMod = q - NEUTRAL_QUALITY;
-  const percent = Math.round(q * PERCENT);
+  const qualityShare = Math.min(PERCENT, Math.max(0, qualityPct)) / PERCENT;
+  const qMod = qualityShare - NEUTRAL_QUALITY;
+  const percent = Math.round(qualityShare * PERCENT);
 
   return (
     <div className="calc">

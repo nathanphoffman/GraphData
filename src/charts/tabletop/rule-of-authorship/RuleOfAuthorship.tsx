@@ -117,14 +117,12 @@ export default function RuleOfAuthorship() {
         </table>
       </div>
 
-      {/* One block per section of the rules. */}
-      {model.sections.map((section) => (
+      {model.sections.map((section) => ( // One block per section of the rules.
         <section key={section.number}>
           <h2>
             <span>{section.number}</span> &nbsp;{section.title}
           </h2>
-          {/* One block per rule, coloured by who owns it. */}
-          {section.rules.map((rule) => (
+          {section.rules.map((rule) => ( // One block per rule, coloured by who owns it.
             <div key={rule.name} className={`auth-rule auth-owner-${rule.owner}`}>
               <div className="auth-rule-head">
                 <span className="auth-rule-name">{rule.name}</span>

@@ -1,4 +1,4 @@
-export interface Day {
+export interface DayWeight {
   date: string;
   weight: number;
   /** true when there was no weigh-in and the value is interpolated */
@@ -46,17 +46,17 @@ const QUADRATIC_TERMS = 3;
 const AUGMENTED_COLUMNS = QUADRATIC_TERMS + 1;
 
 /** Round to one decimal place. */
-export const round1 = (n: number) => Math.round(n * TENTH) / TENTH;
+export const round1 = (value: number) => Math.round(value * TENTH) / TENTH;
 
 /** Date as milliseconds, read as UTC so the time zone cannot shift the day. */
 const parse = (isoDate: string) => Date.parse(isoDate + "T00:00:00Z");
 
 /** Milliseconds back to a YYYY-MM-DD date. */
-const format = (ms: number) => new Date(ms).toISOString().slice(0, ISO_DATE_LENGTH);
+const format = (milliseconds: number) => new Date(milliseconds).toISOString().slice(0, ISO_DATE_LENGTH);
 
 /** One row per calendar day; gaps between weigh-ins are filled in a straight line. */
-export function fillDays(weights: [string, number][]): Day[] {
-  const days: Day[] = [];
+export function fillDays(weights: [string, number][]): DayWeight[] {
+  const days: DayWeight[] = [];
 
   for (let index = 0; index < weights.length; index++) {
     const [date, weight] = weights[index];
@@ -65,12 +65,12 @@ export function fillDays(weights: [string, number][]): Day[] {
 
     if (!next) break;
     const start = parse(date);
-    const gap = (parse(next[0]) - start) / DAY_MS;
+    const gapDays = (parse(next[0]) - start) / DAY_MS;
 
-    for (let step = 1; step < gap; step++) {
+    for (let step = 1; step < gapDays; step++) {
       days.push({
         date: format(start + step * DAY_MS),
-        weight: round1(weight + ((next[1] - weight) * step) / gap),
+        weight: round1(weight + ((next[1] - weight) * step) / gapDays),
         estimated: true,
       });
     }
@@ -80,64 +80,64 @@ export function fillDays(weights: [string, number][]): Day[] {
 }
 
 /** Solve a 3x3 system (normal equations for a quadratic fit) by Gaussian elimination. */
-function solve3(m: number[][], value: number[]): number[] {
-  const a = m.map((row, index) => [...row, value[index]]);
+function solve3(matrix: number[][], value: number[]): number[] {
+  const augmented = matrix.map((matrixRow, index) => [...matrixRow, value[index]]);
 
   for (let column = 0; column < QUADRATIC_TERMS; column++) {
     let pivot = column;
 
-    for (let r = column + 1; r < QUADRATIC_TERMS; r++) if (Math.abs(a[r][column]) > Math.abs(a[pivot][column])) pivot = r;
-    [a[column], a[pivot]] = [a[pivot], a[column]];
+    for (let rowIndex = column + 1; rowIndex < QUADRATIC_TERMS; rowIndex++) if (Math.abs(augmented[rowIndex][column]) > Math.abs(augmented[pivot][column])) pivot = rowIndex;
+    [augmented[column], augmented[pivot]] = [augmented[pivot], augmented[column]];
 
-    for (let r = column + 1; r < QUADRATIC_TERMS; r++) {
-      const f = a[r][column] / a[column][column];
+    for (let rowIndex = column + 1; rowIndex < QUADRATIC_TERMS; rowIndex++) {
+      const factor = augmented[rowIndex][column] / augmented[column][column];
 
-      for (let c = column; c < AUGMENTED_COLUMNS; c++) a[r][c] -= f * a[column][c];
+      for (let columnIndex = column; columnIndex < AUGMENTED_COLUMNS; columnIndex++) augmented[rowIndex][columnIndex] -= factor * augmented[column][columnIndex];
     }
   }
 
   const xPos = [0, 0, 0];
 
-  for (let r = 2; r >= 0; r--) {
-    let total = a[r][QUADRATIC_TERMS];
+  for (let rowIndex = 2; rowIndex >= 0; rowIndex--) {
+    let total = augmented[rowIndex][QUADRATIC_TERMS];
 
-    for (let c = r + 1; c < QUADRATIC_TERMS; c++) total -= a[r][c] * xPos[c];
-    xPos[r] = total / a[r][r];
+    for (let columnIndex = rowIndex + 1; columnIndex < QUADRATIC_TERMS; columnIndex++) total -= augmented[rowIndex][columnIndex] * xPos[columnIndex];
+    xPos[rowIndex] = total / augmented[rowIndex][rowIndex];
   }
 
   return xPos;
 }
 
 /** Quadratic least-squares curve through the last `fitDays` days, extended `aheadDays` into the future. */
-export function project(days: Day[], fitDays: number, aheadDays: number): { fit: Projection[]; future: Projection[] } {
+export function project(days: DayWeight[], fitDays: number, aheadDays: number): { fit: Projection[]; future: Projection[] } {
   const recent = days.slice(-fitDays);
-  const n = recent.length;
+  const dayCount = recent.length;
 
   // Sums used for a least-squares fit over the recent days (x is the day index).
-  const power = (k: number) => recent.reduce((total, _unused, index) => total + index ** k, 0);
+  const power = (exponent: number) => recent.reduce((total, _unused, index) => total + index ** exponent, 0);
   // Weighted sum used by the curve fit: each day's weight times its index to the power k.
-  const weighted = (k: number) => recent.reduce((total, d, index) => total + d.weight * index ** k, 0);
+  const weighted = (exponent: number) => recent.reduce((total, dayRecord, index) => total + dayRecord.weight * index ** exponent, 0);
   const [c, b, a] = solve3(
     // Row i, column j of the normal equations is the sum of x to the power i + j (power 0 is just n).
-    Array.from({ length: QUADRATIC_TERMS }, (_row, row) => Array.from({ length: QUADRATIC_TERMS }, (_column, column) => power(row + column))),
-    Array.from({ length: QUADRATIC_TERMS }, (_term, k) => weighted(k)),
+    Array.from({ length: QUADRATIC_TERMS }, (_equation, rowIndex) => Array.from({ length: QUADRATIC_TERMS }, (_column, column) => power(rowIndex + column))),
+    Array.from({ length: QUADRATIC_TERMS }, (_term, exponent) => weighted(exponent)),
   );
 
-  const at = (index: number) => round1(c + b * index + a * index * index);
-  const last = parse(recent[n - 1].date);
+  const weightAt = (index: number) => round1(c + b * index + a * index * index);
+  const last = parse(recent[dayCount - 1].date);
 
   return {
-    fit: recent.map((d, index) => ({ date: d.date, weight: at(index) })),
+    fit: recent.map((dayRecord, index) => ({ date: dayRecord.date, weight: weightAt(index) })),
     // Extend the fitted curve forward one point per future day.
-    future: Array.from({ length: aheadDays }, (_unused, k) => ({
-      date: format(last + (k + 1) * DAY_MS),
-      weight: at(n + k),
+    future: Array.from({ length: aheadDays }, (_unused, daysAhead) => ({
+      date: format(last + (daysAhead + 1) * DAY_MS),
+      weight: weightAt(dayCount + daysAhead),
     })),
   };
 }
 
 /** Trailing averages (the day itself plus the days before it) and the blended number built from them. */
-export function addAverages<T extends Day>(
+export function addAverages<T extends DayWeight>(
   days: T[],
   windows = { short: SHORT_WINDOW_DAYS, medium: DAYS_PER_MONTH, long: DAYS_PER_YEAR },
   /** real days per row; the 30-row change is divided by it so `monthly` is always per 30 real days */
@@ -145,7 +145,7 @@ export function addAverages<T extends Day>(
 ): (T & Averages)[] {
   const prefix = [0];
 
-  for (const d of days) prefix.push(prefix[prefix.length - 1] + d.weight);
+  for (const dayRecord of days) prefix.push(prefix[prefix.length - 1] + dayRecord.weight);
 
   // Average of the last `size` rows, from running totals so each row takes constant time.
   const trailing = (index: number, size: number) => {
@@ -157,8 +157,8 @@ export function addAverages<T extends Day>(
   const blended = days.map((_unused, index) => (BLEND_SHORT * trailing(index, windows.short) + BLEND_MEDIUM * trailing(index, windows.medium) + BLEND_LONG * trailing(index, windows.long)) / BLEND_TOTAL);
 
   // Attach every average to its day, plus the monthly change once there is enough history.
-  return days.map((d, index) => ({
-    ...d,
+  return days.map((dayRecord, index) => ({
+    ...dayRecord,
     avg3: round1(trailing(index, windows.short)),
     avg30: round1(trailing(index, windows.medium)),
     avg365: round1(trailing(index, windows.long)),
@@ -174,19 +174,19 @@ const MUSCLE_TOTAL = 14.5;
 const MUSCLE_TAPER = 0.5;
 
 /** Estimated muscle gain: a nearly straight line from MUSCLE_START to the last day that adds up to MUSCLE_TOTAL lb. */
-export function addMuscle<T extends Day>(days: T[]): (T & Muscle)[] {
-  const start = days.findIndex((d) => d.date >= MUSCLE_START);
+export function addMuscle<T extends DayWeight>(days: T[]): (T & Muscle)[] {
+  const start = days.findIndex((dayRecord) => dayRecord.date >= MUSCLE_START);
   const span = days.length - 1 - start;
 
   // Cumulative share of the total at position u (0..1): a line bent slightly flat toward the end.
-  const share = (u: number) => (u - (MUSCLE_TAPER * u * u) / 2) / (1 - MUSCLE_TAPER / 2);
+  const share = (progress: number) => (progress - (MUSCLE_TAPER * progress * progress) / 2) / (1 - MUSCLE_TAPER / 2);
 
   // Split the muscle total across the days so the daily gain tapers off.
-  return days.map((d, index) => {
+  return days.map((dayRecord, index) => {
     const total = index < start ? 0 : MUSCLE_TOTAL * share((index - start) / span);
     const before = index <= start ? 0 : MUSCLE_TOTAL * share((index - 1 - start) / span);
 
-    return { ...d, muscleDaily: total - before, muscleTotal: total };
+    return { ...dayRecord, muscleDaily: total - before, muscleTotal: total };
   });
 }
 
@@ -217,11 +217,11 @@ export function projectTapering(
   let muscle = startMuscle;
   const points: TargetPoint[] = [];
 
-  for (let k = 1; k <= aheadDays; k++) {
-    const factor = MONTHLY_KEEP ** (k / DAYS_PER_MONTH);
+  for (let dayNumber = 1; dayNumber <= aheadDays; dayNumber++) {
+    const factor = MONTHLY_KEEP ** (dayNumber / DAYS_PER_MONTH);
     weight -= (monthlyLoss / DAYS_PER_MONTH) * factor;
     muscle += muscleDaily * factor;
-    points.push({ date: format(start + k * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle), muscle });
+    points.push({ date: format(start + dayNumber * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle), muscle });
   }
 
   return points;

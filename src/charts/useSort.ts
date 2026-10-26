@@ -9,11 +9,11 @@ export function useSort<Key extends string>(initialKey: Key) {
   const [ascending, setAscending] = useState(false);
 
   // Clicking the sorted column flips direction; a new column starts descending (names ascending).
-  const sortBy = (key: Key) => {
-    if (key === sortKey) setAscending(!ascending);
+  const sortBy = (columnKey: Key) => {
+    if (columnKey === sortKey) setAscending(!ascending);
     else {
-      setSortKey(key);
-      setAscending(key === NAME_KEY);
+      setSortKey(columnKey);
+      setAscending(columnKey === NAME_KEY);
     }
   };
 

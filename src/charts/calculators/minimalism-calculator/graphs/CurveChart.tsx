@@ -5,7 +5,7 @@ const CHART_WIDTH = 400;
 const CHART_HEIGHT = 190;
 const LEFT = 40;
 const RIGHT = 14;
-const TOP = 22;
+const TOP_MARGIN = 22;
 const BOTTOM = 34;
 
 /** Sizes and spacing for what is drawn on the chart. */
@@ -26,10 +26,10 @@ interface Props {
   xLabel: string;
   color: string;
   /** Count at x (how many to own); the top of the chart is yMax. */
-  at: (n: number) => number;
+  at: (xValue: number) => number;
   yMax: number;
   /** Where x sits along the axis, 0 (left) to 1 (right). */
-  toFrac: (n: number) => number;
+  toFrac: (xValue: number) => number;
   /** X values the curve is drawn through. */
   samples: number[];
   /** X values that get a dot, a count and an axis label. */
@@ -47,7 +47,7 @@ export default function CurveChart({
   ariaLabel,
   xLabel,
   color,
-  at,
+  at: countAt,
   yMax,
   toFrac,
   samples,
@@ -58,10 +58,10 @@ export default function CurveChart({
   onDragEnd,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const xScale = (n: number) => LEFT + toFrac(n) * (CHART_WIDTH - LEFT - RIGHT);
-  const yScale = (value: number) => TOP + (1 - value / yMax) * (CHART_HEIGHT - TOP - BOTTOM);
+  const xScale = (xValue: number) => LEFT + toFrac(xValue) * (CHART_WIDTH - LEFT - RIGHT);
+  const yScale = (value: number) => TOP_MARGIN + (1 - value / yMax) * (CHART_HEIGHT - TOP_MARGIN - BOTTOM);
 
-  const path = samples.map((sample, index) => `${index === 0 ? "M" : "L"}${xScale(sample).toFixed(1)},${yScale(at(sample)).toFixed(1)}`).join(" ");
+  const path = samples.map((sample, index) => `${index === 0 ? "M" : "L"}${xScale(sample).toFixed(1)},${yScale(countAt(sample)).toFixed(1)}`).join(" ");
 
   // Only follow the pointer while it is captured by this chart, so a stray hover does not move the curve.
   const drag = (pointerEvent: PointerEvent) => {
@@ -82,20 +82,20 @@ export default function CurveChart({
       {/* One dot and label per marked point on the curve. */}
       {marks.map((mark) => (
         <g key={mark}>
-          <circle cx={xScale(mark)} cy={yScale(at(mark))} r={MARK_RADIUS} fill={color} />
-          <text x={xScale(mark)} y={yScale(at(mark)) - MARK_LABEL_GAP} fontSize={LABEL_SIZE} textAnchor="middle" fill="currentColor">
-            {recommendedCount(at(mark))}
+          <circle cx={xScale(mark)} cy={yScale(countAt(mark))} r={MARK_RADIUS} fill={color} />
+          <text x={xScale(mark)} y={yScale(countAt(mark)) - MARK_LABEL_GAP} fontSize={LABEL_SIZE} textAnchor="middle" fill="currentColor">
+            {recommendedCount(countAt(mark))}
           </text>
           <text x={xScale(mark)} y={CHART_HEIGHT - BOTTOM + AXIS_LABEL_DROP} fontSize={LABEL_SIZE} textAnchor="middle" fill="currentColor" opacity={LABEL_OPACITY}>
             {mark}
           </text>
         </g>
       ))}
-      <line x1={xScale(current)} x2={xScale(current)} y1={yScale(at(current))} y2={yScale(0)} stroke="var(--fg)" strokeDasharray="4 3" />
-      <circle cx={xScale(current)} cy={yScale(at(current))} r={CURRENT_RING_RADIUS} fill="none" stroke="var(--fg)" strokeWidth={2} />
+      <line x1={xScale(current)} x2={xScale(current)} y1={yScale(countAt(current))} y2={yScale(0)} stroke="var(--fg)" strokeDasharray="4 3" />
+      <circle cx={xScale(current)} cy={yScale(countAt(current))} r={CURRENT_RING_RADIUS} fill="none" stroke="var(--fg)" strokeWidth={2} />
       <circle
         cx={xScale(current)}
-        cy={yScale(at(current))}
+        cy={yScale(countAt(current))}
         r={DRAG_RADIUS}
         fill="transparent"
         style={{ cursor: "grab", touchAction: "none" }}

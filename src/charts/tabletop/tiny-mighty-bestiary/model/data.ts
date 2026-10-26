@@ -13,7 +13,7 @@ export const model = {
 
 /** The combat tier for a creature; throws if the data names a tier that does not exist. */
 export function tierFor(creature: Creature) {
-  const tier = model.tiers.find((t) => t.difficulty === creature.tier);
+  const tier = model.tiers.find((tierEntry) => tierEntry.difficulty === creature.tier);
 
   if (!tier) throw new Error(`No combat tier ${creature.tier} for ${creature.name}`);
 
@@ -63,6 +63,7 @@ const byDifficultyThenName = (creature: Creature, second: Creature) =>
 
 /** Sort function for the chosen sort name; ties fall back to difficulty and then name. */
 export function compareBy(sort: string): (creature: Creature, second: Creature) => number {
+  // Where a creature's type sits in the list of types, so creatures can be grouped by type.
   const typeOrder = (creature: Creature) => model.creatureTypes.findIndex((creatureType) => creatureType.id === creature.type);
 
   switch (sort) {

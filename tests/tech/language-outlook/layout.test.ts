@@ -41,27 +41,27 @@ describe("arrowPoints", () => {
 
 describe("makeXAt", () => {
   it("spaces languages evenly inside the margins", () => {
-    const xAt = makeXAt(4);
+    const xOfIndex = makeXAt(4);
 
-    expect(xAt(1) - xAt(0)).toBeCloseTo(xAt(2) - xAt(1));
-    expect(xAt(0)).toBeGreaterThan(MARGIN.left);
-    expect(xAt(3)).toBeLessThan(CHART_WIDTH - MARGIN.right);
+    expect(xOfIndex(1) - xOfIndex(0)).toBeCloseTo(xOfIndex(2) - xOfIndex(1));
+    expect(xOfIndex(0)).toBeGreaterThan(MARGIN.left);
+    expect(xOfIndex(3)).toBeLessThan(CHART_WIDTH - MARGIN.right);
   });
 });
 
 describe("lineSegments", () => {
-  const xAt = (index: number) => index * 10;
-  const yAt = (value: number) => value;
+  const xOfIndex = (index: number) => index * 10;
+  const yOfValue = (value: number) => value;
 
   it("splits a line wherever a value is missing", () => {
     const langs = [1, 2, null, 3, 4].map((value, index) => language(`L${index}`, { k: value }));
 
-    expect(lineSegments(langs, "k", xAt, yAt)).toEqual(["0,1 10,2", "30,3 40,4"]);
+    expect(lineSegments(langs, "k", xOfIndex, yOfValue)).toEqual(["0,1 10,2", "30,3 40,4"]);
   });
 
   it("drops stretches that are a single point", () => {
     const langs = [1, null, 3].map((value, index) => language(`L${index}`, { k: value }));
 
-    expect(lineSegments(langs, "k", xAt, yAt)).toEqual([]);
+    expect(lineSegments(langs, "k", xOfIndex, yOfValue)).toEqual([]);
   });
 });

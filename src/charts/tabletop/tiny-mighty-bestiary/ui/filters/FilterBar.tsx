@@ -30,7 +30,7 @@ const themeChipClass = () => THEME_CHIP_CLASS;
 
 /** Search, theme, type, difficulty and tone filters with a button to clear them. */
 export default function FilterBar({ filters, onChange, canClear, onClear }: Props) {
-  const set = (patch: Partial<Filters>) => onChange({ ...filters, ...patch });
+  const updateFilters = (patch: Partial<Filters>) => onChange({ ...filters, ...patch });
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         label="Theme"
         options={SCIFI_OPTIONS}
         active={filters.theme}
-        onChange={(theme) => theme && set({ theme })}
+        onChange={(theme) => theme && updateFilters({ theme })}
         chipClass={themeChipClass}
       />
       <FilterChips
@@ -46,14 +46,14 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         groupName="Theme"
         options={OTHER_OPTIONS}
         active={filters.theme}
-        onChange={(theme) => theme && set({ theme })}
+        onChange={(theme) => theme && updateFilters({ theme })}
         chipClass={themeChipClass}
       />
       <FilterChips
         label="Type"
         options={model.creatureTypes}
         active={filters.type}
-        onChange={(type) => set({ type })}
+        onChange={(type) => updateFilters({ type })}
         chipClass={(identifier) => `bestiary-type-${identifier}`}
         swatch
       >
@@ -67,21 +67,21 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         label="Difficulty"
         options={DIFFICULTY_BANDS}
         active={filters.difficulty}
-        onChange={(difficulty) => set({ difficulty })}
+        onChange={(difficulty) => updateFilters({ difficulty })}
         chipClass={themeChipClass}
       />
       <FilterChips
         label="Tone"
         options={TONE_BANDS}
         active={filters.tone}
-        onChange={(tone) => set({ tone })}
+        onChange={(tone) => updateFilters({ tone })}
         chipClass={themeChipClass}
       />
       <FilterChips
         label="Sort"
         options={SORTS}
         active={filters.sort}
-        onChange={(sort) => sort && set({ sort })}
+        onChange={(sort) => sort && updateFilters({ sort })}
         chipClass={themeChipClass}
       />
       <input
@@ -90,7 +90,7 @@ export default function FilterBar({ filters, onChange, canClear, onClear }: Prop
         placeholder="Search creatures, powers, skills, classic names..."
         aria-label="Search creatures"
         value={filters.query}
-        onChange={(event) => set({ query: event.target.value })}
+        onChange={(event) => updateFilters({ query: event.target.value })}
       />
     </>
   );

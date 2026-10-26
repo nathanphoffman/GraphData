@@ -97,8 +97,7 @@ export default function DndSales() {
       </svg>
 
       <h2>How each number was reached</h2>
-      {/* One line of explanation per edition. */}
-      {model.editions.map((edition) => (
+      {model.editions.map((edition) => ( // One line of explanation per edition.
         <div key={edition.id} style={{ marginBottom: "1rem" }}>
           <strong>{edition.name}</strong> ({edition.year}): {edition.best}M best guess, range {edition.low}-{edition.high}M.{" "}
           <span className="muted">{CONFIDENCE_LABEL[edition.confidence]}.</span>

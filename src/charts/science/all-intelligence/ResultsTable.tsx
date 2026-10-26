@@ -23,13 +23,14 @@ interface TableProps extends SortProps {
 }
 
 /** Format a score as a whole number, or a dash when it is missing. */
-function fmt(value: number | null | undefined): string {
+function formatScore(value: number | null | undefined): string {
   return value === null || value === undefined ? "—" : value.toFixed(1);
 }
 
 /** Table header with one sortable column per group of scores. */
 function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllIntelligenceData }) {
-  const arrow = (key: SortKey) => (key === sortKey ? (ascending ? " ▲" : " ▼") : "");
+  // Show an arrow on the sorted column only: up when ascending, down when descending, nothing on the others.
+  const arrow = (columnKey: SortKey) => (columnKey === sortKey ? (ascending ? " ▲" : " ▼") : "");
 
   return (
     <thead>
@@ -37,8 +38,7 @@ function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllI
         <th>#</th>
         <th className="sortable" onClick={() => onSort(NAME_KEY)}>Name{arrow(NAME_KEY)}</th>
         <th className="sortable" onClick={() => onSort(OVERALL_KEY)}>Score{arrow(OVERALL_KEY)}</th>
-        {/* One sortable header cell per group of columns. */}
-        {model.groups.map((group) => (
+        {model.groups.map((group) => ( // One sortable header cell per group of columns.
           <th key={group.id} className="sortable allint-group-th" onClick={() => onSort(group.id)}>{group.name.replace("& ", "&\n")}{arrow(group.id)}</th>
         ))}
         <th className="sortable" onClick={() => onSort(MEASURED_KEY)}>Measured{arrow(MEASURED_KEY)}</th>
@@ -48,10 +48,10 @@ function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllI
 }
 
 /** One column's score: the real value, a proxy from price, a guess, or "not measured". */
-function ColumnScore({ model, row, settings, column }: { model: AllIntelligenceData; row: ScoredSubject; settings: Settings; column: string }) {
-  const real = knownScore(row.subject, column);
-  const isProxy = row.subject.scores[column] === undefined && real !== undefined;
-  const guess = settings.missingMode === "estimate" ? estimateScore(model, row.subject, column) : null;
+function ColumnScore({ model, row: subjectRow, settings, column }: { model: AllIntelligenceData; row: ScoredSubject; settings: Settings; column: string }) {
+  const real = knownScore(subjectRow.subject, column);
+  const isProxy = subjectRow.subject.scores[column] === undefined && real !== undefined;
+  const guess = settings.missingMode === "estimate" ? estimateScore(model, subjectRow.subject, column) : null;
 
   // Show the real score if there is one, else the estimate marked with "~", else "not measured".
   const text = real !== undefined ? `${real.toFixed(0)}${isProxy ? " (from price)" : ""}` : guess !== null ? `~${guess.toFixed(0)} (guess)` : "not measured";
@@ -64,16 +64,15 @@ function ColumnScore({ model, row, settings, column }: { model: AllIntelligenceD
 }
 
 /** Expanded view of a subject showing each underlying score. */
-function DetailRow({ model, row, settings }: { model: AllIntelligenceData; row: ScoredSubject; settings: Settings }) {
+function DetailRow({ model, row: subjectRow, settings }: { model: AllIntelligenceData; row: ScoredSubject; settings: Settings }) {
   return (
     <tr className="allint-detail">
       <td colSpan={FIXED_COLUMNS + model.groups.length}>
         <div className="allint-detail-grid">
-          {/* One block of detail per group, shown when the row is expanded. */}
-          {model.groups.map((group) => (
+          {model.groups.map((group) => ( // One block of detail per group, shown when the row is expanded.
             <div key={group.id} className="allint-detail-group">
               <h4>{group.name}</h4>
-              {group.columns.map((key) => <ColumnScore key={key} model={model} row={row} settings={settings} column={key} />)}
+              {group.columns.map((columnKey) => <ColumnScore key={columnKey} model={model} row={subjectRow} settings={settings} column={columnKey} />)}
             </div>
           ))}
         </div>
@@ -83,16 +82,16 @@ function DetailRow({ model, row, settings }: { model: AllIntelligenceData; row: 
 }
 
 /** Summary row for one subject; clicking it opens the detail row. */
-function SubjectRow({ model, row, index, onToggle }: { model: AllIntelligenceData; row: ScoredSubject; index: number; onToggle: (name: string) => void }) {
-  const { name, kind, maker } = row.subject;
+function SubjectRow({ model, row: subjectRow, index, onToggle }: { model: AllIntelligenceData; row: ScoredSubject; index: number; onToggle: (name: string) => void }) {
+  const { name, kind, maker } = subjectRow.subject;
 
   return (
     <tr className={`allint-row allint-${kind}`} onClick={() => onToggle(name)}>
       <td>{index + 1}</td>
       <td className="allint-name">{name} <span className="allint-maker">{maker}</span></td>
-      <td className="allint-score">{fmt(row.overall)}</td>
-      {model.groups.map((group) => <td key={group.id}>{fmt(row.groups[group.id])}</td>)}
-      <td>{row.measured}/{Object.keys(model.columns).length}</td>
+      <td className="allint-score">{formatScore(subjectRow.overall)}</td>
+      {model.groups.map((group) => <td key={group.id}>{formatScore(subjectRow.groups[group.id])}</td>)}
+      <td>{subjectRow.measured}/{Object.keys(model.columns).length}</td> {/* How many columns were measured out of all of them. */}
     </tr>
   );
 }
@@ -105,9 +104,9 @@ export function ResultsTable({ model, rows, settings, open, onToggle, ...sort }:
         <Header model={model} {...sort} />
         <tbody>
           {/* One summary row per subject, followed by its detail row when open. */}
-          {rows.map((scoredSubject, i) => (
+          {rows.map((scoredSubject, rowIndex) => (
             <Fragment key={scoredSubject.subject.name}>
-              <SubjectRow model={model} row={scoredSubject} index={i} onToggle={onToggle} />
+              <SubjectRow model={model} row={scoredSubject} index={rowIndex} onToggle={onToggle} />
               {open.has(scoredSubject.subject.name) && <DetailRow model={model} row={scoredSubject} settings={settings} />}
             </Fragment>
           ))}

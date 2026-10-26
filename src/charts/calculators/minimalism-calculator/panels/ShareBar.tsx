@@ -19,15 +19,15 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
 
   // Build a share link from the current settings; fall back to a prompt if the clipboard is blocked.
   const copyLink = async () => {
-    const url = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(shareParams())}`;
+    const shareUrl = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(shareParams())}`;
 
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       window.setTimeout(() => setCopied(false), COPIED_MESSAGE_MS);
     } catch (error) {
       console.warn("Clipboard copy failed, falling back to prompt", error);
-      window.prompt("Copy this link:", url);
+      window.prompt("Copy this link:", shareUrl);
     }
   };
 

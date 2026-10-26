@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
 import data from "../../../data/economic-systems/economic-systems-map.json";
-import { GRID_H, GRID_X0, GRID_Y0, cellNameWidth, fixedObstacles, labelWidth, placeLabels, toX, toY } from "../../../src/charts/tech/economic-systems-map/model/layout";
+import { GRID_H, GRID_X0, GRID_Y0, cellNameWidth, fixedObstacles, labelWidth, placeLabels, xToPixels, yToPixels } from "../../../src/charts/tech/economic-systems-map/model/layout";
 import type { EconomicSystemsData, Figure } from "../../../src/charts/tech/economic-systems-map/model/types";
 
 const model = data as unknown as EconomicSystemsData;
 
 describe("unit conversion", () => {
   it("puts x 0 on the left edge and y 0 on the bottom edge", () => {
-    expect(toX(0)).toBe(GRID_X0);
-    expect(toY(0)).toBe(GRID_Y0 + GRID_H);
-    expect(toY(3)).toBe(GRID_Y0);
+    expect(xToPixels(0)).toBe(GRID_X0);
+    expect(yToPixels(0)).toBe(GRID_Y0 + GRID_H);
+    expect(yToPixels(3)).toBe(GRID_Y0);
   });
 
   it("makes longer text wider", () => {
@@ -26,8 +26,8 @@ describe("fixedObstacles", () => {
 });
 
 describe("placeLabels", () => {
-  const overlaps = (a: { cx: number; cy: number; w: number; h: number }, b: typeof a) =>
-    Math.abs(a.cx - b.cx) < (a.w + b.w) / 2 && Math.abs(a.cy - b.cy) < (a.h + b.h) / 2;
+  const overlaps = (first: { cx: number; cy: number; w: number; h: number }, second: typeof first) =>
+    Math.abs(first.cx - second.cx) < (first.w + second.w) / 2 && Math.abs(first.cy - second.cy) < (first.h + second.h) / 2;
 
   it("keeps labels for figures on the same spot from overlapping each other", () => {
     const figures: Figure[] = [

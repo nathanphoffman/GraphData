@@ -1,6 +1,6 @@
 import { TENTH } from "../logic/constants";
 import { purchasePlan, yearsToReach } from "../logic/spending";
-import { cap, type ItemType } from "../logic/items";
+import { capitalize, type ItemType } from "../logic/items";
 
 interface Props {
   owned: number;
@@ -23,11 +23,11 @@ const YEARS = 10;
 const money = (value: number) => `$${Math.round(value).toLocaleString()}`;
 
 /** Number input that only accepts non-negative amounts. */
-function NumberField({ id, label, value, onChange }: { id: string; label: string; value: number; onChange: (value: number) => void }) {
+function NumberField({ id: fieldId, label, value, onChange }: { id: string; label: string; value: number; onChange: (value: number) => void }) {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
-      <input id={id} type="number" min={0} step="any" value={value} onChange={(event) => onChange(Math.max(0, Number(event.target.value) || 0))} />
+      <label htmlFor={fieldId}>{label}</label>
+      <input id={fieldId} type="number" min={0} step="any" value={value} onChange={(event) => onChange(Math.max(0, Number(event.target.value) || 0))} />
     </div>
   );
 }
@@ -61,10 +61,10 @@ export default function SavingsPanel({
   const yearsToTarget = owned < target ? yearsToReach(owned, target, yearlyUses, minPlays, maxPlays) : 0;
 
   // Add up every year's savings.
-  const totalSaved = rows.reduce((total, r) => total + r.saved, 0);
+  const totalSaved = rows.reduce((total, yearRow) => total + yearRow.saved, 0);
 
   // Add up every year's spending.
-  const totalSpent = rows.reduce((total, r) => total + r.cost, 0);
+  const totalSpent = rows.reduce((total, yearRow) => total + yearRow.cost, 0);
   const totalToday = todayCost * YEARS;
 
   return (
@@ -87,17 +87,17 @@ export default function SavingsPanel({
         </thead>
         <tbody>
           {/* One table row per year. */}
-          {rows.map((r) => (
-            <tr key={r.label}>
-              <td>{r.label}</td>
+          {rows.map((yearRow) => (
+            <tr key={yearRow.label}>
+              <td>{yearRow.label}</td>
               <td>{money(todayCost)}</td>
               <td>
-                {money(r.cost)} <span className="muted">({Math.round(r.bought * TENTH) / TENTH} bought)</span>
+                {money(yearRow.cost)} <span className="muted">({Math.round(yearRow.bought * TENTH) / TENTH} bought)</span>
               </td>
-              <td style={{ color: r.saved >= 0 ? "#16a34a" : "#dc2626" }}>
+              <td style={{ color: yearRow.saved >= 0 ? "#16a34a" : "#dc2626" }}>
                 <strong>
-                  {r.saved >= 0 ? "" : "−"}
-                  {money(Math.abs(r.saved))}
+                  {yearRow.saved >= 0 ? "" : "−"}
+                  {money(Math.abs(yearRow.saved))}
                 </strong>
               </td>
             </tr>
@@ -122,7 +122,7 @@ export default function SavingsPanel({
       </p>
       <p className="muted">
         Every {Math.max(1, minPlays)} {item.uses} earns you one purchase, so you only buy once what you own has paid off.
-        {cap(item.many)} wear out after about {Math.max(minPlays, maxPlays)} {item.uses} and get replaced.
+        {capitalize(item.many)} wear out after about {Math.max(minPlays, maxPlays)} {item.uses} and get replaced.
       </p>
     </details>
   );

@@ -10,8 +10,10 @@ export function useEditor(saved: Record<string, string> | undefined, onSaved: ()
   const [message, setMessage] = useState("");
   const exists = saved !== undefined;
 
-  const run = (action: Promise<unknown>, done: string) =>
+  // Run the save or remove call, then reload the data and show a message (or the problem if it failed).
+  const runAction = (action: Promise<unknown>, done: string) =>
     action
+      // Each .then runs when the step before it worked; the .catch below handles a failure in any of them.
       .then(onSaved)
       .then(() => {
         setTyped({});
@@ -23,15 +25,15 @@ export function useEditor(saved: Record<string, string> | undefined, onSaved: ()
     exists,
     message,
     /** Text of one field: what was typed, otherwise the saved value. */
-    field: (key: string) => typed[key] ?? saved?.[key] ?? "",
-    set: (key: string, value: string) => setTyped({ ...typed, [key]: value }),
+    field: (fieldName: string) => typed[fieldName] ?? saved?.[fieldName] ?? "",
+    set: (fieldName: string, value: string) => setTyped({ ...typed, [fieldName]: value }),
     reset: () => {
       setTyped({});
       setMessage("");
     },
     /** Run the call that adds or changes the record. */
-    save: (action: Promise<unknown>) => run(action, exists ? "Changed" : "Added"),
+    save: (action: Promise<unknown>) => runAction(action, exists ? "Changed" : "Added"),
     /** Run the call that removes the record. */
-    remove: (action: Promise<unknown>) => run(action, "Removed"),
+    remove: (action: Promise<unknown>) => runAction(action, "Removed"),
   };
 }

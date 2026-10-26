@@ -35,8 +35,7 @@ export default function GridCells({ model, onSelect }: Props) {
         </g>
       ))}
 
-      {/* One clickable cell per system. */}
-      {model.cells.map((cell) => (
+      {model.cells.map((cell) => ( // One clickable cell per system.
         <rect
           key={cell.name}
           x={GRID_X0 + cell.col * CELL_W}

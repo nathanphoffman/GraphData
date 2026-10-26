@@ -12,8 +12,8 @@ interface Result {
 }
 
 /** A range as text, e.g. "2 to 4", or a single number when both ends match. */
-function formatRange(low: number, high: number) {
-  return low === high ? `${low}` : `${low} to ${high}`;
+function formatRange(lowEnd: number, high: number) {
+  return lowEnd === high ? `${lowEnd}` : `${lowEnd} to ${high}`;
 }
 
 /** Result of the encounter generator: the creatures picked and their total difficulty. */
@@ -55,7 +55,7 @@ export default function EncounterGenerator({ pool }: { pool: Creature[] }) {
   const [result, setResult] = useState<Result | null>(null);
 
   // Target difficulty range = players + levels gained, at the low and high ends.
-  const low = players[0] + 1 + levels[0] / 2;
+  const lowEnd = players[0] + 1 + levels[0] / 2;
   const high = players[1] + 1 + levels[1] / 2;
 
   return (
@@ -73,13 +73,13 @@ export default function EncounterGenerator({ pool }: { pool: Creature[] }) {
           <div className="bestiary-encounter-sliders">
             <SliderRow label="Players" stops={PLAYER_STOPS} value={players} onChange={setPlayers} />
             <SliderRow label="Levels gained" stops={LEVEL_STOPS} value={levels} onChange={setLevels} />
-            <p className="muted">Target difficulty: {formatRange(low, high)}</p>
+            <p className="muted">Target difficulty: {formatRange(lowEnd, high)}</p>
           </div>
           <button
             type="button"
             className="bestiary-generate"
             disabled={pool.length === 0}
-            onClick={() => setResult({ low, high, picks: buildEncounter(pool, low, high) })}
+            onClick={() => setResult({ low: lowEnd, high, picks: buildEncounter(pool, lowEnd, high) })}
           >
             Generate Encounter
           </button>

@@ -55,13 +55,13 @@ export function InlineCell({ column, itemName, value, canEdit, onSave, style, ch
   if (!canEdit) return <td style={style}>{children}</td>;
 
   return (
-    <td style={style} className={`rankings-editable${error ? " rankings-cell-error" : ""}`} title={error || undefined} tabIndex={text === null ? 0 : undefined} onClick={start} onKeyDown={(e) => e.target === e.currentTarget && e.key === ENTER_KEY && start()}>
+    <td style={style} className={`rankings-editable${error ? " rankings-cell-error" : ""}`} title={error || undefined} tabIndex={text === null ? 0 : undefined} onClick={start} onKeyDown={(keyEvent) => keyEvent.target === keyEvent.currentTarget && keyEvent.key === ENTER_KEY && start()}>
       {text === null ? children : (
         <>
           {/* far below the header the column is out of sight, so name it next to the box */}
           <small className="rankings-cell-label">{itemName} · {column.label}</small>
           {/* Escape sets text to null, which removes the box, and blur then does nothing. */}
-          <input className="rankings-cell-input" ref={(input) => input?.focus()} value={text} onChange={(e) => setText(e.target.value)} onKeyDown={keys} onBlur={() => void finish()} />
+          <input className="rankings-cell-input" ref={(input) => input?.focus()} value={text} onChange={(changeEvent) => setText(changeEvent.target.value)} onKeyDown={keys} onBlur={() => void finish()} />
         </>
       )}
     </td>

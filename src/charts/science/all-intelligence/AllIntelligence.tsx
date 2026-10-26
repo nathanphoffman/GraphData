@@ -22,11 +22,11 @@ function sortValue(scoredSubject: ScoredSubject, sortKey: SortKey): number | str
 
 /** Row ordering for the table: names alphabetical, scores numeric, with the direction applied last. */
 function compareRows(scoredSubject: ScoredSubject, second: ScoredSubject, sortKey: SortKey, ascending: boolean) {
-  const av = sortValue(scoredSubject, sortKey);
-  const bv = sortValue(second, sortKey);
-  const cmp = typeof av === "string" ? av.localeCompare(bv as string) : (av as number) - (bv as number);
+  const leftValue = sortValue(scoredSubject, sortKey);
+  const rightValue = sortValue(second, sortKey);
+  const comparison = typeof leftValue === "string" ? leftValue.localeCompare(rightValue as string) : (leftValue as number) - (rightValue as number);
 
-  return ascending ? cmp : -cmp;
+  return ascending ? comparison : -comparison;
 }
 
 /** All intelligence page: holds the settings, sort and open rows and passes them to the table. */
@@ -34,6 +34,7 @@ export default function AllIntelligence() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const { sortKey, ascending, sortBy } = useSort<SortKey>(OVERALL_KEY);
   const [open, setOpen] = useState<Set<string>>(new Set());
+  // Score every subject, then sort the rows by the chosen column in the chosen direction.
   const rows = useMemo(() => scoreSubjects(model, settings).sort((scoredSubject, second) => compareRows(scoredSubject, second, sortKey, ascending)), [settings, sortKey, ascending]);
 
   // Flip one name in the set of open rows.
@@ -49,7 +50,7 @@ export default function AllIntelligence() {
 
   return (
     <div className="allint">
-      <SettingsPanel settings={settings} set={(patch) => setSettings((prev) => ({ ...prev, ...patch }))} groupCount={model.groups.length} />
+      <SettingsPanel settings={settings} set={(patch) => setSettings((prev) => ({ ...prev, ...patch }))} groupCount={model.groups.length} /* set merges a change into the settings, keeping the other settings the same. */ />
       <ResultsTable model={model} rows={rows} settings={settings} open={open} onToggle={toggleOpen} sortKey={sortKey} ascending={ascending} onSort={sortBy} />
       <p className="muted allint-source">{model.source}</p>
     </div>

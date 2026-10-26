@@ -33,7 +33,7 @@ interface Props {
 /** The plot: grid, connecting lines, then one column of dots per language. */
 export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }: Props) {
   const { languages, series, lines } = model;
-  const xAt = makeXAt(languages.length);
+  const xOfIndex = makeXAt(languages.length);
   const gridValues = yScale.ticks(Math.round(yScale.domain()[1] / Y_ROUND_STEP));
 
   // Draw the gridlines, then each language's lines, projection arrows and labels.
@@ -49,11 +49,10 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
         </g>
       ))}
 
-      {/* Draw each visible line as one or more segments, since gaps in the data break the line. */}
-      {lines.map((line) =>
+      {lines.map((line) => // Draw each visible line as one or more segments, since gaps in the data break the line.
         visible[line]
           // One polyline per unbroken stretch.
-          ? lineSegments(languages, line, xAt, yScale).map((points, index) => (
+          ? lineSegments(languages, line, xOfIndex, yScale).map((points, index) => (
               <polyline
                 key={`${line}-${index}`}
                 points={points}
@@ -69,25 +68,23 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
           : null,
       )}
 
-      {/* Draw each language's name, dots and arrows. */}
-      {languages.map((lang, index) => (
+      {languages.map((lang, index) => ( // Draw each language's name, dots and arrows.
         <g key={lang.name}>
           <text
-            x={xAt(index)}
+            x={xOfIndex(index)}
             y={CHART_HEIGHT - MARGIN.bottom + NAME_DROP}
             textAnchor="end"
             fontSize={NAME_FONT_SIZE}
             fill="#fff"
-            transform={`rotate(${NAME_ANGLE} ${xAt(index)} ${CHART_HEIGHT - MARGIN.bottom + NAME_DROP})`}
+            transform={`rotate(${NAME_ANGLE} ${xOfIndex(index)} ${CHART_HEIGHT - MARGIN.bottom + NAME_DROP})`}
           >
             {lang.name}
           </text>
-          {/* One dot (or arrow for projections) per series; hidden or missing values are skipped. */}
-          {series.map((seriesName, s) => {
+          {series.map((seriesName, seriesIndex) => { // One dot (or arrow for projections) per series; hidden or missing values are skipped.
             const value = lang.values[seriesName];
 
             if (!visible[seriesName] || value == null) return null;
-            const centerX = xAt(index);
+            const centerX = xOfIndex(index);
             const centerY = yScale(value);
 
             if (seriesName.startsWith(PROJECTION_PREFIX)) {
@@ -98,7 +95,7 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
                 <g key={seriesName}>
                   <polygon
                     points={arrowPoints(centerX, centerY, change)}
-                    fill={seriesColor(seriesName, s)}
+                    fill={seriesColor(seriesName, seriesIndex)}
                     fillOpacity={ARROW_STYLE.fillOpacity}
                     stroke={ARROW_STYLE.stroke}
                     strokeOpacity={ARROW_STYLE.strokeOpacity}
@@ -109,7 +106,7 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
                     cx={centerX}
                     cy={centerY}
                     r={PROJECTION_DOT_RADIUS}
-                    fill={seriesColor(seriesName, s)}
+                    fill={seriesColor(seriesName, seriesIndex)}
                     stroke="#4c4c4c"
                     strokeWidth={1}
 
@@ -129,7 +126,7 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
                 cx={centerX}
                 cy={centerY}
                 r={seriesName === NEWEST_YEAR_SERIES ? FEATURED_DOT_RADIUS : DOT_RADIUS}
-                fill={seriesColor(seriesName, s)}
+                fill={seriesColor(seriesName, seriesIndex)}
                 stroke="#4c4c4c"
                 strokeWidth={1}
                 onMouseMove={(event) => onTip(event, `${lang.name} - ${seriesName}: ${value.toFixed(2)}`)}

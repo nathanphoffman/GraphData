@@ -59,31 +59,31 @@ export function seriesColor(series: string, index: number): string {
 }
 
 /** Legend sections, in display order. Each key belongs to the first group whose test it passes. */
-export const LEGEND_GROUPS: Array<{ title: string; description: string; test: (key: string) => boolean }> = [
+export const LEGEND_GROUPS: Array<{ title: string; description: string; test: (seriesKey: string) => boolean }> = [
   {
     title: "Outlook by year",
     description:
       "Each year's popularity weighted by opinion: Stack Overflow usage multiplied by how much developers like the language.",
-    test: (key) => key.startsWith("Year ") },
+    test: (seriesKey) => seriesKey.startsWith("Year ") },
   {
     title: "Averages",
     description:
       "3-year averages of the outlook and TIOBE, plus a version using raw Stack Overflow usage with no opinion. The older and newer windows show which way a language is moving.",
-    test: (key) => key.includes(" avg ") },
+    test: (seriesKey) => seriesKey.includes(" avg ") },
   {
     title: "Healthiness",
     description:
       "A closer guide to likely real-world use than the projections. It averages the last 3 years of outlook with raw Stack Overflow usage (no opinion) and TIOBE, plus two projection points. The dot is that score projected 10 years out. It still leans partly on opinion-weighted numbers.",
-    test: (key) => key.startsWith("Healthiness") || key.startsWith(HEALTH_PREDICTION_PREFIX),
+    test: (seriesKey) => seriesKey.startsWith("Healthiness") || seriesKey.startsWith(HEALTH_PREDICTION_PREFIX),
   },
   {
     title: "Outlook Projections",
     description:
       "Where each language lands in 10 years, leaning on hype and love: usage is included, but multiplied by how much developers like the language, with TIOBE (1/3) as the only opinion-free part. The trend is half the long-run change and half the last 3 years, fading out over time. Historical Fix adds half of how far the backtest missed.",
-    test: (key) => key.startsWith(PROJECTION_PREFIX) },
+    test: (seriesKey) => seriesKey.startsWith(PROJECTION_PREFIX) },
   {
     title: "Backtests",
     description:
       "A test of the hype-and-love projection: the same math run with data through 2024 only, to predict 2025 and 2026. Compare against the real dots to see how far off it was.",
-    test: (key) => key.startsWith("Backtest") },
+    test: (seriesKey) => seriesKey.startsWith("Backtest") },
 ];

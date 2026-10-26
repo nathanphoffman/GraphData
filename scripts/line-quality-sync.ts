@@ -87,9 +87,9 @@ type TokeiLang = { code: number; comments: number; blanks: number; reports: Toke
 type Quality = { score: number; grade: string } | null;
 
 // Runs this repo's own checker (python -m codequality) on a project and reads its JSON result
-async function qualityOf(dir: string): Promise<Quality> {
+async function qualityOf(projectDir: string): Promise<Quality> {
   try {
-    const { stdout } = await execFileAsync(PYTHON, ["-m", "codequality", dir, "--json"], {
+    const { stdout } = await execFileAsync(PYTHON, ["-m", "codequality", projectDir, "--json"], {
       cwd: CHECKER_DIR,
       encoding: ENCODING,
       maxBuffer: MAX_BUFFER_BYTES,
@@ -102,39 +102,40 @@ async function qualityOf(dir: string): Promise<Quality> {
 }
 
 // Runs fn over items with at most `limit` running at once, keeping the input order
-async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
+async function mapLimit<T, R>(items: T[], limit: number, work: (item: T) => Promise<R>): Promise<R[]> {
   const results: R[] = new Array(items.length);
   let next = 0;
   const worker = async () => {
     while (next < items.length) {
-      const i = next++;
-      results[i] = await fn(items[i]);
+      const index = next++;
+      results[index] = await work(items[index]);
     }
   };
   await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
   return results;
 }
 
-function repoOf(dir: string): string {
+function repoOf(projectDir: string): string {
   try {
-    return execFileSync("git", ["-C", dir, "remote", "get-url", "origin"], {
+    return execFileSync("git", ["-C", projectDir, "remote", "get-url", "origin"], {
       encoding: ENCODING,
       stdio: ["ignore", "pipe", "ignore"],
     })
       .trim()
+      // Drop a trailing ".git" so the link opens the repo page.
       .replace(/\.git$/, "");
   } catch {
     return "(no remote)";
   }
 }
 
-function count(p: Project): { total: number; langs: Record<string, number> } {
-  const dir = join(ROOT, p.folder);
-  const args = [dir, "-o", "json"];
-  for (const e of [...GLOBAL_EXCLUDE, ...(p.exclude ?? [])]) args.push("-e", e);
+function count(project: Project): { total: number; langs: Record<string, number> } {
+  const projectDir = join(ROOT, project.folder);
+  const args = [projectDir, "-o", "json"];
+  for (const excluded of [...GLOBAL_EXCLUDE, ...(project.exclude ?? [])]) args.push("-e", excluded);
 
-  const out = execFileSync("tokei", args, { encoding: ENCODING, maxBuffer: MAX_BUFFER_BYTES });
-  const json = JSON.parse(out) as Record<string, TokeiLang>;
+  const tokeiOutput = execFileSync("tokei", args, { encoding: ENCODING, maxBuffer: MAX_BUFFER_BYTES });
+  const json = JSON.parse(tokeiOutput) as Record<string, TokeiLang>;
 
   const langs: Record<string, number> = {};
   let total = 0;
@@ -154,28 +155,28 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality }
 
   const RANKING = "project-priority";
   const labels = db.prepare("SELECT label FROM ranking_columns WHERE ranking_id = ? ORDER BY position").all(RANKING) as { label: string }[];
-  const linesAt = labels.findIndex((c) => c.label === "Completed Lines");
-  const qualityAt = labels.findIndex((c) => c.label === "Computed Quality");
-  const familiarityAt = labels.findIndex((c) => c.label === "Familiarity");
-  const finalAt = labels.findIndex((c) => c.label === "Quality"); // the average of familiarity and computed quality
+  const linesAt = labels.findIndex((column) => column.label === "Completed Lines");
+  const qualityAt = labels.findIndex((column) => column.label === "Computed Quality");
+  const familiarityAt = labels.findIndex((column) => column.label === "Familiarity");
+  const finalAt = labels.findIndex((column) => column.label === "Quality"); // the average of familiarity and computed quality
   if (linesAt < 0 || qualityAt < 0) throw new Error("project-priority is missing its Completed Lines or Computed Quality column");
 
   const find = db.prepare("SELECT values_json FROM ranking_items WHERE ranking_id = ? AND name = ?");
   const save = db.prepare("UPDATE ranking_items SET values_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?");
-  for (const r of rows) {
-    const item = find.get(RANKING, r.name) as { values_json: string } | undefined;
+  for (const projectRow of rows) {
+    const item = find.get(RANKING, projectRow.name) as { values_json: string } | undefined;
     if (!item) {
-      console.warn(`Not in the ranking, skipped: ${r.name}`);
+      console.warn(`Not in the ranking, skipped: ${projectRow.name}`);
       continue;
     }
     const values = JSON.parse(item.values_json) as (string | number | null)[];
-    values[linesAt] = r.lines;
+    values[linesAt] = projectRow.lines;
     // keep the old quality when the checker failed
-    if (r.quality) values[qualityAt] = Math.round(r.quality.score * TENTH) / TENTH;
+    if (projectRow.quality) values[qualityAt] = Math.round(projectRow.quality.score * TENTH) / TENTH;
     // the page works this out itself; storing it keeps the saved copy from going stale
-    const [fam, computed] = [values[familiarityAt], values[qualityAt]].filter((v) => typeof v === "number");
+    const [fam, computed] = [values[familiarityAt], values[qualityAt]].filter((value) => typeof value === "number");
     if (finalAt >= 0 && fam !== undefined) values[finalAt] = Math.round(((fam + (computed ?? fam)) / 2) * TENTH) / TENTH;
-    save.run(JSON.stringify(values), Date.now(), RANKING, r.name);
+    save.run(JSON.stringify(values), Date.now(), RANKING, projectRow.name);
   }
   console.log(`Saved lines and quality for ${rows.length} projects to the local database`);
 }
@@ -185,14 +186,14 @@ const showLangs = process.argv.includes("--lang");
 const toDb = process.argv.includes("--write-db");
 const withScore = !process.argv.includes("--no-score");
 
-const unsorted = await mapLimit(PROJECTS, availableParallelism(), async (p) => {
-  if (!existsSync(join(ROOT, p.folder))) throw new Error(`Missing folder: ${p.folder}`);
-  const dir = join(ROOT, p.folder);
-  const { total, langs } = count(p);
-  const quality = withScore ? await qualityOf(dir) : null;
-  return { name: p.name, folder: p.folder, repo: repoOf(dir), lines: total, quality, langs };
+const unsorted = await mapLimit(PROJECTS, availableParallelism(), async (project) => {
+  if (!existsSync(join(ROOT, project.folder))) throw new Error(`Missing folder: ${project.folder}`);
+  const projectDir = join(ROOT, project.folder);
+  const { total, langs } = count(project);
+  const quality = withScore ? await qualityOf(projectDir) : null;
+  return { name: project.name, folder: project.folder, repo: repoOf(projectDir), lines: total, quality, langs };
 });
-const rows = unsorted.sort((a, b) => b.lines - a.lines);
+const rows = unsorted.sort((first, second) => second.lines - first.lines);
 
 if (toDb) {
   await writeToDb(rows);
@@ -202,27 +203,31 @@ if (toDb) {
 if (asJson) {
   console.log(JSON.stringify(rows, null, 2));
 } else {
-  const w = (k: "name" | "folder") => Math.max(...rows.map((r) => r[k].length), k.length);
-  const nw = w("name");
-  const fw = w("folder");
-  const fmt = (n: number) => n.toLocaleString("en-US");
-  const lw = Math.max(...rows.map((r) => fmt(r.lines).length), MIN_LINES_WIDTH);
-  const qual = (r: (typeof rows)[number]) =>
-    (r.quality ? `${r.quality.score.toFixed(1)} ${r.quality.grade}` : "n/a").padEnd(QUALITY_WIDTH);
+  // widthOf gives the longest value in one column, so the table can line up.
+  const widthOf = (field: "name" | "folder") => Math.max(...rows.map((projectRow) => projectRow[field].length), field.length);
+  const nameWidth = widthOf("name");
+  const folderWidth = widthOf("folder");
+  const formatNumber = (amount: number) => amount.toLocaleString("en-US");
+  const linesWidth = Math.max(...rows.map((projectRow) => formatNumber(projectRow.lines).length), MIN_LINES_WIDTH);
+  const qual = (projectRow: (typeof rows)[number]) =>
+    (projectRow.quality ? `${projectRow.quality.score.toFixed(1)} ${projectRow.quality.grade}` : "n/a").padEnd(QUALITY_WIDTH);
 
-  console.log(`${"Project".padEnd(nw)}  ${"Lines".padStart(lw)}  ${"Quality".padEnd(QUALITY_WIDTH)}  ${"Folder".padEnd(fw)}  Repo`);
-  for (const r of rows) {
-    console.log(`${r.name.padEnd(nw)}  ${fmt(r.lines).padStart(lw)}  ${qual(r)}  ${r.folder.padEnd(fw)}  ${r.repo}`);
+  console.log(`${"Project".padEnd(nameWidth)}  ${"Lines".padStart(linesWidth)}  ${"Quality".padEnd(QUALITY_WIDTH)}  ${"Folder".padEnd(folderWidth)}  Repo`);
+  for (const projectRow of rows) {
+    console.log(`${projectRow.name.padEnd(nameWidth)}  ${formatNumber(projectRow.lines).padStart(linesWidth)}  ${qual(projectRow)}  ${projectRow.folder.padEnd(folderWidth)}  ${projectRow.repo}`);
     if (showLangs) {
-      const top = Object.entries(r.langs).sort((a, b) => b[1] - a[1]).map(([l, n]) => `${l} ${fmt(n)}`);
-      console.log(`${" ".repeat(nw + 2)}${top.join(", ")}`);
+      const topLanguages = Object.entries(projectRow.langs).sort((first, second) => second[1] - first[1]).map(([language, lineTotal]) => `${language} ${formatNumber(lineTotal)}`);
+      console.log(`${" ".repeat(nameWidth + 2)}${topLanguages.join(", ")}`);
     }
   }
   // average score weighted by line count, so a project with 2x the lines counts 2x as much
-  const scored = rows.filter((r) => r.quality);
-  const scoredLines = scored.reduce((sum, r) => sum + r.lines, 0);
-  const weighted = scored.reduce((sum, r) => sum + r.quality!.score * r.lines, 0) / scoredLines;
+  const scored = rows.filter((projectRow) => projectRow.quality);
+  // Add up the lines of every project that has a score.
+  const scoredLines = scored.reduce((runningTotal, projectRow) => runningTotal + projectRow.lines, 0);
+  // Add up each score times its project's lines, then divide by the lines to weight it.
+  const weighted = scored.reduce((runningTotal, projectRow) => runningTotal + projectRow.quality!.score * projectRow.lines, 0) / scoredLines;
   const totalQual = (scored.length ? weighted.toFixed(1) : "n/a").padEnd(QUALITY_WIDTH);
-  const totalLines = fmt(rows.reduce((sum, r) => sum + r.lines, 0)).padStart(lw);
-  console.log(`${"TOTAL".padEnd(nw)}  ${totalLines}  ${totalQual}`);
+  // Add up the lines of every project for the TOTAL row.
+  const totalLines = formatNumber(rows.reduce((runningTotal, projectRow) => runningTotal + projectRow.lines, 0)).padStart(linesWidth);
+  console.log(`${"TOTAL".padEnd(nameWidth)}  ${totalLines}  ${totalQual}`);
 }

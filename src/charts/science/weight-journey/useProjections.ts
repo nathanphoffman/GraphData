@@ -17,8 +17,8 @@ export interface ProjectionTool {
 }
 
 /** The tapering projection from the typed monthly loss, plus the optional trend, spread and general curves. */
-export function useProjections(tool: ProjectionTool, k: number, lines: Lines, fatRatio: number | null, { dailyRows, fit, future, withMuscle }: Model) {
-  const monthlyLoss = Number(tool.lossInput) / k;
+export function useProjections(tool: ProjectionTool, unitFactor: number, lines: Lines, fatRatio: number | null, { dailyRows, fit: trendFit, future, withMuscle }: Model) {
+  const monthlyLoss = Number(tool.lossInput) / unitFactor;
   const aheadDays = Math.round(Number(tool.months) * DAYS_PER_MONTH);
   const ahead = aheadDays > 0 ? aheadDays : DAYS_PER_YEAR;
 
@@ -31,10 +31,10 @@ export function useProjections(tool: ProjectionTool, k: number, lines: Lines, fa
     return projectTapering(lastRow.date, lastRow.avg3, lastMuscle.muscleTotal, monthlyLoss, lastMuscle.muscleDaily, aheadDays);
   }, [tool.lossInput, monthlyLoss, aheadDays, dailyRows, withMuscle]);
 
-  const fat = useMemo(() => (fatRatio === null ? null : buildFat(fatRatio, withMuscle)), [fatRatio, withMuscle]);
-  const allTrend = useMemo(() => (lines.allTrend ? buildAllTrend(dailyRows, ahead, fat) : null), [lines.allTrend, ahead, fat, dailyRows]);
+  const fatProjection = useMemo(() => (fatRatio === null ? null : buildFat(fatRatio, withMuscle)), [fatRatio, withMuscle]);
+  const allTrend = useMemo(() => (lines.allTrend ? buildAllTrend(dailyRows, ahead, fatProjection) : null), [lines.allTrend, ahead, fatProjection, dailyRows]);
   const spread = useMemo(() => (lines.spread ? buildSpread(dailyRows, ahead) : null), [lines.spread, ahead, dailyRows]);
-  const general = useMemo(() => buildGeneral(dailyRows, ahead, [fit[fit.length - 1], ...future]), [ahead, dailyRows, fit, future]);
+  const general = useMemo(() => buildGeneral(dailyRows, ahead, [trendFit[trendFit.length - 1], ...future]), [ahead, dailyRows, trendFit, future]);
 
-  return { tapered, allTrend, spread, general, fat };
+  return { tapered, allTrend, spread, general, fat: fatProjection };
 }

@@ -1,4 +1,9 @@
 # Files and folders the code quality checker skips, one wildcard pattern per line (like .gitignore).
-# Drawing coordinates and sky positions are data, not settings worth naming.
+# Put rule IDs after a pattern to skip it for those rules only.
+
+# Drawing coordinates and sky positions are data, not code worth grading.
 src/charts/tabletop/tiny-mighty-bestiary/art/
 src/charts/science/astronomy-targets/
+
+# Test files are all describe/it wrappers, which the checker counts as nested closures.
+tests/ RULE-03

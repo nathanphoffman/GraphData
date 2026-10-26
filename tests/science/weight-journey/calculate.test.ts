@@ -5,9 +5,9 @@ describe("fillDays", () => {
   it("fills gaps in a straight line and marks them estimated", () => {
     const days = fillDays([["2024-01-01", 100], ["2024-01-04", 94]]);
 
-    expect(days.map((d) => d.date)).toEqual(["2024-01-01", "2024-01-02", "2024-01-03", "2024-01-04"]);
-    expect(days.map((d) => d.weight)).toEqual([100, 98, 96, 94]);
-    expect(days.map((d) => d.estimated)).toEqual([false, true, true, false]);
+    expect(days.map((dayRecord) => dayRecord.date)).toEqual(["2024-01-01", "2024-01-02", "2024-01-03", "2024-01-04"]);
+    expect(days.map((dayRecord) => dayRecord.weight)).toEqual([100, 98, 96, 94]);
+    expect(days.map((dayRecord) => dayRecord.estimated)).toEqual([false, true, true, false]);
   });
 
   it("returns nothing for no weigh-ins", () => {

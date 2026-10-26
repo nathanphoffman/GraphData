@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cap, DEFAULT_ITEM_TYPE, findItemType, ITEM_TYPES } from "../../../src/charts/calculators/minimalism-calculator/logic/items";
+import { capitalize, DEFAULT_ITEM_TYPE, findItemType, ITEM_TYPES } from "../../../src/charts/calculators/minimalism-calculator/logic/items";
 import { OWNED_STOPS, PER_YEAR_BENCHMARKS, PER_YEAR_STOPS } from "../../../src/charts/calculators/minimalism-calculator/logic/stops";
 
 const strictlyIncreasing = (list: number[]) => list.every((value, index) => index === 0 || value > list[index - 1]);
@@ -25,9 +25,9 @@ describe("slider stops", () => {
 
 describe("item types", () => {
   it("have unique ids and a usable default", () => {
-    const ids = ITEM_TYPES.map((itemType) => itemType.id);
+    const itemTypeIds = ITEM_TYPES.map((itemType) => itemType.id);
 
-    expect(new Set(ids).size).toBe(ids.length);
+    expect(new Set(itemTypeIds).size).toBe(itemTypeIds.length);
     expect(findItemType(DEFAULT_ITEM_TYPE.id)).toBe(DEFAULT_ITEM_TYPE);
   });
 
@@ -38,7 +38,7 @@ describe("item types", () => {
 
 describe("cap", () => {
   it("upper-cases only the first letter", () => {
-    expect(cap("board games")).toBe("Board games");
-    expect(cap("")).toBe("");
+    expect(capitalize("board games")).toBe("Board games");
+    expect(capitalize("")).toBe("");
   });
 });

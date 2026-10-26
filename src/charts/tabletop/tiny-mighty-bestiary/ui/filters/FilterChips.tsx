@@ -19,8 +19,7 @@ export default function FilterChips({ label, groupName = label, options, active,
   return (
     <div className="bestiary-key" role="group" aria-label={`Filter by ${groupName.toLowerCase()}`}>
       <span className="bestiary-key-label">{label}</span>
-      {/* One toggle button per option; the active one is marked pressed. */}
-      {options.map((option) => {
+      {options.map((option) => { // One toggle button per option; the active one is marked pressed.
         const isActive = active === option.id;
 
         return (

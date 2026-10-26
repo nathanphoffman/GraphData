@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { addAverages, addMuscle, projectTapering, taperToTotal } from "../../../src/charts/science/weight-journey/calculate";
 import { buildAllTrend, buildSpread, taperCurve } from "../../../src/charts/science/weight-journey/model/curves";
-import type { Row } from "../../../src/charts/science/weight-journey/model/rows";
+import type { WeightRow } from "../../../src/charts/science/weight-journey/model/rows";
 
 describe("addAverages", () => {
   const days = [10, 20, 30].map((weight, index) => ({ date: `2024-01-0${index + 1}`, weight, estimated: false }));
@@ -10,14 +10,14 @@ describe("addAverages", () => {
   it("averages the day itself and the days before it", () => {
     const result = addAverages(days, windows);
 
-    expect(result.map((d) => d.avg3)).toEqual([10, 15, 25]);
-    expect(result.map((d) => d.avg30)).toEqual([10, 15, 20]);
+    expect(result.map((entry) => entry.avg3)).toEqual([10, 15, 25]);
+    expect(result.map((entry) => entry.avg30)).toEqual([10, 15, 20]);
   });
 
   it("has no monthly change until a full medium window has passed", () => {
     const result = addAverages(days, windows);
 
-    expect(result.every((d) => d.monthly === null)).toBe(true);
+    expect(result.every((entry) => entry.monthly === null)).toBe(true);
   });
 });
 
@@ -32,7 +32,7 @@ describe("addMuscle", () => {
 
   it("adds up to the full total by the last day, with gains that taper off", () => {
     expect(result[result.length - 1].muscleTotal).toBeCloseTo(14.5);
-    expect(result.reduce((total, d) => total + d.muscleDaily, 0)).toBeCloseTo(14.5);
+    expect(result.reduce((total, entry) => total + entry.muscleDaily, 0)).toBeCloseTo(14.5);
     expect(result[3].muscleDaily).toBeGreaterThan(result[5].muscleDaily);
   });
 });
@@ -71,17 +71,17 @@ describe("taperCurve", () => {
   });
 });
 
-const row = (day: number, avg3: number, allProj3: number | null) =>
-  ({ date: `2024-01-${String(day).padStart(2, "0")}`, avg3, allProj3, allProj3Adj: allProj3, adj: { avg3 } }) as unknown as Row;
+const makeRow = (dayNumber: number, avg3: number, allProj3: number | null) =>
+  ({ date: `2024-01-${String(dayNumber).padStart(2, "0")}`, avg3, allProj3, allProj3Adj: allProj3, adj: { avg3 } }) as unknown as WeightRow;
 
 describe("buildAllTrend", () => {
   it("is null when no row has a projection yet", () => {
-    expect(buildAllTrend([row(1, 100, null)], 10)).toBeNull();
+    expect(buildAllTrend([makeRow(1, 100, null)], 10)).toBeNull();
     expect(buildAllTrend([], 10)).toBeNull();
   });
 
   it("builds up to three trend lines, newest first", () => {
-    const rows = [row(1, 100, 90), row(2, 100, 90), row(3, 100, 90), row(4, 100, 90)];
+    const rows = [makeRow(1, 100, 90), makeRow(2, 100, 90), makeRow(3, 100, 90), makeRow(4, 100, 90)];
     const result = buildAllTrend(rows, 10);
 
     expect(result?.trends.map((trend) => trend.back)).toEqual([0, 1, 2]);
@@ -90,11 +90,11 @@ describe("buildAllTrend", () => {
 
 describe("buildSpread", () => {
   it("needs at least two rows with projections", () => {
-    expect(buildSpread([row(1, 100, 90)], 10)).toBeNull();
+    expect(buildSpread([makeRow(1, 100, 90)], 10)).toBeNull();
   });
 
   it("sorts curves from lowest target to highest", () => {
-    const result = buildSpread([row(1, 100, 95), row(2, 100, 85), row(3, 100, 90)], 10);
+    const result = buildSpread([makeRow(1, 100, 95), makeRow(2, 100, 85), makeRow(3, 100, 90)], 10);
 
     expect(result?.actual.curves.map((curve) => curve.target)).toEqual([85, 90, 95]);
   });

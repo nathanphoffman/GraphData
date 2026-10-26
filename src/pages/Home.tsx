@@ -8,8 +8,7 @@ export default function Home() {
       <h1>GraphData</h1>
       <p className="muted">All charts in this project.</p>
       <div className="category-grid">
-      {/* One section per category. */}
-      {categories.map((category) => (
+      {categories.map((category) => ( // One section per category.
         <div key={category} className="category">
           <h2>{category}</h2>
           <ul className="chart-list">

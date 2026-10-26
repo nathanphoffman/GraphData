@@ -66,8 +66,7 @@ export default function ViewsPanel({ model, viewsModel, selectedCell, neighbors,
           </p>
           <div className="views-combo">
             <strong>Combo with:</strong>
-            {/* One button per neighbouring cell you can combine with. */}
-            {neighbors.map((cell) => (
+            {neighbors.map((cell) => ( // One button per neighbouring cell you can combine with.
               <button key={cell.name} type="button" className="combo-button" onClick={() => onPickPartner(cell.name)}>
                 {cell.name}
               </button>

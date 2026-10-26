@@ -83,4 +83,4 @@ export const DEFAULT_ITEM_TYPE = ITEM_TYPES[0];
 export const findItemType = (identifier: string): ItemType | undefined => ITEM_TYPES.find((itemType) => itemType.id === identifier);
 
 /** Capitalise the first letter, for sentences that start with an item name. */
-export const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+export const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);

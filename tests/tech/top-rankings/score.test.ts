@@ -30,11 +30,11 @@ describe("rankItems", () => {
   };
 
   it("puts the best score first", () => {
-    expect(rankItems(ranking).map((row) => row.item.name)).toEqual(["high", "low", "tie"]);
+    expect(rankItems(ranking).map((ranked) => ranked.item.name)).toEqual(["high", "low", "tie"]);
   });
 
   it("gives equal scores the same rank", () => {
-    expect(rankItems(ranking).map((row) => row.rank)).toEqual([1, 2, 2]);
+    expect(rankItems(ranking).map((ranked) => ranked.rank)).toEqual([1, 2, 2]);
   });
 });
 
