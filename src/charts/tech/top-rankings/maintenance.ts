@@ -8,6 +8,16 @@ const COMPUTED_LABEL = "Computed Quality";
 export const QUALITY_LABEL = "Quality";
 const GROWTH_LABEL = "xLines";
 
+/** An information column holding 1 for a project that is retired: it still saves and syncs, but sits last, greyed, and is left out of the maintenance numbers. */
+export const DECOMMISSIONED_LABEL = "Decommissioned";
+
+/** Whether the item is marked decommissioned in this ranking. */
+export function isDecommissioned(ranking: Ranking, item: Ranking["items"][number]): boolean {
+  const column = ranking.columns.findIndex((candidate) => candidate.label === DECOMMISSIONED_LABEL);
+
+  return column >= 0 && item.values[column] === 1;
+}
+
 /** Lines added to every project's Completed Lines when the page shows and scores them, as the minimum scaffolding any project needs. Never saved. */
 export const SCAFFOLDING_LINES = 256;
 
@@ -107,7 +117,10 @@ export function maintenance(ranking: Ranking): Maintenance | null {
   let qualityLines = 0;
   let weighted = 0;
 
-  for (const { values } of ranking.items) {
+  for (const item of ranking.items) {
+    if (isDecommissioned(ranking, item)) continue;
+
+    const { values } = item;
     const [count, rating] = [values[lines], qualityOf(values, familiarity, computed)];
 
     if (!isNumber(count)) continue;

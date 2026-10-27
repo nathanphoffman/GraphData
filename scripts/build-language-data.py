@@ -61,11 +61,16 @@ LINES = [
 NAME_FIELD, VALUES_FIELD, TIOBE_FIELD = "name", "values", "tiobe"
 NAME_FIXES = {"Javascript": "JavaScript", "Typescript": "TypeScript"}
 
+
 def export_csv(spreadsheet: Path, out_dir: Path) -> Path:
     command = [
-        "soffice", "--headless", "--convert-to",
+        "soffice",
+        "--headless",
+        "--convert-to",
         "csv:Text - txt - csv (StarCalc):44,34,76,1,,0,false,true,false,false,false,-1",
-        "--outdir", str(out_dir), str(spreadsheet),
+        "--outdir",
+        str(out_dir),
+        str(spreadsheet),
     ]
 
     subprocess.run(command, check=True, timeout=EXPORT_TIMEOUT_SECONDS, capture_output=True)
@@ -76,6 +81,7 @@ def export_csv(spreadsheet: Path, out_dir: Path) -> Path:
 
     return found[0]
 
+
 def parse_number(text: str):
     try:
         return float(text)
@@ -83,10 +89,12 @@ def parse_number(text: str):
         # empty and non-numeric cells in the sheet mean "no data", not a mistake
         return None
 
+
 def average(values):
     vals = [value for value in values if value is not None]
 
     return sum(vals) / len(vals) if vals else None
+
 
 def combined_year(language_values, tiobe_ratings, year):
     outlook, tiobe_average = language_values.get(f"Year {year}"), tiobe_ratings.get(str(year))
@@ -95,6 +103,7 @@ def combined_year(language_values, tiobe_ratings, year):
         return None
 
     return outlook * OUTLOOK_WEIGHT + tiobe_average * TIOBE_WEIGHT
+
 
 def slope(points):
     """Least-squares slope of (x, y) points."""
@@ -105,6 +114,7 @@ def slope(points):
 
     return sum((x_value - mean_x) * (y_value - mean_y) for x_value, y_value in points) / variance
 
+
 def project(base, per_year, steps):
     """Damped trend: each year's change shrinks by DAMPING. Declines are applied as a
     percentage of the current value, so a falling language approaches zero but never reaches it."""
@@ -112,10 +122,11 @@ def project(base, per_year, steps):
     value = base
 
     for year_offset in range(1, steps + 1):
-        step = per_year * DAMPING ** year_offset
+        step = per_year * DAMPING**year_offset
         value = value * (1 + step / base) if per_year < 0 else value + step
 
     return value
+
 
 def window_avgs(language_values, tiobe_ratings, years):
     """(outlook avg, combined avg) over the years; None where data is missing."""
@@ -124,6 +135,7 @@ def window_avgs(language_values, tiobe_ratings, years):
     combined = outlook * OUTLOOK_WEIGHT + tiobe_average * TIOBE_WEIGHT if None not in (outlook, tiobe_average) else None
 
     return outlook, combined
+
 
 def forecast(language_values, tiobe_ratings, cutoff, steps):
     """Projects each of `steps` (years after `cutoff`) using only data up to `cutoff`: two 3-year
@@ -148,6 +160,7 @@ def forecast(language_values, tiobe_ratings, cutoff, steps):
 
     return [project(base, per_year, years_ahead) if base > 0 else base for years_ahead in steps]
 
+
 def historical_fix(language_values, projected):
     """Nudges `projected` by FIX_WEIGHT of the average backtest miss, as a share of the actual value
     (underestimated by 5% -> raise by 2.5%). Returns `projected` unchanged without backtest data."""
@@ -162,11 +175,16 @@ def historical_fix(language_values, projected):
 
     return projected * (1 + FIX_WEIGHT * average(misses)) if misses else projected
 
+
 def usage_combined(tiobe_ratings, popularity, years):
     """Opinion-free score: raw Stack Overflow usage mixed with TIOBE. None where data is missing."""
-    raw_pop, tiobe_average = average([popularity.get(str(year)) for year in years]), average([tiobe_ratings.get(str(year)) for year in years])
+    raw_pop, tiobe_average = (
+        average([popularity.get(str(year)) for year in years]),
+        average([tiobe_ratings.get(str(year)) for year in years]),
+    )
 
     return raw_pop * POP_WEIGHT + tiobe_average * POP_TIOBE_WEIGHT if None not in (raw_pop, tiobe_average) else None
+
 
 def health_items(language_values, tiobe_ratings, popularity, cutoff):
     """The 5 measured healthiness metrics from the 3 years ending at `cutoff`: the three year dots,
@@ -175,12 +193,17 @@ def health_items(language_values, tiobe_ratings, popularity, cutoff):
     years = range(cutoff - 2, cutoff + 1)
     _, combined = window_avgs(language_values, tiobe_ratings, years)
 
-    return [language_values.get(f"Year {year}") for year in years] + [combined, usage_combined(tiobe_ratings, popularity, years)]
+    return [language_values.get(f"Year {year}") for year in years] + [
+        combined,
+        usage_combined(tiobe_ratings, popularity, years),
+    ]
+
 
 def healthiness_at(language_values, tiobe_ratings, popularity, cutoff, predictions):
     """Healthiness: the plain average of the 5 measured metrics plus two prediction points."""
 
     return average(health_items(language_values, tiobe_ratings, popularity, cutoff) + list(predictions))
+
 
 def health_score(language_values, tiobe_ratings, popularity, year):
     """Healthiness without predictions, for the 3 years ending `year`; None if any metric is missing."""
@@ -188,19 +211,27 @@ def health_score(language_values, tiobe_ratings, popularity, year):
 
     return None if None in items else sum(items) / len(items)
 
+
 def health_outlook(scores, last, steps):
     """Same trend math as forecast(), applied to yearly health scores {year: score}."""
     recent = [(year, scores[year]) for year in range(last - 2, last + 1)]
-    per_year = TREND_WEIGHT * slope(recent) + (1 - TREND_WEIGHT) * (scores[last] - scores[last - WINDOW_YEARS]) / YEARS_PER_WINDOW_GAP
+    per_year = (
+        TREND_WEIGHT * slope(recent)
+        + (1 - TREND_WEIGHT) * (scores[last] - scores[last - WINDOW_YEARS]) / YEARS_PER_WINDOW_GAP
+    )
     base = scores[last]
 
     return [project(base, per_year, years_ahead) if base > 0 else base for years_ahead in steps]
+
 
 def predicted_health(language_values, tiobe_ratings, popularity):
     """10-year healthiness: trend of the yearly health score, nudged by half of how far the same
     method missed 2025 and 2026 when it only had data through BACKTEST_CUTOFF. None if data is missing."""
 
-    scores = {year: health_score(language_values, tiobe_ratings, popularity, year) for year in range(YEARS[0] + 2, LAST_YEAR + 1)}
+    scores = {
+        year: health_score(language_values, tiobe_ratings, popularity, year)
+        for year in range(YEARS[0] + 2, LAST_YEAR + 1)
+    }
 
     if any(scores.get(year) is None for year in range(BACKTEST_CUTOFF - WINDOW_YEARS, LAST_YEAR + 1)):
         return None
@@ -214,8 +245,10 @@ def predicted_health(language_values, tiobe_ratings, popularity):
 
     return raw_prediction * (1 + FIX_WEIGHT * average(misses))
 
+
 def round_value(value):
     return None if value is None else round(value, ROUND_DIGITS)
+
 
 def main() -> None:
     spreadsheet = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else DEFAULT_ODS
@@ -241,7 +274,11 @@ def main() -> None:
         name = NAME_FIXES.get(sheet_row[0], sheet_row[0])
         values = {f"Year {year}": round_value(parse_number(sheet_row[column_index[f"Year {year}"]])) for year in YEARS}
         tiobe = {str(year): parse_number(sheet_row[column_index[f"{year} TIndex"]]) for year in TIOBE_YEARS}
-        popularity = {str(year): parse_number(sheet_row[column_index[f"{year} Pop"]]) for year in YEARS if f"{year} Pop" in column_index}
+        popularity = {
+            str(year): parse_number(sheet_row[column_index[f"{year} Pop"]])
+            for year in YEARS
+            if f"{year} Pop" in column_index
+        }
         tiobe["2019"] = tiobe_2019.get(name)
 
         for year, rating in tiobe_sept.get(name, {}).items():
@@ -261,13 +298,17 @@ def main() -> None:
             language_values[f"TIOBE avg {label}"] = round_value(tiobe_average)
             raw_pop = average([popularity.get(str(year)) for year in years])
             language_values[f"Pop avg {label}"] = round_value(raw_pop)
-            language_values[f"Popularity avg {label}"] = round_value(usage_combined(tiobe_ratings, popularity, years))  # opinion removed
+            language_values[f"Popularity avg {label}"] = round_value(
+                usage_combined(tiobe_ratings, popularity, years)
+            )  # opinion removed
             both = outlook is not None and tiobe_average is not None
             language_values[f"Combined avg {label}"] = (
                 round_value(outlook * OUTLOOK_WEIGHT + tiobe_average * TIOBE_WEIGHT) if both else None
             )
 
-        backtest = forecast(language_values, tiobe_ratings, BACKTEST_CUTOFF, [year - BACKTEST_CUTOFF for year in BACKTEST_YEARS])
+        backtest = forecast(
+            language_values, tiobe_ratings, BACKTEST_CUTOFF, [year - BACKTEST_CUTOFF for year in BACKTEST_YEARS]
+        )
 
         for index, series_key in enumerate(BACKTEST_KEYS):
             language_values[series_key] = round_value(max(0.0, backtest[index])) if backtest else None
@@ -275,12 +316,18 @@ def main() -> None:
         for series_key, bt_key in zip(HEALTH_BACKTEST_KEYS, BACKTEST_KEYS):
             # no historical fix is possible yet at the cutoff, so the projection fills both prediction slots
             predictions = [language_values[bt_key]] * 2 if language_values[bt_key] is not None else [None] * 2
-            language_values[series_key] = round_value(healthiness_at(language_values, tiobe_ratings, popularity, BACKTEST_CUTOFF, predictions)) if language_values[bt_key] is not None else None
+            language_values[series_key] = (
+                round_value(healthiness_at(language_values, tiobe_ratings, popularity, BACKTEST_CUTOFF, predictions))
+                if language_values[bt_key] is not None
+                else None
+            )
 
         projected = forecast(language_values, tiobe_ratings, LAST_YEAR, [PROJECTION_YEARS])
         latest = language_values[f"Year {LAST_YEAR}"]
         language_values[PROJECTION_KEY] = round_value(max(0.0, projected[0])) if projected else None
-        language_values["Projection change"] = round_value(language_values[PROJECTION_KEY] - latest) if projected else None  # matches the arrow
+        language_values["Projection change"] = (
+            round_value(language_values[PROJECTION_KEY] - latest) if projected else None
+        )  # matches the arrow
         fixed = historical_fix(language_values, language_values[PROJECTION_KEY]) if projected else None
         language_values[FIX_KEY] = round_value(fixed)
         language_values[f"{FIX_KEY} change"] = round_value(fixed - latest) if projected else None
@@ -289,13 +336,25 @@ def main() -> None:
         language_values = lang[VALUES_FIELD]
 
         if language_values[PROJECTION_KEY] is not None:
-            language_values[HEALTH_KEY] = round_value(healthiness_at(language_values, lang[TIOBE_FIELD], lang["pop"], LAST_YEAR, [language_values[PROJECTION_KEY], language_values[FIX_KEY]]))
+            language_values[HEALTH_KEY] = round_value(
+                healthiness_at(
+                    language_values,
+                    lang[TIOBE_FIELD],
+                    lang["pop"],
+                    LAST_YEAR,
+                    [language_values[PROJECTION_KEY], language_values[FIX_KEY]],
+                )
+            )
         else:
             language_values[HEALTH_KEY] = None
 
         predicted = predicted_health(language_values, lang[TIOBE_FIELD], lang["pop"])
         language_values[HEALTH_PRED_KEY] = round_value(predicted)
-        language_values[f"{HEALTH_PRED_KEY} change"] = round_value(predicted - language_values[HEALTH_KEY]) if predicted is not None and language_values[HEALTH_KEY] is not None else None
+        language_values[f"{HEALTH_PRED_KEY} change"] = (
+            round_value(predicted - language_values[HEALTH_KEY])
+            if predicted is not None and language_values[HEALTH_KEY] is not None
+            else None
+        )
 
     languages.sort(key=lambda language: -(language[VALUES_FIELD]["Year 2026"] or 0))
     data = {
@@ -307,6 +366,7 @@ def main() -> None:
 
     OUTPUT_PATH.write_text(json.dumps(data, indent=1) + "\n")
     print(f"Wrote {OUTPUT_PATH.relative_to(ROOT)} ({len(languages)} languages)")
+
 
 if __name__ == "__main__":
     main()

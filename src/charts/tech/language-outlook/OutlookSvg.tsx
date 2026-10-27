@@ -50,6 +50,7 @@ function GridLines({ gridValues, yScale }: { gridValues: number[]; yScale: Scale
           </text>
         </g>
       ))}
+
     </>
   );
 }
@@ -78,6 +79,7 @@ function SeriesLine({ line, languages, xOfIndex, yScale }: LineProps) {
           strokeLinejoin="round"
         />
       ))}
+
     </>
   );
 }
@@ -161,6 +163,7 @@ function SeriesMarks({ language, series, visible, centerX, yScale, onTip, onTipH
 
         return <ProjectionMark key={seriesName} {...mark} change={language.values[changeKey(seriesName)] ?? 0} />;
       })}
+
     </>
   );
 }
@@ -193,6 +196,7 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
           <SeriesMarks language={language} series={series} visible={visible} centerX={xOfIndex(index)} yScale={yScale} onTip={onTip} onTipHide={onTipHide} />
         </g>
       ))}
+
     </svg>
   );
 }

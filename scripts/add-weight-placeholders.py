@@ -18,6 +18,7 @@ DEFAULT_DAYS_AHEAD = 60
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "weight-journey" / "weight-journey.json"
 
+
 def main():
     """Append a zero-weight row for every missing date up to today plus the requested days."""
     ahead = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_DAYS_AHEAD
@@ -37,6 +38,7 @@ def main():
 
     DATA.write_text(json.dumps(data))
     print(f"Added {added} placeholder days (last date: {weights[-1][0]})")
+
 
 if __name__ == "__main__":
     main()

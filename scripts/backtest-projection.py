@@ -18,8 +18,9 @@ spec = importlib.util.spec_from_file_location("build", ROOT / "scripts" / "build
 build = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build)
 
+
 def main() -> None:
-    """Print each language's 2025 and 2026 actuals next to the backtest projection and the flat guess, then the average error of each."""
+    """Print each language's 2025 and 2026 actuals, the backtest projection and flat guess, and their average errors."""
     data = json.loads(build.OUTPUT_PATH.read_text())
     cutoff = build.BACKTEST_CUTOFF
     rows = []
@@ -33,21 +34,31 @@ def main() -> None:
         result_row = [lang[build.NAME_FIELD]]
 
         for year, backtest_key in zip(build.BACKTEST_YEARS, build.BACKTEST_KEYS):
-            result_row += [language_values[f"Year {year}"], language_values[backtest_key], language_values[f"Year {cutoff}"]]
+            result_row += [
+                language_values[f"Year {year}"],
+                language_values[backtest_key],
+                language_values[f"Year {cutoff}"],
+            ]
 
         rows.append(result_row)
 
     print(f"{'':12}{'2025 actual':>12}{'proj':>8}{'flat':>8}{'2026 actual':>14}{'proj':>8}{'flat':>8}")
 
     for printed_row in rows:
-        print(f"{printed_row[LABEL]:12}{printed_row[ACTUAL_2025]:12.1f}{printed_row[PROJECTED_2025]:8.1f}{printed_row[FLAT_2025]:8.1f}{printed_row[ACTUAL_2026]:14.1f}{printed_row[PROJECTED_2026]:8.1f}{printed_row[FLAT_2026]:8.1f}")
+        print(
+            f"{printed_row[LABEL]:12}{printed_row[ACTUAL_2025]:12.1f}{printed_row[PROJECTED_2025]:8.1f}{printed_row[FLAT_2025]:8.1f}{printed_row[ACTUAL_2026]:14.1f}{printed_row[PROJECTED_2026]:8.1f}{printed_row[FLAT_2026]:8.1f}"
+        )
 
     row_count = len(rows)
 
     for label, column in (("projection", PROJECTED_2025), ("flat (no change from 2024)", FLAT_2025)):
         error_2025 = sum(abs(printed_row[column] - printed_row[ACTUAL_2025]) for printed_row in rows) / row_count
-        error_2026 = sum(abs(printed_row[column + YEAR_COLUMN_GAP] - printed_row[ACTUAL_2026]) for printed_row in rows) / row_count
+        error_2026 = (
+            sum(abs(printed_row[column + YEAR_COLUMN_GAP] - printed_row[ACTUAL_2026]) for printed_row in rows)
+            / row_count
+        )
         print(f"avg error, {label}: 2025 = {error_2025:.2f}, 2026 = {error_2026:.2f}")
+
 
 if __name__ == "__main__":
     main()

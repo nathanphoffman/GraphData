@@ -95,6 +95,7 @@ function valueAfterKey(pressedKey: string, value: number, step: number, range: R
     ["Home", range.min],
     ["End", range.max],
   ]);
+
   const next = moves.get(pressedKey);
 
   return next === undefined ? null : clamp(next, range);
@@ -138,6 +139,7 @@ function Dial({ id: sliderId, value, range, display, onFraction, onKeyDown }: Di
       onPointerMove={(event) => {
         if (event.currentTarget.hasPointerCapture(event.pointerId)) onFraction(fractionAtPointer(event));
       }}
+
     >
       <path className="mini-dial-track" d={arcPath(START, START + SWEEP)} />
       {frac > 0 && <path className="mini-dial-fill" d={arcPath(START, START + frac * SWEEP)} />}
@@ -177,6 +179,7 @@ function LearnMore({ id: sliderId, label, text }: { id: string; label: string; t
           </div>
         </div>
       )}
+
     </>
   );
 }

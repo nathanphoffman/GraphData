@@ -1,17 +1,8 @@
 import { useState } from "react";
 import { callApi } from "../../../api";
-import { InlineCell } from "./InlineCell";
-import { LINES_LABEL, PERCENT, QUALITY_LABEL, SCAFFOLDING_LINES, withQuality } from "./maintenance";
-import { type Column, HIGHEST_RATING, type Item, LOWEST_RATING, type Ranking, effectiveRating, fractionBetween, isNumber, isText, letterGrade, rankItems } from "./score";
-
-/** Heat colours run from hue 0 (red) to this (green). */
-const GREEN_HUE = 120;
-
-/** Show a value, or nothing when it is missing. */
-const show = (value: number | string | null | undefined) => (value === null || value === undefined ? "" : String(value));
-
-/** Background from red (0) through yellow to green (1); see-through so it works on light and dark pages. */
-export const heat = (fraction: number) => ({ backgroundColor: `hsl(${Math.round(fraction * GREEN_HUE)} 65% 45% / 0.35)` });
+import { InfoCell, NameCell, RatedCell, type SaveCell, heat } from "./RankingCells";
+import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isDecommissioned, withQuality } from "./maintenance";
+import { type Column, type Item, type Ranking, fractionBetween, isNumber, letterGrade, rankItems } from "./score";
 
 const PAGE_SIZE = 100;
 
@@ -20,8 +11,6 @@ const LINK_LABEL = "Link";
 
 /** A column with this label marks the items whose Seasons count is halved: it is not shown, and those items get an asterisk after their seasons. */
 export const EPISODIC_LABEL = "Episodic";
-const SEASONS_LABEL = "Seasons";
-
 export type SortKey = "rank" | "name" | "grade";
 
 export interface Sort {
@@ -33,9 +22,6 @@ export interface Sort {
 export const firstSort = (sortColumn: SortKey): Sort => ({ key: sortColumn, descending: sortColumn === "grade" });
 
 type RankedRow = ReturnType<typeof rankItems>[number];
-type CellValue = number | string | null;
-/** Takes an item and a column position, and gives back the function that saves a new value for that cell. */
-type SaveCell = (item: Item, index: number) => (value: CellValue) => Promise<void>;
 
 interface IndexedColumn {
   column: Column;
@@ -140,47 +126,9 @@ function TableHead({ columns, showScore, sort, onSort }: HeadProps) {
             <small>×{column.weight}</small>
           </th>
         ))}
+
       </tr>
     </thead>
-  );
-}
-
-/** The item's name, linking to its web address when it has one. */
-function NameCell({ item, linkIndex }: { item: Item; linkIndex: number }) {
-  const link = item.values[linkIndex];
-
-  return <td>{isText(link) && link !== "" ? <a href={link} target="_blank" rel="noreferrer">{item.name}</a> : item.name}</td>;
-}
-
-interface CellProps {
-  item: Item;
-  column: Column;
-  index: number;
-  canEdit: boolean;
-  saveCell: SaveCell;
-}
-
-/** A plain information cell. */
-function InfoCell({ item, column, index, canEdit, saveCell }: CellProps) {
-  return (
-    <InlineCell column={column} itemName={item.name} value={item.values[index]} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)}>
-      {show(item.values[index])}
-    </InlineCell>
-  );
-}
-
-/** A rated cell: the value, coloured by its 1 to 5 rating, with that rating in brackets when the column has a curve or a best value. */
-function RatedCell({ item, column, index, canEdit, saveCell, episodic }: CellProps & { episodic: unknown }) {
-  const rating = item.values[index];
-  const used = isNumber(rating) ? effectiveRating(column, rating) : null;
-  const colour = used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING));
-
-  return (
-    <InlineCell column={column} itemName={item.name} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)} style={colour}>
-      {show(rating)}
-      {column.label === SEASONS_LABEL && episodic ? "*" : ""}
-      {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
-    </InlineCell>
   );
 }
 
@@ -191,16 +139,17 @@ interface RowProps {
   scoreRange: [number, number];
   canEdit: boolean;
   saveCell: SaveCell;
+  decommissioned: boolean;
 }
 
 /** One ranked item: rank, name, information, score, grade and rated cells. */
-function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell }: RowProps) {
+function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, decommissioned }: RowProps) {
   const { item, score, grade, rank } = rankedRow;
   const cell = { item, canEdit, saveCell };
 
   return (
-    <tr>
-      <td>{rank}</td>
+    <tr className={decommissioned ? "rankings-decommissioned" : undefined}>
+      <td>{decommissioned ? "–" : rank}</td>
       <NameCell item={item} linkIndex={columns.linkIndex} />
       {columns.info.map(({ column, index }) => <InfoCell key={column.label} {...cell} column={column} index={index} />)}
 
@@ -229,9 +178,13 @@ interface TableProps {
 export function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdit, onSaved }: TableProps) {
   const columns = splitColumns(ranking);
   const [shown, setShown] = useState(PAGE_SIZE);
-  const rows = rankItems(ranking);
-  const matching = matchingRows(rows, search, sort);
-  const scores = rows.map((rankedRow) => rankedRow.score);
+
+  // Decommissioned items are ranked among themselves and listed after the active ones, whatever the sort.
+  const retired = (item: Item) => isDecommissioned(ranking, item);
+  const active = rankItems({ ...ranking, items: ranking.items.filter((item) => !retired(item)) });
+  const inactive = rankItems({ ...ranking, items: ranking.items.filter(retired) });
+  const matching = [...matchingRows(active, search, sort), ...matchingRows(inactive, search, sort)];
+  const scores = active.map((rankedRow) => rankedRow.score);
   const context = { columns, showScore, scoreRange: [Math.min(...scores), Math.max(...scores)] as [number, number], canEdit, saveCell: cellSaver(ranking, source, onSaved) };
 
   return (
@@ -239,7 +192,7 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
       <table>
         <TableHead columns={columns} showScore={showScore} sort={sort} onSort={onSort} />
         <tbody>
-          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} />)}
+          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} decommissioned={retired(rankedRow.item)} />)}
         </tbody>
       </table>
       {matching.length > shown && (
@@ -247,6 +200,7 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
           Show next {Math.min(PAGE_SIZE, matching.length - shown)} ({shown} of {matching.length} shown)
         </button>
       )}
+
     </>
   );
 }

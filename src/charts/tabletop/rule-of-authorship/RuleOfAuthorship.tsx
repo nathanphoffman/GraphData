@@ -54,6 +54,7 @@ function CaseStrip() {
           <Inline parts={item} />
         </span>
       ))}
+
     </div>
   );
 }
@@ -67,6 +68,7 @@ function OwnerLegend() {
           {OWNER_LABELS[owner]}
         </Pill>
       ))}
+
     </div>
   );
 }
@@ -155,6 +157,7 @@ function RuleBlock({ rule }: { rule: Rule }) {
           <span className="auth-cite">{exhibit.cite}</span> — {exhibit.text}
         </div>
       ))}
+
     </div>
   );
 }

@@ -13,7 +13,8 @@
     {"label": "Familiarity", "short": "Familiarity", "was": "Quality"},
     {"label": "xLines", "short": "xLines"},
     {"label": "Computed Quality", "short": "Computed", "was": "Quality"},
-    {"label": "Quality", "short": "Quality", "weight": 4, "curve": {"type": "linear", "from": 60, "to": 95}}
+    {"label": "Quality", "short": "Quality", "weight": 4, "curve": {"type": "linear", "from": 60, "to": 95}},
+    {"label": "Decommissioned", "short": "Decom"}
   ],
   "items": [
     {"name": "Deor Lang", "values": ["Rust, Bun, Biome, TS, VS Code Ext", 5, 5, 5, 5, 5, 35321, "https://github.com/nathanphoffman/DeorLang", 4, 1.2, 88.8, 84.4]},
