@@ -16,18 +16,18 @@ describe("nFactor", () => {
 
 describe("maintenance", () => {
   it("weights quality by lines", () => {
-    const items = [...Array(10)].map((_, index) => ({ name: `s${index}`, values: [500, 50, 50] }));
-    items.push({ name: "big", values: [5000, 100, 100] });
+    const items = [...Array(10)].map((_, index) => ({ name: `s${index}`, values: [500, 3, 50] }));
+    items.push({ name: "big", values: [5000, 5, 100] });
     expect(maintenance({ id: "x", title: "x", columns, items })?.averageQuality).toBe(75);
   });
 
   it("averages familiarity with computed quality, or uses whichever one a project has", () => {
-    const items = [{ name: "a", values: [10, 60, 80] }, { name: "b", values: [10, null, 90] }];
+    const items = [{ name: "a", values: [10, 3, 90] }, { name: "b", values: [10, null, 90] }];
     expect(maintenance({ id: "x", title: "x", columns, items })?.averageQuality).toBe(80);
   });
 
   it("subtracts (quality - 75) / 100 from the n-factor", () => {
-    const result = maintenance({ id: "x", title: "x", columns, items: [{ name: "a", values: [27, 100, 100] }] });
+    const result = maintenance({ id: "x", title: "x", columns, items: [{ name: "a", values: [27, 5, 100] }] });
     expect(result?.gradedNFactor).toBeCloseTo(3 - 0.25, 6);
   });
 
@@ -38,7 +38,7 @@ describe("maintenance", () => {
 
 describe("maintenance growth", () => {
   it("multiplies each project's lines by its xLines for the future n-factor", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 75, 75, 3] }] });
+    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
     expect(result?.futureLines).toBe(27);
     expect(result?.gradedFutureNFactor).toBeCloseTo(3, 6);
   });
@@ -56,12 +56,12 @@ describe("maintenancePercent", () => {
 
 describe("equivalentLines", () => {
   it("is the combined n-factor raised to itself", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 75, 75, 3] }] });
+    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
     expect(result?.equivalentLines).toBeCloseTo((result?.combinedNFactor ?? 0) ** (result?.combinedNFactor ?? 0), 6);
   });
 
   it("ignores quality", () => {
-    const maintenanceAt = (quality: number) => maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, quality, quality, 3] }] });
+    const maintenanceAt = (quality: number) => maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, quality / 25 + 1, quality, 3] }] });
     expect(maintenanceAt(100)?.equivalentLines).toBeCloseTo(maintenanceAt(75)?.equivalentLines ?? 0, 6);
     expect(maintenanceAt(100)?.manualLines).toBeCloseTo(maintenanceAt(75)?.manualLines ?? 0, 6);
   });
@@ -69,7 +69,7 @@ describe("equivalentLines", () => {
 
 describe("manualLines", () => {
   it("is the combined n-factor minus 0.66, raised to itself", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 75, 75, 3] }] });
+    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
     const adjusted = (result?.combinedNFactor ?? 0) - 0.66;
     expect(result?.manualLines).toBeCloseTo(adjusted ** adjusted, 6);
   });
@@ -77,8 +77,8 @@ describe("manualLines", () => {
 
 describe("withQuality", () => {
   it("sets Quality to the average of familiarity and computed quality", () => {
-    const ranking = { id: "x", title: "x", columns: [{ label: "Familiarity" }, { label: "Computed Quality" }, { label: "Quality" }], items: [{ name: "a", values: [80, 91, 0] }] };
-    expect(withQuality(ranking).items[0].values).toEqual([80, 91, 85.5]);
+    const ranking = { id: "x", title: "x", columns: [{ label: "Familiarity" }, { label: "Computed Quality" }, { label: "Quality" }], items: [{ name: "a", values: [4, 91, 0] }] };
+    expect(withQuality(ranking).items[0].values).toEqual([4, 91, 83]);
   });
 });
 

@@ -76,9 +76,18 @@ export function nFactor(total: number): number {
   return (low + high) / 2;
 }
 
-/** A project's quality: its familiarity and computed quality averaged, or whichever one it has. */
+/** Familiarity is rated out of 5, and 1 is 0% up to 5 being 100%. */
+const FAMILIARITY_STEPS = 4;
+
+/** A familiarity rating out of 5 as a percent. */
+export function familiarityPercent(rating: number): number {
+  return ((rating - 1) / FAMILIARITY_STEPS) * PERCENT;
+}
+
+/** A project's quality: its familiarity (as a percent) and computed quality averaged, or whichever one it has. */
 export function qualityOf(values: Ranking["items"][number]["values"], familiarity: number, computed: number): number | null {
-  const found = [values[familiarity], values[computed]].filter(isNumber);
+  const [rating, quality] = [values[familiarity], values[computed]];
+  const found = [isNumber(rating) ? familiarityPercent(rating) : null, quality].filter(isNumber);
 
   // Add up the numbers and divide by how many there are.
   return found.length ? found.reduce((runningTotal, value) => runningTotal + value, 0) / found.length : null;

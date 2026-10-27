@@ -1,6 +1,7 @@
 {
   "id": "rpgs",
   "title": "RPGs",
+  "gradeCurve": {"steepness": 6.54, "bottomBend": 1.691, "middleLift": 23.4, "middleAt": 0.247, "middleWidth": 0.117},
   "columns": [
     {"label": "Solo", "short": "Solo", "weight": 7},
     {"label": "Uniqueness", "short": "Uniqueness", "weight": 3},

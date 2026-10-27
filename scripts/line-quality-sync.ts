@@ -198,9 +198,10 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality }
     if (projectRow.quality) values[qualityAt] = Math.round(projectRow.quality.score * TENTH) / TENTH;
 
     // the page works this out itself; storing it keeps the saved copy from going stale
-    const [fam, computed] = [values[familiarityAt], values[qualityAt]].filter((value) => typeof value === "number");
+    const [rating, computed] = [values[familiarityAt], values[qualityAt]];
+    const fam = typeof rating === "number" ? ((rating - 1) / 4) * 100 : undefined; // familiarity is out of 5, 1 being 0% and 5 being 100%
 
-    if (finalAt >= 0 && fam !== undefined) values[finalAt] = Math.round(((fam + (computed ?? fam)) / 2) * TENTH) / TENTH;
+    if (finalAt >= 0 && fam !== undefined) values[finalAt] = Math.round(((fam + (typeof computed === "number" ? computed : fam)) / 2) * TENTH) / TENTH;
     save.run(JSON.stringify(values), Date.now(), RANKING, projectRow.name);
   }
 
