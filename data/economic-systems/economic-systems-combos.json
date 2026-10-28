@@ -16,7 +16,14 @@
         "Property & land": "Land and industry are owned collectively, with use rights and shares held by workers and communities.",
         "Education": "Free and public through university, with workplaces and communities co-running training.",
         "Environment & energy": "Central planning of energy and resources, with local communities having a say in how projects are run."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a public planning office houses them and assigns them a job, with a residents' council helping them settle in.",
+        "You have a horrible cut, so a planned public hospital stitches you up free, and a staff and patient council runs the place.",
+        "You have an idea for a new business, so you pitch it to a planning council, which may fund it as a public-owned enterprise, with you as a worker-manager.",
+        "You lose your job, so a planned jobs board places you elsewhere in the public sector, so you don't lose income.",
+        "You want to buy or build a home, so you are given public housing, and ownership of a home is mostly collective."
+      ]
     },
     {
       "cells": [
@@ -34,7 +41,14 @@
         "Property & land": "A mix of public and private ownership: public control of essential assets and strict rules on private ones.",
         "Education": "Free public schooling and affordable or free college funded by government.",
         "Environment & energy": "Public investment and ownership of clean energy, backed by tough regulation."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a public housing office places them in a state-built unit, since the market doesn't build for people like them.",
+        "You have a horrible cut, so you go to a public hospital that treats you free or cheaply, while private ones are also open.",
+        "You have an idea for a new business, so you can start small on your own with loans from public programs, while big industries stay public.",
+        "You lose your job, so unemployment insurance pays part of your wage, and public employers are often hiring.",
+        "You want to buy or build a home, so you rent public housing or buy with a government-backed loan."
+      ]
     },
     {
       "cells": [
@@ -52,7 +66,14 @@
         "Property & land": "Strong corporate property rights, with government rules on use, antitrust and public interest.",
         "Education": "Public schools plus employer-linked training and government-funded university research.",
         "Environment & energy": "Regulation and subsidies guide large industries toward cleaner energy."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a government program gives a basic floor of help, but a private shelter or landlord provides the actual bed.",
+        "You have a horrible cut, so you are treated at a private hospital, and public insurance or your own plan pays, with a gap you may owe.",
+        "You have an idea for a new business, so you look for investors or a loan, with a few government programs helping small firms against large ones.",
+        "You lose your job, so unemployment insurance pays part of your wage while you search at large firms.",
+        "You want to buy or build a home, so you buy from a large developer with a government-backed mortgage."
+      ]
     },
     {
       "cells": [
@@ -70,7 +91,14 @@
         "Property & land": "Private property, with a strong worker and trade association role in how firms are run.",
         "Education": "Free public schooling with apprenticeship and vocational training run jointly with the trades.",
         "Environment & energy": "Industry and union agreements work alongside government climate targets."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so their union and the state work together to place them in housing and a job.",
+        "You have a horrible cut, so the union health fund and the public clinic split the bill, so you pay very little.",
+        "You have an idea for a new business, so your guild and public programs back you, and you start within an organized trade with training provided.",
+        "You lose your job, so your union finds you work and public unemployment pay covers you meanwhile.",
+        "You want to buy or build a home, so you buy or rent with help from your union and public loans."
+      ]
     },
     {
       "cells": [
@@ -88,7 +116,14 @@
         "Property & land": "Private property with social obligations, plus some public ownership of key utilities.",
         "Education": "Free or cheap schooling and university, with strong vocational and apprenticeship routes.",
         "Environment & energy": "Ambitious climate policy using carbon pricing and strong industry standards."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a caseworker arranges rent support quickly, and they find a room in a market for housing.",
+        "You have a horrible cut, so your required insurance pays at a regulated price, and you leave with stitches and a small bill.",
+        "You have an idea for a new business, so you start with bank loans and public support, inside fair-competition rules.",
+        "You lose your job, so generous unemployment pay and a caseworker support you while you look.",
+        "You want to buy or build a home, so you take a regulated mortgage with strong buyer protections."
+      ]
     },
     {
       "cells": [
@@ -106,7 +141,14 @@
         "Property & land": "Strong private rights, with limited social obligations through zoning and environmental rules.",
         "Education": "Public schools with choice, plus apprenticeships and subsidized college.",
         "Environment & energy": "Market tools such as cap-and-trade and incentives, set within government standards."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a shelter with public funding takes them in, and rent aid helps them find a place on the private market.",
+        "You have a horrible cut, so your required insurance covers the visit, with a moderate copay at a private hospital.",
+        "You have an idea for a new business, so you meet moderate rules and get a bank loan, with fair-competition rules to help you.",
+        "You lose your job, so you get unemployment pay and a job-search program while you look.",
+        "You want to buy or build a home, so you buy with a bank loan, with some zoning and some buyer protections."
+      ]
     },
     {
       "cells": [
@@ -124,7 +166,14 @@
         "Property & land": "Use-based possession of land and tools, with natural resources held in common.",
         "Education": "Community-run, voluntary and free schools and skill-sharing.",
         "Environment & energy": "Local commons management, with polluters accountable to the community."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a housing co-op takes them in, and a shared land payment gives them a little to live on.",
+        "You have a horrible cut, so a member-run clinic stitches you up, paid for by dues and a shared resource payment.",
+        "You have an idea for a new business, so you start a co-op with a mutual bank loan, with little red tape and a shared resource payment to help.",
+        "You lose your job, so your co-op and mutual aid group help you, and a shared payment tops up your income.",
+        "You want to buy or build a home, so you build on community land through a housing co-op and pay a land rent."
+      ]
     },
     {
       "cells": [
@@ -142,7 +191,14 @@
         "Property & land": "Strong private property in goods, with land and natural resources taxed or shared.",
         "Education": "Parent- and community-led choice among private schools, with open access.",
         "Environment & energy": "Resource charges and clear property rights make polluters pay for what they use."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a small basic payment and cheap, easy-to-build housing let them find a room on their own.",
+        "You have a horrible cut, so you pick any clinic and pay with a basic voucher or insurance you chose.",
+        "You have an idea for a new business, so you start with few licenses and cheap capital, and a basic payment cushions you if it fails.",
+        "You lose your job, so a basic payment and a flexible job market keep you going until you find work.",
+        "You want to buy or build a home, so you build with few permits on land you rent from the community."
+      ]
     },
     {
       "cells": [
@@ -160,14 +216,21 @@
         "Property & land": "Strong, nearly absolute private property rights.",
         "Education": "Mostly private schools and vouchers, with minimal state involvement.",
         "Environment & energy": "Property rights and court cases handle pollution, with little regulation."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so the market and charities are all that is available, so a private charity gives them a bed.",
+        "You have a horrible cut, so a private clinic stitches you up at its listed price, and charity or your own insurance pays.",
+        "You have an idea for a new business, so you open with almost no rules and raise money privately, and you keep your profits.",
+        "You lose your job, so you live on savings while a lightly regulated market hires you quickly.",
+        "You want to buy or build a home, so you build or buy with almost no permits, and the market sets the price."
+      ]
     },
     {
       "cells": [
         "State Commune",
         "Guild System"
       ],
-      "name": "State-Guild Corporatism",
+      "name": "State-Run Guilds",
       "summary": "The state organizes each industry into official associations that run production under its direction.",
       "views": {
         "Healthcare": "A state-run national service administered through trade or industry funds.",
@@ -178,7 +241,14 @@
         "Property & land": "Collective ownership managed by trade bodies under state direction.",
         "Education": "State schooling plus compulsory trade training run by the industry bodies.",
         "Environment & energy": "National plans, with industry bodies responsible for resource use in their trade."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so the state sends them to an official trade association, which gives them a bed and work under its rules.",
+        "You have a horrible cut, so your state-run guild clinic treats you, because your trade ties you to its health plan.",
+        "You have an idea for a new business, so you apply to your state-run trade association, which may license you and sets the standards.",
+        "You lose your job, so the state places you in another guild shop with the same trade.",
+        "You want to buy or build a home, so your guild is given state housing blocks for members to live in."
+      ]
     },
     {
       "cells": [
@@ -196,7 +266,14 @@
         "Property & land": "Tools and workshops owned by members, and land used by the people who work it.",
         "Education": "Apprenticeship and skill-sharing within the trade and community.",
         "Environment & energy": "Trade-managed local resources and small-scale sustainable production."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so their guild or co-op takes them in, because the group looks after its own, and mutual aid fills any gaps.",
+        "You have a horrible cut, so your guild or co-op's health fund pays for the visit, and you owe nothing more.",
+        "You have an idea for a new business, so your guild and a mutual bank back you, so you start within a trade you share with peers.",
+        "You lose your job, so your guild or co-op finds you work and supports you from a mutual fund.",
+        "You want to buy or build a home, so you build or buy through a guild or co-op housing society."
+      ]
     },
     {
       "cells": [
@@ -214,7 +291,14 @@
         "Property & land": "Private property remains, alongside large public and collective stakes in major industries.",
         "Education": "Free public schools and universities.",
         "Environment & energy": "Public ownership and heavy investment in clean energy, plus strong standards."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so public housing and a caseworker get them a home quickly, funded by a welfare state.",
+        "You have a horrible cut, so a public hospital treats you with tiny fees, because taxes and public ownership pay for it.",
+        "You have an idea for a new business, so you start with strong public support, though big sectors are publicly owned and taxes are high.",
+        "You lose your job, so generous unemployment pay and a public jobs agency find you a new place.",
+        "You want to buy or build a home, so you rent from a large public housing sector or buy with public loans."
+      ]
     },
     {
       "cells": [
@@ -232,7 +316,14 @@
         "Property & land": "Private property for goods, with shared ownership of land and natural resources.",
         "Education": "Public funding with local, parent- and community-run schools.",
         "Environment & energy": "Resource taxes and dividends make polluters pay, backed by strong standards."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a local voluntary group, funded by the public, finds them housing with less red tape.",
+        "You have a horrible cut, so public insurance pays, but you choose a local or cooperative clinic.",
+        "You have an idea for a new business, so you start with light rules and public support, with local groups helping you.",
+        "You lose your job, so public unemployment pay covers you, and local groups help you retrain.",
+        "You want to buy or build a home, so you build with few permits, on shared land, with public loans if needed."
+      ]
     },
     {
       "cells": [
@@ -250,7 +341,14 @@
         "Property & land": "Private property protected, with social obligations and regulation for public benefit.",
         "Education": "Public schools and subsidized college, with apprenticeship routes.",
         "Environment & energy": "Regulation and public investment, with market tools like carbon pricing."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so public housing and rent aid get them a place, with the private market offering more options.",
+        "You have a horrible cut, so public insurance covers most of it, while private hospitals compete for your visit.",
+        "You have an idea for a new business, so you get a bank loan or small-business loan and fair-competition rules protect you from big firms.",
+        "You lose your job, so unemployment insurance covers part of your pay while public programs retrain you.",
+        "You want to buy or build a home, so you buy with a government-backed mortgage in a regulated housing market."
+      ]
     },
     {
       "cells": [
@@ -268,7 +366,14 @@
         "Property & land": "Strong property rights with limited social obligations.",
         "Education": "Public schools with choice, plus apprenticeships.",
         "Environment & energy": "Rules and prices (taxes or trading) set by the state, with markets doing the work."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a limited safety net gives them a bed, and market rules that keep rents fair help them move on.",
+        "You have a horrible cut, so your required insurance pays at a competitive, price-checked clinic.",
+        "You have an idea for a new business, so you start with light rules and a bank loan, and the state keeps the market fair.",
+        "You lose your job, so a small safety net holds you up while the labor market hires you quickly.",
+        "You want to buy or build a home, so you buy or build with a regulated mortgage and a few permits."
+      ]
     },
     {
       "cells": [
@@ -286,7 +391,14 @@
         "Property & land": "Strong corporate and intellectual property rights, with regulation on use.",
         "Education": "Public and private schools, with strong employer influence on training and research.",
         "Environment & energy": "Regulations negotiated with industry, plus market incentives and subsidies."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a big developer or charity-run shelter takes them in, with limited public help.",
+        "You have a horrible cut, so your job's insurance pays at a big hospital chain, though you may owe a deductible.",
+        "You have an idea for a new business, so you seek investors or a bank, with licensing and safety rules to meet, while big firms dominate the market.",
+        "You lose your job, so a small unemployment payment helps while you look for work at large firms.",
+        "You want to buy or build a home, so you buy from a big developer with a bank loan, in a regulated market."
+      ]
     },
     {
       "cells": [
@@ -304,7 +416,176 @@
         "Property & land": "Strong property rights with limited zoning and environmental restrictions.",
         "Education": "School choice, vouchers and private options with limited public control.",
         "Environment & energy": "Fewer rules, with market incentives and courts handling harm."
-      }
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a private charity gives them a bed, since taxes are low and there are few programs.",
+        "You have a horrible cut, so you pay mostly yourself or with private insurance, and there are few limits on the price.",
+        "You have an idea for a new business, so you open with minimal rules and low taxes, and you keep most of your profit.",
+        "You lose your job, so you rely on savings, and a lightly regulated market hires quickly.",
+        "You want to buy or build a home, so you buy or build with few permits and a private loan."
+      ]
+    },
+    {
+      "cells": [
+        "State Commune",
+        "Social Ownership",
+        "Guild System",
+        "Nordic Model"
+      ],
+      "name": "Guild Socialism",
+      "summary": "Large public and worker-owned sectors run alongside a strong welfare state, with guilds and unions sharing power over the economy.",
+      "views": {
+        "Healthcare": "Universal and publicly run, with unions and local bodies helping manage hospitals and clinics.",
+        "Poverty & welfare": "Generous guaranteed support, with housing and food provided partly through public and cooperative enterprises.",
+        "Employment & labor": "Strong union and guild power, public job guarantees, and workers sitting on the boards of large firms.",
+        "Taxes": "High, progressive taxes on income and wealth fund wide public services and public investment.",
+        "Business & markets": "Key industries are publicly or collectively owned, while smaller firms compete in a regulated market.",
+        "Property & land": "Land and big industry are held in common or by workers, with personal property and homes still private.",
+        "Education": "Free and public through university, with guilds and unions helping run training and apprenticeships.",
+        "Environment & energy": "Public ownership of energy and utilities, with democratic input from workers and communities on climate goals."
+      },
+      "examples": [
+        "A homeless person is in need of aid, so public bodies and guilds house them as a matter of right, and a caseworker finds them a job.",
+        "You have a horrible cut, so you are stitched up at a public hospital run by workers and unions, at no cost.",
+        "You have an idea for a new business, so you pitch it to a worker-run board or your guild, which funds it and shares the profits, but a private startup is hard.",
+        "You lose your job, so unemployment pay and a public jobs agency or your guild place you in new work.",
+        "You want to buy or build a home, so you get public or guild housing, with a long wait and little private ownership."
+      ]
+    },
+    {
+      "cells": [
+        "Social Ownership",
+        "New Deal Liberalism",
+        "Nordic Model",
+        "Social Market"
+      ],
+      "name": "Social Democracy",
+      "summary": "A market economy with a large welfare state, strong unions, and some public ownership of key industries.",
+      "views": {
+        "Healthcare": "Universal coverage, paid for publicly, with a mix of public and private providers.",
+        "Poverty & welfare": "Broad safety net with unemployment insurance, pensions, and family support for everyone.",
+        "Employment & labor": "Strong unions and collective bargaining, with a high minimum wage and worker protections.",
+        "Taxes": "High taxes on income, with a mix of consumption and wealth taxes funding public services.",
+        "Business & markets": "Private firms compete, but utilities and key sectors are public or closely regulated.",
+        "Property & land": "Private property is protected, with public ownership of infrastructure and some natural resources.",
+        "Education": "Free public schools and universities, with strong vocational training tied to industry.",
+        "Environment & energy": "Public investment and regulation steer the shift to clean energy, with carbon pricing alongside."
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a public housing office and rent aid get them a home, and a caseworker helps them find a job.",
+        "You have a horrible cut, so universal insurance covers you at the hospital, and you pay a small fee.",
+        "You have an idea for a new business, so you start with public loans and support, inside fair rules, and keep part of the profit after high taxes.",
+        "You lose your job, so generous unemployment pay and retraining carry you to the next job.",
+        "You want to buy or build a home, so you buy with a public loan or rent from a large public housing sector."
+      ]
+    },
+    {
+      "cells": [
+        "New Deal Liberalism",
+        "Corporate Capitalism",
+        "Social Market",
+        "Regulated Capitalism"
+      ],
+      "name": "Welfare Capitalism",
+      "summary": "Large private firms drive the economy, while government regulation, public insurance, and bargaining soften the risks.",
+      "views": {
+        "Healthcare": "Mixed system with private insurers and providers, plus public programs for the poor, old, and disabled.",
+        "Poverty & welfare": "Targeted safety net such as tax credits and unemployment insurance, aimed at those who need it.",
+        "Employment & labor": "Flexible labor markets with minimum wage floors, some union rights, and worker protections.",
+        "Taxes": "Moderate taxes that rise with income, with corporate taxes and deductions used to steer investment.",
+        "Business & markets": "Big firms are welcome but watched, with antitrust, consumer, and financial rules.",
+        "Property & land": "Strong private property, with zoning and regulation shaping how land and assets are used.",
+        "Education": "Public schools plus private options, with student aid helping people reach college.",
+        "Environment & energy": "Regulation, subsidies, and standards push industry toward lower emissions without banning it."
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a government safety net gives them a bed, but a private landlord or shelter provides the actual housing.",
+        "You have a horrible cut, so private insurance, with public help for the poor, covers the visit, though a big bill is still possible.",
+        "You have an idea for a new business, so you raise money from banks or investors, with rules to meet and large firms as competition, so the odds are mixed.",
+        "You lose your job, so unemployment insurance pays part of your wage while you look for work.",
+        "You want to buy or build a home, so you buy with a bank loan or a government-backed mortgage in a regulated market."
+      ]
+    },
+    {
+      "cells": [
+        "Guild System",
+        "Nordic Model",
+        "Mutualism",
+        "Left Libertarianism"
+      ],
+      "name": "Cooperative Commonwealth",
+      "summary": "An economy of worker cooperatives, guilds, and mutual aid, backed by a welfare floor and strong personal freedom.",
+      "views": {
+        "Healthcare": "Care provided through mutual aid societies and cooperative clinics, with a public guarantee as backup.",
+        "Poverty & welfare": "Basic needs met through mutual aid, cooperative housing, and a guaranteed income or similar floor.",
+        "Employment & labor": "Workers own and run their firms, with guilds setting standards and cooperatives as the main employer.",
+        "Taxes": "Light-to-moderate taxes, with land and resource taxes used to fund a basic dividend and shared services.",
+        "Business & markets": "Markets of cooperatives and small producers, with credit supplied by mutual banks and no big shareholders.",
+        "Property & land": "Workplaces are owned by the workers, and land is held by communities, with rent shared by all.",
+        "Education": "Public and community-run learning, with guild apprenticeships and cooperative schools.",
+        "Environment & energy": "Local control with shared limits on pollution, and communities able to protect their own land and water."
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a co-op or guild takes them in, and a basic income keeps them going until they find work.",
+        "You have a horrible cut, so a cooperative or guild clinic treats you, with a public floor of coverage behind it.",
+        "You have an idea for a new business, so you form a co-op or join a guild, and a basic income cushions the risk.",
+        "You lose your job, so your guild or co-op and a public floor carry you until you find work.",
+        "You want to buy or build a home, so you build or buy through a co-op, on community land, with public loans if needed."
+      ]
+    },
+    {
+      "cells": [
+        "Nordic Model",
+        "Social Market",
+        "Left Libertarianism",
+        "Classical Liberalism"
+      ],
+      "name": "Inclusive Market Economy",
+      "summary": "Open, competitive markets with a basic safety net and strong rights, but little central planning.",
+      "views": {
+        "Healthcare": "Universal basic coverage, often through regulated insurance or vouchers, with competition among providers.",
+        "Poverty & welfare": "A simple, wide floor such as a basic income or negative income tax, in place of many separate programs.",
+        "Employment & labor": "Open labor markets with basic worker protections and freedom to organize, but few mandated rules.",
+        "Taxes": "A simple, broad tax system with few loopholes, plus taxes on land or pollution.",
+        "Business & markets": "Competition is encouraged and monopolies are broken up, with rules mostly aimed at keeping markets fair.",
+        "Property & land": "Strong private property, with land and natural resource rents shared with the public.",
+        "Education": "Publicly funded but with school choice, so families and students can pick providers.",
+        "Environment & energy": "Market tools like carbon taxes and tradable permits are used to cut pollution at low cost."
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a basic income and open building rules let them rent a place of their own.",
+        "You have a horrible cut, so you choose any clinic, and universal basic coverage pays for most of it.",
+        "You have an idea for a new business, so you start with few barriers and a bank loan, and a basic income softens a failure.",
+        "You lose your job, so a basic income and a flexible market get you back to work quickly.",
+        "You want to buy or build a home, so you build or buy easily with a simple mortgage, with land rent shared by all."
+      ]
+    },
+    {
+      "cells": [
+        "Social Market",
+        "Regulated Capitalism",
+        "Classical Liberalism",
+        "Right Libertarianism"
+      ],
+      "name": "Free Enterprise Economy",
+      "summary": "Private business and open competition lead the economy, with limited government rules and a small safety net.",
+      "views": {
+        "Healthcare": "Mostly private care and insurance, with limited public help for those who cannot afford it.",
+        "Poverty & welfare": "A small safety net, with most help coming from families, charities, and work requirements.",
+        "Employment & labor": "Flexible hiring and firing, few union mandates, and wages set mostly by supply and demand.",
+        "Taxes": "Low, broad taxes with lower rates on business and investment to encourage growth.",
+        "Business & markets": "Open competition with light regulation, rules mostly limited to fraud, contracts, and basic safety.",
+        "Property & land": "Strong private property rights over land, business, and assets, with little government control.",
+        "Education": "Mix of private and charter schools, with parents free to choose and pay for what they want.",
+        "Environment & energy": "Prefers market solutions and private property rights over mandates, with limited government rules on energy."
+      },
+      "examples": [
+        "A homeless person is in need of aid, so a charity and a small safety net are what they have, since the market is expected to do the rest.",
+        "You have a horrible cut, so you are treated at a private hospital, paying with insurance or out of pocket.",
+        "You have an idea for a new business, so you open with light rules, low taxes, and private funding, and you keep most of what you earn.",
+        "You lose your job, so you live on savings while a lightly regulated market hires quickly.",
+        "You want to buy or build a home, so you buy or build with few permits and a private loan, and the market sets the price."
+      ]
     }
   ]
 }

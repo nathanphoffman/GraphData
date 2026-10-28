@@ -60,6 +60,9 @@ export interface PlacedLabel {
 /** Shape of data/economic-systems/economic-systems-views.json: common views per cell, by policy category. */
 export interface CellViews {
   summary: string;
+
+  /** Short stories showing what the system looks like in daily life. */
+  examples: string[];
   views: Record<string, string>;
 }
 
@@ -68,12 +71,13 @@ export interface EconomicSystemsViewsData {
   cells: Record<string, CellViews>;
 }
 
-/** Shape of data/economic-systems/economic-systems-combos.json: one blend per pair of orthogonally adjacent cells. */
+/** Shape of data/economic-systems/economic-systems-combos.json: one blend per pair of orthogonally adjacent cells, plus one per 2x2 block of cells. */
 export interface Combo {
-  /** The two cell names being blended. */
-  cells: [string, string];
+  /** The cell names being blended: two neighbors, or the four cells of a 2x2 block. */
+  cells: string[];
   name: string;
   summary: string;
+  examples: string[];
   views: Record<string, string>;
 }
 

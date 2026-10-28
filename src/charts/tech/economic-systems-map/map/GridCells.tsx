@@ -1,10 +1,10 @@
 import { BOLD, CELL_CENTER, CELL_H, CELL_W, COLORS, FONT_SIZE, GRID_LEFT, GRID_TOP, HEADER_COL_W, HEADER_ROW_H, HEADER_TEXT_BASELINE, ROW_HEADER_NUDGE } from "../model/style";
-import { GRID_X0, GRID_Y0 } from "../model/layout";
+import { GRID_X0, GRID_Y0, nearestCells } from "../model/layout";
 import type { EconomicSystemsData } from "../model/types";
 
 interface Props {
   model: EconomicSystemsData;
-  onSelect: (name: string) => void;
+  onSelect: (names: string[]) => void;
 }
 
 /** Layer 0: column/row headers and the clickable cells. */
@@ -49,13 +49,18 @@ export default function GridCells({ model, onSelect }: Props) {
           role="button"
           tabIndex={0}
           aria-label={`${cell.name}: show common views`}
-          onClick={() => onSelect(cell.name)}
+          onClick={(event) => {
+            // Turn the click into SVG coordinates, then pick whatever is nearest: a cell, a line, or a corner.
+            const svg = event.currentTarget.ownerSVGElement!;
+            const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM()!.inverse());
+            onSelect(nearestCells(model, point.x, point.y));
+          }}
 
           // Let keyboard users pick a cell with Enter or Space.
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
-              onSelect(cell.name);
+              onSelect([cell.name]);
             }
           }}
 

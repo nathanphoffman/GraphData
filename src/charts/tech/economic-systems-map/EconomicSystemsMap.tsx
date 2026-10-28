@@ -11,36 +11,33 @@ const model = data as EconomicSystemsData;
 const viewsModel = views as EconomicSystemsViewsData;
 const combos = (combosData as unknown as EconomicSystemsCombosData).combos;
 
-/** The economic systems grid: pick a system, optionally pick a neighbouring cell to see how the two combine. */
+/** The economic systems grid: click a system, a line between two, or a corner shared by four to see the views of that system or blend. */
 export default function EconomicSystemsMap() {
   const [showExamples, setShowExamples] = useState(false);
-  const [selected, setSelected] = useState<string | null>(null);
 
-  /** The adjacent cell chosen under "Combo with", if any. */
-  const [partner, setPartner] = useState<string | null>(null);
+  /** Names of the chosen cells: one for a system, two for a 2-way blend, four for a 4-way blend. */
+  const [selection, setSelection] = useState<string[]>([]);
 
-  // Picking a system clears the partner, since combos only make sense for the new system.
-  const select = (name: string) => {
-    setSelected(name);
-    setPartner(null);
-  };
-
-  const selectedCell = model.cells.find((cell) => cell.name === selected);
-  const neighbors = selectedCell
-    ? model.cells.filter(
-        (cell) => Math.abs(cell.col - selectedCell.col) + Math.abs(cell.row - selectedCell.row) === 1,
-      )
-
+  const selectedCells = model.cells.filter((cell) => selection.includes(cell.name));
+  const single = selectedCells.length === 1 ? selectedCells[0] : undefined;
+  const neighbors = single
+    ? model.cells.filter((cell) => Math.abs(cell.col - single.col) + Math.abs(cell.row - single.row) === 1)
     : [];
-  const activeCombo: Combo | undefined =
-    selected && partner ? combos.find((combo) => combo.cells.includes(selected) && combo.cells.includes(partner)) : undefined;
 
-  // The outline sits on the selected cell, or centered between both cells while a combo is shown.
-  const partnerCell = activeCombo ? model.cells.find((cell) => cell.name === partner) : undefined;
-  const highlight =
-    selectedCell && partnerCell
-      ? { col: (selectedCell.col + partnerCell.col) / 2, row: (selectedCell.row + partnerCell.row) / 2 }
-      : selectedCell;
+  // The 2x2 blocks of cells that contain the selected system, each with a four-way blend.
+  const quadCombos = single ? combos.filter((combo) => combo.cells.length === 4 && combo.cells.includes(single.name)) : [];
+  const activeCombo: Combo | undefined =
+    selectedCells.length > 1
+      ? combos.find((combo) => combo.cells.length === selectedCells.length && selectedCells.every((cell) => combo.cells.includes(cell.name)))
+      : undefined;
+
+  // The outline is centered on the middle of the chosen cells: on the cell, the shared line, or the shared corner.
+  const highlight = selectedCells.length
+    ? {
+        col: selectedCells.reduce((sum, cell) => sum + cell.col, 0) / selectedCells.length,
+        row: selectedCells.reduce((sum, cell) => sum + cell.row, 0) / selectedCells.length,
+      }
+    : undefined;
 
   return (
     <div>
@@ -59,16 +56,18 @@ export default function EconomicSystemsMap() {
         Show historical examples instead of figures
       </label>
 
-      <MapSvg model={model} showExamples={showExamples} highlight={highlight} onSelect={select} />
+      <MapSvg model={model} showExamples={showExamples} highlight={highlight} onSelect={setSelection} />
 
-      {selectedCell ? (
+      {selectedCells.length ? (
         <ViewsPanel
           model={model}
           viewsModel={viewsModel}
-          selectedCell={selectedCell}
+          selectedCells={selectedCells}
           neighbors={neighbors}
+          combos={combos}
+          quadCombos={quadCombos}
           activeCombo={activeCombo}
-          onPickPartner={setPartner}
+          onPick={setSelection}
         />
       ) : (
         <p className="muted">Click a cell to see the common views of that system by topic.</p>

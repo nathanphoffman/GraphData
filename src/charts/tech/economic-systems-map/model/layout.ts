@@ -107,3 +107,25 @@ export function placeLabels(data: EconomicSystemsData, figures: Figure[]): Place
 
   return placed;
 }
+
+/** The cells (by name) at the grid spot nearest a click: a cell center picks that system, a shared line picks both neighbors, a shared corner picks all four. */
+export function nearestCells(data: EconomicSystemsData, pixelX: number, pixelY: number): string[] {
+  const unitX = (pixelX - GRID_X0) / CELL_W;
+  const unitY = (pixelY - GRID_Y0) / CELL_H;
+  let best: { cols: number[]; rows: number[]; dist: number } | null = null;
+
+  // Anchors sit every half cell: x.5 is a center, a whole number is a line, and both whole is a corner.
+  for (let anchorX = 0.5; anchorX < GRID_COLUMNS; anchorX += 0.5) {
+    for (let anchorY = 0.5; anchorY < GRID_ROWS; anchorY += 0.5) {
+      const dist = Math.hypot(unitX - anchorX, unitY - anchorY);
+
+      if (best && dist >= best.dist) continue;
+
+      const cols = Number.isInteger(anchorX) ? [anchorX - 1, anchorX] : [Math.floor(anchorX)];
+      const rows = Number.isInteger(anchorY) ? [anchorY - 1, anchorY] : [Math.floor(anchorY)];
+      best = { cols, rows, dist };
+    }
+  }
+
+  return data.cells.filter((cell) => best!.cols.includes(cell.col) && best!.rows.includes(cell.row)).map((cell) => cell.name);
+}

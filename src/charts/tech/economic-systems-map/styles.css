@@ -112,3 +112,34 @@
   font-size: 15px;
   line-height: 1.5;
 }
+
+.examples {
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.examples h3 {
+  margin: 0 0 2px;
+  font-size: 14px;
+}
+
+.examples ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.examples li {
+  margin: 0 0 2px;
+}
+
+/* Divider lines between the stories, the views, and the likes/hates. */
+.examples {
+  padding-bottom: 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.attitudes {
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}

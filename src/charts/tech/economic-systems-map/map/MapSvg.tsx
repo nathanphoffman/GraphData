@@ -19,7 +19,7 @@ interface Props {
 
   /** Grid position of the outline; fractional while a combo is shown. */
   highlight?: { col: number; row: number };
-  onSelect: (name: string) => void;
+  onSelect: (names: string[]) => void;
 }
 
 /** The map itself: stacks the layers from grid (bottom) to figures (top). */
