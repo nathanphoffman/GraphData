@@ -65,7 +65,7 @@
       "name": "Regulated Capitalism",
       "col": 3,
       "row": 1,
-      "auth": "Pinochet's Chile",
+      "auth": "Franco's Spain (1960s–70s)",
       "dem": "Canada"
     },
     {
@@ -86,7 +86,7 @@
       "name": "Classical Liberalism",
       "col": 2,
       "row": 2,
-      "auth": "Díaz's Mexico",
+      "auth": "Pinochet's Chile",
       "dem": "Victorian Britain"
     },
     {
@@ -207,7 +207,7 @@
       "name": "Reagan",
       "group": "presidents",
       "x": 3.45,
-      "y": 1.1
+      "y": 1.25
     },
     {
       "name": "Clinton",
@@ -302,7 +302,7 @@
     {
       "name": "Pope Leo XIII",
       "group": "leaders",
-      "x": 1.85,
+      "x": 1.96,
       "y": 1.05
     },
     {
@@ -339,7 +339,7 @@
       "name": "Ayn Rand",
       "group": "thinkers",
       "x": 3.85,
-      "y": 0.62
+      "y": 0.87
     },
     {
       "name": "Stalin",
@@ -374,8 +374,8 @@
     {
       "name": "Hitler",
       "group": "leaders",
-      "x": 2.05,
-      "y": 2.35
+      "x": 2.29,
+      "y": 2.28
     },
     {
       "name": "Putin",
@@ -386,8 +386,8 @@
     {
       "name": "Mussolini",
       "group": "leaders",
-      "x": 0.4,
-      "y": 1.72
+      "x": 0.8,
+      "y": 1.79
     },
     {
       "name": "Olof Palme",
@@ -417,7 +417,7 @@
       "name": "Thatcher",
       "group": "leaders",
       "x": 3.75,
-      "y": 1.2
+      "y": 1.33
     },
     {
       "name": "Gandhi",
@@ -446,7 +446,7 @@
     {
       "name": "Allende",
       "group": "leaders",
-      "x": 1.7,
+      "x": 1.53,
       "y": 2.45
     },
     {
@@ -458,8 +458,8 @@
     {
       "name": "Lee Kuan Yew",
       "group": "leaders",
-      "x": 3.75,
-      "y": 2.05
+      "x": 3.56,
+      "y": 1.99
     },
     {
       "name": "Arizmendiarrieta",
@@ -482,7 +482,7 @@
     {
       "name": "LBJ",
       "group": "presidents",
-      "x": 2.7,
+      "x": 2.55,
       "y": 2.62
     },
     {
@@ -495,7 +495,7 @@
       "name": "Washington",
       "group": "presidents",
       "x": 2.15,
-      "y": 0.68
+      "y": 0.81
     },
     {
       "name": "Andrew Jackson",
@@ -548,7 +548,7 @@
     {
       "name": "Warren Buffett",
       "group": "business",
-      "x": 3.7,
+      "x": 3.53,
       "y": 1.5
     },
     {
