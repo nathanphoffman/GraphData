@@ -11,12 +11,21 @@ const GROWTH_LABEL = "xLines";
 /** An information column holding 1 for a project that is retired: it still saves and syncs, but sits last, greyed, and is left out of the maintenance numbers. */
 export const DECOMMISSIONED_LABEL = "Decommissioned";
 
-/** Whether the item is marked decommissioned in this ranking. */
-export function isDecommissioned(ranking: Ranking, item: Ranking["items"][number]): boolean {
-  const column = ranking.columns.findIndex((candidate) => candidate.label === DECOMMISSIONED_LABEL);
+/** An information column holding 1 for an item that is only a wish (not owned yet): it is ranked to see if it is worth it, but greyed and left out of the numbering. */
+export const WISHLIST_LABEL = "Wishlist";
+
+/** Whether the item has a 1 in the checkbox column with this label. */
+function isChecked(ranking: Ranking, item: Ranking["items"][number], label: string): boolean {
+  const column = ranking.columns.findIndex((candidate) => candidate.label === label);
 
   return column >= 0 && item.values[column] === 1;
 }
+
+/** Whether the item is marked decommissioned in this ranking. */
+export const isDecommissioned = (ranking: Ranking, item: Ranking["items"][number]): boolean => isChecked(ranking, item, DECOMMISSIONED_LABEL);
+
+/** Whether the item is greyed out and left out of the rank numbers: decommissioned or on the wishlist. */
+export const isDimmed = (ranking: Ranking, item: Ranking["items"][number]): boolean => isDecommissioned(ranking, item) || isChecked(ranking, item, WISHLIST_LABEL);
 
 /** Lines added to every project's Completed Lines when the page shows and scores them, as the minimum scaffolding any project needs. Never saved. */
 export const SCAFFOLDING_LINES = 256;
@@ -39,7 +48,7 @@ const TENTH = 10;
 const NEUTRAL_QUALITY = 75;
 
 /** Taken off the combined n-Factor to get the lines a hand-written (manual) codebase would be equivalent to. */
-const MANUAL_ADJUSTMENT = 0.75;
+const MANUAL_ADJUSTMENT = 0.66;
 
 /** How much of the combined n-Factor comes from the future one. */
 const FUTURE_WEIGHT = 0.75;

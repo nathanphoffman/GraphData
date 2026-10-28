@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { callApi } from "../../../api";
 import { InfoCell, NameCell, RatedCell, type SaveCell, heat } from "./RankingCells";
-import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isDecommissioned, withQuality } from "./maintenance";
+import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isDimmed, withQuality } from "./maintenance";
 import { type Column, type Item, type Ranking, fractionBetween, isNumber, letterGrade, rankItems } from "./score";
 
 const PAGE_SIZE = 100;
@@ -21,7 +21,8 @@ export interface Sort {
 /** Rank and name read best first and A to Z; the grade starts with the highest. */
 export const firstSort = (sortColumn: SortKey): Sort => ({ key: sortColumn, descending: sortColumn === "grade" });
 
-type RankedRow = ReturnType<typeof rankItems>[number];
+/** A ranked item; the rank is null for a dimmed item, which keeps its score and grade but has no place in the numbering. */
+type RankedRow = Omit<ReturnType<typeof rankItems>[number], "rank"> & { rank: number | null };
 
 interface IndexedColumn {
   column: Column;
@@ -37,7 +38,7 @@ interface TableColumns {
 
 /** How each sort key orders two ranked rows, smallest first. */
 const COMPARE: Record<SortKey, (first: RankedRow, second: RankedRow) => number> = {
-  rank: (first, second) => first.rank - second.rank,
+  rank: (first, second) => second.score - first.score,
   name: (first, second) => first.item.name.localeCompare(second.item.name),
   grade: (first, second) => first.grade - second.grade,
 };
@@ -139,17 +140,17 @@ interface RowProps {
   scoreRange: [number, number];
   canEdit: boolean;
   saveCell: SaveCell;
-  decommissioned: boolean;
+  dimmed: boolean;
 }
 
 /** One ranked item: rank, name, information, score, grade and rated cells. */
-function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, decommissioned }: RowProps) {
+function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, dimmed }: RowProps) {
   const { item, score, grade, rank } = rankedRow;
   const cell = { item, canEdit, saveCell };
 
   return (
-    <tr className={decommissioned ? "rankings-decommissioned" : undefined}>
-      <td>{decommissioned ? "–" : rank}</td>
+    <tr className={dimmed ? "rankings-dimmed" : undefined}>
+      <td>{dimmed ? "" : rank}</td>
       <NameCell item={item} linkIndex={columns.linkIndex} />
       {columns.info.map(({ column, index }) => <InfoCell key={column.label} {...cell} column={column} index={index} />)}
 
@@ -179,12 +180,12 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
   const columns = splitColumns(ranking);
   const [shown, setShown] = useState(PAGE_SIZE);
 
-  // Decommissioned items are ranked among themselves and listed after the active ones, whatever the sort.
-  const retired = (item: Item) => isDecommissioned(ranking, item);
-  const active = rankItems({ ...ranking, items: ranking.items.filter((item) => !retired(item)) });
-  const inactive = rankItems({ ...ranking, items: ranking.items.filter(retired) });
-  const matching = [...matchingRows(active, search, sort), ...matchingRows(inactive, search, sort)];
-  const scores = active.map((rankedRow) => rankedRow.score);
+  // Dimmed items (decommissioned or wishlist) sit where their score puts them, but only the others are numbered.
+  const dimmed = (item: Item) => isDimmed(ranking, item);
+  const numbers = new Map(rankItems({ ...ranking, items: ranking.items.filter((item) => !dimmed(item)) }).map((rankedRow) => [rankedRow.item.name, rankedRow.rank]));
+  const all: RankedRow[] = rankItems(ranking).map((rankedRow) => ({ ...rankedRow, rank: numbers.get(rankedRow.item.name) ?? null }));
+  const matching = matchingRows(all, search, sort);
+  const scores = all.filter((rankedRow) => rankedRow.rank !== null).map((rankedRow) => rankedRow.score);
   const context = { columns, showScore, scoreRange: [Math.min(...scores), Math.max(...scores)] as [number, number], canEdit, saveCell: cellSaver(ranking, source, onSaved) };
 
   return (
@@ -192,7 +193,7 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
       <table>
         <TableHead columns={columns} showScore={showScore} sort={sort} onSort={onSort} />
         <tbody>
-          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} decommissioned={retired(rankedRow.item)} />)}
+          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} dimmed={dimmed(rankedRow.item)} />)}
         </tbody>
       </table>
       {matching.length > shown && (

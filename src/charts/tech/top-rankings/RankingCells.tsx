@@ -1,5 +1,5 @@
 import { InlineCell } from "./InlineCell";
-import { DECOMMISSIONED_LABEL, QUALITY_LABEL } from "./maintenance";
+import { DECOMMISSIONED_LABEL, QUALITY_LABEL, WISHLIST_LABEL } from "./maintenance";
 import { type Column, HIGHEST_RATING, type Item, LOWEST_RATING, effectiveRating, fractionBetween, isNumber, isText } from "./score";
 
 /** Heat colours run from hue 0 (red) to this (green). */
@@ -33,14 +33,17 @@ export interface CellProps {
   saveCell: SaveCell;
 }
 
-/** A plain information cell; the Decommissioned column is a checkbox. */
+/** The columns shown as a checkbox, with the words the checkbox's label ends in. */
+const CHECKBOX_LABELS: Record<string, string> = { [DECOMMISSIONED_LABEL]: "decommissioned", [WISHLIST_LABEL]: "on the wishlist" };
+
+/** A plain information cell; the Decommissioned and Wishlist columns are checkboxes. */
 export function InfoCell({ item, column, index, canEdit, saveCell }: CellProps) {
-  if (column.label === DECOMMISSIONED_LABEL) {
+  if (column.label in CHECKBOX_LABELS) {
     const checked = item.values[index] === 1;
 
     return (
       <td>
-        <input type="checkbox" checked={checked} disabled={!canEdit} aria-label={`${item.name} decommissioned`} onChange={(changeEvent) => void saveCell(item, index)(changeEvent.target.checked ? 1 : 0)} />
+        <input type="checkbox" checked={checked} disabled={!canEdit} aria-label={`${item.name} ${CHECKBOX_LABELS[column.label]}`} onChange={(changeEvent) => void saveCell(item, index)(changeEvent.target.checked ? 1 : 0)} />
       </td>
     );
   }

@@ -43,7 +43,7 @@ function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
           <small>{Math.round(result.futureLines).toLocaleString()} lines</small>
           <small>{Math.round(result.gradedFutureManualLines).toLocaleString()} lines manual</small>
         </div>
-        <div style={heat(result.maintenancePercent / PERCENT)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent on a curve. The lines are the same average without the quality adjustment (as if quality were 75) turned back into lines (n^n). Manual takes 0.75 off the n-Factor first">
+        <div style={heat(result.maintenancePercent / PERCENT)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent on a curve. The lines are the same average without the quality adjustment (as if quality were 75) turned back into lines (n^n). Manual takes 0.66 off the n-Factor first">
           <dt>Code Maintenance</dt>
           <dd>{result.maintenancePercent.toFixed(1)}%</dd>
           <small>{Math.round(result.equivalentLines).toLocaleString()} lines equivalent</small>

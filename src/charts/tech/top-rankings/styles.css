@@ -159,6 +159,6 @@
   white-space: nowrap;
 }
 
-.rankings tr.rankings-decommissioned {
+.rankings tr.rankings-dimmed {
   opacity: 0.45;
 }

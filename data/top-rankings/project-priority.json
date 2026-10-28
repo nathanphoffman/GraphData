@@ -3,17 +3,17 @@
   "title": "Project Priority",
   "columns": [
     {"label": "Stack", "short": "Stack"},
-    {"label": "Fun", "short": "Fun", "weight": 6},
-    {"label": "Useful", "short": "Useful", "weight": 7},
+    {"label": "Fun", "short": "Fun", "weight": 7},
+    {"label": "Useful", "short": "Useful", "weight": 5},
     {"label": "Job", "short": "Job", "weight": 2},
-    {"label": "Hard", "short": "Hard", "weight": 3, "best": 1},
+    {"label": "Hard", "short": "Hard", "weight": 6, "best": 1},
     {"label": "Logic : Assets", "short": "Logic", "weight": 1},
-    {"label": "Completed Lines", "short": "Lines", "weight": 5, "curve": {"type": "log", "from": 40000, "to": 500}},
+    {"label": "Completed Lines", "short": "Lines", "weight": 4, "curve": {"type": "log", "from": 40000, "to": 500}},
     {"label": "Link", "short": "Link"},
     {"label": "Familiarity", "short": "Familiarity", "was": "Quality"},
     {"label": "xLines", "short": "xLines"},
     {"label": "Computed Quality", "short": "Computed", "was": "Quality"},
-    {"label": "Quality", "short": "Quality", "weight": 4, "curve": {"type": "linear", "from": 60, "to": 95}},
+    {"label": "Quality", "short": "Quality", "weight": 3, "curve": {"type": "linear", "from": 60, "to": 95}},
     {"label": "Decommissioned", "short": "Decom"}
   ],
   "items": [
