@@ -91,6 +91,7 @@ const COLUMNS: Column[] = [
   { group: "wma", title: () => "WMA Projection", note: "weight WMA + 12 × loss WMA / month", kind: "weight", actual: (tableRow) => tableRow.wmaProj, adjusted: (tableRow) => tableRow.wmaProjAdj },
   { group: "wma", title: () => "WMA Projection Projected", note: "average of WMA Projection and WMA Projection + its monthly change", kind: "weight", actual: (tableRow) => tableRow.wmaAvg, adjusted: (tableRow) => tableRow.wmaAvgAdj },
   { title: () => "Average of Complete & WMA", note: "Complete average and WMA Projection Projected", kind: "weight", actual: (tableRow) => tableRow.finalAvg, adjusted: (tableRow) => tableRow.finalAvgAdj },
+  { title: () => "3-day avg of Complete & WMA", note: "3-day average of the column before", kind: "weight", actual: (tableRow) => tableRow.finalAvg3, adjusted: (tableRow) => tableRow.finalAvg3Adj },
 ];
 
 /** The period filter value that means "the last 90 days". */
@@ -178,6 +179,8 @@ function bandClasses(tableRow: WeightRow, show: Show) {
     band(tableRow.weight, false),
     band(tableRow.finalAvg, false),
     band(tableRow.finalAvgAdj, true),
+    band(tableRow.finalAvg3, false),
+    band(tableRow.finalAvg3Adj, true),
     ...(show.dayAverages
       ? [
           ...weightClasses(

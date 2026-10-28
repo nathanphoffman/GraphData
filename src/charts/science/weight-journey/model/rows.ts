@@ -111,10 +111,20 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
   }));
 
   // Last column: the complete average and the WMA Projection Projected, averaged together.
-  return withRates.map((tableRow) => ({
+  const withFinal = withRates.map((tableRow) => ({
     ...tableRow,
     finalAvg: half(addOrNull(tableRow.complete, tableRow.wmaAvg)),
     finalAvgAdj: half(addOrNull(tableRow.completeAdj, tableRow.wmaAvgAdj)),
+  }));
+
+  // 3-day average of the last column.
+  const finalAvgs = withFinal.map((tableRow) => tableRow.finalAvg);
+  const finalAvgsAdj = withFinal.map((tableRow) => tableRow.finalAvgAdj);
+
+  return withFinal.map((tableRow, index) => ({
+    ...tableRow,
+    finalAvg3: last3(finalAvgs, index),
+    finalAvg3Adj: last3(finalAvgsAdj, index),
   }));
 }
 
