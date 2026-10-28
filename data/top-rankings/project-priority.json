@@ -4,11 +4,11 @@
   "columns": [
     {"label": "Stack", "short": "Stack"},
     {"label": "Fun", "short": "Fun", "weight": 7},
-    {"label": "Useful", "short": "Useful", "weight": 5},
+    {"label": "Useful", "short": "Useful", "weight": 4},
     {"label": "Job", "short": "Job", "weight": 2},
     {"label": "Hard", "short": "Hard", "weight": 6, "best": 1},
     {"label": "Logic : Assets", "short": "Logic", "weight": 1},
-    {"label": "Completed Lines", "short": "Lines", "weight": 4, "curve": {"type": "log", "from": 40000, "to": 500}},
+    {"label": "Completed Lines", "short": "Lines", "weight": 5, "curve": {"type": "log", "from": 40000, "to": 500}},
     {"label": "Link", "short": "Link"},
     {"label": "Familiarity", "short": "Familiarity", "was": "Quality"},
     {"label": "xLines", "short": "xLines"},
@@ -38,6 +38,8 @@
     {"name": "NH Blog", "values": ["NewWeb, Bun, Markdown, Railway", 4, 5, 5, 1, 1, 1658, "https://github.com/nathanphoffman/NHBlog", 4, 1.5, 97.8, 88.9]},
     {"name": "Contact App", "values": ["TS, Next.js, Expo, pnpm, Docker, Railway", 2, 5, 3, 5, 3, 29195, "https://github.com/nathanphoffman/ContactProject", 4, 3, 79.4, 74.7]},
     {"name": "Survive Game", "values": ["Rust", 5, 3, 4, 5, 1, 2699, "https://github.com/nathanphoffman/SurviveGame", 3, 10, 70.8, 62.9]},
-    {"name": "Solar Bit Infrastructure", "values": ["C#, Go, Rust, Docker, Caddy, Redis, Mongo", 4, 5, 4, 5, 4, 4449, "https://github.com/nathanphoffman/SolarBitInfrastructure", 3, 5, 69.1, 64.6]}
+    {"name": "Solar Bit Infrastructure", "values": ["C#, Go, Rust, Docker, Caddy, Redis, Mongo", 4, 5, 4, 5, 4, 4449, "https://github.com/nathanphoffman/SolarBitInfrastructure", 3, 5, 69.1, 64.6]},
+    {"name": "Space Viewer", "values": ["Next.js, React, TS, three.js, Vitest", 0, 0, 0, 0, 0, 2170, "https://github.com/nathanphoffman/SpaceViewer", null, null, 85.2, 85.2, 0]},
+    {"name": "34004 Project", "values": ["Rust, Deor, RP2350", 0, 0, 0, 0, 0, 1462, "https://github.com/nathanphoffman/34004Project", null, null, 69.4, 69.4, 0]}
   ]
 }

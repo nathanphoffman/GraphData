@@ -72,6 +72,8 @@ const PROJECTS: Project[] = [
   { name: "BGG Scraper", folder: "BGGScraper" },
   { name: "Proton Drive Sync", folder: "ProtonDriveSync" },
   { name: "ValOutcast", folder: "ValOutcast" },
+  { name: "Space Viewer", folder: "SpaceViewer" },
+  { name: "34004 Project", folder: "34004Project" },
 ];
 
 const GLOBAL_EXCLUDE = ["vendor", "third_party", "*.min.js", "*.min.css", "*-lock.json", "*.lock"];
