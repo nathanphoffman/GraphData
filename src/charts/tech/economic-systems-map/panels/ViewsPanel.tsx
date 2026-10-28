@@ -19,8 +19,13 @@ interface Props {
 }
 
 /** The part of each story that names its situation, shown in bold. */
-const STORY_SUBJECTS = ["A homeless person", "a horrible cut", "an idea for a new business", "lose your job", "buy or build a home"];
-const SUBJECT_PATTERN = new RegExp(`(${STORY_SUBJECTS.join("|")})`);
+const STORY_SUBJECTS = [
+  "A homeless person", "a horrible cut", "an idea for a new business", "lose your job", "buy or build a home",
+  "Gas prices are high", "Rent goes up 20%", "cut your hours", "buy out your small shop", "can't afford college",
+  "polluting your town's river", "your savings are thin", "tech startup is booming", "storm wipes out your neighborhood", "can't pay your medical bill",
+  "The government needs money",
+];
+const SUBJECT_PATTERN = new RegExp(`(${STORY_SUBJECTS.map((subject) => subject.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`);
 
 /** One story with its situation in bold. */
 function Story({ text }: { text: string }) {
@@ -95,8 +100,8 @@ function attitudes(model: EconomicSystemsData, combos: Combo[], selectedCells: C
 
   return [
     { label: "Likely Loves", color: "#2e7d32", items: candidates.filter((item) => item.distance < 1).sort((a, b) => a.distance - b.distance) },
-    { label: "Likely Indifferent", color: "#b8860b", items: candidates.filter((item) => item.distance >= 1 && item.distance <= 1.5).sort((a, b) => a.distance - b.distance) },
-    { label: "Likely Dislikes", color: "#e65100", items: candidates.filter((item) => item.distance > 1.5 && item.distance <= 2) },
+    { label: "Likely Indifferent or Likes", color: "#73811e", items: candidates.filter((item) => item.distance >= 1 && item.distance <= 1.5).sort((a, b) => a.distance - b.distance) },
+    { label: "Likely Indifferent or Dislikes", color: "#e65100", items: candidates.filter((item) => item.distance > 1.5 && item.distance <= 2) },
     { label: "Likely Hates", color: "#c62828", items: candidates.filter((item) => item.distance > 2).sort((a, b) => b.distance - a.distance) },
   ];
 }

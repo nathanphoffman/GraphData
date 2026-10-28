@@ -22,7 +22,18 @@
         "You have a horrible cut, so a planned public hospital stitches you up free, and a staff and patient council runs the place.",
         "You have an idea for a new business, so you pitch it to a planning council, which may fund it as a public-owned enterprise, with you as a worker-manager.",
         "You lose your job, so a planned jobs board places you elsewhere in the public sector, so you don't lose income.",
-        "You want to buy or build a home, so you are given public housing, and ownership of a home is mostly collective."
+        "You want to buy or build a home, so you are given public housing, and ownership of a home is mostly collective.",
+        "Gas prices are high, so public energy planners hold the price and expand transit, but supplies are set centrally.",
+        "Rent goes up 20%, so public planners set rent by income, so it barely changes, but you take the housing you are given.",
+        "Your boss wants to cut your hours, so planners and worker councils share the reduced hours, with pay kept up.",
+        "A big company wants to buy out your small shop, so there is no private shop to buy, since public bodies and workers own it.",
+        "You can't afford college, so it is free and public, with worker councils and the state steering you to needed fields.",
+        "A factory is polluting your town's river, so public planners can shut or fix the plant, with local boards weighing jobs against the river.",
+        "You're retiring and your savings are thin, so a guaranteed public pension plus housing keeps you comfortable.",
+        "A new tech startup is booming, so the gains are public, with workers and the state sharing them.",
+        "A storm wipes out your neighborhood, so public planners rebuild homes fast, using shared resources.",
+        "You can't pay your medical bill, so there is no bill, because public care is free.",
+        "The government needs money, so it collects it by taking surplus from state and worker-owned enterprises, with little personal taxation."
       ]
     },
     {
@@ -47,7 +58,18 @@
         "You have a horrible cut, so you go to a public hospital that treats you free or cheaply, while private ones are also open.",
         "You have an idea for a new business, so you can start small on your own with loans from public programs, while big industries stay public.",
         "You lose your job, so unemployment insurance pays part of your wage, and public employers are often hiring.",
-        "You want to buy or build a home, so you rent public housing or buy with a government-backed loan."
+        "You want to buy or build a home, so you rent public housing or buy with a government-backed loan.",
+        "Gas prices are high, so public energy firms plus aid for drivers soften the spike, and private stations still compete.",
+        "Rent goes up 20%, so public housing and vouchers cap what you pay, while private rents keep rising for others.",
+        "Your boss wants to cut your hours, so your union and labor laws limit cuts, and a public employer may rehire you.",
+        "A big company wants to buy out your small shop, so antitrust review and public programs help you resist, or sell on fair terms.",
+        "You can't afford college, so public universities are low-cost with grants for the rest.",
+        "A factory is polluting your town's river, so an agency fines the plant, and if it is public the local board has to fix it.",
+        "You're retiring and your savings are thin, so Social Security and a public pension cover your base needs.",
+        "A new tech startup is booming, so private founders profit, but public stakes and taxes share some of it.",
+        "A storm wipes out your neighborhood, so public agencies rebuild, with federal aid on top.",
+        "You can't pay your medical bill, so public insurance pays most of it, with charity care for the rest.",
+        "The government needs money, so it collects it by drawing on public enterprise profits and raising taxes on high earners and corporations."
       ]
     },
     {
@@ -72,7 +94,18 @@
         "You have a horrible cut, so you are treated at a private hospital, and public insurance or your own plan pays, with a gap you may owe.",
         "You have an idea for a new business, so you look for investors or a loan, with a few government programs helping small firms against large ones.",
         "You lose your job, so unemployment insurance pays part of your wage while you search at large firms.",
-        "You want to buy or build a home, so you buy from a large developer with a government-backed mortgage."
+        "You want to buy or build a home, so you buy from a large developer with a government-backed mortgage.",
+        "Gas prices are high, so oil firms set the price, but reserves and aid for low-income drivers soften it.",
+        "Rent goes up 20%, so rules limit the worst jumps, but landlords still raise it with the market.",
+        "Your boss wants to cut your hours, so the company can cut them within labor law, and unemployment insurance fills part of the gap.",
+        "A big company wants to buy out your small shop, so antitrust review may stop the deal, otherwise a large firm makes you an offer.",
+        "You can't afford college, so grants and loans help, but debt is common.",
+        "A factory is polluting your town's river, so regulators fine the company, and lawsuits drive a slow cleanup.",
+        "You're retiring and your savings are thin, so Social Security covers a base, and a 401(k) adds the rest.",
+        "A new tech startup is booming, so the market rewards the founders, while regulators step in against abuses.",
+        "A storm wipes out your neighborhood, so federal aid and insurance pay, with large insurers deciding what counts.",
+        "You can't pay your medical bill, so public insurance covers part, and you negotiate the rest with a big hospital system.",
+        "The government needs money, so it collects it by raising taxes on high earners, cutting spending, and issuing bonds to large investors."
       ]
     },
     {
@@ -97,7 +130,18 @@
         "You have a horrible cut, so the union health fund and the public clinic split the bill, so you pay very little.",
         "You have an idea for a new business, so your guild and public programs back you, and you start within an organized trade with training provided.",
         "You lose your job, so your union finds you work and public unemployment pay covers you meanwhile.",
-        "You want to buy or build a home, so you buy or rent with help from your union and public loans."
+        "You want to buy or build a home, so you buy or rent with help from your union and public loans.",
+        "Gas prices are high, so unions and the state negotiate commuter support, and taxes fund transit.",
+        "Rent goes up 20%, so unions, employers and the state agree rent rules, and housing allowances cover the gap.",
+        "Your boss wants to cut your hours, so unions and employers bargain over shared work, with the state topping up pay.",
+        "A big company wants to buy out your small shop, so the sector association and competition rules review the sale, and you decide with their advice.",
+        "You can't afford college, so it is free, with apprenticeship pathways set jointly by employers, unions and the state.",
+        "A factory is polluting your town's river, so the sector association and regulator agree on a cleanup that keeps jobs.",
+        "You're retiring and your savings are thin, so a public pension plus a union-run fund keeps you comfortable.",
+        "A new tech startup is booming, so unions and employers bargain over how to share the gains and retrain workers.",
+        "A storm wipes out your neighborhood, so the state and union funds rebuild together.",
+        "You can't pay your medical bill, so the public system pays, and the bill is tiny.",
+        "The government needs money, so it collects it by agreeing with unions and employers on a shared tax rise, plus levies on each trade."
       ]
     },
     {
@@ -122,7 +166,18 @@
         "You have a horrible cut, so your required insurance pays at a regulated price, and you leave with stitches and a small bill.",
         "You have an idea for a new business, so you start with bank loans and public support, inside fair-competition rules.",
         "You lose your job, so generous unemployment pay and a caseworker support you while you look.",
-        "You want to buy or build a home, so you take a regulated mortgage with strong buyer protections."
+        "You want to buy or build a home, so you take a regulated mortgage with strong buyer protections.",
+        "Gas prices are high, so markets set the price, taxes fund transit, and commuter support softens it.",
+        "Rent goes up 20%, so tenant rules and housing allowances keep it manageable in a competitive market.",
+        "Your boss wants to cut your hours, so works councils and unemployment insurance share the loss.",
+        "A big company wants to buy out your small shop, so competition law keeps it fair, and you can sell or hold out.",
+        "You can't afford college, so tuition is free or low, with living grants.",
+        "A factory is polluting your town's river, so strict rules, fines, and public input shape the cleanup.",
+        "You're retiring and your savings are thin, so a public pension plus a workplace plan covers you.",
+        "A new tech startup is booming, so it grows within competition rules, with taxes spreading the gain.",
+        "A storm wipes out your neighborhood, so mandatory insurance and public aid rebuild.",
+        "You can't pay your medical bill, so insurance pays nearly all of it, with a small fee.",
+        "The government needs money, so it collects it by raising broad taxes and consumption taxes a bit, with social partners agreeing on the split."
       ]
     },
     {
@@ -147,7 +202,18 @@
         "You have a horrible cut, so your required insurance covers the visit, with a moderate copay at a private hospital.",
         "You have an idea for a new business, so you meet moderate rules and get a bank loan, with fair-competition rules to help you.",
         "You lose your job, so you get unemployment pay and a job-search program while you look.",
-        "You want to buy or build a home, so you buy with a bank loan, with some zoning and some buyer protections."
+        "You want to buy or build a home, so you buy with a bank loan, with some zoning and some buyer protections.",
+        "Gas prices are high, so markets set the price, with moderate aid and some transit.",
+        "Rent goes up 20%, so a rent brake helps a little, and aid covers part of the gap.",
+        "Your boss wants to cut your hours, so partial unemployment and a works council soften the cut.",
+        "A big company wants to buy out your small shop, so competition review applies to big deals, and a small shop can sell or hold out.",
+        "You can't afford college, so tuition is moderate, with grants and loans.",
+        "A factory is polluting your town's river, so regulators fine the plant, and rules are moderate.",
+        "You're retiring and your savings are thin, so a state pension plus personal savings cover you.",
+        "A new tech startup is booming, so it grows under moderate rules, and taxes share some of it.",
+        "A storm wipes out your neighborhood, so required insurance and public aid pay.",
+        "You can't pay your medical bill, so insurance covers most of it, with a moderate copay.",
+        "The government needs money, so it collects it by raising taxes moderately and cutting some spending."
       ]
     },
     {
@@ -172,7 +238,18 @@
         "You have a horrible cut, so a member-run clinic stitches you up, paid for by dues and a shared resource payment.",
         "You have an idea for a new business, so you start a co-op with a mutual bank loan, with little red tape and a shared resource payment to help.",
         "You lose your job, so your co-op and mutual aid group help you, and a shared payment tops up your income.",
-        "You want to buy or build a home, so you build on community land through a housing co-op and pay a land rent."
+        "You want to buy or build a home, so you build on community land through a housing co-op and pay a land rent.",
+        "Gas prices are high, so members pool fuel purchases and shared vehicles, and a shared resource dividend offsets the price.",
+        "Rent goes up 20%, so a housing co-op keeps rent at cost, and shared land rent funds a dividend.",
+        "Your boss wants to cut your hours, so the co-op shares the reduced hours, and a resource dividend cushions it.",
+        "A big company wants to buy out your small shop, so members vote on the sale, and shared ownership makes a takeover hard.",
+        "You can't afford college, so co-op and community learning is funded by dues and a shared payment.",
+        "A factory is polluting your town's river, so the commons belongs to everyone, so polluters pay and members pressure the plant.",
+        "You're retiring and your savings are thin, so mutual aid and a resource dividend support you.",
+        "A new tech startup is booming, so ownership is shared, so the gain is spread across members.",
+        "A storm wipes out your neighborhood, so mutual aid networks send help fast.",
+        "You can't pay your medical bill, so your mutual aid fund covers it.",
+        "The government needs money, so it collects it by taxing land and resource rents, plus voluntary contributions from co-ops and mutual banks."
       ]
     },
     {
@@ -197,7 +274,18 @@
         "You have a horrible cut, so you pick any clinic and pay with a basic voucher or insurance you chose.",
         "You have an idea for a new business, so you start with few licenses and cheap capital, and a basic payment cushions you if it fails.",
         "You lose your job, so a basic payment and a flexible job market keep you going until you find work.",
-        "You want to buy or build a home, so you build with few permits on land you rent from the community."
+        "You want to buy or build a home, so you build with few permits on land you rent from the community.",
+        "Gas prices are high, so the market sets the price, and a carbon or land dividend offsets part of it.",
+        "Rent goes up 20%, so easy building adds supply, and a land dividend helps meanwhile.",
+        "Your boss wants to cut your hours, so flexible work and a basic payment cushion the cut.",
+        "A big company wants to buy out your small shop, so you sell or refuse freely, with anti-monopoly rules.",
+        "You can't afford college, so you pick any school, using a voucher or basic payment.",
+        "A factory is polluting your town's river, so polluters pay the community for the harm, and courts enforce it.",
+        "You're retiring and your savings are thin, so private savings plus a basic payment keep you secure.",
+        "A new tech startup is booming, so it grows freely, and shared land and resource rent funds a dividend.",
+        "A storm wipes out your neighborhood, so private insurance and pooled funds rebuild.",
+        "You can't pay your medical bill, so insurance or a voucher covers it, and you choose your provider.",
+        "The government needs money, so it collects it by taxing land, resources and pollution, and trimming spending, with strict limits on borrowing."
       ]
     },
     {
@@ -222,7 +310,18 @@
         "You have a horrible cut, so a private clinic stitches you up at its listed price, and charity or your own insurance pays.",
         "You have an idea for a new business, so you open with almost no rules and raise money privately, and you keep your profits.",
         "You lose your job, so you live on savings while a lightly regulated market hires you quickly.",
-        "You want to buy or build a home, so you build or buy with almost no permits, and the market sets the price."
+        "You want to buy or build a home, so you build or buy with almost no permits, and the market sets the price.",
+        "Gas prices are high, so the market sets the price, with no subsidies.",
+        "Rent goes up 20%, so there are no limits, but open building responds quickly to rising prices.",
+        "Your boss wants to cut your hours, so flexible labor lets you find other work fast.",
+        "A big company wants to buy out your small shop, so you sell or refuse as you like, with only basic fairness laws.",
+        "You can't afford college, so you pay for the school you choose, with private loans.",
+        "A factory is polluting your town's river, so courts hold the plant liable for the damage.",
+        "You're retiring and your savings are thin, so you live on savings and investments.",
+        "A new tech startup is booming, so it is private, and founders keep most of the gain.",
+        "A storm wipes out your neighborhood, so private insurance and charity rebuild.",
+        "You can't pay your medical bill, so you negotiate or use charity, and the provider can sue for payment.",
+        "The government needs money, so it collects it by cutting spending and selling assets, with only a small flat tax or tariffs."
       ]
     },
     {
@@ -247,7 +346,18 @@
         "You have a horrible cut, so your state-run guild clinic treats you, because your trade ties you to its health plan.",
         "You have an idea for a new business, so you apply to your state-run trade association, which may license you and sets the standards.",
         "You lose your job, so the state places you in another guild shop with the same trade.",
-        "You want to buy or build a home, so your guild is given state housing blocks for members to live in."
+        "You want to buy or build a home, so your guild is given state housing blocks for members to live in.",
+        "Gas prices are high, so the state sets the price, and guild-run transport serves members.",
+        "Rent goes up 20%, so rents are state-set, with guild housing for members.",
+        "Your boss wants to cut your hours, so the state and guild plan reduced hours, keeping pay up.",
+        "A big company wants to buy out your small shop, so there is nothing to buy, because the state and guild own the trade.",
+        "You can't afford college, so state-planned guild apprenticeships and free training teach you.",
+        "A factory is polluting your town's river, so the state orders the guild-run plant to fix it.",
+        "You're retiring and your savings are thin, so a state pension and guild fund support you.",
+        "A new tech startup is booming, so the state and guild decide how to use it.",
+        "A storm wipes out your neighborhood, so the state and guilds rebuild together.",
+        "You can't pay your medical bill, so free care comes through the guild-linked state health system.",
+        "The government needs money, so it collects it by taking surplus from state enterprises and levying each state-run guild."
       ]
     },
     {
@@ -272,7 +382,18 @@
         "You have a horrible cut, so your guild or co-op's health fund pays for the visit, and you owe nothing more.",
         "You have an idea for a new business, so your guild and a mutual bank back you, so you start within a trade you share with peers.",
         "You lose your job, so your guild or co-op finds you work and supports you from a mutual fund.",
-        "You want to buy or build a home, so you build or buy through a guild or co-op housing society."
+        "You want to buy or build a home, so you build or buy through a guild or co-op housing society.",
+        "Gas prices are high, so guild and co-op members pool fuel and vehicles.",
+        "Rent goes up 20%, so guild and co-op housing keeps rent at cost.",
+        "Your boss wants to cut your hours, so members share the reduced hours.",
+        "A big company wants to buy out your small shop, so the guild or co-op members vote on any offer.",
+        "You can't afford college, so guild apprenticeships and co-op learning cover it.",
+        "A factory is polluting your town's river, so member-owned firms and the guild police their own pollution under local pressure.",
+        "You're retiring and your savings are thin, so guild and co-op funds support retirees.",
+        "A new tech startup is booming, so shared ownership spreads the gains among members.",
+        "A storm wipes out your neighborhood, so guilds and co-ops send tools, labor and housing.",
+        "You can't pay your medical bill, so the guild and mutual aid funds cover it.",
+        "The government needs money, so it collects it by asking guilds and co-ops for levies and voluntary bond purchases."
       ]
     },
     {
@@ -297,7 +418,18 @@
         "You have a horrible cut, so a public hospital treats you with tiny fees, because taxes and public ownership pay for it.",
         "You have an idea for a new business, so you start with strong public support, though big sectors are publicly owned and taxes are high.",
         "You lose your job, so generous unemployment pay and a public jobs agency find you a new place.",
-        "You want to buy or build a home, so you rent from a large public housing sector or buy with public loans."
+        "You want to buy or build a home, so you rent from a large public housing sector or buy with public loans.",
+        "Gas prices are high, so public energy firms and heavy transit investment cushion the price.",
+        "Rent goes up 20%, so large public housing and strong tenant rules keep rent stable.",
+        "Your boss wants to cut your hours, so worker boards and unions share the cut, and the state tops up pay.",
+        "A big company wants to buy out your small shop, so public and worker ownership is common, and competition rules review any sale.",
+        "You can't afford college, so tuition is free, with living grants.",
+        "A factory is polluting your town's river, so strict rules and public owners fix the problem under democratic oversight.",
+        "You're retiring and your savings are thin, so a strong public pension and public housing keep you secure.",
+        "A new tech startup is booming, so public stakes and high taxes spread the gain.",
+        "A storm wipes out your neighborhood, so public bodies and insurance rebuild fast.",
+        "You can't pay your medical bill, so public care leaves a tiny fee.",
+        "The government needs money, so it collects it by using public enterprise profits and high broad taxes."
       ]
     },
     {
@@ -322,7 +454,18 @@
         "You have a horrible cut, so public insurance pays, but you choose a local or cooperative clinic.",
         "You have an idea for a new business, so you start with light rules and public support, with local groups helping you.",
         "You lose your job, so public unemployment pay covers you, and local groups help you retrain.",
-        "You want to buy or build a home, so you build with few permits, on shared land, with public loans if needed."
+        "You want to buy or build a home, so you build with few permits, on shared land, with public loans if needed.",
+        "Gas prices are high, so taxes fund transit, and a dividend cushions the cost.",
+        "Rent goes up 20%, so tenant rules and housing allowances help, and open building adds supply.",
+        "Your boss wants to cut your hours, so a state top-up and basic payment cushion the loss.",
+        "A big company wants to buy out your small shop, so you decide freely, with competition rules in place.",
+        "You can't afford college, so tuition is free at any school you pick.",
+        "A factory is polluting your town's river, so polluters pay under strict rules, and the community shares the river's value.",
+        "You're retiring and your savings are thin, so a public pension plus a basic payment support you.",
+        "A new tech startup is booming, so taxes and a land dividend spread the gain.",
+        "A storm wipes out your neighborhood, so public insurance and local voluntary groups rebuild.",
+        "You can't pay your medical bill, so public insurance pays at the clinic you choose.",
+        "The government needs money, so it collects it by raising high broad taxes a bit, with added taxes on land and pollution."
       ]
     },
     {
@@ -347,7 +490,18 @@
         "You have a horrible cut, so public insurance covers most of it, while private hospitals compete for your visit.",
         "You have an idea for a new business, so you get a bank loan or small-business loan and fair-competition rules protect you from big firms.",
         "You lose your job, so unemployment insurance covers part of your pay while public programs retrain you.",
-        "You want to buy or build a home, so you buy with a government-backed mortgage in a regulated housing market."
+        "You want to buy or build a home, so you buy with a government-backed mortgage in a regulated housing market.",
+        "Gas prices are high, so aid for drivers and transit programs soften the price.",
+        "Rent goes up 20%, so vouchers and rent rules help in a competitive market.",
+        "Your boss wants to cut your hours, so unions and unemployment insurance cover the cut.",
+        "A big company wants to buy out your small shop, so antitrust and fair-competition rules protect small firms.",
+        "You can't afford college, so grants and low-cost tuition help.",
+        "A factory is polluting your town's river, so regulators fine the plant and enforce cleanup.",
+        "You're retiring and your savings are thin, so Social Security plus a workplace plan cover you.",
+        "A new tech startup is booming, so it grows under strong rules, and taxes share the gain.",
+        "A storm wipes out your neighborhood, so federal aid and required insurance rebuild.",
+        "You can't pay your medical bill, so public insurance covers most of it.",
+        "The government needs money, so it collects it by raising progressive income taxes and value-added taxes moderately, with some bonds."
       ]
     },
     {
@@ -372,7 +526,18 @@
         "You have a horrible cut, so your required insurance pays at a competitive, price-checked clinic.",
         "You have an idea for a new business, so you start with light rules and a bank loan, and the state keeps the market fair.",
         "You lose your job, so a small safety net holds you up while the labor market hires you quickly.",
-        "You want to buy or build a home, so you buy or build with a regulated mortgage and a few permits."
+        "You want to buy or build a home, so you buy or build with a regulated mortgage and a few permits.",
+        "Gas prices are high, so the market sets the price, and the state keeps competition fair.",
+        "Rent goes up 20%, so fair-competition rules and building freedom help over time.",
+        "Your boss wants to cut your hours, so a small safety net and flexible labor help you adjust.",
+        "A big company wants to buy out your small shop, so strong competition law keeps the market open, and you decide.",
+        "You can't afford college, so tuition is moderate, with a choice of schools.",
+        "A factory is polluting your town's river, so clear liability rules make the plant pay.",
+        "You're retiring and your savings are thin, so a modest pension and private savings cover you.",
+        "A new tech startup is booming, so it grows under rules that keep competition open.",
+        "A storm wipes out your neighborhood, so required insurance covers rebuilding.",
+        "You can't pay your medical bill, so insurance covers most of it.",
+        "The government needs money, so it collects it by raising a broad, simple tax moderately and trimming spending, with limits on borrowing."
       ]
     },
     {
@@ -397,7 +562,18 @@
         "You have a horrible cut, so your job's insurance pays at a big hospital chain, though you may owe a deductible.",
         "You have an idea for a new business, so you seek investors or a bank, with licensing and safety rules to meet, while big firms dominate the market.",
         "You lose your job, so a small unemployment payment helps while you look for work at large firms.",
-        "You want to buy or build a home, so you buy from a big developer with a bank loan, in a regulated market."
+        "You want to buy or build a home, so you buy from a big developer with a bank loan, in a regulated market.",
+        "Gas prices are high, so oil firms set the price, with limited rebates.",
+        "Rent goes up 20%, so landlords raise rents, with some local rules.",
+        "Your boss wants to cut your hours, so the company can cut hours within labor law.",
+        "A big company wants to buy out your small shop, so a large firm makes an offer, with antitrust review for large deals.",
+        "You can't afford college, so loans, grants and work-study cover it.",
+        "A factory is polluting your town's river, so regulators fine the company, but cleanup is slow.",
+        "You're retiring and your savings are thin, so Social Security and a 401(k) cover you.",
+        "A new tech startup is booming, so large firms and investors capture most gains.",
+        "A storm wipes out your neighborhood, so private insurance and limited aid pay.",
+        "You can't pay your medical bill, so you negotiate with a hospital system.",
+        "The government needs money, so it collects it by cutting spending and borrowing from large investors, with modest tax rises on income."
       ]
     },
     {
@@ -422,7 +598,18 @@
         "You have a horrible cut, so you pay mostly yourself or with private insurance, and there are few limits on the price.",
         "You have an idea for a new business, so you open with minimal rules and low taxes, and you keep most of your profit.",
         "You lose your job, so you rely on savings, and a lightly regulated market hires quickly.",
-        "You want to buy or build a home, so you buy or build with few permits and a private loan."
+        "You want to buy or build a home, so you buy or build with few permits and a private loan.",
+        "Gas prices are high, so the market sets the price with few rules.",
+        "Rent goes up 20%, so there are few limits on rent, and builders respond quickly.",
+        "Your boss wants to cut your hours, so the employer cuts freely, and you find other work.",
+        "A big company wants to buy out your small shop, so you sell or refuse freely.",
+        "You can't afford college, so private tuition with loans covers it.",
+        "A factory is polluting your town's river, so light rules and lawsuits deal with it.",
+        "You're retiring and your savings are thin, so your savings and investments cover you.",
+        "A new tech startup is booming, so private gain with little tax follows.",
+        "A storm wipes out your neighborhood, so private insurance pays.",
+        "You can't pay your medical bill, so you negotiate directly.",
+        "The government needs money, so it collects it by cutting spending and selling assets, with only small tax increases."
       ]
     },
     {
@@ -449,7 +636,18 @@
         "You have a horrible cut, so you are stitched up at a public hospital run by workers and unions, at no cost.",
         "You have an idea for a new business, so you pitch it to a worker-run board or your guild, which funds it and shares the profits, but a private startup is hard.",
         "You lose your job, so unemployment pay and a public jobs agency or your guild place you in new work.",
-        "You want to buy or build a home, so you get public or guild housing, with a long wait and little private ownership."
+        "You want to buy or build a home, so you get public or guild housing, with a long wait and little private ownership.",
+        "Gas prices are high, so public energy firms and guild transport hold down the price.",
+        "Rent goes up 20%, so public and guild housing keep rent stable.",
+        "Your boss wants to cut your hours, so guilds and worker boards share the cut, and the state tops up pay.",
+        "A big company wants to buy out your small shop, so public, guild and worker ownership make an outside buyout rare.",
+        "You can't afford college, so tuition is free, with guild apprenticeships.",
+        "A factory is polluting your town's river, so public owners and guilds clean it up under democratic oversight.",
+        "You're retiring and your savings are thin, so a public pension and guild fund keep you secure.",
+        "A new tech startup is booming, so public and worker stakes spread the gain.",
+        "A storm wipes out your neighborhood, so public bodies and guilds rebuild together.",
+        "You can't pay your medical bill, so public care and guild funds leave no bill.",
+        "The government needs money, so it collects it by drawing on public, guild and worker-owned enterprise profits, with high broad taxes covering the rest."
       ]
     },
     {
@@ -476,7 +674,18 @@
         "You have a horrible cut, so universal insurance covers you at the hospital, and you pay a small fee.",
         "You have an idea for a new business, so you start with public loans and support, inside fair rules, and keep part of the profit after high taxes.",
         "You lose your job, so generous unemployment pay and retraining carry you to the next job.",
-        "You want to buy or build a home, so you buy with a public loan or rent from a large public housing sector."
+        "You want to buy or build a home, so you buy with a public loan or rent from a large public housing sector.",
+        "Gas prices are high, so taxes fund transit, and commuter aid softens the price.",
+        "Rent goes up 20%, so tenant rules and allowances keep rent manageable.",
+        "Your boss wants to cut your hours, so unions and unemployment insurance share the loss.",
+        "A big company wants to buy out your small shop, so competition review applies, and you decide.",
+        "You can't afford college, so tuition is free or low, with grants.",
+        "A factory is polluting your town's river, so strict rules and fines apply, with public owners fixing their own plants.",
+        "You're retiring and your savings are thin, so a public pension plus a workplace plan cover you.",
+        "A new tech startup is booming, so taxes and public stakes spread the gain.",
+        "A storm wipes out your neighborhood, so universal insurance and public aid rebuild.",
+        "You can't pay your medical bill, so insurance covers it, with a small fee.",
+        "The government needs money, so it collects it by raising progressive and consumption taxes, with public enterprise profits helping."
       ]
     },
     {
@@ -503,7 +712,18 @@
         "You have a horrible cut, so private insurance, with public help for the poor, covers the visit, though a big bill is still possible.",
         "You have an idea for a new business, so you raise money from banks or investors, with rules to meet and large firms as competition, so the odds are mixed.",
         "You lose your job, so unemployment insurance pays part of your wage while you look for work.",
-        "You want to buy or build a home, so you buy with a bank loan or a government-backed mortgage in a regulated market."
+        "You want to buy or build a home, so you buy with a bank loan or a government-backed mortgage in a regulated market.",
+        "Gas prices are high, so oil firms set the price, with aid for low-income drivers.",
+        "Rent goes up 20%, so landlords raise it, with vouchers and some rules.",
+        "Your boss wants to cut your hours, so the company can cut within labor law, and insurance covers part.",
+        "A big company wants to buy out your small shop, so a large firm makes an offer, with antitrust review.",
+        "You can't afford college, so grants and loans help, with some debt.",
+        "A factory is polluting your town's river, so regulators fine the company, and cleanup is slow.",
+        "You're retiring and your savings are thin, so Social Security plus a 401(k) cover you.",
+        "A new tech startup is booming, so firms and investors gain, with taxes sharing some.",
+        "A storm wipes out your neighborhood, so private and public insurance pay.",
+        "You can't pay your medical bill, so insurance covers most of it, with a deductible.",
+        "The government needs money, so it collects it by mixing moderate tax rises on high earners with spending cuts and bonds sold to large investors."
       ]
     },
     {
@@ -530,7 +750,18 @@
         "You have a horrible cut, so a cooperative or guild clinic treats you, with a public floor of coverage behind it.",
         "You have an idea for a new business, so you form a co-op or join a guild, and a basic income cushions the risk.",
         "You lose your job, so your guild or co-op and a public floor carry you until you find work.",
-        "You want to buy or build a home, so you build or buy through a co-op, on community land, with public loans if needed."
+        "You want to buy or build a home, so you build or buy through a co-op, on community land, with public loans if needed.",
+        "Gas prices are high, so co-ops pool fuel, and a dividend cushions the price.",
+        "Rent goes up 20%, so co-op housing and a land dividend keep it at cost.",
+        "Your boss wants to cut your hours, so co-ops share the cut, and a basic income cushions it.",
+        "A big company wants to buy out your small shop, so members vote on any offer.",
+        "You can't afford college, so guild and co-op learning is funded by a public floor.",
+        "A factory is polluting your town's river, so polluters pay, and co-ops and guilds press the plant.",
+        "You're retiring and your savings are thin, so co-op funds and a basic income support you.",
+        "A new tech startup is booming, so shared ownership spreads the gain.",
+        "A storm wipes out your neighborhood, so mutual aid and public funds rebuild.",
+        "You can't pay your medical bill, so co-op and public funds cover it.",
+        "The government needs money, so it collects it by taxing land and resource rents, with levies on guilds and voluntary co-op bond purchases."
       ]
     },
     {
@@ -557,7 +788,18 @@
         "You have a horrible cut, so you choose any clinic, and universal basic coverage pays for most of it.",
         "You have an idea for a new business, so you start with few barriers and a bank loan, and a basic income softens a failure.",
         "You lose your job, so a basic income and a flexible market get you back to work quickly.",
-        "You want to buy or build a home, so you build or buy easily with a simple mortgage, with land rent shared by all."
+        "You want to buy or build a home, so you build or buy easily with a simple mortgage, with land rent shared by all.",
+        "Gas prices are high, so a carbon dividend offsets the price, and the market adjusts.",
+        "Rent goes up 20%, so open building and a basic income help.",
+        "Your boss wants to cut your hours, so a basic income cushions it, and flexible work lets you move on.",
+        "A big company wants to buy out your small shop, so you decide freely, with competition law keeping the market open.",
+        "You can't afford college, so you pick any school with a voucher and basic income.",
+        "A factory is polluting your town's river, so polluters pay under clear liability rules.",
+        "You're retiring and your savings are thin, so a basic income plus private savings cover you.",
+        "A new tech startup is booming, so it grows freely, and shared resource rent funds a dividend.",
+        "A storm wipes out your neighborhood, so universal basic insurance and pooled funds rebuild.",
+        "You can't pay your medical bill, so universal basic coverage pays most of it.",
+        "The government needs money, so it collects it by taxing land, resources and pollution, with a simple broad tax and limits on borrowing."
       ]
     },
     {
@@ -584,7 +826,18 @@
         "You have a horrible cut, so you are treated at a private hospital, paying with insurance or out of pocket.",
         "You have an idea for a new business, so you open with light rules, low taxes, and private funding, and you keep most of what you earn.",
         "You lose your job, so you live on savings while a lightly regulated market hires quickly.",
-        "You want to buy or build a home, so you buy or build with few permits and a private loan, and the market sets the price."
+        "You want to buy or build a home, so you buy or build with few permits and a private loan, and the market sets the price.",
+        "Gas prices are high, so the market sets the price with few subsidies.",
+        "Rent goes up 20%, so there are few limits, with new building responding quickly.",
+        "Your boss wants to cut your hours, so the employer cuts, and a flexible market helps you find other work.",
+        "A big company wants to buy out your small shop, so you sell or refuse freely.",
+        "You can't afford college, so private tuition comes with loans and scholarships.",
+        "A factory is polluting your town's river, so courts and light rules hold the plant liable.",
+        "You're retiring and your savings are thin, so your savings and investments cover you.",
+        "A new tech startup is booming, so private gain comes with low taxes.",
+        "A storm wipes out your neighborhood, so private insurance and charity rebuild.",
+        "You can't pay your medical bill, so you negotiate or use charity.",
+        "The government needs money, so it collects it by cutting spending and selling assets, with only small flat taxes."
       ]
     }
   ]
