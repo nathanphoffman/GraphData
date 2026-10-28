@@ -39,7 +39,7 @@ const TENTH = 10;
 const NEUTRAL_QUALITY = 75;
 
 /** Taken off the combined n-Factor to get the lines a hand-written (manual) codebase would be equivalent to. */
-const MANUAL_ADJUSTMENT = 0.66;
+const MANUAL_ADJUSTMENT = 0.75;
 
 /** How much of the combined n-Factor comes from the future one. */
 const FUTURE_WEIGHT = 0.75;
@@ -66,6 +66,13 @@ export interface Maintenance {
   maintenancePercent: number;
   equivalentLines: number;
   manualLines: number;
+  gradedManualLines: number;
+  gradedFutureManualLines: number;
+}
+
+/** The lines a hand-written codebase would be equivalent to at this n-Factor: MANUAL_ADJUSTMENT off it, raised to itself. */
+function manualLinesAt(n: number): number {
+  return (n - MANUAL_ADJUSTMENT) ** (n - MANUAL_ADJUSTMENT);
 }
 
 /** The n that makes n^n equal the total, found by halving a range until it is close enough. 1 for a total of 1 or less. */
@@ -158,7 +165,9 @@ export function maintenance(ranking: Ranking): Maintenance | null {
     combinedNFactor: combined,
     maintenancePercent: maintenancePercent(combined),
     equivalentLines: ungraded ** ungraded,
-    manualLines: (ungraded - MANUAL_ADJUSTMENT) ** (ungraded - MANUAL_ADJUSTMENT),
+    manualLines: manualLinesAt(ungraded),
+    gradedManualLines: manualLinesAt(graded),
+    gradedFutureManualLines: manualLinesAt(gradedFuture),
   };
 }
 

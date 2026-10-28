@@ -68,9 +68,9 @@ describe("equivalentLines", () => {
 });
 
 describe("manualLines", () => {
-  it("is the combined n-factor minus 0.66, raised to itself", () => {
+  it("is the combined n-factor minus 0.75, raised to itself", () => {
     const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
-    const adjusted = (result?.combinedNFactor ?? 0) - 0.66;
+    const adjusted = (result?.combinedNFactor ?? 0) - 0.75;
     expect(result?.manualLines).toBeCloseTo(adjusted ** adjusted, 6);
   });
 });
