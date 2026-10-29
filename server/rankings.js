@@ -208,16 +208,19 @@ export const rankingRoutes = [
     path: "/api/rankings/:id/items/:name",
     handler: async (request, response, { id, name }) => {
       requireUser(request);
-      const { values, updatedAt } = await readJson(request);
+      const { values, updatedAt, features } = await readJson(request);
       checkValues(id, name, values);
+      if (features !== undefined) checkFeatures(features);
       const stamp = readStamp(updatedAt);
 
-      const changed = db.prepare("UPDATE ranking_items SET values_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?").run(JSON.stringify(values), stamp, id, name);
+      // Features are only replaced when sent, so editing values alone keeps an item's planned features.
+      const changed = db.prepare("UPDATE ranking_items SET values_json = ?, updated_at = ?, features_json = COALESCE(?, features_json) WHERE ranking_id = ? AND name = ?")
+        .run(JSON.stringify(values), stamp, features === undefined ? null : JSON.stringify(features), id, name);
       if (!changed.changes) {
         const { next } = db.prepare("SELECT COALESCE(MAX(position), -1) + 1 AS next FROM ranking_items WHERE ranking_id = ?").get(id);
-        db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json, updated_at) VALUES (?, ?, ?, ?, ?)").run(id, next, name, JSON.stringify(values), stamp);
+        db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json, updated_at, features_json) VALUES (?, ?, ?, ?, ?, ?)").run(id, next, name, JSON.stringify(values), stamp, JSON.stringify(features ?? []));
       }
-      sendJson(response, 200, { name, values, updatedAt: stamp });
+      sendJson(response, 200, { name, values, updatedAt: stamp, features });
     },
   },
   // Replaces the list of planned features of an item that already exists.
@@ -229,7 +232,8 @@ export const rankingRoutes = [
       const { features } = await readJson(request);
       checkFeatures(features);
 
-      const { changes } = db.prepare("UPDATE ranking_items SET features_json = ? WHERE ranking_id = ? AND name = ?").run(JSON.stringify(features), id, name);
+      // Counts as a change to the item, so syncing with the live site sees it as newer.
+      const { changes } = db.prepare("UPDATE ranking_items SET features_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?").run(JSON.stringify(features), Date.now(), id, name);
       if (!changes) throw new HttpError(404, "No such item in that ranking");
 
       sendJson(response, 200, { name, features });

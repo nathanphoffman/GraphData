@@ -1,4 +1,4 @@
-// Syncs ranking items and weigh-ins between the local database and the live site, in both directions.
+// Syncs ranking items (values and planned features) and weigh-ins between the local database and the live site, in both directions.
 // For a row on both sides with different values, the one changed most recently wins. A row only on one side is copied to the other.
 // Nothing is ever deleted, so a row you deleted on one side comes back from the other.
 //
@@ -69,8 +69,13 @@ if ([...liveRankings.values()].some((items) => items.some((item) => item.updated
   process.exit(1);
 }
 
-const updateItem = db.prepare("UPDATE ranking_items SET values_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?");
-const insertItem = db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json, updated_at) VALUES (?, ?, ?, ?, ?)");
+if ([...liveRankings.values()].some((items) => items.some((item) => item.features === undefined))) {
+  console.error("The live site does not track planned features yet. Deploy this version first, then sync.");
+  process.exit(1);
+}
+
+const updateItem = db.prepare("UPDATE ranking_items SET values_json = ?, features_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?");
+const insertItem = db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json, features_json, updated_at) VALUES (?, ?, ?, ?, ?, ?)");
 const columnCount = db.prepare("SELECT COUNT(*) AS count FROM ranking_columns WHERE ranking_id = ?");
 
 for (const { id } of db.prepare("SELECT id FROM rankings").all()) {
@@ -79,20 +84,22 @@ for (const { id } of db.prepare("SELECT id FROM rankings").all()) {
     continue;
   }
 
-  const rows = (items) => new Map(items.map((item) => [item.name, { value: item.values, at: item.updatedAt }]));
-  const localItems = db.prepare("SELECT name, values_json, updated_at FROM ranking_items WHERE ranking_id = ?").all(id);
+  // An item's values and planned features change together, so they are compared and copied as one row.
+  const rows = (items) => new Map(items.map((item) => [item.name, { value: { values: item.values, features: item.features }, at: item.updatedAt }]));
+  const localItems = db.prepare("SELECT name, values_json, features_json, updated_at FROM ranking_items WHERE ranking_id = ?").all(id);
 
   await reconcile(
     `${id} /`,
-    rows(localItems.map((item) => ({ name: item.name, values: JSON.parse(item.values_json), updatedAt: item.updated_at }))),
+    rows(localItems.map((item) => ({ name: item.name, values: JSON.parse(item.values_json), features: JSON.parse(item.features_json), updatedAt: item.updated_at }))),
     rows(liveRankings.get(id)),
-    (name, row) => call("PUT", `/api/rankings/${id}/items/${encodeURIComponent(name)}`, { values: row.value, updatedAt: row.at }),
+    (name, row) => call("PUT", `/api/rankings/${id}/items/${encodeURIComponent(name)}`, { values: row.value.values, features: row.value.features, updatedAt: row.at }),
     (name, row) => {
-      if (row.value.length !== columnCount.get(id).count) throw new Error("it has a different number of columns than the local ranking");
-      if (updateItem.run(JSON.stringify(row.value), row.at, id, name).changes) return;
+      if (row.value.values.length !== columnCount.get(id).count) throw new Error("it has a different number of columns than the local ranking");
+      const [values, features] = [JSON.stringify(row.value.values), JSON.stringify(row.value.features)];
+      if (updateItem.run(values, features, row.at, id, name).changes) return;
 
       const { next } = db.prepare("SELECT COALESCE(MAX(position), -1) + 1 AS next FROM ranking_items WHERE ranking_id = ?").get(id);
-      insertItem.run(id, next, name, JSON.stringify(row.value), row.at);
+      insertItem.run(id, next, name, values, features, row.at);
     },
   );
 }
