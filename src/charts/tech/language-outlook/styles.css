@@ -160,3 +160,85 @@
   font: inherit;
   font-size: 13px;
 }
+
+.top-tens {
+  display: grid;
+  gap: 14px;
+  margin: 8px 0 16px;
+}
+
+/* one box dressed like the tiles: the title on top, the ten tiles inside it */
+.top-ten {
+  --banner: color-mix(in srgb, var(--tile-color) 38%, #1e1e1e);
+  margin: 0;
+  padding: 8px 8px 12px;
+  min-width: 0;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--tile-color) 55%, transparent);
+  background: linear-gradient(90deg, var(--banner) 40%, color-mix(in srgb, var(--banner) 45%, transparent));
+  color: #fff;
+}
+
+.top-ten h3 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 16px;
+  /* stacked offsets build a thick extruded edge, then a soft drop shadow underneath */
+  text-shadow: 0 1px 0 #00000066, 0 2px 0 #00000055, 0 3px 0 #00000044, 0 5px 6px #00000077;
+}
+
+/* the description under the title: small and not bold */
+.top-ten-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.85;
+  text-shadow: none;
+}
+
+/* ten equal tiles in a row; on a narrow screen the row scrolls sideways */
+.top-ten-tiles {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(84px, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 4px;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.top-ten-tile {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 8px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--tile-color) 55%, transparent);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--tile-color) 38%, #1e1e1e), color-mix(in srgb, var(--tile-color) 12%, #1e1e1e));
+  box-shadow: 0 1px 3px #0000004d;
+  color: #fff;
+}
+
+.top-ten-rank {
+  position: absolute;
+  top: -4px;
+  right: 6px;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--tile-color);
+  opacity: 0.55;
+}
+
+.top-ten-name {
+  position: relative;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  text-shadow: 0 1px 2px #0006;
+}

@@ -82,6 +82,7 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
 /** Checkbox legend: boxes in a grid, one per group; the checkboxes slide open under the description. */
 export default function Legend({ model, visible, onToggle, sortKey, onSort }: Props) {
   const [open, setOpen] = useState<Record<string, boolean>>({});
+  const [aboutOpen, setAboutOpen] = useState<Record<string, boolean>>({});
   const allKeys = [...model.series, ...model.lines];
 
   // Collect the keys that belong to each legend group.
@@ -120,7 +121,20 @@ export default function Legend({ model, visible, onToggle, sortKey, onSort }: Pr
         <fieldset key={title} className="legend-group">
           <legend>{title}</legend>
           <ColourKey model={model} keys={keys} />
-          <p className="legend-description">{description}</p>
+          <button
+            type="button"
+            className="legend-toggle"
+            aria-expanded={!!aboutOpen[title]}
+            onClick={() => setAboutOpen({ ...aboutOpen, [title]: !aboutOpen[title] })}
+          >
+            <span className={aboutOpen[title] ? "chevron open" : "chevron"}>▸</span>
+            About
+          </button>
+          <div className={aboutOpen[title] ? "legend-panel open" : "legend-panel"}>
+            <div className="legend-panel-inner">
+              <p className="legend-description">{description}</p>
+            </div>
+          </div>
           <button
             type="button"
             className="legend-toggle"

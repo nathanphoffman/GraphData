@@ -6,6 +6,7 @@ import { HIDDEN_BY_DEFAULT_PREFIXES, NEWEST_YEAR_SERIES } from "./model/style";
 import { buildYScale } from "./model/layout";
 import Legend from "./Legend";
 import OutlookSvg from "./OutlookSvg";
+import TopTens from "./TopTens";
 
 const model = data as LanguageOutlookData;
 
@@ -43,6 +44,7 @@ export default function LanguageOutlook() {
 
   return (
     <div>
+      <TopTens model={model} />
       <Legend
         model={model}
         visible={visible}
