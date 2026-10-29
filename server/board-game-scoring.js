@@ -34,3 +34,34 @@ export function rankGames(games, preference) {
 
   return scored.filter((game) => Number.isFinite(game.score) && game.score !== 0).sort((first, second) => second.score - first.score);
 }
+
+/** The weights tried when finding a preference: 1 to 5 in steps of 0.05. */
+export const WEIGHT_GRID = Array.from({ length: 81 }, (_, step) => Math.round((1 + step * 0.05) * 100) / 100);
+
+const gameKey = (game) => `${game.title}|${game.releaseDate}`;
+
+/**
+ * Finds the weight preference that puts the owned games highest in the list: for every weight, the positions of the owned games are
+ * added up and the lowest total wins. Owned games the list has no score for are left out of every total, so they cannot change the winner.
+ * When several weights tie, the middle one is the suggestion.
+ */
+export function findBestWeight(games, owned) {
+  const ownedKeys = new Set(owned.map(gameKey));
+  const totals = WEIGHT_GRID.map((preference) => {
+    const found = rankGames(games, preference).map((game, index) => ({ title: game.title, releaseDate: game.releaseDate, position: index + 1 })).filter((game) => ownedKeys.has(gameKey(game)));
+
+    return { preference, total: found.reduce((sum, game) => sum + game.position, 0), games: found };
+  });
+
+  const lowest = Math.min(...totals.map(({ total }) => total));
+  const tied = totals.filter(({ total }) => total === lowest);
+  const best = tied[Math.floor(tied.length / 2)];
+  const foundKeys = new Set(best.games.map(gameKey));
+
+  return {
+    best: { preference: best.preference, total: best.total, games: [...best.games].sort((first, second) => first.position - second.position) },
+    tied: [tied[0].preference, tied[tied.length - 1].preference],
+    noPreferenceTotal: rankGames(games, 0).reduce((sum, game, index) => (ownedKeys.has(gameKey(game)) ? sum + index + 1 : sum), 0),
+    missing: owned.filter((game) => !foundKeys.has(gameKey(game))).map((game) => game.title),
+  };
+}

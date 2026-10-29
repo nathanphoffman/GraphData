@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { requireUser } from "./auth.js";
-import { CUSTOM_GAMES, rankGames } from "./board-game-scoring.js";
+import { CUSTOM_GAMES, findBestWeight, rankGames } from "./board-game-scoring.js";
 import { db } from "./db.js";
 import { HttpError, readJson, readStamp, sendJson } from "./http.js";
 
@@ -12,6 +12,8 @@ const MAX_PREFERENCE = 5;
 const MAX_TEXT = 200;
 const MAX_BULK_GAMES = 1000;
 const MAX_BULK_BYTES = 2_000_000;
+const MAX_OWNED_GAMES = 200;
+const MAX_OWNED_BYTES = 100_000;
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS board_games (
@@ -72,6 +74,20 @@ export const boardGameRoutes = [
     method: "GET",
     path: "/api/board-games",
     handler: (request, response) => sendJson(response, 200, getPage(new URL(request.url, "http://localhost").searchParams)),
+  },
+  // Which weight preference puts the sent games (title and releaseDate each) highest in the list. Nothing is saved.
+  {
+    method: "POST",
+    path: "/api/board-games/best-weight",
+    handler: async (request, response) => {
+      const { games: owned } = await readJson(request, MAX_OWNED_BYTES);
+      const valid = Array.isArray(owned) && owned.length > 0 && owned.length <= MAX_OWNED_GAMES
+        && owned.every((game) => typeof game?.title === "string" && typeof game.releaseDate === "string");
+      if (!valid) throw new HttpError(400, `Send a list of 1 to ${MAX_OWNED_GAMES} games, each with a title and releaseDate`);
+
+      const games = [...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame), ...CUSTOM_GAMES];
+      sendJson(response, 200, findBestWeight(games, owned));
+    },
   },
   // Every game with its change time, for the sync script.
   {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { rankGames, scoreGame } from "../server/board-game-scoring.js";
+import { findBestWeight, rankGames, scoreGame } from "../server/board-game-scoring.js";
 
 const light = { title: "Light", releaseDate: "2020", average: 7.5, weight: 1.5, num: 10000, rank: 200 };
 const heavy = { title: "Heavy", releaseDate: "2020", average: 7.5, weight: 4, num: 10000, rank: 100 };
@@ -27,5 +27,25 @@ describe("rankGames", () => {
 
   it("leaves out games with no usable score", () => {
     expect(rankGames([{ ...light, average: 0 }], 0)).toEqual([]);
+  });
+});
+
+describe("findBestWeight", () => {
+  const games = [
+    { title: "A", releaseDate: "2020", average: 7.5, weight: 1.5, num: 10000, rank: 300 },
+    { title: "B", releaseDate: "2020", average: 7.4, weight: 1.6, num: 10000, rank: 310 },
+    { title: "C", releaseDate: "2020", average: 7.5, weight: 4.5, num: 10000, rank: 320 },
+    { title: "D", releaseDate: "2020", average: 7.4, weight: 4.4, num: 10000, rank: 330 },
+  ];
+
+  it("suggests a light weight for light games and a heavy one for heavy games", () => {
+    expect(findBestWeight(games, [games[0], games[1]]).best.preference).toBeLessThan(3);
+    expect(findBestWeight(games, [games[2], games[3]]).best.preference).toBeGreaterThan(3);
+  });
+
+  it("adds up the owned games' positions and reports games it has no score for", () => {
+    const result = findBestWeight(games, [games[0], { title: "Nope", releaseDate: "1999" }]);
+    expect(result.best.total).toBe(result.best.games[0].position);
+    expect(result.missing).toEqual(["Nope"]);
   });
 });

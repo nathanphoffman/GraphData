@@ -12,3 +12,37 @@
   gap: 12px;
   margin-top: 12px;
 }
+
+.board-games-owned ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.board-games-owned li {
+  padding: 2px 8px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+}
+
+.board-games-owned li button {
+  margin-left: 6px;
+  padding: 0 4px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.board-games-add {
+  min-width: 2.5ch;
+  cursor: pointer;
+}
+
+/* A game on my list: the whole row is tinted blue. */
+.board-games tr.board-games-owned-row td {
+  background-color: hsl(215 70% 50% / 0.25);
+}
