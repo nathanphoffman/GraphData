@@ -21,7 +21,7 @@ export default function ChartPage() {
     <section>
       <Link to="/">&larr; All charts</Link>
       <h1>{chart.title}</h1>
-      <p className="muted">{chart.description}</p>
+      {!chart.hidePageDescription && <p className="muted">{chart.description}</p>}
       <Chart />
     </section>
   );

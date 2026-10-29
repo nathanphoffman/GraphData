@@ -31,6 +31,9 @@ export interface ChartEntry {
   description: string;
   component: ComponentType;
 
+  /** Leave the description off the chart's own page (the home page still shows it). */
+  hidePageDescription?: boolean;
+
   /** Not listed on the home page; only reachable by typing the URL. */
   unlisted?: boolean;
 }
@@ -42,11 +45,12 @@ export interface ChartEntry {
 export const charts: ChartEntry[] = [
   {
     id: "language-outlook",
-    title: "Language Outlook",
+    title: "Programming Language Outlook",
     category: TECH_CATEGORY,
     description:
       "Programming language popularity weighted by developer opinion, 2019-2026, with 4-year trend lines and a 10-year projection.",
     component: LanguageOutlook,
+    hidePageDescription: true,
   },
   {
     id: "maintainability-calculator",

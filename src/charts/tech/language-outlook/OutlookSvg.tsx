@@ -44,8 +44,8 @@ function GridLines({ gridValues, yScale }: { gridValues: number[]; yScale: Scale
     <>
       {gridValues.map((gridValue) => (
         <g key={gridValue}>
-          <line x1={MARGIN.left} x2={CHART_WIDTH - MARGIN.right} y1={yScale(gridValue)} y2={yScale(gridValue)} stroke="#ffffff40" />
-          <text x={MARGIN.left - GRID_LABEL_GAP} y={yScale(gridValue) + GRID_LABEL_BASELINE} textAnchor="end" fontSize={GRID_FONT_SIZE} fill="#fff">
+          <line x1={MARGIN.left} x2={CHART_WIDTH - MARGIN.right} y1={yScale(gridValue)} y2={yScale(gridValue)} stroke="#ffffff30" strokeDasharray="2 5" />
+          <text x={MARGIN.left - GRID_LABEL_GAP} y={yScale(gridValue) + GRID_LABEL_BASELINE} textAnchor="end" fontSize={GRID_FONT_SIZE} fill="#fff" fillOpacity={0.8}>
             {gridValue}
           </text>
         </g>
@@ -173,7 +173,7 @@ function LanguageName({ name, centerX }: { name: string; centerX: number }) {
   const baseline = CHART_HEIGHT - MARGIN.bottom + NAME_DROP;
 
   return (
-    <text x={centerX} y={baseline} textAnchor="end" fontSize={NAME_FONT_SIZE} fill="#fff" transform={`rotate(${NAME_ANGLE} ${centerX} ${baseline})`}>
+    <text x={centerX} y={baseline} textAnchor="end" fontSize={NAME_FONT_SIZE} fontWeight={500} fill="#fff" transform={`rotate(${NAME_ANGLE} ${centerX} ${baseline})`}>
       {name}
     </text>
   );

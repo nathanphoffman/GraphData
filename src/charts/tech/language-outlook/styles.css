@@ -10,9 +10,12 @@
   flex-direction: column;
   gap: 6px;
   margin: 0;
-  padding: 6px 12px 10px;
-  border: 1px solid #ffffff40;
-  border-radius: 6px;
+  padding: 10px 14px 12px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--fg) 16%, transparent);
+  border-radius: 12px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--fg) 7%, transparent), color-mix(in srgb, var(--fg) 2%, transparent));
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--fg) 12%, transparent);
 }
 
 .legend-key {
@@ -58,14 +61,21 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 2px 0;
+  padding: 4px 8px;
+  margin: 0 -8px;
+  border-radius: 8px;
   background: none;
   border: none;
+  transition: background 0.15s;
   color: inherit;
   font: inherit;
   font-size: 13px;
   cursor: pointer;
   text-align: left;
+}
+
+.legend-toggle:hover {
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
 }
 
 .chevron {
@@ -105,20 +115,37 @@
   opacity: 0.7;
 }
 
+/* floated so the title sits inside the card instead of cutting into its border */
 .legend-group legend {
-  padding: 0 6px;
+  float: left;
+  width: 100%;
+  margin: 0 0 4px;
+  padding: 0 0 6px;
   font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.7;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+}
+
+.legend-group legend + * {
+  clear: both;
 }
 
 .legend label {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  padding: 2px 6px;
+  margin: 0 -6px;
+  border-radius: 6px;
   font-size: 14px;
+  transition: background 0.15s;
+}
+
+.legend label:hover {
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
 }
 
 .swatch.dot {
@@ -136,29 +163,50 @@
   display: inline-block;
 }
 
+/* mid-tone on purpose: the year dots run from near black to white and both must show */
 .chart-surface {
   width: 100%;
   height: auto;
   display: block;
-  background: var(--chart-bg);
-  border-radius: 6px;
+  margin-top: 12px;
+  background: linear-gradient(160deg, #596077, #424758 60%, #3b3f4e);
+  border: 1px solid #ffffff22;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px #0004, inset 0 1px 0 #ffffff22;
+}
+
+.chart-surface circle {
+  cursor: pointer;
+  transition: stroke-width 0.12s, stroke 0.12s;
+}
+
+.chart-surface circle:hover {
+  stroke: #fff;
+  stroke-width: 2.5;
 }
 
 .tooltip {
   position: fixed;
   pointer-events: none;
-  background: #222;
+  background: #1b1d26ee;
   color: #fff;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  border: 1px solid #ffffff2a;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px #0006;
+  backdrop-filter: blur(4px);
   font-size: 13px;
 }
 
 .sort-select {
   width: 100%;
-  padding: 4px 6px;
+  padding: 6px 8px;
   font: inherit;
   font-size: 13px;
+  color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 6%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-radius: 8px;
 }
 
 .top-tens {
@@ -195,6 +243,27 @@
   font-weight: 400;
   opacity: 0.85;
   text-shadow: none;
+}
+
+/* stock-ticker style change mark in the corner opposite the rank */
+.top-ten-shift {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: #0000008c;
+}
+
+.top-ten-shift.up {
+  color: #3ddc84;
+}
+
+.top-ten-shift.down {
+  color: #ff5c5c;
 }
 
 /* ten equal tiles in a row; on a narrow screen the row scrolls sideways */
@@ -241,4 +310,70 @@
   line-height: 1.15;
   overflow-wrap: anywhere;
   text-shadow: 0 1px 2px #0006;
+}
+
+.settings-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 8px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg);
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-radius: 999px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--fg) 8%, transparent), color-mix(in srgb, var(--fg) 3%, transparent));
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--fg) 12%, transparent);
+  transition: background 0.15s;
+}
+
+.settings-toggle:hover {
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+}
+
+/* the gear button with the one-line key to its right; wraps under the button on a narrow screen */
+.settings-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin: 4px 0 8px;
+}
+
+.settings-bar .settings-toggle {
+  margin: 0;
+}
+
+.quick-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+.quick-key li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.quick-key-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid #4c4c4c;
+}
+
+.quick-key-bar {
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
 }

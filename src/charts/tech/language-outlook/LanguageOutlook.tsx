@@ -6,6 +6,7 @@ import { HIDDEN_BY_DEFAULT_PREFIXES, NEWEST_YEAR_SERIES } from "./model/style";
 import { buildYScale } from "./model/layout";
 import Legend from "./Legend";
 import OutlookSvg from "./OutlookSvg";
+import QuickKey from "./QuickKey";
 import TopTens from "./TopTens";
 
 const model = data as LanguageOutlookData;
@@ -23,6 +24,9 @@ export default function LanguageOutlook() {
 
   const [sortKey, setSortKey] = useState(NEWEST_YEAR_SERIES);
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
+
+  // The sort and the key boxes stay out of the way until asked for.
+  const [showSettings, setShowSettings] = useState(false);
 
   // Sort by the chosen column, highest first, with languages that have no value last.
   const sorted = useMemo(() => {
@@ -45,13 +49,24 @@ export default function LanguageOutlook() {
   return (
     <div>
       <TopTens model={model} />
-      <Legend
-        model={model}
-        visible={visible}
-        onToggle={(seriesKey, shown) => setVisible({ ...visible, [seriesKey]: shown })}
-        sortKey={sortKey}
-        onSort={setSortKey}
-      />
+      <div className="settings-bar">
+        <button type="button" className="settings-toggle" aria-expanded={showSettings} onClick={() => setShowSettings(!showSettings)}>
+          <span aria-hidden="true">⚙</span> Settings and key
+          <span className={showSettings ? "chevron open" : "chevron"}>▸</span>
+        </button>
+        <QuickKey />
+      </div>
+      <div className={showSettings ? "legend-panel open" : "legend-panel"}>
+        <div className="legend-panel-inner">
+          <Legend
+            model={model}
+            visible={visible}
+            onToggle={(seriesKey, shown) => setVisible({ ...visible, [seriesKey]: shown })}
+            sortKey={sortKey}
+            onSort={setSortKey}
+          />
+        </div>
+      </div>
       <OutlookSvg
         model={sorted}
         visible={visible}
