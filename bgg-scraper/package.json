@@ -1,0 +1,22 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "Scrapes BoardGameGeek games into the site database",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node --env-file=.env dist/index.js",
+    "refresh": "tsc && node --env-file=.env dist/refresh.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "puppeteer": "^25.0.4",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.9",
+    "typescript": "^5.9.3"
+  }
+}

@@ -46,20 +46,20 @@ describe("maintenance growth", () => {
 });
 
 describe("maintenancePercent", () => {
-  it("is 100% up to a manual n-factor of 5, and 0% from 9", () => {
+  it("is 100% up to a manual n-factor of 5, and 0% from 10", () => {
     expect(maintenancePercent(5.75, 0.75)).toBeCloseTo(100, 6);
     expect(maintenancePercent(1, 0.75)).toBe(100);
-    expect(maintenancePercent(9.75, 0.75)).toBeCloseTo(0, 6);
+    expect(maintenancePercent(10.75, 0.75)).toBeCloseTo(0, 6);
     expect(maintenancePercent(12, 0.75)).toBe(0);
   });
 
   it("falls in a straight line between them", () => {
-    expect(maintenancePercent(7.75, 0.75)).toBeCloseTo(50, 6);
-    expect(maintenancePercent(6.924, 0.75)).toBeCloseTo(70.6, 1);
+    expect(maintenancePercent(7.75, 0.75)).toBeCloseTo(60, 6);
+    expect(maintenancePercent(6.924, 0.75)).toBeCloseTo(76.5, 1);
   });
 
   it("moves with the extent of AI use", () => {
-    expect(maintenancePercent(7, 0)).toBeCloseTo(50, 6);
+    expect(maintenancePercent(7, 0)).toBeCloseTo(60, 6);
     expect(maintenancePercent(7, 1)).toBeGreaterThan(maintenancePercent(7, 0.75));
   });
 });

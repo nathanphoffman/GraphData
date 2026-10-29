@@ -12,3 +12,11 @@ refresh-local-line-quality:
 # Rewrite the ranking and weight-journey JSON files from the local database and the live site (the newer copy of each item or weigh-in wins), as a backup in git. Pass --local-only to skip the live site.
 backup-json *args:
     node scripts/backup-to-json.mjs {{args}}
+
+# Scrape new and recent board games from BoardGameGeek into the local database (the first run, or --full, scrapes everything). Run sync-prod afterwards to push them live.
+scrape-bgg *args:
+    cd bgg-scraper && npm start -- {{args}}
+
+# Re-scrape any board game year that has not been pulled in 90 days, one year at a time.
+refresh-bgg:
+    cd bgg-scraper && npm run refresh

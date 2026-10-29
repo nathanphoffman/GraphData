@@ -14,12 +14,12 @@ export function sendJson(response, status, body, headers = {}) {
   response.end(JSON.stringify(body));
 }
 
-/** Read the request body as JSON ({} when empty). */
-export async function readJson(request) {
+/** Read the request body as JSON ({} when empty). Bigger bodies than the default can be allowed for the routes that need them. */
+export async function readJson(request, maxBytes = MAX_BODY_BYTES) {
   let text = "";
   for await (const chunk of request) {
     text += chunk;
-    if (text.length > MAX_BODY_BYTES) throw new HttpError(413, "Request too large");
+    if (text.length > maxBytes) throw new HttpError(413, "Request too large");
   }
   try {
     return text ? JSON.parse(text) : {};

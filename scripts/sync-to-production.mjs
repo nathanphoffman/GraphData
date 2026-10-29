@@ -7,6 +7,7 @@
 // Needs PROD_URL, PROD_USERNAME and PROD_PASSWORD (just reads them from .env). --prefer settles rows that differ but have the same
 // change time, which is every difference the first time you sync (older rows have no time yet).
 import { db } from "../server/db.js";
+import "../server/board-games.js";
 import "../server/rankings.js";
 import "../server/weights.js";
 import { connectToProd } from "./prod.mjs";
@@ -110,6 +111,52 @@ await reconcile(
   (date, row) => call("PUT", `/api/weights/${date}`, { weight: row.value, updatedAt: row.at }),
   (date, row) => db.prepare("INSERT OR REPLACE INTO weights (date, weight, updated_at) VALUES (?, ?, ?)").run(date, row.value, row.at),
 );
+
+// Board games, matched by title and release year. There are thousands, so they go in batches and only a summary is printed.
+const GAME_BATCH = 500;
+const gameKey = (game) => `${game.title}|${game.releaseDate}`;
+const sameRatings = (first, second) => ["average", "weight", "num", "rank"].every((field) => first[field] === second[field]);
+
+const { data: liveGames } = await call("GET", "/api/board-games/export");
+const remoteGames = new Map(liveGames.games.map((game) => [gameKey(game), game]));
+const localGames = db.prepare("SELECT title, release_date AS releaseDate, average, weight, num, rank, pulled_at AS pulledAt, updated_at AS updatedAt FROM board_games").all();
+const [toSend, toSave] = [[], []];
+
+for (const mine of localGames) {
+  const theirs = remoteGames.get(gameKey(mine));
+  remoteGames.delete(gameKey(mine));
+
+  if (!theirs) toSend.push(mine);
+  else if (sameRatings(mine, theirs)) stats.same++;
+  else if (mine.updatedAt !== theirs.updatedAt) (mine.updatedAt > theirs.updatedAt ? toSend : toSave).push(mine.updatedAt > theirs.updatedAt ? mine : theirs);
+  else if (prefer) (prefer === "local" ? toSend : toSave).push(prefer === "local" ? mine : theirs);
+  else {
+    stats.conflicts++;
+    console.log(`CONFLICT (differs, same change time): board game ${gameKey(mine)}`);
+  }
+}
+toSave.push(...remoteGames.values());
+
+const saveGame = db.prepare("INSERT OR REPLACE INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+for (let start = 0; start < toSend.length && !dryRun; start += GAME_BATCH) {
+  const batch = toSend.slice(start, start + GAME_BATCH);
+  try {
+    await call("PUT", "/api/board-games/bulk", { games: batch });
+  } catch (error) {
+    stats.failed += batch.length;
+    console.error(`FAILED: ${batch.length} board games from ${batch[0].title}: ${error.message}`);
+    toSend.length = 0;
+    break;
+  }
+}
+if (!dryRun) {
+  db.exec("BEGIN");
+  for (const game of toSave) saveGame.run(game.title, game.releaseDate, game.average, game.weight, game.num, game.rank, game.pulledAt, game.updatedAt);
+  db.exec("COMMIT");
+}
+stats.pushed += toSend.length;
+stats.pulled += toSave.length;
+console.log(`${dryRun ? "would be " : ""}board games: ${toSend.length} sent, ${toSave.length} brought here`);
 
 console.log(`${dryRun ? "Dry run: " : ""}${stats.pushed} sent to the live site, ${stats.pulled} brought here, ${stats.same} already the same, ${stats.conflicts} conflicts, ${stats.failed} failed.`);
 if (stats.conflicts) console.log("Conflicts have the same change time but different values. Run again with --prefer local or --prefer remote to settle them.");

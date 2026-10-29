@@ -11,6 +11,7 @@ import AllIntelligence from "./science/all-intelligence/AllIntelligence";
 import AstronomyTargets from "./science/astronomy-targets/AstronomyTargets";
 import WeightJourney from "./science/weight-journey/WeightJourney";
 import TopRankings from "./tech/top-rankings/TopRankings";
+import BoardGames from "./tech/board-games/BoardGames";
 import ProjectPriority from "./tech/project-priority/ProjectPriority";
 
 /** Home page sections, in display order. */
@@ -141,6 +142,14 @@ export const charts: ChartEntry[] = [
     description:
       "My projects ranked by fun, usefulness, job value, difficulty, size, quality and status, with a code maintenance index (n-Factor) for the whole codebase.",
     component: ProjectPriority,
+  },
+  {
+    id: "board-games",
+    title: "Board Games by Weight",
+    category: TECH_CATEGORY,
+    description:
+      "Thousands of BoardGameGeek games re-ranked for the weight (complexity) you like to play, so a light-game fan and a heavy-game fan each get their own list. Paged and searchable.",
+    component: BoardGames,
   },
 ];
 

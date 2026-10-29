@@ -1,0 +1,42 @@
+import { removeEmpty, stripNonNumeric } from "../utility";
+import { getLinkByWeight } from "./links";
+import { FetchSource, memoize } from "./memoizer";
+import { Game } from "../types/game";
+import * as cheerio from "cheerio";
+
+// unranked games have no number in the rank column
+function parseRank(txt: string): number | null {
+    const rank = stripNonNumeric(txt);
+    return rank ? Number(rank) : null;
+}
+
+export interface PageOptions {
+    startYear?: number;
+    endYear?: number;
+    maxAgeMs?: number;
+}
+
+export async function getObjects(min: string, max: string, { startYear, endYear, maxAgeMs }: PageOptions = {}): Promise<{ data: Game[]; type: FetchSource }> {
+    const response = await memoize(getLinkByWeight(min, max, startYear, endYear), maxAgeMs);
+    const $ = cheerio.load(response.data);
+
+    const rows = $('table#collectionitems tr').toArray().slice(1);
+
+    const results = rows.map(game => {
+        const $game = $(game);
+        const title = $game.find('a.primary').first();
+        if (title.text()) {
+            const ratings = $game.find('td.collection_bggrating');
+            return {
+                title: title.text(),
+                average: Number(stripNonNumeric(ratings.eq(1).text())),
+                weight: (Number(min) + Number(max)) / 2,
+                num: Number(stripNonNumeric(ratings.eq(2).text())),
+                rank: parseRank($game.find('td.collection_rank').first().text()),
+                releaseDate: stripNonNumeric($game.find('span.smallerfont').first().text())
+            } satisfies Game;
+        }
+    });
+
+    return { data: removeEmpty(results), type: response.type };
+}

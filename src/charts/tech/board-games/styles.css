@@ -1,0 +1,14 @@
+.board-games-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.board-games-pages {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
