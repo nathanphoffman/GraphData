@@ -7,7 +7,7 @@ import { useAuth } from "../../../auth/useAuth";
 import { RankingEditor } from "./RankingEditor";
 import { heat } from "./RankingCells";
 import { EPISODIC_LABEL, RankingTable, type Sort, firstSort } from "./RankingTable";
-import { DEFAULT_AI_USE, LINES_LABEL, PERCENT, SCAFFOLDING_LINES, maintenance, maintenancePercent, withQuality, withScaffolding } from "./maintenance";
+import { DEFAULT_AI_USE, LINES_LABEL, PERCENT, SCAFFOLDING_LINES, maintenance, maintenancePercent, withQuality, withScaffolding, withStatus } from "./maintenance";
 import "./styles.css";
 import { type Ranking, fractionBetween, isText } from "./score";
 
@@ -21,11 +21,16 @@ const LOWEST_QUALITY_HEAT = 50;
 const MAX_AI_USE = 1;
 const AI_USE_STEP = 0.05;
 
+/** The Average Quality slider moves in tenths of a percent. */
+const QUALITY_STEP = 0.1;
+
 /** The code maintenance summary for rankings that have lines and quality columns. */
 function MaintenanceIndex({ ranking, aiUse, onAiUse }: { ranking: Ranking; aiUse: number; onAiUse: (aiUse: number) => void }) {
-  const result = maintenance(ranking, aiUse);
+  const [qualityOverride, setQualityOverride] = useState<number | null>(null);
+  const actual = maintenance(ranking, aiUse);
+  const result = maintenance(ranking, aiUse, qualityOverride ?? undefined);
 
-  if (!result) return null;
+  if (!result || !actual) return null;
 
   return (
     <section className="rankings-index">
@@ -33,6 +38,11 @@ function MaintenanceIndex({ ranking, aiUse, onAiUse }: { ranking: Ranking; aiUse
       <label title="How much AI adds to the n-Factor a developer can hold together. 0 is fully manual; it moves the maintenance percent and the manual lines.">
         Extent of AI Use: {Math.round(aiUse * PERCENT)}%{" "}
         <input type="range" min={0} max={MAX_AI_USE} step={AI_USE_STEP} value={aiUse} onChange={(changeEvent) => onAiUse(Number(changeEvent.target.value))} />
+      </label>
+      <label title="Average quality used in the numbers below. It starts at the real average; move it to see what the maintenance numbers would be at a different quality.">
+        Average Quality: {result.averageQuality.toFixed(1)}%{" "}
+        <input type="range" min={0} max={PERCENT} step={QUALITY_STEP} value={result.averageQuality} onChange={(changeEvent) => setQualityOverride(Number(changeEvent.target.value))} />
+        {qualityOverride !== null && <button type="button" onClick={() => setQualityOverride(null)}>Reset to {actual.averageQuality.toFixed(1)}%</button>}
       </label>
       <dl>
         <div style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines">
@@ -51,7 +61,7 @@ function MaintenanceIndex({ ranking, aiUse, onAiUse }: { ranking: Ranking; aiUse
           <small>{Math.round(result.futureLines).toLocaleString()} lines</small>
           <small>{Math.round(result.gradedFutureManualLines).toLocaleString()} lines manual</small>
         </div>
-        <div style={heat(result.maintenancePercent / PERCENT)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent: 100% when the manual n-Factor (n-Factor minus the Extent of AI Use) is 5 or less, falling in a straight line to 0% at 9. The lines are the same average without the quality adjustment (as if quality were 75) turned back into lines (n^n). Manual takes the Extent of AI Use off the n-Factor first">
+        <div style={heat(result.maintenancePercent / PERCENT)} title="Graded n-Factor (25%) and Graded Future n-Factor (75%) averaged, then turned into a percent: 100% when the manual n-Factor (n-Factor minus the Extent of AI Use) is 5 or less, falling in a straight line to 0% at 10. The lines are the same average without the quality adjustment (as if quality were 75) turned back into lines (n^n). Manual takes the Extent of AI Use off the n-Factor first">
           <dt>Code Maintenance</dt>
           <dd>{result.maintenancePercent.toFixed(1)}%</dd>
           <small>{result.combinedNFactor.toFixed(N_FACTOR_DIGITS)} n-Factor</small>
@@ -82,7 +92,7 @@ export default function TopRankings() {
 
   const load = useCallback(async () => {
     const data = await callApi<{ rankings: Ranking[] }>("/api/rankings");
-    setRankings(data.rankings.map(withQuality));
+    setRankings(data.rankings.map((loaded) => withStatus(withQuality(loaded))));
   }, []);
 
   // Load the rankings once when the page opens, and show an error if that fails.

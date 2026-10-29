@@ -11,6 +11,12 @@ const GROWTH_LABEL = "xLines";
 /** An information column holding 1 for a project that is retired: it still saves and syncs, but sits last, greyed, and is left out of the maintenance numbers. */
 export const DECOMMISSIONED_LABEL = "Decommissioned";
 
+/** An information column holding 1 for a project that is cold (set aside): it still counts in the maintenance numbers, but only at COLD_SHARE of its lines. */
+export const COLD_LABEL = "Cold";
+
+/** How much of a cold project's lines count towards the maintenance numbers, and how much weight its quality has. */
+const COLD_SHARE = 1 / 6;
+
 /** An information column holding 1 for an item that is only a wish (not owned yet): it is ranked to see if it is worth it, but greyed and left out of the numbering. */
 export const WISHLIST_LABEL = "Wishlist";
 
@@ -24,6 +30,9 @@ function isChecked(ranking: Ranking, item: Ranking["items"][number], label: stri
 /** Whether the item is marked decommissioned in this ranking. */
 export const isDecommissioned = (ranking: Ranking, item: Ranking["items"][number]): boolean => isChecked(ranking, item, DECOMMISSIONED_LABEL);
 
+/** Whether the item is marked cold in this ranking. */
+export const isCold = (ranking: Ranking, item: Ranking["items"][number]): boolean => isChecked(ranking, item, COLD_LABEL);
+
 /** Whether the item is greyed out and left out of the rank numbers: decommissioned or on the wishlist. */
 export const isDimmed = (ranking: Ranking, item: Ranking["items"][number]): boolean => isDecommissioned(ranking, item) || isChecked(ranking, item, WISHLIST_LABEL);
 
@@ -35,7 +44,7 @@ export const PERCENT = 100;
 
 /** The manual n-Factor (hand-written, no AI) that is 100% maintainable, and the one that is 0%. */
 const MANUAL_FULL_N = 5;
-const MANUAL_ZERO_N = 9;
+const MANUAL_ZERO_N = 10;
 
 /** How much each manual n-Factor above the full mark takes off the maintenance fraction. */
 const LOSS_PER_N = 1 / (MANUAL_ZERO_N - MANUAL_FULL_N);
@@ -55,7 +64,7 @@ const NEUTRAL_QUALITY = 75;
 /** How much of the combined n-Factor comes from the future one. */
 const FUTURE_WEIGHT = 0.75;
 
-/** The n-Factor as a percent: 100% while its manual n-Factor (the n-Factor minus aiUse) is 5 or less, falling in a straight line to 0% at 9. */
+/** The n-Factor as a percent: 100% while its manual n-Factor (the n-Factor minus aiUse) is 5 or less, falling in a straight line to 0% at 10. */
 export function maintenancePercent(n: number, aiUse: number): number {
   return Math.max(0, 1 - (Math.max(n - aiUse, MANUAL_FULL_N) - MANUAL_FULL_N) * LOSS_PER_N) * PERCENT;
 }
@@ -116,8 +125,8 @@ export function qualityOf(values: Ranking["items"][number]["values"], familiarit
   return found.length ? found.reduce((runningTotal, value) => runningTotal + value, 0) / found.length : null;
 }
 
-/** The code maintenance numbers for a ranking with lines and quality columns, or null when it has neither or no lines. */
-export function maintenance(ranking: Ranking, aiUse: number): Maintenance | null {
+/** The code maintenance numbers for a ranking with lines and quality columns, or null when it has neither or no lines. A qualityOverride replaces the average quality worked out from the projects. */
+export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: number): Maintenance | null {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
   const familiarity = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
   const computed = ranking.columns.findIndex((column) => column.label === COMPUTED_LABEL);
@@ -134,9 +143,10 @@ export function maintenance(ranking: Ranking, aiUse: number): Maintenance | null
     if (isDecommissioned(ranking, item)) continue;
 
     const { values } = item;
-    const [count, rating] = [values[lines], qualityOf(values, familiarity, computed)];
+    const [rawCount, rating] = [values[lines], qualityOf(values, familiarity, computed)];
 
-    if (!isNumber(count)) continue;
+    if (!isNumber(rawCount)) continue;
+    const count = isCold(ranking, item) ? rawCount * COLD_SHARE : rawCount;
     totalLines += count;
 
     // A project with no growth number is expected to stay the size it is.
@@ -150,7 +160,7 @@ export function maintenance(ranking: Ranking, aiUse: number): Maintenance | null
 
   if (totalLines === 0 || qualityLines === 0) return null;
 
-  const averageQuality = weighted / qualityLines;
+  const averageQuality = qualityOverride ?? weighted / qualityLines;
   const currentNFactor = nFactor(totalLines);
   const adjustment = (averageQuality - NEUTRAL_QUALITY) / PERCENT;
   const futureN = nFactor(futureLines);
@@ -189,6 +199,31 @@ export function withQuality(ranking: Ranking): Ranking {
     const average = qualityOf(item.values, familiarity, computed);
 
     return average === null ? item : { ...item, values: item.values.map((value, index) => (index === quality ? Math.round(average * TENTH) / TENTH : value)) };
+  });
+
+  return { ...ranking, items };
+}
+
+/** The rated column holding each item's status out of 5, worked out from its Decommissioned and Cold checkboxes whenever the ranking loads or an item is saved. */
+export const STATUS_LABEL = "Status";
+
+/** The status rating of an active, a cold and a decommissioned project. */
+const ACTIVE_STATUS = 5;
+const COLD_STATUS = 3;
+const DECOMMISSIONED_STATUS = 1;
+
+/** The ranking with each item's Status set from its Decommissioned and Cold checkboxes (left as it is when the ranking has no Status column). */
+export function withStatus(ranking: Ranking): Ranking {
+  const status = ranking.columns.findIndex((column) => column.label === STATUS_LABEL);
+
+  if (status < 0) return ranking;
+
+  // Give each item its status, padding short value lists so the Status lands in the right column.
+  const items = ranking.items.map((item) => {
+    const rating = isDecommissioned(ranking, item) ? DECOMMISSIONED_STATUS : isCold(ranking, item) ? COLD_STATUS : ACTIVE_STATUS;
+    const values = ranking.columns.map((_, index) => (index === status ? rating : (item.values[index] ?? null)));
+
+    return { ...item, values };
   });
 
   return { ...ranking, items };

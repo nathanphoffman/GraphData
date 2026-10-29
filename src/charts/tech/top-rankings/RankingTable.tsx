@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { callApi } from "../../../api";
 import { InfoCell, NameCell, RatedCell, type SaveCell, heat } from "./RankingCells";
-import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isDimmed, withQuality } from "./maintenance";
+import { COLD_LABEL, DECOMMISSIONED_LABEL, LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isCold, isDimmed, withQuality, withStatus } from "./maintenance";
 import { type Column, type Item, type Ranking, fractionBetween, isNumber, letterGrade, rankItems } from "./score";
 
 const PAGE_SIZE = 100;
@@ -90,10 +90,18 @@ function cellSaver(ranking: Ranking, source: Ranking, onSaved: () => Promise<voi
     const isLines = ranking.columns[index].label === LINES_LABEL && isNumber(value);
 
     // Copy the saved item with the one value changed; a Lines value comes back without the scaffolding lines.
-    const changed = { ...saved, values: saved.values.map((oldValue, valueIndex) => (valueIndex === index ? (isLines ? value - SCAFFOLDING_LINES : value) : oldValue)) };
+    const label = ranking.columns[index].label;
 
-    // Quality is worked out from the other two, so save it fresh along with the change.
-    const { values } = withQuality({ ...source, items: [changed] }).items[0];
+    // Decommissioned and Cold exclude each other, so ticking one unticks the other.
+    const rival = value === 1 ? { [DECOMMISSIONED_LABEL]: COLD_LABEL, [COLD_LABEL]: DECOMMISSIONED_LABEL }[label] : undefined;
+    const rivalIndex = ranking.columns.findIndex((column) => column.label === rival);
+
+    // Pad short value lists so the rival column can be set to 0.
+    const padded = ranking.columns.map((_, valueIndex) => saved.values[valueIndex] ?? null);
+    const changed = { ...saved, values: padded.map((oldValue, valueIndex) => (valueIndex === index ? (isLines ? value - SCAFFOLDING_LINES : value) : valueIndex === rivalIndex ? 0 : oldValue)) };
+
+    // Quality and Status are worked out from the other values, so save them fresh along with the change.
+    const { values } = withStatus(withQuality({ ...source, items: [changed] })).items[0];
 
     // Save the whole item; the server adds it or changes it by name.
     await callApi(`/api/rankings/${ranking.id}/items/${encodeURIComponent(item.name)}`, "PUT", { values });
@@ -141,15 +149,16 @@ interface RowProps {
   canEdit: boolean;
   saveCell: SaveCell;
   dimmed: boolean;
+  cold: boolean;
 }
 
 /** One ranked item: rank, name, information, score, grade and rated cells. */
-function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, dimmed }: RowProps) {
+function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, dimmed, cold }: RowProps) {
   const { item, score, grade, rank } = rankedRow;
   const cell = { item, canEdit, saveCell };
 
   return (
-    <tr className={dimmed ? "rankings-dimmed" : undefined}>
+    <tr className={dimmed ? "rankings-dimmed" : cold ? "rankings-cold" : undefined}>
       <td>{dimmed ? "" : rank}</td>
       <NameCell item={item} linkIndex={columns.linkIndex} />
       {columns.info.map(({ column, index }) => <InfoCell key={column.label} {...cell} column={column} index={index} />)}
@@ -193,7 +202,7 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
       <table>
         <TableHead columns={columns} showScore={showScore} sort={sort} onSort={onSort} />
         <tbody>
-          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} dimmed={dimmed(rankedRow.item)} />)}
+          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} dimmed={dimmed(rankedRow.item)} cold={isCold(ranking, rankedRow.item)} />)}
         </tbody>
       </table>
       {matching.length > shown && (

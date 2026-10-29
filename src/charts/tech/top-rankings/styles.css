@@ -1,4 +1,9 @@
 /* Top rankings */
+/* The rankings table has many columns, so its page is wider than the others. */
+.page:has(.rankings) {
+  max-width: 1600px;
+}
+
 .rankings-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -161,4 +166,14 @@
 
 .rankings tr.rankings-dimmed {
   opacity: 0.45;
+}
+
+/* A cold project: faded and tinted a dark blue, to tell it from a decommissioned (greyed) one. */
+.rankings tr.rankings-cold {
+  opacity: 0.85;
+  color: hsl(215 55% 75%);
+}
+
+.rankings tr.rankings-cold td {
+  box-shadow: inset 0 0 0 100vmax hsl(215 60% 22% / 0.3);
 }

@@ -1,5 +1,5 @@
 import { InlineCell } from "./InlineCell";
-import { DECOMMISSIONED_LABEL, QUALITY_LABEL, WISHLIST_LABEL } from "./maintenance";
+import { COLD_LABEL, DECOMMISSIONED_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance";
 import { type Column, HIGHEST_RATING, type Item, LOWEST_RATING, effectiveRating, fractionBetween, isNumber, isText } from "./score";
 
 /** Heat colours run from hue 0 (red) to this (green). */
@@ -34,9 +34,9 @@ export interface CellProps {
 }
 
 /** The columns shown as a checkbox, with the words the checkbox's label ends in. */
-const CHECKBOX_LABELS: Record<string, string> = { [DECOMMISSIONED_LABEL]: "decommissioned", [WISHLIST_LABEL]: "on the wishlist" };
+const CHECKBOX_LABELS: Record<string, string> = { [DECOMMISSIONED_LABEL]: "decommissioned", [COLD_LABEL]: "cold", [WISHLIST_LABEL]: "on the wishlist" };
 
-/** A plain information cell; the Decommissioned and Wishlist columns are checkboxes. */
+/** A plain information cell; the Decommissioned, Cold and Wishlist columns are checkboxes. */
 export function InfoCell({ item, column, index, canEdit, saveCell }: CellProps) {
   if (column.label in CHECKBOX_LABELS) {
     const checked = item.values[index] === 1;
@@ -62,7 +62,7 @@ export function RatedCell({ item, column, index, canEdit, saveCell, episodic }: 
   const colour = used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING));
 
   return (
-    <InlineCell column={column} itemName={item.name} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL} onSave={saveCell(item, index)} style={colour}>
+    <InlineCell column={column} itemName={item.name} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL && column.label !== STATUS_LABEL} onSave={saveCell(item, index)} style={colour}>
       {show(rating)}
       {column.label === SEASONS_LABEL && episodic ? "*" : ""}
       {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
