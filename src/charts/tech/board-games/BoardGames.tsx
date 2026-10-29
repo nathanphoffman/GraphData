@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { type CSSProperties, useEffect, useState } from "react";
 import { callApi } from "../../../api";
+import { heat } from "../top-rankings/RankingCells";
 import "./styles.css";
 
 /** The weight slider runs over BGG's weights; the server reads a preference of 0 as no preference. */
@@ -13,9 +14,6 @@ const PAGE_SIZE = 50;
 
 /** The search box and the weight slider wait this long after the last change before asking the server. */
 const DEBOUNCE_MS = 300;
-
-/** The score thresholds from the scraper's notes, as the words they mean. */
-const SCORE_BANDS: [number, string][] = [[3, "phenomenal"], [2.5, "good"], [2, "decent"], [1, "meh"], [0, "probably bad"]];
 
 interface Game {
   position: number;
@@ -60,7 +58,29 @@ function loadOwned(): OwnedGame[] {
   }
 }
 
-const scoreWords = (score: number) => SCORE_BANDS.find(([minimum]) => score >= minimum)?.[1] ?? "";
+/** The release year slider's steps: how many years back it shows (this year counting as the first), or null for every year. */
+const YEAR_STEPS: { label: string; years: number | null }[] = [
+  { label: "Show all", years: null },
+  { label: "Last 25 years", years: 25 },
+  { label: "Last 10 years", years: 10 },
+  { label: "Last 5 years", years: 5 },
+  { label: "Last 3 years", years: 3 },
+  { label: "Last 2 years", years: 2 },
+  { label: "This year", years: 1 },
+];
+
+/** The first release year a step shows from, or 0 for every year. */
+const minYearOf = (step: number) => {
+  const years = YEAR_STEPS[step].years;
+
+  return years === null ? 0 : new Date().getFullYear() - years + 1;
+};
+
+/** The score that fills the colour scale from red to green. */
+const TOP_SCORE = 3.5;
+
+const MAX_WEIGHT_SHOWN = 5;
+
 
 /** Board games from BoardGameGeek ranked for a weight preference, one page at a time so the thousands of rows are never loaded together. */
 export default function BoardGames() {
@@ -76,6 +96,9 @@ export default function BoardGames() {
   const [found, setFound] = useState<BestWeight | null>(null);
   const [finding, setFinding] = useState(false);
   const [findError, setFindError] = useState("");
+  const [onlyMine, setOnlyMine] = useState(false);
+  const [yearStep, setYearStep] = useState(0);
+  const [minYear, setMinYear] = useState(0);
 
   // Wait for a pause in typing before searching, and go back to the first page for the new search.
   useEffect(() => {
@@ -97,19 +120,37 @@ export default function BoardGames() {
     return () => clearTimeout(timer);
   }, [weight, anyWeight]);
 
+  // The release year slider is debounced like the weight one.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMinYear(minYearOf(yearStep));
+      setPage(1);
+    }, DEBOUNCE_MS);
+
+    return () => clearTimeout(timer);
+  }, [yearStep]);
+
+  // The owned list only matters to the page while just my games are shown, so adding games the rest of the time does not reload it.
+  const mineToShow = onlyMine ? owned : null;
+
   // Ask the server for the page whenever the preference, search or page changes; an older answer arriving late is ignored.
   useEffect(() => {
     let current = true;
-    const query = new URLSearchParams({ preference: String(preference), page: String(page), pageSize: String(PAGE_SIZE), search });
+    const query = new URLSearchParams({ preference: String(preference), page: String(page), pageSize: String(PAGE_SIZE), search, minYear: String(minYear) });
 
-    callApi<Page>(`/api/board-games?${query}`)
+    // My games are all shown on one page, so they come from their own call.
+    const request = mineToShow
+      ? mineToShow.length === 0 ? Promise.resolve<Page>({ total: 0, games: [] }) : callApi<Page>("/api/board-games/mine", "POST", { games: mineToShow, preference, search, minYear })
+      : callApi<Page>(`/api/board-games?${query}`);
+
+    request
       .then((result) => current && (setData(result), setError(false)))
       .catch(() => current && setError(true));
 
     return () => {
       current = false;
     };
-  }, [preference, search, page]);
+  }, [preference, search, page, minYear, onlyMine, mineToShow]);
 
   // Keep the owned list in the browser; a browser that blocks storage just forgets it.
   useEffect(() => {
@@ -147,7 +188,7 @@ export default function BoardGames() {
     setWeight(preference);
   };
 
-  const lastPage = data ? Math.max(1, Math.ceil(data.total / PAGE_SIZE)) : 1;
+  const lastPage = data && !onlyMine ? Math.max(1, Math.ceil(data.total / PAGE_SIZE)) : 1;
 
   return (
     <div className="board-games">
@@ -161,6 +202,13 @@ export default function BoardGames() {
         </label>
         <label>
           <input type="checkbox" checked={anyWeight} onChange={(changeEvent) => setAnyWeight(changeEvent.target.checked)} /> Don't Prefer A Specific Weight
+        </label>
+        <label>
+          Released: {YEAR_STEPS[yearStep].label}{" "}
+          <input type="range" min={0} max={YEAR_STEPS.length - 1} step={1} value={yearStep} onChange={(changeEvent) => setYearStep(Number(changeEvent.target.value))} />
+        </label>
+        <label>
+          <input type="checkbox" checked={onlyMine} onChange={(changeEvent) => { setOnlyMine(changeEvent.target.checked); setPage(1); }} /> Just show my games
         </label>
         <input type="search" placeholder="Search by title…" value={typed} onChange={(changeEvent) => setTyped(changeEvent.target.value)} />
       </div>
@@ -199,6 +247,7 @@ export default function BoardGames() {
       {!data && !error && <p>Loading games…</p>}
       {data && (
         <>
+          <div className="board-games-table">
           <table>
             <thead>
               <tr>
@@ -210,7 +259,7 @@ export default function BoardGames() {
                 <th>Rating</th>
                 <th>Weight</th>
                 <th>Ratings</th>
-                <th title="Under 1: probably bad. 1 to 2: meh. 2 to 2.5: decent. 2.5 to 3: good. 3 and up: phenomenal">Score</th>
+                <th>Score</th>
               </tr>
             </thead>
             <tbody>
@@ -221,18 +270,19 @@ export default function BoardGames() {
                       {ownedKeys.has(gameKey(game)) ? "✓" : "+"}
                     </button>
                   </td>
-                  <td>{game.position}</td>
-                  <td>{game.title}</td>
-                  <td>{game.releaseDate}</td>
-                  <td>{game.rank ?? ""}</td>
+                  <td className="board-games-position">{game.position}</td>
+                  <td className="board-games-title">{game.title}</td>
+                  <td className="board-games-dim">{game.releaseDate}</td>
+                  <td className="board-games-dim">{game.rank ?? ""}</td>
                   <td>{game.average.toFixed(2)}</td>
-                  <td>{game.weight.toFixed(2)}</td>
-                  <td>{game.num.toLocaleString()}</td>
-                  <td>{game.score.toFixed(2)} <small>({scoreWords(game.score)})</small></td>
+                  <td className="board-games-weight" style={{ "--weight": `${(game.weight / MAX_WEIGHT_SHOWN) * 100}%` } as CSSProperties}>{game.weight.toFixed(2)}</td>
+                  <td className="board-games-dim">{game.num.toLocaleString()}</td>
+                  <td><span className="board-games-score" style={heat(Math.min(game.score / TOP_SCORE, 1))}>{game.score.toFixed(2)}</span></td>
                 </tr>
               ))}
             </tbody>
           </table>
+          </div>
           <div className="board-games-pages">
             <button type="button" disabled={page <= 1} onClick={() => setPage(page - 1)}>Previous</button>
             <span>Page {page} of {lastPage.toLocaleString()} ({data.total.toLocaleString()} games)</span>

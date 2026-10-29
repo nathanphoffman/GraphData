@@ -40,6 +40,33 @@ seed();
 
 const rowToGame = (row) => ({ title: row.title, releaseDate: row.release_date, average: row.average, weight: row.weight, num: row.num, rank: row.rank });
 
+/** Every game with a score for the preference, best first, each with its place in the whole list. */
+function rankedWithPositions(preference) {
+  const games = [...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame), ...CUSTOM_GAMES];
+
+  return rankGames(games, preference).map((game, index) => ({ ...game, position: index + 1 }));
+}
+
+/** The first release year to show from a request, or 0 for every year. */
+function readMinYear(value) {
+  const minYear = Number(value ?? 0);
+  if (!Number.isInteger(minYear) || minYear < 0) throw new HttpError(400, "minYear must be a year");
+
+  return minYear;
+}
+
+/** Whether a game's release year is this year or later; a game with no clear year only passes when every year is shown. */
+const releasedFrom = (game, minYear) => minYear === 0 || Number(game.releaseDate) >= minYear;
+
+/** A request's list of owned games (title and releaseDate each), or an error when it is not one. */
+function readOwned(owned) {
+  const valid = Array.isArray(owned) && owned.length > 0 && owned.length <= MAX_OWNED_GAMES
+    && owned.every((game) => typeof game?.title === "string" && typeof game.releaseDate === "string");
+  if (!valid) throw new HttpError(400, `Send a list of 1 to ${MAX_OWNED_GAMES} games, each with a title and releaseDate`);
+
+  return owned;
+}
+
 /** One page of the games ranked for a weight preference. Positions are in the whole list, so a search keeps each game's real place. */
 function getPage(query) {
   const preference = Number(query.get("preference") ?? 0);
@@ -47,14 +74,13 @@ function getPage(query) {
   const pageSize = Number(query.get("pageSize") ?? DEFAULT_PAGE_SIZE);
   const search = (query.get("search") ?? "").trim().toLowerCase();
   const year = (query.get("year") ?? "").trim();
+  const minYear = readMinYear(query.get("minYear"));
 
   if (!(preference >= 0 && preference <= MAX_PREFERENCE)) throw new HttpError(400, `preference must be from 0 to ${MAX_PREFERENCE}`);
   if (!Number.isInteger(page) || page < 1) throw new HttpError(400, "page must be 1 or more");
   if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > MAX_PAGE_SIZE) throw new HttpError(400, `pageSize must be from 1 to ${MAX_PAGE_SIZE}`);
 
-  const games = [...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame), ...CUSTOM_GAMES];
-  const ranked = rankGames(games, preference).map((game, index) => ({ ...game, position: index + 1 }));
-  const matching = ranked.filter((game) => game.title.toLowerCase().includes(search) && (year === "" || game.releaseDate === year));
+  const matching = rankedWithPositions(preference).filter((game) => game.title.toLowerCase().includes(search) && (year === "" || game.releaseDate === year) && releasedFrom(game, minYear));
 
   return { preference, page, pageSize, total: matching.length, games: matching.slice((page - 1) * pageSize, page * pageSize) };
 }
@@ -75,16 +101,26 @@ export const boardGameRoutes = [
     path: "/api/board-games",
     handler: (request, response) => sendJson(response, 200, getPage(new URL(request.url, "http://localhost").searchParams)),
   },
+  // Just the sent games (title and releaseDate each), ranked for a weight preference with their places in the whole list. Nothing is saved.
+  {
+    method: "POST",
+    path: "/api/board-games/mine",
+    handler: async (request, response) => {
+      const { games, preference = 0, search = "", minYear: sentMinYear } = await readJson(request, MAX_OWNED_BYTES);
+      const minYear = readMinYear(sentMinYear);
+      const owned = new Set(readOwned(games).map((game) => `${game.title}|${game.releaseDate}`));
+      if (!(preference >= 0 && preference <= MAX_PREFERENCE)) throw new HttpError(400, `preference must be from 0 to ${MAX_PREFERENCE}`);
+
+      const matching = rankedWithPositions(preference).filter((game) => owned.has(`${game.title}|${game.releaseDate}`) && releasedFrom(game, minYear) && game.title.toLowerCase().includes(String(search).trim().toLowerCase()));
+      sendJson(response, 200, { preference, page: 1, pageSize: matching.length, total: matching.length, games: matching });
+    },
+  },
   // Which weight preference puts the sent games (title and releaseDate each) highest in the list. Nothing is saved.
   {
     method: "POST",
     path: "/api/board-games/best-weight",
     handler: async (request, response) => {
-      const { games: owned } = await readJson(request, MAX_OWNED_BYTES);
-      const valid = Array.isArray(owned) && owned.length > 0 && owned.length <= MAX_OWNED_GAMES
-        && owned.every((game) => typeof game?.title === "string" && typeof game.releaseDate === "string");
-      if (!valid) throw new HttpError(400, `Send a list of 1 to ${MAX_OWNED_GAMES} games, each with a title and releaseDate`);
-
+      const owned = readOwned((await readJson(request, MAX_OWNED_BYTES)).games);
       const games = [...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame), ...CUSTOM_GAMES];
       sendJson(response, 200, findBestWeight(games, owned));
     },
