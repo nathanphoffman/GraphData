@@ -33,10 +33,15 @@ export const SCAFFOLDING_LINES = 256;
 /** Percent scale, used for qualities and for the maintenance percent. */
 export const PERCENT = 100;
 
-/** The shape of the maintenance percent curve: its steepness, where it crosses its midpoint, and how it is skewed. */
-const CURVE_STEEPNESS = 3.85;
-const CURVE_MIDPOINT = 7.14;
-const CURVE_SKEW = 0.9;
+/** The manual n-Factor (hand-written, no AI) that is 100% maintainable, and the one that is 0%. */
+const MANUAL_FULL_N = 5;
+const MANUAL_ZERO_N = 9;
+
+/** How much each manual n-Factor above the full mark takes off the maintenance fraction. */
+const LOSS_PER_N = 1 / (MANUAL_ZERO_N - MANUAL_FULL_N);
+
+/** How much AI use adds to the n-Factor a developer can hold together, by default. */
+export const DEFAULT_AI_USE = 0.75;
 
 /** How many times nFactor halves its range, which is plenty to settle on the answer. */
 const HALVINGS = 60;
@@ -47,20 +52,12 @@ const TENTH = 10;
 /** The quality that leaves the n-factor as it is; better lifts it down, worse pushes it up. */
 const NEUTRAL_QUALITY = 75;
 
-/** Taken off the combined n-Factor to get the lines a hand-written (manual) codebase would be equivalent to. */
-const MANUAL_ADJUSTMENT = 0.66;
-
 /** How much of the combined n-Factor comes from the future one. */
 const FUTURE_WEIGHT = 0.75;
 
-/**
- * The combined n-Factor as a percent, on a curve fitted by eye to these marks: 1 is 100%, 6 is 95%, 6.75 is 85%, 7 is 65%, 8 is 5% and 10 is about 0%.
- * It is a stretched S-curve: nearly flat at the top, then falling steeply between 6.5 and 8. It lands within about 4 points of each mark.
- */
-export function maintenancePercent(combined: number): number {
-  if (combined <= 1) return PERCENT;
-
-  return PERCENT / (1 + Math.exp(CURVE_STEEPNESS * (combined - CURVE_MIDPOINT))) ** CURVE_SKEW;
+/** The n-Factor as a percent: 100% while its manual n-Factor (the n-Factor minus aiUse) is 5 or less, falling in a straight line to 0% at 9. */
+export function maintenancePercent(n: number, aiUse: number): number {
+  return Math.max(0, 1 - (Math.max(n - aiUse, MANUAL_FULL_N) - MANUAL_FULL_N) * LOSS_PER_N) * PERCENT;
 }
 
 export interface Maintenance {
@@ -79,9 +76,9 @@ export interface Maintenance {
   gradedFutureManualLines: number;
 }
 
-/** The lines a hand-written codebase would be equivalent to at this n-Factor: MANUAL_ADJUSTMENT off it, raised to itself. */
-function manualLinesAt(n: number): number {
-  return (n - MANUAL_ADJUSTMENT) ** (n - MANUAL_ADJUSTMENT);
+/** The lines a hand-written codebase would be equivalent to at this n-Factor: aiUse off it, raised to itself. */
+function manualLinesAt(n: number, aiUse: number): number {
+  return (n - aiUse) ** (n - aiUse);
 }
 
 /** The n that makes n^n equal the total, found by halving a range until it is close enough. 1 for a total of 1 or less. */
@@ -120,7 +117,7 @@ export function qualityOf(values: Ranking["items"][number]["values"], familiarit
 }
 
 /** The code maintenance numbers for a ranking with lines and quality columns, or null when it has neither or no lines. */
-export function maintenance(ranking: Ranking): Maintenance | null {
+export function maintenance(ranking: Ranking, aiUse: number): Maintenance | null {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
   const familiarity = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
   const computed = ranking.columns.findIndex((column) => column.label === COMPUTED_LABEL);
@@ -172,11 +169,11 @@ export function maintenance(ranking: Ranking): Maintenance | null {
     futureNFactor: futureN,
     gradedFutureNFactor: gradedFuture,
     combinedNFactor: combined,
-    maintenancePercent: maintenancePercent(combined),
+    maintenancePercent: maintenancePercent(combined, aiUse),
     equivalentLines: ungraded ** ungraded,
-    manualLines: manualLinesAt(ungraded),
-    gradedManualLines: manualLinesAt(graded),
-    gradedFutureManualLines: manualLinesAt(gradedFuture),
+    manualLines: manualLinesAt(ungraded, aiUse),
+    gradedManualLines: manualLinesAt(graded, aiUse),
+    gradedFutureManualLines: manualLinesAt(gradedFuture, aiUse),
   };
 }
 
