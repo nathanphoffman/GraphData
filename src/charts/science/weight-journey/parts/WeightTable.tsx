@@ -121,28 +121,36 @@ const formatter = (kind: Kind, unitFormat: Format) => {
   return unitFormat.w;
 };
 
-type Range = { high: number; low: number } | null;
+type Range = { high: number; low: number; avg: number } | null;
 
-/** Highest and lowest value a column takes over the rows (null when it has none). */
+/** Highest, lowest and average value a column takes over the rows (null when it has none). */
 function rangeOf(rows: WeightRow[], column: Column): Range {
   const values = rows.map(column.actual).filter((value): value is number => value !== null);
 
   // Math.max/min spread would overflow the stack on a long history, so loop.
-  return values.length ? { high: values.reduce((left, right) => Math.max(left, right)), low: values.reduce((left, right) => Math.min(left, right)) } : null;
+  return values.length
+    ? {
+        high: values.reduce((left, right) => Math.max(left, right)),
+        low: values.reduce((left, right) => Math.min(left, right)),
+        avg: values.reduce((sum, value) => sum + value, 0) / values.length,
+      }
+    : null;
 }
 
-/** Small print block: the label, then the high, then the low, each on its own line. */
+/** Small print block: the label, then the high, the average, then the low, each on its own line. */
 const rangeBlock = (label: string, range: Range, formatWeight: (pounds: number) => string) => (
   <small className="range">
     {label}
     <br />
     {range ? `↑${formatWeight(range.high)}` : "—"}
     <br />
+    {range ? `~${formatWeight(range.avg)}` : "—"}
+    <br />
     {range ? `↓${formatWeight(range.low)}` : "—"}
   </small>
 );
 
-/** The header shows each column's high and low for the period and for all time, so you can see where a day sits without scanning the table. */
+/** The header shows each column's high, average and low for the period and for all time, so you can see where a day sits without scanning the table. */
 function Head({ unit, f: unitFormat, columns, periodRanges, allTimeRanges }: { unit: Unit; f: Format; columns: Column[]; periodRanges: Range[]; allTimeRanges: Range[] }) {
   return (
     <thead>
@@ -150,7 +158,7 @@ function Head({ unit, f: unitFormat, columns, periodRanges, allTimeRanges }: { u
         <th>Date</th>
         {columns.map((column) => <th key={column.title(unit)} title={column.note}>{column.title(unit)}</th>)}
       </tr>
-      {/* Own row so the highs and lows line up across columns whatever the title length. */}
+      {/* Own row so the ranges line up across columns whatever the title length. */}
       <tr className="ranges">
         <th />
         {columns.map((column, index) => {
