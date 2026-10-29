@@ -47,13 +47,13 @@ export default function ProjectPriority() {
     <div className="rankings">
       <EditGear label="Edit rankings" auth={auth}>
         <RankingEditor ranking={ranking} onSaved={load} />
-        <Link to="/ralph-loops">RalphLoops status</Link>
       </EditGear>
       <MaintenanceIndex ranking={shown} aiUse={aiUse} onAiUse={setAiUse} />
       <p className="muted">
         Score is each rating squared times its column's weight, added up. The weight is shown under each column name. Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
       </p>
       <p className="muted">Completed Lines includes {SCAFFOLDING_LINES} extra lines per project, a minimum scaffolding score that every project needs. It is added here on the page, not saved in the data or counted by the line count script.</p>
+      {isText(auth.user) && <Link to="/ralph-loops" className="ralph-link">RalphLoops status →</Link>}
       <label>
         <input type="checkbox" checked={showScore} onChange={(changeEvent) => setShowScore(changeEvent.target.checked)} /> Show score
       </label>

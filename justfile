@@ -21,6 +21,10 @@ scrape-bgg *args:
 refresh-bgg:
     cd bgg-scraper && npm run refresh
 
-# Send fake RalphLoops reports to the local server (localhost only) so the /ralph-loops page has something to show.
+# Act out a fake RalphLoops run against the local server (localhost only) until Ctrl-C, so the /ralph-loops page has live data. Pass --once for just a few starter reports.
 fake-ralph *args:
     node scripts/ralph-fake-reports.mjs {{args}}
+
+# Run the site and the API locally (the page is on localhost:5173, the API on localhost:3001).
+server:
+    npm run dev

@@ -238,3 +238,6 @@
   gap: 8px;
   margin-top: 12px;
 }
+
+.ralph-link { display: inline-block; margin: 0 12px 8px 0; padding: 4px 12px; border: 1px solid currentColor; border-radius: 999px; text-decoration: none; font-size: 14px; }
+.ralph-link:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
