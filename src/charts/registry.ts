@@ -11,6 +11,7 @@ import AllIntelligence from "./science/all-intelligence/AllIntelligence";
 import AstronomyTargets from "./science/astronomy-targets/AstronomyTargets";
 import WeightJourney from "./science/weight-journey/WeightJourney";
 import TopRankings from "./tech/top-rankings/TopRankings";
+import ProjectPriority from "./tech/project-priority/ProjectPriority";
 
 /** Home page sections, in display order. */
 const SCIENCE_CATEGORY = "Science";
@@ -130,8 +131,16 @@ export const charts: ChartEntry[] = [
     title: "Top Rankings",
     category: TECH_CATEGORY,
     description:
-      "Personal ranking lists (programming languages, board games, video games, project priority, favorite TV and movies, RPGs) scored on syntax, scaffolding, readability and more. Switch between lists with the buttons at the top.",
+      "Personal ranking lists (programming languages, board games, video games, favorite TV and movies, RPGs) scored on syntax, scaffolding, readability and more. Switch between lists with the buttons at the top.",
     component: TopRankings,
+  },
+  {
+    id: "project-priority",
+    title: "Project Priority",
+    category: TECH_CATEGORY,
+    description:
+      "My projects ranked by fun, usefulness, job value, difficulty, size, quality and status, with a code maintenance index (n-Factor) for the whole codebase.",
+    component: ProjectPriority,
   },
 ];
 
