@@ -20,3 +20,7 @@ scrape-bgg *args:
 # Re-scrape any board game year that has not been pulled in 90 days, one year at a time.
 refresh-bgg:
     cd bgg-scraper && npm run refresh
+
+# Send fake RalphLoops reports to the local server (localhost only) so the /ralph-loops page has something to show.
+fake-ralph *args:
+    node scripts/ralph-fake-reports.mjs {{args}}
