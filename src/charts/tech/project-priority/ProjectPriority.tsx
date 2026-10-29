@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { callApi } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { useAuth } from "../../../auth/useAuth";
@@ -46,6 +47,7 @@ export default function ProjectPriority() {
     <div className="rankings">
       <EditGear label="Edit rankings" auth={auth}>
         <RankingEditor ranking={ranking} onSaved={load} />
+        <Link to="/ralph-loops">RalphLoops status</Link>
       </EditGear>
       <MaintenanceIndex ranking={shown} aiUse={aiUse} onAiUse={setAiUse} />
       <p className="muted">

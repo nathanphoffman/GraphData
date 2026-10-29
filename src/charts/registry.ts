@@ -13,6 +13,7 @@ import WeightJourney from "./science/weight-journey/WeightJourney";
 import TopRankings from "./tech/top-rankings/TopRankings";
 import BoardGames from "./tech/board-games/BoardGames";
 import ProjectPriority from "./tech/project-priority/ProjectPriority";
+import RalphLoops from "./tech/ralph-loops/RalphLoops";
 
 /** Home page sections, in display order. */
 const SCIENCE_CATEGORY = "Science";
@@ -150,6 +151,14 @@ export const charts: ChartEntry[] = [
     description:
       "Thousands of BoardGameGeek games re-ranked for the weight (complexity) you like to play, so a light-game fan and a heavy-game fan each get their own list. Paged and searchable.",
     component: BoardGames,
+  },
+  {
+    id: "ralph-loops",
+    title: "RalphLoops",
+    category: TECH_CATEGORY,
+    description: "Live status of my RalphLoops (login required).",
+    component: RalphLoops,
+    unlisted: true,
   },
 ];
 
