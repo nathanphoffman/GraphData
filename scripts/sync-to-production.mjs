@@ -117,46 +117,55 @@ const GAME_BATCH = 500;
 const gameKey = (game) => `${game.title}|${game.releaseDate}`;
 const sameRatings = (first, second) => ["average", "weight", "num", "rank"].every((field) => first[field] === second[field]);
 
-const { data: liveGames } = await call("GET", "/api/board-games/export");
-const remoteGames = new Map(liveGames.games.map((game) => [gameKey(game), game]));
-const localGames = db.prepare("SELECT title, release_date AS releaseDate, average, weight, num, rank, pulled_at AS pulledAt, updated_at AS updatedAt FROM board_games").all();
-const [toSend, toSave] = [[], []];
+let liveGames;
+try {
+  ({ data: liveGames } = await call("GET", "/api/board-games/export"));
+} catch (error) {
+  if (error.message !== "Not found") throw error;
+  console.error("SKIPPED: the live site has no board games yet (deploy this version first, then sync again)");
+}
 
-for (const mine of localGames) {
-  const theirs = remoteGames.get(gameKey(mine));
-  remoteGames.delete(gameKey(mine));
+if (liveGames) {
+  const remoteGames = new Map(liveGames.games.map((game) => [gameKey(game), game]));
+  const localGames = db.prepare("SELECT title, release_date AS releaseDate, average, weight, num, rank, pulled_at AS pulledAt, updated_at AS updatedAt FROM board_games").all();
+  const [toSend, toSave] = [[], []];
 
-  if (!theirs) toSend.push(mine);
-  else if (sameRatings(mine, theirs)) stats.same++;
-  else if (mine.updatedAt !== theirs.updatedAt) (mine.updatedAt > theirs.updatedAt ? toSend : toSave).push(mine.updatedAt > theirs.updatedAt ? mine : theirs);
-  else if (prefer) (prefer === "local" ? toSend : toSave).push(prefer === "local" ? mine : theirs);
-  else {
-    stats.conflicts++;
-    console.log(`CONFLICT (differs, same change time): board game ${gameKey(mine)}`);
+  for (const mine of localGames) {
+    const theirs = remoteGames.get(gameKey(mine));
+    remoteGames.delete(gameKey(mine));
+
+    if (!theirs) toSend.push(mine);
+    else if (sameRatings(mine, theirs)) stats.same++;
+    else if (mine.updatedAt !== theirs.updatedAt) (mine.updatedAt > theirs.updatedAt ? toSend : toSave).push(mine.updatedAt > theirs.updatedAt ? mine : theirs);
+    else if (prefer) (prefer === "local" ? toSend : toSave).push(prefer === "local" ? mine : theirs);
+    else {
+      stats.conflicts++;
+      console.log(`CONFLICT (differs, same change time): board game ${gameKey(mine)}`);
+    }
   }
-}
-toSave.push(...remoteGames.values());
+  toSave.push(...remoteGames.values());
 
-const saveGame = db.prepare("INSERT OR REPLACE INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-for (let start = 0; start < toSend.length && !dryRun; start += GAME_BATCH) {
-  const batch = toSend.slice(start, start + GAME_BATCH);
-  try {
-    await call("PUT", "/api/board-games/bulk", { games: batch });
-  } catch (error) {
-    stats.failed += batch.length;
-    console.error(`FAILED: ${batch.length} board games from ${batch[0].title}: ${error.message}`);
-    toSend.length = 0;
-    break;
+  const saveGame = db.prepare("INSERT OR REPLACE INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  for (let start = 0; start < toSend.length && !dryRun; start += GAME_BATCH) {
+    const batch = toSend.slice(start, start + GAME_BATCH);
+    try {
+      await call("PUT", "/api/board-games/bulk", { games: batch });
+    } catch (error) {
+      stats.failed += batch.length;
+      console.error(`FAILED: ${batch.length} board games from ${batch[0].title}: ${error.message}`);
+      toSend.length = 0;
+      break;
+    }
   }
+  if (!dryRun) {
+    db.exec("BEGIN");
+    for (const game of toSave) saveGame.run(game.title, game.releaseDate, game.average, game.weight, game.num, game.rank, game.pulledAt, game.updatedAt);
+    db.exec("COMMIT");
+  }
+  stats.pushed += toSend.length;
+  stats.pulled += toSave.length;
+  console.log(`${dryRun ? "would be " : ""}board games: ${toSend.length} sent, ${toSave.length} brought here`);
 }
-if (!dryRun) {
-  db.exec("BEGIN");
-  for (const game of toSave) saveGame.run(game.title, game.releaseDate, game.average, game.weight, game.num, game.rank, game.pulledAt, game.updatedAt);
-  db.exec("COMMIT");
-}
-stats.pushed += toSend.length;
-stats.pulled += toSave.length;
-console.log(`${dryRun ? "would be " : ""}board games: ${toSend.length} sent, ${toSave.length} brought here`);
 
 console.log(`${dryRun ? "Dry run: " : ""}${stats.pushed} sent to the live site, ${stats.pulled} brought here, ${stats.same} already the same, ${stats.conflicts} conflicts, ${stats.failed} failed.`);
 if (stats.conflicts) console.log("Conflicts have the same change time but different values. Run again with --prefer local or --prefer remote to settle them.");

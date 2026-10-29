@@ -81,14 +81,67 @@ const TOP_SCORE = 3.5;
 
 const MAX_WEIGHT_SHOWN = 5;
 
+/** The controls you picked are kept in this browser too, next to your games. */
+const SETTINGS_STORAGE_KEY = "board-games-settings";
+
+interface Settings {
+  preferWeight: boolean;
+  weight: number;
+  yearStep: number;
+  onlyMine: boolean;
+  search: string;
+}
+
+const DEFAULT_SETTINGS: Settings = { preferWeight: false, weight: DEFAULT_WEIGHT, yearStep: 0, onlyMine: false, search: "" };
+
+/** What a first-time visitor can answer when asked which weight they prefer; a weight of null means they do not care. */
+const FIRST_VISIT_CHOICES: { label: string; weight: number | null }[] = [
+  { label: "Don't Care", weight: null },
+  { label: "Light Games (1)", weight: 1 },
+  { label: "Medium-Light Games (2)", weight: 2 },
+  { label: "Medium Games (2.5)", weight: 2.5 },
+  { label: "Medium-Heavy Games (3)", weight: 3 },
+  { label: "Heavy Games (4)", weight: 4 },
+  { label: "Extremely Heavy Games (5)", weight: 5 },
+];
+
+/** Whether the controls were ever saved in this browser; if not, it is the visitor's first time. */
+function hasSavedSettings(): boolean {
+  try {
+    return localStorage.getItem(SETTINGS_STORAGE_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
+/** The saved controls, with anything missing or not making sense replaced by its default. */
+function loadSettings(): Settings {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SETTINGS_STORAGE_KEY) ?? "{}");
+    const validWeight = typeof saved.weight === "number" && saved.weight >= MIN_WEIGHT && saved.weight <= MAX_WEIGHT;
+    const validStep = Number.isInteger(saved.yearStep) && saved.yearStep >= 0 && saved.yearStep < YEAR_STEPS.length;
+
+    return {
+      preferWeight: saved.preferWeight === true,
+      weight: validWeight ? saved.weight : DEFAULT_SETTINGS.weight,
+      yearStep: validStep ? saved.yearStep : DEFAULT_SETTINGS.yearStep,
+      onlyMine: saved.onlyMine === true,
+      search: typeof saved.search === "string" ? saved.search : "",
+    };
+  } catch {
+    return DEFAULT_SETTINGS;
+  }
+}
 
 /** Board games from BoardGameGeek ranked for a weight preference, one page at a time so the thousands of rows are never loaded together. */
 export default function BoardGames() {
-  const [weight, setWeight] = useState(DEFAULT_WEIGHT);
-  const [preference, setPreference] = useState(DEFAULT_WEIGHT);
-  const [anyWeight, setAnyWeight] = useState(false);
-  const [search, setSearch] = useState("");
-  const [typed, setTyped] = useState("");
+  const [saved] = useState(loadSettings);
+  const [asked, setAsked] = useState(hasSavedSettings);
+  const [weight, setWeight] = useState(saved.weight);
+  const [preference, setPreference] = useState(saved.preferWeight ? saved.weight : NO_PREFERENCE);
+  const [preferWeight, setPreferWeight] = useState(saved.preferWeight);
+  const [search, setSearch] = useState(saved.search);
+  const [typed, setTyped] = useState(saved.search);
   const [page, setPage] = useState(1);
   const [data, setData] = useState<Page | null>(null);
   const [error, setError] = useState(false);
@@ -96,9 +149,9 @@ export default function BoardGames() {
   const [found, setFound] = useState<BestWeight | null>(null);
   const [finding, setFinding] = useState(false);
   const [findError, setFindError] = useState("");
-  const [onlyMine, setOnlyMine] = useState(false);
-  const [yearStep, setYearStep] = useState(0);
-  const [minYear, setMinYear] = useState(0);
+  const [onlyMine, setOnlyMine] = useState(saved.onlyMine);
+  const [yearStep, setYearStep] = useState(saved.yearStep);
+  const [minYear, setMinYear] = useState(minYearOf(saved.yearStep));
 
   // Wait for a pause in typing before searching, and go back to the first page for the new search.
   useEffect(() => {
@@ -113,12 +166,12 @@ export default function BoardGames() {
   // The same for the slider: the number shown follows it at once, but the list only changes once it stops moving.
   useEffect(() => {
     const timer = setTimeout(() => {
-      setPreference(anyWeight ? NO_PREFERENCE : weight);
+      setPreference(preferWeight ? weight : NO_PREFERENCE);
       setPage(1);
     }, DEBOUNCE_MS);
 
     return () => clearTimeout(timer);
-  }, [weight, anyWeight]);
+  }, [weight, preferWeight]);
 
   // The release year slider is debounced like the weight one.
   useEffect(() => {
@@ -161,6 +214,17 @@ export default function BoardGames() {
     }
   }, [owned]);
 
+  // Keep the controls in the browser the same way, once the visitor has answered the first question.
+  useEffect(() => {
+    if (!asked) return;
+
+    try {
+      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify({ preferWeight, weight, yearStep, onlyMine, search: typed } satisfies Settings));
+    } catch {
+      // Storage can be blocked; the controls still work until the page closes.
+    }
+  }, [asked, preferWeight, weight, yearStep, onlyMine, typed]);
+
   const ownedKeys = new Set(owned.map(gameKey));
 
   const toggleOwned = (game: OwnedGame) => {
@@ -184,11 +248,32 @@ export default function BoardGames() {
   };
 
   const useWeight = (preference: number) => {
-    setAnyWeight(false);
+    setPreferWeight(true);
     setWeight(preference);
   };
 
+  // Their answer fills in the weight controls and opens the main page.
+  const answer = (chosen: number | null) => {
+    setPreferWeight(chosen !== null);
+    if (chosen !== null) setWeight(chosen);
+    setPreference(chosen ?? NO_PREFERENCE);
+    setPage(1);
+    setAsked(true);
+  };
+
   const lastPage = data && !onlyMine ? Math.max(1, Math.ceil(data.total / PAGE_SIZE)) : 1;
+
+  if (!asked) {
+    return (
+      <div className="board-games board-games-welcome">
+        <h2>What weight do you prefer?</h2>
+        <p className="muted">Weight is how complex a game is, from 1 (light) to 5 (heavy). It re-ranks the list so games near your weight come first. You can change it any time.</p>
+        <div className="board-games-choices">
+          {FIRST_VISIT_CHOICES.map((choice) => <button type="button" key={choice.label} onClick={() => answer(choice.weight)}>{choice.label}</button>)}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="board-games">
@@ -197,12 +282,14 @@ export default function BoardGames() {
       </p>
       <div className="board-games-controls">
         <label>
-          Weight preference: {anyWeight ? "none" : weight.toFixed(2)}{" "}
-          <input type="range" min={MIN_WEIGHT} max={MAX_WEIGHT} step={WEIGHT_STEP} value={weight} disabled={anyWeight} onChange={(changeEvent) => setWeight(Number(changeEvent.target.value))} />
+          <input type="checkbox" checked={preferWeight} onChange={(changeEvent) => setPreferWeight(changeEvent.target.checked)} /> Prefer a Specific Weight
         </label>
-        <label>
-          <input type="checkbox" checked={anyWeight} onChange={(changeEvent) => setAnyWeight(changeEvent.target.checked)} /> Don't Prefer A Specific Weight
-        </label>
+        {preferWeight && (
+          <label>
+            Weight preference: {weight.toFixed(2)}{" "}
+            <input type="range" min={MIN_WEIGHT} max={MAX_WEIGHT} step={WEIGHT_STEP} value={weight} onChange={(changeEvent) => setWeight(Number(changeEvent.target.value))} />
+          </label>
+        )}
         <label>
           Released: {YEAR_STEPS[yearStep].label}{" "}
           <input type="range" min={0} max={YEAR_STEPS.length - 1} step={1} value={yearStep} onChange={(changeEvent) => setYearStep(Number(changeEvent.target.value))} />
@@ -210,7 +297,6 @@ export default function BoardGames() {
         <label>
           <input type="checkbox" checked={onlyMine} onChange={(changeEvent) => { setOnlyMine(changeEvent.target.checked); setPage(1); }} /> Just show my games
         </label>
-        <input type="search" placeholder="Search by title…" value={typed} onChange={(changeEvent) => setTyped(changeEvent.target.value)} />
       </div>
 
       <section className="board-games-owned">
@@ -242,6 +328,8 @@ export default function BoardGames() {
           </div>
         )}
       </section>
+
+      <input type="search" className="board-games-search" placeholder="Search by title…" value={typed} onChange={(changeEvent) => setTyped(changeEvent.target.value)} />
 
       {error && <p>Could not load the games.</p>}
       {!data && !error && <p>Loading games…</p>}
