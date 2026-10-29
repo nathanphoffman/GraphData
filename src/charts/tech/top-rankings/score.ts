@@ -41,6 +41,9 @@ export interface Item {
 
   /** When the item was last changed, in milliseconds since 1970; used by the sync script, not shown. */
   updatedAt?: number;
+
+  /** Planned features, as short notes. Kept beside the values rather than in a column, and not used in scoring. */
+  features?: string[];
 }
 
 export interface Ranking {

@@ -7,6 +7,8 @@ import { HttpError, readJson, readStamp, sendJson } from "./http.js";
 const SEED_DIR = "data/top-rankings";
 const MAX_RATING = 5;
 const MAX_TEXT = 80;
+const MAX_FEATURES = 50;
+const MAX_FEATURE_TEXT = 200;
 
 // Everything a column can have besides its label, with its database type. A curve is an object, kept as JSON text.
 const OPTIONAL_FIELDS = { short: "TEXT", weight: "REAL", best: "REAL", curve: "TEXT" };
@@ -31,7 +33,7 @@ db.exec(`
     PRIMARY KEY (ranking_id, position)
   );
   CREATE TABLE IF NOT EXISTS ranking_items (
-    ranking_id TEXT NOT NULL, position INTEGER NOT NULL, name TEXT NOT NULL, values_json TEXT NOT NULL, updated_at INTEGER NOT NULL DEFAULT 0,
+    ranking_id TEXT NOT NULL, position INTEGER NOT NULL, name TEXT NOT NULL, values_json TEXT NOT NULL, updated_at INTEGER NOT NULL DEFAULT 0, features_json TEXT NOT NULL DEFAULT '[]',
     PRIMARY KEY (ranking_id, position)
   );
 `);
@@ -48,6 +50,11 @@ if (!db.prepare("PRAGMA table_info(rankings)").all().some((column) => column.nam
 // Databases made before items had a change time get it added; older items count as changed at time 0.
 if (!db.prepare("PRAGMA table_info(ranking_items)").all().some((column) => column.name === "updated_at")) {
   db.exec("ALTER TABLE ranking_items ADD COLUMN updated_at INTEGER NOT NULL DEFAULT 0");
+}
+
+// Databases made before items had planned features get that added; every item starts with none.
+if (!db.prepare("PRAGMA table_info(ranking_items)").all().some((column) => column.name === "features_json")) {
+  db.exec("ALTER TABLE ranking_items ADD COLUMN features_json TEXT NOT NULL DEFAULT '[]'");
 }
 
 const insertColumn = db.prepare(`INSERT INTO ranking_columns (ranking_id, position, ${COLUMN_FIELDS.join(", ")}) VALUES (?, ?, ${placeholders(COLUMN_FIELDS.length)})`);
@@ -150,14 +157,14 @@ seed();
 /** { rankings: [{ id, title, columns, items }] }, each ranking shaped like its JSON file. */
 function getRankings() {
   const columns = db.prepare(`SELECT ${COLUMN_FIELDS.join(", ")} FROM ranking_columns WHERE ranking_id = ? ORDER BY position`);
-  const items = db.prepare("SELECT name, values_json, updated_at FROM ranking_items WHERE ranking_id = ? ORDER BY position");
+  const items = db.prepare("SELECT name, values_json, updated_at, features_json FROM ranking_items WHERE ranking_id = ? ORDER BY position");
 
   const rankings = db.prepare("SELECT id, title, grade_curve FROM rankings ORDER BY position").all().map(({ id, title, grade_curve }) => ({
     id,
     title,
     ...(grade_curve === null ? {} : { gradeCurve: JSON.parse(grade_curve) }),
     columns: columns.all(id).map(rowToColumn),
-    items: items.all(id).map(({ name, values_json, updated_at }) => ({ name, values: JSON.parse(values_json), updatedAt: updated_at })),
+    items: items.all(id).map(({ name, values_json, updated_at, features_json }) => ({ name, values: JSON.parse(values_json), updatedAt: updated_at, features: JSON.parse(features_json) })),
   }));
 
   return { rankings };
@@ -178,6 +185,15 @@ function checkValues(rankingId, name, values) {
     if (weight !== null && curve === null && !(typeof value === "number" && value >= 0 && value <= MAX_RATING)) throw new HttpError(400, `${label} must be a number from 0 to ${MAX_RATING}`);
     if (weight === null && !(value === null || typeof value === "number" || (typeof value === "string" && value.length <= MAX_TEXT))) throw new HttpError(400, `${label} must be a number, short text or empty`);
   });
+}
+
+/** Check a list of planned features: an array of short, non-empty text. */
+function checkFeatures(features) {
+  if (!Array.isArray(features) || features.length > MAX_FEATURES) throw new HttpError(400, `Features must be a list of up to ${MAX_FEATURES}`);
+
+  for (const feature of features) {
+    if (typeof feature !== "string" || !feature.trim() || feature.length > MAX_FEATURE_TEXT) throw new HttpError(400, `Each feature must be 1 to ${MAX_FEATURE_TEXT} characters`);
+  }
 }
 
 export const rankingRoutes = [
@@ -202,6 +218,21 @@ export const rankingRoutes = [
         db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json, updated_at) VALUES (?, ?, ?, ?, ?)").run(id, next, name, JSON.stringify(values), stamp);
       }
       sendJson(response, 200, { name, values, updatedAt: stamp });
+    },
+  },
+  // Replaces the list of planned features of an item that already exists.
+  {
+    method: "PUT",
+    path: "/api/rankings/:id/items/:name/features",
+    handler: async (request, response, { id, name }) => {
+      requireUser(request);
+      const { features } = await readJson(request);
+      checkFeatures(features);
+
+      const { changes } = db.prepare("UPDATE ranking_items SET features_json = ? WHERE ranking_id = ? AND name = ?").run(JSON.stringify(features), id, name);
+      if (!changes) throw new HttpError(404, "No such item in that ranking");
+
+      sendJson(response, 200, { name, features });
     },
   },
   {

@@ -56,7 +56,7 @@ export default function ProjectPriority() {
         <input type="checkbox" checked={showScore} onChange={(changeEvent) => setShowScore(changeEvent.target.checked)} /> Show score
       </label>
       <input type="search" className="rankings-search" placeholder="Search by name…" value={search} onChange={(changeEvent) => setSearch(changeEvent.target.value)} />
-      <RankingTable key={search} ranking={shown} source={ranking} showScore={showScore} search={search}
+      <RankingTable key={search} ranking={shown} source={ranking} showScore={showScore} showFeatures search={search}
         sort={sort} canEdit={isText(auth.user)} onSaved={load}
         onSort={(sortColumn) => setSort((prev) => (prev.key === sortColumn ? { key: sortColumn, descending: !prev.descending } : firstSort(sortColumn)))} /* Clicking the sorted column flips its direction; a new column starts in its first direction. */
       />

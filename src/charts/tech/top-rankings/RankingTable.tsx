@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { callApi } from "../../../api";
+import { FeaturesModal } from "./FeaturesModal";
 import { InfoCell, NameCell, RatedCell, type SaveCell, heat } from "./RankingCells";
 import { COLD_LABEL, DECOMMISSIONED_LABEL, LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isCold, isDimmed, withQuality, withStatus } from "./maintenance";
 import { type Column, type Item, type Ranking, fractionBetween, isNumber, letterGrade, rankItems } from "./score";
@@ -112,12 +113,13 @@ function cellSaver(ranking: Ranking, source: Ranking, onSaved: () => Promise<voi
 interface HeadProps {
   columns: TableColumns;
   showScore: boolean;
+  showFeatures: boolean;
   sort: Sort;
   onSort: (sortColumn: SortKey) => void;
 }
 
 /** The header row: rank, name, information columns, score, grade, then the rated columns with their weights. */
-function TableHead({ columns, showScore, sort, onSort }: HeadProps) {
+function TableHead({ columns, showScore, showFeatures, sort, onSort }: HeadProps) {
   return (
     <thead>
       <tr>
@@ -135,6 +137,7 @@ function TableHead({ columns, showScore, sort, onSort }: HeadProps) {
             <small>×{column.weight}</small>
           </th>
         ))}
+        {showFeatures && <th title="Planned features">Features</th>}
 
       </tr>
     </thead>
@@ -150,10 +153,11 @@ interface RowProps {
   saveCell: SaveCell;
   dimmed: boolean;
   cold: boolean;
+  onFeatures?: (item: Item) => void;
 }
 
 /** One ranked item: rank, name, information, score, grade and rated cells. */
-function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, dimmed, cold }: RowProps) {
+function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, dimmed, cold, onFeatures }: RowProps) {
   const { item, score, grade, rank } = rankedRow;
   const cell = { item, canEdit, saveCell };
 
@@ -169,6 +173,11 @@ function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, s
         <small> ({letterGrade(grade)})</small>
       </td>
       {columns.rated.map(({ column, index }) => <RatedCell key={column.label} {...cell} column={column} index={index} episodic={item.values[columns.episodicIndex]} />)}
+      {onFeatures && (
+        <td>
+          {canEdit ? <button type="button" className="rankings-features" title={`Edit ${item.name}'s planned features`} onClick={() => onFeatures(item)}>{item.features?.length ?? 0}</button> : (item.features?.length ?? 0)}
+        </td>
+      )}
     </tr>
   );
 }
@@ -182,12 +191,16 @@ interface TableProps {
   onSort: (sortColumn: SortKey) => void;
   canEdit: boolean;
   onSaved: () => Promise<void>;
+
+  /** Adds a Features column with each item's number of planned features, which opens a pop-up to edit them when `canEdit`. */
+  showFeatures?: boolean;
 }
 
 /** One ranking as a table: rank, name, information columns, score, then the rated columns heaviest first. `ranking` is what is shown; `source` is the same data as saved, which edits start from. */
-export function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdit, onSaved }: TableProps) {
+export function RankingTable({ ranking, source, showScore, search, sort, onSort, canEdit, onSaved, showFeatures = false }: TableProps) {
   const columns = splitColumns(ranking);
   const [shown, setShown] = useState(PAGE_SIZE);
+  const [featuresOf, setFeaturesOf] = useState<string | null>(null);
 
   // Dimmed items (decommissioned or wishlist) sit where their score puts them, but only the others are numbered.
   const dimmed = (item: Item) => isDimmed(ranking, item);
@@ -200,9 +213,9 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
   return (
     <>
       <table>
-        <TableHead columns={columns} showScore={showScore} sort={sort} onSort={onSort} />
+        <TableHead columns={columns} showScore={showScore} showFeatures={showFeatures} sort={sort} onSort={onSort} />
         <tbody>
-          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} dimmed={dimmed(rankedRow.item)} cold={isCold(ranking, rankedRow.item)} />)}
+          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} dimmed={dimmed(rankedRow.item)} cold={isCold(ranking, rankedRow.item)} onFeatures={showFeatures ? (item) => setFeaturesOf(item.name) : undefined} />)}
         </tbody>
       </table>
       {matching.length > shown && (
@@ -210,7 +223,10 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
           Show next {Math.min(PAGE_SIZE, matching.length - shown)} ({shown} of {matching.length} shown)
         </button>
       )}
-
+      {/* The item is looked up by name so the pop-up always shows the latest saved list. */}
+      {canEdit && featuresOf !== null && ranking.items.find((item) => item.name === featuresOf) && (
+        <FeaturesModal key={featuresOf} rankingId={ranking.id} item={ranking.items.find((item) => item.name === featuresOf) as Item} onClose={() => setFeaturesOf(null)} onSaved={onSaved} />
+      )}
     </>
   );
 }
