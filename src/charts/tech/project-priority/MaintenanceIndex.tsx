@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { heat } from "../top-rankings/RankingCells";
-import { PERCENT, maintenance, maintenancePercent } from "../top-rankings/maintenance";
+import { DEFAULT_AI_USE as aiUse, PERCENT, maintenance, maintenancePercent } from "../top-rankings/maintenance";
 import { type Ranking, fractionBetween } from "../top-rankings/score";
 
 /** The n-Factor is shown to this many decimals. */
@@ -9,15 +9,11 @@ const N_FACTOR_DIGITS = 3;
 /** The Average Quality card is red at this quality. */
 const LOWEST_QUALITY_HEAT = 50;
 
-/** The Extent of AI Use slider runs from none (0, all manual) to this much added n-Factor. */
-const MAX_AI_USE = 1;
-const AI_USE_STEP = 0.05;
-
 /** The Average Quality slider moves in tenths of a percent. */
 const QUALITY_STEP = 0.1;
 
 /** The code maintenance summary for rankings that have lines and quality columns. */
-export function MaintenanceIndex({ ranking, aiUse, onAiUse }: { ranking: Ranking; aiUse: number; onAiUse: (aiUse: number) => void }) {
+export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
   const [qualityOverride, setQualityOverride] = useState<number | null>(null);
   const actual = maintenance(ranking, aiUse);
   const result = maintenance(ranking, aiUse, qualityOverride ?? undefined);
@@ -27,10 +23,6 @@ export function MaintenanceIndex({ ranking, aiUse, onAiUse }: { ranking: Ranking
   return (
     <section className="rankings-index">
       <h3>Code Maintenance Index</h3>
-      <label title="How much AI adds to the n-Factor a developer can hold together. 0 is fully manual; it moves the maintenance percent and the manual lines.">
-        Extent of AI Use: {Math.round(aiUse * PERCENT)}%{" "}
-        <input type="range" min={0} max={MAX_AI_USE} step={AI_USE_STEP} value={aiUse} onChange={(changeEvent) => onAiUse(Number(changeEvent.target.value))} />
-      </label>
       <label title="Average quality used in the numbers below. It starts at the real average; move it to see what the maintenance numbers would be at a different quality.">
         Average Quality: {result.averageQuality.toFixed(1)}%{" "}
         <input type="range" min={0} max={PERCENT} step={QUALITY_STEP} value={result.averageQuality} onChange={(changeEvent) => setQualityOverride(Number(changeEvent.target.value))} />

@@ -43,62 +43,88 @@ h1 {
   margin: 0 0 12px;
 }
 
-.chart-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 12px;
+.page-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
 }
 
-/* Columns (not grid rows) so a short tile doesn't leave a gap under it. */
-@media (min-width: 700px) {
-  .category-grid {
-    columns: 2;
-    column-gap: 16px;
-  }
+.page-table th {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 0 20px;
 }
 
-.category {
-  break-inside: avoid;
-  margin-bottom: 16px;
-  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
-  border-radius: 12px;
-  padding: 16px;
+.page-table td {
+  padding: 22px 20px;
   background: color-mix(in srgb, var(--fg) 4%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  vertical-align: middle;
 }
 
-.category h2 {
-  margin: 0 0 12px;
+.page-table td:first-child {
+  border-left: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-radius: 12px 0 0 12px;
 }
 
-.chart-list li {
-  position: relative;
-  background: var(--bg);
-  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
-  border-radius: 10px;
-  padding: 16px;
+.page-table td:last-child {
+  border-right: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-radius: 0 12px 12px 0;
 }
 
-.chart-list li:hover {
+.page-table tbody tr {
+  cursor: pointer;
+}
+
+.page-table tbody tr:hover td {
+  background: color-mix(in srgb, var(--link) 10%, transparent);
   border-color: var(--link);
 }
 
-/* Stretch the title link over the whole tile so the entire tile is clickable. */
-.chart-list a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+.page-table a {
+  font-size: 19px;
+  font-weight: 600;
 }
 
-.chart-list a {
+.page-table p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.page-rank,
+.page-lines {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.page-rank {
+  color: var(--muted);
+  width: 1%;
+}
+
+.page-lines {
+  text-align: right;
   font-size: 18px;
 }
 
-.chart-list p {
-  margin: 4px 0 0;
-  font-size: 14px;
-  color: color-mix(in srgb, var(--muted) 70%, var(--bg));
+.page-category {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .page-table .page-category {
+    display: none;
+  }
+
+  .page-table td {
+    padding: 16px 12px;
+  }
 }
 
 

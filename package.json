@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "PORT=3001 node --env-file-if-exists=.env server/index.js & trap 'kill $!' EXIT; vite",
     "dev:site": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/page-sizes.mjs && tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "data": "python3 scripts/build-language-data.py",

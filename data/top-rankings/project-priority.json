@@ -1,6 +1,6 @@
 {
   "id": "project-priority",
-  "title": "Project Priority",
+  "title": "Code Project Index",
   "columns": [
     {"label": "Stack", "short": "Stack"},
     {"label": "Fun", "short": "Fun", "weight": 6},

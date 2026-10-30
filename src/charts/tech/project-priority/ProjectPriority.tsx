@@ -5,7 +5,7 @@ import { EditGear } from "../../../auth/EditGear";
 import { useAuth } from "../../../auth/useAuth";
 import { RankingEditor } from "../top-rankings/RankingEditor";
 import { RankingTable, type Sort, firstSort } from "../top-rankings/RankingTable";
-import { DEFAULT_AI_USE, SCAFFOLDING_LINES, withQuality, withScaffolding, withStatus } from "../top-rankings/maintenance";
+import { SCAFFOLDING_LINES, withQuality, withScaffolding, withStatus } from "../top-rankings/maintenance";
 import { PROJECT_PRIORITY_ID } from "../top-rankings/TopRankings";
 import "../top-rankings/styles.css";
 import { type Ranking, isText } from "../top-rankings/score";
@@ -18,7 +18,6 @@ export default function ProjectPriority() {
   const [showScore, setShowScore] = useState(false);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<Sort>(firstSort("rank"));
-  const [aiUse, setAiUse] = useState(DEFAULT_AI_USE);
 
   // Logged in means the table cells can be clicked and edited in place.
   const auth = useAuth();
@@ -48,7 +47,7 @@ export default function ProjectPriority() {
       <EditGear label="Edit rankings" auth={auth}>
         <RankingEditor ranking={ranking} onSaved={load} />
       </EditGear>
-      <MaintenanceIndex ranking={shown} aiUse={aiUse} onAiUse={setAiUse} />
+      <MaintenanceIndex ranking={shown} />
       <p className="muted">
         Score is each rating squared times its column's weight, added up. The weight is shown under each column name. Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
       </p>

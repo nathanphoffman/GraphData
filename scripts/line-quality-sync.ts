@@ -1,6 +1,6 @@
 // Line counts (tokei) and quality score (codequality) per project.
 // Run: node scripts/line-quality-sync.ts [--json] [--lang] [--no-score] [--write-db]   (node 24+ runs .ts directly; `bun` also works)
-// --write-db saves each project's lines and quality into the local Project Priority ranking (then run `just sync-prod`)
+// --write-db saves each project's lines and quality into the local Code Project Index ranking (then run `just sync-prod`)
 //
 // Count = every line (code + comments + blanks), in programming/markup languages.
 // - tokei already skips anything in .gitignore (node_modules, target, dist, .venv ...)
@@ -167,7 +167,7 @@ function count(project: Project): { total: number; langs: Record<string, number>
   return { total, langs };
 }
 
-// Saves lines and quality into the local Project Priority ranking, marking the items changed now so the next sync pushes them
+// Saves lines and quality into the local Code Project Index ranking, marking the items changed now so the next sync pushes them
 async function writeToDb(rows: { name: string; lines: number; quality: Quality }[]) {
   const { db } = await import("../server/db.js");
   await import("../server/rankings.js"); // creates the tables and applies any column changes

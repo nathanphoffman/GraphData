@@ -142,7 +142,7 @@ export const charts: ChartEntry[] = [
   },
   {
     id: "project-priority",
-    title: "Project Priority",
+    title: "Code Project Index",
     category: TECH_CATEGORY,
     description:
       "My projects ranked by fun, usefulness, job value, difficulty, size, quality and status, with a code maintenance index (n-Factor) for the whole codebase.",
