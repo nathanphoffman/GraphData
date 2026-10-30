@@ -255,7 +255,7 @@ function Loops() {
   const [error, setError] = useState("");
   const [stopped, setStopped] = useState(false);
 
-  // Load when the page opens, then every 15 seconds while this window is focused, until an hour has passed (a refresh starts over).
+  // Load when the page opens, then every 15 seconds while the tab is visible, until an hour has passed (a refresh starts over).
   useEffect(() => {
     const started = Date.now();
     const load = () =>
@@ -265,7 +265,8 @@ function Loops() {
           setError("");
         })
         .catch((problem: Error) => setError(problem.message));
-    const active = () => document.hasFocus() && !document.hidden;
+    // Visible, not focused: a page open on a second screen keeps updating while you type somewhere else.
+    const active = () => !document.hidden;
     const expired = () => Date.now() - started > STOP_POLLING_MS;
 
     load();
@@ -280,10 +281,12 @@ function Loops() {
       if (!expired()) load();
     };
     window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onFocus);
 
     return () => {
       clearInterval(timer);
       window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onFocus);
     };
   }, []);
 
