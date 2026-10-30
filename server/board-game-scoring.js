@@ -40,9 +40,26 @@ export const WEIGHT_GRID = Array.from({ length: 81 }, (_, step) => Math.round((1
 
 const gameKey = (game) => `${game.title}|${game.releaseDate}`;
 
+/** Places below this earn no points. */
+const POINTS_CUTOFF = 1000;
+
+/** How steeply points grow towards the top of the list. */
+const POINTS_EXPONENT = 1.5;
+
+/** What a place in the list is worth: the nearer the top, the more it is worth, and nothing from the cutoff down. */
+export function pointsForPosition(position) {
+  return Math.max(0, POINTS_CUTOFF - position) ** POINTS_EXPONENT;
+}
+
+/** The points for a game's place in the ranking for a preference, or 0 when it is not in the list. */
+function totalPoints(games) {
+  return games.reduce((sum, game) => sum + pointsForPosition(game.position), 0);
+}
+
 /**
- * Finds the weight preference that puts the owned games highest in the list: for every weight, the positions of the owned games are
- * added up and the lowest total wins. Owned games the list has no score for are left out of every total, so they cannot change the winner.
+ * Finds the weight preference that puts the owned games highest in the list: for every weight, each owned game earns points for its
+ * place (see pointsForPosition) and the highest total wins, so getting games into the top 100 matters far more than the bottom of the list.
+ * Owned games the list has no score for are left out of every total, so they cannot change the winner.
  * When several weights tie, the middle one is the suggestion.
  */
 export function findBestWeight(games, owned) {
@@ -50,18 +67,19 @@ export function findBestWeight(games, owned) {
   const totals = WEIGHT_GRID.map((preference) => {
     const found = rankGames(games, preference).map((game, index) => ({ title: game.title, releaseDate: game.releaseDate, position: index + 1 })).filter((game) => ownedKeys.has(gameKey(game)));
 
-    return { preference, total: found.reduce((sum, game) => sum + game.position, 0), games: found };
+    return { preference, points: totalPoints(found), games: found };
   });
 
-  const lowest = Math.min(...totals.map(({ total }) => total));
-  const tied = totals.filter(({ total }) => total === lowest);
+  const highest = Math.max(...totals.map(({ points }) => points));
+  const tied = totals.filter(({ points }) => points === highest);
   const best = tied[Math.floor(tied.length / 2)];
   const foundKeys = new Set(best.games.map(gameKey));
+  const noPreference = rankGames(games, 0).map((game, index) => ({ ...game, position: index + 1 })).filter((game) => ownedKeys.has(gameKey(game)));
 
   return {
-    best: { preference: best.preference, total: best.total, games: [...best.games].sort((first, second) => first.position - second.position) },
+    best: { preference: best.preference, points: best.points, games: [...best.games].sort((first, second) => first.position - second.position) },
     tied: [tied[0].preference, tied[tied.length - 1].preference],
-    noPreferenceTotal: rankGames(games, 0).reduce((sum, game, index) => (ownedKeys.has(gameKey(game)) ? sum + index + 1 : sum), 0),
+    noPreferencePoints: totalPoints(noPreference),
     missing: owned.filter((game) => !foundKeys.has(gameKey(game))).map((game) => game.title),
   };
 }

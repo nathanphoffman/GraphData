@@ -13,6 +13,7 @@ import WeightJourney from "./science/weight-journey/WeightJourney";
 import TopRankings from "./tech/top-rankings/TopRankings";
 import BoardGames from "./tech/board-games/BoardGames";
 import ProjectPriority from "./tech/project-priority/ProjectPriority";
+import CodeQualityEntropy from "./tech/code-quality-entropy/CodeQualityEntropy";
 import RalphLoops from "./tech/ralph-loops/RalphLoops";
 
 /** Home page sections, in display order. */
@@ -155,6 +156,14 @@ export const charts: ChartEntry[] = [
     description:
       "Thousands of BoardGameGeek games re-ranked for the weight (complexity) you like to play, so a light-game fan and a heavy-game fan each get their own list. Paged and searchable.",
     component: BoardGames,
+  },
+  {
+    id: "code-quality-entropy",
+    title: "Code Quality Entropy Model",
+    category: TECH_CATEGORY,
+    description:
+      "A Monte Carlo simulation of how code quality drifts over many commits: every commit can help or hurt, and the more commits and the lower the quality, the likelier the damage. Tune commit impact, entropy and developer intuition.",
+    component: CodeQualityEntropy,
   },
   {
     id: "ralph-loops",

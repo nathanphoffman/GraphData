@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { findBestWeight, rankGames, scoreGame } from "../server/board-game-scoring.js";
+import { findBestWeight, pointsForPosition, rankGames, scoreGame } from "../server/board-game-scoring.js";
 
 const light = { title: "Light", releaseDate: "2020", average: 7.5, weight: 1.5, num: 10000, rank: 200 };
 const heavy = { title: "Heavy", releaseDate: "2020", average: 7.5, weight: 4, num: 10000, rank: 100 };
@@ -43,9 +43,21 @@ describe("findBestWeight", () => {
     expect(findBestWeight(games, [games[2], games[3]]).best.preference).toBeGreaterThan(3);
   });
 
-  it("adds up the owned games' positions and reports games it has no score for", () => {
+  it("adds up points for the owned games' positions and reports games it has no score for", () => {
     const result = findBestWeight(games, [games[0], { title: "Nope", releaseDate: "1999" }]);
-    expect(result.best.total).toBe(result.best.games[0].position);
+    expect(result.best.points).toBe(pointsForPosition(result.best.games[0].position));
     expect(result.missing).toEqual(["Nope"]);
+  });
+});
+
+describe("pointsForPosition", () => {
+  it("is worth (1000 - place) to the power 1.5, and nothing from place 1000 down", () => {
+    expect(pointsForPosition(1)).toBeCloseTo(999 ** 1.5);
+    expect(pointsForPosition(1000)).toBe(0);
+    expect(pointsForPosition(5000)).toBe(0);
+  });
+
+  it("rewards the top far more than the same step lower down", () => {
+    expect(pointsForPosition(1) - pointsForPosition(11)).toBeGreaterThan(pointsForPosition(901) - pointsForPosition(911));
   });
 });
