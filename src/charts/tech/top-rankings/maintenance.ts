@@ -62,7 +62,7 @@ const TENTH = 10;
 const NEUTRAL_QUALITY = 75;
 
 /** How much of the combined n-Factor comes from the future one. */
-const FUTURE_WEIGHT = 0.75;
+export const FUTURE_WEIGHT = 0.75;
 
 /** The n-Factor as a percent: 100% while its manual n-Factor (the n-Factor minus aiUse) is 5 or less, falling in a straight line to 0% at 10. */
 export function maintenancePercent(n: number, aiUse: number): number {
@@ -83,6 +83,11 @@ export interface Maintenance {
   manualLines: number;
   gradedManualLines: number;
   gradedFutureManualLines: number;
+  /** The lines of the active projects, and of the cold ones at their full size (before COLD_SHARE), now and after growth. */
+  warmLines: number;
+  coldLines: number;
+  futureWarmLines: number;
+  futureColdLines: number;
 }
 
 /** The lines a hand-written codebase would be equivalent to at this n-Factor: aiUse off it, raised to itself. */
@@ -136,6 +141,7 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
 
   let totalLines = 0;
   let futureLines = 0;
+  let [warmLines, coldLines, futureWarmLines, futureColdLines] = [0, 0, 0, 0];
   let qualityLines = 0;
   let weighted = 0;
 
@@ -146,12 +152,22 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
     const [rawCount, rating] = [values[lines], qualityOf(values, familiarity, computed)];
 
     if (!isNumber(rawCount)) continue;
-    const count = isCold(ranking, item) ? rawCount * COLD_SHARE : rawCount;
+    const cold = isCold(ranking, item);
+    const count = cold ? rawCount * COLD_SHARE : rawCount;
     totalLines += count;
 
     // A project with no growth number is expected to stay the size it is.
     const times = growth < 0 ? undefined : values[growth];
-    futureLines += count * (isNumber(times) ? times : 1);
+    const grown = isNumber(times) ? times : 1;
+    futureLines += count * grown;
+
+    if (cold) {
+      coldLines += rawCount;
+      futureColdLines += rawCount * grown;
+    } else {
+      warmLines += rawCount;
+      futureWarmLines += rawCount * grown;
+    }
 
     if (rating === null) continue;
     qualityLines += count;
@@ -184,6 +200,10 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
     manualLines: manualLinesAt(ungraded, aiUse),
     gradedManualLines: manualLinesAt(graded, aiUse),
     gradedFutureManualLines: manualLinesAt(gradedFuture, aiUse),
+    warmLines,
+    coldLines,
+    futureWarmLines,
+    futureColdLines,
   };
 }
 
