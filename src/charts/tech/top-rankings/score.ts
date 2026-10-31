@@ -16,7 +16,7 @@ export interface Column {
 
 /**
  * How a raw value becomes a rating from 1 to 5, set per column in the ranking's JSON file:
- * - peak: `at` is the best value (5). Below it the rating falls quickly to `fromRating` at `from`; above it, in a straight line to 1 at `to`.
+ * - peak: `at` is the best value (5). Below it the rating falls in a straight line to `fromRating` at `from`; above it, in a straight line to 1 at `to`.
  *   With `kneeAt` and `kneeRating`, the line above `at` is gentle down to `kneeRating` at `kneeAt`, then steeper to 1 at `to`.
  * - log: 5 at `from` down to 1 at `to`, on a log scale so a few huge values do not flatten the rest. For things where less is better.
  * - log1p: 5 at a value of 0 down to 1 at `to`, on a log scale of 1 + the value, so the first few count for much more than later ones. For counts where fewer is better.
@@ -105,7 +105,7 @@ function applyCurve(curve: Curve, value: number): number {
 
       const distance = (value - curve.from) / (curve.at - curve.from);
 
-      return clamp(curve.fromRating + (HIGHEST_RATING - curve.fromRating) * distance * Math.abs(distance));
+      return clamp(curve.fromRating + (HIGHEST_RATING - curve.fromRating) * distance);
     }
 
     case "log": {

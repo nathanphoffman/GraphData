@@ -126,11 +126,12 @@ describe("effectiveRating curves", () => {
 
   const rate = (name: keyof typeof curves, value: number) => effectiveRating({ label: "A", weight: 1, curve: curves[name] }, value);
 
-  it("rates a weight of 2 best, falling off faster below it than above", () => {
+  it("rates a weight of 2 best, falling in a straight line to 3 at 1 and to 1 at 5", () => {
     expect(rate("weight", 2)).toBe(5);
     expect(rate("weight", 1)).toBe(3);
     expect(rate("weight", 5)).toBe(1);
-    expect(5 - rate("weight", 1.5)).toBeGreaterThan(5 - rate("weight", 2.5));
+    expect(rate("weight", 1.5)).toBeCloseTo(4);
+    expect(rate("weight", 3.5)).toBeCloseTo(3);
   });
 
   it("rates the shortest time 5 and the longest 1", () => {
