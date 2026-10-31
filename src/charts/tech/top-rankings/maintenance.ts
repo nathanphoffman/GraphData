@@ -8,14 +8,11 @@ const COMPUTED_LABEL = "Computed Quality";
 export const QUALITY_LABEL = "Quality";
 const GROWTH_LABEL = "xLines";
 
-/** An information column holding 1 for a project that is retired: it still saves and syncs, but sits last, greyed, and is left out of the maintenance numbers. */
+/** An information column holding 1 for a project that is retired: it still saves and syncs, but sits last and greyed, and counts in the n-factors at only DECOMMISSIONED_SHARE of its lines. */
 export const DECOMMISSIONED_LABEL = "Decommissioned";
 
-/** An information column holding 1 for a project that is cold (set aside): it still counts in the maintenance numbers, but only at COLD_SHARE of its lines. */
-export const COLD_LABEL = "Cold";
-
-/** How much of a cold project's lines count towards the maintenance numbers, and how much weight its quality has. */
-const COLD_SHARE = 1 / 6;
+/** How much of a decommissioned project's lines count towards the n-factors, and how much weight its quality has. */
+const DECOMMISSIONED_SHARE = 1 / 6;
 
 /** An information column holding 1 for an item that is only a wish (not owned yet): it is ranked to see if it is worth it, but greyed and left out of the numbering. */
 export const WISHLIST_LABEL = "Wishlist";
@@ -30,24 +27,14 @@ function isChecked(ranking: Ranking, item: Ranking["items"][number], label: stri
 /** Whether the item is marked decommissioned in this ranking. */
 export const isDecommissioned = (ranking: Ranking, item: Ranking["items"][number]): boolean => isChecked(ranking, item, DECOMMISSIONED_LABEL);
 
-/** Whether the item is marked cold in this ranking. */
-export const isCold = (ranking: Ranking, item: Ranking["items"][number]): boolean => isChecked(ranking, item, COLD_LABEL);
-
 /** Whether the item is greyed out and left out of the rank numbers: decommissioned or on the wishlist. */
 export const isDimmed = (ranking: Ranking, item: Ranking["items"][number]): boolean => isDecommissioned(ranking, item) || isChecked(ranking, item, WISHLIST_LABEL);
 
 /** Lines added to every project's Completed Lines when the page shows and scores them, as the minimum scaffolding any project needs. Never saved. */
 export const SCAFFOLDING_LINES = 256;
 
-/** Percent scale, used for qualities and for the maintenance percent. */
+/** Percent scale, used for qualities. */
 export const PERCENT = 100;
-
-/** The manual n-Factor (hand-written, no AI) that is 100% maintainable, and the one that is 0%. */
-const MANUAL_FULL_N = 5;
-const MANUAL_ZERO_N = 10;
-
-/** How much each manual n-Factor above the full mark takes off the maintenance fraction. */
-const LOSS_PER_N = 1 / (MANUAL_ZERO_N - MANUAL_FULL_N);
 
 /** How much AI use adds to the n-Factor a developer can hold together, by default. */
 export const DEFAULT_AI_USE = 0.75;
@@ -64,30 +51,24 @@ const NEUTRAL_QUALITY = 75;
 /** How much of the combined n-Factor comes from the future one. */
 export const FUTURE_WEIGHT = 0.75;
 
-/** The n-Factor as a percent: 100% while its manual n-Factor (the n-Factor minus aiUse) is 5 or less, falling in a straight line to 0% at 10. */
-export function maintenancePercent(n: number, aiUse: number): number {
-  return Math.max(0, 1 - (Math.max(n - aiUse, MANUAL_FULL_N) - MANUAL_FULL_N) * LOSS_PER_N) * PERCENT;
+/** One n-factor with the lines behind it; the lines of decommissioned projects are counted at DECOMMISSIONED_SHARE. */
+export interface NFactorResult {
+  /** The n-Factor with the quality adjustment taken off. */
+  graded: number;
+
+  /** The lines the graded n-Factor stands for (n^n), and the same with the extent of AI use taken off first. */
+  equivalentLines: number;
+  manualLines: number;
+
+  /** The decommissioned projects' lines at their full size (before DECOMMISSIONED_SHARE). */
+  decommissionedLines: number;
 }
 
 export interface Maintenance {
-  totalLines: number;
-  nFactor: number;
   averageQuality: number;
-  gradedNFactor: number;
-  futureLines: number;
-  futureNFactor: number;
-  gradedFutureNFactor: number;
-  combinedNFactor: number;
-  maintenancePercent: number;
-  equivalentLines: number;
-  manualLines: number;
-  gradedManualLines: number;
-  gradedFutureManualLines: number;
-  /** The lines of the active projects, and of the cold ones at their full size (before COLD_SHARE), now and after growth. */
-  warmLines: number;
-  coldLines: number;
-  futureWarmLines: number;
-  futureColdLines: number;
+  current: NFactorResult;
+  future: NFactorResult;
+  projected: NFactorResult;
 }
 
 /** The lines a hand-written codebase would be equivalent to at this n-Factor: aiUse off it, raised to itself. */
@@ -130,7 +111,12 @@ export function qualityOf(values: Ranking["items"][number]["values"], familiarit
   return found.length ? found.reduce((runningTotal, value) => runningTotal + value, 0) / found.length : null;
 }
 
-/** The code maintenance numbers for a ranking with lines and quality columns, or null when it has neither or no lines. A qualityOverride replaces the average quality worked out from the projects. */
+/** An n-Factor result for these (decommissioned-weighted) lines and the already adjusted n. */
+function resultFor(graded: number, decommissionedLines: number, aiUse: number): NFactorResult {
+  return { graded, equivalentLines: graded ** graded, manualLines: manualLinesAt(graded, aiUse), decommissionedLines };
+}
+
+/** The current, future and projected n-factors for a ranking with lines and quality columns, or null when it has neither or no lines. A qualityOverride replaces the average quality worked out from the projects. */
 export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: number): Maintenance | null {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
   const familiarity = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
@@ -141,19 +127,17 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
 
   let totalLines = 0;
   let futureLines = 0;
-  let [warmLines, coldLines, futureWarmLines, futureColdLines] = [0, 0, 0, 0];
+  let [decomLines, futureDecomLines] = [0, 0];
   let qualityLines = 0;
   let weighted = 0;
 
   for (const item of ranking.items) {
-    if (isDecommissioned(ranking, item)) continue;
-
     const { values } = item;
     const [rawCount, rating] = [values[lines], qualityOf(values, familiarity, computed)];
 
     if (!isNumber(rawCount)) continue;
-    const cold = isCold(ranking, item);
-    const count = cold ? rawCount * COLD_SHARE : rawCount;
+    const decommissioned = isDecommissioned(ranking, item);
+    const count = decommissioned ? rawCount * DECOMMISSIONED_SHARE : rawCount;
     totalLines += count;
 
     // A project with no growth number is expected to stay the size it is.
@@ -161,12 +145,9 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
     const grown = isNumber(times) ? times : 1;
     futureLines += count * grown;
 
-    if (cold) {
-      coldLines += rawCount;
-      futureColdLines += rawCount * grown;
-    } else {
-      warmLines += rawCount;
-      futureWarmLines += rawCount * grown;
+    if (decommissioned) {
+      decomLines += rawCount;
+      futureDecomLines += rawCount * grown;
     }
 
     if (rating === null) continue;
@@ -177,33 +158,15 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
   if (totalLines === 0 || qualityLines === 0) return null;
 
   const averageQuality = qualityOverride ?? weighted / qualityLines;
-  const currentNFactor = nFactor(totalLines);
   const adjustment = (averageQuality - NEUTRAL_QUALITY) / PERCENT;
-  const futureN = nFactor(futureLines);
-  const [graded, gradedFuture] = [currentNFactor - adjustment, futureN - adjustment];
-  const combined = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
-
-  // The lines figures ignore quality, as if it were the neutral 75.
-  const ungraded = currentNFactor * (1 - FUTURE_WEIGHT) + futureN * FUTURE_WEIGHT;
+  const [graded, gradedFuture] = [nFactor(totalLines) - adjustment, nFactor(futureLines) - adjustment];
+  const projected = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
 
   return {
-    totalLines,
-    nFactor: currentNFactor,
     averageQuality,
-    gradedNFactor: graded,
-    futureLines,
-    futureNFactor: futureN,
-    gradedFutureNFactor: gradedFuture,
-    combinedNFactor: combined,
-    maintenancePercent: maintenancePercent(combined, aiUse),
-    equivalentLines: ungraded ** ungraded,
-    manualLines: manualLinesAt(ungraded, aiUse),
-    gradedManualLines: manualLinesAt(graded, aiUse),
-    gradedFutureManualLines: manualLinesAt(gradedFuture, aiUse),
-    warmLines,
-    coldLines,
-    futureWarmLines,
-    futureColdLines,
+    current: resultFor(graded, decomLines, aiUse),
+    future: resultFor(gradedFuture, futureDecomLines, aiUse),
+    projected: resultFor(projected, decomLines * (1 - FUTURE_WEIGHT) + futureDecomLines * FUTURE_WEIGHT, aiUse),
   };
 }
 
@@ -224,15 +187,14 @@ export function withQuality(ranking: Ranking): Ranking {
   return { ...ranking, items };
 }
 
-/** The rated column holding each item's status out of 5, worked out from its Decommissioned and Cold checkboxes whenever the ranking loads or an item is saved. */
+/** The rated column holding each item's status out of 5, worked out from its Decommissioned checkbox whenever the ranking loads or an item is saved. */
 export const STATUS_LABEL = "Status";
 
-/** The status rating of an active, a cold and a decommissioned project. */
+/** The status rating of an active and a decommissioned project. */
 const ACTIVE_STATUS = 5;
-const COLD_STATUS = 3;
 const DECOMMISSIONED_STATUS = 1;
 
-/** The ranking with each item's Status set from its Decommissioned and Cold checkboxes (left as it is when the ranking has no Status column). */
+/** The ranking with each item's Status set from its Decommissioned checkbox (left as it is when the ranking has no Status column). */
 export function withStatus(ranking: Ranking): Ranking {
   const status = ranking.columns.findIndex((column) => column.label === STATUS_LABEL);
 
@@ -240,7 +202,7 @@ export function withStatus(ranking: Ranking): Ranking {
 
   // Give each item its status, padding short value lists so the Status lands in the right column.
   const items = ranking.items.map((item) => {
-    const rating = isDecommissioned(ranking, item) ? DECOMMISSIONED_STATUS : isCold(ranking, item) ? COLD_STATUS : ACTIVE_STATUS;
+    const rating = isDecommissioned(ranking, item) ? DECOMMISSIONED_STATUS : ACTIVE_STATUS;
     const values = ranking.columns.map((_, index) => (index === status ? rating : (item.values[index] ?? null)));
 
     return { ...item, values };

@@ -15,7 +15,6 @@
     {"label": "Computed Quality", "short": "Computed", "was": "Quality"},
     {"label": "Quality", "short": "Quality", "weight": 3, "curve": {"type": "linear", "from": 60, "to": 95}},
     {"label": "Decommissioned", "short": "Decom"},
-    {"label": "Cold", "short": "Cold"},
     {"label": "Status", "short": "Status", "weight": 3}
   ],
   "items": [

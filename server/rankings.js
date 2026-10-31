@@ -47,6 +47,9 @@ for (const [field, type] of Object.entries(OPTIONAL_FIELDS)) {
 // Databases made before the grade curve existed get its column added.
 if (!db.prepare("PRAGMA table_info(rankings)").all().some((column) => column.name === "grade_curve")) db.exec("ALTER TABLE rankings ADD COLUMN grade_curve TEXT");
 
+// Once weights are reordered on the site, the database's weights win over the JSON file's.
+if (!db.prepare("PRAGMA table_info(rankings)").all().some((column) => column.name === "weights_custom")) db.exec("ALTER TABLE rankings ADD COLUMN weights_custom INTEGER NOT NULL DEFAULT 0");
+
 // Databases made before items had a change time get it added; older items count as changed at time 0.
 if (!db.prepare("PRAGMA table_info(ranking_items)").all().some((column) => column.name === "updated_at")) {
   db.exec("ALTER TABLE ranking_items ADD COLUMN updated_at INTEGER NOT NULL DEFAULT 0");
@@ -139,7 +142,14 @@ function seed() {
         return;
       }
 
-      ranking.columns.forEach((column, index) => updateColumn.run(...columnToRow(column), ranking.id, index));
+      // Reordered weights are kept: the file's weights only apply until the first reorder.
+      const custom = db.prepare("SELECT weights_custom FROM rankings WHERE id = ?").get(ranking.id).weights_custom === 1;
+      const savedWeights = db.prepare("SELECT weight FROM ranking_columns WHERE ranking_id = ? ORDER BY position").all(ranking.id);
+      ranking.columns.forEach((column, index) => {
+        const row = columnToRow(column);
+        if (custom) row[COLUMN_FIELDS.indexOf("weight")] = savedWeights[index].weight;
+        updateColumn.run(...row, ranking.id, index);
+      });
       return;
     }
 
@@ -237,6 +247,28 @@ export const rankingRoutes = [
       if (!changes) throw new HttpError(404, "No such item in that ranking");
 
       sendJson(response, 200, { name, features });
+    },
+  },
+  // Sets the weights of the rated columns from their order, heaviest first: the first label gets xN and the last x1.
+  {
+    method: "PUT",
+    path: "/api/rankings/:id/weights",
+    handler: async (request, response, { id }) => {
+      requireUser(request);
+      const { order } = await readJson(request);
+      const rated = db.prepare("SELECT label FROM ranking_columns WHERE ranking_id = ? AND weight IS NOT NULL").all(id).map((column) => column.label);
+
+      if (!rated.length) throw new HttpError(404, "No such ranking");
+      if (!Array.isArray(order) || order.length !== rated.length || new Set(order).size !== rated.length || !order.every((label) => rated.includes(label))) {
+        throw new HttpError(400, "Order must list every rated column once");
+      }
+
+      db.exec("BEGIN");
+      order.forEach((label, index) => db.prepare("UPDATE ranking_columns SET weight = ? WHERE ranking_id = ? AND label = ?").run(order.length - index, id, label));
+      db.prepare("UPDATE rankings SET weights_custom = 1 WHERE id = ?").run(id);
+      db.exec("COMMIT");
+
+      sendJson(response, 200, { order });
     },
   },
   {

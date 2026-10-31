@@ -2,7 +2,7 @@ import { useState } from "react";
 import { callApi } from "../../../api";
 import { FeaturesModal } from "./FeaturesModal";
 import { InfoCell, NameCell, RatedCell, type SaveCell, heat } from "./RankingCells";
-import { COLD_LABEL, DECOMMISSIONED_LABEL, LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isCold, isDimmed, withQuality, withStatus } from "./maintenance";
+import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isDimmed, withQuality, withStatus } from "./maintenance";
 import { type Column, type Item, type Ranking, fractionBetween, isNumber, letterGrade, rankItems } from "./score";
 
 const PAGE_SIZE = 100;
@@ -91,15 +91,9 @@ function cellSaver(ranking: Ranking, source: Ranking, onSaved: () => Promise<voi
     const isLines = ranking.columns[index].label === LINES_LABEL && isNumber(value);
 
     // Copy the saved item with the one value changed; a Lines value comes back without the scaffolding lines.
-    const label = ranking.columns[index].label;
-
-    // Decommissioned and Cold exclude each other, so ticking one unticks the other.
-    const rival = value === 1 ? { [DECOMMISSIONED_LABEL]: COLD_LABEL, [COLD_LABEL]: DECOMMISSIONED_LABEL }[label] : undefined;
-    const rivalIndex = ranking.columns.findIndex((column) => column.label === rival);
-
-    // Pad short value lists so the rival column can be set to 0.
+    // Pad short value lists so every column has a value.
     const padded = ranking.columns.map((_, valueIndex) => saved.values[valueIndex] ?? null);
-    const changed = { ...saved, values: padded.map((oldValue, valueIndex) => (valueIndex === index ? (isLines ? value - SCAFFOLDING_LINES : value) : valueIndex === rivalIndex ? 0 : oldValue)) };
+    const changed = { ...saved, values: padded.map((oldValue, valueIndex) => (valueIndex === index ? (isLines ? value - SCAFFOLDING_LINES : value) : oldValue)) };
 
     // Quality and Status are worked out from the other values, so save them fresh along with the change.
     const { values } = withStatus(withQuality({ ...source, items: [changed] })).items[0];
@@ -116,10 +110,24 @@ interface HeadProps {
   showFeatures: boolean;
   sort: Sort;
   onSort: (sortColumn: SortKey) => void;
+
+  /** When set (logged in), the rated headers can be dragged to reorder; gets the new label order, heaviest first. */
+  onReorder?: (order: string[]) => void;
 }
 
 /** The header row: rank, name, information columns, score, grade, then the rated columns with their weights. */
-function TableHead({ columns, showScore, showFeatures, sort, onSort }: HeadProps) {
+function TableHead({ columns, showScore, showFeatures, sort, onSort, onReorder }: HeadProps) {
+  const [dragged, setDragged] = useState<string | null>(null);
+
+  // Dropping a header onto another puts it in that spot, and the ones in between shift over.
+  const drop = (target: string) => {
+    const order = columns.rated.map(({ column }) => column.label);
+    if (dragged === null || dragged === target) return;
+    order.splice(order.indexOf(dragged), 1);
+    order.splice(order.indexOf(target), 0, dragged);
+    onReorder?.(order);
+  };
+
   return (
     <thead>
       <tr>
@@ -132,7 +140,14 @@ function TableHead({ columns, showScore, showFeatures, sort, onSort }: HeadProps
         {showScore && <th title="Each rating squared times its weight, added up">Score</th>}
         <SortHeader label="Grade" sortKey="grade" sort={sort} onSort={onSort} title="The score as a grade out of 100 on a curve: it eases off near the top and drops faster further down" />
         {columns.rated.map(({ column }) => (
-          <th key={column.label} title={`${column.label} (weight ×${column.weight})${column.best === undefined ? "" : `, best rating ${column.best}`}${column.curve === undefined ? "" : `, shown with its 1 to 5 rating`}`}>
+          <th key={column.label}
+            draggable={onReorder !== undefined}
+            onDragStart={() => setDragged(column.label)}
+            onDragOver={(dragEvent) => onReorder && dragEvent.preventDefault()}
+            onDrop={() => drop(column.label)}
+            onDragEnd={() => setDragged(null)}
+            className={onReorder ? "rankings-draggable" : undefined}
+            title={`${column.label} (weight ×${column.weight})${column.best === undefined ? "" : `, best rating ${column.best}`}${column.curve === undefined ? "" : `, shown with its 1 to 5 rating`}${onReorder ? ". Drag to reorder the weights" : ""}`}>
             {column.short ?? column.label}
             <small>×{column.weight}</small>
           </th>
@@ -152,17 +167,16 @@ interface RowProps {
   canEdit: boolean;
   saveCell: SaveCell;
   dimmed: boolean;
-  cold: boolean;
   onFeatures?: (item: Item) => void;
 }
 
 /** One ranked item: rank, name, information, score, grade and rated cells. */
-function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, dimmed, cold, onFeatures }: RowProps) {
+function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, saveCell, dimmed, onFeatures }: RowProps) {
   const { item, score, grade, rank } = rankedRow;
   const cell = { item, canEdit, saveCell };
 
   return (
-    <tr className={dimmed ? "rankings-dimmed" : cold ? "rankings-cold" : undefined}>
+    <tr className={dimmed ? "rankings-dimmed" : undefined}>
       <td>{dimmed ? "" : rank}</td>
       <NameCell item={item} linkIndex={columns.linkIndex} />
       {columns.info.map(({ column, index }) => <InfoCell key={column.label} {...cell} column={column} index={index} />)}
@@ -213,9 +227,10 @@ export function RankingTable({ ranking, source, showScore, search, sort, onSort,
   return (
     <>
       <table>
-        <TableHead columns={columns} showScore={showScore} showFeatures={showFeatures} sort={sort} onSort={onSort} />
+        <TableHead columns={columns} showScore={showScore} showFeatures={showFeatures} sort={sort} onSort={onSort}
+          onReorder={canEdit ? (order) => { callApi(`/api/rankings/${ranking.id}/weights`, "PUT", { order }).then(onSaved); } : undefined} />
         <tbody>
-          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} dimmed={dimmed(rankedRow.item)} cold={isCold(ranking, rankedRow.item)} onFeatures={showFeatures ? (item) => setFeaturesOf(item.name) : undefined} />)}
+          {matching.slice(0, shown).map((rankedRow) => <RankingRow key={rankedRow.item.name} row={rankedRow} {...context} dimmed={dimmed(rankedRow.item)} onFeatures={showFeatures ? (item) => setFeaturesOf(item.name) : undefined} />)}
         </tbody>
       </table>
       {matching.length > shown && (
