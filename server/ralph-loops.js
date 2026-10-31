@@ -22,6 +22,7 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT, project TEXT NOT NULL, at INTEGER NOT NULL, source TEXT NOT NULL, sha TEXT NOT NULL, message TEXT NOT NULL,
     added INTEGER NOT NULL, removed INTEGER NOT NULL, files INTEGER NOT NULL, UNIQUE (project, sha)
   );
+  CREATE TABLE IF NOT EXISTS ralph_languages (project TEXT PRIMARY KEY, deor INTEGER NOT NULL, rust INTEGER NOT NULL, updated_at INTEGER NOT NULL);
   CREATE TABLE IF NOT EXISTS ralph_files (project TEXT NOT NULL, name TEXT NOT NULL, content TEXT NOT NULL, updated_at INTEGER NOT NULL, PRIMARY KEY (project, name));
 `);
 
@@ -126,6 +127,19 @@ export const ralphRoutes = [
       sendJson(response, 200, { ok: true });
     },
   },
+  // The loop reports how many lines of Deor and Rust the project has (from tokei); only the newest numbers are kept.
+  {
+    method: "POST",
+    path: "/api/ralph/languages",
+    handler: async (request, response) => {
+      requireUser(request);
+      const body = await readJson(request);
+      const project = text(body.project, MAX_NAME, "project");
+
+      db.prepare("INSERT OR REPLACE INTO ralph_languages (project, deor, rust, updated_at) VALUES (?, ?, ?, ?)").run(project, count(body.deor, "deor"), count(body.rust, "rust"), Date.now());
+      sendJson(response, 200, { ok: true });
+    },
+  },
   // The loop sends the newest copy of a file it writes (SPEC.md, the log, ...); only the newest copy is kept.
   {
     method: "POST",
@@ -180,6 +194,7 @@ function readProjects() {
       updatedAt: row.updated_at,
       events: db.prepare("SELECT at, kind, message, source FROM ralph_events WHERE project = ? ORDER BY id DESC LIMIT ?").all(row.project, SHOWN_EVENTS),
       commits: db.prepare("SELECT at, source, sha, message, added, removed, files, total FROM ralph_commits WHERE project = ? ORDER BY id DESC LIMIT ?").all(row.project, SHOWN_COMMITS),
+      languages: db.prepare("SELECT deor, rust, updated_at AS updatedAt FROM ralph_languages WHERE project = ?").get(row.project) ?? null,
       files: db.prepare("SELECT name, updated_at AS updatedAt FROM ralph_files WHERE project = ? ORDER BY name").all(row.project),
     }));
 }

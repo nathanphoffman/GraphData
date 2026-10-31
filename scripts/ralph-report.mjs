@@ -6,7 +6,10 @@
 //
 // Example: node scripts/ralph-report.mjs my-game round "round 3 started" --state running --round 3 --area world=4/10/0 --area ui=2/5/1
 // Needs PROD_URL, PROD_USERNAME and PROD_PASSWORD, read from this repo's .env if they are not already set.
+import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
 import { connectToProd } from "./prod.mjs";
 
 try {
@@ -51,9 +54,27 @@ if (state && route === "/api/ralph/report") {
   });
 }
 
+// Projects whose Deor/Rust line counts are watched: the folder tokei counts. Counted when a round starts, on each commit and when the loop stops.
+const CODE_FOLDERS = { "3dspacegame-deor": join(process.env.RALPH_HOST_HOME ?? homedir(), "Code/3dSpaceGameWT/3dSpaceGame/src") };
+
+/** Lines of code (no blanks or comments) in Deor and Rust under <folder>, or undefined when tokei is not available. */
+function countLanguages(folder) {
+  try {
+    const found = JSON.parse(execFileSync("tokei", ["-t=Rust,Deor", "-o", "json", folder], { encoding: "utf8", timeout: 30_000 }));
+
+    return { deor: found.Deor?.code ?? 0, rust: found.Rust?.code ?? 0 };
+  } catch {
+    return undefined;
+  }
+}
+
 try {
   const call = await connectToProd();
   await call("POST", route, body);
+
+  const folder = CODE_FOLDERS[project];
+  const counts = folder && (kind === "commit" || kind === "round" || (state && state !== "running")) ? countLanguages(folder) : undefined;
+  if (counts) await call("POST", "/api/ralph/languages", { project, ...counts });
 } catch (error) {
   console.error(`ralph-report failed: ${error.message}`);
   process.exit(1);
