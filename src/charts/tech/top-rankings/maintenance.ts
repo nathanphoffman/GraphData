@@ -43,6 +43,10 @@ export const PERCENT = 100;
 /** How much AI use adds to the n-Factor a developer can hold together, by default. */
 export const DEFAULT_AI_USE = 0.75;
 
+/** The AI use the 67-68dn goal was set for. Every 0.1 of AI use below it adds 10dn (1n) to the n-Factors, and every 0.1 above it takes 10dn off. */
+const GOAL_AI_USE = 0.75;
+const N_PER_AI_USE = 10;
+
 /** How many times nFactor halves its range, which is plenty to settle on the answer. */
 const HALVINGS = 60;
 
@@ -179,7 +183,8 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
   const averageQuality = qualityOverride ?? weighted / qualityLines;
   const languageAdjustment = averageNetN(languageLines, averageQuality / PERCENT);
   const adjustment = languageAdjustment ?? (averageQuality - NEUTRAL_QUALITY) / PERCENT;
-  const [graded, gradedFuture] = [nFactor(totalLines) - adjustment, nFactor(futureLines) - adjustment];
+  const aiShift = (GOAL_AI_USE - aiUse) * N_PER_AI_USE;
+  const [graded, gradedFuture] = [nFactor(totalLines) - adjustment + aiShift, nFactor(futureLines) - adjustment + aiShift];
   const projected = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
 
   return {

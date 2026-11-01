@@ -14,7 +14,7 @@
     {"label": "xLines", "short": "xLines"},
     {"label": "Computed Quality", "short": "Computed", "was": "Quality"},
     {"label": "Quality", "short": "Quality", "weight": 3, "curve": {"type": "linear", "from": 60, "to": 95}},
-    {"label": "Decommissioned", "short": "Decom"},
+    {"label": "Decommissioned", "short": "Paused"},
     {"label": "Status", "short": "Status", "weight": 3},
     {"label": "Tech Lines", "short": "Tech"}
   ],

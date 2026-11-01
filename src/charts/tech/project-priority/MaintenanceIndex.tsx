@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { heat } from "../top-rankings/RankingCells";
-import { DEFAULT_AI_USE as aiUse, type NFactorResult, PERCENT, maintenance } from "../top-rankings/maintenance";
+import { DEFAULT_AI_USE, type NFactorResult, PERCENT, maintenance } from "../top-rankings/maintenance";
 import { type Ranking, fractionBetween } from "../top-rankings/score";
 
 /** An n-Factor is shown in deci-ns (dn): n x 10, to this many decimals. */
@@ -12,6 +12,9 @@ const LOWEST_QUALITY_HEAT = 50;
 
 /** The Average Quality slider moves in tenths of a percent. */
 const QUALITY_STEP = 0.1;
+
+/** The Extent of AI Use slider moves in hundredths. */
+const AI_USE_STEP = 0.01;
 
 const lines = (count: number) => Math.round(count).toLocaleString();
 
@@ -45,12 +48,12 @@ function FactorCard({ name, result }: { name: keyof typeof FACTOR_DESCRIPTIONS; 
   const dn = deciNs(result.graded);
 
   return (
-    <div style={deciNHeat(dn)} title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Decommissioned projects count at 1/6 of their lines. Manual takes the Extent of AI Use off the n-Factor first`}>
+    <div style={deciNHeat(dn)} title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Paused projects count at 1/6 of their lines. Manual takes the Extent of AI Use off the n-Factor first`}>
       <dt>{name}</dt>
       <dd>{dn.toFixed(DN_DIGITS)}dn <span title="Which way, and how far, to move to reach the blue goal of 67-68dn">{goalMark(dn)}{dn < GOAL_LOW || dn > GOAL_HIGH ? <small className="rankings-index-delta"> Δ{dn < GOAL_LOW ? "+" : "-"}{goalDistance(dn).toFixed(DN_DIGITS)}</small> : null}</span></dd>
       <small>{lines(result.equivalentLines)} Lines eq.</small>
       <small>{lines(result.manualLines)} Manual Lines eq.</small>
-      <small className="rankings-index-decom">({lines(result.decommissionedLines)} Lines in Decom)</small>
+      <small className="rankings-index-decom">({lines(result.decommissionedLines)} Lines Paused)</small>
     </div>
   );
 }
@@ -58,6 +61,7 @@ function FactorCard({ name, result }: { name: keyof typeof FACTOR_DESCRIPTIONS; 
 /** The code maintenance summary for rankings that have lines and quality columns. */
 export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
   const [qualityOverride, setQualityOverride] = useState<number | null>(null);
+  const [aiUse, setAiUse] = useState(DEFAULT_AI_USE);
   const actual = maintenance(ranking, aiUse);
   const result = maintenance(ranking, aiUse, qualityOverride ?? undefined);
 
@@ -71,8 +75,13 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
         <input type="range" min={0} max={PERCENT} step={QUALITY_STEP} value={result.averageQuality} onChange={(changeEvent) => setQualityOverride(Number(changeEvent.target.value))} />
         {qualityOverride !== null && <button type="button" onClick={() => setQualityOverride(null)}>Reset to {actual.averageQuality.toFixed(1)}%</button>}
       </label>
+      <label title="Extent of AI Use: how much AI help adds to the n-Factor you can hold together. Only the Manual Lines eq. numbers use it, by taking it off the n-Factor first.">
+        Extent of AI Use: {aiUse.toFixed(2)}{" "}
+        <input type="range" min={0} max={1} step={AI_USE_STEP} value={aiUse} onChange={(changeEvent) => setAiUse(Number(changeEvent.target.value))} />
+        {aiUse !== DEFAULT_AI_USE && <button type="button" onClick={() => setAiUse(DEFAULT_AI_USE)}>Reset to {DEFAULT_AI_USE}</button>}
+      </label>
       <dl>
-        <div style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines (decommissioned projects at 1/6)">
+        <div style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines (paused projects at 1/6)">
           <dt>Average Quality</dt>
           <dd>{result.averageQuality.toFixed(1)}%</dd>
         </div>

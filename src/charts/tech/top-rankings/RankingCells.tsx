@@ -37,7 +37,7 @@ export interface CellProps {
 }
 
 /** The columns shown as a checkbox, with the words the checkbox's label ends in. */
-const CHECKBOX_LABELS: Record<string, string> = { [DECOMMISSIONED_LABEL]: "decommissioned", [WISHLIST_LABEL]: "on the wishlist" };
+const CHECKBOX_LABELS: Record<string, string> = { [DECOMMISSIONED_LABEL]: "paused", [WISHLIST_LABEL]: "on the wishlist" };
 
 /** A plain information cell; the Decommissioned and Wishlist columns are checkboxes. */
 export function InfoCell({ item, column, index, canEdit, saveCell }: CellProps) {
