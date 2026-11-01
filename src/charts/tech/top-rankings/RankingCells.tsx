@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { InlineCell } from "./InlineCell";
-import { DECOMMISSIONED_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance";
+import { TechLinesModal } from "./TechLinesModal";
+import { techShares } from "./languageBurden";
+import { DECOMMISSIONED_LABEL, LINES_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance";
 import { type Column, HIGHEST_RATING, type Item, LOWEST_RATING, effectiveRating, fractionBetween, isNumber, isText } from "./score";
 
 /** Heat colours run from hue 0 (red) to this (green). */
@@ -56,14 +59,18 @@ export function InfoCell({ item, column, index, canEdit, saveCell }: CellProps) 
 }
 
 /** A rated cell: the value, coloured by its 1 to 5 rating, with that rating in brackets when the column has a curve or a best value. */
-export function RatedCell({ item, column, index, canEdit, saveCell, episodic }: CellProps & { episodic: unknown }) {
+export function RatedCell({ item, column, index, canEdit, saveCell, episodic, techLines }: CellProps & { episodic: unknown; techLines?: unknown }) {
+  const [showTech, setShowTech] = useState(false);
   const rating = item.values[index];
   const used = isNumber(rating) ? effectiveRating(column, rating) : null;
   const colour = used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING));
 
   return (
     <InlineCell column={column} itemName={item.name} value={rating} canEdit={canEdit && column.label !== QUALITY_LABEL && column.label !== STATUS_LABEL} onSave={saveCell(item, index)} style={colour}>
-      {show(rating)}
+      {column.label === LINES_LABEL && techShares(techLines) ? (
+        <button type="button" className="rankings-lines-link" title="Show the lines by language" onClick={(clickEvent) => { clickEvent.stopPropagation(); setShowTech(true); }}>{show(rating)}</button>
+      ) : show(rating)}
+      {showTech && <TechLinesModal itemName={item.name} shares={techShares(techLines) ?? []} onClose={() => setShowTech(false)} />}
       {column.label === SEASONS_LABEL && episodic ? "*" : ""}
       {(column.best !== undefined || column.curve !== undefined) && used !== null && <small> ({Number(used.toFixed(1))})</small>}
     </InlineCell>

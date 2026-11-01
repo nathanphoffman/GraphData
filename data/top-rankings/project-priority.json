@@ -15,7 +15,8 @@
     {"label": "Computed Quality", "short": "Computed", "was": "Quality"},
     {"label": "Quality", "short": "Quality", "weight": 3, "curve": {"type": "linear", "from": 60, "to": 95}},
     {"label": "Decommissioned", "short": "Decom"},
-    {"label": "Status", "short": "Status", "weight": 3}
+    {"label": "Status", "short": "Status", "weight": 3},
+    {"label": "Tech Lines", "short": "Tech"}
   ],
   "items": [
     {"name": "Deor Lang", "values": ["Rust, Bun, Biome, TS, VS Code Ext", 5, 5, 5, 5, 5, 35321, "https://github.com/nathanphoffman/DeorLang", 4, 1.2, 88.8, 84.4]},
@@ -34,7 +35,7 @@
     {"name": "BGG Scraper", "values": ["TS, Puppeteer, Cheerio", 3, 5, 2, 2, 3, 476, "https://github.com/nathanphoffman/BGGScraper", 4, 3, 77, 78.5]},
     {"name": "Proton Drive Sync", "values": ["Node, TS, Chokidar", 1, 5, 1, 1, 5, 712, "https://github.com/nathanphoffman/ProtonDriveSync", 4, 1.2, 95.1, 82.6]},
     {"name": "ValOutcast", "values": ["C# (Valheim), C for OpenJK, Python", 5, 2, 3, 5, 4, 6236, "https://github.com/nathanphoffman/ValOutcast", 4, 5, 75, 72.5]},
-    {"name": "Family History Astro", "values": ["Astro, TS", 4, 4, 1, 2, 2, 8000, null, 4, 3, 72, 72]},
+    {"name": "Family History Astro", "values": ["Astro, TS", 4, 4, 1, 2, 2, 8000, "https://github.com/nathanphoffman/FamilyHistoryAstro", 4, 3, 72, 72]},
     {"name": "DeorPi", "values": ["Deor, Rust", 4, 4, 2, 1, 5, 877, "https://github.com/nathanphoffman/DeorPi", 4, 1.5, 81.4, 80.7]},
     {"name": "NH Blog", "values": ["NewWeb, Bun, Markdown, Railway", 4, 5, 5, 1, 1, 1658, "https://github.com/nathanphoffman/NHBlog", 4, 1.5, 97.8, 88.9]},
     {"name": "Contact App", "values": ["TS, Next.js, Expo, pnpm, Docker, Railway", 2, 5, 3, 5, 3, 29195, "https://github.com/nathanphoffman/ContactProject", 4, 3, 79.4, 74.7]},

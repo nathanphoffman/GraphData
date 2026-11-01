@@ -1,3 +1,4 @@
+import { averageNetN, parseTechLines } from "./languageBurden";
 import { type Ranking, isNumber } from "./score";
 
 export const LINES_LABEL = "Completed Lines";
@@ -7,6 +8,9 @@ const COMPUTED_LABEL = "Computed Quality";
 /** The rated column holding each item's final quality, the average of the two above. It is worked out whenever the ranking loads. */
 export const QUALITY_LABEL = "Quality";
 const GROWTH_LABEL = "xLines";
+
+/** The information column holding each project's lines per language, like "Rust 1200, TypeScript 300". The line count script writes it. */
+export const TECH_LINES_LABEL = "Tech Lines";
 
 /** An information column holding 1 for a project that is retired: it still saves and syncs, but sits last and greyed, and counts in the n-factors at only DECOMMISSIONED_SHARE of its lines. */
 export const DECOMMISSIONED_LABEL = "Decommissioned";
@@ -66,6 +70,12 @@ export interface NFactorResult {
 
 export interface Maintenance {
   averageQuality: number;
+
+  /** What was taken off the n-Factor: the languages' net n averaged by lines, or (quality - 75) / 100 when no project has language lines. */
+  adjustment: number;
+
+  /** Whether the adjustment came from the languages. */
+  fromLanguages: boolean;
   current: NFactorResult;
   future: NFactorResult;
   projected: NFactorResult;
@@ -122,6 +132,7 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
   const familiarity = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
   const computed = ranking.columns.findIndex((column) => column.label === COMPUTED_LABEL);
   const growth = ranking.columns.findIndex((column) => column.label === GROWTH_LABEL);
+  const tech = ranking.columns.findIndex((column) => column.label === TECH_LINES_LABEL);
 
   if (lines < 0 || (familiarity < 0 && computed < 0)) return null;
 
@@ -130,6 +141,9 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
   let [decomLines, futureDecomLines] = [0, 0];
   let qualityLines = 0;
   let weighted = 0;
+
+  // Lines per language across all projects, each project's share scaled to the lines it counts for.
+  const languageLines: Record<string, number> = {};
 
   for (const item of ranking.items) {
     const { values } = item;
@@ -150,6 +164,11 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
       futureDecomLines += rawCount * grown;
     }
 
+    const projectTech = tech < 0 ? {} : parseTechLines(values[tech]);
+    const techTotal = Object.values(projectTech).reduce((runningTotal, value) => runningTotal + value, 0);
+
+    for (const [language, languageCount] of Object.entries(projectTech)) languageLines[language] = (languageLines[language] ?? 0) + (languageCount / techTotal) * count;
+
     if (rating === null) continue;
     qualityLines += count;
     weighted += count * rating;
@@ -158,12 +177,15 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
   if (totalLines === 0 || qualityLines === 0) return null;
 
   const averageQuality = qualityOverride ?? weighted / qualityLines;
-  const adjustment = (averageQuality - NEUTRAL_QUALITY) / PERCENT;
+  const languageAdjustment = averageNetN(languageLines, averageQuality / PERCENT);
+  const adjustment = languageAdjustment ?? (averageQuality - NEUTRAL_QUALITY) / PERCENT;
   const [graded, gradedFuture] = [nFactor(totalLines) - adjustment, nFactor(futureLines) - adjustment];
   const projected = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
 
   return {
     averageQuality,
+    adjustment,
+    fromLanguages: languageAdjustment !== null,
     current: resultFor(graded, decomLines, aiUse),
     future: resultFor(gradedFuture, futureDecomLines, aiUse),
     projected: resultFor(projected, decomLines * (1 - FUTURE_WEIGHT) + futureDecomLines * FUTURE_WEIGHT, aiUse),

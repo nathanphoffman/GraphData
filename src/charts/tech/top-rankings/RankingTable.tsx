@@ -2,7 +2,7 @@ import { useState } from "react";
 import { callApi } from "../../../api";
 import { FeaturesModal } from "./FeaturesModal";
 import { InfoCell, NameCell, RatedCell, type SaveCell, heat } from "./RankingCells";
-import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, isDimmed, withQuality, withStatus } from "./maintenance";
+import { LINES_LABEL, PERCENT, SCAFFOLDING_LINES, TECH_LINES_LABEL, isDimmed, withQuality, withStatus } from "./maintenance";
 import { type Column, type Item, type Ranking, fractionBetween, isNumber, letterGrade, rankItems } from "./score";
 
 const PAGE_SIZE = 100;
@@ -33,6 +33,7 @@ interface IndexedColumn {
 interface TableColumns {
   linkIndex: number;
   episodicIndex: number;
+  techIndex: number;
   info: IndexedColumn[];
   rated: IndexedColumn[];
 }
@@ -62,11 +63,12 @@ function SortHeader({ label, sortKey, sort, onSort, title }: { label: string; so
 /** Sort the columns into those shown as plain information and those that are rated (heaviest first); the link and episodic columns are not shown. */
 function splitColumns(ranking: Ranking): TableColumns {
   const indexed = ranking.columns.map((column, index) => ({ column, index }));
-  const hiddenLabels = [LINK_LABEL, EPISODIC_LABEL];
+  const hiddenLabels = [LINK_LABEL, EPISODIC_LABEL, TECH_LINES_LABEL];
 
   return {
     linkIndex: ranking.columns.findIndex((column) => column.label === LINK_LABEL),
     episodicIndex: ranking.columns.findIndex((column) => column.label === EPISODIC_LABEL),
+    techIndex: ranking.columns.findIndex((column) => column.label === TECH_LINES_LABEL),
     info: indexed.filter(({ column }) => column.weight === undefined && !hiddenLabels.includes(column.label)),
     rated: indexed.filter(({ column }) => column.weight !== undefined).sort((first, second) => (second.column.weight ?? 0) - (first.column.weight ?? 0)),
   };
@@ -186,7 +188,7 @@ function RankingRow({ row: rankedRow, columns, showScore, scoreRange, canEdit, s
         {grade.toFixed(1)}
         <small> ({letterGrade(grade)})</small>
       </td>
-      {columns.rated.map(({ column, index }) => <RatedCell key={column.label} {...cell} column={column} index={index} episodic={item.values[columns.episodicIndex]} />)}
+      {columns.rated.map(({ column, index }) => <RatedCell key={column.label} {...cell} column={column} index={index} episodic={item.values[columns.episodicIndex]} techLines={item.values[columns.techIndex]} />)}
       {onFeatures && (
         <td>
           {canEdit ? <button type="button" className="rankings-features" title={`Edit ${item.name}'s planned features`} onClick={() => onFeatures(item)}>{item.features?.length ?? 0}</button> : (item.features?.length ?? 0)}

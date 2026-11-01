@@ -237,3 +237,17 @@
 .rankings-index-decom { color: var(--muted); opacity: 0.7; }
 
 .rankings-index dl div small.rankings-index-delta { display: inline; font-size: 0.7em; font-weight: normal; }
+
+.rankings-lines-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.rankings-modal td {
+  padding: 2px 12px 2px 0;
+}

@@ -7,6 +7,9 @@ import { HttpError, readJson, readStamp, sendJson } from "./http.js";
 const SEED_DIR = "data/top-rankings";
 const MAX_RATING = 5;
 const MAX_TEXT = 80;
+
+// a cell of text can be longer than a name (the Tech Lines cell lists every language)
+const MAX_VALUE_TEXT = 400;
 const MAX_FEATURES = 50;
 const MAX_FEATURE_TEXT = 200;
 
@@ -193,7 +196,7 @@ function checkValues(rankingId, name, values) {
 
     if (curve !== null && !(typeof value === "number" && Number.isFinite(value))) throw new HttpError(400, `${label} must be a number`);
     if (weight !== null && curve === null && !(typeof value === "number" && value >= 0 && value <= MAX_RATING)) throw new HttpError(400, `${label} must be a number from 0 to ${MAX_RATING}`);
-    if (weight === null && !(value === null || typeof value === "number" || (typeof value === "string" && value.length <= MAX_TEXT))) throw new HttpError(400, `${label} must be a number, short text or empty`);
+    if (weight === null && !(value === null || typeof value === "number" || (typeof value === "string" && value.length <= MAX_VALUE_TEXT))) throw new HttpError(400, `${label} must be a number, short text or empty`);
   });
 }
 

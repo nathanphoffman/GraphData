@@ -35,8 +35,8 @@ const goalMark = (dn: number) => (dn < GOAL_LOW ? "↑" : dn > GOAL_HIGH ? "↓"
 const goalDistance = (dn: number) => Math.abs(dn < GOAL_LOW ? GOAL_LOW - dn : dn > GOAL_HIGH ? dn - GOAL_HIGH : 0);
 
 const FACTOR_DESCRIPTIONS = {
-  Current: "The n-Factor of today's lines, minus (average quality - 75) / 100",
-  Future: "The n-Factor if every project grows by its xLines, minus (average quality - 75) / 100",
+  Current: "The n-Factor of today's lines, minus the Avg n Adj",
+  Future: "The n-Factor if every project grows by its xLines, minus the Avg n Adj",
   Projected: "Current (25%) and Future (75%) n-Factors averaged",
 };
 
@@ -75,6 +75,10 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
         <div style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines (decommissioned projects at 1/6)">
           <dt>Average Quality</dt>
           <dd>{result.averageQuality.toFixed(1)}%</dd>
+        </div>
+        <div title={result.fromLanguages ? "Each language's net n (average quality out of 1, divided by the language's burden score, minus 0.25), averaged by lines across all projects. It is taken off the n-Factors. Shown in deci-ns (dn)." : "No project has language lines yet, so this is (average quality - 75) / 100. Shown in deci-ns (dn)."}>
+          <dt>Avg n Adj</dt>
+          <dd>{deciNs(result.adjustment).toFixed(DN_DIGITS)}dn</dd>
         </div>
         <FactorCard name="Current" result={result.current} />
         <FactorCard name="Future" result={result.future} />
