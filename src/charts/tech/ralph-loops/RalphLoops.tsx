@@ -209,15 +209,15 @@ function LoopView({ loop }: { loop: Loop }) {
           <span className="ralph-tile-label">Project size</span>
           <strong>{current ? `${current.total.toLocaleString()} lines` : "—"}</strong>
         </div>
-        {loop.languages && (
-          <div className="ralph-tile">
-            <span className="ralph-tile-label">Deor / Rust lines</span>
-            <strong>
-              {loop.languages.deor.toLocaleString()} / {loop.languages.rust.toLocaleString()}
-            </strong>
-            <span className="muted">{`${((loop.languages.deor / Math.max(1, loop.languages.deor + loop.languages.rust)) * 100).toFixed(1)}% Deor`}</span>
-          </div>
-        )}
+        <div className="ralph-tile">
+          <span className="ralph-tile-label">Deor / Rust lines</span>
+          <strong>{loop.languages ? `${loop.languages.deor.toLocaleString()} / ${loop.languages.rust.toLocaleString()}` : "—"}</strong>
+          <span className="muted">
+            {loop.languages
+              ? `${((loop.languages.deor / Math.max(1, loop.languages.deor + loop.languages.rust)) * 100).toFixed(1)}% Deor`
+              : "no data yet"}
+          </span>
+        </div>
         <div className="ralph-tile">
           <span className="ralph-tile-label">Commits</span>
           <strong>{loop.commits.length}</strong>
