@@ -1,174 +1,174 @@
-import m45 from "./images/messier/m45.jpg";
-import dc from "./images/other/dc.jpg";
-import m31 from "./images/messier/m31.jpg";
-import m81 from "./images/messier/m81.jpg";
-import mel20 from "./images/other/mel20.jpg";
-import img_cr_399 from "./images/other/cr_399.jpg";
-import img_stock_2 from "./images/other/stock_2.jpg";
-import img_ic_4665 from "./images/other/ic_4665.jpg";
-import img_ngc_2232 from "./images/ngc/ngc_2232.jpg";
-import img_m39 from "./images/messier/m39.jpg";
-import img_mel_111 from "./images/other/mel_111.jpg";
-import img_ngc_2264 from "./images/ngc/ngc_2264.jpg";
-import img_m34 from "./images/messier/m34.jpg";
-import img_ic_4756 from "./images/other/ic_4756.jpg";
-import img_ngc_457 from "./images/ngc/ngc_457.jpg";
-import img_ngc_752 from "./images/ngc/ngc_752.jpg";
-import img_m35 from "./images/messier/m35.jpg";
-import img_mel_25 from "./images/other/mel_25.jpg";
-import img_ngc_6633 from "./images/ngc/ngc_6633.jpg";
-import img_ngc_1647 from "./images/ngc/ngc_1647.jpg";
-import img_ic_405 from "./images/other/ic_405.jpg";
-import moon from "./images/planets/moon.jpg";
-import img_m47 from "./images/messier/m47.jpg";
-import img_m38 from "./images/messier/m38.jpg";
-import img_m44 from "./images/messier/m44.jpg";
-import img_m37 from "./images/messier/m37.jpg";
-import img_m48 from "./images/messier/m48.jpg";
-import img_m42 from "./images/messier/m42.jpg";
-import img_m13 from "./images/messier/m13.jpg";
+import img_m1 from "./images/messier/m1.jpg";
+import img_m2 from "./images/messier/m2.jpg";
 import img_m3 from "./images/messier/m3.jpg";
+import img_m4 from "./images/messier/m4.jpg";
+import img_m5 from "./images/messier/m5.jpg";
+import img_m6 from "./images/messier/m6.jpg";
+import img_m7 from "./images/messier/m7.jpg";
+import img_m8 from "./images/messier/m8.jpg";
+import img_m9 from "./images/messier/m9.jpg";
+import img_m10 from "./images/messier/m10.jpg";
+import img_m11 from "./images/messier/m11.jpg";
+import img_m12 from "./images/messier/m12.jpg";
+import img_m13 from "./images/messier/m13.jpg";
+import img_m14 from "./images/messier/m14.jpg";
+import img_m15 from "./images/messier/m15.jpg";
+import img_m16 from "./images/messier/m16.jpg";
+import img_m17 from "./images/messier/m17.jpg";
+import img_m18 from "./images/messier/m18.jpg";
+import img_m19 from "./images/messier/m19.jpg";
+import img_m20 from "./images/messier/m20.jpg";
+import img_m21 from "./images/messier/m21.jpg";
+import img_m22 from "./images/messier/m22.jpg";
+import img_m23 from "./images/messier/m23.jpg";
 import img_m24 from "./images/messier/m24.jpg";
 import img_m25 from "./images/messier/m25.jpg";
-import img_m41 from "./images/messier/m41.jpg";
-import img_ngc_7789 from "./images/ngc/ngc_7789.jpg";
-import img_ngc_7023 from "./images/ngc/ngc_7023.jpg";
-import img_ngc_129 from "./images/ngc/ngc_129.jpg";
-import img_ngc_663 from "./images/ngc/ngc_663.jpg";
-import img_ngc_225 from "./images/ngc/ngc_225.jpg";
-import img_m15 from "./images/messier/m15.jpg";
-import img_m5 from "./images/messier/m5.jpg";
+import img_m26 from "./images/messier/m26.jpg";
+import img_m27 from "./images/messier/m27.jpg";
+import img_m28 from "./images/messier/m28.jpg";
+import img_m29 from "./images/messier/m29.jpg";
+import img_m30 from "./images/messier/m30.jpg";
+import m31 from "./images/messier/m31.jpg";
+import img_m32 from "./images/messier/m32.jpg";
 import img_m33 from "./images/messier/m33.jpg";
-import img_ngc_6888 from "./images/ngc/ngc_6888.jpg";
-import img_m92 from "./images/messier/m92.jpg";
-import img_ngc_2301 from "./images/ngc/ngc_2301.jpg";
-import img_m46 from "./images/messier/m46.jpg";
-import img_ngc_2175 from "./images/ngc/ngc_2175.jpg";
-import img_ngc_7000 from "./images/ngc/ngc_7000.jpg";
-import img_m106 from "./images/messier/m106.jpg";
-import img_ngc_281 from "./images/ngc/ngc_281.jpg";
-import img_m67 from "./images/messier/m67.jpg";
-import img_ngc_7380 from "./images/ngc/ngc_7380.jpg";
+import img_m34 from "./images/messier/m34.jpg";
+import img_m35 from "./images/messier/m35.jpg";
 import img_m36 from "./images/messier/m36.jpg";
+import img_m37 from "./images/messier/m37.jpg";
+import img_m38 from "./images/messier/m38.jpg";
+import img_m39 from "./images/messier/m39.jpg";
+import img_m41 from "./images/messier/m41.jpg";
+import img_m42 from "./images/messier/m42.jpg";
+import img_m43 from "./images/messier/m43.jpg";
+import img_m44 from "./images/messier/m44.jpg";
+import m45 from "./images/messier/m45.jpg";
+import img_m46 from "./images/messier/m46.jpg";
+import img_m47 from "./images/messier/m47.jpg";
+import img_m48 from "./images/messier/m48.jpg";
+import img_m49 from "./images/messier/m49.jpg";
 import img_m50 from "./images/messier/m50.jpg";
-import img_vega from "./images/stars/vega.jpg";
-import img_capella from "./images/stars/capella.jpg";
-import img_m53 from "./images/messier/m53.jpg";
-import img_ic_1396 from "./images/other/ic_1396.jpg";
-import img_m11 from "./images/messier/m11.jpg";
-import img_arcturus from "./images/stars/arcturus.jpg";
-import img_pollux from "./images/stars/pollux.jpg";
-import img_deneb from "./images/stars/deneb.jpg";
-import img_castor from "./images/stars/castor.jpg";
-import img_alioth from "./images/stars/alioth.jpg";
-import img_alkaid from "./images/stars/alkaid.jpg";
-import img_procyon from "./images/stars/procyon.jpg";
-import img_menkalinan from "./images/stars/menkalinan.jpg";
-import img_altair from "./images/stars/altair.jpg";
-import img_mizar from "./images/stars/mizar.jpg";
-import img_mirach from "./images/stars/mirach.jpg";
-import img_dubhe from "./images/stars/dubhe.jpg";
-import img_betelgeuse from "./images/stars/betelgeuse.jpg";
+import img_m51 from "./images/messier/m51.jpg";
 import img_m52 from "./images/messier/m52.jpg";
-import img_elnath from "./images/stars/elnath.jpg";
-import img_alpheratz from "./images/stars/alpheratz.jpg";
-import img_m23 from "./images/messier/m23.jpg";
-import img_mirfak from "./images/stars/mirfak.jpg";
-import img_alhena from "./images/stars/alhena.jpg";
-import img_m110 from "./images/messier/m110.jpg";
-import img_hamal from "./images/stars/hamal.jpg";
-import img_m12 from "./images/messier/m12.jpg";
-import img_ngc_4565 from "./images/ngc/ngc_4565.jpg";
-import img_m16 from "./images/messier/m16.jpg";
-import img_m10 from "./images/messier/m10.jpg";
-import img_m94 from "./images/messier/m94.jpg";
-import img_rasalhague from "./images/stars/rasalhague.jpg";
-import img_albireo from "./images/stars/albireo.jpg";
-import img_ic_1805 from "./images/other/ic_1805.jpg";
-import img_bellatrix from "./images/stars/bellatrix.jpg";
-import img_m2 from "./images/messier/m2.jpg";
-import img_m22 from "./images/messier/m22.jpg";
-import img_ngc_6791 from "./images/ngc/ngc_6791.jpg";
-import img_polaris from "./images/stars/polaris.jpg";
+import img_m53 from "./images/messier/m53.jpg";
+import img_m54 from "./images/messier/m54.jpg";
+import img_m55 from "./images/messier/m55.jpg";
+import img_m56 from "./images/messier/m56.jpg";
+import img_m57 from "./images/messier/m57.jpg";
 import img_m63 from "./images/messier/m63.jpg";
+import img_m64 from "./images/messier/m64.jpg";
+import img_m65 from "./images/messier/m65.jpg";
+import img_m66 from "./images/messier/m66.jpg";
+import img_m67 from "./images/messier/m67.jpg";
+import img_m71 from "./images/messier/m71.jpg";
+import img_m74 from "./images/messier/m74.jpg";
+import img_m76 from "./images/messier/m76.jpg";
+import img_m77 from "./images/messier/m77.jpg";
+import img_m78 from "./images/messier/m78.jpg";
+import img_m80 from "./images/messier/m80.jpg";
+import m81 from "./images/messier/m81.jpg";
+import img_m84 from "./images/messier/m84.jpg";
+import img_m86 from "./images/messier/m86.jpg";
+import img_m87 from "./images/messier/m87.jpg";
+import img_m92 from "./images/messier/m92.jpg";
+import img_m93 from "./images/messier/m93.jpg";
+import img_m94 from "./images/messier/m94.jpg";
+import img_m97 from "./images/messier/m97.jpg";
+import img_m101 from "./images/messier/m101.jpg";
+import img_m103 from "./images/messier/m103.jpg";
+import img_m104 from "./images/messier/m104.jpg";
+import img_m106 from "./images/messier/m106.jpg";
+import img_m108 from "./images/messier/m108.jpg";
+import img_m109 from "./images/messier/m109.jpg";
+import img_m110 from "./images/messier/m110.jpg";
+import img_ngc_40 from "./images/ngc/ngc_40.jpg";
+import img_ngc_129 from "./images/ngc/ngc_129.jpg";
+import img_ngc_225 from "./images/ngc/ngc_225.jpg";
+import img_ngc_253 from "./images/ngc/ngc_253.jpg";
+import img_ngc_281 from "./images/ngc/ngc_281.jpg";
+import img_ngc_457 from "./images/ngc/ngc_457.jpg";
+import img_ngc_663 from "./images/ngc/ngc_663.jpg";
+import img_ngc_752 from "./images/ngc/ngc_752.jpg";
+import img_ngc_891 from "./images/ngc/ngc_891.jpg";
+import img_ngc_1499 from "./images/ngc/ngc_1499.jpg";
+import img_ngc_1502 from "./images/ngc/ngc_1502.jpg";
+import img_ngc_1647 from "./images/ngc/ngc_1647.jpg";
+import img_ngc_2024 from "./images/ngc/ngc_2024.jpg";
+import img_ngc_2129 from "./images/ngc/ngc_2129.jpg";
+import img_ngc_2169 from "./images/ngc/ngc_2169.jpg";
+import img_ngc_2175 from "./images/ngc/ngc_2175.jpg";
+import img_ngc_2232 from "./images/ngc/ngc_2232.jpg";
+import img_ngc_2237 from "./images/ngc/ngc_2237.jpg";
+import img_ngc_2264 from "./images/ngc/ngc_2264.jpg";
+import img_ngc_2301 from "./images/ngc/ngc_2301.jpg";
+import img_ngc_2362 from "./images/ngc/ngc_2362.jpg";
+import img_ngc_2392 from "./images/ngc/ngc_2392.jpg";
+import img_ngc_3242 from "./images/ngc/ngc_3242.jpg";
+import img_ngc_4565 from "./images/ngc/ngc_4565.jpg";
 import img_ngc_4631 from "./images/ngc/ngc_4631.jpg";
-import mars from "./images/planets/mars.jpg";
+import img_ngc_6543 from "./images/ngc/ngc_6543.jpg";
+import img_ngc_6633 from "./images/ngc/ngc_6633.jpg";
+import img_ngc_6791 from "./images/ngc/ngc_6791.jpg";
+import img_ngc_6826 from "./images/ngc/ngc_6826.jpg";
+import img_ngc_6888 from "./images/ngc/ngc_6888.jpg";
+import img_ngc_6946 from "./images/ngc/ngc_6946.jpg";
+import img_ngc_6960_92 from "./images/ngc/ngc_6960_92.jpg";
+import img_ngc_7000 from "./images/ngc/ngc_7000.jpg";
+import img_ngc_7009 from "./images/ngc/ngc_7009.jpg";
+import img_ngc_7023 from "./images/ngc/ngc_7023.jpg";
+import img_ngc_7293 from "./images/ngc/ngc_7293.jpg";
+import img_ngc_7331 from "./images/ngc/ngc_7331.jpg";
+import img_ngc_7380 from "./images/ngc/ngc_7380.jpg";
+import img_ngc_7635 from "./images/ngc/ngc_7635.jpg";
+import img_ngc_7662 from "./images/ngc/ngc_7662.jpg";
+import img_ngc_7789 from "./images/ngc/ngc_7789.jpg";
+import img_cr_399 from "./images/other/cr_399.jpg";
+import dc from "./images/other/dc.jpg";
+import img_ic_405 from "./images/other/ic_405.jpg";
+import img_ic_434 from "./images/other/ic_434.jpg";
+import img_ic_1396 from "./images/other/ic_1396.jpg";
+import img_ic_1805 from "./images/other/ic_1805.jpg";
+import img_ic_1848 from "./images/other/ic_1848.jpg";
+import img_ic_4665 from "./images/other/ic_4665.jpg";
+import img_ic_4756 from "./images/other/ic_4756.jpg";
+import img_ic_5146 from "./images/other/ic_5146.jpg";
+import img_mel_25 from "./images/other/mel_25.jpg";
+import img_mel_111 from "./images/other/mel_111.jpg";
+import mel20 from "./images/other/mel20.jpg";
+import img_stock_2 from "./images/other/stock_2.jpg";
 import jupiter from "./images/planets/jupiter.jpg";
+import mars from "./images/planets/mars.jpg";
+import mercury from "./images/planets/mercury.jpg";
+import moon from "./images/planets/moon.jpg";
+import neptune from "./images/planets/neptune.jpg";
 import saturn from "./images/planets/saturn.jpg";
 import uranus from "./images/planets/uranus.jpg";
-import neptune from "./images/planets/neptune.jpg";
-import img_m101 from "./images/messier/m101.jpg";
-import img_ic_5146 from "./images/other/ic_5146.jpg";
-import img_m64 from "./images/messier/m64.jpg";
-import img_m32 from "./images/messier/m32.jpg";
-import img_regulus from "./images/stars/regulus.jpg";
-import img_m26 from "./images/messier/m26.jpg";
-import img_aldebaran from "./images/stars/aldebaran.jpg";
-import img_ngc_1502 from "./images/ngc/ngc_1502.jpg";
-import img_m51 from "./images/messier/m51.jpg";
-import img_ngc_6543 from "./images/ngc/ngc_6543.jpg";
-import img_ngc_891 from "./images/ngc/ngc_891.jpg";
-import img_m93 from "./images/messier/m93.jpg";
-import img_ngc_6826 from "./images/ngc/ngc_6826.jpg";
-import img_ngc_7662 from "./images/ngc/ngc_7662.jpg";
-import img_m6 from "./images/messier/m6.jpg";
-import img_ngc_253 from "./images/ngc/ngc_253.jpg";
-import img_m14 from "./images/messier/m14.jpg";
-import img_ngc_2129 from "./images/ngc/ngc_2129.jpg";
-import img_m49 from "./images/messier/m49.jpg";
-import img_m65 from "./images/messier/m65.jpg";
-import img_m17 from "./images/messier/m17.jpg";
-import img_m86 from "./images/messier/m86.jpg";
-import img_m7 from "./images/messier/m7.jpg";
-import img_ngc_2169 from "./images/ngc/ngc_2169.jpg";
-import img_m56 from "./images/messier/m56.jpg";
-import img_ngc_7331 from "./images/ngc/ngc_7331.jpg";
-import img_m21 from "./images/messier/m21.jpg";
-import img_ic_1848 from "./images/other/ic_1848.jpg";
-import img_m103 from "./images/messier/m103.jpg";
-import img_m57 from "./images/messier/m57.jpg";
-import img_m27 from "./images/messier/m27.jpg";
-import img_m66 from "./images/messier/m66.jpg";
-import img_ngc_2392 from "./images/ngc/ngc_2392.jpg";
-import img_ngc_1499 from "./images/ngc/ngc_1499.jpg";
-import img_m29 from "./images/messier/m29.jpg";
-import img_m104 from "./images/messier/m104.jpg";
-import img_m108 from "./images/messier/m108.jpg";
-import img_m20 from "./images/messier/m20.jpg";
-import img_m87 from "./images/messier/m87.jpg";
-import img_ngc_7635 from "./images/ngc/ngc_7635.jpg";
-import img_ngc_2362 from "./images/ngc/ngc_2362.jpg";
-import img_m74 from "./images/messier/m74.jpg";
-import img_m43 from "./images/messier/m43.jpg";
-import img_m71 from "./images/messier/m71.jpg";
-import img_m1 from "./images/messier/m1.jpg";
-import img_ngc_6946 from "./images/ngc/ngc_6946.jpg";
-import img_ngc_40 from "./images/ngc/ngc_40.jpg";
-import img_m78 from "./images/messier/m78.jpg";
-import img_m84 from "./images/messier/m84.jpg";
-import img_m18 from "./images/messier/m18.jpg";
-import img_m28 from "./images/messier/m28.jpg";
-import img_m76 from "./images/messier/m76.jpg";
-import img_ngc_7009 from "./images/ngc/ngc_7009.jpg";
-import img_m109 from "./images/messier/m109.jpg";
-import img_m77 from "./images/messier/m77.jpg";
-import img_m19 from "./images/messier/m19.jpg";
-import img_m97 from "./images/messier/m97.jpg";
-import img_m8 from "./images/messier/m8.jpg";
-import img_m30 from "./images/messier/m30.jpg";
-import img_ngc_6960_92 from "./images/ngc/ngc_6960_92.jpg";
-import img_ngc_3242 from "./images/ngc/ngc_3242.jpg";
-import img_m9 from "./images/messier/m9.jpg";
-import img_m80 from "./images/messier/m80.jpg";
-import img_m54 from "./images/messier/m54.jpg";
-import img_m4 from "./images/messier/m4.jpg";
-import img_m55 from "./images/messier/m55.jpg";
-import img_ngc_7293 from "./images/ngc/ngc_7293.jpg";
-import img_ngc_2237 from "./images/ngc/ngc_2237.jpg";
-import img_ngc_2024 from "./images/ngc/ngc_2024.jpg";
-import img_ic_434 from "./images/other/ic_434.jpg";
-import mercury from "./images/planets/mercury.jpg";
 import venus from "./images/planets/venus.jpg";
+import img_albireo from "./images/stars/albireo.jpg";
+import img_aldebaran from "./images/stars/aldebaran.jpg";
+import img_alhena from "./images/stars/alhena.jpg";
+import img_alioth from "./images/stars/alioth.jpg";
+import img_alkaid from "./images/stars/alkaid.jpg";
+import img_alpheratz from "./images/stars/alpheratz.jpg";
+import img_altair from "./images/stars/altair.jpg";
+import img_arcturus from "./images/stars/arcturus.jpg";
+import img_bellatrix from "./images/stars/bellatrix.jpg";
+import img_betelgeuse from "./images/stars/betelgeuse.jpg";
+import img_capella from "./images/stars/capella.jpg";
+import img_castor from "./images/stars/castor.jpg";
+import img_deneb from "./images/stars/deneb.jpg";
+import img_dubhe from "./images/stars/dubhe.jpg";
+import img_elnath from "./images/stars/elnath.jpg";
+import img_hamal from "./images/stars/hamal.jpg";
+import img_menkalinan from "./images/stars/menkalinan.jpg";
+import img_mirach from "./images/stars/mirach.jpg";
+import img_mirfak from "./images/stars/mirfak.jpg";
+import img_mizar from "./images/stars/mizar.jpg";
+import img_polaris from "./images/stars/polaris.jpg";
+import img_pollux from "./images/stars/pollux.jpg";
+import img_procyon from "./images/stars/procyon.jpg";
+import img_rasalhague from "./images/stars/rasalhague.jpg";
+import img_regulus from "./images/stars/regulus.jpg";
+import img_vega from "./images/stars/vega.jpg";
 
 export interface TargetImage {
   src: string;
@@ -265,7 +265,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M39": {
+  M39: {
     src: img_m39,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -283,7 +283,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M34": {
+  M34: {
     src: img_m34,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -307,7 +307,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M35": {
+  M35: {
     src: img_m35,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -337,67 +337,67 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M47": {
+  M47: {
     src: img_m47,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M38": {
+  M38: {
     src: img_m38,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M44": {
+  M44: {
     src: img_m44,
     widthArcmin: 285,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M37": {
+  M37: {
     src: img_m37,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M48": {
+  M48: {
     src: img_m48,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M42": {
+  M42: {
     src: img_m42,
     widthArcmin: 255,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M13": {
+  M13: {
     src: img_m13,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M3": {
+  M3: {
     src: img_m3,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M24": {
+  M24: {
     src: img_m24,
     widthArcmin: 270,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M25": {
+  M25: {
     src: img_m25,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M41": {
+  M41: {
     src: img_m41,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -433,19 +433,19 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M15": {
+  M15: {
     src: img_m15,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M5": {
+  M5: {
     src: img_m5,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M33": {
+  M33: {
     src: img_m33,
     widthArcmin: 210,
     credit: DSS_CREDIT,
@@ -458,7 +458,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M92": {
+  M92: {
     src: img_m92,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -470,7 +470,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M46": {
+  M46: {
     src: img_m46,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -488,7 +488,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M106": {
+  M106: {
     src: img_m106,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -500,7 +500,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M67": {
+  M67: {
     src: img_m67,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -512,31 +512,31 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M36": {
+  M36: {
     src: img_m36,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M50": {
+  M50: {
     src: img_m50,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Vega": {
+  Vega: {
     src: img_vega,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Capella": {
+  Capella: {
     src: img_capella,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M53": {
+  M53: {
     src: img_m53,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -548,139 +548,139 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M11": {
+  M11: {
     src: img_m11,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Arcturus": {
+  Arcturus: {
     src: img_arcturus,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Pollux": {
+  Pollux: {
     src: img_pollux,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Deneb": {
+  Deneb: {
     src: img_deneb,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Castor": {
+  Castor: {
     src: img_castor,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Alioth": {
+  Alioth: {
     src: img_alioth,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Alkaid": {
+  Alkaid: {
     src: img_alkaid,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Procyon": {
+  Procyon: {
     src: img_procyon,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Menkalinan": {
+  Menkalinan: {
     src: img_menkalinan,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Altair": {
+  Altair: {
     src: img_altair,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Mizar": {
+  Mizar: {
     src: img_mizar,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Mirach": {
+  Mirach: {
     src: img_mirach,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Dubhe": {
+  Dubhe: {
     src: img_dubhe,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Betelgeuse": {
+  Betelgeuse: {
     src: img_betelgeuse,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M52": {
+  M52: {
     src: img_m52,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Elnath": {
+  Elnath: {
     src: img_elnath,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Alpheratz": {
+  Alpheratz: {
     src: img_alpheratz,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M23": {
+  M23: {
     src: img_m23,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Mirfak": {
+  Mirfak: {
     src: img_mirfak,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Alhena": {
+  Alhena: {
     src: img_alhena,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M110": {
+  M110: {
     src: img_m110,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Hamal": {
+  Hamal: {
     src: img_hamal,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M12": {
+  M12: {
     src: img_m12,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -692,31 +692,31 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M16": {
+  M16: {
     src: img_m16,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M10": {
+  M10: {
     src: img_m10,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M94": {
+  M94: {
     src: img_m94,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Rasalhague": {
+  Rasalhague: {
     src: img_rasalhague,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Albireo": {
+  Albireo: {
     src: img_albireo,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -728,19 +728,19 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Bellatrix": {
+  Bellatrix: {
     src: img_bellatrix,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M2": {
+  M2: {
     src: img_m2,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M22": {
+  M22: {
     src: img_m22,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -752,13 +752,13 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Polaris": {
+  Polaris: {
     src: img_polaris,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M63": {
+  M63: {
     src: img_m63,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -801,7 +801,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: "NASA/JPL, Voyager 2 (public domain)",
     footprint: { cx: 0.49, cy: 0.5, angleDeg: 0 },
   },
-  "M101": {
+  M101: {
     src: img_m101,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -813,31 +813,31 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M64": {
+  M64: {
     src: img_m64,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M32": {
+  M32: {
     src: img_m32,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Regulus": {
+  Regulus: {
     src: img_regulus,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M26": {
+  M26: {
     src: img_m26,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "Aldebaran": {
+  Aldebaran: {
     src: img_aldebaran,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -849,7 +849,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M51": {
+  M51: {
     src: img_m51,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -867,7 +867,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M93": {
+  M93: {
     src: img_m93,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -885,7 +885,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M6": {
+  M6: {
     src: img_m6,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -897,7 +897,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M14": {
+  M14: {
     src: img_m14,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -909,31 +909,31 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M49": {
+  M49: {
     src: img_m49,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M65": {
+  M65: {
     src: img_m65,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M17": {
+  M17: {
     src: img_m17,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M86": {
+  M86: {
     src: img_m86,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M7": {
+  M7: {
     src: img_m7,
     widthArcmin: 240,
     credit: DSS_CREDIT,
@@ -945,7 +945,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M56": {
+  M56: {
     src: img_m56,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -957,7 +957,7 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M21": {
+  M21: {
     src: img_m21,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -969,25 +969,25 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M103": {
+  M103: {
     src: img_m103,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M57": {
+  M57: {
     src: img_m57,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M27": {
+  M27: {
     src: img_m27,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M66": {
+  M66: {
     src: img_m66,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -1005,31 +1005,31 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M29": {
+  M29: {
     src: img_m29,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M104": {
+  M104: {
     src: img_m104,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M108": {
+  M108: {
     src: img_m108,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M20": {
+  M20: {
     src: img_m20,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M87": {
+  M87: {
     src: img_m87,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -1047,25 +1047,25 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M74": {
+  M74: {
     src: img_m74,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M43": {
+  M43: {
     src: img_m43,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M71": {
+  M71: {
     src: img_m71,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M1": {
+  M1: {
     src: img_m1,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -1083,31 +1083,31 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M78": {
+  M78: {
     src: img_m78,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M84": {
+  M84: {
     src: img_m84,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M18": {
+  M18: {
     src: img_m18,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M28": {
+  M28: {
     src: img_m28,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M76": {
+  M76: {
     src: img_m76,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -1119,37 +1119,37 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M109": {
+  M109: {
     src: img_m109,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M77": {
+  M77: {
     src: img_m77,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M19": {
+  M19: {
     src: img_m19,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M97": {
+  M97: {
     src: img_m97,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M8": {
+  M8: {
     src: img_m8,
     widthArcmin: 270,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M30": {
+  M30: {
     src: img_m30,
     widthArcmin: 180,
     credit: DSS_CREDIT,
@@ -1167,31 +1167,31 @@ export const TARGET_IMAGES: Record<string, TargetImage> = {
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M9": {
+  M9: {
     src: img_m9,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M80": {
+  M80: {
     src: img_m80,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M54": {
+  M54: {
     src: img_m54,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M4": {
+  M4: {
     src: img_m4,
     widthArcmin: 180,
     credit: DSS_CREDIT,
     footprint: CENTRED,
   },
-  "M55": {
+  M55: {
     src: img_m55,
     widthArcmin: 180,
     credit: DSS_CREDIT,

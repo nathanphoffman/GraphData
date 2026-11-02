@@ -1,5 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { type Ranking, effectiveRating, fractionBetween, grade, letterGrade, maxScore, minScore, rankItems, score } from "../../../src/charts/tech/top-rankings/score";
+import {
+  effectiveRating,
+  fractionBetween,
+  grade,
+  letterGrade,
+  maxScore,
+  minScore,
+  type Ranking,
+  rankItems,
+  score,
+} from "../../../src/charts/tech/top-rankings/score";
 
 const columns = [{ label: "Year" }, { label: "Syntax", weight: 10 }, { label: "Skill", weight: 1 }];
 
@@ -57,9 +67,17 @@ describe("fractionBetween", () => {
 
 describe("grade", () => {
   // Weights 3, 2, 1: the best possible score is (3 + 2 + 1) x 25 and the lowest is (3 + 2 + 1) x 1.
-  const rated = [{ label: "A", weight: 3 }, { label: "B", weight: 2 }, { label: "C", weight: 1 }];
+  const rated = [
+    { label: "A", weight: 3 },
+    { label: "B", weight: 2 },
+    { label: "C", weight: 1 },
+  ];
 
-  const gradeOfAll = (rating: number) => grade(rated.reduce((total, column) => total + rating ** 2 * (column.weight ?? 0), 0), rated);
+  const gradeOfAll = (rating: number) =>
+    grade(
+      rated.reduce((total, column) => total + rating ** 2 * (column.weight ?? 0), 0),
+      rated,
+    );
 
   it("knows the best and lowest possible scores", () => {
     expect(maxScore(rated)).toBe(150);
@@ -124,7 +142,8 @@ describe("effectiveRating curves", () => {
     first: { type: "halving", start: 1 },
   } as const;
 
-  const rate = (name: keyof typeof curves, value: number) => effectiveRating({ label: "A", weight: 1, curve: curves[name] }, value);
+  const rate = (name: keyof typeof curves, value: number) =>
+    effectiveRating({ label: "A", weight: 1, curve: curves[name] }, value);
 
   it("rates a weight of 2 best, falling in a straight line to 3 at 1 and to 1 at 5", () => {
     expect(rate("weight", 2)).toBe(5);
@@ -172,7 +191,11 @@ describe("letterGrade", () => {
 });
 
 describe("peak curve with a knee", () => {
-  const column = { label: "Weight", weight: 1, curve: { type: "peak" as const, at: 2, from: 1, fromRating: 3, to: 4.25, kneeAt: 3.25, kneeRating: 3.5 } };
+  const column = {
+    label: "Weight",
+    weight: 1,
+    curve: { type: "peak" as const, at: 2, from: 1, fromRating: 3, to: 4.25, kneeAt: 3.25, kneeRating: 3.5 },
+  };
 
   it("falls gently up to the knee and steeply after it", () => {
     expect(effectiveRating(column, 2)).toBe(5);

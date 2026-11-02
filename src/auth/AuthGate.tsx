@@ -16,8 +16,19 @@ function LoginForm({ onLogin }: { onLogin: (username: string, password: string) 
 
   return (
     <form className="login-form" onSubmit={submit}>
-      <input value={username} onChange={(changeEvent) => setUsername(changeEvent.target.value)} placeholder="Username" autoComplete="username" />
-      <input type="password" value={password} onChange={(changeEvent) => setPassword(changeEvent.target.value)} placeholder="Password" autoComplete="current-password" />
+      <input
+        value={username}
+        onChange={(changeEvent) => setUsername(changeEvent.target.value)}
+        placeholder="Username"
+        autoComplete="username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(changeEvent) => setPassword(changeEvent.target.value)}
+        placeholder="Password"
+        autoComplete="current-password"
+      />
       <button type="submit">Log in</button>
       {error && <span className="login-error">{error}</span>}
     </form>
@@ -25,7 +36,13 @@ function LoginForm({ onLogin }: { onLogin: (username: string, password: string) 
 }
 
 /** Shows the login form until someone is logged in, then shows `children` with the username and a way to log out. */
-export function AuthGate({ auth, children }: { auth?: ReturnType<typeof useAuth>; children: (user: string, logout: () => void) => ReactNode }) {
+export function AuthGate({
+  auth,
+  children,
+}: {
+  auth?: ReturnType<typeof useAuth>;
+  children: (user: string, logout: () => void) => ReactNode;
+}) {
   const ownAuth = useAuth();
   const { user, login, logout } = auth ?? ownAuth;
 

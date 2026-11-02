@@ -64,12 +64,14 @@ export const LEGEND_GROUPS: Array<{ title: string; description: string; test: (s
     title: "Outlook by year",
     description:
       "Each year's popularity weighted by opinion: Stack Overflow usage multiplied by how much developers like the language.",
-    test: (seriesKey) => seriesKey.startsWith("Year ") },
+    test: (seriesKey) => seriesKey.startsWith("Year "),
+  },
   {
     title: "Averages",
     description:
       "3-year averages of the outlook and TIOBE, plus a version using raw Stack Overflow usage with no opinion. The older and newer windows show which way a language is moving.",
-    test: (seriesKey) => seriesKey.includes(" avg ") },
+    test: (seriesKey) => seriesKey.includes(" avg "),
+  },
   {
     title: "Healthiness",
     description:
@@ -80,10 +82,12 @@ export const LEGEND_GROUPS: Array<{ title: string; description: string; test: (s
     title: "Outlook Projections",
     description:
       "Where each language lands in 10 years, leaning on hype and love: usage is included, but multiplied by how much developers like the language, with TIOBE (1/3) as the only opinion-free part. The trend is half the long-run change and half the last 3 years, fading out over time. Historical Fix adds half of how far the backtest missed.",
-    test: (seriesKey) => seriesKey.startsWith(PROJECTION_PREFIX) },
+    test: (seriesKey) => seriesKey.startsWith(PROJECTION_PREFIX),
+  },
   {
     title: "Backtests",
     description:
       "A test of the hype-and-love projection: the same math run with data through 2024 only, to predict 2025 and 2026. Compare against the real dots to see how far off it was.",
-    test: (seriesKey) => seriesKey.startsWith("Backtest") },
+    test: (seriesKey) => seriesKey.startsWith("Backtest"),
+  },
 ];

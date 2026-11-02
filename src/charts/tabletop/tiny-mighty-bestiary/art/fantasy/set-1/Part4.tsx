@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -48,7 +48,11 @@ export function CrossroadsFiend() {
 export function CheekyPoltergeist() {
   return (
     <Drawing label="Drawing of an invisible prankster shown as a dotted outline, with a spoon, a sock and a chair flying around it">
-      <Line d="M160 90 C160 40 240 40 240 90 L250 190 q-12 10 -24 0 q-12 10 -26 0 q-12 10 -26 0 q-12 10 -24 0 Z" dash="3 9" w={5} />
+      <Line
+        d="M160 90 C160 40 240 40 240 90 L250 190 q-12 10 -24 0 q-12 10 -26 0 q-12 10 -26 0 q-12 10 -24 0 Z"
+        dash="3 9"
+        w={5}
+      />
       <Dot x={184} y={90} r={6} />
       <Dot x={216} y={90} r={6} />
       <Line d="M180 118 Q200 138 222 116" />

@@ -14,7 +14,8 @@ const number = (value: unknown, lowest: number, highest: number, fallback: numbe
   typeof value === "number" && value >= lowest && value <= highest ? value : fallback;
 
 /** Older saved settings used "medium-long" and "long" for what are now Medium-Large and Large. */
-const renamedFocal = (value: unknown) => (value === "medium-long" ? "medium-large" : value === "long" ? "large" : value);
+const renamedFocal = (value: unknown) =>
+  value === "medium-long" ? "medium-large" : value === "long" ? "large" : value;
 
 /** Keeps only valid saved fields, so an old or edited save can never break the page. */
 export function parseSettings(saved: unknown): Settings | null {

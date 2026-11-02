@@ -1,6 +1,6 @@
 import type { Settings, Target } from "../types";
-import { DEGREES_TO_RADIANS, clamp } from "./sky";
 import { optics, scopeFocalLength } from "./settings";
+import { clamp, DEGREES_TO_RADIANS } from "./sky";
 
 /** 0 at 10° or lower, 1 at 55° or higher: low objects fight haze and thick air. */
 export function altitudeQuality(altitude: number): number {

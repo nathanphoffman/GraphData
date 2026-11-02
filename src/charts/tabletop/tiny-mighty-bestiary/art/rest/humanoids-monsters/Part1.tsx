@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Figure } from "../../core/figure";
 
 const card = CARD_COLOR;
@@ -60,7 +60,12 @@ export function SmogBaron() {
     <Drawing label="Drawing of a top-hatted soot-grey mill owner with a cane, coughing, with a factory belching smoke behind him">
       <Shape d="M240 120 H390 V224 H240 Z" w={4} />
       <Shape d="M260 40 H284 V120 H260 Z M310 20 H334 V120 H310 Z M360 50 H382 V120 H360 Z" w={4} />
-      <path d="M260 30 q-20 -20 10 -30 q40 0 40 20 q30 -14 40 8 q30 0 20 20 H260 Z" fill={card} stroke="currentColor" strokeWidth="4" />
+      <path
+        d="M260 30 q-20 -20 10 -30 q40 0 40 20 q30 -14 40 8 q30 0 20 20 H260 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="4"
+      />
       <Shape d="M166 62 L172 12 H228 L234 62 Z" />
       <Line d="M172 40 H228 M152 64 H248" w={5} />
       <Shape d="M172 68 H228 V100 C228 116 172 116 172 100 Z" />
@@ -83,7 +88,10 @@ export function BackAlleySurgeon() {
       <Line d="M184 84 Q200 98 216 84" w={4} />
       <Shape d="M150 104 H250 L260 214 H140 Z" />
       <Line d="M200 104 V214" w={3} />
-      <Line d="M152 114 L112 100 L96 60 M152 130 L108 140 L88 120 M154 148 L120 178 L90 170 M248 114 L288 100 L304 60 M248 130 L292 140 L312 120 M246 148 L280 178 L310 170" w={6} />
+      <Line
+        d="M152 114 L112 100 L96 60 M152 130 L108 140 L88 120 M154 148 L120 178 L90 170 M248 114 L288 100 L304 60 M248 130 L292 140 L312 120 M246 148 L280 178 L310 170"
+        w={6}
+      />
       <Shape d="M82 150 h14 v8 h-14 Z" w={3} />
       <Solid d="M92 54 L96 38 L102 56 Z M298 54 L304 38 L308 56 Z" />
       <Shape d="M304 112 h14 v10 h-14 Z" w={3} />

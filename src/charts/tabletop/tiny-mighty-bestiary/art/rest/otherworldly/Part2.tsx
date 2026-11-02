@@ -1,4 +1,4 @@
-import { Dot, Drawing, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Line, Shape, Solid } from "../../core/artStyle";
 import { ghostBody } from "./Part1";
 
 const card = CARD_COLOR;
@@ -17,7 +17,15 @@ export function NeonShrineFox() {
       <Dot x={236} y={90} r={3} />
       {/* Fan out one curve per offset. */}
       {[-70, -50, -30, -10, 10, 30, 50, 70, 90].map((a, index) => (
-        <path key={index} d={`M150 140 C${100 + index * 2} ${140 - a} ${70 + index * 4} ${120 - a * 0.8} ${60 + index * 6} ${110 - a * 0.9}`} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray={index % 2 ? "2 4" : undefined} />
+        <path
+          key={index}
+          d={`M150 140 C${100 + index * 2} ${140 - a} ${70 + index * 4} ${120 - a * 0.8} ${60 + index * 6} ${110 - a * 0.9}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeDasharray={index % 2 ? "2 4" : undefined}
+        />
       ))}
       <Line d="M160 150 V170 M190 150 V170" w={4} />
     </Drawing>
@@ -31,7 +39,14 @@ export function BoilerGhost() {
       <Shape d="M270 130 H350 V190 H270 Z" w={4} />
       <Solid d="M290 190 C280 166 300 156 306 140 C316 156 336 166 326 190 Z" />
       <Line d="M240 60 H380 M300 60 V90 M320 60 V90" w={5} />
-      <path d={ghostBody(90, 210, 60, 200)} fill={card} stroke="currentColor" strokeWidth="5" strokeDasharray="6 6" strokeLinejoin="round" />
+      <path
+        d={ghostBody(90, 210, 60, 200)}
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeDasharray="6 6"
+        strokeLinejoin="round"
+      />
       <Shape d="M102 70 L150 40 L198 70 Q150 82 102 70 Z" w={4} />
       <Dot x={132} y={96} r={4} />
       <Dot x={164} y={96} r={4} />
@@ -53,7 +68,10 @@ export function StarlightWisp() {
       <Line d="M90 156 L110 140" w={4} />
       <Shape d="M170 80 L200 40 L230 80 L200 120 Z" />
       <Solid d="M200 66 l4 10 l10 2 l-8 6 l2 10 l-8 -6 l-8 6 l2 -10 l-8 -6 l10 -2 Z" />
-      <Line d="M200 40 V22 M200 120 V138 M170 80 H152 M230 80 H248 M178 58 l-12 -12 M222 58 l12 -12 M178 102 l-12 12 M222 102 l12 12" w={3} />
+      <Line
+        d="M200 40 V22 M200 120 V138 M170 80 H152 M230 80 H248 M178 58 l-12 -12 M222 58 l12 -12 M178 102 l-12 12 M222 102 l12 12"
+        w={3}
+      />
       <Line d="M240 100 C290 90 330 130 360 100" w={3} dash="3 5" />
       <Line d="M300 40 v10 M295 45 h10 M120 40 v8 M116 44 h8 M340 190 v8 M336 194 h8" w={3} />
     </Drawing>

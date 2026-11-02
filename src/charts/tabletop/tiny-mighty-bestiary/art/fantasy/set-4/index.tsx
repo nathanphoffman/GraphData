@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { TumbleweedImp, StoneGolem, SteamGolem, RuneTeapot, ScarecrowSentinel, RatKing } from "./Part1";
-import { SmogHound, ThunderRam, RoamingMinstrel, TempleHealer, SchemingChancellor, SellswordCaptain } from "./Part2";
-import { TollTroll, StoneGazer, SpikedHodag, SugarWyrm, VainWyrm, Shellback } from "./Part3";
-import { Stormbird, Skeleton, RestlessGhost, RainbowTrickster, VoidTentacle, SwampHag } from "./Part4";
-import { SunkenDreamer, RiddleSphinx, Siren } from "./Part5";
+import { RatKing, RuneTeapot, ScarecrowSentinel, SteamGolem, StoneGolem, TumbleweedImp } from "./Part1";
+import { RoamingMinstrel, SchemingChancellor, SellswordCaptain, SmogHound, TempleHealer, ThunderRam } from "./Part2";
+import { Shellback, SpikedHodag, StoneGazer, SugarWyrm, TollTroll, VainWyrm } from "./Part3";
+import { RainbowTrickster, RestlessGhost, Skeleton, Stormbird, SwampHag, VoidTentacle } from "./Part4";
+import { RiddleSphinx, Siren, SunkenDreamer } from "./Part5";
 
 export const fantasyArtQZ: Record<string, () => ReactNode> = {
   "tumbleweed-imp": TumbleweedImp,

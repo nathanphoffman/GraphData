@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./styles.css";
+import combosData from "../../../../data/economic-systems/economic-systems-combos.json";
 import data from "../../../../data/economic-systems/economic-systems-map.json";
 import views from "../../../../data/economic-systems/economic-systems-views.json";
-import combosData from "../../../../data/economic-systems/economic-systems-combos.json";
-import type { Combo, EconomicSystemsCombosData, EconomicSystemsData, EconomicSystemsViewsData } from "./model/types";
 import MapSvg from "./map/MapSvg";
+import type { Combo, EconomicSystemsCombosData, EconomicSystemsData, EconomicSystemsViewsData } from "./model/types";
 import ViewsPanel from "./panels/ViewsPanel";
 
 const model = data as EconomicSystemsData;
@@ -25,10 +25,17 @@ export default function EconomicSystemsMap() {
     : [];
 
   // The 2x2 blocks of cells that contain the selected system, each with a four-way blend.
-  const quadCombos = single ? combos.filter((combo) => combo.cells.length === 4 && combo.cells.includes(single.name)) : [];
+  const quadCombos = single
+    ? combos.filter((combo) => combo.cells.length === 4 && combo.cells.includes(single.name))
+    : [];
   const activeCombo: Combo | undefined =
     selectedCells.length > 1
-      ? combos.find((combo) => combo.cells.length === selectedCells.length && selectedCells.every((cell) => combo.cells.includes(cell.name)))
+      ? combos.find(
+          (combo) =>
+            combo.cells.length === selectedCells.length &&
+            selectedCells.every((cell) => combo.cells.includes(cell.name)),
+        )
+
       : undefined;
 
   // The outline is centered on the middle of the chosen cells: on the cell, the shared line, or the shared corner.
@@ -37,6 +44,7 @@ export default function EconomicSystemsMap() {
         col: selectedCells.reduce((sum, cell) => sum + cell.col, 0) / selectedCells.length,
         row: selectedCells.reduce((sum, cell) => sum + cell.row, 0) / selectedCells.length,
       }
+
     : undefined;
 
   return (

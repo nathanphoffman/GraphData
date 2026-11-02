@@ -1,11 +1,11 @@
 import { useState } from "react";
-import CreatureCard from "./ui/cards/CreatureCard";
-import Credits from "./ui/cards/Credits";
 import EncounterGenerator from "./encounter/EncounterGenerator";
-import FilterBar, { type Filters } from "./ui/filters/FilterBar";
-import { DIFFICULTY_BANDS, TONE_BANDS, compareBy, difficultyOf, model } from "./model/data";
+import { compareBy, DIFFICULTY_BANDS, difficultyOf, model, TONE_BANDS } from "./model/data";
 import { matches } from "./model/search";
 import type { Creature } from "./model/types";
+import CreatureCard from "./ui/cards/CreatureCard";
+import Credits from "./ui/cards/Credits";
+import FilterBar, { type Filters } from "./ui/filters/FilterBar";
 import "./styles.css";
 
 const DEFAULT_FILTERS: Filters = {
@@ -46,8 +46,8 @@ export default function TinyMightyBestiary() {
     <div className="bestiary">
       <Credits />
       <p className="muted">
-        Built with the combat table from {model.rulesVersion}. Net difficulty of an encounter should equal the number
-        of players plus the levels they have gained. Each 1-use power adds 0.5 difficulty. Enemies die at 0 health and
+        Built with the combat table from {model.rulesVersion}. Net difficulty of an encounter should equal the number of
+        players plus the levels they have gained. Each 1-use power adds 0.5 difficulty. Enemies die at 0 health and
         power damage ignores defense.
       </p>
       <FilterBar

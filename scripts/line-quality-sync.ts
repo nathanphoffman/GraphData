@@ -16,6 +16,7 @@ import { dirname, join } from "node:path";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
+
 import { fileURLToPath } from "node:url";
 import { formatTechLines } from "../src/charts/tech/top-rankings/languageBurden.ts";
 
@@ -80,16 +81,51 @@ const GLOBAL_EXCLUDE = ["vendor", "third_party", "*.min.js", "*.min.css", "*-loc
 
 // tokei languages that are data/config/docs, not code someone wrote
 const NOT_CODE = new Set([
-  "JSON", "YAML", "TOML", "XML", "Markdown", "Plain Text", "SVG", "CSV", "INI",
-  "Dockerfile", "Ignore", "Autoconf", "Just", "Makefile", "MSBuild", "Org", "ReStructuredText",
+  "JSON",
+  "YAML",
+  "TOML",
+  "XML",
+  "Markdown",
+  "Plain Text",
+  "SVG",
+  "CSV",
+  "INI",
+  "Dockerfile",
+  "Ignore",
+  "Autoconf",
+  "Just",
+  "Makefile",
+  "MSBuild",
+  "Org",
+  "ReStructuredText",
 ]);
 
 // tokei language names that count as one of the rated languages in src/charts/tech/top-rankings/languageBurden.ts; languages not listed here (HTML, CSS, shell ...) are not rated
 const RATED_AS: Record<string, string> = {
-  TypeScript: "TypeScript", TSX: "TypeScript", JavaScript: "JavaScript", JSX: "JavaScript",
-  Rust: "Rust", Deor: "Deor", Python: "Python", C: "C", "C Header": "C", "C++": "C++", "C++ Header": "C++",
-  "C#": "C#", Go: "Go", Java: "Java", Kotlin: "Kotlin", Swift: "Swift", Ruby: "Ruby", PHP: "PHP", Lua: "Lua",
-  Haskell: "Haskell", Scala: "Scala", APL: "APL", Assembly: "Assembly", "GNU Style Assembly": "Assembly",
+  TypeScript: "TypeScript",
+  TSX: "TypeScript",
+  JavaScript: "JavaScript",
+  JSX: "JavaScript",
+  Rust: "Rust",
+  Deor: "Deor",
+  Python: "Python",
+  C: "C",
+  "C Header": "C",
+  "C++": "C++",
+  "C++ Header": "C++",
+  "C#": "C#",
+  Go: "Go",
+  Java: "Java",
+  Kotlin: "Kotlin",
+  Swift: "Swift",
+  Ruby: "Ruby",
+  PHP: "PHP",
+  Lua: "Lua",
+  Haskell: "Haskell",
+  Scala: "Scala",
+  APL: "APL",
+  Assembly: "Assembly",
+  "GNU Style Assembly": "Assembly",
 };
 
 type TokeiReport = { stats: { code: number } };
@@ -136,13 +172,15 @@ async function mapLimit<T, R>(items: T[], limit: number, work: (item: T) => Prom
 
 function repoOf(projectDir: string): string {
   try {
-    return execFileSync("git", ["-C", projectDir, "remote", "get-url", "origin"], {
-      encoding: ENCODING,
-      stdio: ["ignore", "pipe", "ignore"],
-    })
-      .trim()
-      // Drop a trailing ".git" so the link opens the repo page.
-      .replace(/\.git$/, "");
+    return (
+      execFileSync("git", ["-C", projectDir, "remote", "get-url", "origin"], {
+        encoding: ENCODING,
+        stdio: ["ignore", "pipe", "ignore"],
+      })
+        .trim()
+        // Drop a trailing ".git" so the link opens the repo page.
+        .replace(/\.git$/, "")
+    );
   } catch (error) {
     // git exits with an error when the folder has no origin remote, which is normal; a missing git is not
     if ((error as NodeJS.ErrnoException).code === "ENOENT") throw error;
@@ -171,9 +209,14 @@ function isGenerated(file: string): boolean {
 // The generated Rust files of a git project (untracked ones too, but nothing .gitignore skips), as paths from the project folder
 function generatedRust(projectDir: string): string[] {
   try {
-    const files = execFileSync("git", ["-C", projectDir, "ls-files", "-co", "--exclude-standard", "*.rs"], { encoding: ENCODING, maxBuffer: MAX_BUFFER_BYTES }).split("\n");
+    const files = execFileSync("git", ["-C", projectDir, "ls-files", "-co", "--exclude-standard", "*.rs"], {
+      encoding: ENCODING,
+      maxBuffer: MAX_BUFFER_BYTES,
+    }).split("\n");
 
-    return files.filter((file) => file !== "" && existsSync(join(projectDir, file)) && isGenerated(join(projectDir, file)));
+    return files.filter(
+      (file) => file !== "" && existsSync(join(projectDir, file)) && isGenerated(join(projectDir, file)),
+    );
   } catch {
     // not a git folder: nothing to look up
     return [];
@@ -183,11 +226,13 @@ function generatedRust(projectDir: string): string[] {
 // Counts every line of the project's code, skipping data files and generated folders so lock files and datasets do not inflate it.
 function count(project: Project): { total: number; langs: Record<string, number>; tech: Record<string, number> } {
   const projectDir = join(ROOT, project.folder);
+
   // tokei matches excludes against paths from where it runs, so it runs inside the project
   const args = [".", "-o", "json"];
 
   // Generated Rust is the Deor code again, so it would be counted twice
-  for (const excluded of [...GLOBAL_EXCLUDE, ...(project.exclude ?? []), ...generatedRust(projectDir)]) args.push("-e", excluded);
+  for (const excluded of [...GLOBAL_EXCLUDE, ...(project.exclude ?? []), ...generatedRust(projectDir)])
+    args.push("-e", excluded);
 
   const tokeiOutput = execFileSync("tokei", args, { cwd: projectDir, encoding: ENCODING, maxBuffer: MAX_BUFFER_BYTES });
   const json = JSON.parse(tokeiOutput) as Record<string, TokeiLang>;
@@ -218,14 +263,18 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality; 
   await import("../server/rankings.js"); // creates the tables and applies any column changes
 
   const RANKING = "project-priority";
-  const labels = db.prepare("SELECT label FROM ranking_columns WHERE ranking_id = ? ORDER BY position").all(RANKING) as { label: string }[];
+  const labels = db
+    .prepare("SELECT label FROM ranking_columns WHERE ranking_id = ? ORDER BY position")
+    .all(RANKING) as { label: string }[];
   const linesAt = labels.findIndex((column) => column.label === "Completed Lines");
   const qualityAt = labels.findIndex((column) => column.label === "Computed Quality");
   const familiarityAt = labels.findIndex((column) => column.label === "Familiarity");
   const techAt = labels.findIndex((column) => column.label === "Tech Lines"); // lines per rated language, which weights the n-Factor adjustment
   const finalAt = labels.findIndex((column) => column.label === "Quality"); // the average of familiarity and computed quality
 
-  if (linesAt < 0 || qualityAt < 0) throw new Error("project-priority is missing its Completed Lines or Computed Quality column");
+  if (linesAt < 0 || qualityAt < 0)
+
+    throw new Error("project-priority is missing its Completed Lines or Computed Quality column");
 
   const find = db.prepare("SELECT values_json FROM ranking_items WHERE ranking_id = ? AND name = ?");
   const save = db.prepare("UPDATE ranking_items SET values_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?");
@@ -251,7 +300,8 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality; 
     const [rating, computed] = [values[familiarityAt], values[qualityAt]];
     const fam = typeof rating === "number" ? ((rating - 1) / 4) * 100 : undefined; // familiarity is out of 5, 1 being 0% and 5 being 100%
 
-    if (finalAt >= 0 && fam !== undefined) values[finalAt] = Math.round(((fam + (typeof computed === "number" ? computed : fam)) / 2) * TENTH) / TENTH;
+    if (finalAt >= 0 && fam !== undefined)
+      values[finalAt] = Math.round(((fam + (typeof computed === "number" ? computed : fam)) / 2) * TENTH) / TENTH;
     save.run(JSON.stringify(values), Date.now(), RANKING, projectRow.name);
   }
 
@@ -283,22 +333,31 @@ if (asJson) {
   console.log(JSON.stringify(rows, null, 2));
 } else {
   // widthOf gives the longest value in one column, so the table can line up.
-  const widthOf = (field: "name" | "folder") => Math.max(...rows.map((projectRow) => projectRow[field].length), field.length);
+  const widthOf = (field: "name" | "folder") =>
+    Math.max(...rows.map((projectRow) => projectRow[field].length), field.length);
   const nameWidth = widthOf("name");
   const folderWidth = widthOf("folder");
 
   const formatNumber = (amount: number) => amount.toLocaleString("en-US");
   const linesWidth = Math.max(...rows.map((projectRow) => formatNumber(projectRow.lines).length), MIN_LINES_WIDTH);
   const qual = (projectRow: (typeof rows)[number]) =>
-    (projectRow.quality ? `${projectRow.quality.score.toFixed(1)} ${projectRow.quality.grade}` : "n/a").padEnd(QUALITY_WIDTH);
+    (projectRow.quality ? `${projectRow.quality.score.toFixed(1)} ${projectRow.quality.grade}` : "n/a").padEnd(
+      QUALITY_WIDTH,
+    );
 
-  console.log(`${"Project".padEnd(nameWidth)}  ${"Lines".padStart(linesWidth)}  ${"Quality".padEnd(QUALITY_WIDTH)}  ${"Folder".padEnd(folderWidth)}  Repo`);
+  console.log(
+    `${"Project".padEnd(nameWidth)}  ${"Lines".padStart(linesWidth)}  ${"Quality".padEnd(QUALITY_WIDTH)}  ${"Folder".padEnd(folderWidth)}  Repo`,
+  );
 
   for (const projectRow of rows) {
-    console.log(`${projectRow.name.padEnd(nameWidth)}  ${formatNumber(projectRow.lines).padStart(linesWidth)}  ${qual(projectRow)}  ${projectRow.folder.padEnd(folderWidth)}  ${projectRow.repo}`);
+    console.log(
+      `${projectRow.name.padEnd(nameWidth)}  ${formatNumber(projectRow.lines).padStart(linesWidth)}  ${qual(projectRow)}  ${projectRow.folder.padEnd(folderWidth)}  ${projectRow.repo}`,
+    );
 
     if (showLangs) {
-      const topLanguages = Object.entries(projectRow.langs).sort((first, second) => second[1] - first[1]).map(([language, lineTotal]) => `${language} ${formatNumber(lineTotal)}`);
+      const topLanguages = Object.entries(projectRow.langs)
+        .sort((first, second) => second[1] - first[1])
+        .map(([language, lineTotal]) => `${language} ${formatNumber(lineTotal)}`);
       console.log(`${" ".repeat(nameWidth + 2)}${topLanguages.join(", ")}`);
     }
   }
@@ -310,10 +369,15 @@ if (asJson) {
   const scoredLines = scored.reduce((runningTotal, projectRow) => runningTotal + projectRow.lines, 0);
 
   // Add up each score times its project's lines, then divide by the lines to weight it.
-  const weighted = scored.reduce((runningTotal, projectRow) => runningTotal + projectRow.quality!.score * projectRow.lines, 0) / scoredLines;
+  const weighted =
+    scored.reduce((runningTotal, projectRow) => runningTotal + projectRow.quality!.score * projectRow.lines, 0) /
+    scoredLines;
   const totalQual = (scored.length ? weighted.toFixed(1) : "n/a").padEnd(QUALITY_WIDTH);
 
   // Add up the lines of every project for the TOTAL row.
-  const totalLines = formatNumber(rows.reduce((runningTotal, projectRow) => runningTotal + projectRow.lines, 0)).padStart(linesWidth);
+  const totalLines = formatNumber(
+    rows.reduce((runningTotal, projectRow) => runningTotal + projectRow.lines, 0),
+  ).padStart(linesWidth);
+
   console.log(`${"TOTAL".padEnd(nameWidth)}  ${totalLines}  ${totalQual}`);
 }

@@ -32,7 +32,9 @@ export function rankGames(games, preference) {
   const byBggRank = [...games].sort((first, second) => (first.rank ?? Infinity) - (second.rank ?? Infinity) || 0);
   const scored = byBggRank.map((game) => ({ ...game, score: scoreGame(game, preference) }));
 
-  return scored.filter((game) => Number.isFinite(game.score) && game.score !== 0).sort((first, second) => second.score - first.score);
+  return scored
+    .filter((game) => Number.isFinite(game.score) && game.score !== 0)
+    .sort((first, second) => second.score - first.score);
 }
 
 /** The weights tried when finding a preference: 1 to 5 in steps of 0.05. */
@@ -65,7 +67,9 @@ function totalPoints(games) {
 export function findBestWeight(games, owned) {
   const ownedKeys = new Set(owned.map(gameKey));
   const totals = WEIGHT_GRID.map((preference) => {
-    const found = rankGames(games, preference).map((game, index) => ({ title: game.title, releaseDate: game.releaseDate, position: index + 1 })).filter((game) => ownedKeys.has(gameKey(game)));
+    const found = rankGames(games, preference)
+      .map((game, index) => ({ title: game.title, releaseDate: game.releaseDate, position: index + 1 }))
+      .filter((game) => ownedKeys.has(gameKey(game)));
 
     return { preference, points: totalPoints(found), games: found };
   });
@@ -74,10 +78,16 @@ export function findBestWeight(games, owned) {
   const tied = totals.filter(({ points }) => points === highest);
   const best = tied[Math.floor(tied.length / 2)];
   const foundKeys = new Set(best.games.map(gameKey));
-  const noPreference = rankGames(games, 0).map((game, index) => ({ ...game, position: index + 1 })).filter((game) => ownedKeys.has(gameKey(game)));
+  const noPreference = rankGames(games, 0)
+    .map((game, index) => ({ ...game, position: index + 1 }))
+    .filter((game) => ownedKeys.has(gameKey(game)));
 
   return {
-    best: { preference: best.preference, points: best.points, games: [...best.games].sort((first, second) => first.position - second.position) },
+    best: {
+      preference: best.preference,
+      points: best.points,
+      games: [...best.games].sort((first, second) => first.position - second.position),
+    },
     tied: [tied[0].preference, tied[tied.length - 1].preference],
     noPreferencePoints: totalPoints(noPreference),
     missing: owned.filter((game) => !foundKeys.has(gameKey(game))).map((game) => game.title),

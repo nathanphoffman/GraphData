@@ -1,15 +1,25 @@
 import { useMemo, useState } from "react";
 import { ACTIVE_CLASS } from "../../../classNames";
-import { averageTint, band, deltaBand } from "../model/bands";
 import { ISO_DATE_LENGTH } from "../constants";
 import { yearly } from "../model/averages";
+import { averageTint, band, deltaBand } from "../model/bands";
 import type { WeightRow } from "../model/rows";
-import { type Format, type Unit, pretty, toDate } from "../model/units";
+import { type Format, pretty, toDate, type Unit } from "../model/units";
 
 type BandOf = (pounds: number | null, adjusted: boolean) => string;
 
 /** Actual value on top, muscle-adjusted value underneath, each highlighted by its target band. */
-function ActualAndAdjusted({ actual, adjusted, fmt: formatWeight, bandOf = band }: { actual: number | null; adjusted: number | null; fmt: (pounds: number) => string; bandOf?: BandOf }) {
+function ActualAndAdjusted({
+  actual,
+  adjusted,
+  fmt: formatWeight,
+  bandOf = band,
+}: {
+  actual: number | null;
+  adjusted: number | null;
+  fmt: (pounds: number) => string;
+  bandOf?: BandOf;
+}) {
   const show = (value: number | null) => (value === null ? "—" : formatWeight(value));
 
   return (
@@ -28,7 +38,9 @@ const quarterOf = (isoDate: string) =>
 /** Rows of one period: a quarter (e.g. "2025-Q3"), or by default the last 90 days. */
 function periodRows(newestFirst: WeightRow[], period: string) {
   if (period !== DEFAULT_PERIOD) return newestFirst.filter((tableRow) => quarterOf(tableRow.date) === period);
-  const cutoff = new Date(toDate(newestFirst[0].date).getTime() - (DEFAULT_PERIOD_DAYS - 1) * DAY_MS).toISOString().slice(0, ISO_DATE_LENGTH);
+  const cutoff = new Date(toDate(newestFirst[0].date).getTime() - (DEFAULT_PERIOD_DAYS - 1) * DAY_MS)
+    .toISOString()
+    .slice(0, ISO_DATE_LENGTH);
 
   return newestFirst.filter((tableRow) => tableRow.date >= cutoff);
 }
@@ -44,7 +56,14 @@ function useTableRows(period: string, dailyRows: WeightRow[]) {
   return { newestFirst, rows, quarters };
 }
 
-type Show = { muscleDaily: boolean; muscleTotal: boolean; dayAverages: boolean; weightLoss: boolean; allAverages: boolean; wma: boolean };
+type Show = {
+  muscleDaily: boolean;
+  muscleTotal: boolean;
+  dayAverages: boolean;
+  weightLoss: boolean;
+  allAverages: boolean;
+  wma: boolean;
+};
 
 const GROUPS: { key: keyof Show; label: string }[] = [
   { key: "dayAverages", label: "Day Averages" },
@@ -72,26 +91,152 @@ type Column = {
 
 const COLUMNS: Column[] = [
   { title: (unit) => `Weight (${unit})`, kind: "weight", actual: (tableRow) => tableRow.weight },
-  { group: "wma", title: () => "Weight WMA", note: "14-day weighted moving average", kind: "weight", actual: (tableRow) => tableRow.weightWma, adjusted: (tableRow) => tableRow.weightWmaAdj },
-  { group: "muscleDaily", title: (unit) => `Muscle gain (${unit})`, kind: "muscle3", actual: (tableRow) => tableRow.muscleDaily },
-  { group: "muscleTotal", title: (unit) => `Muscle gained so far (${unit})`, kind: "muscle2", actual: (tableRow) => tableRow.muscleTotal },
-  { group: "dayAverages", title: () => "3-day avg", note: "actual / muscle-adjusted", kind: "weight", actual: (tableRow) => tableRow.avg3, adjusted: (tableRow) => tableRow.adj.avg3 },
-  { group: "weightLoss", title: () => "Recent weight loss / month", note: "from 15 and 30 day change", kind: "change", actual: (tableRow) => tableRow.recent, adjusted: (tableRow) => tableRow.recentAdj },
-  { group: "weightLoss", title: () => "Weight loss 3-day / month", note: "3-day avg of the column before", kind: "change", actual: (tableRow) => tableRow.recent3, adjusted: (tableRow) => tableRow.recent3Adj },
-  { group: "dayAverages", title: () => "30-day avg", kind: "weight", actual: (tableRow) => tableRow.avg30, adjusted: (tableRow) => tableRow.adj.avg30 },
-  { group: "dayAverages", title: () => "365-day avg", kind: "weight", actual: (tableRow) => tableRow.avg365, adjusted: (tableRow) => tableRow.adj.avg365 },
-  { group: "dayAverages", title: () => "Blended avg", kind: "weight", actual: (tableRow) => tableRow.blended, adjusted: (tableRow) => tableRow.adj.blended },
-  { group: "dayAverages", title: () => "Projected / month", kind: "change", actual: (tableRow) => tableRow.monthly, adjusted: (tableRow) => tableRow.adj.monthly },
-  { group: "dayAverages", title: () => "Projected in 1 year", kind: "weight", actual: (tableRow) => yearly(tableRow.blended, tableRow.monthly), adjusted: (tableRow) => yearly(tableRow.adj.blended, tableRow.adj.monthly) },
-  { group: "allAverages", title: () => "All average", kind: "weight", actual: (tableRow) => tableRow.allAvg, adjusted: (tableRow) => tableRow.allAvgAdj },
-  { group: "allAverages", title: () => "Projected all average", kind: "weight", actual: (tableRow) => tableRow.allProj, adjusted: (tableRow) => tableRow.allProjAdj },
-  { group: "allAverages", title: () => "3 day projected all average", kind: "weight", actual: (tableRow) => tableRow.allProj3, adjusted: (tableRow) => tableRow.allProj3Adj },
-  { group: "allAverages", title: () => "Complete average", note: "every weight column", kind: "weight", actual: (tableRow) => tableRow.complete, adjusted: (tableRow) => tableRow.completeAdj },
-  { group: "wma", title: () => "Weight loss WMA / month", note: "14-day weighted moving average, newest counts most", kind: "change", actual: (tableRow) => tableRow.recentWma, adjusted: (tableRow) => tableRow.recentWmaAdj },
-  { group: "wma", title: () => "WMA Projection", note: "weight WMA + 12 × loss WMA / month", kind: "weight", actual: (tableRow) => tableRow.wmaProj, adjusted: (tableRow) => tableRow.wmaProjAdj },
-  { group: "wma", title: () => "WMA Projection Projected", note: "average of WMA Projection and WMA Projection + its monthly change", kind: "weight", actual: (tableRow) => tableRow.wmaAvg, adjusted: (tableRow) => tableRow.wmaAvgAdj },
-  { title: () => "Average of Complete & WMA", note: "Complete average and WMA Projection Projected", kind: "weight", actual: (tableRow) => tableRow.finalAvg, adjusted: (tableRow) => tableRow.finalAvgAdj },
-  { title: () => "3-day avg of Complete & WMA", note: "3-day average of the column before", kind: "weight", actual: (tableRow) => tableRow.finalAvg3, adjusted: (tableRow) => tableRow.finalAvg3Adj },
+  {
+    group: "wma",
+    title: () => "Weight WMA",
+    note: "14-day weighted moving average",
+    kind: "weight",
+    actual: (tableRow) => tableRow.weightWma,
+    adjusted: (tableRow) => tableRow.weightWmaAdj,
+  },
+  {
+    group: "muscleDaily",
+    title: (unit) => `Muscle gain (${unit})`,
+    kind: "muscle3",
+    actual: (tableRow) => tableRow.muscleDaily,
+  },
+  {
+    group: "muscleTotal",
+    title: (unit) => `Muscle gained so far (${unit})`,
+    kind: "muscle2",
+    actual: (tableRow) => tableRow.muscleTotal,
+  },
+  {
+    group: "dayAverages",
+    title: () => "3-day avg",
+    note: "actual / muscle-adjusted",
+    kind: "weight",
+    actual: (tableRow) => tableRow.avg3,
+    adjusted: (tableRow) => tableRow.adj.avg3,
+  },
+  {
+    group: "weightLoss",
+    title: () => "Recent weight loss / month",
+    note: "from 15 and 30 day change",
+    kind: "change",
+    actual: (tableRow) => tableRow.recent,
+    adjusted: (tableRow) => tableRow.recentAdj,
+  },
+  {
+    group: "weightLoss",
+    title: () => "Weight loss 3-day / month",
+    note: "3-day avg of the column before",
+    kind: "change",
+    actual: (tableRow) => tableRow.recent3,
+    adjusted: (tableRow) => tableRow.recent3Adj,
+  },
+  {
+    group: "dayAverages",
+    title: () => "30-day avg",
+    kind: "weight",
+    actual: (tableRow) => tableRow.avg30,
+    adjusted: (tableRow) => tableRow.adj.avg30,
+  },
+  {
+    group: "dayAverages",
+    title: () => "365-day avg",
+    kind: "weight",
+    actual: (tableRow) => tableRow.avg365,
+    adjusted: (tableRow) => tableRow.adj.avg365,
+  },
+  {
+    group: "dayAverages",
+    title: () => "Blended avg",
+    kind: "weight",
+    actual: (tableRow) => tableRow.blended,
+    adjusted: (tableRow) => tableRow.adj.blended,
+  },
+  {
+    group: "dayAverages",
+    title: () => "Projected / month",
+    kind: "change",
+    actual: (tableRow) => tableRow.monthly,
+    adjusted: (tableRow) => tableRow.adj.monthly,
+  },
+  {
+    group: "dayAverages",
+    title: () => "Projected in 1 year",
+    kind: "weight",
+    actual: (tableRow) => yearly(tableRow.blended, tableRow.monthly),
+    adjusted: (tableRow) => yearly(tableRow.adj.blended, tableRow.adj.monthly),
+  },
+  {
+    group: "allAverages",
+    title: () => "All average",
+    kind: "weight",
+    actual: (tableRow) => tableRow.allAvg,
+    adjusted: (tableRow) => tableRow.allAvgAdj,
+  },
+  {
+    group: "allAverages",
+    title: () => "Projected all average",
+    kind: "weight",
+    actual: (tableRow) => tableRow.allProj,
+    adjusted: (tableRow) => tableRow.allProjAdj,
+  },
+  {
+    group: "allAverages",
+    title: () => "3 day projected all average",
+    kind: "weight",
+    actual: (tableRow) => tableRow.allProj3,
+    adjusted: (tableRow) => tableRow.allProj3Adj,
+  },
+  {
+    group: "allAverages",
+    title: () => "Complete average",
+    note: "every weight column",
+    kind: "weight",
+    actual: (tableRow) => tableRow.complete,
+    adjusted: (tableRow) => tableRow.completeAdj,
+  },
+  {
+    group: "wma",
+    title: () => "Weight loss WMA / month",
+    note: "14-day weighted moving average, newest counts most",
+    kind: "change",
+    actual: (tableRow) => tableRow.recentWma,
+    adjusted: (tableRow) => tableRow.recentWmaAdj,
+  },
+  {
+    group: "wma",
+    title: () => "WMA Projection",
+    note: "weight WMA + 12 × loss WMA / month",
+    kind: "weight",
+    actual: (tableRow) => tableRow.wmaProj,
+    adjusted: (tableRow) => tableRow.wmaProjAdj,
+  },
+  {
+    group: "wma",
+    title: () => "WMA Projection Projected",
+    note: "average of WMA Projection and WMA Projection + its monthly change",
+    kind: "weight",
+    actual: (tableRow) => tableRow.wmaAvg,
+    adjusted: (tableRow) => tableRow.wmaAvgAdj,
+  },
+  {
+    title: () => "Average of Complete & WMA",
+    note: "Complete average and WMA Projection Projected",
+    kind: "weight",
+    actual: (tableRow) => tableRow.finalAvg,
+    adjusted: (tableRow) => tableRow.finalAvgAdj,
+  },
+  {
+    title: () => "3-day avg of Complete & WMA",
+    note: "3-day average of the column before",
+    kind: "weight",
+    actual: (tableRow) => tableRow.finalAvg3,
+    adjusted: (tableRow) => tableRow.finalAvg3Adj,
+  },
 ];
 
 /** The period filter value that means "the last 90 days". */
@@ -134,6 +279,7 @@ function rangeOf(rows: WeightRow[], column: Column): Range {
         low: values.reduce((left, right) => Math.min(left, right)),
         avg: values.reduce((sum, value) => sum + value, 0) / values.length,
       }
+
     : null;
 }
 
@@ -151,12 +297,29 @@ const rangeBlock = (label: string, range: Range, formatWeight: (pounds: number) 
 );
 
 /** The header shows each column's high, average and low for the period and for all time, so you can see where a day sits without scanning the table. */
-function Head({ unit, f: unitFormat, columns, periodRanges, allTimeRanges }: { unit: Unit; f: Format; columns: Column[]; periodRanges: Range[]; allTimeRanges: Range[] }) {
+function Head({
+  unit,
+  f: unitFormat,
+  columns,
+  periodRanges,
+  allTimeRanges,
+}: {
+  unit: Unit;
+  f: Format;
+  columns: Column[];
+  periodRanges: Range[];
+  allTimeRanges: Range[];
+}) {
   return (
     <thead>
       <tr className="titles">
         <th>Date</th>
-        {columns.map((column) => <th key={column.title(unit)} title={column.note}>{column.title(unit)}</th>)}
+        {columns.map((column) => (
+          <th key={column.title(unit)} title={column.note}>
+            {column.title(unit)}
+          </th>
+        ))}
+
       </tr>
       {/* Own row so the ranges line up across columns whatever the title length. */}
       <tr className="ranges">
@@ -180,7 +343,11 @@ function Head({ unit, f: unitFormat, columns, periodRanges, allTimeRanges }: { u
 /** Bands of the values in the columns on screen (actual and muscle-adjusted); the weight is always shown. */
 function bandClasses(tableRow: WeightRow, show: Show) {
   // The colour band of each weight in the actual list, then in the muscle-adjusted list.
-  const weightClasses = (actual: (number | null)[], adjusted: (number | null)[]) => [...actual.map((weight) => band(weight, false)), ...adjusted.map((weight) => band(weight, true))];
+  const weightClasses = (actual: (number | null)[], adjusted: (number | null)[]) => [
+    ...actual.map((weight) => band(weight, false)),
+    ...adjusted.map((weight) => band(weight, true)),
+  ];
+
   const changeClasses = (...values: (number | null)[]) => values.map(deltaBand);
 
   return [
@@ -192,20 +359,45 @@ function bandClasses(tableRow: WeightRow, show: Show) {
     ...(show.dayAverages
       ? [
           ...weightClasses(
-            [tableRow.avg3, tableRow.avg30, tableRow.avg365, tableRow.blended, yearly(tableRow.blended, tableRow.monthly)],
-            [tableRow.adj.avg3, tableRow.adj.avg30, tableRow.adj.avg365, tableRow.adj.blended, yearly(tableRow.adj.blended, tableRow.adj.monthly)],
+            [
+              tableRow.avg3,
+              tableRow.avg30,
+              tableRow.avg365,
+              tableRow.blended,
+              yearly(tableRow.blended, tableRow.monthly),
+            ],
+            [
+              tableRow.adj.avg3,
+              tableRow.adj.avg30,
+              tableRow.adj.avg365,
+              tableRow.adj.blended,
+              yearly(tableRow.adj.blended, tableRow.adj.monthly),
+            ],
           ),
           ...changeClasses(tableRow.monthly, tableRow.adj.monthly),
         ]
 
       : []),
     // Only colour the weight loss columns when they are shown.
-    ...(show.weightLoss ? changeClasses(tableRow.recent, tableRow.recent3, tableRow.recentAdj, tableRow.recent3Adj) : []),
+    ...(show.weightLoss
+      ? changeClasses(tableRow.recent, tableRow.recent3, tableRow.recentAdj, tableRow.recent3Adj)
+      : []),
     ...(show.allAverages
-      ? weightClasses([tableRow.allAvg, tableRow.allProj, tableRow.allProj3, tableRow.complete], [tableRow.allAvgAdj, tableRow.allProjAdj, tableRow.allProj3Adj, tableRow.completeAdj])
+      ? weightClasses(
+          [tableRow.allAvg, tableRow.allProj, tableRow.allProj3, tableRow.complete],
+          [tableRow.allAvgAdj, tableRow.allProjAdj, tableRow.allProj3Adj, tableRow.completeAdj],
+        )
+
       : []),
     ...(show.wma
-      ? [...weightClasses([tableRow.weightWma, tableRow.wmaProj, tableRow.wmaAvg], [tableRow.weightWmaAdj, tableRow.wmaProjAdj, tableRow.wmaAvgAdj]), ...changeClasses(tableRow.recentWma, tableRow.recentWmaAdj)]
+      ? [
+          ...weightClasses(
+            [tableRow.weightWma, tableRow.wmaProj, tableRow.wmaAvg],
+            [tableRow.weightWmaAdj, tableRow.wmaProjAdj, tableRow.wmaAvgAdj],
+          ),
+          ...changeClasses(tableRow.recentWma, tableRow.recentWmaAdj),
+        ]
+
       : []),
   ];
 }
@@ -214,45 +406,95 @@ function bandClasses(tableRow: WeightRow, show: Show) {
 function Cell({ column, d: tableRow, f: unitFormat }: { column: Column; d: WeightRow; f: Format }) {
   const formatWeight = formatter(column.kind, unitFormat);
 
-  if (column.adjusted) return <ActualAndAdjusted actual={column.actual(tableRow)} adjusted={column.adjusted(tableRow)} fmt={formatWeight} bandOf={column.kind === "change" ? deltaBand : band} />;
+  if (column.adjusted)
 
-  if (column.kind === "weight") return <span className={band(tableRow.weight, false)}>{formatWeight(tableRow.weight)}</span>;
+    return (
+      <ActualAndAdjusted
+        actual={column.actual(tableRow)}
+        adjusted={column.adjusted(tableRow)}
+        fmt={formatWeight}
+        bandOf={column.kind === "change" ? deltaBand : band}
+      />
+    );
+
+  if (column.kind === "weight")
+
+    return <span className={band(tableRow.weight, false)}>{formatWeight(tableRow.weight)}</span>;
 
   return <>{formatWeight(column.actual(tableRow) ?? 0)}</>;
 }
 
 /** One day in the table; columns shown depend on the chosen options, and estimated days are styled differently. */
-function DayRow({ d: tableRow, f: unitFormat, show, columns }: { d: WeightRow; f: Format; show: Show; columns: Column[] }) {
+function DayRow({
+  d: tableRow,
+  f: unitFormat,
+  show,
+  columns,
+}: {
+  d: WeightRow;
+  f: Format;
+  show: Show;
+  columns: Column[];
+}) {
   const tint = averageTint(bandClasses(tableRow, show));
 
   return (
     <tr className={tableRow.estimated ? "estimated" : ""} style={{ backgroundColor: tint }}>
       <td>{pretty(tableRow.date)}</td>
-      {columns.map((column) => <td key={column.title("lb")}><Cell column={column} d={tableRow} f={unitFormat} /></td>)} {/* One cell per column on screen. */}
+      {columns.map((column) => (
+        <td key={column.title("lb")}>
+          <Cell column={column} d={tableRow} f={unitFormat} />
+        </td>
+      ))}{" "}
+
+      {/* One cell per column on screen. */}
       <td>{tableRow.estimated ? "estimated" : ""}</td>
     </tr>
   );
 }
 
 /** Dropdown of periods, each with a square in the average colour of the values currently shown over that period. */
-function PeriodPicker({ period, onChange, options }: { period: string; onChange: (period: string) => void; options: { value: string; label: string; color?: string }[] }) {
+function PeriodPicker({
+  period,
+  onChange,
+  options,
+}: {
+  period: string;
+  onChange: (period: string) => void;
+  options: { value: string; label: string; color?: string }[];
+}) {
   const [open, setOpen] = useState(false);
   const current = options.find((option) => option.value === period) ?? options[0];
 
   return (
-    <fieldset className="period-picker" onBlur={(event) => !event.currentTarget.contains(event.relatedTarget) && setOpen(false)}>
+    <fieldset
+      className="period-picker"
+      onBlur={(event) => !event.currentTarget.contains(event.relatedTarget) && setOpen(false)}
+    >
       <button type="button" className="period-button" onClick={() => setOpen(!open)}>
         <span className="period-square" style={{ background: current.color }} /> {current.label}
       </button>
       {open && (
         <ul className="period-list">
-          {options.map((option) => ( // One button per period choice.
-            <li key={option.value}>
-              <button type="button" className={option.value === period ? ACTIVE_CLASS : ""} onClick={() => { onChange(option.value); setOpen(false); }}>
-                <span className="period-square" style={{ background: option.color }} /> {option.label}
-              </button>
-            </li>
-          ))}
+          {options.map(
+            (
+              option, // One button per period choice.
+            ) => (
+              <li key={option.value}>
+                <button
+                  type="button"
+                  className={option.value === period ? ACTIVE_CLASS : ""}
+                  onClick={() => {
+                    onChange(option.value);
+                    setOpen(false);
+                  }}
+
+                >
+                  <span className="period-square" style={{ background: option.color }} /> {option.label}
+                </button>
+              </li>
+            ),
+          )}
 
         </ul>
       )}
@@ -264,7 +506,15 @@ function PeriodPicker({ period, onChange, options }: { period: string; onChange:
 /** Daily table with a period filter, showing the last 90 days by default. */
 export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f: Format; dailyRows: WeightRow[] }) {
   const [period, setPeriod] = useState(DEFAULT_PERIOD);
-  const [show, setShow] = useState<Show>({ muscleDaily: false, muscleTotal: false, dayAverages: false, weightLoss: false, allAverages: true, wma: true });
+  const [show, setShow] = useState<Show>({
+    muscleDaily: false,
+    muscleTotal: false,
+    dayAverages: false,
+    weightLoss: false,
+    allAverages: true,
+    wma: true,
+  });
+
   const { newestFirst, rows, quarters } = useTableRows(period, dailyRows);
 
   // Columns on screen, with each one's high and low for the period and for all time.
@@ -277,9 +527,15 @@ export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f:
   const periodRanges = useMemo(() => columns.map((column) => rangeOf(rows, column)), [columns, rows]);
 
   // Average colour of every shown value over each period, for the dropdown squares.
-  const options = [{ value: DEFAULT_PERIOD, label: "[default] last 90 days" }, ...quarters.map((quarter) => ({ value: quarter, label: quarter.replace("-", " ") }))].map((option) => ({
+  const options = [
+    { value: DEFAULT_PERIOD, label: "[default] last 90 days" },
+    ...quarters.map((quarter) => ({ value: quarter, label: quarter.replace("-", " ") })),
+  ].map((option) => ({
     ...option,
-    color: averageTint(periodRows(newestFirst, option.value).flatMap((tableRow) => bandClasses(tableRow, show)), 1),
+    color: averageTint(
+      periodRows(newestFirst, option.value).flatMap((tableRow) => bandClasses(tableRow, show)),
+      1,
+    ),
   }));
 
   return (
@@ -292,11 +548,20 @@ export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f:
         <div className="control-group">
           <span className="control-label">Column groups</span>
           <div className="toggles">
-            {GROUPS.map(({ key: groupKey, label }) => ( // One checkbox per column group.
-              <label key={groupKey} className="toggle">
-                <input type="checkbox" checked={show[groupKey]} onChange={(event) => setShow({ ...show, [groupKey]: event.target.checked })} /> {label}
-              </label>
-            ))}
+            {GROUPS.map(
+              (
+                { key: groupKey, label }, // One checkbox per column group.
+              ) => (
+                <label key={groupKey} className="toggle">
+                  <input
+                    type="checkbox"
+                    checked={show[groupKey]}
+                    onChange={(event) => setShow({ ...show, [groupKey]: event.target.checked })}
+                  />{" "}
+                  {label}
+                </label>
+              ),
+            )}
 
           </div>
         </div>
@@ -304,7 +569,10 @@ export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f:
       <table>
         <Head unit={unit} f={unitFormat} columns={columns} periodRanges={periodRanges} allTimeRanges={allTimeRanges} />
         <tbody>
-          {rows.map((tableRow) => <DayRow key={tableRow.date} d={tableRow} f={unitFormat} show={show} columns={columns} />)}
+          {rows.map((tableRow) => (
+            <DayRow key={tableRow.date} d={tableRow} f={unitFormat} show={show} columns={columns} />
+          ))}
+
         </tbody>
       </table>
     </>

@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import "./styles.css";
-import { PERCENT, WEEKS_PER_YEAR } from "./logic/constants";
+import GoalCurve from "./graphs/GoalCurve";
+import SharingCurve from "./graphs/SharingCurve";
+import WaitChart from "./graphs/WaitChart";
 import { averageUses, recommended, recommendedCount } from "./logic/calculate";
-import { findItemType, DEFAULT_ITEM_TYPE } from "./logic/items";
+import { PERCENT, WEEKS_PER_YEAR } from "./logic/constants";
 import type { ItemType } from "./logic/items";
+import { DEFAULT_ITEM_TYPE, findItemType } from "./logic/items";
 import InputDials from "./panels/InputDials";
 import RecommendationPanel from "./panels/RecommendationPanel";
 import SavingsPanel from "./panels/SavingsPanel";
-import GoalCurve from "./graphs/GoalCurve";
 import ShareBar from "./panels/ShareBar";
-import SharingCurve from "./graphs/SharingCurve";
 import { useCalculatorState } from "./state/state";
-import WaitChart from "./graphs/WaitChart";
 
 type Calculator = ReturnType<typeof useCalculatorState>;
 
@@ -25,24 +25,52 @@ function useClearSharedLink() {
 }
 
 /** The charts and recommendation that react to your numbers. */
-function Results({ calculator, item, people, needed }: { calculator: Calculator; item: ItemType; people: number; needed: number }) {
+function Results({
+  calculator,
+  item,
+  people,
+  needed,
+}: {
+  calculator: Calculator;
+  item: ItemType;
+  people: number;
+  needed: number;
+}) {
   return (
     <div className="mini-results">
       <h2>Results</h2>
       <RecommendationPanel owned={calculator.owned} needed={needed} />
-      <WaitChart owned={calculator.owned} avgUses={averageUses(calculator.perWeek, calculator.sharePct, calculator.owned)} goal={calculator.perYear} item={item} />
+      <WaitChart
+        owned={calculator.owned}
+        avgUses={averageUses(calculator.perWeek, calculator.sharePct, calculator.owned)}
+        goal={calculator.perYear}
+        item={item}
+      />
       <SharingCurve
         soloNeeded={recommended(calculator.perWeek, calculator.perYear, PERCENT)}
         people={people}
         item={item}
-        onPeople={(peopleCount) => calculator.setSharePct(Math.min(PERCENT, Math.max(1, Math.round(PERCENT / peopleCount))))}
+        onPeople={(peopleCount) =>
+          calculator.setSharePct(Math.min(PERCENT, Math.max(1, Math.round(PERCENT / peopleCount))))
+        }
+
       />
     </div>
   );
 }
 
 /** The cost of buying up to the recommendation, with its price and wear settings. */
-function Savings({ calculator, item, target, yearlyUses }: { calculator: Calculator; item: ItemType; target: number; yearlyUses: number }) {
+function Savings({
+  calculator,
+  item,
+  target,
+  yearlyUses,
+}: {
+  calculator: Calculator;
+  item: ItemType;
+  target: number;
+  yearlyUses: number;
+}) {
   return (
     <SavingsPanel
       owned={calculator.owned}
@@ -73,7 +101,13 @@ export default function MinimalismCalculator() {
 
   return (
     <div className="mini-calc">
-      <ShareBar title={calculator.title} onTitle={calculator.setTitle} typeId={calculator.typeId} onType={calculator.setTypeId} shareParams={calculator.shareParams} />
+      <ShareBar
+        title={calculator.title}
+        onTitle={calculator.setTitle}
+        typeId={calculator.typeId}
+        onType={calculator.setTypeId}
+        shareParams={calculator.shareParams}
+      />
       {calculator.title.trim() && <h2 className="mini-title">{calculator.title.trim()}</h2>}
 
       <div className="mini-layout">

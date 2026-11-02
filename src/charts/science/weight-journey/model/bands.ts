@@ -70,7 +70,9 @@ export function averageTint(classes: string[], alpha = DEFAULT_TINT_ALPHA): stri
   if (!colors.length) return undefined;
 
   // Average each of red, green and blue across the colours.
-  const [red, green, blue] = [0, 1, 2].map((channel) => Math.round(colors.reduce((total, rgbColor) => total + rgbColor[channel], 0) / colors.length));
+  const [red, green, blue] = [0, 1, 2].map((channel) =>
+    Math.round(colors.reduce((total, rgbColor) => total + rgbColor[channel], 0) / colors.length),
+  );
 
   return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 }

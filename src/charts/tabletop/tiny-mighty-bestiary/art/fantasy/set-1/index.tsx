@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { CarnivalColossus, ClockworkSongbird, BlinkCat, CarrionCrow, AbyssalLeviathan, BarnCatTerror } from "./Part1";
-import { CaveTroll, BefuddledWizard, CaveDwarf, BraggartKnight, CastleGuard, Cutpurse } from "./Part2";
-import { BlackKnight, ChestLurker, BouncySlime, CaveWurm, CloudLeviathan, BoneSorcerer } from "./Part3";
-import { BloodNoble, CrossroadsFiend, CheekyPoltergeist, AetherDjinn } from "./Part4";
+import { AbyssalLeviathan, BarnCatTerror, BlinkCat, CarnivalColossus, CarrionCrow, ClockworkSongbird } from "./Part1";
+import { BefuddledWizard, BraggartKnight, CastleGuard, CaveDwarf, CaveTroll, Cutpurse } from "./Part2";
+import { BlackKnight, BoneSorcerer, BouncySlime, CaveWurm, ChestLurker, CloudLeviathan } from "./Part3";
+import { AetherDjinn, BloodNoble, CheekyPoltergeist, CrossroadsFiend } from "./Part4";
 
 export const fantasyArt: Record<string, () => ReactNode> = {
   "carnival-colossus": CarnivalColossus,

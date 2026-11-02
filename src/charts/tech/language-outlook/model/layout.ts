@@ -41,7 +41,9 @@ export function buildYScale(model: LanguageOutlookData, visible: Record<string, 
 
   const highest = Math.max(MIN_Y_MAX, Math.ceil(Math.max(...shown) / Y_ROUND_STEP) * Y_ROUND_STEP);
 
-  return scaleLinear().domain([0, highest]).range([CHART_HEIGHT - MARGIN.bottom, MARGIN.top]);
+  return scaleLinear()
+    .domain([0, highest])
+    .range([CHART_HEIGHT - MARGIN.bottom, MARGIN.top]);
 }
 
 /** Bigger changes get longer arrows, capped so one huge change cannot cover the chart. */

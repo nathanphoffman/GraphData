@@ -1,9 +1,40 @@
 import type { ReactNode } from "react";
-import { FigureheadGuardian, KnotSnake, RiggingMarionette, CursedManOWar, IronMaidenCannon, GaleGargoyle } from "./Part1";
-import { MastPuppet, ParrotLookout, PirateCrab, ReefShark, HammerheadTerror, KrakenSpawn, DrownedPack } from "./Part2";
-import { AlbatrossOmen, GreatWhiteTerror, DeckhandScallywag, PressGanger, CutlassCorsair, NavyLieutenant, PirateCaptain } from "./Part3";
-import { RoyalMarineSergeant, PirateKing, ShipsSurgeon, IroncladQuartermaster, BarnacleBiter, SeaSerpent, MaelstromLeviathan } from "./Part4";
-import { CatacombCrawler, BilgeSprite, SquallWraith, CabinBoyGhost, LanternKeeperGhost, SpectralLeviathanCaptain, GhostTide } from "./Part5";
+import {
+  CursedManOWar,
+  FigureheadGuardian,
+  GaleGargoyle,
+  IronMaidenCannon,
+  KnotSnake,
+  RiggingMarionette,
+} from "./Part1";
+import { DrownedPack, HammerheadTerror, KrakenSpawn, MastPuppet, ParrotLookout, PirateCrab, ReefShark } from "./Part2";
+import {
+  AlbatrossOmen,
+  CutlassCorsair,
+  DeckhandScallywag,
+  GreatWhiteTerror,
+  NavyLieutenant,
+  PirateCaptain,
+  PressGanger,
+} from "./Part3";
+import {
+  BarnacleBiter,
+  IroncladQuartermaster,
+  MaelstromLeviathan,
+  PirateKing,
+  RoyalMarineSergeant,
+  SeaSerpent,
+  ShipsSurgeon,
+} from "./Part4";
+import {
+  BilgeSprite,
+  CabinBoyGhost,
+  CatacombCrawler,
+  GhostTide,
+  LanternKeeperGhost,
+  SpectralLeviathanCaptain,
+  SquallWraith,
+} from "./Part5";
 
 export const ageOfSailArt: Record<string, () => ReactNode> = {
   "figurehead-guardian": FigureheadGuardian,

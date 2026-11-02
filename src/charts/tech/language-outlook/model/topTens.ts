@@ -18,6 +18,7 @@ const MIN_SHIFT = 1;
 export interface TopTen {
   title: string;
   description: string;
+
   /** Accent colour of the tiles. */
   color: string;
   names: string[];
@@ -32,16 +33,34 @@ function rankBy(model: LanguageOutlookData, keys: string[]): string[] {
     .flatMap((language) => {
       const values = keys.map((key) => language.values[key]);
 
-      return values.every((value): value is number => typeof value === "number") ? [{ name: language.name, score: values.reduce((sum, value) => sum + value, 0) / values.length }] : [];
+      return values.every((value): value is number => typeof value === "number")
+        ? [{ name: language.name, score: values.reduce((sum, value) => sum + value, 0) / values.length }]
+        : [];
     })
     .sort((first, second) => second.score - first.score)
     .map(({ name }) => name);
 }
 
 const LISTS = [
-  { title: "Currently Being Used Top 10", description: "Stack Overflow usage and TIOBE, half each, averaged over 2024-2026, with no developer opinion mixed in.", color: "#4cc9f0", keys: [USAGE] },
-  { title: "Loved and Used (Outlook) Top 10", description: "The newest year's outlook: Stack Overflow usage, weighted by how much developers like each language.", color: "#ffffff", keys: [NEWEST] },
-  { title: "Top 10 To Learn", description: "Where each language is projected to stand in 10 years, adjusted by the Historical Fix.", color: "#b45cff", keys: [PURPLE] },
+  {
+    title: "Currently Being Used Top 10",
+    description:
+      "Stack Overflow usage and TIOBE, half each, averaged over 2024-2026, with no developer opinion mixed in.",
+    color: "#4cc9f0",
+    keys: [USAGE],
+  },
+  {
+    title: "Loved and Used (Outlook) Top 10",
+    description: "The newest year's outlook: Stack Overflow usage, weighted by how much developers like each language.",
+    color: "#ffffff",
+    keys: [NEWEST],
+  },
+  {
+    title: "Top 10 To Learn",
+    description: "Where each language is projected to stand in 10 years, adjusted by the Historical Fix.",
+    color: "#b45cff",
+    keys: [PURPLE],
+  },
 ];
 
 /** Used, loved-and-used and to-learn top tens, best first, each with how its languages sit compared to the other lists. */
@@ -55,10 +74,14 @@ export function buildTopTens(model: LanguageOutlookData): TopTen[] {
 
     for (const name of names) {
       // Positions (1 is best) in the other lists, wherever the language ranks there, even below the top 10.
-      const others = orders.flatMap((order, otherIndex) => (otherIndex === listIndex || !order.includes(name) ? [] : [order.indexOf(name) + 1]));
+      const others = orders.flatMap((order, otherIndex) =>
+        otherIndex === listIndex || !order.includes(name) ? [] : [order.indexOf(name) + 1],
+      );
+
       if (!others.length) continue;
 
       const shift = others.reduce((sum, position) => sum + position, 0) / others.length - (own.indexOf(name) + 1);
+
       if (Math.abs(shift) >= MIN_SHIFT) shifts[name] = Math.round(shift * 2) / 2;
     }
 

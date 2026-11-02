@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { recommendedCount } from "../logic/calculate";
 import { MARK_ALL_UP_TO, MARK_EVERY, SHARING_MAX_PEOPLE, SHARING_MIN_PEOPLE } from "../logic/constants";
-import CurveChart from "./CurveChart";
 import type { ItemType } from "../logic/items";
+import CurveChart from "./CurveChart";
 
 interface Props {
   /** Exact recommendation if you supplied everything yourself (100% share). */
@@ -28,7 +28,9 @@ export default function SharingCurve({ soloNeeded, people, item, onPeople }: Pro
   const countAt = (peopleCount: number) => soloNeeded / peopleCount;
 
   // Past 10 people only every fifth dot is labeled, to keep the numbers readable.
-  const marks = Array.from({ length: xMax }, (_unused, index) => index + 1).filter((peopleCount) => xMax <= MARK_ALL_UP_TO || peopleCount === 1 || peopleCount % MARK_EVERY === 0);
+  const marks = Array.from({ length: xMax }, (_unused, index) => index + 1).filter(
+    (peopleCount) => xMax <= MARK_ALL_UP_TO || peopleCount === 1 || peopleCount % MARK_EVERY === 0,
+  );
 
   return (
     <div className="panel mini-chart">
@@ -45,7 +47,11 @@ export default function SharingCurve({ soloNeeded, people, item, onPeople }: Pro
         at={countAt}
         yMax={Math.max(soloNeeded, 1)}
         toFrac={(peopleCount) => (peopleCount - 1) / (xMax - 1)}
-        samples={Array.from({ length: (xMax - 1) * SAMPLES_PER_PERSON + 1 }, (_unused, index) => 1 + index / SAMPLES_PER_PERSON)}
+        samples={Array.from(
+          { length: (xMax - 1) * SAMPLES_PER_PERSON + 1 },
+          (_unused, index) => 1 + index / SAMPLES_PER_PERSON,
+        )}
+
         marks={marks}
         current={Math.min(people, xMax)}
         onDragStart={() => setFrozenMax(xMax)}

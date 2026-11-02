@@ -1,6 +1,6 @@
 import { PERCENT } from "../logic/constants";
 import type { ItemType } from "../logic/items";
-import { gapLabel, goalColor, waitBuckets, type Bucket } from "../logic/waiting";
+import { type Bucket, gapLabel, goalColor, waitBuckets } from "../logic/waiting";
 
 /** Counts with the right singular or plural wording for the chosen item type. */
 /** The tallest bar is this many pixels high. */
@@ -37,7 +37,9 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
 
   return (
     <div className="panel">
-      <h3>How long {item.many} wait between {item.uses}</h3>
+      <h3>
+        How long {item.many} wait between {item.uses}
+      </h3>
       <p className="muted">
         Picking at random, your {owned} {item.many} average {avgUses.toFixed(1)} {item.uses} a year each.
       </p>
@@ -49,7 +51,11 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
             <div
               className="mini-bar-fill"
               title={`${(bucket.p * PERCENT).toFixed(1)}% of ${item.many}`}
-              style={{ height: Math.max(2, (bucket.p / tallest) * TALLEST_BAR_PX), background: goalColor(bucket.mid, goal) }}
+              style={{
+                height: Math.max(2, (bucket.p / tallest) * TALLEST_BAR_PX),
+                background: goalColor(bucket.mid, goal),
+              }}
+
             />
           </div>
         ))}
@@ -59,7 +65,8 @@ export default function WaitChart({ owned, avgUses, goal, item }: Props) {
         {/* One label per bucket under the bars; the line break lets "Every ..." wrap onto two lines. */}
         {buckets.map((bucket) => (
           <div key={bucket.label} className="muted">
-            {gapLabel(bucket).replace(/^Every /, "Every\n")} {/* Put a line break after "Every" so the label wraps onto two lines (the regex only matches at the start). */}
+            {gapLabel(bucket).replace(/^Every /, "Every\n")}{" "}
+            {/* Put a line break after "Every" so the label wraps onto two lines (the regex only matches at the start). */}
           </div>
         ))}
 

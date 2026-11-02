@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR, Spokes } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid, Spokes } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -13,11 +13,21 @@ export function AetherPoltergeist() {
       <Line d="M120 108 V132 M108 120 H132" w={3} />
       <circle cx="280" cy="120" r="18" fill={card} {...ink} strokeWidth={4} />
       <Line d="M280 108 V132 M268 120 H292" w={3} />
-      <path d="M170 30 C170 6 230 6 230 30 L236 90 q-12 12 -24 0 q-12 12 -24 0 q-12 12 -22 0 Z" fill={card} stroke="currentColor" strokeWidth="5" strokeLinejoin="round" />
+      <path
+        d="M170 30 C170 6 230 6 230 30 L236 90 q-12 12 -24 0 q-12 12 -24 0 q-12 12 -22 0 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeLinejoin="round"
+      />
       <Dot x={188} y={28} r={4} />
       <Dot x={212} y={28} r={4} />
       <Line d="M190 44 q10 8 20 0" w={3} />
-      <Line d="M60 60 q-14 -16 0 -30 q14 -14 0 -26 M340 180 q14 -16 0 -30 q-14 -14 0 -26 M200 180 q-14 20 0 40" w={4} dash="3 5" />
+      <Line
+        d="M60 60 q-14 -16 0 -30 q14 -14 0 -26 M340 180 q14 -16 0 -30 q-14 -14 0 -26 M200 180 q-14 20 0 40"
+        w={4}
+        dash="3 5"
+      />
     </Drawing>
   );
 }
@@ -48,10 +58,30 @@ export function PocketPetGhost() {
       <Shape d="M100 20 H300 V224 H100 Z" w={5} />
       <Shape d="M126 44 H274 V140 H126 Z" w={4} />
       {[
-        [190, 70], [210, 70], [170, 90], [190, 90], [210, 90], [230, 90], [170, 110], [190, 110], [210, 110], [230, 110], [150, 110], [250, 110],
-      // Repeat the shape at each listed position.
+        [190, 70],
+        [210, 70],
+        [170, 90],
+        [190, 90],
+        [210, 90],
+        [230, 90],
+        [170, 110],
+        [190, 110],
+        [210, 110],
+        [230, 110],
+        [150, 110],
+        [250, 110],
+        // Repeat the shape at each listed position.
       ].map(([x, y], index) => (
-        <rect key={index} x={x - 9} y={y - 9} width="18" height="18" fill="currentColor" stroke={card} strokeWidth="2" />
+        <rect
+          key={index}
+          x={x - 9}
+          y={y - 9}
+          width="18"
+          height="18"
+          fill="currentColor"
+          stroke={card}
+          strokeWidth="2"
+        />
       ))}
       <rect x="182" y="86" width="8" height="8" fill={card} />
       <rect x="210" y="86" width="8" height="8" fill={card} />

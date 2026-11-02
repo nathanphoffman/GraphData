@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Figure } from "../../core/figure";
 
 const card = CARD_COLOR;
@@ -9,7 +9,14 @@ export function FleetAdmiral() {
       <Shape d="M20 20 H380 V110 H20 Z" w={4} />
       <Line d="M20 110 L120 20 M200 110 L300 20" w={2} />
       {/* Repeat the shape at each listed position. */}
-      {[[60, 60], [120, 80], [170, 48], [240, 70], [300, 50], [340, 84]].map(([x, y], index) => (
+      {[
+        [60, 60],
+        [120, 80],
+        [170, 48],
+        [240, 70],
+        [300, 50],
+        [340, 84],
+      ].map(([x, y], index) => (
         <path key={index} d={`M${x} ${y} l14 -4 l12 4 l-12 4 Z`} fill="currentColor" />
       ))}
       <Shape d="M166 120 C160 82 240 82 234 120 L228 140 H172 Z" />
@@ -82,7 +89,10 @@ export function FieldMedicDroid() {
 export function ShipLordRegent() {
   return (
     <Drawing label="Drawing of a cold shaved-headed noble on a throne of cables and glass panels">
-      <Line d="M60 224 C70 120 80 80 110 40 M340 224 C330 120 320 80 290 40 M90 224 C100 150 110 110 130 70 M310 224 C300 150 290 110 270 70" w={5} />
+      <Line
+        d="M60 224 C70 120 80 80 110 40 M340 224 C330 120 320 80 290 40 M90 224 C100 150 110 110 130 70 M310 224 C300 150 290 110 270 70"
+        w={5}
+      />
       <Shape d="M100 30 H140 V90 H100 Z M260 30 H300 V90 H260 Z" w={4} />
       <Line d="M110 44 H130 M270 44 H290" w={2} />
       <Shape d="M170 86 C170 44 230 44 230 86 C230 110 170 110 170 86 Z" />

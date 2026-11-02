@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Hat } from "./Part1";
 
 const card = CARD_COLOR;
@@ -121,7 +121,10 @@ export function SaloonBrawler() {
     <Drawing label="Drawing of a bearded hatless man with raised fists, standing in a pair of swinging saloon doors">
       <Line d="M60 224 V40 M340 224 V40" w={7} />
       <Shape d="M60 100 H120 V224 H60 Z M280 100 H340 V224 H280 Z" w={4} />
-      <Line d="M72 120 H108 M72 140 H108 M72 160 H108 M72 180 H108 M292 120 H328 M292 140 H328 M292 160 H328 M292 180 H328" w={2} />
+      <Line
+        d="M72 120 H108 M72 140 H108 M72 160 H108 M72 180 H108 M292 120 H328 M292 140 H328 M292 160 H328 M292 180 H328"
+        w={2}
+      />
       <Shape d="M168 72 C160 26 240 26 232 72 C238 102 162 102 168 72 Z" />
       <Line d="M172 44 q28 -14 56 0" w={3} />
       <Dot x={186} y={68} r={3} />

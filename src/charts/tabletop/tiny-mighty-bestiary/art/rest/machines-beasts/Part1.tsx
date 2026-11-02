@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -50,8 +50,14 @@ export function ClockworkSpider() {
       <Line d="M200 80 V56 M186 56 H214 M186 56 a8 8 0 1 0 0 -0.1 M214 56 a8 8 0 1 1 0 -0.1" w={4} />
       <Shape d="M240 108 C254 100 284 100 292 112 C292 124 260 130 244 122 Z" w={4} />
       <Dot x={274} y={110} r={3} />
-      <Line d="M170 100 L130 70 L100 90 L90 130 M166 112 L110 110 L80 140 L84 190 M170 124 L130 150 L110 190 L120 220 M176 134 L150 176 L150 224" w={5} />
-      <Line d="M230 100 L270 70 L300 90 L310 130 M234 124 L270 150 L290 190 L280 220 M226 134 L250 176 L250 224" w={5} />
+      <Line
+        d="M170 100 L130 70 L100 90 L90 130 M166 112 L110 110 L80 140 L84 190 M170 124 L130 150 L110 190 L120 220 M176 134 L150 176 L150 224"
+        w={5}
+      />
+      <Line
+        d="M230 100 L270 70 L300 90 L310 130 M234 124 L270 150 L290 190 L280 220 M226 134 L250 176 L250 224"
+        w={5}
+      />
       <Ground y={228} />
     </Drawing>
   );

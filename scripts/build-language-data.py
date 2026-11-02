@@ -219,6 +219,7 @@ def health_outlook(scores, last, steps):
         TREND_WEIGHT * slope(recent)
         + (1 - TREND_WEIGHT) * (scores[last] - scores[last - WINDOW_YEARS]) / YEARS_PER_WINDOW_GAP
     )
+
     base = scores[last]
 
     return [project(base, per_year, years_ahead) if base > 0 else base for years_ahead in steps]
@@ -279,6 +280,7 @@ def main() -> None:
             for year in YEARS
             if f"{year} Pop" in column_index
         }
+
         tiobe["2019"] = tiobe_2019.get(name)
 
         for year, rating in tiobe_sept.get(name, {}).items():
@@ -301,6 +303,7 @@ def main() -> None:
             language_values[f"Popularity avg {label}"] = round_value(
                 usage_combined(tiobe_ratings, popularity, years)
             )  # opinion removed
+
             both = outlook is not None and tiobe_average is not None
             language_values[f"Combined avg {label}"] = (
                 round_value(outlook * OUTLOOK_WEIGHT + tiobe_average * TIOBE_WEIGHT) if both else None
@@ -328,6 +331,7 @@ def main() -> None:
         language_values["Projection change"] = (
             round_value(language_values[PROJECTION_KEY] - latest) if projected else None
         )  # matches the arrow
+
         fixed = historical_fix(language_values, language_values[PROJECTION_KEY]) if projected else None
         language_values[FIX_KEY] = round_value(fixed)
         language_values[f"{FIX_KEY} change"] = round_value(fixed - latest) if projected else None

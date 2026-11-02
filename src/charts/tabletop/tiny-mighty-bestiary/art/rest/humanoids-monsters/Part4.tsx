@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Steam } from "./Part1";
 
 const card = CARD_COLOR;
@@ -45,8 +45,15 @@ export function TunnelSpawn() {
       <Shape d="M0 0 H140 L110 80 L150 110 L100 150 L140 224 H0 Z" w={5} />
       <Line d="M20 40 H100 M20 100 H70 M20 160 H90" w={2} />
       {/* Repeat the shape at each listed position, turned a little differently each time. */}
-      {[[190, 100], [250, 140], [310, 90], [220, 190], [300, 190], [350, 150]].map(([x, y], index) => (
-        <g key={index} transform={`translate(${x} ${y}) rotate(${(index * 23) % 40 - 20})`}>
+      {[
+        [190, 100],
+        [250, 140],
+        [310, 90],
+        [220, 190],
+        [300, 190],
+        [350, 150],
+      ].map(([x, y], index) => (
+        <g key={index} transform={`translate(${x} ${y}) rotate(${((index * 23) % 40) - 20})`}>
           <Shape d="M-30 0 C-30 -16 20 -16 24 0 C20 14 -30 14 -30 0 Z" w={4} />
           <Shape d="M18 -6 C30 -10 38 -4 38 0 C38 6 30 10 18 6 Z" w={3} />
           <Solid d="M22 -3 l3 4 l3 -4 Z M22 3 l3 -4 l3 4 Z" />
@@ -61,7 +68,13 @@ export function TunnelSpawn() {
 export function WarpBehemoth() {
   return (
     <Drawing label="Drawing of a twisted tower of flesh and warp-light tearing holes in reality as it moves">
-      <path d="M140 224 C100 160 180 150 140 100 C110 60 190 60 170 20 C230 20 250 60 230 100 C290 130 240 170 280 224 Z" fill={card} stroke="currentColor" strokeWidth="5" strokeLinejoin="round" />
+      <path
+        d="M140 224 C100 160 180 150 140 100 C110 60 190 60 170 20 C230 20 250 60 230 100 C290 130 240 170 280 224 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeLinejoin="round"
+      />
       <circle cx="190" cy="70" r="14" fill={card} {...ink} strokeWidth={4} />
       <Dot x={190} y={72} r={6} />
       <circle cx="226" cy="120" r="10" fill={card} {...ink} strokeWidth={3} />
@@ -87,7 +100,10 @@ export function BiolabEscapee() {
       <Dot x={200} y={56} r={3} />
       <Line d="M180 88 Q200 98 220 88" w={3} />
       <Shape d="M150 106 H250 L258 190 H142 Z" />
-      <Line d="M156 112 L110 96 L90 60 M158 126 L100 134 L70 120 M160 142 L112 170 L84 160 M244 112 L290 96 L310 60 M242 126 L300 134 L330 120 M240 142 L288 170 L316 160" w={6} />
+      <Line
+        d="M156 112 L110 96 L90 60 M158 126 L100 134 L70 120 M160 142 L112 170 L84 160 M244 112 L290 96 L310 60 M242 126 L300 134 L330 120 M240 142 L288 170 L316 160"
+        w={6}
+      />
       <Line d="M166 190 L150 224 M200 190 V226 M234 190 L250 224 M180 190 L170 226 M220 190 L230 226" w={6} />
       <Shape d="M60 150 h14 v10 h-14 Z M326 150 h14 v10 h-14 Z" w={3} />
       <Line d="M170 140 q30 14 60 0" w={3} />

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { recommendedCount } from "../logic/calculate";
-import CurveChart from "./CurveChart";
 import { capitalize, type ItemType } from "../logic/items";
 import { PER_YEAR_STOPS } from "../logic/stops";
+import CurveChart from "./CurveChart";
 
 interface Props {
   /** Your own uses per year (weekly uses x 52 x your share). */
@@ -31,9 +31,10 @@ export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
 
   // Closest stop to n, measured as a ratio because the stops are spaced multiplicatively.
   const nearestStop = (xValue: number) =>
-
     // Snap to the closest allowed stop by ratio (log distance), since the stops are spaced on a multiplicative scale.
-    PER_YEAR_STOPS.reduce((best, value) => (Math.abs(Math.log(value / xValue)) < Math.abs(Math.log(best / xValue)) ? value : best));
+    PER_YEAR_STOPS.reduce((best, value) =>
+      Math.abs(Math.log(value / xValue)) < Math.abs(Math.log(best / xValue)) ? value : best,
+    );
 
   return (
     <div className="panel mini-chart">

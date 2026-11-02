@@ -1,13 +1,23 @@
 import { useMemo } from "react";
-import { BOLD, CELL_H, CELL_W, COLORS, FONT_SIZE, HIGHLIGHT_INSET, HIGHLIGHT_STROKE, TITLE_BASELINE } from "../model/style";
 import { GRID_H, GRID_W, GRID_X0, GRID_Y0, placeLabels } from "../model/layout";
+import {
+  BOLD,
+  CELL_H,
+  CELL_W,
+  COLORS,
+  FONT_SIZE,
+  HIGHLIGHT_INSET,
+  HIGHLIGHT_STROKE,
+  TITLE_BASELINE,
+} from "../model/style";
+
 import type { EconomicSystemsData } from "../model/types";
+import Legend from "../panels/Legend";
+import CellNames from "./CellNames";
+import FigureLabels from "./FigureLabels";
 import GridCells from "./GridCells";
 import StabilityBand from "./StabilityBand";
 import UsOverlay from "./UsOverlay";
-import CellNames from "./CellNames";
-import FigureLabels from "./FigureLabels";
-import Legend from "../panels/Legend";
 
 const CHART_WIDTH = GRID_X0 + GRID_W + 8;
 const CHART_HEIGHT = GRID_Y0 + GRID_H + 94;
@@ -27,7 +37,13 @@ export default function MapSvg({ model, showExamples, highlight, onSelect }: Pro
   const labels = useMemo(() => placeLabels(model, model.figures), [model]);
 
   return (
-    <svg className="map-surface" viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} role="img" aria-label={model.title} fontFamily={FONT}>
+    <svg
+      className="map-surface"
+      viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`}
+      role="img"
+      aria-label={model.title}
+      fontFamily={FONT}
+    >
       <text x={GRID_X0} y={TITLE_BASELINE} fontSize={FONT_SIZE.title} fontWeight={BOLD} fill="#222">
         {model.title}
       </text>

@@ -1,7 +1,7 @@
 import data from "../../../../data/rule-of-authorship/rule-of-authorship.json";
 import "./styles.css";
-import type { Owner, Product, Rule, RuleOfAuthorshipData, Section, Segment, SummaryRow } from "./types";
 import { OWNER_LABELS } from "./style";
+import type { Owner, Product, Rule, RuleOfAuthorshipData, Section, Segment, SummaryRow } from "./types";
 
 const model = data as RuleOfAuthorshipData;
 
@@ -49,11 +49,16 @@ function Masthead() {
 function CaseStrip() {
   return (
     <div className="auth-case-strip">
-      {model.caseStrip.map((item, index) => ( // One example per item in the strip.
-        <span key={index}>
-          <Inline parts={item} />
-        </span>
-      ))}
+      {model.caseStrip.map(
+        (
+          item,
+          index, // One example per item in the strip.
+        ) => (
+          <span key={index}>
+            <Inline parts={item} />
+          </span>
+        ),
+      )}
 
     </div>
   );
@@ -63,11 +68,15 @@ function CaseStrip() {
 function OwnerLegend() {
   return (
     <div className="auth-legend">
-      {(Object.keys(OWNER_LABELS) as Owner[]).map((owner) => ( // One colour key per kind of owner.
-        <Pill key={owner} owner={owner}>
-          {OWNER_LABELS[owner]}
-        </Pill>
-      ))}
+      {(Object.keys(OWNER_LABELS) as Owner[]).map(
+        (
+          owner, // One colour key per kind of owner.
+        ) => (
+          <Pill key={owner} owner={owner}>
+            {OWNER_LABELS[owner]}
+          </Pill>
+        ),
+      )}
 
     </div>
   );
@@ -99,7 +108,11 @@ function SummaryTable() {
           </tr>
         </thead>
         <tbody>
-          {model.summary.map((summaryRow) => <SummaryTableRow key={summaryRow.element} row={summaryRow} />)} {/* One summary row per rule element. */}
+          {model.summary.map((summaryRow) => (
+            <SummaryTableRow key={summaryRow.element} row={summaryRow} />
+          ))}{" "}
+
+          {/* One summary row per rule element. */}
         </tbody>
       </table>
     </div>
@@ -134,7 +147,11 @@ function ProductsTable() {
           </tr>
         </thead>
         <tbody>
-          {model.products.map((product) => <ProductRow key={product.title} product={product} />)} {/* One row per product that was checked against the rules. */}
+          {model.products.map((product) => (
+            <ProductRow key={product.title} product={product} />
+          ))}{" "}
+
+          {/* One row per product that was checked against the rules. */}
         </tbody>
       </table>
     </div>
@@ -150,13 +167,19 @@ function RuleBlock({ rule }: { rule: Rule }) {
         <Pill owner={rule.owner}>{rule.label}</Pill>
       </div>
       <p className="auth-verdict">{rule.verdict}</p>
-      {rule.body?.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-
-      {rule.exhibits?.map((exhibit) => ( // One quoted example per rule.
-        <div key={exhibit.cite} className="auth-exhibit">
-          <span className="auth-cite">{exhibit.cite}</span> — {exhibit.text}
-        </div>
+      {rule.body?.map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
       ))}
+
+      {rule.exhibits?.map(
+        (
+          exhibit, // One quoted example per rule.
+        ) => (
+          <div key={exhibit.cite} className="auth-exhibit">
+            <span className="auth-cite">{exhibit.cite}</span> — {exhibit.text}
+          </div>
+        ),
+      )}
 
     </div>
   );
@@ -169,7 +192,11 @@ function SectionBlock({ section }: { section: Section }) {
       <h2>
         <span>{section.number}</span> &nbsp;{section.title}
       </h2>
-      {section.rules.map((rule) => <RuleBlock key={rule.name} rule={rule} />)} {/* One block per rule, coloured by who owns it. */}
+      {section.rules.map((rule) => (
+        <RuleBlock key={rule.name} rule={rule} />
+      ))}{" "}
+
+      {/* One block per rule, coloured by who owns it. */}
     </section>
   );
 }
@@ -180,27 +207,25 @@ export default function RuleOfAuthorship() {
     <div className="authorship">
       <Masthead />
       <CaseStrip />
-
       <div className="auth-caveat">
         <Inline parts={model.caveat} />
       </div>
-
       <OwnerLegend />
-
       <h2>Verdict at a glance</h2>
       <SummaryTable />
-
       <h2>OD&amp;D-era products, credit by credit</h2>
       <ProductsTable />
-      {model.sections.map((section) => <SectionBlock key={section.number} section={section} />)} {/* One block per section of the rules. */}
+      {model.sections.map((section) => (
+        <SectionBlock key={section.number} section={section} />
+      ))}{" "}
 
+      {/* One block per section of the rules. */}
       <h2>Bottom line</h2>
       <div className="auth-rule auth-rule-neutral">
         <p>
           <Inline parts={model.bottomLine} />
         </p>
       </div>
-
       <footer className="auth-footer">{model.footer}</footer>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -17,7 +17,16 @@ export function DuneGullet() {
         const endX = 200 + Math.cos(a) * 96;
         const endY = 154 + Math.sin(a) * 38;
 
-        return <path key={index} d={`M${xPos - 5} ${yPos} L${endX} ${endY} L${xPos + 5} ${yPos} Z`} fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />;
+        return (
+          <path
+            key={index}
+            d={`M${xPos - 5} ${yPos} L${endX} ${endY} L${xPos + 5} ${yPos} Z`}
+            fill="currentColor"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinejoin="round"
+          />
+        );
       })}
       <Line d="M200 140 C200 100 240 90 240 50 C240 30 260 20 276 28" w={12} />
       <Line d="M200 140 C200 100 240 90 240 50 C240 30 260 20 276 28" w={6} />
@@ -75,7 +84,10 @@ export function VentCrawler() {
       <circle cx="216" cy="96" r="6" fill={card} {...ink} strokeWidth={3} />
       <Dot x={184} y={96} r={2} />
       <Dot x={216} y={96} r={2} />
-      <Line d="M160 100 L110 78 L80 110 L60 190 M168 108 L120 126 L96 170 L90 220 M240 100 L290 78 L320 110 L340 190 M232 108 L280 126 L304 170 L310 220 M180 118 L160 160 L150 220 M220 118 L240 160 L250 220" w={5} />
+      <Line
+        d="M160 100 L110 78 L80 110 L60 190 M168 108 L120 126 L96 170 L90 220 M240 100 L290 78 L320 110 L340 190 M232 108 L280 126 L304 170 L310 220 M180 118 L160 160 L150 220 M220 118 L240 160 L250 220"
+        w={5}
+      />
       <Line d="M190 112 H210 M194 108 V116 M200 108 V116 M206 108 V116" w={3} />
       <Line d="M20 226 H380" w={4} />
     </Drawing>

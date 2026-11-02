@@ -37,8 +37,26 @@ export interface AstronomyTargetsData {
 }
 
 export type Season = "spring" | "summer" | "autumn" | "winter";
-export type FocalLength = "tiny" | "tiny-small" | "small" | "small-medium" | "medium" | "medium-large" | "large" | "large-huge" | "huge";
-export type Aperture = "tiny" | "tiny-small" | "small" | "small-medium" | "medium" | "medium-large" | "large" | "large-huge" | "huge";
+export type FocalLength =
+  | "tiny"
+  | "tiny-small"
+  | "small"
+  | "small-medium"
+  | "medium"
+  | "medium-large"
+  | "large"
+  | "large-huge"
+  | "huge";
+export type Aperture =
+  | "tiny"
+  | "tiny-small"
+  | "small"
+  | "small-medium"
+  | "medium"
+  | "medium-large"
+  | "large"
+  | "large-huge"
+  | "huge";
 
 export interface Settings {
   latitude: number;

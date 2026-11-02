@@ -12,18 +12,25 @@ db.exec(`
 `);
 
 // Databases made before weigh-ins had a change time get it added; older weigh-ins count as changed at time 0.
-if (!db.prepare("PRAGMA table_info(weights)").all().some((column) => column.name === "updated_at")) {
+if (
+  !db
+    .prepare("PRAGMA table_info(weights)")
+    .all()
+    .some((column) => column.name === "updated_at")
+) {
   db.exec("ALTER TABLE weights ADD COLUMN updated_at INTEGER NOT NULL DEFAULT 0");
 }
 
 /** On a brand new database, load the weigh-ins from the JSON file. Placeholder rows (weight 0) are skipped. */
 function seed() {
   const { count } = db.prepare("SELECT COUNT(*) AS count FROM weights").get();
+
   if (count > 0) return;
 
   const { unit, weights } = JSON.parse(readFileSync(SEED_PATH, "utf8"));
   const insert = db.prepare("INSERT INTO weights (date, weight) VALUES (?, ?)");
   db.exec("BEGIN");
+
   for (const [date, weight] of weights) if (weight > 0) insert.run(date, weight);
   db.prepare("INSERT OR REPLACE INTO settings (key, value) VALUES ('unit', ?)").run(unit);
   db.exec("COMMIT");
@@ -37,7 +44,11 @@ function getWeights() {
   const unit = db.prepare("SELECT value FROM settings WHERE key = 'unit'").get()?.value ?? "lb";
   const rows = db.prepare("SELECT date, weight, updated_at FROM weights ORDER BY date").all();
 
-  return { unit, weights: rows.map((row) => [row.date, row.weight]), updatedAt: Object.fromEntries(rows.map((row) => [row.date, row.updated_at])) };
+  return {
+    unit,
+    weights: rows.map((row) => [row.date, row.weight]),
+    updatedAt: Object.fromEntries(rows.map((row) => [row.date, row.updated_at])),
+  };
 }
 
 /** A real calendar date written YYYY-MM-DD. */
@@ -58,8 +69,12 @@ export const weightRoutes = [
     handler: async (request, response, { date }) => {
       requireUser(request);
       const { weight, updatedAt } = await readJson(request);
+
       if (!validDate(date)) throw new HttpError(400, "Date must be a real date like 2026-10-25");
-      if (typeof weight !== "number" || !(weight > 0 && weight <= MAX_WEIGHT)) throw new HttpError(400, `Weight must be a number up to ${MAX_WEIGHT}`);
+
+      if (typeof weight !== "number" || !(weight > 0 && weight <= MAX_WEIGHT))
+
+        throw new HttpError(400, `Weight must be a number up to ${MAX_WEIGHT}`);
 
       const stamp = readStamp(updatedAt);
 
@@ -73,6 +88,7 @@ export const weightRoutes = [
     handler: (request, response, { date }) => {
       requireUser(request);
       const { changes } = db.prepare("DELETE FROM weights WHERE date = ?").run(date);
+
       if (!changes) throw new HttpError(404, "No weigh-in on that date");
 
       sendJson(response, 200, { date });

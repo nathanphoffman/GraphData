@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { difficultyOf, LEVEL_STOPS, PLAYER_STOPS } from "../model/data";
+import type { Creature } from "../model/types";
 import CreatureCard from "../ui/cards/CreatureCard";
 import SliderRow from "../ui/filters/SliderRow";
-import { LEVEL_STOPS, PLAYER_STOPS, difficultyOf } from "../model/data";
 import { buildEncounter, groupPicks } from "./encounter";
-import type { Creature } from "../model/types";
 
 interface Result {
   low: number;
@@ -61,12 +61,7 @@ export default function EncounterGenerator({ pool }: { pool: Creature[] }) {
 
   return (
     <div className="bestiary-encounter">
-      <button
-        type="button"
-        className="bestiary-encounter-toggle"
-        aria-expanded={open}
-        onClick={() => setOpen(!open)}
-      >
+      <button type="button" className="bestiary-encounter-toggle" aria-expanded={open} onClick={() => setOpen(!open)}>
         <span aria-hidden="true">{open ? "▾" : "▸"}</span> Encounter generator
       </button>
       {open && (

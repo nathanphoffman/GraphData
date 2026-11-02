@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { completeAverage, last3, projectAll, recentRate } from "../../../src/charts/science/weight-journey/model/averages";
+import {
+  completeAverage,
+  last3,
+  projectAll,
+  recentRate,
+} from "../../../src/charts/science/weight-journey/model/averages";
 
 describe("completeAverage", () => {
   it("skips missing values", () => {

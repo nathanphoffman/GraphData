@@ -61,7 +61,11 @@ function poissonBuckets(lambda: number): Bucket[] {
 
     used += probability;
     const lowest = index * width;
-    buckets.push({ label: width === 1 ? `${index}` : `${lowest}–${lowest + width - 1}`, mid: lowest + (width - 1) / 2, p: probability });
+    buckets.push({
+      label: width === 1 ? `${index}` : `${lowest}–${lowest + width - 1}`,
+      mid: lowest + (width - 1) / 2,
+      p: probability,
+    });
   }
 
   buckets.push({ label: `${useCount}+`, mid: useCount, p: Math.max(0, 1 - used) });
@@ -72,7 +76,10 @@ function poissonBuckets(lambda: number): Bucket[] {
 /** At or above the goal: green fading to yellow-green. Below it: yellow through orange to red at zero. */
 export function goalColor(middle: number, goal: number): string {
   const safeGoal = Math.max(goal, MIN_GOAL);
-  const hueAngle = middle >= safeGoal ? GOOD_HUE - Math.min(1, (middle - safeGoal) / safeGoal) * HUE_SPAN : HUE_SPAN * (middle / safeGoal);
+  const hueAngle =
+    middle >= safeGoal
+      ? GOOD_HUE - Math.min(1, (middle - safeGoal) / safeGoal) * HUE_SPAN
+      : HUE_SPAN * (middle / safeGoal);
 
   return `hsl(${Math.round(hueAngle)}, 70%, 45%)`;
 }

@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Servant } from "./Part1";
 
 const card = CARD_COLOR;
@@ -64,7 +64,10 @@ export function ServoCherub() {
       <Line d="M170 50 q30 -20 60 0" w={4} />
       <Shape d="M178 110 H222 L226 160 H174 Z" />
       <Line d="M176 120 L140 140 M224 120 L260 140" w={6} />
-      <Shape d="M120 60 C100 40 70 50 70 80 C90 100 120 100 140 90 Z M280 60 C300 40 330 50 330 80 C310 100 280 100 260 90 Z" w={4} />
+      <Shape
+        d="M120 60 C100 40 70 50 70 80 C90 100 120 100 140 90 Z M280 60 C300 40 330 50 330 80 C310 100 280 100 260 90 Z"
+        w={4}
+      />
       <Shape d="M184 160 H216 V190 H184 Z" w={4} />
       <Solid d="M190 190 L200 224 L210 190 Z" />
       <Line d="M170 164 L160 190 M230 164 L240 190" w={5} />
@@ -120,7 +123,10 @@ export function ArcologyWarden() {
       ))}
       <circle cx="200" cy="110" r="30" fill={card} {...ink} strokeWidth={5} />
       <circle cx="200" cy="110" r="12" fill="currentColor" />
-      <Line d="M170 110 H90 L70 90 M230 110 H310 L330 90 M200 140 V160 H110 L90 190 M200 140 V160 H290 L310 190" w={3} />
+      <Line
+        d="M170 110 H90 L70 90 M230 110 H310 L330 90 M200 140 V160 H110 L90 190 M200 140 V160 H290 L310 190"
+        w={3}
+      />
       <Shape d="M50 70 H80 V94 H50 Z M320 70 H350 V94 H320 Z" w={4} />
       <Shape d="M60 186 H100 V214 H60 Z M300 186 H340 V214 H300 Z" w={4} />
       <Line d="M70 70 V56 H84 M330 70 V56 H316" w={3} />

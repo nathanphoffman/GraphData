@@ -20,7 +20,9 @@ export function matches(creature: Creature, query: string) {
     model.toneScale[creature.tone - 1],
     creature.description,
     creature.attack,
-    ...creature.skills.map((skill) => `${skill.skill} ${skill.mod === "+" ? "advantage" : "disadvantage"} ${skill.note ?? ""}`),
+    ...creature.skills.map(
+      (skill) => `${skill.skill} ${skill.mod === "+" ? "advantage" : "disadvantage"} ${skill.note ?? ""}`,
+    ),
     creature.skillNote ?? "",
     creature.tactics,
     creature.flying ? "flying" : "",
@@ -29,11 +31,13 @@ export function matches(creature: Creature, query: string) {
     .join(" ")
     .toLowerCase();
 
-  return query
-    .toLowerCase()
+  return (
+    query
+      .toLowerCase()
 
-    // Split the search text on any run of whitespace.
-    .split(/\s+/)
-    .filter(Boolean)
-    .every((word) => text.includes(word) || inNames(squash(word)));
+      // Split the search text on any run of whitespace.
+      .split(/\s+/)
+      .filter(Boolean)
+      .every((word) => text.includes(word) || inNames(squash(word)))
+  );
 }

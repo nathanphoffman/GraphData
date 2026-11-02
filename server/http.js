@@ -17,10 +17,13 @@ export function sendJson(response, status, body, headers = {}) {
 /** Read the request body as JSON ({} when empty). Bigger bodies than the default can be allowed for the routes that need them. */
 export async function readJson(request, maxBytes = MAX_BODY_BYTES) {
   let text = "";
+
   for await (const chunk of request) {
     text += chunk;
+
     if (text.length > maxBytes) throw new HttpError(413, "Request too large");
   }
+
   try {
     return text ? JSON.parse(text) : {};
   } catch {
@@ -34,14 +37,20 @@ export async function readJson(request, maxBytes = MAX_BODY_BYTES) {
  */
 export function readStamp(value) {
   if (value === undefined) return Date.now();
-  if (!Number.isInteger(value) || value < 0 || value > Date.now() + 24 * 60 * 60 * 1000) throw new HttpError(400, "updatedAt must be a time in milliseconds");
+
+  if (!Number.isInteger(value) || value < 0 || value > Date.now() + 24 * 60 * 60 * 1000)
+
+    throw new HttpError(400, "updatedAt must be a time in milliseconds");
 
   return value;
 }
 
 /** Value of one cookie from the request, or undefined. */
 export function getCookie(request, name) {
-  const pair = (request.headers.cookie ?? "").split(";").map((part) => part.trim().split("=")).find(([key]) => key === name);
+  const pair = (request.headers.cookie ?? "")
+    .split(";")
+    .map((part) => part.trim().split("="))
+    .find(([key]) => key === name);
 
   return pair?.[1];
 }

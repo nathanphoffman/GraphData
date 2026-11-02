@@ -1,5 +1,5 @@
-import { compassWord, measure, type GuideStar } from "../model/guideStars";
 import { CONSTELLATIONS } from "../model/constellations";
+import { compassWord, type GuideStar, measure } from "../model/guideStars";
 
 const SIZE = 320;
 const CENTRE = SIZE / 2;
@@ -13,7 +13,9 @@ function niceScale(radius: number): number {
   const target = radius / 3;
 
   // Pick the nicest round field size closest to the target by keeping whichever candidate is nearest so far.
-  return [1, 2, 5, 10, 20, 30].reduce((best, value) => (Math.abs(value - target) < Math.abs(best - target) ? value : best));
+  return [1, 2, 5, 10, 20, 30].reduce((best, value) =>
+    Math.abs(value - target) < Math.abs(best - target) ? value : best,
+  );
 }
 
 /** Degrees with one decimal and a degree sign. */
@@ -44,10 +46,17 @@ export function FindingChart({ stars, target }: { stars: GuideStar[]; target: { 
   const project = (p: { ra: number; dec: number }) => {
     const m = measure(target, p);
 
-    return { sep: m.separation, x: CENTRE - Math.sin((m.bearing * Math.PI) / 180) * m.separation * pixels, y: CENTRE - Math.cos((m.bearing * Math.PI) / 180) * m.separation * pixels };
+    return {
+      sep: m.separation,
+      x: CENTRE - Math.sin((m.bearing * Math.PI) / 180) * m.separation * pixels,
+      y: CENTRE - Math.cos((m.bearing * Math.PI) / 180) * m.separation * pixels,
+    };
   };
 
-  const figures = CONSTELLATIONS.map((constellationFigure) => ({ name: constellationFigure.name, lines: constellationFigure.lines.map((chain) => chain.map(project)) }))
+  const figures = CONSTELLATIONS.map((constellationFigure) => ({
+    name: constellationFigure.name,
+    lines: constellationFigure.lines.map((chain) => chain.map(project)),
+  }))
     .filter((c) => c.lines.some((chain) => chain.some((p) => p.sep < reach)))
 
     // Put each constellation name at the middle of its lines that fall inside the chart.
@@ -55,7 +64,11 @@ export function FindingChart({ stars, target }: { stars: GuideStar[]; target: { 
       const inside = c.lines.flat().filter((line) => line.sep < reach);
 
       // Label sits at the average position of the points inside the view, so it stays near the visible part.
-      return { ...c, labelX: inside.reduce((t, p) => t + p.x, 0) / inside.length, labelY: inside.reduce((t, p) => t + p.y, 0) / inside.length };
+      return {
+        ...c,
+        labelX: inside.reduce((t, p) => t + p.x, 0) / inside.length,
+        labelY: inside.reduce((t, p) => t + p.y, 0) / inside.length,
+      };
     });
 
   const barLeft = 12;
@@ -63,15 +76,26 @@ export function FindingChart({ stars, target }: { stars: GuideStar[]; target: { 
 
   // Draw the constellation outlines first, then the guide stars and distances on top.
   return (
-    <svg className="astro-guide" viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label="Triangulation chart: distances from the three nearest bright stars to the target">
+    <svg
+      className="astro-guide"
+      viewBox={`0 0 ${SIZE} ${SIZE}`}
+      role="img"
+      aria-label="Triangulation chart: distances from the three nearest bright stars to the target"
+    >
       {/* Draw each constellation's lines and its name. */}
       {figures.map((figure) => (
         <g key={figure.name}>
           {/* One line of connected stars. */}
           {figure.lines.map((chain, index) => (
-            <polyline key={index} className="astro-guide-constellation" points={chain.map((p) => `${p.x},${p.y}`).join(" ")} />
+            <polyline
+              key={index}
+              className="astro-guide-constellation"
+              points={chain.map((p) => `${p.x},${p.y}`).join(" ")}
+            />
           ))}
-          <text className="astro-guide-constellation-name" x={figure.labelX} y={figure.labelY} textAnchor="middle">{figure.name}</text>
+          <text className="astro-guide-constellation-name" x={figure.labelX} y={figure.labelY} textAnchor="middle">
+            {figure.name}
+          </text>
         </g>
       ))}
 
@@ -89,20 +113,39 @@ export function FindingChart({ stars, target }: { stars: GuideStar[]; target: { 
         return (
           <g key={guideStar.name}>
             <line className="astro-guide-line" x1={point.x} y1={point.y} x2={CENTRE} y2={CENTRE} />
-            <text className="astro-guide-dist" x={mx} y={my} dy={-3} textAnchor="middle">{formatDegrees(guideStar.separation)}</text>
+            <text className="astro-guide-dist" x={mx} y={my} dy={-3} textAnchor="middle">
+              {formatDegrees(guideStar.separation)}
+            </text>
             <circle className="astro-guide-star" cx={point.x} cy={point.y} r={Math.max(3, 6.5 - guideStar.mag * 1.2)} />
             {/* Keep the label away from the chart edges by flipping it above or beside the point. */}
-            <text className="astro-guide-name" x={point.x} y={point.y + (point.y < CENTRE ? -10 : 17)} textAnchor={point.x < 60 ? "start" : point.x > SIZE - 60 ? "end" : "middle"}>{guideStar.name}</text>
+            <text
+              className="astro-guide-name"
+              x={point.x}
+              y={point.y + (point.y < CENTRE ? -10 : 17)}
+              textAnchor={point.x < 60 ? "start" : point.x > SIZE - 60 ? "end" : "middle"}
+            >
+              {guideStar.name}
+            </text>
           </g>
         );
       })}
       <circle className="astro-guide-target" cx={CENTRE} cy={CENTRE} r={7} />
       <circle className="astro-guide-target" cx={CENTRE} cy={CENTRE} r={1.5} />
-      <text className="astro-guide-dist" x={SIZE - 10} y={14} textAnchor="end">N ↑ · E ←</text>
+      <text className="astro-guide-dist" x={SIZE - 10} y={14} textAnchor="end">
+        N ↑ · E ←
+      </text>
       <line className="astro-guide-bar" x1={barLeft} y1={barY} x2={barLeft + scale * pixels} y2={barY} />
       <line className="astro-guide-bar" x1={barLeft} y1={barY - 4} x2={barLeft} y2={barY + 4} />
-      <line className="astro-guide-bar" x1={barLeft + scale * pixels} y1={barY - 4} x2={barLeft + scale * pixels} y2={barY + 4} />
-      <text className="astro-guide-dist" x={barLeft + scale * pixels + 6} y={barY + 4}>{scale}° (rings every {scale}°)</text>
+      <line
+        className="astro-guide-bar"
+        x1={barLeft + scale * pixels}
+        y1={barY - 4}
+        x2={barLeft + scale * pixels}
+        y2={barY + 4}
+      />
+      <text className="astro-guide-dist" x={barLeft + scale * pixels + 6} y={barY + 4}>
+        {scale}° (rings every {scale}°)
+      </text>
     </svg>
   );
 }
@@ -114,7 +157,9 @@ export function GuideList({ stars }: { stars: GuideStar[] }) {
       {/* One line of written directions per guide star. */}
       {stars.map((guideStar) => (
         <li key={guideStar.name}>
-          <strong>{guideStar.name}</strong> (mag {guideStar.mag.toFixed(1)}): target is {formatDegrees(guideStar.separation)} ({(guideStar.separation / FIST).toFixed(1)} fists) to its {compassWord((guideStar.bearing + 180) % 360)}
+          <strong>{guideStar.name}</strong> (mag {guideStar.mag.toFixed(1)}): target is{" "}
+          {formatDegrees(guideStar.separation)} ({(guideStar.separation / FIST).toFixed(1)} fists) to its{" "}
+          {compassWord((guideStar.bearing + 180) % 360)}
         </li>
       ))}
     </ul>

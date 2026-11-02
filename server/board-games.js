@@ -21,28 +21,45 @@ db.exec(`
     pulled_at TEXT, updated_at INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (title, release_date)
   );
+
 `);
 
 /** On a brand new database, load the games from the JSON file. */
 function seed() {
   const { count } = db.prepare("SELECT COUNT(*) AS count FROM board_games").get();
+
   if (count > 0 || !existsSync(SEED_PATH)) return;
 
   const games = Object.values(JSON.parse(readFileSync(SEED_PATH, "utf8")));
-  const insert = db.prepare("INSERT INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  const insert = db.prepare(
+    "INSERT INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  );
+
   db.exec("BEGIN");
-  for (const game of games) insert.run(game.title, game.releaseDate, game.average, game.weight, game.num, game.rank, game.pulledAt ?? null, 0);
+
+  for (const game of games)
+    insert.run(game.title, game.releaseDate, game.average, game.weight, game.num, game.rank, game.pulledAt ?? null, 0);
   db.exec("COMMIT");
   console.log(`Seeded ${games.length} board games from ${SEED_PATH}`);
 }
 
 seed();
 
-const rowToGame = (row) => ({ title: row.title, releaseDate: row.release_date, average: row.average, weight: row.weight, num: row.num, rank: row.rank });
+const rowToGame = (row) => ({
+  title: row.title,
+  releaseDate: row.release_date,
+  average: row.average,
+  weight: row.weight,
+  num: row.num,
+  rank: row.rank,
+});
 
 /** Every game with a score for the preference, best first, each with its place in the whole list. */
 function rankedWithPositions(preference) {
-  const games = [...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame), ...CUSTOM_GAMES];
+  const games = [
+    ...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame),
+    ...CUSTOM_GAMES,
+  ];
 
   return rankGames(games, preference).map((game, index) => ({ ...game, position: index + 1 }));
 }
@@ -50,6 +67,7 @@ function rankedWithPositions(preference) {
 /** The first release year to show from a request, or 0 for every year. */
 function readMinYear(value) {
   const minYear = Number(value ?? 0);
+
   if (!Number.isInteger(minYear) || minYear < 0) throw new HttpError(400, "minYear must be a year");
 
   return minYear;
@@ -60,9 +78,15 @@ const releasedFrom = (game, minYear) => minYear === 0 || Number(game.releaseDate
 
 /** A request's list of owned games (title and releaseDate each), or an error when it is not one. */
 function readOwned(owned) {
-  const valid = Array.isArray(owned) && owned.length > 0 && owned.length <= MAX_OWNED_GAMES
-    && owned.every((game) => typeof game?.title === "string" && typeof game.releaseDate === "string");
-  if (!valid) throw new HttpError(400, `Send a list of 1 to ${MAX_OWNED_GAMES} games, each with a title and releaseDate`);
+  const valid =
+    Array.isArray(owned) &&
+    owned.length > 0 &&
+    owned.length <= MAX_OWNED_GAMES &&
+    owned.every((game) => typeof game?.title === "string" && typeof game.releaseDate === "string");
+
+  if (!valid)
+
+    throw new HttpError(400, `Send a list of 1 to ${MAX_OWNED_GAMES} games, each with a title and releaseDate`);
 
   return owned;
 }
@@ -76,22 +100,48 @@ function getPage(query) {
   const year = (query.get("year") ?? "").trim();
   const minYear = readMinYear(query.get("minYear"));
 
-  if (!(preference >= 0 && preference <= MAX_PREFERENCE)) throw new HttpError(400, `preference must be from 0 to ${MAX_PREFERENCE}`);
+  if (!(preference >= 0 && preference <= MAX_PREFERENCE))
+
+    throw new HttpError(400, `preference must be from 0 to ${MAX_PREFERENCE}`);
+
   if (!Number.isInteger(page) || page < 1) throw new HttpError(400, "page must be 1 or more");
-  if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > MAX_PAGE_SIZE) throw new HttpError(400, `pageSize must be from 1 to ${MAX_PAGE_SIZE}`);
 
-  const matching = rankedWithPositions(preference).filter((game) => game.title.toLowerCase().includes(search) && (year === "" || game.releaseDate === year) && releasedFrom(game, minYear));
+  if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > MAX_PAGE_SIZE)
 
-  return { preference, page, pageSize, total: matching.length, games: matching.slice((page - 1) * pageSize, page * pageSize) };
+    throw new HttpError(400, `pageSize must be from 1 to ${MAX_PAGE_SIZE}`);
+
+  const matching = rankedWithPositions(preference).filter(
+    (game) =>
+      game.title.toLowerCase().includes(search) &&
+      (year === "" || game.releaseDate === year) &&
+      releasedFrom(game, minYear),
+  );
+
+  return {
+    preference,
+    page,
+    pageSize,
+    total: matching.length,
+    games: matching.slice((page - 1) * pageSize, page * pageSize),
+  };
 }
 
 /** Check one game sent by the sync script. */
 function checkGame(game) {
   const isCount = (value) => Number.isInteger(value) && value >= 0;
+
   const isText = (value) => typeof value === "string" && value.length <= MAX_TEXT;
-  const valid = game && isText(game.title) && game.title !== "" && isText(game.releaseDate)
-    && Number.isFinite(game.average) && Number.isFinite(game.weight) && isCount(game.num)
-    && (game.rank === null || isCount(game.rank)) && (game.pulledAt === null || isText(game.pulledAt));
+  const valid =
+    game &&
+    isText(game.title) &&
+    game.title !== "" &&
+    isText(game.releaseDate) &&
+    Number.isFinite(game.average) &&
+    Number.isFinite(game.weight) &&
+    isCount(game.num) &&
+    (game.rank === null || isCount(game.rank)) &&
+    (game.pulledAt === null || isText(game.pulledAt));
+
   if (!valid) throw new HttpError(400, `Not a valid board game: ${JSON.stringify(game)?.slice(0, 100)}`);
 }
 
@@ -99,7 +149,8 @@ export const boardGameRoutes = [
   {
     method: "GET",
     path: "/api/board-games",
-    handler: (request, response) => sendJson(response, 200, getPage(new URL(request.url, "http://localhost").searchParams)),
+    handler: (request, response) =>
+      sendJson(response, 200, getPage(new URL(request.url, "http://localhost").searchParams)),
   },
   // Just the sent games (title and releaseDate each), ranked for a weight preference with their places in the whole list. Nothing is saved.
   {
@@ -109,10 +160,25 @@ export const boardGameRoutes = [
       const { games, preference = 0, search = "", minYear: sentMinYear } = await readJson(request, MAX_OWNED_BYTES);
       const minYear = readMinYear(sentMinYear);
       const owned = new Set(readOwned(games).map((game) => `${game.title}|${game.releaseDate}`));
-      if (!(preference >= 0 && preference <= MAX_PREFERENCE)) throw new HttpError(400, `preference must be from 0 to ${MAX_PREFERENCE}`);
 
-      const matching = rankedWithPositions(preference).filter((game) => owned.has(`${game.title}|${game.releaseDate}`) && releasedFrom(game, minYear) && game.title.toLowerCase().includes(String(search).trim().toLowerCase()));
-      sendJson(response, 200, { preference, page: 1, pageSize: matching.length, total: matching.length, games: matching });
+      if (!(preference >= 0 && preference <= MAX_PREFERENCE))
+
+        throw new HttpError(400, `preference must be from 0 to ${MAX_PREFERENCE}`);
+
+      const matching = rankedWithPositions(preference).filter(
+        (game) =>
+          owned.has(`${game.title}|${game.releaseDate}`) &&
+          releasedFrom(game, minYear) &&
+          game.title.toLowerCase().includes(String(search).trim().toLowerCase()),
+      );
+
+      sendJson(response, 200, {
+        preference,
+        page: 1,
+        pageSize: matching.length,
+        total: matching.length,
+        games: matching,
+      });
     },
   },
   // Which weight preference puts the sent games (title and releaseDate each) highest in the list. Nothing is saved.
@@ -121,7 +187,11 @@ export const boardGameRoutes = [
     path: "/api/board-games/best-weight",
     handler: async (request, response) => {
       const owned = readOwned((await readJson(request, MAX_OWNED_BYTES)).games);
-      const games = [...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame), ...CUSTOM_GAMES];
+      const games = [
+        ...db.prepare("SELECT title, release_date, average, weight, num, rank FROM board_games").all().map(rowToGame),
+        ...CUSTOM_GAMES,
+      ];
+
       sendJson(response, 200, findBestWeight(games, owned));
     },
   },
@@ -131,8 +201,12 @@ export const boardGameRoutes = [
     path: "/api/board-games/export",
     handler: (request, response) => {
       requireUser(request);
-      const rows = db.prepare("SELECT title, release_date, average, weight, num, rank, pulled_at, updated_at FROM board_games").all();
-      sendJson(response, 200, { games: rows.map((row) => ({ ...rowToGame(row), pulledAt: row.pulled_at, updatedAt: row.updated_at })) });
+      const rows = db
+        .prepare("SELECT title, release_date, average, weight, num, rank, pulled_at, updated_at FROM board_games")
+        .all();
+      sendJson(response, 200, {
+        games: rows.map((row) => ({ ...rowToGame(row), pulledAt: row.pulled_at, updatedAt: row.updated_at })),
+      });
     },
   },
   // Adds or changes up to MAX_BULK_GAMES games at once, each keeping the change time it is sent with.
@@ -142,14 +216,29 @@ export const boardGameRoutes = [
     handler: async (request, response) => {
       requireUser(request);
       const { games } = await readJson(request, MAX_BULK_BYTES);
-      if (!Array.isArray(games) || games.length > MAX_BULK_GAMES) throw new HttpError(400, `Send a list of up to ${MAX_BULK_GAMES} games`);
+
+      if (!Array.isArray(games) || games.length > MAX_BULK_GAMES)
+
+        throw new HttpError(400, `Send a list of up to ${MAX_BULK_GAMES} games`);
       games.forEach(checkGame);
 
       const upsert = db.prepare(`
         INSERT OR REPLACE INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       `);
       db.exec("BEGIN");
-      for (const game of games) upsert.run(game.title, game.releaseDate, game.average, game.weight, game.num, game.rank, game.pulledAt, readStamp(game.updatedAt));
+
+      for (const game of games)
+        upsert.run(
+          game.title,
+          game.releaseDate,
+          game.average,
+          game.weight,
+          game.num,
+          game.rank,
+          game.pulledAt,
+          readStamp(game.updatedAt),
+        );
+
       db.exec("COMMIT");
       sendJson(response, 200, { saved: games.length });
     },

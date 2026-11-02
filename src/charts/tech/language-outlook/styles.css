@@ -14,7 +14,11 @@
   min-width: 0;
   border: 1px solid color-mix(in srgb, var(--fg) 16%, transparent);
   border-radius: 12px;
-  background: linear-gradient(160deg, color-mix(in srgb, var(--fg) 7%, transparent), color-mix(in srgb, var(--fg) 2%, transparent));
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--fg) 7%, transparent),
+    color-mix(in srgb, var(--fg) 2%, transparent)
+  );
   box-shadow: 0 1px 4px color-mix(in srgb, var(--fg) 12%, transparent);
 }
 
@@ -92,7 +96,9 @@
   display: grid;
   grid-template-rows: 0fr;
   visibility: hidden;
-  transition: grid-template-rows 0.25s ease, visibility 0.25s;
+  transition:
+    grid-template-rows 0.25s ease,
+    visibility 0.25s;
 }
 
 .legend-panel.open {
@@ -172,12 +178,16 @@
   background: linear-gradient(160deg, #596077, #424758 60%, #3b3f4e);
   border: 1px solid #ffffff22;
   border-radius: 14px;
-  box-shadow: 0 4px 18px #0004, inset 0 1px 0 #ffffff22;
+  box-shadow:
+    0 4px 18px #0004,
+    inset 0 1px 0 #ffffff22;
 }
 
 .chart-surface circle {
   cursor: pointer;
-  transition: stroke-width 0.12s, stroke 0.12s;
+  transition:
+    stroke-width 0.12s,
+    stroke 0.12s;
 }
 
 .chart-surface circle:hover {
@@ -232,7 +242,11 @@
   text-align: center;
   font-size: 16px;
   /* stacked offsets build a thick extruded edge, then a soft drop shadow underneath */
-  text-shadow: 0 1px 0 #00000066, 0 2px 0 #00000055, 0 3px 0 #00000044, 0 5px 6px #00000077;
+  text-shadow:
+    0 1px 0 #00000066,
+    0 2px 0 #00000055,
+    0 3px 0 #00000044,
+    0 5px 6px #00000077;
 }
 
 /* the description under the title: small and not bold */
@@ -287,7 +301,11 @@
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid color-mix(in srgb, var(--tile-color) 55%, transparent);
-  background: linear-gradient(145deg, color-mix(in srgb, var(--tile-color) 38%, #1e1e1e), color-mix(in srgb, var(--tile-color) 12%, #1e1e1e));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--tile-color) 38%, #1e1e1e),
+    color-mix(in srgb, var(--tile-color) 12%, #1e1e1e)
+  );
   box-shadow: 0 1px 3px #0000004d;
   color: #fff;
 }
@@ -325,7 +343,11 @@
   cursor: pointer;
   border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
   border-radius: 999px;
-  background: linear-gradient(160deg, color-mix(in srgb, var(--fg) 8%, transparent), color-mix(in srgb, var(--fg) 3%, transparent));
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--fg) 8%, transparent),
+    color-mix(in srgb, var(--fg) 3%, transparent)
+  );
   box-shadow: 0 1px 3px color-mix(in srgb, var(--fg) 12%, transparent);
   transition: background 0.15s;
 }

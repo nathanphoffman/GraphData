@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -30,7 +30,10 @@ export function HiveLurker() {
       <Line d="M60 30 V90 M160 30 V90 M260 30 V90 M360 30 V90" w={3} />
       <Shape d="M150 100 C150 80 250 80 250 100 L240 130 H160 Z" />
       <Line d="M170 100 L120 40 M230 100 L280 40 M176 112 L100 80 M224 112 L300 80" w={5} />
-      <Line d="M120 40 l-10 -6 M120 40 l4 -12 M280 40 l10 -6 M280 40 l-4 -12 M100 80 l-14 -4 M100 80 l-6 10 M300 80 l14 -4 M300 80 l6 10" w={3} />
+      <Line
+        d="M120 40 l-10 -6 M120 40 l4 -12 M280 40 l10 -6 M280 40 l-4 -12 M100 80 l-14 -4 M100 80 l-6 10 M300 80 l14 -4 M300 80 l6 10"
+        w={3}
+      />
       <Shape d="M168 130 C160 170 200 220 200 220 C200 220 240 170 232 130 Z" />
       <Dot x={188} y={108} r={0} />
       <Line d="M190 140 V150 M200 140 V156 M210 140 V150" w={3} />
@@ -52,7 +55,10 @@ export function RotColossus() {
       <circle cx="170" cy="170" r="14" fill="none" {...ink} strokeWidth={3} />
       <circle cx="240" cy="150" r="10" fill="none" {...ink} strokeWidth={3} />
       <Line d="M110 130 L70 170 L80 210 M290 130 L330 170 L320 210" w={12} />
-      <path d="M60 50 q4 -6 8 0 q-4 6 -8 0 Z M92 30 q4 -6 8 0 q-4 6 -8 0 Z M310 40 q4 -6 8 0 q-4 6 -8 0 Z M340 80 q4 -6 8 0 q-4 6 -8 0 Z M280 20 q4 -6 8 0 q-4 6 -8 0 Z" fill="currentColor" />
+      <path
+        d="M60 50 q4 -6 8 0 q-4 6 -8 0 Z M92 30 q4 -6 8 0 q-4 6 -8 0 Z M310 40 q4 -6 8 0 q-4 6 -8 0 Z M340 80 q4 -6 8 0 q-4 6 -8 0 Z M280 20 q4 -6 8 0 q-4 6 -8 0 Z"
+        fill="currentColor"
+      />
       <Line d="M64 66 q10 4 14 14 M316 56 q-10 4 -12 14" w={2} dash="2 4" />
     </Drawing>
   );
@@ -78,7 +84,10 @@ export function VoidSerpent() {
 export function VoidSultan() {
   return (
     <Drawing label="Drawing of a masked ruler on a throne of bent starlight, with rays curving around him">
-      <Line d="M200 120 C160 60 100 40 40 50 M200 120 C240 60 300 40 360 50 M200 120 C150 100 90 110 30 140 M200 120 C250 100 310 110 370 140" w={4} />
+      <Line
+        d="M200 120 C160 60 100 40 40 50 M200 120 C240 60 300 40 360 50 M200 120 C150 100 90 110 30 140 M200 120 C250 100 310 110 370 140"
+        w={4}
+      />
       <Line d="M200 120 C170 160 130 190 70 200 M200 120 C230 160 270 190 330 200" w={3} />
       <Shape d="M168 86 C160 30 240 30 232 86 C238 110 162 110 168 86 Z" />
       <Line d="M180 70 H196 M204 70 H220" w={5} />

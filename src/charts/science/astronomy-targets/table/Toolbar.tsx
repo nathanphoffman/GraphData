@@ -26,7 +26,9 @@ function SeasonButtons({ value, onToggle, onSchedule }: SeasonProps) {
         </button>
       ))}
       {value && value !== "any" && (
-        <button type="button" className="astro-button" onClick={() => onSchedule(value)}>Generate Schedule</button>
+        <button type="button" className="astro-button" onClick={() => onSchedule(value)}>
+          Generate Schedule
+        </button>
       )}
     </div>
   );
@@ -62,7 +64,13 @@ interface ToolbarProps extends SeasonProps {
 export function Toolbar({ query, onQuery, hidden, onToggleColumn, count, ...season }: ToolbarProps) {
   return (
     <div className="astro-toolbar">
-      <input type="search" placeholder="Search name, nickname, constellation or type" value={query} onChange={(event) => onQuery(event.target.value)} aria-label="Search targets" />
+      <input
+        type="search"
+        placeholder="Search name, nickname, constellation or type"
+        value={query}
+        onChange={(event) => onQuery(event.target.value)}
+        aria-label="Search targets"
+      />
       <SeasonButtons {...season} />
       <ColumnsMenu hidden={hidden} onToggle={onToggleColumn} />
       <small>{count}</small>

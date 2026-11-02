@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { OreMuncher, PitGorger, SandMaw, DuneWyrm, SlugLord } from "./Part1";
-import { VatHorror, HiveLurker, RotColossus, VoidSerpent, VoidSultan } from "./Part2";
-import { DuneGullet, SlugBoss, AsteroidLeviathan, VentCrawler, HangarGrub } from "./Part3";
-import { AsteroidDevourer, NovaSlug, VacuumLurker, UploadGhost, StaticSprite, HangarHaunt } from "./Part4";
-import { StarOracle, VoidWhisperer, NebulaPhantom, CometSprite, WillOWire, VoidBride } from "./Part5";
+import { DuneWyrm, OreMuncher, PitGorger, SandMaw, SlugLord } from "./Part1";
+import { HiveLurker, RotColossus, VatHorror, VoidSerpent, VoidSultan } from "./Part2";
+import { AsteroidLeviathan, DuneGullet, HangarGrub, SlugBoss, VentCrawler } from "./Part3";
+import { AsteroidDevourer, HangarHaunt, NovaSlug, StaticSprite, UploadGhost, VacuumLurker } from "./Part4";
+import { CometSprite, NebulaPhantom, StarOracle, VoidBride, VoidWhisperer, WillOWire } from "./Part5";
 
 export const sciFiMonstersArt: Record<string, () => ReactNode> = {
   "ore-muncher": OreMuncher,

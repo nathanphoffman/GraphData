@@ -8,12 +8,11 @@ export default function Credits() {
     <>
       <div className="bestiary-banner" role="note">
         <strong>Heads up: this bestiary is made with AI.</strong> AI, especially AI art, is controversial in the RPG
-        community. The contributors of Tiny Mighty RPG had nothing to do with this project and do not endorse it.
-        The original Tiny Mighty RPG was made entirely by humans. This bestiary is an
-        adaptation of Tiny Mighty RPG and contains changes to the original: its creature stats and artwork were generated
-
-        with AI. This project is by Nathan Hoffman, the original author
-        of Tiny Mighty, who has not profited and will not profit from this bestiary. It is just for fun and free, and is released under{" "}
+        community. The contributors of Tiny Mighty RPG had nothing to do with this project and do not endorse it. The
+        original Tiny Mighty RPG was made entirely by humans. This bestiary is an adaptation of Tiny Mighty RPG and
+        contains changes to the original: its creature stats and artwork were generated with AI. This project is by
+        Nathan Hoffman, the original author of Tiny Mighty, who has not profited and will not profit from this bestiary.
+        It is just for fun and free, and is released under{" "}
         <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">
           CC0
         </a>{" "}
@@ -30,7 +29,11 @@ export default function Credits() {
         onClick={(event) => event.target === dialog.current && dialog.current.close()}
       >
         <h2 id="bestiary-credits-title">Tiny Mighty Attribution Credit</h2>
-        <p>The original Tiny Mighty RPG was made entirely by humans, this bestiary was not, and <strong>the contributors listed below had no part in making it</strong>. This was exclusively a project of Nathan Hoffman, the original author of the game.</p>
+        <p>
+          The original Tiny Mighty RPG was made entirely by humans, this bestiary was not, and{" "}
+          <strong>the contributors listed below had no part in making it</strong>. This was exclusively a project of
+          Nathan Hoffman, the original author of the game.
+        </p>
         <h3>Original Human Tiny Mighty RPG Attribution:</h3>
         <p>
           Author: Nathan Hoffman
@@ -51,7 +54,8 @@ export default function Credits() {
           </a>
         </p>
         <p>
-          The original art, as found there, was made by Kim Chan, who holds the copyright to the art therein. If you want to support human art, support her.
+          The original art, as found there, was made by Kim Chan, who holds the copyright to the art therein. If you
+          want to support human art, support her.
         </p>
         <button type="button" className="bestiary-credits-close" onClick={() => dialog.current?.close()}>
           Close

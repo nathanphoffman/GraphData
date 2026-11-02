@@ -1,9 +1,17 @@
 import type { ReactNode } from "react";
-import { HauntedDoll, GhostGalleon, GiantSpider, HornedJackrabbit, DreamCat, Goblin, GrandpaGiant } from "./Part1";
-import { ErrantKnight, GreenwoodArcher, Hexmaster, DuskEnchantress, HoodedHeadsman, IronWarlord, HollowThrall } from "./Part2";
-import { FrostKing, GraveClerk, Dragon, JellyBlock, GreatRoc, HullCrusher, GiggleSprite } from "./Part3";
-import { GraveKnight, Hellspawn, HauntedSheriff, Ghoul, GallowsTree, GraveImp, HearthSpirit } from "./Part4";
-import { FerrymanOfSouls, DrownedCaptain, GaslampSpecter } from "./Part5";
+import { DreamCat, GhostGalleon, GiantSpider, Goblin, GrandpaGiant, HauntedDoll, HornedJackrabbit } from "./Part1";
+import {
+  DuskEnchantress,
+  ErrantKnight,
+  GreenwoodArcher,
+  Hexmaster,
+  HollowThrall,
+  HoodedHeadsman,
+  IronWarlord,
+} from "./Part2";
+import { Dragon, FrostKing, GiggleSprite, GraveClerk, GreatRoc, HullCrusher, JellyBlock } from "./Part3";
+import { GallowsTree, Ghoul, GraveImp, GraveKnight, HauntedSheriff, HearthSpirit, Hellspawn } from "./Part4";
+import { DrownedCaptain, FerrymanOfSouls, GaslampSpecter } from "./Part5";
 
 export const fantasyArtDK: Record<string, () => ReactNode> = {
   "haunted-doll": HauntedDoll,

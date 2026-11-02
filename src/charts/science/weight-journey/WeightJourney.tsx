@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { callApi } from "../../../api";
 import "./styles.css";
+import { type Model, setWeights } from "./model/rows";
+import { makeFormat, type Unit } from "./model/units";
 import { Controls, RANGES } from "./parts/Controls";
+import { EditPanel } from "./parts/EditPanel";
 import { Legend } from "./parts/Legend";
 import { StatsBar } from "./parts/StatsBar";
-import { EditPanel } from "./parts/EditPanel";
 import { WeightChart } from "./parts/WeightChart";
 import { WeightTable } from "./parts/WeightTable";
 import { type Lines, type ProjectionTool, useProjections } from "./useProjections";
-import { type Model, setWeights } from "./model/rows";
-import { makeFormat, type Unit } from "./model/units";
 
 const ALL_LINES: Lines = { quadratic: true, general: true, allTrend: true, spread: true };
 
@@ -21,13 +21,27 @@ function Journey({ model }: { model: Model }) {
   const [lines, setLines] = useState(ALL_LINES);
   const [fatRatio, setFatRatio] = useState({ enabled: false, value: "0.3" });
   const unitFormat = makeFormat(unit);
-  const ratio = fatRatio.enabled && fatRatio.value !== "" && Number(fatRatio.value) >= 0 ? Number(fatRatio.value) : null;
+  const ratio =
+    fatRatio.enabled && fatRatio.value !== "" && Number(fatRatio.value) >= 0 ? Number(fatRatio.value) : null;
   const proj = useProjections(tool, unitFormat.k, lines, ratio, model);
 
   return (
     <div className="weight">
       <StatsBar unit={unit} f={unitFormat} />
-      <Controls unit={unit} f={unitFormat} onUnit={setUnit} range={range} onRange={setRange} tool={tool} onTool={setTool} tapered={proj.tapered} lines={lines} onLines={setLines} fatRatio={fatRatio} onFatRatio={setFatRatio} />
+      <Controls
+        unit={unit}
+        f={unitFormat}
+        onUnit={setUnit}
+        range={range}
+        onRange={setRange}
+        tool={tool}
+        onTool={setTool}
+        tapered={proj.tapered}
+        lines={lines}
+        onLines={setLines}
+        fatRatio={fatRatio}
+        onFatRatio={setFatRatio}
+      />
       <WeightChart input={{ rangeDays: range.days, k: unitFormat.k, ...proj }} lines={lines} />
       <Legend lines={lines} tapered={proj.tapered !== null} fatRatio={ratio} />
       <WeightTable unit={unit} f={unitFormat} dailyRows={model.dailyRows} />

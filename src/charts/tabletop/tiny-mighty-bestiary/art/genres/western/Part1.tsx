@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -6,9 +6,14 @@ const card = CARD_COLOR;
 export function Hat({ y = 62, w = 60 }: { y?: number; w?: number }) {
   return (
     <>
-      <Shape d={`M${200 - w * 0.55} ${y} C${200 - w * 0.55} ${y - 44} ${200 + w * 0.55} ${y - 44} ${200 + w * 0.55} ${y} Z`} />
+      <Shape
+        d={`M${200 - w * 0.55} ${y} C${200 - w * 0.55} ${y - 44} ${200 + w * 0.55} ${y - 44} ${200 + w * 0.55} ${y} Z`}
+      />
       <Line d={`M${200 - w * 0.55} ${y - 14} H${200 + w * 0.55}`} w={3} />
-      <Line d={`M${200 - w - 14} ${y - 6} Q${200 - w} ${y + 8} ${200 - w * 0.5} ${y + 2} H${200 + w * 0.5} Q${200 + w} ${y + 8} ${200 + w + 14} ${y - 6}`} w={5} />
+      <Line
+        d={`M${200 - w - 14} ${y - 6} Q${200 - w} ${y + 8} ${200 - w * 0.5} ${y + 2} H${200 + w * 0.5} Q${200 + w} ${y + 8} ${200 + w + 14} ${y - 6}`}
+        w={5}
+      />
     </>
   );
 }

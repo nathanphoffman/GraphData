@@ -113,13 +113,20 @@ export interface GuideStar {
 }
 
 /** Angular distance and compass direction (east of north) from a to b. */
-export function measure(a: { ra: number; dec: number }, b: { ra: number; dec: number }): { separation: number; bearing: number } {
+export function measure(
+  a: { ra: number; dec: number },
+  b: { ra: number; dec: number },
+): { separation: number; bearing: number } {
   const d1 = a.dec * DEGREES_TO_RADIANS;
   const d2 = b.dec * DEGREES_TO_RADIANS;
   const dRa = (b.ra - a.ra) * 15 * DEGREES_TO_RADIANS;
   const cosSep = Math.sin(d1) * Math.sin(d2) + Math.cos(d1) * Math.cos(d2) * Math.cos(dRa);
   const separation = Math.acos(Math.min(1, Math.max(-1, cosSep))) / DEGREES_TO_RADIANS;
-  const bearing = Math.atan2(Math.sin(dRa) * Math.cos(d2), Math.cos(d1) * Math.sin(d2) - Math.sin(d1) * Math.cos(d2) * Math.cos(dRa)) / DEGREES_TO_RADIANS;
+  const bearing =
+    Math.atan2(
+      Math.sin(dRa) * Math.cos(d2),
+      Math.cos(d1) * Math.sin(d2) - Math.sin(d1) * Math.cos(d2) * Math.cos(dRa),
+    ) / DEGREES_TO_RADIANS;
 
   return { separation, bearing: (bearing + 360) % 360 };
 }

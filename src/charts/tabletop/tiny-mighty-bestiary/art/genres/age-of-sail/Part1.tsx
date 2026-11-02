@@ -1,9 +1,12 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
 export const Waves = ({ y = 214, w = 3 }: { y?: number; w?: number }) => (
-  <Line d={`M0 ${y} q15 -10 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0`} w={w} />
+  <Line
+    d={`M0 ${y} q15 -10 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0`}
+    w={w}
+  />
 );
 
 /** Three-quarter pirate hat on a head centered at x=200. */
@@ -39,8 +42,14 @@ export function FigureheadGuardian() {
 export function KnotSnake() {
   return (
     <Drawing label="Drawing of a length of old rigging that ties itself into knots to trip a sailor">
-      <Line d="M20 200 C60 170 90 230 130 200 C170 170 150 130 190 140 C230 150 210 200 250 190 C300 178 290 120 330 130 C360 138 370 170 384 160" w={14} />
-      <Line d="M20 200 C60 170 90 230 130 200 C170 170 150 130 190 140 C230 150 210 200 250 190 C300 178 290 120 330 130 C360 138 370 170 384 160" w={7} />
+      <Line
+        d="M20 200 C60 170 90 230 130 200 C170 170 150 130 190 140 C230 150 210 200 250 190 C300 178 290 120 330 130 C360 138 370 170 384 160"
+        w={14}
+      />
+      <Line
+        d="M20 200 C60 170 90 230 130 200 C170 170 150 130 190 140 C230 150 210 200 250 190 C300 178 290 120 330 130 C360 138 370 170 384 160"
+        w={7}
+      />
       <circle cx="190" cy="140" r="26" fill="none" {...ink} strokeWidth={6} />
       <circle cx="250" cy="190" r="22" fill="none" {...ink} strokeWidth={6} />
       <Shape d="M370 150 C380 134 398 136 400 152 C396 168 374 170 368 160 Z" w={4} />
@@ -76,11 +85,17 @@ export function CursedManOWar() {
   return (
     <Drawing label="Drawing of a warship with tattered sails and a dead crew nailed to the decks, cannons run out">
       <Line d="M130 40 V160 M220 20 V160 M300 50 V160" w={6} />
-      <Shape d="M130 50 L180 50 L190 120 L130 130 Z M220 30 L280 36 L290 120 L220 124 Z M300 58 L350 66 L340 124 L300 128 Z" w={4} />
+      <Shape
+        d="M130 50 L180 50 L190 120 L130 130 Z M220 30 L280 36 L290 120 L220 124 Z M300 58 L350 66 L340 124 L300 128 Z"
+        w={4}
+      />
       <Line d="M140 130 l-8 14 M232 124 l8 16 M310 128 l-6 12 M160 50 l6 40 M250 36 l6 40" w={2} />
       <Shape d="M60 160 H370 L346 214 H90 Z" />
       <Line d="M80 180 H356" w={3} />
-      <Shape d="M100 182 h20 v8 h-20 Z M150 184 h20 v8 h-20 Z M200 184 h20 v8 h-20 Z M250 184 h20 v8 h-20 Z M300 184 h20 v8 h-20 Z" w={3} />
+      <Shape
+        d="M100 182 h20 v8 h-20 Z M150 184 h20 v8 h-20 Z M200 184 h20 v8 h-20 Z M250 184 h20 v8 h-20 Z M300 184 h20 v8 h-20 Z"
+        w={3}
+      />
       <Line d="M100 166 v-14 M122 166 v-16 M150 166 v-14 M270 166 v-14" w={4} />
       <circle cx="100" cy="146" r="6" fill={card} {...ink} strokeWidth={3} />
       <circle cx="150" cy="148" r="6" fill={card} {...ink} strokeWidth={3} />
@@ -117,7 +132,10 @@ export function IronMaidenCannon() {
 export function GaleGargoyle() {
   return (
     <Drawing label="Drawing of a stone figurehead come alive in a storm, swooping off the bow with wings spread">
-      <Line d="M20 30 l-10 24 M70 20 l-10 24 M120 30 l-10 24 M180 18 l-10 24 M250 26 l-10 24 M310 20 l-10 24 M370 30 l-10 24" w={3} />
+      <Line
+        d="M20 30 l-10 24 M70 20 l-10 24 M120 30 l-10 24 M180 18 l-10 24 M250 26 l-10 24 M310 20 l-10 24 M370 30 l-10 24"
+        w={3}
+      />
       <Shape d="M190 100 C150 60 90 40 30 56 C60 76 70 100 70 124 C110 112 160 116 190 134 Z" />
       <Shape d="M210 100 C250 60 310 40 370 56 C340 76 330 100 330 124 C290 112 240 116 210 134 Z" />
       <Shape d="M176 78 C170 36 230 36 224 78 C230 106 170 106 176 78 Z" />

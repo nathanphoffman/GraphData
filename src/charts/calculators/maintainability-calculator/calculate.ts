@@ -6,7 +6,11 @@ import type { Spans, Tier } from "./types";
 const MIN_DOWN_SPAN = 0.05;
 
 /** Line counts are shortened with these suffixes. */
-const COUNT_SUFFIXES = [[1e9, "B"], [1e6, "M"], [1e3, "K"]] as const;
+const COUNT_SUFFIXES = [
+  [1e9, "B"],
+  [1e6, "M"],
+  [1e3, "K"],
+] as const;
 
 /** A shortened count shows no decimals from the hundreds, one from the tens, and two below that. */
 const HUNDREDS = 100;
@@ -18,7 +22,12 @@ const PAIR_AI_BELOW = 0.5;
 /** Letter grades: 50 and below is F−, under 60 is F, then A, B and C start here and anything else is D. */
 const F_MINUS_AT = 50;
 const F_BELOW = 60;
-const LETTER_STARTS: [number, string][] = [[90, "A"], [80, "B"], [70, "C"]];
+const LETTER_STARTS: [number, string][] = [
+  [90, "A"],
+  [80, "B"],
+  [70, "C"],
+];
+
 const PERFECT = 100;
 
 /** The last digit decides the plus or minus: 7 and up is +, 2 and down is −. */
@@ -52,7 +61,11 @@ export function position(lines: number, nFactor: number): number {
 export function tierFor(placement: number): Tier {
   for (const tier of TIERS) {
     // Normal is inclusive at its upper edge; negative tiers are exclusive so a boundary value moves to the harder tier.
-    if (tier.name === "Normal" ? placement <= tier.upTo : tier.upTo < 0 ? placement < tier.upTo : placement <= tier.upTo) return tier;
+    if (
+      tier.name === "Normal" ? placement <= tier.upTo : tier.upTo < 0 ? placement < tier.upTo : placement <= tier.upTo
+    )
+
+      return tier;
   }
 
   return TIERS[TIERS.length - 1];

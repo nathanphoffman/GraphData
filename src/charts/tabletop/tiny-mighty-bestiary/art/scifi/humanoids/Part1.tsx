@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Figure } from "../../core/figure";
 
 const card = CARD_COLOR;
@@ -22,7 +22,10 @@ export function FuzzWarrior() {
   return (
     <Drawing label="Drawing of a knee-high fuzzy forest dweller with a spear and a drum">
       <Shape d="M130 90 C110 130 130 200 200 204 C270 200 290 130 270 90 C250 60 150 60 130 90 Z" />
-      <Line d="M130 100 l-8 -6 M126 120 l-10 0 M130 144 l-10 6 M270 100 l8 -6 M274 120 l10 0 M270 144 l10 6 M150 76 l-4 -10 M176 68 l-2 -12 M224 68 l2 -12 M250 76 l4 -10" w={4} />
+      <Line
+        d="M130 100 l-8 -6 M126 120 l-10 0 M130 144 l-10 6 M270 100 l8 -6 M274 120 l10 0 M270 144 l10 6 M150 76 l-4 -10 M176 68 l-2 -12 M224 68 l2 -12 M250 76 l4 -10"
+        w={4}
+      />
       <circle cx="176" cy="104" r="9" fill={card} {...ink} strokeWidth={3} />
       <circle cx="224" cy="104" r="9" fill={card} {...ink} strokeWidth={3} />
       <Dot x={176} y={104} r={3} />
@@ -124,7 +127,12 @@ export function IronMarshal() {
       <Line d="M188 104 H212" w={3} />
       <Solid d="M144 122 H256 L270 224 H130 Z" />
       <path d="M200 126 V222" stroke={card} strokeWidth="2" />
-      <path d="M178 134 h12 M178 148 h12 M210 134 h12 M210 148 h12" stroke={card} strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M178 134 h12 M178 148 h12 M210 134 h12 M210 148 h12"
+        stroke={card}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
       <Line d="M252 130 L296 110 L310 84" w={8} />
       <Shape d="M300 70 H352 V86 H300 Z" w={4} />
       <Line d="M352 78 H376" w={4} />

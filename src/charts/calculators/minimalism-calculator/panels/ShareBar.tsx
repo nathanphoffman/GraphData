@@ -35,7 +35,14 @@ export default function ShareBar({ title, onTitle, typeId, onType, shareParams }
     <div className="panel mini-sharebar">
       <div>
         <label htmlFor="mini-title">Title (optional)</label>
-        <input id="mini-title" type="text" maxLength={MAX_TITLE_LENGTH} placeholder="e.g. Jack Smith's Board Games" value={title} onChange={(event) => onTitle(event.target.value)} />
+        <input
+          id="mini-title"
+          type="text"
+          maxLength={MAX_TITLE_LENGTH}
+          placeholder="e.g. Jack Smith's Board Games"
+          value={title}
+          onChange={(event) => onTitle(event.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="mini-type">What are you minimizing?</label>

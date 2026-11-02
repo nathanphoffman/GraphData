@@ -10,7 +10,9 @@ describe("waitBuckets", () => {
   });
 
   it("breaks the never-used bucket into year groups", () => {
-    const labels = waitBuckets(0.5).map((bucket) => bucket.gap).filter(Boolean);
+    const labels = waitBuckets(0.5)
+      .map((bucket) => bucket.gap)
+      .filter(Boolean);
     expect(labels).toContain("10+ years");
   });
 });

@@ -57,7 +57,9 @@
   border-top: 6px solid var(--accent);
   padding: 14px 16px 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 
 .bestiary-card:hover {
@@ -65,11 +67,21 @@
   box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
-.bestiary-type-beast { --accent: var(--b-beast); }
-.bestiary-type-humanoid { --accent: var(--b-humanoid); }
-.bestiary-type-animated { --accent: var(--b-animated); }
-.bestiary-type-otherworldly { --accent: var(--b-otherworldly); }
-.bestiary-type-monster { --accent: var(--b-monster); }
+.bestiary-type-beast {
+  --accent: var(--b-beast);
+}
+.bestiary-type-humanoid {
+  --accent: var(--b-humanoid);
+}
+.bestiary-type-animated {
+  --accent: var(--b-animated);
+}
+.bestiary-type-otherworldly {
+  --accent: var(--b-otherworldly);
+}
+.bestiary-type-monster {
+  --accent: var(--b-monster);
+}
 
 .bestiary-key {
   display: flex;
@@ -250,8 +262,12 @@
   font-weight: 800;
 }
 
-.bestiary-adv { color: var(--b-beast); }
-.bestiary-dis { color: var(--b-monster); }
+.bestiary-adv {
+  color: var(--b-beast);
+}
+.bestiary-dis {
+  color: var(--b-monster);
+}
 
 /* Two-handle difficulty slider: two range inputs stacked on one track. */
 .bestiary-range-wrap {

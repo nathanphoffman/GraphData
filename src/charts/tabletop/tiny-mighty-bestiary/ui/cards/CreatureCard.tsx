@@ -1,7 +1,7 @@
 import CreatureArt from "../../art/core/CreatureArt";
-import DifficultyDots from "./DifficultyDots";
 import { difficultyOf, model, tierFor } from "../../model/data";
 import type { Creature, Tier } from "../../model/types";
+import DifficultyDots from "./DifficultyDots";
 
 /** Number with an explicit plus sign for positive values. */
 function sign(value: number) {
@@ -36,8 +36,7 @@ function SkillList({ creature }: { creature: Creature }) {
   // Comma-separated skills, each with a + or − marker and an optional note.
   return (
     <p>
-      <strong>Skills:</strong>{" "}
-      {/* List the skills separated by commas. */}
+      <strong>Skills:</strong> {/* List the skills separated by commas. */}
       {creature.skills.map((skill, index) => (
         <span key={skill.skill}>
           {index > 0 && ", "}

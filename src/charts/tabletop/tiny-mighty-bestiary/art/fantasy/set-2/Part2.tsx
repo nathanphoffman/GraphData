@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -45,7 +45,11 @@ export function GreenwoodArcher() {
 export function Hexmaster() {
   return (
     <Drawing label="Drawing of a gaunt robed sorcerer with a shadow that lags behind">
-      <Line d="M120 214 C100 180 100 120 140 90 C150 70 160 66 180 66 C200 66 210 70 220 90 C260 120 260 180 240 214" w={4} dash="3 9" />
+      <Line
+        d="M120 214 C100 180 100 120 140 90 C150 70 160 66 180 66 C200 66 210 70 220 90 C260 120 260 180 240 214"
+        w={4}
+        dash="3 9"
+      />
       <Shape d="M190 54 C176 54 176 100 190 104 C204 100 204 54 190 54 Z" w={4} />
       <path d="M170 44 H210 L200 20 H180 Z" fill="currentColor" />
       <Shape d="M170 104 H210 L236 218 H144 Z" />
@@ -100,7 +104,10 @@ export function IronWarlord() {
   return (
     <Drawing label="Drawing of a scarred conqueror in spiked iron armor with a banner and a mass of spears behind him">
       <Line d="M30 224 V90 M60 224 V80 M90 224 V94 M310 224 V84 M340 224 V92 M370 224 V80" w={3} />
-      <Line d="M30 90 l-6 12 h12 Z M60 80 l-6 12 h12 Z M90 94 l-6 12 h12 Z M310 84 l-6 12 h12 Z M340 92 l-6 12 h12 Z M370 80 l-6 12 h12 Z" w={3} />
+      <Line
+        d="M30 90 l-6 12 h12 Z M60 80 l-6 12 h12 Z M90 94 l-6 12 h12 Z M310 84 l-6 12 h12 Z M340 92 l-6 12 h12 Z M370 80 l-6 12 h12 Z"
+        w={3}
+      />
       <Shape d="M160 90 C156 36 244 36 240 90 L230 118 H170 Z" />
       <Solid d="M200 20 L192 40 H208 Z" />
       <Solid d="M162 56 L146 36 L170 48 Z M238 56 L254 36 L230 48 Z" />

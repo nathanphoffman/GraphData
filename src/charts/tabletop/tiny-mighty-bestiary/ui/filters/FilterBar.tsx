@@ -1,5 +1,5 @@
+import { DIFFICULTY_BANDS, model, SORTS, TONE_BANDS } from "../../model/data";
 import FilterChips from "./FilterChips";
-import { DIFFICULTY_BANDS, SORTS, TONE_BANDS, model } from "../../model/data";
 
 export interface Filters {
   query: string;
@@ -20,7 +20,16 @@ interface Props {
 }
 
 /** Themes shown on the first row; the rest go on a second row. */
-const SCIFI_THEMES = new Set(["scifi", "science-fantasy", "space-wars", "space-hammer", "space-jammer", "cyberpunk", "post-apocalypse"]);
+const SCIFI_THEMES = new Set([
+  "scifi",
+  "science-fantasy",
+  "space-wars",
+  "space-hammer",
+  "space-jammer",
+  "cyberpunk",
+  "post-apocalypse",
+]);
+
 const SCIFI_OPTIONS = model.themes.filter((theme) => SCIFI_THEMES.has(theme.id));
 const OTHER_OPTIONS = model.themes.filter((theme) => !SCIFI_THEMES.has(theme.id));
 

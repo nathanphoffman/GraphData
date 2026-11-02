@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -30,7 +30,10 @@ export function Hellspawn() {
       <Shape d="M170 110 C120 90 80 50 40 70 C60 90 70 110 80 140 C110 120 140 126 170 140 Z" />
       <Shape d="M230 110 C280 90 320 50 360 70 C340 90 330 110 320 140 C290 120 260 126 230 140 Z" />
       <Shape d="M168 70 C168 40 232 40 232 70 C232 100 168 100 168 70 Z" />
-      <Shape d="M174 52 C160 40 150 20 160 10 C170 24 178 34 184 42 Z M226 52 C240 40 250 20 240 10 C230 24 222 34 216 42 Z" w={4} />
+      <Shape
+        d="M174 52 C160 40 150 20 160 10 C170 24 178 34 184 42 Z M226 52 C240 40 250 20 240 10 C230 24 222 34 216 42 Z"
+        w={4}
+      />
       <Line d="M182 66 l12 6 M218 66 l-12 6" w={4} />
       <Line d="M184 86 Q200 98 216 86" w={3} />
       <Shape d="M174 106 H226 L232 190 H168 Z" />

@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { addAverages, addMuscle, projectTapering, taperToTotal } from "../../../src/charts/science/weight-journey/calculate";
+import {
+  addAverages,
+  addMuscle,
+  projectTapering,
+  taperToTotal,
+} from "../../../src/charts/science/weight-journey/calculate";
+
 import { buildAllTrend, buildSpread, taperCurve } from "../../../src/charts/science/weight-journey/model/curves";
 import type { WeightRow } from "../../../src/charts/science/weight-journey/model/rows";
 
@@ -72,7 +78,13 @@ describe("taperCurve", () => {
 });
 
 const makeRow = (dayNumber: number, avg3: number, allProj3: number | null) =>
-  ({ date: `2024-01-${String(dayNumber).padStart(2, "0")}`, avg3, allProj3, allProj3Adj: allProj3, adj: { avg3 } }) as unknown as WeightRow;
+  ({
+    date: `2024-01-${String(dayNumber).padStart(2, "0")}`,
+    avg3,
+    allProj3,
+    allProj3Adj: allProj3,
+    adj: { avg3 },
+  }) as unknown as WeightRow;
 
 describe("buildAllTrend", () => {
   it("is null when no row has a projection yet", () => {

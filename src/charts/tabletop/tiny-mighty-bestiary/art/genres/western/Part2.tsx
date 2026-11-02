@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape } from "../../core/artStyle";
 import { Cactus } from "./Part1";
 
 const card = CARD_COLOR;

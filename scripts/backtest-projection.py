@@ -57,6 +57,7 @@ def main() -> None:
             sum(abs(printed_row[column + YEAR_COLUMN_GAP] - printed_row[ACTUAL_2026]) for printed_row in rows)
             / row_count
         )
+
         print(f"avg error, {label}: 2025 = {error_2025:.2f}, 2026 = {error_2026:.2f}")
 
 

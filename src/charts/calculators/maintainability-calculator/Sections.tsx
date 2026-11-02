@@ -25,16 +25,37 @@ interface SliderPanelProps {
 }
 
 /** A titled range slider with a headline value on top and tick labels underneath. */
-export function SliderPanel({ id: sliderId, label, value, min: minValue, max: maxValue, step, current, onChange, ticks }: SliderPanelProps) {
+export function SliderPanel({
+  id: sliderId,
+  label,
+  value,
+  min: minValue,
+  max: maxValue,
+  step,
+  current,
+  onChange,
+  ticks,
+}: SliderPanelProps) {
   return (
     <div className="panel">
       <div className="calc-row">
         <label htmlFor={sliderId}>{label}</label>
         <strong>{value}</strong>
       </div>
-      <input id={sliderId} type="range" min={minValue} max={maxValue} step={step} value={current} onChange={(event) => onChange(Number(event.target.value))} />
+      <input
+        id={sliderId}
+        type="range"
+        min={minValue}
+        max={maxValue}
+        step={step}
+        value={current}
+        onChange={(event) => onChange(Number(event.target.value))}
+      />
       <div className="calc-ticks">
-        {ticks.map((tick) => <span key={tick}>{tick}</span>)}
+        {ticks.map((tick) => (
+          <span key={tick}>{tick}</span>
+        ))}
+
       </div>
     </div>
   );
@@ -66,7 +87,10 @@ function RoleRow({ role, lines, mult, shift }: { role: TableProps["roles"][numbe
       <td className="edge">{formatCount(stabilitySpans.lo * mult)}</td>
       <td className="normal">{formatCount(stabilitySpans.mid * mult)}</td>
       <td className="edge">{formatCount(stabilitySpans.hi * mult)}</td>
-      <td className="normal"><Badge tier={tierFor(position(lines / mult, nFactor))} /></td> {/* The badge names the difficulty tier these lines fall in. */}
+      <td className="normal">
+        <Badge tier={tierFor(position(lines / mult, nFactor))} />
+      </td>{" "}
+      {/* The badge names the difficulty tier these lines fall in. */}
     </tr>
   );
 }
@@ -88,7 +112,10 @@ export function RoleTable({ roles, ...rest }: TableProps) {
           </tr>
         </thead>
         <tbody>
-          {roles.map((role) => <RoleRow key={role.name} role={role} {...rest} />)}
+          {roles.map((role) => (
+            <RoleRow key={role.name} role={role} {...rest} />
+          ))}
+
         </tbody>
       </table>
     </div>
@@ -100,7 +127,10 @@ export function TierLegend() {
   return (
     <div className="panel">
       <div className="calc-scale">
-        {TIERS.map((tier) => <Badge key={tier.name} tier={tier} />)}
+        {TIERS.map((tier) => (
+          <Badge key={tier.name} tier={tier} />
+        ))}
+
       </div>
       <p className="muted">
         Each line count is placed on a logarithmic position between Very Stable (−1), Stable (0, n<sup>n</sup>) and

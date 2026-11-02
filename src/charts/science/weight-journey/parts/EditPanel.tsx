@@ -27,9 +27,30 @@ function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
 
   return (
     <form className="edit-form" onSubmit={save}>
-      <input type="date" value={date} max={todayDate()} onChange={(changeEvent) => { setDate(changeEvent.target.value); editor.reset(); }} />
-      <input type="number" step="0.1" min="0" value={weight} onChange={(changeEvent) => editor.set(WEIGHT_FIELD, changeEvent.target.value)} placeholder="Weight (lb)" />
-      <EditButtons exists={editor.exists} canSave={!!date && Number(weight) > 0} onRemove={() => editor.remove(callApi(weightUrl, "DELETE"))} message={editor.message} />
+      <input
+        type="date"
+        value={date}
+        max={todayDate()}
+        onChange={(changeEvent) => {
+          setDate(changeEvent.target.value);
+          editor.reset();
+        }}
+
+      />
+      <input
+        type="number"
+        step="0.1"
+        min="0"
+        value={weight}
+        onChange={(changeEvent) => editor.set(WEIGHT_FIELD, changeEvent.target.value)}
+        placeholder="Weight (lb)"
+      />
+      <EditButtons
+        exists={editor.exists}
+        canSave={!!date && Number(weight) > 0}
+        onRemove={() => editor.remove(callApi(weightUrl, "DELETE"))}
+        message={editor.message}
+      />
     </form>
   );
 }

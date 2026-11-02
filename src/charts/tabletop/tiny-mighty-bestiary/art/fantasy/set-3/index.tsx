@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { LivingArmor, MossTortoise, MountainMammoth, Orc, Ogre, LegendaryChampion } from "./Part1";
-import { Owlbear, MountainDinosaur, PuffDragon, MountainGriffin, PipeWyrm, MushroomMayor } from "./Part2";
+import { LegendaryChampion, LivingArmor, MossTortoise, MountainMammoth, Ogre, Orc } from "./Part1";
+import { MountainDinosaur, MountainGriffin, MushroomMayor, Owlbear, PipeWyrm, PuffDragon } from "./Part2";
 import { Moonhorn, PocketSprite } from "./Part3";
 
 export const fantasyArtLP: Record<string, () => ReactNode> = {

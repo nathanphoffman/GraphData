@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -52,7 +52,16 @@ export function SandMaw() {
         const endX = 200 + Math.cos(a) * 84;
         const endY = 150 + Math.sin(a) * 32;
 
-        return <path key={index} d={`M${xPos - 5} ${yPos} L${endX} ${endY} L${xPos + 5} ${yPos} Z`} fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />;
+        return (
+          <path
+            key={index}
+            d={`M${xPos - 5} ${yPos} L${endX} ${endY} L${xPos + 5} ${yPos} Z`}
+            fill="currentColor"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinejoin="round"
+          />
+        );
       })}
       <Line d="M40 210 q20 -12 40 0 M300 214 q20 -12 40 0 M160 224 q20 -12 40 0" w={3} />
       <circle cx="340" cy="44" r="20" fill="none" {...ink} strokeWidth={3} />

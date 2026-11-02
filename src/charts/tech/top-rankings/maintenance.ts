@@ -1,5 +1,5 @@
 import { averageNetN, parseTechLines } from "./languageBurden";
-import { type Ranking, isNumber } from "./score";
+import { isNumber, type Ranking } from "./score";
 
 export const LINES_LABEL = "Completed Lines";
 const FAMILIARITY_LABEL = "Familiarity";
@@ -29,10 +29,12 @@ function isChecked(ranking: Ranking, item: Ranking["items"][number], label: stri
 }
 
 /** Whether the item is marked decommissioned in this ranking. */
-export const isDecommissioned = (ranking: Ranking, item: Ranking["items"][number]): boolean => isChecked(ranking, item, DECOMMISSIONED_LABEL);
+export const isDecommissioned = (ranking: Ranking, item: Ranking["items"][number]): boolean =>
+  isChecked(ranking, item, DECOMMISSIONED_LABEL);
 
 /** Whether the item is greyed out and left out of the rank numbers: decommissioned or on the wishlist. */
-export const isDimmed = (ranking: Ranking, item: Ranking["items"][number]): boolean => isDecommissioned(ranking, item) || isChecked(ranking, item, WISHLIST_LABEL);
+export const isDimmed = (ranking: Ranking, item: Ranking["items"][number]): boolean =>
+  isDecommissioned(ranking, item) || isChecked(ranking, item, WISHLIST_LABEL);
 
 /** Lines added to every project's Completed Lines when the page shows and scores them, as the minimum scaffolding any project needs. Never saved. */
 export const SCAFFOLDING_LINES = 256;
@@ -113,7 +115,11 @@ export function familiarityPercent(rating: number): number {
 }
 
 /** A project's quality: its familiarity (as a percent) and computed quality averaged, or whichever one it has. */
-export function qualityOf(values: Ranking["items"][number]["values"], familiarity: number, computed: number): number | null {
+export function qualityOf(
+  values: Ranking["items"][number]["values"],
+  familiarity: number,
+  computed: number,
+): number | null {
   const [rating, quality] = [values[familiarity], values[computed]];
   const found = [isNumber(rating) ? familiarityPercent(rating) : null, quality].filter(isNumber);
 
@@ -167,7 +173,8 @@ export function maintenance(ranking: Ranking, qualityOverride?: number): Mainten
     const projectTech = tech < 0 ? {} : parseTechLines(values[tech]);
     const techTotal = Object.values(projectTech).reduce((runningTotal, value) => runningTotal + value, 0);
 
-    for (const [language, languageCount] of Object.entries(projectTech)) languageLines[language] = (languageLines[language] ?? 0) + (languageCount / techTotal) * count;
+    for (const [language, languageCount] of Object.entries(projectTech))
+      languageLines[language] = (languageLines[language] ?? 0) + (languageCount / techTotal) * count;
 
     if (rating === null) continue;
     qualityLines += count;
@@ -195,7 +202,9 @@ export function maintenance(ranking: Ranking, qualityOverride?: number): Mainten
 /** The ranking with each item's Quality value set to the average of its Familiarity and Computed Quality (left as it is when it has neither). */
 export function withQuality(ranking: Ranking): Ranking {
   // The position of each of the three columns in the ranking, or -1 when it is missing.
-  const [quality, familiarity, computed] = [QUALITY_LABEL, FAMILIARITY_LABEL, COMPUTED_LABEL].map((label) => ranking.columns.findIndex((column) => column.label === label));
+  const [quality, familiarity, computed] = [QUALITY_LABEL, FAMILIARITY_LABEL, COMPUTED_LABEL].map((label) =>
+    ranking.columns.findIndex((column) => column.label === label),
+  );
 
   if (quality < 0 || familiarity < 0 || computed < 0) return ranking;
 
@@ -203,7 +212,12 @@ export function withQuality(ranking: Ranking): Ranking {
   const items = ranking.items.map((item) => {
     const average = qualityOf(item.values, familiarity, computed);
 
-    return average === null ? item : { ...item, values: item.values.map((value, index) => (index === quality ? Math.round(average * TENTH) / TENTH : value)) };
+    return average === null
+      ? item
+      : {
+          ...item,
+          values: item.values.map((value, index) => (index === quality ? Math.round(average * TENTH) / TENTH : value)),
+        };
   });
 
   return { ...ranking, items };

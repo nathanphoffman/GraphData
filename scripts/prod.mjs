@@ -1,6 +1,7 @@
 // Logs in to the live site with PROD_URL, PROD_USERNAME and PROD_PASSWORD (just reads them from .env) and returns a function to call its API.
 export async function connectToProd() {
   const { PROD_URL, PROD_USERNAME, PROD_PASSWORD } = process.env;
+
   if (!PROD_URL || !PROD_USERNAME || !PROD_PASSWORD) {
     console.error("Set PROD_URL, PROD_USERNAME and PROD_PASSWORD first.");
     process.exit(1);
@@ -16,7 +17,9 @@ export async function connectToProd() {
       headers: { "Content-Type": "application/json", ...(cookie && { Cookie: cookie }) },
       body: body && JSON.stringify(body),
     });
+
     const data = await response.json().catch(() => ({}));
+
     if (!response.ok) throw new Error(data.error ?? data.message ?? `${response.status} ${response.statusText}`);
 
     return { data, response };

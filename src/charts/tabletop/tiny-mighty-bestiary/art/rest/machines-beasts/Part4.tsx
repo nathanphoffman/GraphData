@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Steam } from "./Part1";
 import { Hunter } from "./Part3";
 
@@ -107,9 +107,21 @@ export function AstralStag() {
       <Shape d="M110 170 C100 126 160 108 220 112 C268 116 290 140 280 170 L270 180 H120 Z" />
       <Shape d="M262 124 C256 90 280 66 312 70 L350 96 L322 118 C308 140 270 146 262 124 Z" />
       <Dot x={310} y={90} r={3} />
-      <Line d="M282 70 L276 30 L250 6 M276 30 L300 8 M282 62 L252 44 M306 70 L330 34 L360 24 M330 34 L344 10 M318 56 L350 52" w={4} />
+      <Line
+        d="M282 70 L276 30 L250 6 M276 30 L300 8 M282 62 L252 44 M306 70 L330 34 L360 24 M330 34 L344 10 M318 56 L350 52"
+        w={4}
+      />
       {/* Repeat the shape at each listed position. */}
-      {[[250, 6], [300, 8], [252, 44], [360, 24], [344, 10], [350, 52], [276, 30], [330, 34]].map(([x, y], index) => (
+      {[
+        [250, 6],
+        [300, 8],
+        [252, 44],
+        [360, 24],
+        [344, 10],
+        [350, 52],
+        [276, 30],
+        [330, 34],
+      ].map(([x, y], index) => (
         <circle key={index} cx={x} cy={y} r="4" fill="currentColor" />
       ))}
       <Line d="M130 180 V222 M160 182 V222 M236 182 V222 M262 180 V222" w={6} />

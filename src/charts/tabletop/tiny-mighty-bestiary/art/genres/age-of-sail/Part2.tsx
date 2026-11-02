@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Waves } from "./Part1";
 
 const card = CARD_COLOR;
@@ -115,7 +115,10 @@ export function KrakenSpawn() {
       <circle cx="224" cy="104" r="16" fill={card} {...ink} strokeWidth={4} />
       <Dot x={176} y={104} r={8} />
       <Dot x={224} y={104} r={8} />
-      <Line d="M160 150 C120 180 80 150 40 180 C20 196 40 214 60 200 M190 150 C170 190 130 200 110 224 M210 150 C230 190 270 200 290 224 M240 150 C280 180 320 150 360 180 C380 196 360 214 340 200" w={9} />
+      <Line
+        d="M160 150 C120 180 80 150 40 180 C20 196 40 214 60 200 M190 150 C170 190 130 200 110 224 M210 150 C230 190 270 200 290 224 M240 150 C280 180 320 150 360 180 C380 196 360 214 340 200"
+        w={9}
+      />
       <circle cx="80" cy="170" r="3" fill={card} />
       <circle cx="110" cy="176" r="3" fill={card} />
       <circle cx="320" cy="170" r="3" fill={card} />
@@ -132,7 +135,11 @@ export function DrownedPack() {
       <Shape d="M120 100 L350 90 L320 150 H150 Z" w={5} />
       <Line d="M220 90 V30 M220 36 L270 56 L220 80" w={4} />
       {/* Repeat the shape at each listed position. */}
-      {[[100, 190], [200, 200], [290, 190]].map(([x, y], index) => (
+      {[
+        [100, 190],
+        [200, 200],
+        [290, 190],
+      ].map(([x, y], index) => (
         <g key={index} transform={`translate(${x} ${y})`}>
           <Shape d="M-30 6 C-30 -18 30 -18 30 6 Z" w={4} />
           <Shape d="M18 -8 C16 -28 44 -34 54 -20 L68 -12 L52 -2 C40 6 22 4 18 -8 Z" w={4} />

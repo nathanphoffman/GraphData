@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -27,7 +27,10 @@ export function ScrapGolem() {
       <Shape d="M290 90 H340 V150 H290 Z" w={4} />
       <circle cx="62" cy="200" r="16" fill={card} {...ink} strokeWidth={4} />
       <Shape d="M130 170 H190 V224 H130 Z M210 170 H270 V224 H210 Z" w={4} />
-      <Line d="M110 120 C90 130 80 100 70 110 M290 130 C310 120 320 150 340 140 M200 170 C190 150 210 150 200 140" w={3} />
+      <Line
+        d="M110 120 C90 130 80 100 70 110 M290 130 C310 120 320 150 340 140 M200 170 C190 150 210 150 200 140"
+        w={3}
+      />
       <Line d="M260 36 l14 -10 l8 12" w={3} />
       <Ground y={228} />
     </Drawing>
@@ -84,7 +87,10 @@ export function WarMachineRemnant() {
       <Shape d="M130 60 H200 V80 H130 Z" w={4} />
       <circle cx="170" cy="110" r="10" fill={card} {...ink} strokeWidth={3} />
       <Dot x={170} y={110} r={3} />
-      <Line d="M130 140 L96 190 L80 224 M170 140 L160 190 L156 224 M210 140 L220 190 L226 224 M250 140 L270 190 L290 224 M150 140 L130 180 M230 140 L250 180" w={7} />
+      <Line
+        d="M130 140 L96 190 L80 224 M170 140 L160 190 L156 224 M210 140 L220 190 L226 224 M250 140 L270 190 L290 224 M150 140 L130 180 M230 140 L250 180"
+        w={7}
+      />
       <Line d="M120 90 v14 M140 92 v18 M260 120 v14" w={2} dash="2 3" />
       <Line d="M370 80 l10 -6 M372 100 l14 0" w={3} />
       <Ground y={228} />
@@ -139,7 +145,10 @@ export function PocketWatchSentinel() {
     <Drawing label="Drawing of a coffin-sized watch-shaped guard standing on mechanical legs">
       <circle cx="200" cy="100" r="76" fill={card} {...ink} />
       <circle cx="200" cy="100" r="60" fill="none" {...ink} strokeWidth={3} />
-      <Line d="M200 48 V60 M200 140 V152 M148 100 H160 M240 100 H252 M163 63 l8 8 M237 63 l-8 8 M163 137 l8 -8 M237 137 l-8 -8" w={4} />
+      <Line
+        d="M200 48 V60 M200 140 V152 M148 100 H160 M240 100 H252 M163 63 l8 8 M237 63 l-8 8 M163 137 l8 -8 M237 137 l-8 -8"
+        w={4}
+      />
       <Line d="M200 100 V64 M200 100 L226 116" w={5} />
       <Dot x={200} y={100} r={5} />
       <Shape d="M186 18 H214 V28 H186 Z" w={4} />
@@ -162,7 +171,10 @@ export function GlowRat() {
       <Shape d="M262 98 a20 24 0 1 0 0.1 0 Z" w={5} />
       <circle cx="304" cy="124" r="7" fill="currentColor" />
       <circle cx="350" cy="138" r="5" fill="currentColor" />
-      <Line d="M112 178 L100 208 L128 208 M150 184 L146 208 L172 208 M250 184 L254 208 L280 208 M222 180 L212 208 L238 208" w={5} />
+      <Line
+        d="M112 178 L100 208 L128 208 M150 184 L146 208 L172 208 M250 184 L254 208 L280 208 M222 180 L212 208 L238 208"
+        w={5}
+      />
       <Line d="M338 124 L384 108 M338 130 L386 130 M338 136 L382 152" w={4} />
       <Ground y={216} />
     </Drawing>

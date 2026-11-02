@@ -229,14 +229,33 @@
   margin-top: 12px;
 }
 
-.ralph-link { display: inline-block; margin: 0 12px 8px 0; padding: 4px 12px; border: 1px solid currentColor; border-radius: 999px; text-decoration: none; font-size: 14px; }
-.ralph-link:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+.ralph-link {
+  display: inline-block;
+  margin: 0 12px 8px 0;
+  padding: 4px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+}
+.ralph-link:hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
 
-.rankings-draggable { cursor: grab; }
+.rankings-draggable {
+  cursor: grab;
+}
 
-.rankings-index-decom { color: var(--muted); opacity: 0.7; }
+.rankings-index-decom {
+  color: var(--muted);
+  opacity: 0.7;
+}
 
-.rankings-index dl div small.rankings-index-delta { display: inline; font-size: 0.7em; font-weight: normal; }
+.rankings-index dl div small.rankings-index-delta {
+  display: inline;
+  font-size: 0.7em;
+  font-weight: normal;
+}
 
 .rankings-lines-link {
   padding: 0;

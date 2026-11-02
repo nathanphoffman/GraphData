@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -6,7 +6,10 @@ export function TumbleweedImp() {
   return (
     <Drawing label="Drawing of a bouncing ball of dried scrub with eyes">
       <circle cx="200" cy="120" r="70" fill={card} {...ink} />
-      <Line d="M150 80 C190 60 230 70 250 100 M140 120 C190 100 240 110 262 140 M156 160 C200 140 230 150 246 176 M180 56 C200 100 190 140 170 180 M220 58 C210 100 224 140 236 176" w={3} />
+      <Line
+        d="M150 80 C190 60 230 70 250 100 M140 120 C190 100 240 110 262 140 M156 160 C200 140 230 150 246 176 M180 56 C200 100 190 140 170 180 M220 58 C210 100 224 140 236 176"
+        w={3}
+      />
       <Line d="M140 90 L160 124 L136 140 M258 100 L238 134 L262 156 M170 66 L190 108 M232 66 L216 112" w={3} />
       <circle cx="184" cy="112" r="10" fill={card} {...ink} strokeWidth={3} />
       <circle cx="218" cy="112" r="10" fill={card} {...ink} strokeWidth={3} />
@@ -95,7 +98,10 @@ export function ScarecrowSentinel() {
       <Line d="M186 94 l28 0 M190 90 v8 M200 90 v8 M210 90 v8" w={3} />
       <Shape d="M168 110 H232 L240 190 H160 Z" />
       <Line d="M180 130 l10 10 M220 130 l-10 10 M176 160 h48" w={3} />
-      <Line d="M110 130 l-14 -4 M110 130 l-14 8 M110 130 l-16 -12 M290 130 l14 -4 M290 130 l14 8 M290 130 l16 -12" w={4} />
+      <Line
+        d="M110 130 l-14 -4 M110 130 l-14 8 M110 130 l-16 -12 M290 130 l14 -4 M290 130 l14 8 M290 130 l16 -12"
+        w={4}
+      />
       <Line d="M170 190 l-4 16 M184 190 l2 18 M216 190 l-2 18 M232 190 l4 16" w={4} />
       <Line d="M60 210 v14 M52 218 h16 M330 200 v14 M322 208 h16" w={3} />
       <Ground y={230} />

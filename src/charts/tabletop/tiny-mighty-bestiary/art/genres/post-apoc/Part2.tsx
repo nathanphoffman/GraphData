@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Figure } from "../../core/figure";
 import { Glow } from "./Part1";
 
@@ -12,7 +12,10 @@ export function AtomicRoach() {
       <Shape d="M290 140 C296 116 330 104 352 120 C368 134 358 156 334 160 C312 164 292 156 290 140 Z" />
       <Dot x={332} y={128} r={4} />
       <Line d="M340 100 C350 70 380 60 392 64 M330 100 C330 70 350 40 372 36" w={4} />
-      <Line d="M110 170 L84 210 L70 224 M150 182 L140 220 L136 228 M230 184 L240 220 L248 228 M270 176 L300 210 L312 224 M120 130 L90 120 L70 100" w={5} />
+      <Line
+        d="M110 170 L84 210 L70 224 M150 182 L140 220 L136 228 M230 184 L240 220 L248 228 M270 176 L300 210 L312 224 M120 130 L90 120 L70 100"
+        w={5}
+      />
       <circle cx="150" cy="140" r="16" fill="none" {...ink} strokeWidth={3} />
       <Solid d="M150 140 l-8 -14 h16 Z M150 140 l-14 8 l8 12 Z M150 140 l14 8 l-8 12 Z" />
       <Line d="M300 110 q10 -6 20 0" w={3} />

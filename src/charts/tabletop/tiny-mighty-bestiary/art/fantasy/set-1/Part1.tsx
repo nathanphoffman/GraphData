@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -73,9 +73,18 @@ export function CarrionCrow() {
       <Line d="M110 70 L72 52 M118 96 L64 92 M130 130 L82 150" w={4} />
       <Line d="M150 100 Q190 100 220 140" w={3} />
       <Line d="M124 64 l-10 -14 M142 62 l-4 -16 M166 62 l0 -14 M192 64 l6 -14 M216 72 l10 -12 M238 88 l12 -8" w={3} />
-      <Line d="M112 100 l-14 6 M120 118 l-16 10 M128 146 l-14 14 M144 162 l-8 16 M166 174 l-4 18 M196 182 l0 14 M226 170 l8 12 M252 150 l12 6 M258 126 l14 2" w={3} />
+      <Line
+        d="M112 100 l-14 6 M120 118 l-16 10 M128 146 l-14 14 M144 162 l-8 16 M166 174 l-4 18 M196 182 l0 14 M226 170 l8 12 M252 150 l12 6 M258 126 l14 2"
+        w={3}
+      />
       <Line d="M84 90 l-12 -6 M92 136 l-14 -2 M96 156 l-10 8" w={3} />
-      <path d="M150 100 l-8 4 M170 92 l-6 8 M190 90 l-4 10 M210 100 l4 -6" fill="none" stroke={card} strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M150 100 l-8 4 M170 92 l-6 8 M190 90 l-4 10 M210 100 l4 -6"
+        fill="none"
+        stroke={card}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       <Line d="M40 40 q10 -8 20 0 q10 -8 20 0" w={3} />
     </Drawing>
   );

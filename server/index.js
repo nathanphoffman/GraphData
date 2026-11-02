@@ -19,6 +19,7 @@ const routes = [...authRoutes, ...weightRoutes, ...rankingRoutes, ...boardGameRo
 /** Run the matching API route, or return false when the URL is not an API route. */
 async function handleApi(request, response) {
   const { pathname } = new URL(request.url, "http://localhost");
+
   if (!pathname.startsWith("/api/")) return false;
 
   const matches = routes.map((route) => ({ route, match: route.pattern.exec(pathname) })).filter(({ match }) => match);
@@ -26,16 +27,22 @@ async function handleApi(request, response) {
 
   if (!found) {
     sendJson(response, matches.length ? 405 : 404, { error: matches.length ? "Method not allowed" : "Not found" });
+
     return true;
   }
 
   try {
     // Names like "HTML/CSS" travel URL-encoded in the path.
-    const params = Object.fromEntries(Object.entries(found.match.groups ?? {}).map(([key, value]) => [key, decodeURIComponent(value)]));
+    const params = Object.fromEntries(
+      Object.entries(found.match.groups ?? {}).map(([key, value]) => [key, decodeURIComponent(value)]),
+    );
+
     await found.route.handler(request, response, params);
   } catch (error) {
     if (!(error instanceof HttpError)) console.error(error);
-    sendJson(response, error instanceof HttpError ? error.status : 500, { error: error instanceof HttpError ? error.message : "Server error" });
+    sendJson(response, error instanceof HttpError ? error.status : 500, {
+      error: error instanceof HttpError ? error.message : "Server error",
+    });
   }
 
   return true;

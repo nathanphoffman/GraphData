@@ -265,10 +265,18 @@
   border: 1px solid color-mix(in srgb, var(--tag) 70%, transparent);
 }
 
-.astro-tag-spring { --tag: #3fa34d; }
-.astro-tag-summer { --tag: #e0a100; }
-.astro-tag-autumn { --tag: #d9622b; }
-.astro-tag-winter { --tag: #3b82c4; }
+.astro-tag-spring {
+  --tag: #3fa34d;
+}
+.astro-tag-summer {
+  --tag: #e0a100;
+}
+.astro-tag-autumn {
+  --tag: #d9622b;
+}
+.astro-tag-winter {
+  --tag: #3b82c4;
+}
 
 .astro-heat {
   display: inline-block;
@@ -278,7 +286,9 @@
   border-radius: 6px;
 }
 
-.astro-tag-any { --tag: #8a63d2; }
+.astro-tag-any {
+  --tag: #8a63d2;
+}
 
 .astro-filter {
   font-family: inherit;
@@ -296,8 +306,8 @@
   background: var(--tag);
 }
 
-.astro th:nth-child(-n+2),
-.astro td:nth-child(-n+2) {
+.astro th:nth-child(-n + 2),
+.astro td:nth-child(-n + 2) {
   width: 1%;
 }
 

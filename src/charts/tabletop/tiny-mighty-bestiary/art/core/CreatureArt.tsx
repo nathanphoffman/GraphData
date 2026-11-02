@@ -1,20 +1,20 @@
 import type { ReactNode } from "react";
-import { ink, CARD_COLOR } from "./artStyle";
 import { fantasyArt } from "../fantasy/set-1";
 import { fantasyArtDK } from "../fantasy/set-2";
 import { fantasyArtLP } from "../fantasy/set-3";
 import { fantasyArtQZ } from "../fantasy/set-4";
-import { occultNoirArt } from "../genres/occult-noir";
 import { ageOfSailArt } from "../genres/age-of-sail";
-import { restOtherworldlyArt } from "../rest/otherworldly";
+import { occultNoirArt } from "../genres/occult-noir";
+import { pixelArt } from "../genres/PixelArt";
+import { postApocArt } from "../genres/post-apoc";
+import { westernArt } from "../genres/western";
 import { restHumanoidsMonstersArt } from "../rest/humanoids-monsters";
 import { restMachinesBeastsArt } from "../rest/machines-beasts";
-import { postApocArt } from "../genres/post-apoc";
-import { sciFiMonstersArt } from "../scifi/monsters";
+import { restOtherworldlyArt } from "../rest/otherworldly";
 import { sciFiHumanoidsArt } from "../scifi/humanoids";
 import { sciFiMachinesArt } from "../scifi/machines";
-import { westernArt } from "../genres/western";
-import { pixelArt } from "../genres/PixelArt";
+import { sciFiMonstersArt } from "../scifi/monsters";
+import { CARD_COLOR, ink } from "./artStyle";
 
 /** Maggots packed into a dome: rows of short capsules, tilted by a fixed pseudo-random angle. */
 const maggots = Array.from({ length: 6 }, (_unused, row) => {
@@ -35,7 +35,16 @@ function Fly({ x, y }: { x: number; y: number }) {
     <g transform={`translate(${x} ${y})`}>
       <ellipse cx="0" cy="0" rx="7" ry="4" fill="currentColor" />
       <circle cx="8" cy="0" r="3" fill="currentColor" />
-      <ellipse cx="-2" cy="-7" rx="8" ry="4" fill={CARD_COLOR} {...ink} strokeWidth={2.5} transform="rotate(-25 -2 -7)" />
+      <ellipse
+        cx="-2"
+        cy="-7"
+        rx="8"
+        ry="4"
+        fill={CARD_COLOR}
+        {...ink}
+        strokeWidth={2.5}
+        transform="rotate(-25 -2 -7)"
+      />
     </g>
   );
 }
@@ -54,13 +63,7 @@ function MaggotSwarm() {
       <Fly x={110} y={70} />
       <Fly x={250} y={48} />
       <Fly x={310} y={92} />
-      <path
-        d="M120 62 q10 6 4 14 M250 40 q-8 -4 -4 -12"
-        fill="none"
-        {...ink}
-        strokeWidth={2}
-        strokeDasharray="2 6"
-      />
+      <path d="M120 62 q10 6 4 14 M250 40 q-8 -4 -4 -12" fill="none" {...ink} strokeWidth={2} strokeDasharray="2 6" />
       <path d="M20 218 H380" fill="none" {...ink} strokeWidth={3} strokeDasharray="2 10" />
     </svg>
   );
@@ -68,7 +71,16 @@ function MaggotSwarm() {
 
 /** Ten stalks fanned over the top of the orb: [angle in degrees from straight up, length]. */
 const stalks: [number, number][] = [
-  [-80, 62], [-62, 78], [-44, 58], [-26, 80], [-9, 60], [9, 74], [26, 58], [44, 80], [62, 62], [80, 72],
+  [-80, 62],
+  [-62, 78],
+  [-44, 58],
+  [-26, 80],
+  [-9, 60],
+  [9, 74],
+  [26, 58],
+  [44, 80],
+  [62, 62],
+  [80, 72],
 ];
 
 function EyeTyrant() {
@@ -77,7 +89,11 @@ function EyeTyrant() {
   const r = 66;
 
   return (
-    <svg viewBox="0 0 400 240" role="img" aria-label="Drawing of a floating orb with one large eye, teeth and eye-stalks">
+    <svg
+      viewBox="0 0 400 240"
+      role="img"
+      aria-label="Drawing of a floating orb with one large eye, teeth and eye-stalks"
+    >
       {/* One eye stalk per angle and length. */}
       {stalks.map(([deg, len], index) => {
         const a = (deg * Math.PI) / 180;
@@ -104,12 +120,7 @@ function EyeTyrant() {
       <ellipse cx={centerX} cy={centerY - 14} rx="34" ry="24" fill={CARD_COLOR} {...ink} strokeWidth={4} />
       <circle cx={centerX} cy={centerY - 14} r="14" fill="currentColor" />
       <circle cx={centerX - 5} cy={centerY - 19} r="4" fill={CARD_COLOR} />
-      <path
-        d="M146 172 Q200 200 254 172"
-        fill="none"
-        {...ink}
-        strokeWidth={4}
-      />
+      <path d="M146 172 Q200 200 254 172" fill="none" {...ink} strokeWidth={4} />
       <path
         d="M156 176 l6 12 l6 -9 l8 14 l7 -12 l9 14 l9 -14 l7 12 l8 -14 l6 9 l6 -12"
         fill="none"

@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { MANUAL_AI_N, maintenance, nFactor, withQuality, withScaffolding } from "../../../src/charts/tech/top-rankings/maintenance";
+import {
+  MANUAL_AI_N,
+  maintenance,
+  nFactor,
+  withQuality,
+  withScaffolding,
+} from "../../../src/charts/tech/top-rankings/maintenance";
 
 const columns = [{ label: "Completed Lines" }, { label: "Familiarity" }, { label: "Computed Quality" }];
 
@@ -22,7 +28,11 @@ describe("maintenance", () => {
   });
 
   it("averages familiarity with computed quality, or uses whichever one a project has", () => {
-    const items = [{ name: "a", values: [10, 3, 90] }, { name: "b", values: [10, null, 90] }];
+    const items = [
+      { name: "a", values: [10, 3, 90] },
+      { name: "b", values: [10, null, 90] },
+    ];
+
     expect(maintenance({ id: "x", title: "x", columns, items })?.averageQuality).toBe(80);
   });
 
@@ -38,8 +48,14 @@ describe("maintenance", () => {
 
 describe("maintenance growth", () => {
   it("multiplies each project's lines by its xLines for the future n-factor", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
-        expect(result?.future.graded).toBeCloseTo(3, 6);
+    const result = maintenance({
+      id: "x",
+      title: "x",
+      columns: [...columns, { label: "xLines" }],
+      items: [{ name: "a", values: [9, 4, 75, 3] }],
+    });
+
+    expect(result?.future.graded).toBeCloseTo(3, 6);
   });
 });
 
@@ -47,7 +63,16 @@ describe("decommissioned projects", () => {
   const withDecom = [...columns, { label: "xLines" }, { label: "Decommissioned" }];
 
   it("count at 1/6 of their lines in all three n-factors", () => {
-    const result = maintenance({ id: "x", title: "x", columns: withDecom, items: [{ name: "a", values: [9, 4, 75, 3, 0] }, { name: "b", values: [60, 4, 75, 2, 1] }] });
+    const result = maintenance({
+      id: "x",
+      title: "x",
+      columns: withDecom,
+      items: [
+        { name: "a", values: [9, 4, 75, 3, 0] },
+        { name: "b", values: [60, 4, 75, 2, 1] },
+      ],
+    });
+
     // 9 + 60/6 = 19 lines now, 27 + 120/6 = 47 after growth.
     expect(result?.current.graded).toBeCloseTo(nFactor(19), 6);
     expect(result?.future.graded).toBeCloseTo(nFactor(47), 6);
@@ -57,14 +82,29 @@ describe("decommissioned projects", () => {
   });
 
   it("projected is 25% current and 75% future", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
-    expect(result?.projected.graded).toBeCloseTo((result?.current.graded ?? 0) * 0.25 + (result?.future.graded ?? 0) * 0.75, 6);
+    const result = maintenance({
+      id: "x",
+      title: "x",
+      columns: [...columns, { label: "xLines" }],
+      items: [{ name: "a", values: [9, 4, 75, 3] }],
+    });
+
+    expect(result?.projected.graded).toBeCloseTo(
+      (result?.current.graded ?? 0) * 0.25 + (result?.future.graded ?? 0) * 0.75,
+      6,
+    );
   });
 });
 
 describe("lines equivalents", () => {
   it("are the n-factor raised to itself, and with the 0.5n taken off first for manual", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
+    const result = maintenance({
+      id: "x",
+      title: "x",
+      columns: [...columns, { label: "xLines" }],
+      items: [{ name: "a", values: [9, 4, 75, 3] }],
+    });
+
     const n = result?.projected.graded ?? 0;
     expect(result?.projected.equivalentLines).toBeCloseTo(n ** n, 6);
     expect(result?.projected.manualLines).toBeCloseTo((n - MANUAL_AI_N) ** (n - MANUAL_AI_N), 6);
@@ -73,16 +113,35 @@ describe("lines equivalents", () => {
 
 describe("withQuality", () => {
   it("sets Quality to the average of familiarity and computed quality", () => {
-    const ranking = { id: "x", title: "x", columns: [{ label: "Familiarity" }, { label: "Computed Quality" }, { label: "Quality" }], items: [{ name: "a", values: [4, 91, 0] }] };
+    const ranking = {
+      id: "x",
+      title: "x",
+      columns: [{ label: "Familiarity" }, { label: "Computed Quality" }, { label: "Quality" }],
+      items: [{ name: "a", values: [4, 91, 0] }],
+    };
+
     expect(withQuality(ranking).items[0].values).toEqual([4, 91, 83]);
   });
 });
 
 describe("withScaffolding", () => {
   it("adds 256 to each project's Completed Lines and leaves other columns alone", () => {
-    const ranking = { id: "x", title: "x", columns: [{ label: "Completed Lines" }, { label: "Other" }], items: [{ name: "a", values: [100, 5] }, { name: "b", values: [null, 5] }] };
+    const ranking = {
+      id: "x",
+      title: "x",
+      columns: [{ label: "Completed Lines" }, { label: "Other" }],
+      items: [
+        { name: "a", values: [100, 5] },
+        { name: "b", values: [null, 5] },
+      ],
+    };
+
     const result = withScaffolding(ranking);
-    expect(result.items.map((item) => item.values)).toEqual([[356, 5], [null, 5]]);
+    expect(result.items.map((item) => item.values)).toEqual([
+      [356, 5],
+      [null, 5],
+    ]);
+
     expect(ranking.items[0].values[0]).toBe(100);
   });
 });

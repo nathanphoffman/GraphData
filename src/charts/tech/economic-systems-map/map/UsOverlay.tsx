@@ -1,5 +1,5 @@
-import { COLORS, OVERLAY_OPACITY, OVERLAY_STROKE } from "../model/style";
 import { xToPixels, yToPixels } from "../model/layout";
+import { COLORS, OVERLAY_OPACITY, OVERLAY_STROKE } from "../model/style";
 import type { EconomicSystemsData } from "../model/types";
 
 /** Layer 2: the U.S. history region. */

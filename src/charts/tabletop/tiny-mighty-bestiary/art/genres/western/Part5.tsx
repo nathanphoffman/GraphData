@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Cactus } from "./Part1";
 
 const card = CARD_COLOR;
@@ -8,7 +8,10 @@ export function CactusCrawler() {
     <Drawing label="Drawing of a walking barrel cactus with fishhook spines and an angry face">
       <Shape d="M130 190 C110 130 130 60 200 56 C270 60 290 130 270 190 Z" />
       <Line d="M170 62 C160 100 160 150 170 188 M200 56 V190 M230 62 C240 100 240 150 230 188" w={3} />
-      <Line d="M150 90 l-14 -4 q-6 4 -2 8 M140 130 l-16 2 q-6 6 0 8 M156 170 l-12 8 q-4 6 2 8 M250 90 l14 -4 q6 4 2 8 M260 130 l16 2 q6 6 0 8 M244 170 l12 8 q4 6 -2 8" w={3} />
+      <Line
+        d="M150 90 l-14 -4 q-6 4 -2 8 M140 130 l-16 2 q-6 6 0 8 M156 170 l-12 8 q-4 6 2 8 M250 90 l14 -4 q6 4 2 8 M260 130 l16 2 q6 6 0 8 M244 170 l12 8 q4 6 -2 8"
+        w={3}
+      />
       <Dot x={180} y={104} r={5} />
       <Dot x={220} y={104} r={5} />
       <Line d="M170 94 L192 100 M230 94 L208 100" w={4} />
@@ -74,7 +77,11 @@ export function SandstormRoc() {
       <Shape d="M200 84 L224 92 L202 98 Z" w={4} />
       <Dot x={194} y={84} r={3} />
       <Line d="M190 160 L176 186 M210 160 L224 186" w={4} />
-      <Line d="M10 150 q30 -14 60 0 t60 0 M270 150 q30 -14 60 0 t60 0 M30 176 q30 -14 60 0 t60 0 M230 180 q30 -14 60 0 t60 0 M60 204 q30 -14 60 0 t60 0 t60 0 t60 0" w={4} dash="10 8" />
+      <Line
+        d="M10 150 q30 -14 60 0 t60 0 M270 150 q30 -14 60 0 t60 0 M30 176 q30 -14 60 0 t60 0 M230 180 q30 -14 60 0 t60 0 M60 204 q30 -14 60 0 t60 0 t60 0 t60 0"
+        w={4}
+        dash="10 8"
+      />
       <Line d="M150 190 q50 20 100 0 M140 210 q60 20 120 0" w={3} dash="4 8" />
     </Drawing>
   );
@@ -95,7 +102,10 @@ export function BadlandsDevil() {
       <Line d="M236 130 L270 170" w={7} />
       <Solid d="M264 164 L290 176 L284 190 L260 180 Z" />
       <path d="M170 150 l-4 14 M230 150 l4 14" stroke={card} strokeWidth="2" strokeLinecap="round" />
-      <Line d="M60 200 q8 -12 16 0 q-8 12 -16 0 Z M320 210 q8 -12 16 0 q-8 12 -16 0 Z M90 224 q6 -10 12 0 M300 224 q6 -10 12 0" w={3} />
+      <Line
+        d="M60 200 q8 -12 16 0 q-8 12 -16 0 Z M320 210 q8 -12 16 0 q-8 12 -16 0 Z M90 224 q6 -10 12 0 M300 224 q6 -10 12 0"
+        w={3}
+      />
       <Line d="M40 120 l10 -4 M350 150 l10 4" w={3} />
       <Ground y={230} />
     </Drawing>
@@ -106,7 +116,10 @@ export function DustDevil() {
   return (
     <Drawing label="Drawing of a spinning whirl of sand with a face in the middle sweeping across the desert at dusk">
       <path d="M300 30 a22 22 0 1 0 22 22 a16 16 0 1 1 -22 -22 Z" fill="currentColor" />
-      <Line d="M150 30 C250 20 270 40 250 56 C200 70 130 50 160 80 M140 80 C250 76 270 94 240 112 C180 124 130 108 150 134 M150 134 C240 134 260 150 232 166 C190 176 150 164 170 186 M170 186 C230 190 240 204 220 214" w={5} />
+      <Line
+        d="M150 30 C250 20 270 40 250 56 C200 70 130 50 160 80 M140 80 C250 76 270 94 240 112 C180 124 130 108 150 134 M150 134 C240 134 260 150 232 166 C190 176 150 164 170 186 M170 186 C230 190 240 204 220 214"
+        w={5}
+      />
       <circle cx="190" cy="104" r="7" fill={card} {...ink} strokeWidth={3} />
       <circle cx="224" cy="104" r="7" fill={card} {...ink} strokeWidth={3} />
       <Dot x={190} y={104} r={3} />

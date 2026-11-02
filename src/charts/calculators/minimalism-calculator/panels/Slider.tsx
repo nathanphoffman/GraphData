@@ -218,7 +218,14 @@ export default function Slider({
       </div>
       {description && <p className="muted mini-description">{description}</p>}
 
-      <Dial id={sliderId} value={value} range={range} display={display} onFraction={(fraction) => onChange(valueAtFraction(fraction, range, step))} onKeyDown={handleKey} />
+      <Dial
+        id={sliderId}
+        value={value}
+        range={range}
+        display={display}
+        onFraction={(fraction) => onChange(valueAtFraction(fraction, range, step))}
+        onKeyDown={handleKey}
+      />
       <div className="mini-ticks">
         <span>{lowLabel}</span>
         <span>{high}</span>

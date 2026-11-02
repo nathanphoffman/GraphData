@@ -1,20 +1,20 @@
 import type { ComponentType } from "react";
-import LanguageOutlook from "./tech/language-outlook/LanguageOutlook";
-import EconomicSystemsMap from "./tech/economic-systems-map/EconomicSystemsMap";
-import NeuronIntelligence from "./science/neuron-intelligence/NeuronIntelligence";
-import RuleOfAuthorship from "./tabletop/rule-of-authorship/RuleOfAuthorship";
 import MaintainabilityCalculator from "./calculators/maintainability-calculator/MaintainabilityCalculator";
 import MinimalismCalculator from "./calculators/minimalism-calculator/MinimalismCalculator";
-import DndSales from "./tabletop/dnd-sales/DndSales";
-import TinyMightyBestiary from "./tabletop/tiny-mighty-bestiary/TinyMightyBestiary";
 import AllIntelligence from "./science/all-intelligence/AllIntelligence";
 import AstronomyTargets from "./science/astronomy-targets/AstronomyTargets";
+import NeuronIntelligence from "./science/neuron-intelligence/NeuronIntelligence";
 import WeightJourney from "./science/weight-journey/WeightJourney";
-import TopRankings from "./tech/top-rankings/TopRankings";
+import DndSales from "./tabletop/dnd-sales/DndSales";
+import RuleOfAuthorship from "./tabletop/rule-of-authorship/RuleOfAuthorship";
+import TinyMightyBestiary from "./tabletop/tiny-mighty-bestiary/TinyMightyBestiary";
 import BoardGames from "./tech/board-games/BoardGames";
-import ProjectPriority from "./tech/project-priority/ProjectPriority";
 import CodeQualityEntropy from "./tech/code-quality-entropy/CodeQualityEntropy";
+import EconomicSystemsMap from "./tech/economic-systems-map/EconomicSystemsMap";
+import LanguageOutlook from "./tech/language-outlook/LanguageOutlook";
+import ProjectPriority from "./tech/project-priority/ProjectPriority";
 import RalphLoops from "./tech/ralph-loops/RalphLoops";
+import TopRankings from "./tech/top-rankings/TopRankings";
 
 /** Home page sections, in display order. */
 const SCIENCE_CATEGORY = "Science";

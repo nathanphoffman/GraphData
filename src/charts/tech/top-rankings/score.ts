@@ -85,7 +85,13 @@ export interface GradeCurve {
   middleWidth: number;
 }
 
-export const DEFAULT_GRADE_CURVE: GradeCurve = { steepness: 5.4, bottomBend: 1.75, middleLift: 9, middleAt: 0.42, middleWidth: 0.16 };
+export const DEFAULT_GRADE_CURVE: GradeCurve = {
+  steepness: 5.4,
+  bottomBend: 1.75,
+  middleLift: 9,
+  middleAt: 0.42,
+  middleWidth: 0.16,
+};
 
 const clamp = (rating: number) => Math.min(HIGHEST_RATING, Math.max(LOWEST_RATING, rating));
 
@@ -95,12 +101,20 @@ function applyCurve(curve: Curve, value: number): number {
     case "peak": {
       if (value > curve.at) {
         if (curve.kneeAt === undefined || curve.kneeRating === undefined) {
-          return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.at)) / (curve.to - curve.at));
+          return clamp(
+            HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.at)) / (curve.to - curve.at),
+          );
         }
 
-        if (value <= curve.kneeAt) return clamp(HIGHEST_RATING - ((HIGHEST_RATING - curve.kneeRating) * (value - curve.at)) / (curve.kneeAt - curve.at));
+        if (value <= curve.kneeAt)
 
-        return clamp(curve.kneeRating - ((curve.kneeRating - LOWEST_RATING) * (value - curve.kneeAt)) / (curve.to - curve.kneeAt));
+          return clamp(
+            HIGHEST_RATING - ((HIGHEST_RATING - curve.kneeRating) * (value - curve.at)) / (curve.kneeAt - curve.at),
+          );
+
+        return clamp(
+          curve.kneeRating - ((curve.kneeRating - LOWEST_RATING) * (value - curve.kneeAt)) / (curve.to - curve.kneeAt),
+        );
       }
 
       const distance = (value - curve.from) / (curve.at - curve.from);
@@ -153,7 +167,9 @@ export function score(columns: Column[], item: Item): number {
   return columns.reduce((total, column, index) => {
     const rating = item.values[index];
 
-    return column.weight === undefined || !isNumber(rating) ? total : total + effectiveRating(column, rating) ** 2 * column.weight;
+    return column.weight === undefined || !isNumber(rating)
+      ? total
+      : total + effectiveRating(column, rating) ** 2 * column.weight;
   }, 0);
 }
 
@@ -170,7 +186,8 @@ export const maxScore = (columns: Column[]) => scoreOfAll(columns, HIGHEST_RATIN
 export const minScore = (columns: Column[]) => scoreOfAll(columns, LOWEST_RATING);
 
 /** The points added to the grade at this share: a bump centred on the middle. */
-const middleLift = (share: number, curve: GradeCurve) => curve.middleLift * Math.exp(-(((share - curve.middleAt) / curve.middleWidth) ** 2) / 2);
+const middleLift = (share: number, curve: GradeCurve) =>
+  curve.middleLift * Math.exp(-(((share - curve.middleAt) / curve.middleWidth) ** 2) / 2);
 
 /** Grade out of 100 for a score, on an exponential curve: 0 for the lowest possible score and 100 for the best. */
 export function grade(scoreValue: number, columns: Column[], shape: Partial<GradeCurve> = {}): number {
@@ -181,8 +198,11 @@ export function grade(scoreValue: number, columns: Column[], shape: Partial<Grad
   const curveShape = { ...DEFAULT_GRADE_CURVE, ...shape };
   const share = Math.max(0, (scoreValue - low) / (high - low));
 
-  const curve = (MAX_GRADE * (1 - Math.exp(-curveShape.steepness * share ** curveShape.bottomBend))) / (1 - Math.exp(-curveShape.steepness));
-  const lift = middleLift(share, curveShape) - (1 - share) * middleLift(0, curveShape) - share * middleLift(1, curveShape);
+  const curve =
+    (MAX_GRADE * (1 - Math.exp(-curveShape.steepness * share ** curveShape.bottomBend))) /
+    (1 - Math.exp(-curveShape.steepness));
+  const lift =
+    middleLift(share, curveShape) - (1 - share) * middleLift(0, curveShape) - share * middleLift(1, curveShape);
 
   return Math.min(MAX_GRADE, curve + lift);
 }
@@ -206,8 +226,20 @@ export function fractionBetween(value: number, lowest: number, high: number): nu
 }
 
 const LETTER_GRADES: [number, string][] = [
-  [97, "A+"], [93, "A"], [90, "A-"], [87, "B+"], [83, "B"], [80, "B-"], [77, "C+"], [73, "C"], [70, "C-"], [67, "D+"], [63, "D"], [60, "D-"],
+  [97, "A+"],
+  [93, "A"],
+  [90, "A-"],
+  [87, "B+"],
+  [83, "B"],
+  [80, "B-"],
+  [77, "C+"],
+  [73, "C"],
+  [70, "C-"],
+  [67, "D+"],
+  [63, "D"],
+  [60, "D-"],
 ];
 
 /** The usual school letter for a grade out of 100: A at 93, B at 83, and so on down to F under 60. */
-export const letterGrade = (gradeValue: number): string => LETTER_GRADES.find(([minimum]) => Math.round(gradeValue) >= minimum)?.[1] ?? "F";
+export const letterGrade = (gradeValue: number): string =>
+  LETTER_GRADES.find(([minimum]) => Math.round(gradeValue) >= minimum)?.[1] ?? "F";

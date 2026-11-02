@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -10,7 +10,17 @@ export function ScrapperDroneHive() {
       <Dot x={200} y={114} r={5} />
       <Line d="M150 90 L120 60 M250 90 L280 60 M120 60 H100 M280 60 H300" w={5} />
       {/* Repeat the shape at each listed position. */}
-      {[[70, 40], [330, 40], [60, 120], [340, 120], [90, 190], [310, 190], [200, 190], [150, 50], [260, 50]].map(([x, y], index) => (
+      {[
+        [70, 40],
+        [330, 40],
+        [60, 120],
+        [340, 120],
+        [90, 190],
+        [310, 190],
+        [200, 190],
+        [150, 50],
+        [260, 50],
+      ].map(([x, y], index) => (
         <g key={index} transform={`translate(${x} ${y})`}>
           <Shape d="M-12 -6 H12 V8 H-12 Z" w={3} />
           <Line d="M-16 -10 H-6 M6 -10 H16" w={3} />

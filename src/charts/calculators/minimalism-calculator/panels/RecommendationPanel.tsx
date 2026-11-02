@@ -1,5 +1,5 @@
-import { PERCENT } from "../logic/constants";
 import { arrowPosition, recommendedCount as countFor } from "../logic/calculate";
+import { PERCENT } from "../logic/constants";
 
 const LEVELS = [
   {
@@ -51,7 +51,12 @@ export default function RecommendationPanel({ owned, needed }: Props) {
         <div className="mini-arrow" title={`You own ${owned}`} style={{ left: `${arrowPct}%` }} />
         <div
           className="mini-arrow-label"
-          style={arrowPct <= LABEL_FLIPS_AT ? { left: `calc(${arrowPct}% + 14px)` } : { right: `calc(${PERCENT - arrowPct}% + 14px)` }}
+          style={
+            arrowPct <= LABEL_FLIPS_AT
+              ? { left: `calc(${arrowPct}% + 14px)` }
+              : { right: `calc(${PERCENT - arrowPct}% + 14px)` }
+          }
+
         >
           <strong>You own {owned}</strong> <strong style={{ color: diffColor }}>({diffText})</strong>
         </div>

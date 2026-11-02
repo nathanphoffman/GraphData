@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { arrowPosition, averageUses, recommended, recommendedCount } from "../../../src/charts/calculators/minimalism-calculator/logic/calculate";
+import {
+  arrowPosition,
+  averageUses,
+  recommended,
+  recommendedCount,
+} from "../../../src/charts/calculators/minimalism-calculator/logic/calculate";
 
 describe("recommended", () => {
   it("scales yearly use by your share", () => {

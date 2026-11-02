@@ -3,11 +3,7 @@
     "id": "giant-rat",
     "name": "Giant Rat",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "scifi",
-      "post-apocalypse"
-    ],
+    "themes": ["fantasy", "scifi", "post-apocalypse"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
@@ -26,21 +22,13 @@
     ],
     "powers": [],
     "tactics": "Comes in packs. Use 1 rat per player for an easy fight.",
-    "aliases": [
-      "rat",
-      "dire rat",
-      "vermin",
-      "swarm"
-    ]
+    "aliases": ["rat", "dire rat", "vermin", "swarm"]
   },
   {
     "id": "giant-spider",
     "name": "Giant Spider",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "scifi"
-    ],
+    "themes": ["fantasy", "scifi"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -67,32 +55,17 @@
       }
     ],
     "tactics": "Drops from the ceiling. Saves its venom for a player in light armor.",
-    "aliases": [
-      "drider",
-      "phase spider",
-      "arachnid"
-    ]
+    "aliases": ["drider", "phase spider", "arachnid"]
   },
   {
     "id": "blink-cat",
     "name": "Blink Cat",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "scifi",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "scifi", "science-fantasy", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "displacer beast",
-      "displacer",
-      "panther",
-      "big cat",
-      "illusion"
-    ],
+    "aliases": ["displacer beast", "displacer", "panther", "big cat", "illusion"],
     "description": "A six-legged black cat that always seems to be standing a step to the left of where it actually is.",
     "attack": "Tentacle lash",
     "skills": [
@@ -117,19 +90,11 @@
     "id": "cave-sucker",
     "name": "Cave Sucker",
     "type": "beast",
-    "themes": [
-      "space-wars",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "science-fantasy", "space-jammer"],
     "tone": 2,
     "tier": 0.25,
     "flying": true,
-    "aliases": [
-      "space bat",
-      "bat",
-      "parasite"
-    ],
+    "aliases": ["space bat", "bat", "parasite"],
     "description": "A leathery, bat-winged leech that eats power cables and ship hulls.",
     "attack": "Drain bite",
     "skills": [
@@ -145,19 +110,11 @@
     "id": "frost-strider",
     "name": "Frost Strider",
     "type": "beast",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "snow lizard",
-      "ice lizard",
-      "mount",
-      "steed"
-    ],
+    "aliases": ["snow lizard", "ice lizard", "mount", "steed"],
     "description": "A shaggy, two-legged snow lizard ridden across the ice fields.",
     "attack": "Kick",
     "skills": [
@@ -178,19 +135,11 @@
     "id": "snow-mauler",
     "name": "Snow Mauler",
     "type": "beast",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "yeti",
-      "abominable snowman",
-      "ice monster",
-      "snow beast"
-    ],
+    "aliases": ["yeti", "abominable snowman", "ice monster", "snow beast"],
     "description": "A white-furred ice-field hunter that hauls prey back to a cave for later.",
     "attack": "Claw swipe",
     "skills": [
@@ -215,21 +164,11 @@
     "id": "cosmic-whale",
     "name": "Cosmic Whale",
     "type": "beast",
-    "themes": [
-      "space-wars",
-      "scifi",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "scifi", "science-fantasy", "space-jammer"],
     "tone": 1,
     "tier": 4,
     "flying": true,
-    "aliases": [
-      "space whale",
-      "star whale",
-      "spaceship whale",
-      "space orca"
-    ],
+    "aliases": ["space whale", "star whale", "spaceship whale", "space orca"],
     "description": "A starlit, ship-sized whale that sings across the void and hauls tiny cargo ships along in its slipstream.",
     "attack": "Tail slap",
     "skills": [
@@ -253,20 +192,11 @@
     "id": "rat-king",
     "name": "Rat King",
     "type": "beast",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 5,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "plague",
-      "vermin",
-      "rat lord",
-      "rat",
-      "swarm",
-      "pied piper"
-    ],
+    "aliases": ["plague", "vermin", "rat lord", "rat", "swarm", "pied piper"],
     "description": "A knot of fused rats with one hundred eyes and one terrible, whispery voice.",
     "attack": "Bite",
     "skills": [
@@ -295,23 +225,11 @@
     "id": "hive-stalker",
     "name": "Hive Stalker",
     "type": "beast",
-    "themes": [
-      "scifi",
-      "science-fantasy",
-      "space-hammer"
-    ],
+    "themes": ["scifi", "science-fantasy", "space-hammer"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "alien",
-      "bug",
-      "acid blood",
-      "queen",
-      "lictor",
-      "tyranid",
-      "hive fleet"
-    ],
+    "aliases": ["alien", "bug", "acid blood", "queen", "lictor", "tyranid", "hive fleet"],
     "description": "A sleek black insectoid hunter with a second set of jaws, acid for blood and an unblinking, eyeless face.",
     "attack": "Tail stab",
     "skills": [
@@ -343,10 +261,7 @@
     "id": "swarmling",
     "name": "Swarmling",
     "type": "beast",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 0.25,
     "flying": false,
@@ -382,10 +297,7 @@
     "id": "chitin-crusher",
     "name": "Chitin Crusher",
     "type": "beast",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -423,20 +335,11 @@
     "id": "dust-rattler",
     "name": "Dust Rattler",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "rattlesnake",
-      "snake",
-      "viper",
-      "rattler",
-      "sidewinder",
-      "serpent"
-    ],
+    "aliases": ["rattlesnake", "snake", "viper", "rattler", "sidewinder", "serpent"],
     "description": "A cart-sized rattlesnake that makes a sound like gravel in a tin can.",
     "attack": "Bite",
     "skills": [
@@ -465,21 +368,11 @@
     "id": "horned-jackrabbit",
     "name": "Horned Jackrabbit",
     "type": "beast",
-    "themes": [
-      "western",
-      "fantasy"
-    ],
+    "themes": ["western", "fantasy"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "jackalope",
-      "antelope hare",
-      "tall tale",
-      "jackrabbit",
-      "rabbit",
-      "hare"
-    ],
+    "aliases": ["jackalope", "antelope hare", "tall tale", "jackrabbit", "rabbit", "hare"],
     "description": "A rabbit with antlers that mimics human voices and starts bar fights for sport.",
     "attack": "Antler jab",
     "skills": [
@@ -500,21 +393,11 @@
     "id": "thunder-herd",
     "name": "Thunder Herd",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "buffalo",
-      "bison",
-      "stampede",
-      "cattle",
-      "herd",
-      "cattle drive",
-      "longhorn"
-    ],
+    "aliases": ["buffalo", "bison", "stampede", "cattle", "herd", "cattle drive", "longhorn"],
     "description": "A thousand-ton wave of bison with a dust cloud that can be seen for miles.",
     "attack": "Trample",
     "skills": [
@@ -541,21 +424,11 @@
     "id": "neon-gutter-cat",
     "name": "Neon Gutter Cat",
     "type": "beast",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "cyber cat",
-      "stray cat",
-      "street cat",
-      "alley cat",
-      "neko",
-      "cat"
-    ],
+    "aliases": ["cyber cat", "stray cat", "street cat", "alley cat", "neko", "cat"],
     "description": "A scruffy alley cat with glowing cyber-eyes, a robotic tail and a talent for knocking over trash cans.",
     "attack": "Scratch",
     "skills": [
@@ -576,22 +449,11 @@
     "id": "sewer-gator",
     "name": "Sewer Gator",
     "type": "beast",
-    "themes": [
-      "cyberpunk",
-      "scifi",
-      "post-apocalypse"
-    ],
+    "themes": ["cyberpunk", "scifi", "post-apocalypse"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "alligator",
-      "mutant",
-      "sewer croc",
-      "crocodile",
-      "urban legend",
-      "sewer monster"
-    ],
+    "aliases": ["alligator", "mutant", "sewer croc", "crocodile", "urban legend", "sewer monster"],
     "description": "A pale, blind, six-meter alligator that grew fat on dumped lab waste and the occasional squatter.",
     "attack": "Bite",
     "skills": [
@@ -616,22 +478,11 @@
     "id": "chomp-ball",
     "name": "Chomp Ball",
     "type": "beast",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "ball",
-      "chomper",
-      "pet",
-      "bouncer",
-      "squig",
-      "ork squig",
-      "ork"
-    ],
+    "aliases": ["ball", "chomper", "pet", "bouncer", "squig", "ork squig", "ork"],
     "description": "A red, toothy, bouncing ball of meat that eats anything and farts a lot.",
     "attack": "Chomp",
     "skills": [
@@ -652,21 +503,11 @@
     "id": "dream-cat",
     "name": "Dream Cat",
     "type": "beast",
-    "themes": [
-      "occult-noir",
-      "fantasy"
-    ],
+    "themes": ["occult-noir", "fantasy"],
     "tone": 2,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "cat of ulthar",
-      "dreamland cat",
-      "cat",
-      "kitten",
-      "dream walker",
-      "star cat"
-    ],
+    "aliases": ["cat of ulthar", "dreamland cat", "cat", "kitten", "dream walker", "star cat"],
     "description": "A sleek, star-eyed cat that walks through dreams and keeps an eye on anyone who tries to hurt cats.",
     "attack": "Scratch",
     "skills": [
@@ -686,21 +527,11 @@
     "id": "void-hound",
     "name": "Void Hound",
     "type": "beast",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "hound of tindalos",
-      "tindalos",
-      "hellhound",
-      "dog",
-      "angle hound",
-      "time hound",
-      "cosmic dog"
-    ],
+    "aliases": ["hound of tindalos", "tindalos", "hellhound", "dog", "angle hound", "time hound", "cosmic dog"],
     "description": "A rail-thin, blue-black hound that steps out of the corners of rooms and walls and never stops hunting.",
     "attack": "Bite",
     "skills": [
@@ -727,23 +558,11 @@
     "id": "moss-tortoise",
     "name": "Moss Tortoise",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "science-fantasy", "space-jammer"],
     "tone": 2,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "giant tortoise",
-      "turtle",
-      "giant turtle",
-      "world turtle",
-      "ancient turtle",
-      "mossy rock",
-      "shell"
-    ],
+    "aliases": ["giant tortoise", "turtle", "giant turtle", "world turtle", "ancient turtle", "mossy rock", "shell"],
     "description": "A hill-sized, mossy tortoise with a village on its back and a very, very slow temper.",
     "attack": "Shell bump",
     "skills": [
@@ -764,22 +583,11 @@
     "id": "carrion-crow",
     "name": "Carrion Crow",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "western"
-    ],
+    "themes": ["fantasy", "western"],
     "tone": 5,
     "tier": 0.25,
     "flying": true,
-    "aliases": [
-      "raven",
-      "crow",
-      "carrion",
-      "bird",
-      "scavenger",
-      "vulture",
-      "omen"
-    ],
+    "aliases": ["raven", "crow", "carrion", "bird", "scavenger", "vulture", "omen"],
     "description": "A scraggly black crow with a cold, intelligent eye that watches the battlefield and always seems to know who's next.",
     "attack": "Peck",
     "skills": [
@@ -800,25 +608,11 @@
     "id": "abyssal-leviathan",
     "name": "Abyssal Leviathan",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "science-fantasy",
-      "occult-noir",
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "science-fantasy", "occult-noir", "age-of-sail", "space-jammer"],
     "tone": 4,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "leviathan",
-      "sea serpent",
-      "kraken",
-      "sea monster",
-      "deep serpent",
-      "giant squid",
-      "ocean beast"
-    ],
+    "aliases": ["leviathan", "sea serpent", "kraken", "sea monster", "deep serpent", "giant squid", "ocean beast"],
     "description": "A hundred-meter, barnacle-crusted sea serpent that rises from the dark and swallows ships whole.",
     "attack": "Bite & coils",
     "skills": [
@@ -850,21 +644,11 @@
     "id": "mountain-mammoth",
     "name": "Mountain Mammoth",
     "type": "beast",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "mammoth",
-      "woolly mammoth",
-      "giant elephant",
-      "tusker",
-      "elephant",
-      "ice age beast",
-      "tusked beast"
-    ],
+    "aliases": ["mammoth", "woolly mammoth", "giant elephant", "tusker", "elephant", "ice age beast", "tusked beast"],
     "description": "A shaggy, house-high mammoth with tusks like fallen trees and a stampede that shakes the glacier.",
     "attack": "Tusk gore",
     "skills": [
@@ -889,21 +673,11 @@
     "id": "parrot-lookout",
     "name": "Parrot Lookout",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 1,
     "tier": 0.25,
     "flying": true,
-    "aliases": [
-      "parrot",
-      "pirate parrot",
-      "macaw",
-      "bird",
-      "squawker",
-      "shoulder bird"
-    ],
+    "aliases": ["parrot", "pirate parrot", "macaw", "bird", "squawker", "shoulder bird"],
     "description": "A colorful, foul-mouthed parrot who repeats secrets and spots every enemy ship before the captain does.",
     "attack": "Beak nip",
     "skills": [
@@ -924,21 +698,11 @@
     "id": "pirate-crab",
     "name": "Pirate Crab",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "crab",
-      "hermit crab",
-      "sea crab",
-      "beach crab",
-      "shell",
-      "pirate hermit"
-    ],
+    "aliases": ["crab", "hermit crab", "sea crab", "beach crab", "shell", "pirate hermit"],
     "description": "A big hermit crab wearing a tricorn hat, a pirate-flag shell and a deep resentment of seagulls.",
     "attack": "Claw snap",
     "skills": [
@@ -959,22 +723,11 @@
     "id": "reef-shark",
     "name": "Reef Shark",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "shark",
-      "great white",
-      "jaws",
-      "hammerhead",
-      "sea hunter",
-      "man-eater",
-      "predator fish"
-    ],
+    "aliases": ["shark", "great white", "jaws", "hammerhead", "sea hunter", "man-eater", "predator fish"],
     "description": "A six-foot, grey-finned shark that smells blood from a mile away and has no manners.",
     "attack": "Bite",
     "skills": [
@@ -995,20 +748,11 @@
     "id": "glow-rat",
     "name": "Glow Rat",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "radioactive rat",
-      "mutant rat",
-      "glowing rat",
-      "rad rat",
-      "wasteland rat",
-      "giant rat"
-    ],
+    "aliases": ["radioactive rat", "mutant rat", "glowing rat", "rad rat", "wasteland rat", "giant rat"],
     "description": "A cat-sized rat that glows green in the dark and does not care about your lunch.",
     "attack": "Bite",
     "skills": [
@@ -1029,21 +773,11 @@
     "id": "atomic-roach",
     "name": "Atomic Roach",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "cockroach",
-      "roach",
-      "radiroach",
-      "bug",
-      "giant cockroach",
-      "wasteland bug",
-      "survivor"
-    ],
+    "aliases": ["cockroach", "roach", "radiroach", "bug", "giant cockroach", "wasteland bug", "survivor"],
     "description": "A dog-sized cockroach that survived the end of the world and is mildly annoyed by it.",
     "attack": "Mandibles",
     "skills": [
@@ -1063,21 +797,11 @@
     "id": "rad-hound",
     "name": "Rad Hound",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "dog",
-      "wild dog",
-      "mutant dog",
-      "hound",
-      "canine",
-      "wasteland dog",
-      "feral dog"
-    ],
+    "aliases": ["dog", "wild dog", "mutant dog", "hound", "canine", "wasteland dog", "feral dog"],
     "description": "A mangy, two-headed wild dog with a green-glowing eye and a limp.",
     "attack": "Bite",
     "skills": [
@@ -1098,20 +822,11 @@
     "id": "soot-pigeon",
     "name": "Soot Pigeon",
     "type": "beast",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 1,
     "tier": 0.25,
     "flying": true,
-    "aliases": [
-      "pigeon",
-      "city pigeon",
-      "messenger bird",
-      "street bird",
-      "rooftop bird",
-      "sooty bird"
-    ],
+    "aliases": ["pigeon", "city pigeon", "messenger bird", "street bird", "rooftop bird", "sooty bird"],
     "description": "A grubby, sooty pigeon with a tiny brass message tube strapped to one leg and a very big attitude.",
     "attack": "Peck",
     "skills": [
@@ -1132,21 +847,11 @@
     "id": "iron-draft-horse",
     "name": "Iron Draft Horse",
     "type": "beast",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "horse",
-      "carriage horse",
-      "draft horse",
-      "workhorse",
-      "cart horse",
-      "steed",
-      "brass horse"
-    ],
+    "aliases": ["horse", "carriage horse", "draft horse", "workhorse", "cart horse", "steed", "brass horse"],
     "description": "A massive, calm draft horse with iron-shod hooves and a brass-plated leg brace, hauling a steam carriage.",
     "attack": "Kick",
     "skills": [
@@ -1170,22 +875,11 @@
     "id": "smog-hound",
     "name": "Smog Hound",
     "type": "beast",
-    "themes": [
-      "steampunk",
-      "fantasy"
-    ],
+    "themes": ["steampunk", "fantasy"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "dog",
-      "black dog",
-      "smog dog",
-      "foggy hound",
-      "night dog",
-      "phantom hound",
-      "street hound"
-    ],
+    "aliases": ["dog", "black dog", "smog dog", "foggy hound", "night dog", "phantom hound", "street hound"],
     "description": "A black, sooty, ember-eyed hound that prowls the fogged streets of a coal town.",
     "attack": "Bite",
     "skills": [
@@ -1207,18 +901,11 @@
     "id": "chrome-rat-king",
     "name": "Chrome Rat King",
     "type": "beast",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 3,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "rat king",
-      "giant rat",
-      "sewer king",
-      "cyber rat"
-    ],
+    "aliases": ["rat king", "giant rat", "sewer king", "cyber rat"],
     "description": "A knot of cybernetic rats wired into one scheming sewer lord.",
     "attack": "Gnaw Swarm",
     "skills": [
@@ -1249,19 +936,11 @@
     "id": "library-silverfish",
     "name": "Library Silverfish",
     "type": "beast",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "silverfish",
-      "bookworm",
-      "book bug",
-      "paper bug",
-      "insect"
-    ],
+    "aliases": ["silverfish", "bookworm", "book bug", "paper bug", "insect"],
     "description": "A silver bug the size of a cat that nibbles forbidden books and burps whispers.",
     "attack": "Nibble",
     "skills": [
@@ -1285,19 +964,11 @@
     "id": "thunder-ram",
     "name": "Thunder Ram",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "western"
-    ],
+    "themes": ["fantasy", "western"],
     "tone": 2,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "ram",
-      "goat",
-      "bighorn",
-      "storm goat"
-    ],
+    "aliases": ["ram", "goat", "bighorn", "storm goat"],
     "description": "A broad mountain ram whose horns crack like lightning.",
     "attack": "Headbutt",
     "skills": [
@@ -1328,19 +999,11 @@
     "id": "sludge-pup",
     "name": "Sludge Pup",
     "type": "beast",
-    "themes": [
-      "post-apocalypse",
-      "scifi"
-    ],
+    "themes": ["post-apocalypse", "scifi"],
     "tone": 2,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "slime",
-      "ooze pup",
-      "mutant",
-      "puppy"
-    ],
+    "aliases": ["slime", "ooze pup", "mutant", "puppy"],
     "description": "A cheerful ooze shaped vaguely like a puppy that loves to be petted.",
     "attack": "Slurp",
     "skills": [
@@ -1364,19 +1027,11 @@
     "id": "crow-informant",
     "name": "Crow Informant",
     "type": "beast",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 0.5,
     "flying": true,
-    "aliases": [
-      "raven",
-      "crow",
-      "spy bird",
-      "familiar",
-      "black bird"
-    ],
+    "aliases": ["raven", "crow", "spy bird", "familiar", "black bird"],
     "description": "A smart crow in a tiny hat that trades gossip for shiny buttons.",
     "attack": "Peck",
     "skills": [
@@ -1400,11 +1055,7 @@
     "id": "nebula-stalker",
     "name": "Nebula Stalker",
     "type": "beast",
-    "themes": [
-      "space-wars",
-      "scifi",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "scifi", "space-jammer"],
     "tone": 4,
     "tier": 5,
     "flying": true,
@@ -1429,20 +1080,13 @@
       }
     ],
     "tactics": "Rushes the loudest engine first. Retreats to a nebula if badly hurt.",
-    "aliases": [
-      "space whale",
-      "void beast",
-      "space monster",
-      "kraken"
-    ]
+    "aliases": ["space whale", "void beast", "space monster", "kraken"]
   },
   {
     "id": "dust-raptor",
     "name": "Dust Raptor",
     "type": "beast",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -1460,20 +1104,13 @@
     ],
     "powers": [],
     "tactics": "Circles the group, then dives at the one who falls behind.",
-    "aliases": [
-      "raptor",
-      "desert hunter",
-      "space bird",
-      "lizard"
-    ]
+    "aliases": ["raptor", "desert hunter", "space bird", "lizard"]
   },
   {
     "id": "hive-hound",
     "name": "Hive Hound",
     "type": "beast",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -1491,22 +1128,13 @@
     ],
     "powers": [],
     "tactics": "Hunts by smell. Goes for the wounded first.",
-    "aliases": [
-      "tyranid",
-      "xenos hound",
-      "alien dog",
-      "bug",
-      "hive fleet",
-      "ravener"
-    ]
+    "aliases": ["tyranid", "xenos hound", "alien dog", "bug", "hive fleet", "ravener"]
   },
   {
     "id": "bulkhead-ravager",
     "name": "Bulkhead Ravager",
     "type": "beast",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 5,
     "tier": 4,
     "flying": false,
@@ -1531,23 +1159,13 @@
       }
     ],
     "tactics": "Rips down a door and charges the biggest player. Ignores minor wounds.",
-    "aliases": [
-      "bio-titan",
-      "xenos beast",
-      "hive tyrant",
-      "monster",
-      "tyranid",
-      "carnifex",
-      "hive fleet"
-    ]
+    "aliases": ["bio-titan", "xenos beast", "hive tyrant", "monster", "tyranid", "carnifex", "hive fleet"]
   },
   {
     "id": "cyber-hound",
     "name": "Cyber Hound",
     "type": "beast",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -1565,20 +1183,13 @@
     ],
     "powers": [],
     "tactics": "Chases whoever smells wrong. Leashed to a security console.",
-    "aliases": [
-      "guard dog",
-      "k9",
-      "robo dog",
-      "hound"
-    ]
+    "aliases": ["guard dog", "k9", "robo dog", "hound"]
   },
   {
     "id": "chrome-panther-prime",
     "name": "Chrome Panther Prime",
     "type": "beast",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -1603,20 +1214,13 @@
       }
     ],
     "tactics": "Cloaked until the first strike. Picks off a lone player, then retreats.",
-    "aliases": [
-      "panther",
-      "cyber cat",
-      "apex predator",
-      "tiger"
-    ]
+    "aliases": ["panther", "cyber cat", "apex predator", "tiger"]
   },
   {
     "id": "great-white-buffalo",
     "name": "Great White Buffalo",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 5,
     "flying": false,
@@ -1641,20 +1245,13 @@
       }
     ],
     "tactics": "Charges through the camp. Stops if someone shows it respect.",
-    "aliases": [
-      "bison",
-      "buffalo",
-      "spirit beast",
-      "plains giant"
-    ]
+    "aliases": ["bison", "buffalo", "spirit beast", "plains giant"]
   },
   {
     "id": "graveyard-hound",
     "name": "Graveyard Hound",
     "type": "beast",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -1672,20 +1269,13 @@
     ],
     "powers": [],
     "tactics": "Stalks the group at a distance. Bites the one walking behind.",
-    "aliases": [
-      "black dog",
-      "dog",
-      "grim",
-      "hound"
-    ]
+    "aliases": ["black dog", "dog", "grim", "hound"]
   },
   {
     "id": "hellhound-stalker",
     "name": "Hellhound Stalker",
     "type": "beast",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 5,
     "tier": 3,
     "flying": false,
@@ -1710,21 +1300,13 @@
       }
     ],
     "tactics": "Ignores everyone except its mark. Backs off if it is doused with holy water.",
-    "aliases": [
-      "hellhound",
-      "demon dog",
-      "barghest",
-      "hound"
-    ]
+    "aliases": ["hellhound", "demon dog", "barghest", "hound"]
   },
   {
     "id": "hammerhead-terror",
     "name": "Hammerhead Terror",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -1742,21 +1324,13 @@
     ],
     "powers": [],
     "tactics": "Rams a dinghy first, then circles the survivors.",
-    "aliases": [
-      "shark",
-      "hammerhead",
-      "sea beast",
-      "predator"
-    ]
+    "aliases": ["shark", "hammerhead", "sea beast", "predator"]
   },
   {
     "id": "kraken-spawn",
     "name": "Kraken Spawn",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -1774,20 +1348,13 @@
     ],
     "powers": [],
     "tactics": "Grabs the rail and pulls. Retreats if its limbs are cut.",
-    "aliases": [
-      "giant squid",
-      "kraken",
-      "octopus",
-      "sea monster"
-    ]
+    "aliases": ["giant squid", "kraken", "octopus", "sea monster"]
   },
   {
     "id": "boiler-rhino",
     "name": "Boiler Rhino",
     "type": "beast",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -1805,21 +1372,13 @@
     ],
     "powers": [],
     "tactics": "Builds up steam, then charges in a straight line. Stuck if its horn hits a wall.",
-    "aliases": [
-      "rhino",
-      "steam beast",
-      "armored beast",
-      "cyborg animal"
-    ]
+    "aliases": ["rhino", "steam beast", "armored beast", "cyborg animal"]
   },
   {
     "id": "steam-drake",
     "name": "Steam Drake",
     "type": "beast",
-    "themes": [
-      "steampunk",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "space-jammer"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -1844,20 +1403,13 @@
       }
     ],
     "tactics": "Fills the room with steam, then dives at the one who cannot see.",
-    "aliases": [
-      "drake",
-      "wyvern",
-      "steam dragon",
-      "mechanical dragon"
-    ]
+    "aliases": ["drake", "wyvern", "steam dragon", "mechanical dragon"]
   },
   {
     "id": "rad-bear",
     "name": "Rad-Bear",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -1875,20 +1427,13 @@
     ],
     "powers": [],
     "tactics": "Charges the nearest player. Ignores minor wounds.",
-    "aliases": [
-      "bear",
-      "mutant bear",
-      "grizzly",
-      "mutant"
-    ]
+    "aliases": ["bear", "mutant bear", "grizzly", "mutant"]
   },
   {
     "id": "doom-hound-alpha",
     "name": "Doom Hound Alpha",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 5,
     "tier": 4,
     "flying": false,
@@ -1913,21 +1458,13 @@
       }
     ],
     "tactics": "Calls its pack with a howl. Goes for the throat of whoever hurt it.",
-    "aliases": [
-      "alpha",
-      "dire wolf",
-      "mutant wolf",
-      "pack leader"
-    ]
+    "aliases": ["alpha", "dire wolf", "mutant wolf", "pack leader"]
   },
   {
     "id": "prism-moth",
     "name": "Prism Moth",
     "type": "beast",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 2,
     "tier": 0.25,
     "flying": true,
@@ -1952,20 +1489,13 @@
       }
     ],
     "tactics": "Flutters around a lamp. Dazzles the first player who swats at it.",
-    "aliases": [
-      "moth",
-      "butterfly",
-      "star insect",
-      "fairy"
-    ]
+    "aliases": ["moth", "butterfly", "star insect", "fairy"]
   },
   {
     "id": "jackalope-gang",
     "name": "Jackalope Gang",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -1990,20 +1520,13 @@
       }
     ],
     "tactics": "Steals a hat and runs. Impossible to catch by foot.",
-    "aliases": [
-      "jackalope",
-      "rabbit",
-      "trickster",
-      "pest"
-    ]
+    "aliases": ["jackalope", "rabbit", "trickster", "pest"]
   },
   {
     "id": "bouncing-grub-pup",
     "name": "Bouncing Grub-Pup",
     "type": "beast",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 1,
     "tier": 1,
     "flying": false,
@@ -2021,23 +1544,13 @@
     ],
     "powers": [],
     "tactics": "Bounces off the walls. Distracted by shiny things.",
-    "aliases": [
-      "pup",
-      "bug",
-      "grub",
-      "pest",
-      "tyranid",
-      "ripper",
-      "hive fleet"
-    ]
+    "aliases": ["pup", "bug", "grub", "pest", "tyranid", "ripper", "hive fleet"]
   },
   {
     "id": "overdramatic-raven",
     "name": "Overdramatic Raven",
     "type": "beast",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 1,
     "tier": 0.25,
     "flying": true,
@@ -2055,21 +1568,13 @@
     ],
     "powers": [],
     "tactics": "Recites a doomy rhyme. Flies away if ignored.",
-    "aliases": [
-      "raven",
-      "crow",
-      "bird",
-      "omen"
-    ]
+    "aliases": ["raven", "crow", "bird", "omen"]
   },
   {
     "id": "drowned-pack",
     "name": "Drowned Pack",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 5,
     "tier": 2,
     "flying": false,
@@ -2087,20 +1592,13 @@
     ],
     "powers": [],
     "tactics": "Climbs over the rail in the dark. Retreats at dawn.",
-    "aliases": [
-      "ghost dogs",
-      "sea hounds",
-      "drowned dogs",
-      "pack"
-    ]
+    "aliases": ["ghost dogs", "sea hounds", "drowned dogs", "pack"]
   },
   {
     "id": "wasteland-vulture",
     "name": "Wasteland Vulture",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 0.5,
     "flying": true,
@@ -2118,20 +1616,13 @@
     ],
     "powers": [],
     "tactics": "Circles overhead. Swoops on the wounded.",
-    "aliases": [
-      "vulture",
-      "bird",
-      "scavenger",
-      "carrion bird"
-    ]
+    "aliases": ["vulture", "bird", "scavenger", "carrion bird"]
   },
   {
     "id": "prairie-hawk",
     "name": "Prairie Hawk",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 2,
     "tier": 0.5,
     "flying": true,
@@ -2149,21 +1640,13 @@
     ],
     "powers": [],
     "tactics": "Circles the camp. Steals meat from plates.",
-    "aliases": [
-      "hawk",
-      "bird",
-      "raptor",
-      "falcon"
-    ]
+    "aliases": ["hawk", "bird", "raptor", "falcon"]
   },
   {
     "id": "albatross-omen",
     "name": "Albatross Omen",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 0.5,
     "flying": true,
@@ -2181,20 +1664,13 @@
     ],
     "powers": [],
     "tactics": "Glides behind the ship. Curses a sailor if it is hurt.",
-    "aliases": [
-      "albatross",
-      "bird",
-      "omen",
-      "seabird"
-    ]
+    "aliases": ["albatross", "bird", "omen", "seabird"]
   },
   {
     "id": "barn-cat-terror",
     "name": "Barn Cat Terror",
     "type": "beast",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -2212,20 +1688,13 @@
     ],
     "powers": [],
     "tactics": "Bats at dangling items. Lands on a player's head.",
-    "aliases": [
-      "cat",
-      "tabby",
-      "mouser",
-      "pest"
-    ]
+    "aliases": ["cat", "tabby", "mouser", "pest"]
   },
   {
     "id": "plasma-panther",
     "name": "Plasma Panther",
     "type": "beast",
-    "themes": [
-      "scifi"
-    ],
+    "themes": ["scifi"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -2250,20 +1719,13 @@
       }
     ],
     "tactics": "Cloaked in the dark until the first strike. Tears out lights before attacking.",
-    "aliases": [
-      "panther",
-      "space cat",
-      "predator",
-      "alien cat"
-    ]
+    "aliases": ["panther", "space cat", "predator", "alien cat"]
   },
   {
     "id": "scout-lizard",
     "name": "Scout Lizard",
     "type": "beast",
-    "themes": [
-      "scifi"
-    ],
+    "themes": ["scifi"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -2281,21 +1743,13 @@
     ],
     "powers": [],
     "tactics": "Skitters and hisses. Calls its herd with a screech.",
-    "aliases": [
-      "lizard",
-      "reptile",
-      "alien beast",
-      "scout"
-    ]
+    "aliases": ["lizard", "reptile", "alien beast", "scout"]
   },
   {
     "id": "astral-stag",
     "name": "Astral Stag",
     "type": "beast",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -2320,21 +1774,13 @@
       }
     ],
     "tactics": "Walks slowly through the group and tests them with a glare. Charges anyone with malice.",
-    "aliases": [
-      "stag",
-      "star beast",
-      "guardian",
-      "spirit animal"
-    ]
+    "aliases": ["stag", "star beast", "guardian", "spirit animal"]
   },
   {
     "id": "void-krill-swarm",
     "name": "Void Krill Swarm",
     "type": "beast",
-    "themes": [
-      "space-wars",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "space-jammer"],
     "tone": 4,
     "tier": 3,
     "flying": true,
@@ -2359,20 +1805,13 @@
       }
     ],
     "tactics": "Surrounds the group. Targets any gap in a suit.",
-    "aliases": [
-      "swarm",
-      "space bugs",
-      "krill",
-      "plague"
-    ]
+    "aliases": ["swarm", "space bugs", "krill", "plague"]
   },
   {
     "id": "grot-hound-pack",
     "name": "Grot Hound Pack",
     "type": "beast",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 3,
     "tier": 2,
     "flying": true,
@@ -2390,24 +1829,13 @@
     ],
     "powers": [],
     "tactics": "Strikes in packs of three. Drops from above and retreats into the vents.",
-    "aliases": [
-      "hounds",
-      "xenos hounds",
-      "pack",
-      "bugs",
-      "kroot",
-      "kroot hound",
-      "tau",
-      "tau empire"
-    ]
+    "aliases": ["hounds", "xenos hounds", "pack", "bugs", "kroot", "kroot hound", "tau", "tau empire"]
   },
   {
     "id": "chaos-hydra",
     "name": "Chaos Hydra",
     "type": "beast",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 5,
     "tier": 6,
     "flying": false,
@@ -2432,23 +1860,13 @@
       }
     ],
     "tactics": "Grows a new head when one is cut. Burns whatever it cannot bite.",
-    "aliases": [
-      "hydra",
-      "daemon beast",
-      "chaos beast",
-      "multi-headed horror",
-      "chaos",
-      "daemon engine",
-      "chaos spawn"
-    ]
+    "aliases": ["hydra", "daemon beast", "chaos beast", "multi-headed horror", "chaos", "daemon engine", "chaos spawn"]
   },
   {
     "id": "back-alley-tiger",
     "name": "Back-Alley Tiger",
     "type": "beast",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -2466,20 +1884,13 @@
     ],
     "powers": [],
     "tactics": "Bounds across rooftops. Jumps at the player with the most expensive gear.",
-    "aliases": [
-      "tiger",
-      "cyber cat",
-      "big cat",
-      "pet"
-    ]
+    "aliases": ["tiger", "cyber cat", "big cat", "pet"]
   },
   {
     "id": "prairie-skyray",
     "name": "Prairie Skyray",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 2,
     "flying": true,
@@ -2497,20 +1908,13 @@
     ],
     "powers": [],
     "tactics": "Glides silently above the herd. Dives on a lone rider.",
-    "aliases": [
-      "manta",
-      "ray",
-      "sky ray",
-      "glider"
-    ]
+    "aliases": ["manta", "ray", "sky ray", "glider"]
   },
   {
     "id": "barghest-warden",
     "name": "Barghest Warden",
     "type": "beast",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 5,
     "tier": 2,
     "flying": false,
@@ -2528,21 +1932,13 @@
     ],
     "powers": [],
     "tactics": "Stays by the gate. Chases anyone who tries to leave a grave open.",
-    "aliases": [
-      "black dog",
-      "hell dog",
-      "guardian dog",
-      "hound"
-    ]
+    "aliases": ["black dog", "hell dog", "guardian dog", "hound"]
   },
   {
     "id": "great-white-terror",
     "name": "Great White Terror",
     "type": "beast",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -2567,20 +1963,13 @@
       }
     ],
     "tactics": "Circles the ship and rams the hull. Goes for a sailor who falls overboard.",
-    "aliases": [
-      "shark",
-      "great white",
-      "monster fish",
-      "sea beast"
-    ]
+    "aliases": ["shark", "great white", "monster fish", "sea beast"]
   },
   {
     "id": "boiler-wyrm",
     "name": "Boiler Wyrm",
     "type": "beast",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -2605,20 +1994,13 @@
       }
     ],
     "tactics": "Rises out of the steam. Retreats into the pipes when hurt.",
-    "aliases": [
-      "eel",
-      "wyrm",
-      "steam beast",
-      "pipe beast"
-    ]
+    "aliases": ["eel", "wyrm", "steam beast", "pipe beast"]
   },
   {
     "id": "irradiated-aurochs",
     "name": "Irradiated Aurochs",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -2643,20 +2025,13 @@
       }
     ],
     "tactics": "Charges the first thing that moves. Slow to turn.",
-    "aliases": [
-      "bull",
-      "aurochs",
-      "buffalo",
-      "mutant bull"
-    ]
+    "aliases": ["bull", "aurochs", "buffalo", "mutant bull"]
   },
   {
     "id": "hive-wyvern",
     "name": "Hive Wyvern",
     "type": "beast",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 4,
     "tier": 3,
     "flying": true,
@@ -2681,24 +2056,13 @@
       }
     ],
     "tactics": "Dives from above. Targets whoever wears the heaviest armor.",
-    "aliases": [
-      "wyvern",
-      "bio-beast",
-      "xenos flyer",
-      "drake",
-      "tyranid",
-      "gargoyle",
-      "hive fleet",
-      "winged tyranid"
-    ]
+    "aliases": ["wyvern", "bio-beast", "xenos flyer", "drake", "tyranid", "gargoyle", "hive fleet", "winged tyranid"]
   },
   {
     "id": "neon-pigeon-flock",
     "name": "Neon Pigeon Flock",
     "type": "beast",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 2,
     "tier": 1,
     "flying": true,
@@ -2716,29 +2080,17 @@
     ],
     "powers": [],
     "tactics": "Swarms the group and pecks at anything shiny. Scatters if one is hit.",
-    "aliases": [
-      "pigeon",
-      "bird flock",
-      "drone bird",
-      "pest"
-    ]
+    "aliases": ["pigeon", "bird flock", "drone bird", "pest"]
   },
   {
     "id": "thunder-goose",
     "name": "Thunder Goose",
     "type": "beast",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 1,
     "tier": 4,
     "flying": true,
-    "aliases": [
-      "storm goose",
-      "angry goose",
-      "honk"
-    ],
+    "aliases": ["storm goose", "angry goose", "honk"],
     "description": "A honking, storm-fat goose who believes every pond, field and kingdom is hers.",
     "attack": "Peck & wing slap",
     "skills": [
@@ -2765,18 +2117,11 @@
     "id": "carnival-star-whale",
     "name": "Carnival Star-Whale",
     "type": "beast",
-    "themes": [
-      "science-fantasy",
-      "scifi"
-    ],
+    "themes": ["science-fantasy", "scifi"],
     "tone": 2,
     "tier": 6,
     "flying": true,
-    "aliases": [
-      "space whale",
-      "sky whale",
-      "void whale"
-    ],
+    "aliases": ["space whale", "sky whale", "void whale"],
     "description": "A gigantic, gentle space whale hung with lanterns and carrying a whole traveling fair on its back.",
     "attack": "Tail slap",
     "skills": [
@@ -2809,17 +2154,11 @@
     "id": "buffalo-stampede",
     "name": "Great Bison Stampede",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "bison",
-      "buffalo herd",
-      "stampede"
-    ],
+    "aliases": ["bison", "buffalo herd", "stampede"],
     "description": "A thundering herd of buffalo that turns the whole prairie into a battering ram.",
     "attack": "Trample",
     "skills": [
@@ -2852,17 +2191,11 @@
     "id": "mutant-mammoth",
     "name": "Mutant Mammoth",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "mammoth",
-      "mutant elephant",
-      "two-headed beast"
-    ],
+    "aliases": ["mammoth", "mutant elephant", "two-headed beast"],
     "description": "A giant two-headed, furred elephant that hauls supply caravans, or tramples them.",
     "attack": "Tusks & trample",
     "skills": [
@@ -2895,20 +2228,11 @@
     "id": "thunder-herdbeast",
     "name": "Thunder Herdbeast",
     "type": "beast",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 2,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "bantha",
-      "nerf",
-      "mount",
-      "desert beast",
-      "furry mount"
-    ],
+    "aliases": ["bantha", "nerf", "mount", "desert beast", "furry mount"],
     "description": "A huge shaggy, horned desert mount that can carry a whole tribe and is gentler than it looks.",
     "attack": "Horns & stomp",
     "skills": [
@@ -2928,18 +2252,11 @@
     "id": "jackalope-sheriff",
     "name": "Jackalope Sheriff",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 1,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "jackalope",
-      "rabbit sheriff",
-      "deputy rabbit",
-      "horned rabbit"
-    ],
+    "aliases": ["jackalope", "rabbit sheriff", "deputy rabbit", "horned rabbit"],
     "description": "A jackrabbit with antlers, a tiny hat and a very big sense of justice.",
     "attack": "Antler jab",
     "skills": [
@@ -2970,18 +2287,11 @@
     "id": "parrot-admiral",
     "name": "Parrot Admiral",
     "type": "beast",
-    "themes": [
-      "age-of-sail"
-    ],
+    "themes": ["age-of-sail"],
     "tone": 1,
     "tier": 4,
     "flying": true,
-    "aliases": [
-      "pirate parrot",
-      "captain's parrot",
-      "pirate bird",
-      "admiral parrot"
-    ],
+    "aliases": ["pirate parrot", "captain's parrot", "pirate bird", "admiral parrot"],
     "description": "A scarlet parrot in an admiral's hat who shouts orders to an entire pirate fleet.",
     "attack": "Beak & cutlass",
     "skills": [
@@ -3018,19 +2328,11 @@
     "id": "trash-panda-warlord",
     "name": "Trash Panda Warlord",
     "type": "beast",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 2,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "raccoon",
-      "raccoon king",
-      "dump boss",
-      "trash raccoon",
-      "garbage king"
-    ],
+    "aliases": ["raccoon", "raccoon king", "dump boss", "trash raccoon", "garbage king"],
     "description": "A masked raccoon boss in a crown of can lids who rules the dump with a gang of clever hands.",
     "attack": "Claws & bat",
     "skills": [
@@ -3063,19 +2365,11 @@
     "id": "thunderbird",
     "name": "Thunderbird",
     "type": "beast",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 2,
     "tier": 6,
     "flying": true,
-    "aliases": [
-      "roc",
-      "storm bird",
-      "giant eagle",
-      "sky spirit",
-      "thunder eagle"
-    ],
+    "aliases": ["roc", "storm bird", "giant eagle", "sky spirit", "thunder eagle"],
     "description": "A giant bird of the high plains whose wingbeats make thunder and whose eyes spark lightning.",
     "attack": "Beak & talons",
     "skills": [
@@ -3114,19 +2408,11 @@
     "id": "fuzz-matriarch",
     "name": "Fuzz Matriarch",
     "type": "beast",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 1,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "ewok queen",
-      "fuzz queen",
-      "teddy matriarch",
-      "giant teddy bear",
-      "forest queen"
-    ],
+    "aliases": ["ewok queen", "fuzz queen", "teddy matriarch", "giant teddy bear", "forest queen"],
     "description": "The towering, motherly queen of a forest tribe of tiny fuzzy warriors.",
     "attack": "Spear & hug",
     "skills": [
@@ -3163,19 +2449,11 @@
     "id": "island-tortoise",
     "name": "Island Tortoise",
     "type": "beast",
-    "themes": [
-      "age-of-sail"
-    ],
+    "themes": ["age-of-sail"],
     "tone": 3,
     "tier": 8,
     "flying": false,
-    "aliases": [
-      "giant tortoise",
-      "island turtle",
-      "sea turtle",
-      "aspidochelone",
-      "living island"
-    ],
+    "aliases": ["giant tortoise", "island turtle", "sea turtle", "aspidochelone", "living island"],
     "description": "A tortoise as big as an island with a forest, a lighthouse and a whole village on its back.",
     "attack": "Head slam",
     "skills": [
@@ -3214,20 +2492,11 @@
     "id": "neon-kaiju-ape",
     "name": "Neon Kaiju Ape",
     "type": "beast",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 4,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "kaiju",
-      "giant ape",
-      "cyber gorilla",
-      "city smasher",
-      "king kong"
-    ],
+    "aliases": ["kaiju", "giant ape", "cyber gorilla", "city smasher", "king kong"],
     "description": "A skyscraper-sized, cybernetic ape that smashes through the city, lit up by its own neon implants.",
     "attack": "Fists",
     "skills": [
@@ -3264,19 +2533,11 @@
     "id": "smokestack-behemoth",
     "name": "Smokestack Behemoth",
     "type": "beast",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "steam bull",
-      "iron bull",
-      "boiler bull",
-      "mechanical beast",
-      "giant bull"
-    ],
+    "aliases": ["steam bull", "iron bull", "boiler bull", "mechanical beast", "giant bull"],
     "description": "A coal-fed iron-plated bull with a boiler in its belly and a smokestack on its back.",
     "attack": "Horns & stomp",
     "skills": [
@@ -3309,22 +2570,11 @@
     "id": "blood-hound",
     "name": "Blood Hound",
     "type": "beast",
-    "themes": [
-      "space-hammer",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "science-fantasy"],
     "tone": 5,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "flesh hound",
-      "khorne hound",
-      "chaos hound",
-      "war hound",
-      "daemon dog",
-      "khorne",
-      "chaos"
-    ],
+    "aliases": ["flesh hound", "khorne hound", "chaos hound", "war hound", "daemon dog", "khorne", "chaos"],
     "description": "A red-fleshed, brass-collared hound of the warp that tracks anything with a pulse.",
     "attack": "Fangs",
     "skills": [

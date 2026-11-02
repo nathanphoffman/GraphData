@@ -1,6 +1,17 @@
 import { describe, expect, it } from "vitest";
 import data from "../../../data/economic-systems/economic-systems-map.json";
-import { GRID_H, GRID_X0, GRID_Y0, cellNameWidth, fixedObstacles, labelWidth, placeLabels, xToPixels, yToPixels } from "../../../src/charts/tech/economic-systems-map/model/layout";
+import {
+  cellNameWidth,
+  fixedObstacles,
+  GRID_H,
+  GRID_X0,
+  GRID_Y0,
+  labelWidth,
+  placeLabels,
+  xToPixels,
+  yToPixels,
+} from "../../../src/charts/tech/economic-systems-map/model/layout";
+
 import type { EconomicSystemsData, Figure } from "../../../src/charts/tech/economic-systems-map/model/types";
 
 const model = data as unknown as EconomicSystemsData;
@@ -27,7 +38,8 @@ describe("fixedObstacles", () => {
 
 describe("placeLabels", () => {
   const overlaps = (first: { cx: number; cy: number; w: number; h: number }, second: typeof first) =>
-    Math.abs(first.cx - second.cx) < (first.w + second.w) / 2 && Math.abs(first.cy - second.cy) < (first.h + second.h) / 2;
+    Math.abs(first.cx - second.cx) < (first.w + second.w) / 2 &&
+    Math.abs(first.cy - second.cy) < (first.h + second.h) / 2;
 
   it("keeps labels for figures on the same spot from overlapping each other", () => {
     const figures: Figure[] = [

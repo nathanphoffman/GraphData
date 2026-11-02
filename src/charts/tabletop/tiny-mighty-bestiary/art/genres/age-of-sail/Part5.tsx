@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -14,7 +14,10 @@ export function CatacombCrawler() {
       <circle cx="220" cy="94" r="6" fill={card} {...ink} strokeWidth={3} />
       <Dot x={194} y={96} r={2} />
       <Dot x={220} y={94} r={2} />
-      <Line d="M170 110 C130 100 110 130 90 120 M240 110 C280 100 300 130 320 120 M180 130 C150 160 130 180 100 176 M230 130 C260 160 280 180 310 176 M200 134 C196 170 210 190 200 210" w={7} />
+      <Line
+        d="M170 110 C130 100 110 130 90 120 M240 110 C280 100 300 130 320 120 M180 130 C150 160 130 180 100 176 M230 130 C260 160 280 180 310 176 M200 134 C196 170 210 190 200 210"
+        w={7}
+      />
       <Line d="M90 120 l-8 -8 M320 120 l8 -8 M100 176 l-10 4 M310 176 l10 4" w={3} />
       <Shape d="M350 140 H376 V168 H350 Z" w={4} />
       <Line d="M363 140 V128" w={3} />
@@ -51,8 +54,21 @@ export function SquallWraith() {
       <Shape d="M20 70 q16 -30 40 -18 q20 -34 56 -10 q36 -20 54 14 q30 -6 40 20 Z" w={5} />
       <Shape d="M220 56 q16 -30 40 -18 q20 -34 56 -10 q36 -20 54 14 q30 -6 40 20 Z" w={5} />
       <Line d="M50 90 l-10 28 M90 90 l-10 28 M130 94 l-10 28 M250 90 l-10 28 M290 90 l-10 28 M330 94 l-10 28" w={3} />
-      <path d="M200 60 C260 70 270 100 220 120 C170 140 180 160 230 170 C260 176 250 200 210 210 C180 218 190 230 220 232" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <path d="M200 90 C150 100 160 130 200 140 C240 150 230 170 200 176" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="4 6" />
+      <path
+        d="M200 60 C260 70 270 100 220 120 C170 140 180 160 230 170 C260 176 250 200 210 210 C180 218 190 230 220 232"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M200 90 C150 100 160 130 200 140 C240 150 230 170 200 176"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeDasharray="4 6"
+      />
       <Shape d="M166 130 C158 84 234 84 226 130 C230 160 162 160 166 130 Z" />
       <Line d="M162 120 C140 140 130 170 140 190 M230 120 C256 140 266 170 256 190" w={5} />
       <Dot x={184} y={112} r={4} />
@@ -66,7 +82,14 @@ export function SquallWraith() {
 export function CabinBoyGhost() {
   return (
     <Drawing label="Drawing of the ghost of a young cabin boy trailing a new crew and getting into trouble, a bucket tipped over">
-      <path d="M150 90 C146 40 230 40 226 90 L232 190 q-14 14 -28 0 q-14 14 -28 0 q-14 14 -26 0 Z" fill={card} stroke="currentColor" strokeWidth="5" strokeDasharray="6 6" strokeLinejoin="round" />
+      <path
+        d="M150 90 C146 40 230 40 226 90 L232 190 q-14 14 -28 0 q-14 14 -28 0 q-14 14 -26 0 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeDasharray="6 6"
+        strokeLinejoin="round"
+      />
       <Line d="M164 56 q24 -22 48 0" w={4} />
       <Dot x={176} y={80} r={4} />
       <Dot x={202} y={80} r={4} />
@@ -92,7 +115,14 @@ export function LanternKeeperGhost() {
       <Line d="M300 120 H366 M296 170 H370" w={3} />
       <Line d="M330 30 V12 M318 12 H342" w={4} />
       <Line d="M300 40 l-60 -10 M360 40 l40 -10" w={3} dash="6 6" />
-      <path d="M120 86 C116 40 196 40 192 86 L198 190 q-14 14 -28 0 q-14 14 -28 0 q-14 14 -24 0 Z" fill={card} stroke="currentColor" strokeWidth="5" strokeDasharray="6 6" strokeLinejoin="round" />
+      <path
+        d="M120 86 C116 40 196 40 192 86 L198 190 q-14 14 -28 0 q-14 14 -28 0 q-14 14 -24 0 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeDasharray="6 6"
+        strokeLinejoin="round"
+      />
       <Shape d="M110 54 C130 20 180 20 200 54 Z" w={4} />
       <Dot x={142} y={78} r={4} />
       <Dot x={170} y={78} r={4} />
@@ -118,7 +148,14 @@ export function SpectralLeviathanCaptain() {
       <Shape d="M150 22 L200 -10 L250 22 Q200 36 150 22 Z" w={4} />
       <Dot x={184} y={46} r={3} />
       <Dot x={208} y={46} r={3} />
-      <path d="M146 76 H254 L276 118 H124 Z" fill={card} stroke="currentColor" strokeWidth="5" strokeDasharray="6 6" strokeLinejoin="round" />
+      <path
+        d="M146 76 H254 L276 118 H124 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeDasharray="6 6"
+        strokeLinejoin="round"
+      />
       <circle cx="160" cy="100" r="5" fill="none" {...ink} strokeWidth={2} />
       <circle cx="200" cy="96" r="4" fill="none" {...ink} strokeWidth={2} />
       <circle cx="240" cy="102" r="5" fill="none" {...ink} strokeWidth={2} />

@@ -10,7 +10,11 @@ describe("scoreGame", () => {
   });
 
   it("punishes a heavier game twice as much as a lighter one at the same distance", () => {
-    const [lighter, heavier] = [{ ...light, weight: 1.5 }, { ...light, weight: 2.5 }];
+    const [lighter, heavier] = [
+      { ...light, weight: 1.5 },
+      { ...light, weight: 2.5 },
+    ];
+
     expect(scoreGame(heavier, 2)).toBeLessThan(scoreGame(lighter, 2));
   });
 
@@ -58,6 +62,8 @@ describe("pointsForPosition", () => {
   });
 
   it("rewards the top far more than the same step lower down", () => {
-    expect(pointsForPosition(1) - pointsForPosition(11)).toBeGreaterThan(pointsForPosition(901) - pointsForPosition(911));
+    expect(pointsForPosition(1) - pointsForPosition(11)).toBeGreaterThan(
+      pointsForPosition(901) - pointsForPosition(911),
+    );
   });
 });

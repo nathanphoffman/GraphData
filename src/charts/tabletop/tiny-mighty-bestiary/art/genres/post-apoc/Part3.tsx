@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -54,7 +54,20 @@ export function BottlecapHermit() {
       <Shape d="M172 84 C170 130 190 144 200 146 C210 144 230 130 228 84 C214 98 186 98 172 84 Z" w={4} />
       <Shape d="M144 112 H256 L270 224 H130 Z" />
       {/* Repeat the shape at each listed position. */}
-      {[[168, 134], [200, 130], [232, 134], [156, 164], [186, 160], [216, 160], [246, 164], [170, 192], [200, 190], [232, 192], [146, 208], [254, 208]].map(([x, y], index) => (
+      {[
+        [168, 134],
+        [200, 130],
+        [232, 134],
+        [156, 164],
+        [186, 160],
+        [216, 160],
+        [246, 164],
+        [170, 192],
+        [200, 190],
+        [232, 192],
+        [146, 208],
+        [254, 208],
+      ].map(([x, y], index) => (
         <g key={index}>
           <circle cx={x} cy={y} r="10" fill={card} stroke="currentColor" strokeWidth="2.5" />
           <circle cx={x} cy={y} r="5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="1 2.4" />

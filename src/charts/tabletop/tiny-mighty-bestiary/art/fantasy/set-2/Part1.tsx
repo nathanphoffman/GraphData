@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -24,7 +24,11 @@ export function GhostGalleon() {
   return (
     <Drawing label="Drawing of a ghostly galleon with tattered sails">
       <Line d="M200 30 V170 M130 60 V170 M270 70 V170" w={6} />
-      <Line d="M200 36 L200 150 L150 130 L170 100 L150 70 Z M200 36 L256 60 L240 100 L260 130 L200 150" w={4} dash="10 5" />
+      <Line
+        d="M200 36 L200 150 L150 130 L170 100 L150 70 Z M200 36 L256 60 L240 100 L260 130 L200 150"
+        w={4}
+        dash="10 5"
+      />
       <Line d="M130 64 L130 140 L100 126 L112 100 L100 80 Z" w={4} dash="10 5" />
       <Line d="M270 74 L270 140 L296 128 L286 104 L298 88 Z" w={4} dash="10 5" />
       <Shape d="M70 170 H330 L300 214 H100 Z" />

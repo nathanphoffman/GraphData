@@ -92,7 +92,13 @@ interface Settings {
   search: string;
 }
 
-const DEFAULT_SETTINGS: Settings = { preferWeight: false, weight: DEFAULT_WEIGHT, yearStep: 0, onlyMine: false, search: "" };
+const DEFAULT_SETTINGS: Settings = {
+  preferWeight: false,
+  weight: DEFAULT_WEIGHT,
+  yearStep: 0,
+  onlyMine: false,
+  search: "",
+};
 
 /** What a first-time visitor can answer when asked which weight they prefer; a weight of null means they do not care. */
 const FIRST_VISIT_CHOICES: { label: string; weight: number | null }[] = [
@@ -189,16 +195,22 @@ export default function BoardGames() {
   // Ask the server for the page whenever the preference, search or page changes; an older answer arriving late is ignored.
   useEffect(() => {
     let current = true;
-    const query = new URLSearchParams({ preference: String(preference), page: String(page), pageSize: String(PAGE_SIZE), search, minYear: String(minYear) });
+    const query = new URLSearchParams({
+      preference: String(preference),
+      page: String(page),
+      pageSize: String(PAGE_SIZE),
+      search,
+      minYear: String(minYear),
+    });
 
     // My games are all shown on one page, so they come from their own call.
     const request = mineToShow
-      ? mineToShow.length === 0 ? Promise.resolve<Page>({ total: 0, games: [] }) : callApi<Page>("/api/board-games/mine", "POST", { games: mineToShow, preference, search, minYear })
+      ? mineToShow.length === 0
+        ? Promise.resolve<Page>({ total: 0, games: [] })
+        : callApi<Page>("/api/board-games/mine", "POST", { games: mineToShow, preference, search, minYear })
       : callApi<Page>(`/api/board-games?${query}`);
 
-    request
-      .then((result) => current && (setData(result), setError(false)))
-      .catch(() => current && setError(true));
+    request.then((result) => current && (setData(result), setError(false))).catch(() => current && setError(true));
 
     return () => {
       current = false;
@@ -219,7 +231,10 @@ export default function BoardGames() {
     if (!asked) return;
 
     try {
-      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify({ preferWeight, weight, yearStep, onlyMine, search: typed } satisfies Settings));
+      localStorage.setItem(
+        SETTINGS_STORAGE_KEY,
+        JSON.stringify({ preferWeight, weight, yearStep, onlyMine, search: typed } satisfies Settings),
+      );
     } catch {
       // Storage can be blocked; the controls still work until the page closes.
     }
@@ -230,7 +245,11 @@ export default function BoardGames() {
   const toggleOwned = (game: OwnedGame) => {
     const { title, releaseDate } = game;
     setFound(null);
-    setOwned(ownedKeys.has(gameKey(game)) ? owned.filter((own) => gameKey(own) !== gameKey(game)) : [...owned, { title, releaseDate }]);
+    setOwned(
+      ownedKeys.has(gameKey(game))
+        ? owned.filter((own) => gameKey(own) !== gameKey(game))
+        : [...owned, { title, releaseDate }],
+    );
   };
 
   // Ask the server which weight puts the owned games highest, and show it.
@@ -255,6 +274,7 @@ export default function BoardGames() {
   // Their answer fills in the weight controls and opens the main page.
   const answer = (chosen: number | null) => {
     setPreferWeight(chosen !== null);
+
     if (chosen !== null) setWeight(chosen);
     setPreference(chosen ?? NO_PREFERENCE);
     setPage(1);
@@ -267,9 +287,17 @@ export default function BoardGames() {
     return (
       <div className="board-games board-games-welcome">
         <h2>What weight do you prefer?</h2>
-        <p className="muted">Weight is how complex a game is, from 1 (light) to 5 (heavy). It re-ranks the list so games near your weight come first. You can change it any time.</p>
+        <p className="muted">
+          Weight is how complex a game is, from 1 (light) to 5 (heavy). It re-ranks the list so games near your weight
+          come first. You can change it any time.
+        </p>
         <div className="board-games-choices">
-          {FIRST_VISIT_CHOICES.map((choice) => <button type="button" key={choice.label} onClick={() => answer(choice.weight)}>{choice.label}</button>)}
+          {FIRST_VISIT_CHOICES.map((choice) => (
+            <button type="button" key={choice.label} onClick={() => answer(choice.weight)}>
+              {choice.label}
+            </button>
+          ))}
+
         </div>
       </div>
     );
@@ -278,106 +306,185 @@ export default function BoardGames() {
   return (
     <div className="board-games">
       <p className="muted">
-        Pick the weight that best matches what you like to play. It is not a filter: it only pushes games of that weight up the list, so a highly rated game of another weight can still show up, just lower. No preference (0) is not a copy of BGG; it punishes lower rated games more and rewards popular games more.
+        Pick the weight that best matches what you like to play. It is not a filter: it only pushes games of that weight
+        up the list, so a highly rated game of another weight can still show up, just lower. No preference (0) is not a
+        copy of BGG; it punishes lower rated games more and rewards popular games more.
       </p>
       <div className="board-games-controls">
         <label>
-          <input type="checkbox" checked={preferWeight} onChange={(changeEvent) => setPreferWeight(changeEvent.target.checked)} /> Prefer a Specific Weight
+          <input
+            type="checkbox"
+            checked={preferWeight}
+            onChange={(changeEvent) => setPreferWeight(changeEvent.target.checked)}
+          />{" "}
+          Prefer a Specific Weight
         </label>
         {preferWeight && (
           <label>
             Weight preference: {weight.toFixed(2)}{" "}
-            <input type="range" min={MIN_WEIGHT} max={MAX_WEIGHT} step={WEIGHT_STEP} value={weight} onChange={(changeEvent) => setWeight(Number(changeEvent.target.value))} />
+            <input
+              type="range"
+              min={MIN_WEIGHT}
+              max={MAX_WEIGHT}
+              step={WEIGHT_STEP}
+              value={weight}
+              onChange={(changeEvent) => setWeight(Number(changeEvent.target.value))}
+            />
           </label>
         )}
+
         <label>
           Released: {YEAR_STEPS[yearStep].label}{" "}
-          <input type="range" min={0} max={YEAR_STEPS.length - 1} step={1} value={yearStep} onChange={(changeEvent) => setYearStep(Number(changeEvent.target.value))} />
+          <input
+            type="range"
+            min={0}
+            max={YEAR_STEPS.length - 1}
+            step={1}
+            value={yearStep}
+            onChange={(changeEvent) => setYearStep(Number(changeEvent.target.value))}
+          />
         </label>
         <label>
-          <input type="checkbox" checked={onlyMine} onChange={(changeEvent) => { setOnlyMine(changeEvent.target.checked); setPage(1); }} /> Just show my games
+          <input
+            type="checkbox"
+            checked={onlyMine}
+            onChange={(changeEvent) => {
+              setOnlyMine(changeEvent.target.checked);
+              setPage(1);
+            }}
+
+          />{" "}
+          Just show my games
         </label>
       </div>
 
       <section className="board-games-owned">
         <h3>My games ({owned.length})</h3>
-        {owned.length === 0 && <p className="muted">Click + on the games you own or love to collect them here, then find the weight preference that ranks them highest.</p>}
+        {owned.length === 0 && (
+          <p className="muted">
+            Click + on the games you own or love to collect them here, then find the weight preference that ranks them
+            highest.
+          </p>
+        )}
+
         <ul>
           {owned.map((game) => (
             <li key={gameKey(game)}>
               {game.title} <small>({game.releaseDate})</small>
-              <button type="button" aria-label={`Remove ${game.title}`} onClick={() => toggleOwned(game)}>✕</button>
+              <button type="button" aria-label={`Remove ${game.title}`} onClick={() => toggleOwned(game)}>
+                ✕
+              </button>
             </li>
           ))}
+
         </ul>
-        <button type="button" disabled={owned.length === 0 || finding} onClick={() => void findWeight()}>{finding ? "Finding…" : "Find My Weight Preference"}</button>
+        <button type="button" disabled={owned.length === 0 || finding} onClick={() => void findWeight()}>
+          {finding ? "Finding…" : "Find My Weight Preference"}
+        </button>
         {findError && <p role="alert">{findError}</p>}
         {found && (
           <div className="board-games-found">
             <p>
               <strong>Best weight: {found.best.preference.toFixed(2)}</strong>
-              {found.tied[0] !== found.tied[1] && ` (${found.tied[0].toFixed(2)} to ${found.tied[1].toFixed(2)} tie)`}
-              {" "}— your games earn {Math.round(found.best.points).toLocaleString()} points (higher is better; places near the top are worth far more).{" "}
-              <button type="button" onClick={() => useWeight(found.best.preference)}>Use this weight</button>
+              {found.tied[0] !== found.tied[1] && ` (${found.tied[0].toFixed(2)} to ${found.tied[1].toFixed(2)} tie)`} —
+              your games earn {Math.round(found.best.points).toLocaleString()} points (higher is better; places near the
+              top are worth far more).{" "}
+              <button type="button" onClick={() => useWeight(found.best.preference)}>
+                Use this weight
+              </button>
             </p>
             <p className="muted">
-              Their places at that weight: {found.best.games.map((game) => `${game.title} #${game.position}`).join(", ")}.
-              With no weight preference they earn {Math.round(found.noPreferencePoints).toLocaleString()}.
+              Their places at that weight:{" "}
+              {found.best.games.map((game) => `${game.title} #${game.position}`).join(", ")}. With no weight preference
+              they earn {Math.round(found.noPreferencePoints).toLocaleString()}.
               {found.missing.length > 0 && ` Not in the list (left out): ${found.missing.join(", ")}.`}
             </p>
           </div>
         )}
+
       </section>
 
-      <input type="search" className="board-games-search" placeholder="Search by title…" value={typed} onChange={(changeEvent) => setTyped(changeEvent.target.value)} />
+      <input
+        type="search"
+        className="board-games-search"
+        placeholder="Search by title…"
+        value={typed}
+        onChange={(changeEvent) => setTyped(changeEvent.target.value)}
+      />
 
       {error && <p>Could not load the games.</p>}
       {!data && !error && <p>Loading games…</p>}
       {data && (
         <>
           <div className="board-games-table">
-          <table>
-            <thead>
-              <tr>
-                <th title="Add to my games">+</th>
-                <th>#</th>
-                <th>Title</th>
-                <th>Year</th>
-                <th title="BGG's own rank">BGG</th>
-                <th>Rating</th>
-                <th>Weight</th>
-                <th>Ratings</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.games.map((game) => (
-                <tr key={`${game.title}|${game.releaseDate}`} className={ownedKeys.has(gameKey(game)) ? "board-games-owned-row" : undefined}>
-                  <td>
-                    <button type="button" className="board-games-add" title={ownedKeys.has(gameKey(game)) ? "Remove from my games" : "Add to my games"} aria-pressed={ownedKeys.has(gameKey(game))} onClick={() => toggleOwned(game)}>
-                      {ownedKeys.has(gameKey(game)) ? "✓" : "+"}
-                    </button>
-                  </td>
-                  <td className="board-games-position">{game.position}</td>
-                  <td className="board-games-title">{game.title}</td>
-                  <td className="board-games-dim">{game.releaseDate}</td>
-                  <td className="board-games-dim">{game.rank ?? ""}</td>
-                  <td>{game.average.toFixed(2)}</td>
-                  <td className="board-games-weight" style={{ "--weight": `${(game.weight / MAX_WEIGHT_SHOWN) * 100}%` } as CSSProperties}>{game.weight.toFixed(2)}</td>
-                  <td className="board-games-dim">{game.num.toLocaleString()}</td>
-                  <td><span className="board-games-score" style={heat(Math.min(game.score / TOP_SCORE, 1))}>{game.score.toFixed(2)}</span></td>
+            <table>
+              <thead>
+                <tr>
+                  <th title="Add to my games">+</th>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Year</th>
+                  <th title="BGG's own rank">BGG</th>
+                  <th>Rating</th>
+                  <th>Weight</th>
+                  <th>Ratings</th>
+                  <th>Score</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.games.map((game) => (
+                  <tr
+                    key={`${game.title}|${game.releaseDate}`}
+                    className={ownedKeys.has(gameKey(game)) ? "board-games-owned-row" : undefined}
+                  >
+                    <td>
+                      <button
+                        type="button"
+                        className="board-games-add"
+                        title={ownedKeys.has(gameKey(game)) ? "Remove from my games" : "Add to my games"}
+                        aria-pressed={ownedKeys.has(gameKey(game))}
+                        onClick={() => toggleOwned(game)}
+                      >
+                        {ownedKeys.has(gameKey(game)) ? "✓" : "+"}
+                      </button>
+                    </td>
+                    <td className="board-games-position">{game.position}</td>
+                    <td className="board-games-title">{game.title}</td>
+                    <td className="board-games-dim">{game.releaseDate}</td>
+                    <td className="board-games-dim">{game.rank ?? ""}</td>
+                    <td>{game.average.toFixed(2)}</td>
+                    <td
+                      className="board-games-weight"
+                      style={{ "--weight": `${(game.weight / MAX_WEIGHT_SHOWN) * 100}%` } as CSSProperties}
+                    >
+                      {game.weight.toFixed(2)}
+                    </td>
+                    <td className="board-games-dim">{game.num.toLocaleString()}</td>
+                    <td>
+                      <span className="board-games-score" style={heat(Math.min(game.score / TOP_SCORE, 1))}>
+                        {game.score.toFixed(2)}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+
+              </tbody>
+            </table>
           </div>
           <div className="board-games-pages">
-            <button type="button" disabled={page <= 1} onClick={() => setPage(page - 1)}>Previous</button>
-            <span>Page {page} of {lastPage.toLocaleString()} ({data.total.toLocaleString()} games)</span>
-            <button type="button" disabled={page >= lastPage} onClick={() => setPage(page + 1)}>Next</button>
+            <button type="button" disabled={page <= 1} onClick={() => setPage(page - 1)}>
+              Previous
+            </button>
+            <span>
+              Page {page} of {lastPage.toLocaleString()} ({data.total.toLocaleString()} games)
+            </span>
+            <button type="button" disabled={page >= lastPage} onClick={() => setPage(page + 1)}>
+              Next
+            </button>
           </div>
         </>
       )}
+
     </div>
   );
 }

@@ -10,6 +10,7 @@ const SHOWN_COMMITS = 200;
 const MAX_MESSAGE = 300;
 const MAX_FILE_BYTES = 120_000;
 const MAX_FILES_PER_PROJECT = 20;
+
 // Several pages polling at once share one answer this long.
 const CACHE_MS = 15_000;
 const MAX_NAME = 80;
@@ -22,6 +23,7 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT, project TEXT NOT NULL, at INTEGER NOT NULL, source TEXT NOT NULL, sha TEXT NOT NULL, message TEXT NOT NULL,
     added INTEGER NOT NULL, removed INTEGER NOT NULL, files INTEGER NOT NULL, UNIQUE (project, sha)
   );
+
   CREATE TABLE IF NOT EXISTS ralph_languages (project TEXT PRIMARY KEY, deor INTEGER NOT NULL, rust INTEGER NOT NULL, updated_at INTEGER NOT NULL);
   CREATE TABLE IF NOT EXISTS ralph_files (project TEXT NOT NULL, name TEXT NOT NULL, content TEXT NOT NULL, updated_at INTEGER NOT NULL, PRIMARY KEY (project, name));
 `);
@@ -49,7 +51,9 @@ if (
 let cached = { at: 0, projects: [] };
 
 const text = (value, max, label) => {
-  if (typeof value !== "string" || !value.trim() || value.length > max) throw new HttpError(400, `${label} must be text of 1 to ${max} characters`);
+  if (typeof value !== "string" || !value.trim() || value.length > max)
+
+    throw new HttpError(400, `${label} must be text of 1 to ${max} characters`);
 
   return value.trim();
 };
@@ -62,11 +66,16 @@ const count = (value, label) => {
 
 /** Areas as [{ name, done, open, blocked }], checked so a bad report cannot store junk. */
 function readAreas(areas) {
-  if (!Array.isArray(areas) || areas.length > MAX_AREAS) throw new HttpError(400, `areas must be a list of up to ${MAX_AREAS}`);
+  if (!Array.isArray(areas) || areas.length > MAX_AREAS)
+
+    throw new HttpError(400, `areas must be a list of up to ${MAX_AREAS}`);
 
   return areas.map((area) => {
     const counts = ["done", "open", "blocked"].map((key) => area?.[key]);
-    if (!counts.every((count) => Number.isInteger(count) && count >= 0)) throw new HttpError(400, "each area needs whole-number done, open and blocked");
+
+    if (!counts.every((count) => Number.isInteger(count) && count >= 0))
+
+      throw new HttpError(400, "each area needs whole-number done, open and blocked");
 
     return { name: text(area.name, MAX_NAME, "area name"), done: counts[0], open: counts[1], blocked: counts[2] };
   });
@@ -87,9 +96,12 @@ export const ralphRoutes = [
       const now = Date.now();
 
       db.exec("BEGIN");
+
       if (body.state !== undefined) {
         if (!Number.isInteger(body.round) || body.round < 0) throw new HttpError(400, "round must be a whole number");
-        db.prepare("INSERT OR REPLACE INTO ralph_status (project, state, round, areas, updated_at) VALUES (?, ?, ?, ?, ?)").run(
+        db.prepare(
+          "INSERT OR REPLACE INTO ralph_status (project, state, round, areas, updated_at) VALUES (?, ?, ?, ?, ?)",
+        ).run(
           project,
           text(body.state, MAX_NAME, "state"),
           body.round,
@@ -97,8 +109,19 @@ export const ralphRoutes = [
           now,
         );
       }
-      db.prepare("INSERT INTO ralph_events (project, at, kind, message, source) VALUES (?, ?, ?, ?, ?)").run(project, now, kind, message, source);
-      db.prepare("DELETE FROM ralph_events WHERE project = ? AND id NOT IN (SELECT id FROM ralph_events WHERE project = ? ORDER BY id DESC LIMIT ?)").run(project, project, MAX_EVENTS_PER_PROJECT);
+
+      db.prepare("INSERT INTO ralph_events (project, at, kind, message, source) VALUES (?, ?, ?, ?, ?)").run(
+        project,
+        now,
+        kind,
+        message,
+        source,
+      );
+
+      db.prepare(
+        "DELETE FROM ralph_events WHERE project = ? AND id NOT IN (SELECT id FROM ralph_events WHERE project = ? ORDER BY id DESC LIMIT ?)",
+      ).run(project, project, MAX_EVENTS_PER_PROJECT);
+
       db.exec("COMMIT");
       sendJson(response, 200, { ok: true });
     },
@@ -112,7 +135,9 @@ export const ralphRoutes = [
       const body = await readJson(request);
       const project = text(body.project, MAX_NAME, "project");
 
-      db.prepare("INSERT OR IGNORE INTO ralph_commits (project, at, source, sha, message, added, removed, files, total) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)").run(
+      db.prepare(
+        "INSERT OR IGNORE INTO ralph_commits (project, at, source, sha, message, added, removed, files, total) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      ).run(
         project,
         Date.now(),
         text(body.source ?? "orchestrator", MAX_NAME, "source"),
@@ -123,7 +148,11 @@ export const ralphRoutes = [
         count(body.files, "files"),
         count(body.total ?? 0, "total"),
       );
-      db.prepare("DELETE FROM ralph_commits WHERE project = ? AND id NOT IN (SELECT id FROM ralph_commits WHERE project = ? ORDER BY id DESC LIMIT ?)").run(project, project, MAX_COMMITS_PER_PROJECT);
+
+      db.prepare(
+        "DELETE FROM ralph_commits WHERE project = ? AND id NOT IN (SELECT id FROM ralph_commits WHERE project = ? ORDER BY id DESC LIMIT ?)",
+      ).run(project, project, MAX_COMMITS_PER_PROJECT);
+
       sendJson(response, 200, { ok: true });
     },
   },
@@ -136,7 +165,13 @@ export const ralphRoutes = [
       const body = await readJson(request);
       const project = text(body.project, MAX_NAME, "project");
 
-      db.prepare("INSERT OR REPLACE INTO ralph_languages (project, deor, rust, updated_at) VALUES (?, ?, ?, ?)").run(project, count(body.deor, "deor"), count(body.rust, "rust"), Date.now());
+      db.prepare("INSERT OR REPLACE INTO ralph_languages (project, deor, rust, updated_at) VALUES (?, ?, ?, ?)").run(
+        project,
+        count(body.deor, "deor"),
+        count(body.rust, "rust"),
+        Date.now(),
+      );
+
       sendJson(response, 200, { ok: true });
     },
   },
@@ -149,11 +184,25 @@ export const ralphRoutes = [
       const body = await readJson(request, MAX_FILE_BYTES * 2);
       const project = text(body.project, MAX_NAME, "project");
       const name = text(body.name, MAX_NAME, "name");
-      if (typeof body.content !== "string" || body.content.length > MAX_FILE_BYTES) throw new HttpError(400, `content must be text of up to ${MAX_FILE_BYTES} characters`);
 
-      const known = db.prepare("SELECT COUNT(*) AS total FROM ralph_files WHERE project = ? AND name != ?").get(project, name).total;
-      if (known >= MAX_FILES_PER_PROJECT) throw new HttpError(400, `A project can have up to ${MAX_FILES_PER_PROJECT} files`);
-      db.prepare("INSERT OR REPLACE INTO ralph_files (project, name, content, updated_at) VALUES (?, ?, ?, ?)").run(project, name, body.content, Date.now());
+      if (typeof body.content !== "string" || body.content.length > MAX_FILE_BYTES)
+
+        throw new HttpError(400, `content must be text of up to ${MAX_FILE_BYTES} characters`);
+
+      const known = db
+        .prepare("SELECT COUNT(*) AS total FROM ralph_files WHERE project = ? AND name != ?")
+        .get(project, name).total;
+
+      if (known >= MAX_FILES_PER_PROJECT)
+
+        throw new HttpError(400, `A project can have up to ${MAX_FILES_PER_PROJECT} files`);
+      db.prepare("INSERT OR REPLACE INTO ralph_files (project, name, content, updated_at) VALUES (?, ?, ?, ?)").run(
+        project,
+        name,
+        body.content,
+        Date.now(),
+      );
+
       sendJson(response, 200, { ok: true });
     },
   },
@@ -162,7 +211,10 @@ export const ralphRoutes = [
     path: "/api/ralph/files/:project/:name",
     handler: (request, response, { project, name }) => {
       requireUser(request);
-      const file = db.prepare("SELECT content, updated_at FROM ralph_files WHERE project = ? AND name = ?").get(project, name);
+      const file = db
+        .prepare("SELECT content, updated_at FROM ralph_files WHERE project = ? AND name = ?")
+        .get(project, name);
+
       if (!file) throw new HttpError(404, "No such file");
 
       sendJson(response, 200, { name, content: file.content, updatedAt: file.updated_at });
@@ -174,6 +226,7 @@ export const ralphRoutes = [
     path: "/api/ralph",
     handler: (request, response) => {
       requireUser(request);
+
       if (Date.now() - cached.at > CACHE_MS) cached = { at: Date.now(), projects: readProjects() };
 
       sendJson(response, 200, { projects: cached.projects, cachedAt: cached.at });
@@ -192,9 +245,20 @@ function readProjects() {
       round: row.round,
       areas: JSON.parse(row.areas),
       updatedAt: row.updated_at,
-      events: db.prepare("SELECT at, kind, message, source FROM ralph_events WHERE project = ? ORDER BY id DESC LIMIT ?").all(row.project, SHOWN_EVENTS),
-      commits: db.prepare("SELECT at, source, sha, message, added, removed, files, total FROM ralph_commits WHERE project = ? ORDER BY id DESC LIMIT ?").all(row.project, SHOWN_COMMITS),
-      languages: db.prepare("SELECT deor, rust, updated_at AS updatedAt FROM ralph_languages WHERE project = ?").get(row.project) ?? null,
-      files: db.prepare("SELECT name, updated_at AS updatedAt FROM ralph_files WHERE project = ? ORDER BY name").all(row.project),
+      events: db
+        .prepare("SELECT at, kind, message, source FROM ralph_events WHERE project = ? ORDER BY id DESC LIMIT ?")
+        .all(row.project, SHOWN_EVENTS),
+      commits: db
+        .prepare(
+          "SELECT at, source, sha, message, added, removed, files, total FROM ralph_commits WHERE project = ? ORDER BY id DESC LIMIT ?",
+        )
+        .all(row.project, SHOWN_COMMITS),
+      languages:
+        db
+          .prepare("SELECT deor, rust, updated_at AS updatedAt FROM ralph_languages WHERE project = ?")
+          .get(row.project) ?? null,
+      files: db
+        .prepare("SELECT name, updated_at AS updatedAt FROM ralph_files WHERE project = ? ORDER BY name")
+        .all(row.project),
     }));
 }

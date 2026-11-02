@@ -1,7 +1,15 @@
 import type { ScoredTarget, Season, Settings, Target } from "../types";
-import { SEASONS, effectiveQuality, optics } from "./settings";
-import { NIGHT_START, VIEW_HALF_WINDOW, altitude, bestHour, clamp, positionsAt, sampleWindow } from "./sky";
-import { altitudeQuality, coreScore, coreSurfaceBrightness, lightScore, sizeFit, skyGlowPenalty, surfaceBrightness } from "./brightness";
+import {
+  altitudeQuality,
+  coreScore,
+  coreSurfaceBrightness,
+  lightScore,
+  sizeFit,
+  skyGlowPenalty,
+  surfaceBrightness,
+} from "./brightness";
+import { effectiveQuality, optics, SEASONS } from "./settings";
+import { altitude, bestHour, clamp, NIGHT_START, positionsAt, sampleWindow, VIEW_HALF_WINDOW } from "./sky";
 
 /** Points taken off every score (it never goes below 0). */
 export const SCORE_OFFSET = 9;
@@ -65,7 +73,9 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     let count = 0;
 
     for (const sample of samples) {
-      let positions = positionsAt(target, sample).map((position) => altitude(position.ra, position.dec, sample.lst, settings.latitude));
+      let positions = positionsAt(target, sample).map((position) =>
+        altitude(position.ra, position.dec, sample.lst, settings.latitude),
+      );
 
       // A planet can be anywhere along the ecliptic, so use the spot where it is highest at this moment.
       if (target.planet) positions = [Math.max(...positions)];
@@ -92,23 +102,34 @@ export function scoreTargets(targets: Target[], settings: Settings): ScoredTarge
     const light = aboveHorizon > 0 ? lightTotal / aboveHorizon : 0;
     const core = aboveHorizon > 0 ? coreTotal / aboveHorizon : 0;
     const rawValue = 100 * sky ** 0.1 * fit ** 0.4 * light ** 0.2 * core ** 0.3;
-    const score = Math.min(100, rawValue - SCORE_OFFSET + adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) + adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) + qualityAdjust(target, settings));
+    const score = Math.min(
+      100,
+      rawValue -
+        SCORE_OFFSET +
+        adjustPoints(target.simAdjust ?? 0, settings.simWeight, settings.bortle) +
+        adjustPoints(target.authorAdjust ?? 0, settings.authorWeight, settings.bortle) +
+        qualityAdjust(target, settings),
+    );
 
     return { target, score, sky, fit, light, core, peakAltitude, bestHour: hour };
   };
 
-  return targets
+  return (
+    targets
 
-    // Planets have no fixed best season, so they are scored in every season and the best one is kept.
-    .map((target) => {
-      if (target.bestSeason !== "any") return evaluate(target, target.bestSeason);
+      // Planets have no fixed best season, so they are scored in every season and the best one is kept.
+      .map((target) => {
+        if (target.bestSeason !== "any") return evaluate(target, target.bestSeason);
 
-      // Planets: score every season and keep the one where it is best placed.
-      return (Object.keys(SEASONS) as Season[])
-        .map((season) => evaluate(target, season))
+        // Planets: score every season and keep the one where it is best placed.
+        return (
+          (Object.keys(SEASONS) as Season[])
+            .map((season) => evaluate(target, season))
 
-        // Keep the highest scoring row.
-        .reduce((best, r) => (r.score > best.score ? r : best));
-    })
-    .sort((target, second) => second.score - target.score);
+            // Keep the highest scoring row.
+            .reduce((best, r) => (r.score > best.score ? r : best))
+        );
+      })
+      .sort((target, second) => second.score - target.score)
+  );
 }

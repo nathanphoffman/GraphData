@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 import data from "../../../data/astronomy/astronomy-targets.json";
 import {
-  DEFAULT_SETTINGS,
-  PRESETS,
   buildSchedule,
+  DEFAULT_SETTINGS,
   effectiveQuality,
   isNakedEye,
   optics,
+  PRESETS,
   scopeFocalLength,
   scoreTargets,
   WINDOW_HOURS,
@@ -99,7 +99,12 @@ describe("buildSchedule", () => {
   it("only lists targets from the chosen season, with stars kept in their own list", () => {
     const listed = schedule.slots.flatMap((scheduleSlot) => Object.values(scheduleSlot.items).flat());
 
-    expect(listed.every((scheduleItem) => scheduleItem.row.target.bestSeason === "autumn" && scheduleItem.row.target.type !== "Star")).toBe(true);
+    expect(
+      listed.every(
+        (scheduleItem) => scheduleItem.row.target.bestSeason === "autumn" && scheduleItem.row.target.type !== "Star",
+      ),
+    ).toBe(true);
+
     expect(schedule.stars.every((scoredTarget) => scoredTarget.target.type === "Star")).toBe(true);
   });
 

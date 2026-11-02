@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -21,7 +21,11 @@ export function AsteroidDevourer() {
 export function NovaSlug() {
   return (
     <Drawing label="Drawing of a bloated glowing slug in a nebula cloud eating a power cell">
-      <Line d="M20 60 q16 -16 32 0 q16 -16 32 0 M300 40 q16 -16 32 0 q16 -16 32 0 M40 210 q16 -16 32 0 q16 -16 32 0 M300 210 q16 -16 32 0 q16 -16 32 0" w={3} dash="3 6" />
+      <Line
+        d="M20 60 q16 -16 32 0 q16 -16 32 0 M300 40 q16 -16 32 0 q16 -16 32 0 M40 210 q16 -16 32 0 q16 -16 32 0 M300 210 q16 -16 32 0 q16 -16 32 0"
+        w={3}
+        dash="3 6"
+      />
       <Shape d="M60 190 C40 130 120 90 210 100 C290 110 330 150 310 190 Z" />
       <Shape d="M270 130 C270 96 316 88 332 116 C346 142 316 158 292 152 Z" />
       <Line d="M290 92 L280 62 M316 92 L328 64" w={4} />
@@ -67,7 +71,13 @@ export function UploadGhost() {
       <Line d="M40 70 H360 M40 110 H360 M40 150 H360" w={2} dash="3 8" />
       <Line d="M80 30 V210 M320 30 V210" w={5} />
       <Shape d="M150 70 C150 40 250 40 250 70 C260 110 240 150 200 156 C160 150 140 110 150 70 Z" />
-      <path d="M200 44 L250 70 C260 110 240 150 200 156 Z" fill={card} stroke="currentColor" strokeWidth="3" strokeDasharray="3 4" />
+      <path
+        d="M200 44 L250 70 C260 110 240 150 200 156 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeDasharray="3 4"
+      />
       <circle cx="178" cy="84" r="9" fill={card} {...ink} strokeWidth={3} />
       <Dot x={178} y={84} r={3} />
       <Shape d="M214 76 H240 V92 H214 Z" w={3} />
@@ -105,7 +115,14 @@ export function HangarHaunt() {
       <Line d="M300 150 L340 140" w={4} />
       <Line d="M110 180 l-20 18 M200 188 l-6 24 M290 190 l10 20" w={5} />
       <Line d="M170 180 l14 20 l-16 4 M240 186 l12 16" w={3} />
-      <path d="M170 84 C170 30 240 30 240 84 L246 130 q-12 14 -24 0 q-12 14 -24 0 q-12 14 -26 0 Z" fill="none" stroke="currentColor" strokeWidth="5" strokeDasharray="4 7" strokeLinecap="round" />
+      <path
+        d="M170 84 C170 30 240 30 240 84 L246 130 q-12 14 -24 0 q-12 14 -24 0 q-12 14 -26 0 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeDasharray="4 7"
+        strokeLinecap="round"
+      />
       <Dot x={190} y={72} r={4} />
       <Dot x={216} y={72} r={4} />
       <Line d="M176 56 q30 -20 60 0" w={4} />

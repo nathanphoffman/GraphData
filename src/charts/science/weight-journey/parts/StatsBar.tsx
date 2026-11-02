@@ -1,7 +1,7 @@
 import { round1 } from "../calculate";
 import { yearly } from "../model/averages";
 import { dailyRows, days, future, projectedAdjusted } from "../model/rows";
-import { type Format, type Unit, pretty } from "../model/units";
+import { type Format, pretty, type Unit } from "../model/units";
 
 /** One headline number with its label. */
 function Stat({ label, value }: { label: string; value: string }) {
@@ -35,7 +35,13 @@ export function StatsBar({ unit, f: unitFormat }: { unit: Unit; f: Format }) {
       <Stat label="Lost so far" value={show(first.weight - latest.weight)} />
       <Stat label={`Projected ${pretty(projection.date)}`} value={show(projection.weight)} />
       <Stat label={`Muscle-adjusted projected ${pretty(endAdjusted.date)}`} value={show(endAdjusted.weight)} />
-      {yearOut !== null && <Stat label={`In 1 year (${unitFormat.w(today.blended)} blended + ${unitFormat.w(today.monthly!)} × 12)`} value={show(yearOut)} />}
+      {yearOut !== null && (
+        <Stat
+          label={`In 1 year (${unitFormat.w(today.blended)} blended + ${unitFormat.w(today.monthly!)} × 12)`}
+          value={show(yearOut)}
+        />
+      )}
+
     </div>
   );
 }

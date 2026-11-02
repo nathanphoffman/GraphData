@@ -21,6 +21,7 @@ export default function QuickKey() {
           {item.label}
         </li>
       ))}
+
     </ul>
   );
 }

@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -17,7 +17,10 @@ export function StarOracle() {
       <circle cx="296" cy="74" r="14" fill={card} {...ink} strokeWidth={3} />
       <Line d="M104 66 v16 M96 74 h16 M296 66 v16 M288 74 h16" w={2} />
       <Solid d="M200 150 l6 14 l14 2 l-10 10 l3 14 l-13 -7 l-13 7 l3 -14 l-10 -10 l14 -2 Z" />
-      <Line d="M60 40 v14 M53 47 h14 M340 36 v14 M333 43 h14 M180 10 v10 M175 15 h10 M230 14 v10 M225 19 h10 M30 130 v10 M25 135 h10 M370 150 v10 M365 155 h10" w={3} />
+      <Line
+        d="M60 40 v14 M53 47 h14 M340 36 v14 M333 43 h14 M180 10 v10 M175 15 h10 M230 14 v10 M225 19 h10 M30 130 v10 M25 135 h10 M370 150 v10 M365 155 h10"
+        w={3}
+      />
     </Drawing>
   );
 }
@@ -50,8 +53,22 @@ export function NebulaPhantom() {
       <Shape d="M130 130 L170 116 H250 L290 130 L250 144 H170 Z" />
       <Shape d="M190 116 L200 90 H224 L234 116 Z" w={4} />
       <Line d="M130 130 H110 M290 130 H320" w={4} />
-      <path d="M40 90 C60 30 160 20 220 50 C300 20 360 60 350 120 C380 170 320 210 260 190 C220 220 140 220 100 190 C40 180 20 130 40 90 Z" fill="none" stroke="currentColor" strokeWidth="5" strokeDasharray="10 6" strokeLinecap="round" />
-      <path d="M90 100 C100 70 160 60 200 80 M210 170 C250 190 300 170 310 140" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="4 6" strokeLinecap="round" />
+      <path
+        d="M40 90 C60 30 160 20 220 50 C300 20 360 60 350 120 C380 170 320 210 260 190 C220 220 140 220 100 190 C40 180 20 130 40 90 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeDasharray="10 6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M90 100 C100 70 160 60 200 80 M210 170 C250 190 300 170 310 140"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeDasharray="4 6"
+        strokeLinecap="round"
+      />
       <circle cx="120" cy="70" r="8" fill={card} {...ink} strokeWidth={3} />
       <circle cx="154" cy="62" r="8" fill={card} {...ink} strokeWidth={3} />
       <Dot x={120} y={70} r={3} />
@@ -70,7 +87,14 @@ export function CometSprite() {
       <Shape d="M240 130 C240 114 270 112 276 130 Z" w={4} />
       <Line d="M40 150 H10 M44 140 H14 M44 160 H14" w={4} dash="6 5" />
       <circle cx="60" cy="150" r="20" fill={card} {...ink} strokeWidth={4} />
-      <path d="M50 150 l-30 -30 l24 14 l-4 -26 l18 22 l12 -22 l4 26 l22 -14 l-12 28" fill="none" stroke="currentColor" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
+      <path
+        d="M50 150 l-30 -30 l24 14 l-4 -26 l18 22 l12 -22 l4 26 l22 -14 l-12 28"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="4"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
       <Dot x={54} y={146} r={2} />
       <Dot x={66} y={146} r={2} />
       <Line d="M54 156 Q60 162 68 156" w={2} />
@@ -89,7 +113,10 @@ export function WillOWire() {
       <Line d="M70 90 H100 M70 110 H100 M300 90 H330 M300 110 H330" w={2} />
       <circle cx="200" cy="110" r="30" fill={card} {...ink} />
       <circle cx="200" cy="110" r="14" fill="currentColor" />
-      <Line d="M200 70 l-8 -20 M230 82 l16 -14 M240 110 l22 0 M230 138 l16 14 M200 150 l8 22 M170 138 l-16 14 M160 110 l-22 0 M170 82 l-16 -14" w={3} />
+      <Line
+        d="M200 70 l-8 -20 M230 82 l16 -14 M240 110 l22 0 M230 138 l16 14 M200 150 l8 22 M170 138 l-16 14 M160 110 l-22 0 M170 82 l-16 -14"
+        w={3}
+      />
       <Line d="M200 150 C190 180 210 190 200 210" w={3} dash="2 5" />
       <Line d="M260 200 q10 -10 20 0" w={3} dash="2 5" />
     </Drawing>
@@ -104,7 +131,10 @@ export function VoidBride() {
       <circle cx="150" cy="190" r="7" fill={card} {...ink} strokeWidth={3} />
       <circle cx="190" cy="190" r="7" fill={card} {...ink} strokeWidth={3} />
       <Shape d="M168 88 C160 40 240 40 232 88 L226 110 H174 Z" />
-      <Shape d="M150 96 C150 80 170 60 200 60 C230 60 250 80 250 96 C260 150 270 160 290 168 L110 168 C130 160 140 150 150 96 Z" w={4} />
+      <Shape
+        d="M150 96 C150 80 170 60 200 60 C230 60 250 80 250 96 C260 150 270 160 290 168 L110 168 C130 160 140 150 150 96 Z"
+        w={4}
+      />
       <Line d="M180 90 H220" w={3} />
       <Dot x={188} y={86} r={2} />
       <Dot x={212} y={86} r={2} />

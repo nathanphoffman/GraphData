@@ -22,7 +22,12 @@
   --disputed-bg: #f3ded9;
   max-width: 760px;
   margin: 0 auto;
-  font-family: Iowan Old Style, "Palatino Linotype", Palatino, Georgia, serif;
+  font-family:
+    Iowan Old Style,
+    "Palatino Linotype",
+    Palatino,
+    Georgia,
+    serif;
   line-height: 1.55;
 }
 
@@ -51,14 +56,38 @@
   }
 }
 
-.auth-owner-arneson { --owner: var(--arneson); --owner-bg: var(--arneson-bg); }
-.auth-owner-gygax { --owner: var(--gygax); --owner-bg: var(--gygax-bg); }
-.auth-owner-kuntz { --owner: var(--kuntz); --owner-bg: var(--kuntz-bg); }
-.auth-owner-kask { --owner: var(--kask); --owner-bg: var(--kask-bg); }
-.auth-owner-ernie { --owner: var(--ernie); --owner-bg: var(--ernie-bg); }
-.auth-owner-others { --owner: var(--others); --owner-bg: var(--others-bg); }
-.auth-owner-joint { --owner: var(--joint); --owner-bg: var(--joint-bg); }
-.auth-owner-disputed { --owner: var(--disputed); --owner-bg: var(--disputed-bg); }
+.auth-owner-arneson {
+  --owner: var(--arneson);
+  --owner-bg: var(--arneson-bg);
+}
+.auth-owner-gygax {
+  --owner: var(--gygax);
+  --owner-bg: var(--gygax-bg);
+}
+.auth-owner-kuntz {
+  --owner: var(--kuntz);
+  --owner-bg: var(--kuntz-bg);
+}
+.auth-owner-kask {
+  --owner: var(--kask);
+  --owner-bg: var(--kask-bg);
+}
+.auth-owner-ernie {
+  --owner: var(--ernie);
+  --owner-bg: var(--ernie-bg);
+}
+.auth-owner-others {
+  --owner: var(--others);
+  --owner-bg: var(--others-bg);
+}
+.auth-owner-joint {
+  --owner: var(--joint);
+  --owner-bg: var(--joint-bg);
+}
+.auth-owner-disputed {
+  --owner: var(--disputed);
+  --owner-bg: var(--disputed-bg);
+}
 
 .auth-masthead {
   border-top: 3px solid var(--fg);

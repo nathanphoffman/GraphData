@@ -1,7 +1,15 @@
 import { PERCENT } from "../logic/constants";
 import type { ItemType } from "../logic/items";
 import { capitalize } from "../logic/items";
-import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_BENCHMARKS, PER_YEAR_STOPS } from "../logic/stops";
+import {
+  OWNED_STOPS,
+  PER_WEEK_MAX,
+  PER_WEEK_MIN,
+  PER_WEEK_STEP,
+  PER_YEAR_BENCHMARKS,
+  PER_YEAR_STOPS,
+} from "../logic/stops";
+
 import type { useCalculatorState } from "../state/state";
 import Slider from "./Slider";
 

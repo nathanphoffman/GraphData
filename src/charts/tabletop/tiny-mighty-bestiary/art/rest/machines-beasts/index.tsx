@@ -1,9 +1,35 @@
 import type { ReactNode } from "react";
-import { ButlerBot, ClockworkSpider, BrassDuelist, ZeppelinDread, NeonKoi, ChitteringSkull } from "./Part1";
-import { CrystalSentinel, CrystalCourier, RuneWalker, ServoCherub, SiegeAutomaton, RiotDrone, ArcologyWarden, TinFootman } from "./Part2";
-import { ServoJanitor, MeatGrinderAutomaton, ForgeSentinel, SootPigeon, IronDraftHorse, ChromeRatKing, HiveHound, BulkheadRavager } from "./Part3";
-import { CyberHound, ChromePantherPrime, BoilerRhino, SteamDrake, PrismMoth, BouncingGrubPup, AstralStag } from "./Part4";
-import { GrotHoundPack, ChaosHydra, BackAlleyTiger, BoilerWyrm, HiveWyvern, NeonPigeonFlock } from "./Part5";
+import { BrassDuelist, ButlerBot, ChitteringSkull, ClockworkSpider, NeonKoi, ZeppelinDread } from "./Part1";
+import {
+  ArcologyWarden,
+  CrystalCourier,
+  CrystalSentinel,
+  RiotDrone,
+  RuneWalker,
+  ServoCherub,
+  SiegeAutomaton,
+  TinFootman,
+} from "./Part2";
+import {
+  BulkheadRavager,
+  ChromeRatKing,
+  ForgeSentinel,
+  HiveHound,
+  IronDraftHorse,
+  MeatGrinderAutomaton,
+  ServoJanitor,
+  SootPigeon,
+} from "./Part3";
+import {
+  AstralStag,
+  BoilerRhino,
+  BouncingGrubPup,
+  ChromePantherPrime,
+  CyberHound,
+  PrismMoth,
+  SteamDrake,
+} from "./Part4";
+import { BackAlleyTiger, BoilerWyrm, ChaosHydra, GrotHoundPack, HiveWyvern, NeonPigeonFlock } from "./Part5";
 
 export const restMachinesBeastsArt: Record<string, () => ReactNode> = {
   "butler-bot": ButlerBot,

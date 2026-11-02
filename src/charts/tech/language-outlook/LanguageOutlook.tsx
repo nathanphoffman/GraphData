@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
 import data from "../../../../data/language-outlook/language-outlook.json";
-import type { LanguageOutlookData, LanguageRecord, Tooltip } from "./model/types";
-import { HIDDEN_BY_DEFAULT_PREFIXES, NEWEST_YEAR_SERIES } from "./model/style";
-import { buildYScale } from "./model/layout";
 import Legend from "./Legend";
+import { buildYScale } from "./model/layout";
+import { HIDDEN_BY_DEFAULT_PREFIXES, NEWEST_YEAR_SERIES } from "./model/style";
+import type { LanguageOutlookData, LanguageRecord, Tooltip } from "./model/types";
 import OutlookSvg from "./OutlookSvg";
 import QuickKey from "./QuickKey";
 import TopTens from "./TopTens";
@@ -19,7 +19,12 @@ export default function LanguageOutlook() {
   // Start with every line visible except those hidden by default.
   const [visible, setVisible] = useState<Record<string, boolean>>(() =>
     // One entry per series and line: visible, unless its name starts with a prefix that is hidden by default.
-    Object.fromEntries([...model.series, ...model.lines].map((seriesKey) => [seriesKey, !HIDDEN_BY_DEFAULT_PREFIXES.some((prefix) => seriesKey.startsWith(prefix))])),
+    Object.fromEntries(
+      [...model.series, ...model.lines].map((seriesKey) => [
+        seriesKey,
+        !HIDDEN_BY_DEFAULT_PREFIXES.some((prefix) => seriesKey.startsWith(prefix)),
+      ]),
+    ),
   );
 
   const [sortKey, setSortKey] = useState(NEWEST_YEAR_SERIES);
@@ -50,7 +55,12 @@ export default function LanguageOutlook() {
     <div>
       <TopTens model={model} />
       <div className="settings-bar">
-        <button type="button" className="settings-toggle" aria-expanded={showSettings} onClick={() => setShowSettings(!showSettings)}>
+        <button
+          type="button"
+          className="settings-toggle"
+          aria-expanded={showSettings}
+          onClick={() => setShowSettings(!showSettings)}
+        >
           <span aria-hidden="true">⚙</span> Settings and key
           <span className={showSettings ? "chevron open" : "chevron"}>▸</span>
         </button>
@@ -71,7 +81,10 @@ export default function LanguageOutlook() {
         model={sorted}
         visible={visible}
         yScale={yScale}
-        onTip={(event, text) => setTooltip({ x: event.clientX + TOOLTIP_OFFSET, y: event.clientY + TOOLTIP_OFFSET, text })}
+        onTip={(event, text) =>
+          setTooltip({ x: event.clientX + TOOLTIP_OFFSET, y: event.clientY + TOOLTIP_OFFSET, text })
+        }
+
         onTipHide={() => setTooltip(null)}
       />
       {tooltip && (

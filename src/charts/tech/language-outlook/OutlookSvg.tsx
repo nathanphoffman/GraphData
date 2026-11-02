@@ -1,7 +1,18 @@
-import type { MouseEvent } from "react";
 import type { ScaleLinear } from "d3-scale";
-import { LINE_COLORS, LINE_DASHES, NEWEST_YEAR_SERIES, PROJECTION_PREFIX, changeKey, seriesColor } from "./model/style";
-import { ARROW_STYLE, CHART_HEIGHT, MARGIN, CHART_WIDTH, PROJECTION_DOT_RADIUS, Y_ROUND_STEP, arrowPoints, lineSegments, makeXAt } from "./model/layout";
+import type { MouseEvent } from "react";
+import {
+  ARROW_STYLE,
+  arrowPoints,
+  CHART_HEIGHT,
+  CHART_WIDTH,
+  lineSegments,
+  MARGIN,
+  makeXAt,
+  PROJECTION_DOT_RADIUS,
+  Y_ROUND_STEP,
+} from "./model/layout";
+
+import { changeKey, LINE_COLORS, LINE_DASHES, NEWEST_YEAR_SERIES, PROJECTION_PREFIX, seriesColor } from "./model/style";
 import type { LanguageOutlookData, LanguageRecord } from "./model/types";
 
 /** Grid labels sit this far left of the axis and this far below their line, at this size. */
@@ -44,8 +55,22 @@ function GridLines({ gridValues, yScale }: { gridValues: number[]; yScale: Scale
     <>
       {gridValues.map((gridValue) => (
         <g key={gridValue}>
-          <line x1={MARGIN.left} x2={CHART_WIDTH - MARGIN.right} y1={yScale(gridValue)} y2={yScale(gridValue)} stroke="#ffffff30" strokeDasharray="2 5" />
-          <text x={MARGIN.left - GRID_LABEL_GAP} y={yScale(gridValue) + GRID_LABEL_BASELINE} textAnchor="end" fontSize={GRID_FONT_SIZE} fill="#fff" fillOpacity={0.8}>
+          <line
+            x1={MARGIN.left}
+            x2={CHART_WIDTH - MARGIN.right}
+            y1={yScale(gridValue)}
+            y2={yScale(gridValue)}
+            stroke="#ffffff30"
+            strokeDasharray="2 5"
+          />
+          <text
+            x={MARGIN.left - GRID_LABEL_GAP}
+            y={yScale(gridValue) + GRID_LABEL_BASELINE}
+            textAnchor="end"
+            fontSize={GRID_FONT_SIZE}
+            fill="#fff"
+            fillOpacity={0.8}
+          >
             {gridValue}
           </text>
         </g>
@@ -94,7 +119,17 @@ interface MarkProps extends TipProps {
 }
 
 /** A projection: a faint arrow for the trend change with a dot on the value. */
-function ProjectionMark({ languageName, seriesName, seriesIndex, value, centerX, centerY, change, onTip, onTipHide }: MarkProps & { change: number }) {
+function ProjectionMark({
+  languageName,
+  seriesName,
+  seriesIndex,
+  value,
+  centerX,
+  centerY,
+  change,
+  onTip,
+  onTipHide,
+}: MarkProps & { change: number }) {
   const sign = change >= 0 ? "+" : "";
 
   return (
@@ -117,7 +152,13 @@ function ProjectionMark({ languageName, seriesName, seriesIndex, value, centerX,
         strokeWidth={1}
 
         // Show the value and its trend change in the tooltip.
-        onMouseMove={(event) => onTip(event, `${languageName} - ${seriesName}: ${value.toFixed(2)} (trend change ${sign}${change.toFixed(2)})`)}
+        onMouseMove={(event) =>
+          onTip(
+            event,
+            `${languageName} - ${seriesName}: ${value.toFixed(2)} (trend change ${sign}${change.toFixed(2)})`,
+          )
+        }
+
         onMouseLeave={onTipHide}
       />
     </g>
@@ -157,7 +198,16 @@ function SeriesMarks({ language, series, visible, centerX, yScale, onTip, onTipH
         const value = language.values[seriesName];
 
         if (!visible[seriesName] || value == null) return null;
-        const mark = { languageName: language.name, seriesName, seriesIndex, value, centerX, centerY: yScale(value), onTip, onTipHide };
+        const mark = {
+          languageName: language.name,
+          seriesName,
+          seriesIndex,
+          value,
+          centerX,
+          centerY: yScale(value),
+          onTip,
+          onTipHide,
+        };
 
         if (!seriesName.startsWith(PROJECTION_PREFIX)) return <ValueDot key={seriesName} {...mark} />;
 
@@ -173,7 +223,15 @@ function LanguageName({ name, centerX }: { name: string; centerX: number }) {
   const baseline = CHART_HEIGHT - MARGIN.bottom + NAME_DROP;
 
   return (
-    <text x={centerX} y={baseline} textAnchor="end" fontSize={NAME_FONT_SIZE} fontWeight={500} fill="#fff" transform={`rotate(${NAME_ANGLE} ${centerX} ${baseline})`}>
+    <text
+      x={centerX}
+      y={baseline}
+      textAnchor="end"
+      fontSize={NAME_FONT_SIZE}
+      fontWeight={500}
+      fill="#fff"
+      transform={`rotate(${NAME_ANGLE} ${centerX} ${baseline})`}
+    >
       {name}
     </text>
   );
@@ -188,14 +246,32 @@ export default function OutlookSvg({ model, visible, yScale, onTip, onTipHide }:
   return (
     <svg className="chart-surface" viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} role="img" aria-label={model.title}>
       <GridLines gridValues={gridValues} yScale={yScale} />
-      {lines.filter((line) => visible[line]).map((line) => <SeriesLine key={line} line={line} languages={languages} xOfIndex={xOfIndex} yScale={yScale} />)} {/* Only the visible lines are drawn. */}
+      {lines
+        .filter((line) => visible[line])
+        .map((line) => (
+          <SeriesLine key={line} line={line} languages={languages} xOfIndex={xOfIndex} yScale={yScale} />
+        ))}{" "}
 
-      {languages.map((language, index) => ( // Each language gets its name and its dots and arrows.
-        <g key={language.name}>
-          <LanguageName name={language.name} centerX={xOfIndex(index)} />
-          <SeriesMarks language={language} series={series} visible={visible} centerX={xOfIndex(index)} yScale={yScale} onTip={onTip} onTipHide={onTipHide} />
-        </g>
-      ))}
+      {/* Only the visible lines are drawn. */}
+      {languages.map(
+        (
+          language,
+          index, // Each language gets its name and its dots and arrows.
+        ) => (
+          <g key={language.name}>
+            <LanguageName name={language.name} centerX={xOfIndex(index)} />
+            <SeriesMarks
+              language={language}
+              series={series}
+              visible={visible}
+              centerX={xOfIndex(index)}
+              yScale={yScale}
+              onTip={onTip}
+              onTipHide={onTipHide}
+            />
+          </g>
+        ),
+      )}
 
     </svg>
   );

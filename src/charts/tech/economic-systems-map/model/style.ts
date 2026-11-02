@@ -41,7 +41,18 @@ export const CELL_CENTER = 0.5;
 export const BOLD = 700;
 
 /** Text sizes in pixels. */
-export const FONT_SIZE = { title: 22, header: 15, sizeHeader: 14, cellName: 15, example: 13, note: 12, legend: 13, footnote: 11, figure: 11, stability: 13 };
+export const FONT_SIZE = {
+  title: 22,
+  header: 15,
+  sizeHeader: 14,
+  cellName: 15,
+  example: 13,
+  note: 12,
+  legend: 13,
+  footnote: 11,
+  figure: 11,
+  stability: 13,
+};
 
 export const TITLE_BASELINE = 34;
 
@@ -50,7 +61,15 @@ export const HEADER_TEXT_BASELINE = 26;
 export const ROW_HEADER_NUDGE = 5;
 
 /** The box behind a cell name, measured from the top of the cell. */
-export const CELL_NAME_BOX = { top: 5, height: 24, radius: 5, opacity: 0.75, textBaseline: 18, charWidth: 8.6, padding: 18 };
+export const CELL_NAME_BOX = {
+  top: 5,
+  height: 24,
+  radius: 5,
+  opacity: 0.75,
+  textBaseline: 18,
+  charWidth: 8.6,
+  padding: 18,
+};
 
 /** Where each example line sits from the top of its cell; the note under an example is one line below it. */
 export const EXAMPLE_Y = { auth: 50, authNote: 68, dem: 70, demAfterNote: 88, noteGap: 18 };

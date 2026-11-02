@@ -24,7 +24,9 @@ function worstScores(subjects: Subject[], columns: string[]): Record<string, num
   const worst: Record<string, number> = {};
 
   for (const column of columns) {
-    const positives = subjects.map((subject) => subject.scores[column]).filter((subject): subject is number => subject !== undefined && subject > 0);
+    const positives = subjects
+      .map((subject) => subject.scores[column])
+      .filter((subject): subject is number => subject !== undefined && subject > 0);
     worst[column] = positives.length ? Math.min(...positives) : 1;
   }
 
@@ -35,7 +37,10 @@ function worstScores(subjects: Subject[], columns: string[]): Record<string, num
 function priceEfficiency(subject: Subject): number | undefined {
   if (subject.outputPrice === undefined) return undefined;
 
-  return Math.max(1, Math.min(MAX_SCORE, EFFICIENCY_AT_ONE_DOLLAR - EFFICIENCY_LOST_PER_TENFOLD * Math.log10(subject.outputPrice)));
+  return Math.max(
+    1,
+    Math.min(MAX_SCORE, EFFICIENCY_AT_ONE_DOLLAR - EFFICIENCY_LOST_PER_TENFOLD * Math.log10(subject.outputPrice)),
+  );
 }
 
 /** A real score, or the price proxy for efficiency when there is no real score. */

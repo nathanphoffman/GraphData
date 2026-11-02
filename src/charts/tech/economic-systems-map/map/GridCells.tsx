@@ -1,5 +1,19 @@
-import { BOLD, CELL_CENTER, CELL_H, CELL_W, COLORS, FONT_SIZE, GRID_LEFT, GRID_TOP, HEADER_COL_W, HEADER_ROW_H, HEADER_TEXT_BASELINE, ROW_HEADER_NUDGE } from "../model/style";
 import { GRID_X0, GRID_Y0, nearestCells } from "../model/layout";
+import {
+  BOLD,
+  CELL_CENTER,
+  CELL_H,
+  CELL_W,
+  COLORS,
+  FONT_SIZE,
+  GRID_LEFT,
+  GRID_TOP,
+  HEADER_COL_W,
+  HEADER_ROW_H,
+  HEADER_TEXT_BASELINE,
+  ROW_HEADER_NUDGE,
+} from "../model/style";
+
 import type { EconomicSystemsData } from "../model/types";
 
 interface Props {
@@ -11,15 +25,43 @@ interface Props {
 export default function GridCells({ model, onSelect }: Props) {
   return (
     <>
-      <rect x={GRID_LEFT} y={GRID_TOP} width={HEADER_COL_W} height={HEADER_ROW_H} fill={COLORS.header} stroke={COLORS.border} />
-      <text x={GRID_LEFT + HEADER_COL_W / 2} y={GRID_TOP + HEADER_TEXT_BASELINE} textAnchor="middle" fontSize={FONT_SIZE.sizeHeader} fontWeight={BOLD} fill={COLORS.headerText}>
+      <rect
+        x={GRID_LEFT}
+        y={GRID_TOP}
+        width={HEADER_COL_W}
+        height={HEADER_ROW_H}
+        fill={COLORS.header}
+        stroke={COLORS.border}
+      />
+      <text
+        x={GRID_LEFT + HEADER_COL_W / 2}
+        y={GRID_TOP + HEADER_TEXT_BASELINE}
+        textAnchor="middle"
+        fontSize={FONT_SIZE.sizeHeader}
+        fontWeight={BOLD}
+        fill={COLORS.headerText}
+      >
         Size
       </text>
       {/* One header cell per column. */}
       {model.columns.map((name, index) => (
         <g key={name}>
-          <rect x={GRID_X0 + index * CELL_W} y={GRID_TOP} width={CELL_W} height={HEADER_ROW_H} fill={COLORS.header} stroke={COLORS.border} />
-          <text x={GRID_X0 + (index + CELL_CENTER) * CELL_W} y={GRID_TOP + HEADER_TEXT_BASELINE} textAnchor="middle" fontSize={FONT_SIZE.header} fontWeight={BOLD} fill={COLORS.headerText}>
+          <rect
+            x={GRID_X0 + index * CELL_W}
+            y={GRID_TOP}
+            width={CELL_W}
+            height={HEADER_ROW_H}
+            fill={COLORS.header}
+            stroke={COLORS.border}
+          />
+          <text
+            x={GRID_X0 + (index + CELL_CENTER) * CELL_W}
+            y={GRID_TOP + HEADER_TEXT_BASELINE}
+            textAnchor="middle"
+            fontSize={FONT_SIZE.header}
+            fontWeight={BOLD}
+            fill={COLORS.headerText}
+          >
             {name}
           </text>
         </g>
@@ -28,44 +70,62 @@ export default function GridCells({ model, onSelect }: Props) {
       {/* One header cell per row. */}
       {model.rows.map((name, index) => (
         <g key={name}>
-          <rect x={GRID_LEFT} y={GRID_Y0 + index * CELL_H} width={HEADER_COL_W} height={CELL_H} fill={COLORS.header} stroke={COLORS.border} />
-          <text x={GRID_LEFT + HEADER_COL_W / 2} y={GRID_Y0 + (index + CELL_CENTER) * CELL_H + ROW_HEADER_NUDGE} textAnchor="middle" fontSize={FONT_SIZE.header} fontWeight={BOLD} fill={COLORS.headerText}>
+          <rect
+            x={GRID_LEFT}
+            y={GRID_Y0 + index * CELL_H}
+            width={HEADER_COL_W}
+            height={CELL_H}
+            fill={COLORS.header}
+            stroke={COLORS.border}
+          />
+          <text
+            x={GRID_LEFT + HEADER_COL_W / 2}
+            y={GRID_Y0 + (index + CELL_CENTER) * CELL_H + ROW_HEADER_NUDGE}
+            textAnchor="middle"
+            fontSize={FONT_SIZE.header}
+            fontWeight={BOLD}
+            fill={COLORS.headerText}
+          >
             {name}
           </text>
         </g>
       ))}
 
-      {model.cells.map((cell) => ( // One clickable cell per system.
-        <rect
-          key={cell.name}
-          x={GRID_X0 + cell.col * CELL_W}
-          y={GRID_Y0 + cell.row * CELL_H}
-          width={CELL_W}
-          height={CELL_H}
-          fill={(cell.col + cell.row) % 2 === 0 ? COLORS.cellLight : COLORS.cellDark}
-          stroke={COLORS.border}
-          strokeWidth={2}
-          className="map-cell"
-          role="button"
-          tabIndex={0}
-          aria-label={`${cell.name}: show common views`}
-          onClick={(event) => {
-            // Turn the click into SVG coordinates, then pick whatever is nearest: a cell, a line, or a corner.
-            const svg = event.currentTarget.ownerSVGElement!;
-            const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM()!.inverse());
-            onSelect(nearestCells(model, point.x, point.y));
-          }}
+      {model.cells.map(
+        (
+          cell, // One clickable cell per system.
+        ) => (
+          <rect
+            key={cell.name}
+            x={GRID_X0 + cell.col * CELL_W}
+            y={GRID_Y0 + cell.row * CELL_H}
+            width={CELL_W}
+            height={CELL_H}
+            fill={(cell.col + cell.row) % 2 === 0 ? COLORS.cellLight : COLORS.cellDark}
+            stroke={COLORS.border}
+            strokeWidth={2}
+            className="map-cell"
+            role="button"
+            tabIndex={0}
+            aria-label={`${cell.name}: show common views`}
+            onClick={(event) => {
+              // Turn the click into SVG coordinates, then pick whatever is nearest: a cell, a line, or a corner.
+              const svg = event.currentTarget.ownerSVGElement!;
+              const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM()!.inverse());
+              onSelect(nearestCells(model, point.x, point.y));
+            }}
 
-          // Let keyboard users pick a cell with Enter or Space.
-          onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              onSelect([cell.name]);
-            }
-          }}
+            // Let keyboard users pick a cell with Enter or Space.
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onSelect([cell.name]);
+              }
+            }}
 
-        />
-      ))}
+          />
+        ),
+      )}
 
     </>
   );

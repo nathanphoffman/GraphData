@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -49,7 +49,13 @@ export function PlasmaPanther() {
       <circle cx="324" cy="126" r="4" fill={card} />
       <Line d="M100 176 V196 M130 178 V196 M236 178 V196 M262 176 V196" w={7} />
       <Line d="M72 150 C40 150 30 120 44 100" w={7} />
-      <path d="M100 140 q20 -14 40 -4 q20 10 40 -2 q20 -8 40 4 M120 160 q30 -10 60 0 q30 8 60 -4" fill="none" stroke={card} strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M100 140 q20 -14 40 -4 q20 10 40 -2 q20 -8 40 4 M120 160 q30 -10 60 0 q30 8 60 -4"
+        fill="none"
+        stroke={card}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
       <path d="M296 112 q6 -14 18 -6" fill="none" stroke={card} strokeWidth="2" strokeLinecap="round" />
     </Drawing>
   );
@@ -62,7 +68,10 @@ export function ScoutLizard() {
       <Shape d="M258 128 C262 100 296 84 326 94 L366 108 L326 124 C306 140 270 146 258 128 Z" />
       <Dot x={310} y={102} r={4} />
       <Line d="M350 112 l24 -6 M350 118 l24 8" w={3} />
-      <Line d="M120 176 L104 214 M160 180 L152 218 M204 182 L204 220 M244 178 L254 216 M274 168 L296 204 M96 164 L70 196" w={6} />
+      <Line
+        d="M120 176 L104 214 M160 180 L152 218 M204 182 L204 220 M244 178 L254 216 M274 168 L296 204 M96 164 L70 196"
+        w={6}
+      />
       <Line d="M90 160 C50 160 30 130 48 110 C58 120 66 130 84 140" w={7} />
       <Line d="M130 128 l4 -10 M160 122 l4 -10 M190 120 l4 -10 M220 124 l4 -10" w={4} />
       <Ground y={226} />
@@ -77,9 +86,29 @@ export function VoidKrillSwarm() {
       <Line d="M40 200 V230 M160 200 V230 M280 200 V230" w={3} />
       <path d="M150 200 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0" fill="none" stroke={card} strokeWidth="4" />
       {/* Repeat the shape at each listed position, turned a little differently each time. */}
-      {[[70, 60], [130, 90], [200, 50], [260, 100], [320, 70], [110, 140], [180, 130], [250, 150], [310, 130], [350, 170], [60, 170], [200, 180], [150, 175]].map(([x, y], index) => (
-        <g key={index} transform={`translate(${x} ${y}) rotate(${(index * 47) % 60 - 30})`}>
-          <path d="M-14 0 C-14 -8 6 -8 12 -2 L20 0 L12 3 C6 8 -14 8 -14 0 Z" fill={card} stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      {[
+        [70, 60],
+        [130, 90],
+        [200, 50],
+        [260, 100],
+        [320, 70],
+        [110, 140],
+        [180, 130],
+        [250, 150],
+        [310, 130],
+        [350, 170],
+        [60, 170],
+        [200, 180],
+        [150, 175],
+      ].map(([x, y], index) => (
+        <g key={index} transform={`translate(${x} ${y}) rotate(${((index * 47) % 60) - 30})`}>
+          <path
+            d="M-14 0 C-14 -8 6 -8 12 -2 L20 0 L12 3 C6 8 -14 8 -14 0 Z"
+            fill={card}
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinejoin="round"
+          />
           <Line d="M-8 -4 V4 M-2 -5 V5 M4 -4 V4" w={2} />
           <Line d="M-6 6 l-2 8 M0 7 l0 8 M6 6 l2 8" w={2} />
         </g>

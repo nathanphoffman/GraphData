@@ -19,12 +19,16 @@ try {
 }
 
 const args = process.argv.slice(2);
+
 const flag = (name) => args.flatMap((arg, at) => (arg === `--${name}` ? [args[at + 1]] : []));
 const positional = args.filter((arg, at) => !arg.startsWith("--") && !args[at - 1]?.startsWith("--"));
 const [project, kind, message] = positional;
 
 if (!project || !kind) {
-  console.error('Usage: ralph-report.mjs <project> <kind> "<message>" [--source s --state s --round n --area name=done/open/blocked ...]');
+  console.error(
+    'Usage: ralph-report.mjs <project> <kind> "<message>" [--source s --state s --round n --area name=done/open/blocked ...]',
+  );
+
   process.exit(1);
 }
 
@@ -34,7 +38,10 @@ let body = { project, kind, message, source };
 
 if (kind === "commit") {
   const [sha] = flag("sha");
-  const [added, removed, files, total] = ["added", "removed", "files", "total"].map((name) => Number(flag(name)[0] ?? 0));
+  const [added, removed, files, total] = ["added", "removed", "files", "total"].map((name) =>
+    Number(flag(name)[0] ?? 0),
+  );
+
   route = "/api/ralph/commit";
   body = { project, source, sha, message, added, removed, files, total };
 } else if (kind === "file") {
@@ -43,6 +50,7 @@ if (kind === "commit") {
 }
 
 const [state] = flag("state");
+
 if (state && route === "/api/ralph/report") {
   body.state = state;
   body.round = Number(flag("round")[0] ?? 0);
@@ -65,6 +73,7 @@ const WORKTREE_ROOTS = { "3dspacegame-deor": join(HOME_DIR, "Code/RalphLoops/run
 /** Hand-written Rust and Deor lines from the game's own counter (generated Rust and tests left out), or undefined when it cannot run. */
 function countWithGameScript(folder) {
   const script = join(folder, "..", "scripts", "deor_share.py");
+
   if (!existsSync(script)) return undefined;
 
   const found = JSON.parse(execFileSync("python3", [script, "--json"], { encoding: "utf8", timeout: 30_000 }));
@@ -78,13 +87,16 @@ function countWithGameScript(folder) {
 function countLanguages(folder) {
   try {
     const fromScript = countWithGameScript(folder);
+
     if (fromScript) return fromScript;
   } catch (error) {
     console.error(`ralph-report: deor_share.py failed, trying tokei: ${error.message}`);
   }
 
   try {
-    const found = JSON.parse(execFileSync("tokei", ["-t=Rust,Deor", "-o", "json", folder], { encoding: "utf8", timeout: 30_000 }));
+    const found = JSON.parse(
+      execFileSync("tokei", ["-t=Rust,Deor", "-o", "json", folder], { encoding: "utf8", timeout: 30_000 }),
+    );
 
     return { deor: found.Deor?.code ?? 0, rust: found.Rust?.code ?? 0 };
   } catch (error) {
@@ -98,6 +110,7 @@ function countLanguages(folder) {
 function countWithWorktrees(project, folder) {
   const base = countLanguages(folder);
   const root = WORKTREE_ROOTS[project];
+
   if (!base || !root || !existsSync(root)) return base;
 
   const total = { ...base };
@@ -105,6 +118,7 @@ function countWithWorktrees(project, folder) {
   for (const area of readdirSync(root)) {
     const areaFolder = join(root, area, "src");
     const counted = existsSync(areaFolder) ? countLanguages(areaFolder) : undefined;
+
     if (!counted) continue;
 
     total.deor += counted.deor - base.deor;
@@ -119,7 +133,11 @@ try {
   await call("POST", route, body);
 
   const folder = CODE_FOLDERS[project];
-  const counts = folder && (kind === "commit" || kind === "round" || (state && state !== "running")) ? countWithWorktrees(project, folder) : undefined;
+  const counts =
+    folder && (kind === "commit" || kind === "round" || (state && state !== "running"))
+      ? countWithWorktrees(project, folder)
+      : undefined;
+
   if (counts) await call("POST", "/api/ralph/languages", { project, ...counts });
 } catch (error) {
   console.error(`ralph-report failed: ${error.message}`);

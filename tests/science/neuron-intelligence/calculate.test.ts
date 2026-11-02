@@ -9,9 +9,9 @@ describe("scoreAnimals", () => {
   it("scores neurons per kilogram and rates humans at 100%", () => {
     const [scoredHuman, scoredMouse] = scoreAnimals([human, mouse], linear);
 
-    expect(scoredHuman.score).toBeCloseTo((86e9) / 70);
+    expect(scoredHuman.score).toBeCloseTo(86e9 / 70);
     expect(scoredHuman.humanPercent).toBeCloseTo(100);
-    expect(scoredMouse.humanPercent).toBeCloseTo(((0.07e9 / 0.02) / (86e9 / 70)) * 100);
+    expect(scoredMouse.humanPercent).toBeCloseTo((0.07e9 / 0.02 / (86e9 / 70)) * 100);
   });
 
   it("gives NaN percentages when there is no human to compare with", () => {

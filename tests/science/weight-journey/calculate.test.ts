@@ -3,7 +3,10 @@ import { fillDays, project } from "../../../src/charts/science/weight-journey/ca
 
 describe("fillDays", () => {
   it("fills gaps in a straight line and marks them estimated", () => {
-    const days = fillDays([["2024-01-01", 100], ["2024-01-04", 94]]);
+    const days = fillDays([
+      ["2024-01-01", 100],
+      ["2024-01-04", 94],
+    ]);
 
     expect(days.map((dayRecord) => dayRecord.date)).toEqual(["2024-01-01", "2024-01-02", "2024-01-03", "2024-01-04"]);
     expect(days.map((dayRecord) => dayRecord.weight)).toEqual([100, 98, 96, 94]);
@@ -17,7 +20,11 @@ describe("fillDays", () => {
 
 describe("project", () => {
   it("continues a straight line downward", () => {
-    const days = fillDays([["2024-01-01", 100], ["2024-01-11", 90]]);
+    const days = fillDays([
+      ["2024-01-01", 100],
+      ["2024-01-11", 90],
+    ]);
+
     const { future } = project(days, 11, 3);
 
     expect(future).toHaveLength(3);

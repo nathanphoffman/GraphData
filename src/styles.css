@@ -127,7 +127,6 @@ h1 {
   }
 }
 
-
 .panel {
   border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
   border-radius: 10px;

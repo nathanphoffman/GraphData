@@ -1,9 +1,57 @@
 import type { ReactNode } from "react";
-import { ScrapGolem, TinCanPup, JunkyardGuardBot, WarMachineRemnant, VendingBuddy, RotorScavenger, PocketWatchSentinel, GlowRat } from "./Part1";
-import { AtomicRoach, RadHound, RadBear, DoomHoundAlpha, WastelandVulture, IrradiatedAurochs, JunkScavenger, WastelandRaider, WastelandMerchant, GlowHusk } from "./Part2";
-import { MutantBrute, WastelandWarlord, BottlecapHermit, VaultTyrant, ScrapKid, TinkeringGranny, ScrapNurse, AshRoadPreacher, WastelandGunslinger } from "./Part3";
-import { DustTitan, HighwayBehemoth, MutantGrub, SumpLeech, GlowTroll, PlagueMammoth, NuclearColossus, MutantHedgehog, RadMothMatriarch } from "./Part4";
-import { GlowWraith, DustOracle, LanternGhost, FallPoutRevenant, AshenHerald, GlowingMemory, FalloutBanshee } from "./Part5";
+import {
+  GlowRat,
+  JunkyardGuardBot,
+  PocketWatchSentinel,
+  RotorScavenger,
+  ScrapGolem,
+  TinCanPup,
+  VendingBuddy,
+  WarMachineRemnant,
+} from "./Part1";
+import {
+  AtomicRoach,
+  DoomHoundAlpha,
+  GlowHusk,
+  IrradiatedAurochs,
+  JunkScavenger,
+  RadBear,
+  RadHound,
+  WastelandMerchant,
+  WastelandRaider,
+  WastelandVulture,
+} from "./Part2";
+import {
+  AshRoadPreacher,
+  BottlecapHermit,
+  MutantBrute,
+  ScrapKid,
+  ScrapNurse,
+  TinkeringGranny,
+  VaultTyrant,
+  WastelandGunslinger,
+  WastelandWarlord,
+} from "./Part3";
+import {
+  DustTitan,
+  GlowTroll,
+  HighwayBehemoth,
+  MutantGrub,
+  MutantHedgehog,
+  NuclearColossus,
+  PlagueMammoth,
+  RadMothMatriarch,
+  SumpLeech,
+} from "./Part4";
+import {
+  AshenHerald,
+  DustOracle,
+  FalloutBanshee,
+  FallPoutRevenant,
+  GlowingMemory,
+  GlowWraith,
+  LanternGhost,
+} from "./Part5";
 
 export const postApocArt: Record<string, () => ReactNode> = {
   "scrap-golem": ScrapGolem,

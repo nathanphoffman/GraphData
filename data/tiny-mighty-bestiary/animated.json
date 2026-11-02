@@ -3,18 +3,11 @@
     "id": "battle-clank",
     "name": "Battle Clank",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "robot",
-      "android",
-      "clanker"
-    ],
+    "aliases": ["robot", "android", "clanker"],
     "description": "A spindly, rattling combat robot that surrenders only when its head is knocked off.",
     "attack": "Wrist blaster",
     "skills": [
@@ -41,21 +34,11 @@
     "id": "beep-bot",
     "name": "Beep Bot",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "robot sidekick",
-      "little robot",
-      "astro-bot",
-      "utility bot",
-      "droid sidekick",
-      "trash can robot"
-    ],
+    "aliases": ["robot sidekick", "little robot", "astro-bot", "utility bot", "droid sidekick", "trash can robot"],
     "description": "A beeping, domed astro-bot with a screwdriver arm, a projector and an excellent attitude.",
     "attack": "Shock prod",
     "skills": [
@@ -83,10 +66,7 @@
     "id": "chrome-revenant",
     "name": "Chrome Revenant",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 5,
     "tier": 1,
     "flying": false,
@@ -127,10 +107,7 @@
     "id": "iron-colossus",
     "name": "Iron Colossus",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 7,
     "flying": false,
@@ -184,21 +161,11 @@
     "id": "buzz-drone",
     "name": "Buzz Drone",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 3,
     "tier": 0.25,
     "flying": true,
-    "aliases": [
-      "drone",
-      "quadcopter",
-      "surveillance",
-      "camera drone",
-      "security drone",
-      "spy drone"
-    ],
+    "aliases": ["drone", "quadcopter", "surveillance", "camera drone", "security drone", "spy drone"],
     "description": "A fist-sized flying camera with a taser and a perpetually unsettling red light.",
     "attack": "Shock probe",
     "skills": [
@@ -218,22 +185,11 @@
     "id": "wire-ghost",
     "name": "Wire Ghost",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi",
-      "science-fantasy"
-    ],
+    "themes": ["cyberpunk", "scifi", "science-fantasy"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "rogue ai",
-      "ai",
-      "malware",
-      "net spirit",
-      "virus",
-      "daemon"
-    ],
+    "aliases": ["rogue ai", "ai", "malware", "net spirit", "virus", "daemon"],
     "description": "A rogue intelligence that lives in every screen, speaker and doorlock in the building and does not like being unplugged.",
     "attack": "Static shock",
     "skills": [
@@ -271,21 +227,11 @@
     "id": "riot-walker",
     "name": "Riot Walker",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 4,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "enforcer",
-      "mech",
-      "cop robot",
-      "police robot",
-      "law bot",
-      "riot mech"
-    ],
+    "aliases": ["enforcer", "mech", "cop robot", "police robot", "law bot", "riot mech"],
     "description": "A two-legged police robot with a loudspeaker voice, a shield and a perfectly legal right to shoot.",
     "attack": "Riot cannon",
     "skills": [
@@ -316,21 +262,11 @@
     "id": "tumbleweed-imp",
     "name": "Tumbleweed Imp",
     "type": "animated",
-    "themes": [
-      "western",
-      "fantasy"
-    ],
+    "themes": ["western", "fantasy"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "tumbleweed",
-      "dust devil",
-      "prairie imp",
-      "desert imp",
-      "trickster",
-      "wind spirit"
-    ],
+    "aliases": ["tumbleweed", "dust devil", "prairie imp", "desert imp", "trickster", "wind spirit"],
     "description": "A bouncing ball of dried scrub with eyes and a bad sense of timing.",
     "attack": "Prick",
     "skills": [
@@ -347,21 +283,11 @@
     "id": "noodle-cart-bot",
     "name": "Noodle Cart Bot",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "noodle vendor",
-      "food cart",
-      "street vendor",
-      "robot cook",
-      "ramen",
-      "vending robot"
-    ],
+    "aliases": ["noodle vendor", "food cart", "street vendor", "robot cook", "ramen", "vending robot"],
     "description": "A rolling street cart with a mechanical arm that serves hot noodles and bad advice at 3 a.m.",
     "attack": "Ladle",
     "skills": [
@@ -388,22 +314,11 @@
     "id": "runaway-locomotive",
     "name": "Runaway Locomotive",
     "type": "animated",
-    "themes": [
-      "western",
-      "steampunk"
-    ],
+    "themes": ["western", "steampunk"],
     "tone": 4,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "train",
-      "locomotive",
-      "iron horse",
-      "steam engine",
-      "ghost train",
-      "train robber",
-      "steam train"
-    ],
+    "aliases": ["train", "locomotive", "iron horse", "steam engine", "ghost train", "train robber", "steam train"],
     "description": "A smoking, brass-and-iron steam engine barreling down the track with no engineer and no brakes.",
     "attack": "Cowcatcher",
     "skills": [
@@ -441,20 +356,11 @@
     "id": "haunted-doll",
     "name": "Haunted Doll",
     "type": "animated",
-    "themes": [
-      "occult-noir",
-      "fantasy"
-    ],
+    "themes": ["occult-noir", "fantasy"],
     "tone": 4,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "creepy doll",
-      "puppet",
-      "toy",
-      "marionette",
-      "ventriloquist doll"
-    ],
+    "aliases": ["creepy doll", "puppet", "toy", "marionette", "ventriloquist doll"],
     "description": "A cracked porcelain doll with a stitched smile that is in a different spot every time you look.",
     "attack": "Tiny knife",
     "skills": [
@@ -486,20 +392,11 @@
     "id": "clank-walker",
     "name": "Clank Walker",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "walker",
-      "scout walker",
-      "mech",
-      "bipedal walker",
-      "war machine"
-    ],
+    "aliases": ["walker", "scout walker", "mech", "bipedal walker", "war machine"],
     "description": "A two-legged armored scout walker with a chin-mounted cannon and a cockpit that is a tight squeeze.",
     "attack": "Chin cannon",
     "skills": [
@@ -523,23 +420,11 @@
     "id": "carnival-colossus",
     "name": "Carnival Colossus",
     "type": "animated",
-    "themes": [
-      "fantasy",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "science-fantasy", "space-jammer"],
     "tone": 1,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "parade float",
-      "giant balloon",
-      "balloon golem",
-      "pinata",
-      "carnival",
-      "circus giant",
-      "festival"
-    ],
+    "aliases": ["parade float", "giant balloon", "balloon golem", "pinata", "carnival", "circus giant", "festival"],
     "description": "A forty-foot, confetti-stuffed parade float with a goofy grin, springy arms and a very loud calliope.",
     "attack": "Balloon bonk",
     "skills": [
@@ -572,9 +457,7 @@
     "id": "stone-golem",
     "name": "Stone Golem",
     "type": "animated",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -610,10 +493,7 @@
     "id": "living-armor",
     "name": "Living Armor",
     "type": "animated",
-    "themes": [
-      "fantasy",
-      "western"
-    ],
+    "themes": ["fantasy", "western"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -649,11 +529,7 @@
     "id": "ghost-galleon",
     "name": "Ghost Galleon",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "fantasy", "space-jammer"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -697,21 +573,11 @@
     "id": "butler-bot",
     "name": "Butler Bot",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "butler",
-      "servant robot",
-      "automaton butler",
-      "valet",
-      "brass butler",
-      "tea robot",
-      "robot servant"
-    ],
+    "aliases": ["butler", "servant robot", "automaton butler", "valet", "brass butler", "tea robot", "robot servant"],
     "description": "A brass butler with a monocle, a tea tray and a perfectly polite response to a fire in the library.",
     "attack": "Tea tray",
     "skills": [
@@ -732,21 +598,11 @@
     "id": "clockwork-spider",
     "name": "Clockwork Spider",
     "type": "animated",
-    "themes": [
-      "steampunk",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "space-jammer"],
     "tone": 2,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "mechanical spider",
-      "cog spider",
-      "windup spider",
-      "tin spider",
-      "clockwork bug",
-      "gear spider"
-    ],
+    "aliases": ["mechanical spider", "cog spider", "windup spider", "tin spider", "clockwork bug", "gear spider"],
     "description": "A hand-sized brass spider that ticks along walls and winds itself up with a tiny key.",
     "attack": "Bite",
     "skills": [
@@ -767,9 +623,7 @@
     "id": "brass-duelist",
     "name": "Brass Duelist",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -804,11 +658,7 @@
     "id": "steam-golem",
     "name": "Steam Golem",
     "type": "animated",
-    "themes": [
-      "steampunk",
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "fantasy", "space-jammer"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -851,22 +701,11 @@
     "id": "zeppelin-dread",
     "name": "Zeppelin Dread",
     "type": "animated",
-    "themes": [
-      "steampunk",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "space-jammer"],
     "tone": 4,
     "tier": 6,
     "flying": true,
-    "aliases": [
-      "zeppelin",
-      "airship",
-      "dirigible",
-      "warship",
-      "sky fortress",
-      "airship dreadnought",
-      "blimp"
-    ],
+    "aliases": ["zeppelin", "airship", "dirigible", "warship", "sky fortress", "airship dreadnought", "blimp"],
     "description": "A ten-story war-airship with a hundred cannons, a searchlight and a crew of brass men.",
     "attack": "Broadside",
     "skills": [
@@ -904,9 +743,7 @@
     "id": "scrap-golem",
     "name": "Scrap Golem",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -938,10 +775,7 @@
     "id": "rusted-sentinel",
     "name": "Rusted Sentinel",
     "type": "animated",
-    "themes": [
-      "post-apocalypse",
-      "scifi"
-    ],
+    "themes": ["post-apocalypse", "scifi"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -984,21 +818,11 @@
     "id": "tin-can-pup",
     "name": "Tin Can Pup",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "robot dog",
-      "toy dog",
-      "robot pup",
-      "mascot",
-      "companion",
-      "robo pup",
-      "tin dog"
-    ],
+    "aliases": ["robot dog", "toy dog", "robot pup", "mascot", "companion", "robo pup", "tin dog"],
     "description": "A wobbly dog made of two tin cans, a spring and a pair of headlight eyes that wags its tail in circles.",
     "attack": "Nibble",
     "skills": [
@@ -1023,18 +847,11 @@
     "id": "neon-koi",
     "name": "Neon Koi",
     "type": "animated",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 2,
     "tier": 0.5,
     "flying": true,
-    "aliases": [
-      "hologram",
-      "holo fish",
-      "ghost fish",
-      "ad bot"
-    ],
+    "aliases": ["hologram", "holo fish", "ghost fish", "ad bot"],
     "description": "A glowing holographic fish that swims through the air advertising noodles.",
     "attack": "Zap Tail",
     "skills": [
@@ -1054,20 +871,11 @@
     "id": "data-courier-drone",
     "name": "Data Courier Drone",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 2,
     "tier": 0.5,
     "flying": true,
-    "aliases": [
-      "drone",
-      "delivery drone",
-      "quadcopter",
-      "robot",
-      "flying robot"
-    ],
+    "aliases": ["drone", "delivery drone", "quadcopter", "robot", "flying robot"],
     "description": "A flying delivery bot with a locked package and a very short temper about being late.",
     "attack": "Rotor Slap",
     "skills": [
@@ -1091,19 +899,11 @@
     "id": "midnight-radio",
     "name": "Midnight Radio",
     "type": "animated",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "haunted radio",
-      "cursed radio",
-      "possessed object",
-      "voice",
-      "broadcast"
-    ],
+    "aliases": ["haunted radio", "cursed radio", "possessed object", "voice", "broadcast"],
     "description": "An old wooden radio that only picks up a station that has not aired in fifty years.",
     "attack": "Static Burst",
     "skills": [
@@ -1134,20 +934,11 @@
     "id": "mannequin-butler",
     "name": "Mannequin Butler",
     "type": "animated",
-    "themes": [
-      "occult-noir",
-      "steampunk"
-    ],
+    "themes": ["occult-noir", "steampunk"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "mannequin",
-      "butler",
-      "automaton",
-      "doll",
-      "living statue"
-    ],
+    "aliases": ["mannequin", "butler", "automaton", "doll", "living statue"],
     "description": "A stiff mannequin in a tailcoat that keeps clean, serves tea and never blinks.",
     "attack": "Silver Tray",
     "skills": [
@@ -1171,20 +962,11 @@
     "id": "clockwork-songbird",
     "name": "Clockwork Songbird",
     "type": "animated",
-    "themes": [
-      "steampunk",
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "fantasy", "space-jammer"],
     "tone": 1,
     "tier": 0.25,
     "flying": true,
-    "aliases": [
-      "mechanical bird",
-      "toy bird",
-      "canary",
-      "wind-up bird"
-    ],
+    "aliases": ["mechanical bird", "toy bird", "canary", "wind-up bird"],
     "description": "A brass bird that sings one tune and winds itself down by teatime.",
     "attack": "Peck",
     "skills": [
@@ -1208,20 +990,11 @@
     "id": "figurehead-guardian",
     "name": "Figurehead Guardian",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "figurehead",
-      "wooden statue",
-      "golem",
-      "ship spirit",
-      "carved lady"
-    ],
+    "aliases": ["figurehead", "wooden statue", "golem", "ship spirit", "carved lady"],
     "description": "A carved wooden maiden pulled off a ship's prow that still guards the hull she came from.",
     "attack": "Wooden Fist",
     "skills": [
@@ -1245,20 +1018,11 @@
     "id": "knot-snake",
     "name": "Knot Snake",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "rope",
-      "living rope",
-      "rigging",
-      "rope snake",
-      "tangle"
-    ],
+    "aliases": ["rope", "living rope", "rigging", "rope snake", "tangle"],
     "description": "A length of old rigging that ties itself into knots and loves to trip sailors.",
     "attack": "Trip",
     "skills": [
@@ -1282,9 +1046,7 @@
     "id": "chittering-skull",
     "name": "Chittering Skull",
     "type": "animated",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 4,
     "tier": 0.5,
     "flying": true,
@@ -1321,20 +1083,11 @@
     "id": "crystal-sentinel",
     "name": "Crystal Sentinel",
     "type": "animated",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 3,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "golem",
-      "crystal golem",
-      "guardian",
-      "statue",
-      "construct"
-    ],
+    "aliases": ["golem", "crystal golem", "guardian", "statue", "construct"],
     "description": "A faceted crystal guardian that hums with leftover starlight and fires prism beams.",
     "attack": "Crystal Fist",
     "skills": [
@@ -1365,21 +1118,11 @@
     "id": "rune-teapot",
     "name": "Rune Teapot",
     "type": "animated",
-    "themes": [
-      "science-fantasy",
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "fantasy", "space-jammer"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "teapot",
-      "enchanted teapot",
-      "spell kettle",
-      "tea pot",
-      "cup"
-    ],
+    "aliases": ["teapot", "enchanted teapot", "spell kettle", "tea pot", "cup"],
     "description": "A tiny teapot covered in glowing runes that pours whatever drink the room needs.",
     "attack": "Splash",
     "skills": [
@@ -1403,9 +1146,7 @@
     "id": "dreadnought-core",
     "name": "Dreadnought Core",
     "type": "animated",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 4,
     "tier": 6,
     "flying": false,
@@ -1430,20 +1171,13 @@
       }
     ],
     "tactics": "Seals doors and sends repair drones. Opens its core to the one who cuts the main cable.",
-    "aliases": [
-      "ship ai",
-      "warship",
-      "battle computer",
-      "hal"
-    ]
+    "aliases": ["ship ai", "warship", "battle computer", "hal"]
   },
   {
     "id": "possessed-typewriter",
     "name": "Possessed Typewriter",
     "type": "animated",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
@@ -1461,20 +1195,13 @@
     ],
     "powers": [],
     "tactics": "Types a name aloud. Whoever reads it gets disadvantage next turn.",
-    "aliases": [
-      "typewriter",
-      "cursed object",
-      "haunted machine",
-      "machine"
-    ]
+    "aliases": ["typewriter", "cursed object", "haunted machine", "machine"]
   },
   {
     "id": "cursed-hearse",
     "name": "Cursed Hearse",
     "type": "animated",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 5,
     "tier": 4,
     "flying": false,
@@ -1499,21 +1226,13 @@
       }
     ],
     "tactics": "Idles outside with the engine running. Opens its back door for whoever is chosen.",
-    "aliases": [
-      "haunted car",
-      "death car",
-      "ghost car",
-      "vehicle"
-    ]
+    "aliases": ["haunted car", "death car", "ghost car", "vehicle"]
   },
   {
     "id": "crystal-courier",
     "name": "Crystal Courier",
     "type": "animated",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -1531,21 +1250,13 @@
     ],
     "powers": [],
     "tactics": "Delivers a message, then attacks whoever is not on the list.",
-    "aliases": [
-      "construct",
-      "drone",
-      "crystal golem",
-      "messenger"
-    ]
+    "aliases": ["construct", "drone", "crystal golem", "messenger"]
   },
   {
     "id": "rune-walker",
     "name": "Rune-Etched Walker",
     "type": "animated",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -1563,20 +1274,13 @@
     ],
     "powers": [],
     "tactics": "Marches straight at the nearest spellcaster. Slows when the runes on its chest are covered.",
-    "aliases": [
-      "golem",
-      "construct",
-      "automaton",
-      "guardian"
-    ]
+    "aliases": ["golem", "construct", "automaton", "guardian"]
   },
   {
     "id": "cargo-loader",
     "name": "Cargo Loader",
     "type": "animated",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -1594,20 +1298,13 @@
     ],
     "powers": [],
     "tactics": "Rolls forward on its fixed route. Stops only if someone yells.",
-    "aliases": [
-      "droid",
-      "forklift",
-      "worker bot",
-      "loader"
-    ]
+    "aliases": ["droid", "forklift", "worker bot", "loader"]
   },
   {
     "id": "siege-walker",
     "name": "Siege Walker",
     "type": "animated",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -1625,20 +1322,13 @@
     ],
     "powers": [],
     "tactics": "Walks straight at the strongest point. Weak underneath, if someone gets there.",
-    "aliases": [
-      "at-at",
-      "walker",
-      "war machine",
-      "tank"
-    ]
+    "aliases": ["at-at", "walker", "war machine", "tank"]
   },
   {
     "id": "servo-cherub",
     "name": "Servo Cherub",
     "type": "animated",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 3,
     "tier": 2,
     "flying": true,
@@ -1656,23 +1346,13 @@
     ],
     "powers": [],
     "tactics": "Hovers overhead and calls in reinforcements. Dies loudly.",
-    "aliases": [
-      "servo skull",
-      "drone",
-      "mech",
-      "cherub",
-      "servo-skull",
-      "servitor",
-      "imperium"
-    ]
+    "aliases": ["servo skull", "drone", "mech", "cherub", "servo-skull", "servitor", "imperium"]
   },
   {
     "id": "siege-automaton",
     "name": "Siege Automaton",
     "type": "animated",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -1706,9 +1386,7 @@
     "id": "riot-drone",
     "name": "Riot Drone",
     "type": "animated",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 3,
     "tier": 2,
     "flying": true,
@@ -1726,20 +1404,13 @@
     ],
     "powers": [],
     "tactics": "Warns once, then attacks. Flies out of reach when hurt.",
-    "aliases": [
-      "security drone",
-      "police drone",
-      "bot",
-      "drone"
-    ]
+    "aliases": ["security drone", "police drone", "bot", "drone"]
   },
   {
     "id": "arcology-warden",
     "name": "Arcology Warden",
     "type": "animated",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 6,
     "flying": false,
@@ -1764,20 +1435,13 @@
       }
     ],
     "tactics": "Seals doors and floods hallways with gas. Weak if cut off from its server.",
-    "aliases": [
-      "building ai",
-      "security ai",
-      "system",
-      "mainframe"
-    ]
+    "aliases": ["building ai", "security ai", "system", "mainframe"]
   },
   {
     "id": "clockwork-gunslinger",
     "name": "Clockwork Gunslinger",
     "type": "animated",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -1795,20 +1459,13 @@
     ],
     "powers": [],
     "tactics": "Waits for a high noon moment. Stands still until someone touches a gun.",
-    "aliases": [
-      "automaton",
-      "robot",
-      "gunslinger",
-      "mechanical man"
-    ]
+    "aliases": ["automaton", "robot", "gunslinger", "mechanical man"]
   },
   {
     "id": "iron-horse-automaton",
     "name": "Iron Horse Automaton",
     "type": "animated",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -1826,20 +1483,13 @@
     ],
     "powers": [],
     "tactics": "Rears and charges at anyone on the tracks. Runs out of steam eventually.",
-    "aliases": [
-      "steam horse",
-      "robot horse",
-      "construct",
-      "mount"
-    ]
+    "aliases": ["steam horse", "robot horse", "construct", "mount"]
   },
   {
     "id": "waxwork-stalker",
     "name": "Waxwork Stalker",
     "type": "animated",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -1857,21 +1507,13 @@
     ],
     "powers": [],
     "tactics": "Stands still while observed. Takes a step each time the lights flicker.",
-    "aliases": [
-      "wax figure",
-      "mannequin",
-      "statue",
-      "doll"
-    ]
+    "aliases": ["wax figure", "mannequin", "statue", "doll"]
   },
   {
     "id": "rigging-marionette",
     "name": "Rigging Marionette",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -1889,21 +1531,13 @@
     ],
     "powers": [],
     "tactics": "Waits in the rigging. Tangles a player in line and drops.",
-    "aliases": [
-      "puppet",
-      "marionette",
-      "rope thing",
-      "scarecrow"
-    ]
+    "aliases": ["puppet", "marionette", "rope thing", "scarecrow"]
   },
   {
     "id": "cursed-man-o-war",
     "name": "Cursed Man-o-War",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 5,
     "tier": 6,
     "flying": false,
@@ -1928,20 +1562,13 @@
       }
     ],
     "tactics": "Sails straight at the biggest ship. Cannons fire themselves.",
-    "aliases": [
-      "ghost ship",
-      "warship",
-      "flying dutchman",
-      "vessel"
-    ]
+    "aliases": ["ghost ship", "warship", "flying dutchman", "vessel"]
   },
   {
     "id": "tin-footman",
     "name": "Tin Footman",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -1959,20 +1586,13 @@
     ],
     "powers": [],
     "tactics": "Bows. Hits whoever it is told to hit.",
-    "aliases": [
-      "butler",
-      "servant",
-      "automaton",
-      "valet"
-    ]
+    "aliases": ["butler", "servant", "automaton", "valet"]
   },
   {
     "id": "junkyard-guard-bot",
     "name": "Junkyard Guard Bot",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -1990,20 +1610,13 @@
     ],
     "powers": [],
     "tactics": "Rolls out of a heap of scrap and chases trespassers.",
-    "aliases": [
-      "guard bot",
-      "robot",
-      "scrap bot",
-      "sentry"
-    ]
+    "aliases": ["guard bot", "robot", "scrap bot", "sentry"]
   },
   {
     "id": "war-machine-remnant",
     "name": "War Machine Remnant",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -2028,20 +1641,13 @@
       }
     ],
     "tactics": "Marches in a straight line. Keeps shooting until its ammo is gone.",
-    "aliases": [
-      "old war machine",
-      "tank",
-      "war bot",
-      "terminator"
-    ]
+    "aliases": ["old war machine", "tank", "war bot", "terminator"]
   },
   {
     "id": "servo-janitor",
     "name": "Servo Janitor",
     "type": "animated",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
@@ -2066,22 +1672,13 @@
       }
     ],
     "tactics": "Cleans up whatever is nearest, including the players.",
-    "aliases": [
-      "janitor",
-      "cleaning bot",
-      "servitor",
-      "mop bot",
-      "mechanicus",
-      "adeptus mechanicus"
-    ]
+    "aliases": ["janitor", "cleaning bot", "servitor", "mop bot", "mechanicus", "adeptus mechanicus"]
   },
   {
     "id": "haunted-umbrella",
     "name": "Haunted Umbrella",
     "type": "animated",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -2106,20 +1703,13 @@
       }
     ],
     "tactics": "Sits by the door. Blows open in the face of the first person to leave.",
-    "aliases": [
-      "umbrella",
-      "cursed object",
-      "haunted object",
-      "brolly"
-    ]
+    "aliases": ["umbrella", "cursed object", "haunted object", "brolly"]
   },
   {
     "id": "vending-buddy",
     "name": "Vending Buddy",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -2137,21 +1727,13 @@
     ],
     "powers": [],
     "tactics": "Asks for coins. Throws cans when it is shaken.",
-    "aliases": [
-      "vending machine",
-      "robot",
-      "machine",
-      "snack bot"
-    ]
+    "aliases": ["vending machine", "robot", "machine", "snack bot"]
   },
   {
     "id": "iron-maiden-cannon",
     "name": "Iron Maiden Cannon",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 5,
     "tier": 2,
     "flying": false,
@@ -2169,20 +1751,13 @@
     ],
     "powers": [],
     "tactics": "Rolls out of the hold and fires at anyone on deck.",
-    "aliases": [
-      "cannon",
-      "cursed gun",
-      "haunted weapon",
-      "artillery"
-    ]
+    "aliases": ["cannon", "cursed gun", "haunted weapon", "artillery"]
   },
   {
     "id": "meat-grinder-automaton",
     "name": "Meat-Grinder Automaton",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 5,
     "tier": 3,
     "flying": false,
@@ -2200,20 +1775,13 @@
     ],
     "powers": [],
     "tactics": "Chases the nearest worker. Pulls a player in if it gets a grip.",
-    "aliases": [
-      "factory bot",
-      "grinder",
-      "industrial bot",
-      "machine"
-    ]
+    "aliases": ["factory bot", "grinder", "industrial bot", "machine"]
   },
   {
     "id": "gallows-marionette",
     "name": "Gallows Marionette",
     "type": "animated",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 5,
     "tier": 2,
     "flying": false,
@@ -2231,20 +1799,13 @@
     ],
     "powers": [],
     "tactics": "Waits on the platform. Dances toward a liar.",
-    "aliases": [
-      "marionette",
-      "puppet",
-      "haunted gallows",
-      "scarecrow"
-    ]
+    "aliases": ["marionette", "puppet", "haunted gallows", "scarecrow"]
   },
   {
     "id": "rotor-scavenger",
     "name": "Rotor Scavenger",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 1,
     "flying": true,
@@ -2262,22 +1823,13 @@
     ],
     "powers": [],
     "tactics": "Zips overhead and dives. Falls apart on a heavy hit.",
-    "aliases": [
-      "drone",
-      "copter",
-      "scavenger drone",
-      "bot"
-    ]
+    "aliases": ["drone", "copter", "scavenger drone", "bot"]
   },
   {
     "id": "gale-gargoyle",
     "name": "Gale Gargoyle",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "space-jammer",
-      "fantasy"
-    ],
+    "themes": ["age-of-sail", "space-jammer", "fantasy"],
     "tone": 4,
     "tier": 2,
     "flying": true,
@@ -2295,20 +1847,13 @@
     ],
     "powers": [],
     "tactics": "Perches on the rigging. Strikes a sailor in the dark.",
-    "aliases": [
-      "gargoyle",
-      "figurehead",
-      "stone bird",
-      "statue"
-    ]
+    "aliases": ["gargoyle", "figurehead", "stone bird", "statue"]
   },
   {
     "id": "scarecrow-sentinel",
     "name": "Scarecrow Sentinel",
     "type": "animated",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -2326,20 +1871,13 @@
     ],
     "powers": [],
     "tactics": "Waits among the crops. Walks stiffly toward trespassers.",
-    "aliases": [
-      "scarecrow",
-      "straw man",
-      "guardian",
-      "golem"
-    ]
+    "aliases": ["scarecrow", "straw man", "guardian", "golem"]
   },
   {
     "id": "scrapper-drone-hive",
     "name": "Scrapper Drone Hive",
     "type": "animated",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 3,
     "tier": 3,
     "flying": true,
@@ -2364,20 +1902,13 @@
       }
     ],
     "tactics": "Sends out the small ones first. Fuses with whatever it eats.",
-    "aliases": [
-      "drone",
-      "hive",
-      "scrapper",
-      "swarm"
-    ]
+    "aliases": ["drone", "hive", "scrapper", "swarm"]
   },
   {
     "id": "forge-sentinel",
     "name": "Forge Sentinel",
     "type": "animated",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 5,
     "tier": 3,
     "flying": false,
@@ -2402,23 +1933,13 @@
       }
     ],
     "tactics": "Chants a litany and walks forward. Cannot be reasoned with.",
-    "aliases": [
-      "servitor",
-      "guardian",
-      "forge guard",
-      "machine",
-      "mechanicus",
-      "skitarii",
-      "adeptus mechanicus"
-    ]
+    "aliases": ["servitor", "guardian", "forge guard", "machine", "mechanicus", "skitarii", "adeptus mechanicus"]
   },
   {
     "id": "tumbleweed-war-bot",
     "name": "Tumbleweed War-Bot",
     "type": "animated",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -2443,20 +1964,13 @@
       }
     ],
     "tactics": "Rolls through the dust. Stands still until it gets a target.",
-    "aliases": [
-      "war bot",
-      "walker",
-      "war machine",
-      "robot"
-    ]
+    "aliases": ["war bot", "walker", "war machine", "robot"]
   },
   {
     "id": "grave-shift-gurney",
     "name": "Grave-Shift Gurney",
     "type": "animated",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 5,
     "tier": 3,
     "flying": false,
@@ -2481,21 +1995,13 @@
       }
     ],
     "tactics": "Rolls out of a closet. Straps a player down and rolls away.",
-    "aliases": [
-      "gurney",
-      "haunted hospital",
-      "cursed object",
-      "wheelchair"
-    ]
+    "aliases": ["gurney", "haunted hospital", "cursed object", "wheelchair"]
   },
   {
     "id": "mast-puppet",
     "name": "Mast-Puppet",
     "type": "animated",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -2513,20 +2019,13 @@
     ],
     "powers": [],
     "tactics": "Drops from the crow's nest. Pulls a sailor up the mast.",
-    "aliases": [
-      "puppet",
-      "rope man",
-      "rigging ghost",
-      "scarecrow"
-    ]
+    "aliases": ["puppet", "rope man", "rigging ghost", "scarecrow"]
   },
   {
     "id": "pocket-watch-sentinel",
     "name": "Pocket-Watch Sentinel",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -2544,28 +2043,17 @@
     ],
     "powers": [],
     "tactics": "Stands in a doorway at fixed times. Slow to react outside its pattern.",
-    "aliases": [
-      "guard",
-      "clockwork",
-      "sentinel",
-      "golem"
-    ]
+    "aliases": ["guard", "clockwork", "sentinel", "golem"]
   },
   {
     "id": "steam-calliope",
     "name": "Steam Calliope",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 1,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "calliope",
-      "parade organ",
-      "music cart"
-    ],
+    "aliases": ["calliope", "parade organ", "music cart"],
     "description": "A rolling parade organ that plays happy tunes while it flattens anything in its way.",
     "attack": "Ram & pipes",
     "skills": [
@@ -2598,17 +2086,11 @@
     "id": "teakettle-titan",
     "name": "Teakettle Titan",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 2,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "giant kettle",
-      "tea walker",
-      "boiler titan"
-    ],
+    "aliases": ["giant kettle", "tea walker", "boiler titan"],
     "description": "A building-sized whistling kettle on spider legs that serves boiling tea to everyone.",
     "attack": "Stomp & spout",
     "skills": [
@@ -2647,18 +2129,11 @@
     "id": "ghost-train",
     "name": "Ghost Train",
     "type": "animated",
-    "themes": [
-      "western",
-      "occult-noir"
-    ],
+    "themes": ["western", "occult-noir"],
     "tone": 5,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "phantom train",
-      "spirit locomotive",
-      "death train"
-    ],
+    "aliases": ["phantom train", "spirit locomotive", "death train"],
     "description": "A spectral steam locomotive that rolls through towns at midnight to collect souls for the last stop.",
     "attack": "Ram",
     "skills": [
@@ -2691,19 +2166,11 @@
     "id": "warframe-enforcer",
     "name": "Warframe Enforcer",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 4,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "power armor",
-      "war frame",
-      "corp mech",
-      "enforcer"
-    ],
+    "aliases": ["power armor", "war frame", "corp mech", "enforcer"],
     "description": "A corporate war frame with a pilot sealed inside and orders to clear the block.",
     "attack": "Armor fists",
     "skills": [
@@ -2740,19 +2207,11 @@
     "id": "arcology-overmind",
     "name": "Arcology Overmind",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 4,
     "tier": 8,
     "flying": false,
-    "aliases": [
-      "central AI",
-      "building AI",
-      "corp mind",
-      "overmind"
-    ],
+    "aliases": ["central AI", "building AI", "corp mind", "overmind"],
     "description": "A building-sized AI that runs a whole arcology and sees every resident as a resource.",
     "attack": "Door & drone swarm",
     "skills": [
@@ -2801,17 +2260,11 @@
     "id": "dreadnought-walker",
     "name": "Dreadnought Walker",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "steam walker",
-      "war machine",
-      "land ship"
-    ],
+    "aliases": ["steam walker", "war machine", "land ship"],
     "description": "A towering steam-powered war walker with cannon turrets on every limb.",
     "attack": "Piston stomp",
     "skills": [
@@ -2855,18 +2308,11 @@
     "id": "hungry-archive",
     "name": "Hungry Archive",
     "type": "animated",
-    "themes": [
-      "occult-noir",
-      "fantasy"
-    ],
+    "themes": ["occult-noir", "fantasy"],
     "tone": 3,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "living library",
-      "book monster",
-      "grimoire"
-    ],
+    "aliases": ["living library", "book monster", "grimoire"],
     "description": "A library of forbidden books that eats memories and shelves them for later.",
     "attack": "Paper cuts",
     "skills": [
@@ -2903,18 +2349,11 @@
     "id": "void-reaper",
     "name": "Void Reaper Drone",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "space-hammer"
-    ],
+    "themes": ["space-wars", "space-hammer"],
     "tone": 5,
     "tier": 5,
     "flying": true,
-    "aliases": [
-      "reaper drone",
-      "ship killer",
-      "hunter drone"
-    ],
+    "aliases": ["reaper drone", "ship killer", "hunter drone"],
     "description": "A black, silent warship drone that hunts crippled ships and finishes them off.",
     "attack": "Beam lance",
     "skills": [
@@ -2947,19 +2386,11 @@
     "id": "four-armed-cyborg-general",
     "name": "Four-Armed Cyborg General",
     "type": "animated",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 4,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "general grievous",
-      "droid general",
-      "cyborg",
-      "droid commander",
-      "four arms"
-    ],
+    "aliases": ["general grievous", "droid general", "cyborg", "droid commander", "four arms"],
     "description": "A coughing cyborg warlord who wields four laser blades, collects trophies and commands a droid army.",
     "attack": "Four blades",
     "skills": [
@@ -2996,19 +2427,11 @@
     "id": "probe-drone",
     "name": "Probe Drone",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "probe droid",
-      "viper droid",
-      "scout drone",
-      "spy droid"
-    ],
+    "aliases": ["probe droid", "viper droid", "scout drone", "spy droid"],
     "description": "A floating, one-eyed scout droid that drops from the sky, scans everything and calls in the fleet.",
     "attack": "Shock arm",
     "skills": [
@@ -3039,20 +2462,11 @@
     "id": "chrome-assassin",
     "name": "Chrome Assassin",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "ig-88",
-      "assassin droid",
-      "killer droid",
-      "hunter droid",
-      "bounty droid"
-    ],
+    "aliases": ["ig-88", "assassin droid", "killer droid", "hunter droid", "bounty droid"],
     "description": "A tall, thin silver droid that has been programmed with a long list of targets.",
     "attack": "Rifle",
     "skills": [
@@ -3083,19 +2497,11 @@
     "id": "rolling-shield-droid",
     "name": "Rolling Shield Droid",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "droideka",
-      "destroyer droid",
-      "wheel droid",
-      "shield droid"
-    ],
+    "aliases": ["droideka", "destroyer droid", "wheel droid", "shield droid"],
     "description": "A droid that rolls into battle as a wheel, then unfolds with a bubble shield and twin cannons.",
     "attack": "Twin cannons",
     "skills": [
@@ -3126,20 +2532,11 @@
     "id": "scrap-crawler",
     "name": "Scrap Crawler",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 3,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "sandcrawler",
-      "jawa",
-      "jawa crawler",
-      "junk fortress",
-      "junk crawler"
-    ],
+    "aliases": ["sandcrawler", "jawa", "jawa crawler", "junk fortress", "junk crawler"],
     "description": "A rolling junk fortress the size of a house that collects droids and scrap from the desert.",
     "attack": "Ram & tractor beam",
     "skills": [
@@ -3170,20 +2567,11 @@
     "id": "moon-fortress",
     "name": "Moon Fortress",
     "type": "animated",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 5,
     "tier": 9,
     "flying": false,
-    "aliases": [
-      "death star",
-      "planet killer",
-      "battle station",
-      "deathstar",
-      "space station"
-    ],
+    "aliases": ["death star", "planet killer", "battle station", "deathstar", "space station"],
     "description": "A moon-sized battle station with a planet-cracking laser, a dark emperor and one very small weak spot.",
     "attack": "Turbolasers",
     "skills": [
@@ -3224,20 +2612,11 @@
     "id": "neon-karaoke-bot",
     "name": "Neon Karaoke Bot",
     "type": "animated",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 1,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "karaoke",
-      "singing robot",
-      "street bot",
-      "idol bot",
-      "jukebox"
-    ],
+    "aliases": ["karaoke", "singing robot", "street bot", "idol bot", "jukebox"],
     "description": "A glowing street-corner robot that will sing every hit song of the last century, whether you want it or not.",
     "attack": "Mic swing",
     "skills": [
@@ -3268,21 +2647,11 @@
     "id": "cherub-skull-swarm",
     "name": "Cherub Skull Swarm",
     "type": "animated",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 2,
     "tier": 3,
     "flying": true,
-    "aliases": [
-      "servo skull",
-      "skull drone",
-      "cherub drone",
-      "angel skull",
-      "servo-skull",
-      "cherub",
-      "imperium"
-    ],
+    "aliases": ["servo skull", "skull drone", "cherub drone", "angel skull", "servo-skull", "cherub", "imperium"],
     "description": "A cloud of tiny winged skulls with halos that sing hymns and shoot lasers.",
     "attack": "Zap",
     "skills": [
@@ -3309,18 +2678,11 @@
     "id": "clockwork-carousel",
     "name": "Clockwork Carousel",
     "type": "animated",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 1,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "carousel",
-      "merry-go-round",
-      "carnival ride",
-      "steam horse ride"
-    ],
+    "aliases": ["carousel", "merry-go-round", "carnival ride", "steam horse ride"],
     "description": "A huge gear-driven carousel that rolls through towns playing music and grabbing riders.",
     "attack": "Spin & gallop",
     "skills": [
@@ -3359,19 +2721,11 @@
     "id": "gingerbread-colossus",
     "name": "Gingerbread Colossus",
     "type": "animated",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 1,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "gingerbread man",
-      "cookie giant",
-      "candy giant",
-      "sweet golem",
-      "biscuit titan"
-    ],
+    "aliases": ["gingerbread man", "cookie giant", "candy giant", "sweet golem", "biscuit titan"],
     "description": "A house-sized cookie giant with gumdrop buttons, icing trim and an unquenchable urge to hug you.",
     "attack": "Giant hug",
     "skills": [
@@ -3414,19 +2768,11 @@
     "id": "convoy-city",
     "name": "Roving Convoy City",
     "type": "animated",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "war rig",
-      "convoy",
-      "wheeled city",
-      "road city",
-      "truck city"
-    ],
+    "aliases": ["war rig", "convoy", "wheeled city", "road city", "truck city"],
     "description": "A city on wheels built from a hundred trucks, towing its streets, markets and a warlord's tower across the dust.",
     "attack": "Ramming prow",
     "skills": [
@@ -3469,9 +2815,7 @@
     "id": "battle-barge",
     "name": "Battle Barge Cathedral",
     "type": "animated",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 3,
     "tier": 8,
     "flying": false,
@@ -3528,10 +2872,7 @@
     "id": "chrome-scarab-swarm",
     "name": "Chrome Scarab Swarm",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -3575,10 +2916,7 @@
     "id": "tomb-lord",
     "name": "Tomb Lord",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 5,
     "tier": 4,
     "flying": false,
@@ -3629,10 +2967,7 @@
     "id": "tomb-monolith",
     "name": "Tomb Monolith",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 6,
     "flying": true,
@@ -3682,10 +3017,7 @@
     "id": "spirit-stone-walker",
     "name": "Spirit-Stone Walker",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "science-fantasy"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -3730,22 +3062,11 @@
     "id": "sky-battlesuit",
     "name": "Sky Coalition Battlesuit",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 3,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "crisis suit",
-      "battlesuit",
-      "exo suit",
-      "blue suit",
-      "mech suit",
-      "tau",
-      "tau empire"
-    ],
+    "aliases": ["crisis suit", "battlesuit", "exo suit", "blue suit", "mech suit", "tau", "tau empire"],
     "description": "A tall, sleek, white-and-orange battle exo-suit with a pilot, a jetpack and a lot of guns.",
     "attack": "Burst cannon",
     "skills": [
@@ -3776,10 +3097,7 @@
     "id": "entombed-veteran",
     "name": "Entombed Veteran",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -3829,10 +3147,7 @@
     "id": "penitent-engine",
     "name": "Penitent Engine",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 5,
     "tier": 3,
     "flying": false,
@@ -3876,10 +3191,7 @@
     "id": "throne-knight",
     "name": "Throne Knight",
     "type": "animated",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 3,
     "tier": 6,
     "flying": false,

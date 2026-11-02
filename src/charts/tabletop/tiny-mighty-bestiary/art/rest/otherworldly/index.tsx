@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { WarpFiend, DreamEater, WarpLord, GhostInTheWire, RiftWhisperer } from "./Part1";
-import { NeonShrineFox, BoilerGhost, StarlightWisp, WarpImp } from "./Part2";
-import { GlitchGremlin, CogSprite, NetspaceWraith, DeepNetGod } from "./Part3";
+import { DreamEater, GhostInTheWire, RiftWhisperer, WarpFiend, WarpLord } from "./Part1";
+import { BoilerGhost, NeonShrineFox, StarlightWisp, WarpImp } from "./Part2";
+import { CogSprite, DeepNetGod, GlitchGremlin, NetspaceWraith } from "./Part3";
 import { AetherPoltergeist, AetherSovereign, PocketPetGhost, WarpSeer } from "./Part4";
-import { WarpJester, DataSuccubus, TickTockWraith } from "./Part5";
+import { DataSuccubus, TickTockWraith, WarpJester } from "./Part5";
 
 export const restOtherworldlyArt: Record<string, () => ReactNode> = {
   "warp-fiend": WarpFiend,

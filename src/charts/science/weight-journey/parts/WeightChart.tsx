@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { DAYS_PER_YEAR } from "../constants";
-import { type ChartInput, CHART_HEIGHT, CHART_MARGIN, CHART_WIDTH, buildChart } from "../model/chart";
+import { buildChart, CHART_HEIGHT, CHART_MARGIN, CHART_WIDTH, type ChartInput } from "../model/chart";
 import type { Lines } from "../useProjections";
 
 type Chart = ReturnType<typeof buildChart>;
@@ -22,8 +22,16 @@ function Axes({ chart }: { chart: Chart }) {
       {/* One horizontal grid line and label per weight tick. */}
       {chart.y.ticks(TICK_COUNT).map((tickValue) => (
         <g key={tickValue}>
-          <line x1={CHART_MARGIN.left} x2={CHART_WIDTH - CHART_MARGIN.right} y1={chart.y(tickValue)} y2={chart.y(tickValue)} className="grid" />
-          <text x={CHART_MARGIN.left - LABEL_GAP} y={chart.y(tickValue) + LABEL_BASELINE} textAnchor="end">{tickValue.toFixed(0)}</text>
+          <line
+            x1={CHART_MARGIN.left}
+            x2={CHART_WIDTH - CHART_MARGIN.right}
+            y1={chart.y(tickValue)}
+            y2={chart.y(tickValue)}
+            className="grid"
+          />
+          <text x={CHART_MARGIN.left - LABEL_GAP} y={chart.y(tickValue) + LABEL_BASELINE} textAnchor="end">
+            {tickValue.toFixed(0)}
+          </text>
         </g>
       ))}
 
@@ -42,18 +50,22 @@ function Axes({ chart }: { chart: Chart }) {
 function SpreadBands({ spread }: { spread: NonNullable<Chart["spread"]> }) {
   return (
     <>
-      {(["actual", "adjusted"] as const).map((series) => ( // Draw the shaded range for both the actual and the muscle-adjusted weight.
-        <g key={series} className={`spread spread-${series}`}>
-          {/* One shaded band between neighbouring curves. */}
-          {spread[series].bands.map((band, index) => (
-            <path key={index} d={band.d} className="spread-band" fillOpacity={band.opacity} />
-          ))}
+      {(["actual", "adjusted"] as const).map(
+        (
+          series, // Draw the shaded range for both the actual and the muscle-adjusted weight.
+        ) => (
+          <g key={series} className={`spread spread-${series}`}>
+            {/* One shaded band between neighbouring curves. */}
+            {spread[series].bands.map((band, index) => (
+              <path key={index} d={band.d} className="spread-band" fillOpacity={band.opacity} />
+            ))}
 
-          <path d={spread[series].best} className="spread-best" />
-          <path d={spread[series].worst} className="spread-worst" />
-          <path d={spread[series].mean} className="spread-mean" />
-        </g>
-      ))}
+            <path d={spread[series].best} className="spread-best" />
+            <path d={spread[series].worst} className="spread-worst" />
+            <path d={spread[series].mean} className="spread-mean" />
+          </g>
+        ),
+      )}
 
     </>
   );
@@ -82,10 +94,19 @@ export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines 
   const chart = useMemo(() => buildChart(input), [rangeDays, k, tapered, allTrend, spread, general, fat]);
 
   return (
-    <svg viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} className="weight-chart" role="img" aria-label="Weight over time">
+    <svg
+      viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`}
+      className="weight-chart"
+      role="img"
+      aria-label="Weight over time"
+    >
       <Axes chart={chart} />
       <path d={chart.actual} className="line-actual" />
-      {rangeDays <= DAYS_PER_YEAR && chart.measured.map((weighInDot, index) => <circle key={index} cx={weighInDot.x} cy={weighInDot.y} r={DOT_RADIUS} className="dot" />)}
+      {rangeDays <= DAYS_PER_YEAR &&
+        chart.measured.map((weighInDot, index) => (
+          <circle key={index} cx={weighInDot.x} cy={weighInDot.y} r={DOT_RADIUS} className="dot" />
+        ))}
+
       <path d={chart.avg3Fat} className="line-avg3-fat" />
       <path d={chart.avg3Adjusted} className="line-avg3-adjusted" />
       <path d={chart.avg3} className="line-avg3" />

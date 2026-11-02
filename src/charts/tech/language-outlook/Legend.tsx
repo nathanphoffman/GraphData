@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ARROW_STYLE, PROJECTION_DOT_RADIUS, arrowPoints } from "./model/layout";
+import { ARROW_STYLE, arrowPoints, PROJECTION_DOT_RADIUS } from "./model/layout";
 import { LEGEND_GROUPS, LINE_COLORS, LINE_DASHES, LINE_LABELS, PROJECTION_PREFIX, seriesColor } from "./model/style";
 import type { LanguageOutlookData } from "./model/types";
 
@@ -19,14 +19,21 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
   // One legend entry per series: projections get an arrow swatch, the rest a plain colour swatch.
   return (
     <div className="legend-key" aria-hidden="true">
-      {keys.map((seriesKey) => { // One legend entry per series.
+      {keys.map((seriesKey) => {
+        // One legend entry per series.
 
         if (seriesKey.startsWith(PROJECTION_PREFIX)) {
           // projection dots come with a faint arrow, as on the chart
           const color = seriesColor(seriesKey, model.series.indexOf(seriesKey));
 
           return (
-            <svg key={seriesKey} className="key-arrow" width={KEY_ARROW.width} height={KEY_ARROW.height} viewBox={`0 0 ${KEY_ARROW.width} ${KEY_ARROW.height}`}>
+            <svg
+              key={seriesKey}
+              className="key-arrow"
+              width={KEY_ARROW.width}
+              height={KEY_ARROW.height}
+              viewBox={`0 0 ${KEY_ARROW.width} ${KEY_ARROW.height}`}
+            >
               <title>{seriesKey}</title>
               <polygon
                 points={arrowPoints(KEY_ARROW.centerX, KEY_ARROW.centerY, 1)}
@@ -36,7 +43,14 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
                 strokeOpacity={ARROW_STYLE.strokeOpacity}
                 strokeWidth={ARROW_STYLE.strokeWidth}
               />
-              <circle cx={KEY_ARROW.centerX} cy={KEY_ARROW.centerY} r={PROJECTION_DOT_RADIUS} fill={color} stroke="#4c4c4c" strokeWidth={1} />
+              <circle
+                cx={KEY_ARROW.centerX}
+                cy={KEY_ARROW.centerY}
+                r={PROJECTION_DOT_RADIUS}
+                fill={color}
+                stroke="#4c4c4c"
+                strokeWidth={1}
+              />
             </svg>
           );
         }
@@ -66,7 +80,11 @@ function ColourKey({ model, keys }: { model: LanguageOutlookData; keys: string[]
             className="key-bar"
             style={
               dash
-                ? { backgroundImage: `radial-gradient(circle, ${color} 2px, transparent 2.5px)`, backgroundSize: `${period + 2}px 100%` }
+                ? {
+                    backgroundImage: `radial-gradient(circle, ${color} 2px, transparent 2.5px)`,
+                    backgroundSize: `${period + 2}px 100%`,
+                  }
+
                 : { background: color }
             }
 
@@ -100,77 +118,101 @@ export default function Legend({ model, visible, onToggle, sortKey, onSort }: Pr
       <fieldset className="legend-group">
         <legend>Sort order</legend>
         <p className="legend-description">
-          Orders the languages from left to right, highest first, by any one metric. Languages with no value for it go last.
+          Orders the languages from left to right, highest first, by any one metric. Languages with no value for it go
+          last.
         </p>
         <select className="sort-select" value={sortKey} onChange={(event) => onSort(event.target.value)}>
-          {sections.map(({ title, keys }) => ( // One dropdown group per legend group.
-            <optgroup key={title} label={title}>
-              {/* One dropdown entry per series. */}
-              {keys.map((seriesKey) => (
-                <option key={seriesKey} value={seriesKey}>
-                  {labelOf(seriesKey)}
-                </option>
-              ))}
+          {sections.map(
+            (
+              { title, keys }, // One dropdown group per legend group.
+            ) => (
+              <optgroup key={title} label={title}>
+                {/* One dropdown entry per series. */}
+                {keys.map((seriesKey) => (
+                  <option key={seriesKey} value={seriesKey}>
+                    {labelOf(seriesKey)}
+                  </option>
+                ))}
 
-            </optgroup>
-          ))}
+              </optgroup>
+            ),
+          )}
 
         </select>
       </fieldset>
-      {sections.map(({ title, description, keys }) => ( // One box of checkboxes per legend group.
-        <fieldset key={title} className="legend-group">
-          <legend>{title}</legend>
-          <ColourKey model={model} keys={keys} />
-          <button
-            type="button"
-            className="legend-toggle"
-            aria-expanded={!!aboutOpen[title]}
-            onClick={() => setAboutOpen({ ...aboutOpen, [title]: !aboutOpen[title] })}
-          >
-            <span className={aboutOpen[title] ? "chevron open" : "chevron"}>▸</span>
-            About
-          </button>
-          <div className={aboutOpen[title] ? "legend-panel open" : "legend-panel"}>
-            <div className="legend-panel-inner">
-              <p className="legend-description">{description}</p>
+      {sections.map(
+        (
+          { title, description, keys }, // One box of checkboxes per legend group.
+        ) => (
+          <fieldset key={title} className="legend-group">
+            <legend>{title}</legend>
+            <ColourKey model={model} keys={keys} />
+            <button
+              type="button"
+              className="legend-toggle"
+              aria-expanded={!!aboutOpen[title]}
+              onClick={() => setAboutOpen({ ...aboutOpen, [title]: !aboutOpen[title] })}
+            >
+              <span className={aboutOpen[title] ? "chevron open" : "chevron"}>▸</span>
+              About
+            </button>
+            <div className={aboutOpen[title] ? "legend-panel open" : "legend-panel"}>
+              <div className="legend-panel-inner">
+                <p className="legend-description">{description}</p>
+              </div>
             </div>
-          </div>
-          <button
-            type="button"
-            className="legend-toggle"
-            aria-expanded={!!open[title]}
-            onClick={() => setOpen({ ...open, [title]: !open[title] })}
-          >
-            <span className={open[title] ? "chevron open" : "chevron"}>▸</span>
-            Filters ({keys.filter((seriesKey) => visible[seriesKey]).length}/{keys.length} shown)
-          </button>
-          <div className={open[title] ? "legend-panel open" : "legend-panel"}>
-            <div className="legend-panel-inner">
-              {keys.map((seriesKey) => ( // One checkbox per series.
-                <label key={seriesKey}>
-                  <input type="checkbox" checked={visible[seriesKey]} onChange={(event) => onToggle(seriesKey, event.target.checked)} />
-                  {model.series.includes(seriesKey) ? (
-                    <>
-                      <span className="swatch dot" style={{ background: seriesColor(seriesKey, model.series.indexOf(seriesKey)) }} />
-                      {seriesKey}
-                    </>
-                  ) : (
-                    <>
-                      <span
-                        className="swatch line"
-                        style={{ borderTopColor: LINE_COLORS[seriesKey], borderTopStyle: LINE_DASHES[seriesKey] ? "dotted" : "solid" }}
+            <button
+              type="button"
+              className="legend-toggle"
+              aria-expanded={!!open[title]}
+              onClick={() => setOpen({ ...open, [title]: !open[title] })}
+            >
+              <span className={open[title] ? "chevron open" : "chevron"}>▸</span>
+              Filters ({keys.filter((seriesKey) => visible[seriesKey]).length}/{keys.length} shown)
+            </button>
+            <div className={open[title] ? "legend-panel open" : "legend-panel"}>
+              <div className="legend-panel-inner">
+                {keys.map(
+                  (
+                    seriesKey, // One checkbox per series.
+                  ) => (
+                    <label key={seriesKey}>
+                      <input
+                        type="checkbox"
+                        checked={visible[seriesKey]}
+                        onChange={(event) => onToggle(seriesKey, event.target.checked)}
                       />
-                      {labelOf(seriesKey)}
-                    </>
-                  )}
+                      {model.series.includes(seriesKey) ? (
+                        <>
+                          <span
+                            className="swatch dot"
+                            style={{ background: seriesColor(seriesKey, model.series.indexOf(seriesKey)) }}
+                          />
+                          {seriesKey}
+                        </>
+                      ) : (
+                        <>
+                          <span
+                            className="swatch line"
+                            style={{
+                              borderTopColor: LINE_COLORS[seriesKey],
+                              borderTopStyle: LINE_DASHES[seriesKey] ? "dotted" : "solid",
+                            }}
 
-                </label>
-              ))}
+                          />
+                          {labelOf(seriesKey)}
+                        </>
+                      )}
 
+                    </label>
+                  ),
+                )}
+
+              </div>
             </div>
-          </div>
-        </fieldset>
-      ))}
+          </fieldset>
+        ),
+      )}
 
     </div>
   );

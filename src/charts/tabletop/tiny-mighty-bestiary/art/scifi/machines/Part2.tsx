@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -90,7 +90,10 @@ export function DreadnoughtCore() {
       <circle cx="200" cy="120" r="48" fill={card} {...ink} />
       <circle cx="200" cy="120" r="32" fill="none" {...ink} strokeWidth={4} />
       <circle cx="200" cy="120" r="14" fill="currentColor" />
-      <Line d="M152 120 C110 110 100 80 70 70 M248 120 C290 110 300 80 330 70 M170 160 C150 190 120 190 100 210 M230 160 C250 190 280 190 300 210" w={5} />
+      <Line
+        d="M152 120 C110 110 100 80 70 70 M248 120 C290 110 300 80 330 70 M170 160 C150 190 120 190 100 210 M230 160 C250 190 280 190 300 210"
+        w={5}
+      />
       <Line d="M200 72 V40 M180 80 L160 50 M220 80 L240 50" w={4} />
       <Line d="M30 100 l10 6 M360 140 l-10 6 M40 170 l12 -4" w={3} />
       <Ground y={216} />
@@ -125,8 +128,14 @@ export function SiegeWalker() {
       <Shape d="M130 40 H270 V60 H130 Z" w={4} />
       <Line d="M110 80 H290 M110 100 H290" w={3} />
       <Shape d="M300 84 H380 V104 H300 Z" w={4} />
-      <Line d="M110 130 L70 178 L44 224 M150 130 L140 190 L130 224 M250 130 L260 190 L270 224 M290 130 L330 178 L356 224" w={12} />
-      <Shape d="M30 224 h30 l-4 -6 h-22 Z M116 224 h30 l-4 -6 h-22 Z M256 224 h30 l-4 -6 h-22 Z M342 224 h30 l-4 -6 h-22 Z" w={3} />
+      <Line
+        d="M110 130 L70 178 L44 224 M150 130 L140 190 L130 224 M250 130 L260 190 L270 224 M290 130 L330 178 L356 224"
+        w={12}
+      />
+      <Shape
+        d="M30 224 h30 l-4 -6 h-22 Z M116 224 h30 l-4 -6 h-22 Z M256 224 h30 l-4 -6 h-22 Z M342 224 h30 l-4 -6 h-22 Z"
+        w={3}
+      />
       <Line d="M160 212 v-10 M180 212 v-10 M200 212 v-10 M220 212 v-10" w={3} />
       <Dot x={130} y={70} r={3} />
     </Drawing>

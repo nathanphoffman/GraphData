@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -16,7 +16,10 @@ export function BrinyKin() {
       <Line d="M180 90 l-4 6 M200 94 v8 M220 90 l4 6" w={2} />
       <Line d="M170 108 l-8 4 M170 116 l-8 4 M230 108 l8 4 M230 116 l8 4" w={3} />
       <Shape d="M160 120 H240 L254 210 H146 Z" />
-      <Line d="M170 140 q6 6 12 0 q6 6 12 0 q6 6 12 0 q6 6 12 0 M170 164 q6 6 12 0 q6 6 12 0 q6 6 12 0 q6 6 12 0" w={2} />
+      <Line
+        d="M170 140 q6 6 12 0 q6 6 12 0 q6 6 12 0 q6 6 12 0 M170 164 q6 6 12 0 q6 6 12 0 q6 6 12 0 q6 6 12 0"
+        w={2}
+      />
       <Line d="M164 130 L192 170 M236 130 L208 170" w={7} />
       <Shape d="M190 160 H210 V176 H190 Z" w={3} />
       <Line d="M150 200 l-10 14 M250 200 l10 14 M130 150 q-8 8 -2 16 M274 150 q8 8 2 16" w={3} dash="2 5" />

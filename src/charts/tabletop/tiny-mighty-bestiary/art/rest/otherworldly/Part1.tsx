@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -9,12 +9,18 @@ export const ghostBody = (startX: number, x1: number, topEdge: number, bottom: n
 export function WarpFiend() {
   return (
     <Drawing label="Drawing of a red horned fiend bleeding out of the warp from a pile of skulls">
-      <Shape d="M60 224 C80 190 130 190 150 224 Z M140 224 C160 180 240 180 260 224 Z M250 224 C270 190 320 190 340 224 Z" w={4} />
+      <Shape
+        d="M60 224 C80 190 130 190 150 224 Z M140 224 C160 180 240 180 260 224 Z M250 224 C270 190 320 190 340 224 Z"
+        w={4}
+      />
       <circle cx="120" cy="206" r="6" fill="currentColor" />
       <circle cx="200" cy="200" r="7" fill="currentColor" />
       <circle cx="296" cy="206" r="6" fill="currentColor" />
       <Shape d="M170 78 C164 34 236 34 230 78 C236 102 164 102 170 78 Z" />
-      <Shape d="M176 50 C160 30 150 14 158 4 C170 18 180 28 188 40 Z M224 50 C240 30 250 14 242 4 C230 18 220 28 212 40 Z" w={4} />
+      <Shape
+        d="M176 50 C160 30 150 14 158 4 C170 18 180 28 188 40 Z M224 50 C240 30 250 14 242 4 C230 18 220 28 212 40 Z"
+        w={4}
+      />
       <Line d="M184 68 L196 74 M216 68 L204 74" w={4} />
       <Shape d="M188 88 Q200 104 212 88 Z" w={3} />
       <Shape d="M144 108 H256 L270 186 H130 Z" />
@@ -38,7 +44,10 @@ export function DreamEater() {
       <Dot x={192} y={66} r={3} />
       <Line d="M168 80 H192" w={2} />
       <Shape d="M160 90 H200 L190 150 H170 Z" />
-      <Line d="M164 98 L120 100 L84 126 M164 110 L110 124 L100 150 M168 124 L134 150 M196 98 L240 80 L270 100 M196 110 L250 110 L280 130 M192 124 L226 140" w={4} />
+      <Line
+        d="M164 98 L120 100 L84 126 M164 110 L110 124 L100 150 M168 124 L134 150 M196 98 L240 80 L270 100 M196 110 L250 110 L280 130 M192 124 L226 140"
+        w={4}
+      />
       <Line d="M170 150 L160 190 M190 150 L196 190" w={4} />
       <Line d="M280 60 q-14 14 -4 34 q12 12 30 4 M260 40 q-12 8 -10 22" w={3} dash="3 5" />
     </Drawing>
@@ -55,7 +64,10 @@ export function WarpLord() {
       <Shape d="M170 110 C130 80 80 60 30 70 C60 90 64 116 56 140 C100 130 140 134 170 150 Z" />
       <Shape d="M230 110 C270 80 320 60 370 70 C340 90 336 116 344 140 C300 130 260 134 230 150 Z" />
       <Shape d="M178 80 C172 40 228 40 222 80 C228 104 172 104 178 80 Z" />
-      <Shape d="M184 54 C164 36 158 14 166 0 C178 14 188 30 194 44 Z M216 54 C236 36 242 14 234 0 C222 14 212 30 206 44 Z" w={4} />
+      <Shape
+        d="M184 54 C164 36 158 14 166 0 C178 14 188 30 194 44 Z M216 54 C236 36 242 14 234 0 C222 14 212 30 206 44 Z"
+        w={4}
+      />
       <Dot x={192} y={74} r={4} />
       <Dot x={208} y={74} r={4} />
       <Shape d="M168 112 H232 L240 190 H160 Z" />
@@ -88,8 +100,23 @@ export function GhostInTheWire() {
 export function RiftWhisperer() {
   return (
     <Drawing label="Drawing of a tall shape leaking out of a tear in the sky, promising everyone what they most want">
-      <path d="M200 0 L224 40 L196 70 L228 110 L190 140" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M200 0 L176 40 L204 70 L172 110 L210 140" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="4 5" />
+      <path
+        d="M200 0 L224 40 L196 70 L228 110 L190 140"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M200 0 L176 40 L204 70 L172 110 L210 140"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="4 5"
+      />
       <Shape d="M176 140 C170 100 230 100 224 140 L232 224 H168 Z" />
       <Shape d="M184 120 C184 96 216 96 216 120 C216 138 184 138 184 120 Z" w={4} />
       <Line d="M170 150 L130 190 L116 224 M230 150 L270 190 L284 224" w={5} />

@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Servant, Steam } from "./Part1";
 
 const card = CARD_COLOR;
@@ -69,9 +69,18 @@ export function SootPigeon() {
       <Dot x={275} y={84} r={2} />
       <Line d="M260 70 l16 -6" w={4} />
       <Line d="M110 130 L70 120 M114 150 L76 160" w={5} />
-      <Line d="M180 172 L174 200 M210 172 L214 200 M174 200 l-10 6 M174 200 l8 8 M214 200 l-10 6 M214 200 l10 6" w={4} />
+      <Line
+        d="M180 172 L174 200 M210 172 L214 200 M174 200 l-10 6 M174 200 l8 8 M214 200 l-10 6 M214 200 l10 6"
+        w={4}
+      />
       <Shape d="M196 184 H216 V196 H196 Z" w={3} />
-      <path d="M140 110 l-6 -10 M170 98 l-4 -12 M200 100 l-2 -12" stroke={card} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path
+        d="M140 110 l-6 -10 M170 98 l-4 -12 M200 100 l-2 -12"
+        stroke={card}
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
       <Line d="M60 60 q10 -8 20 0 M90 40 q10 -8 20 0 M330 140 q10 -8 20 0" w={3} dash="2 5" />
     </Drawing>
   );
@@ -155,7 +164,10 @@ export function BulkheadRavager() {
       <Dot x={186} y={68} r={3} />
       <Dot x={214} y={68} r={3} />
       <Line d="M176 80 l6 8 l6 -8 l6 8 l6 -8 l6 8" w={3} />
-      <Line d="M142 100 L110 90 L96 60 M258 100 L290 90 L304 60 M146 130 L110 150 L100 190 M254 130 L290 150 L300 190 M150 160 L140 224 M250 160 L260 224" w={9} />
+      <Line
+        d="M142 100 L110 90 L96 60 M258 100 L290 90 L304 60 M146 130 L110 150 L100 190 M254 130 L290 150 L300 190 M150 160 L140 224 M250 160 L260 224"
+        w={9}
+      />
     </Drawing>
   );
 }

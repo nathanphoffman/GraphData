@@ -1,10 +1,25 @@
 /** Pure layout helpers: unit-to-pixel conversion and greedy label placement. */
 import {
-  CELL_CENTER, CELL_H, CELL_NAME_BOX, CELL_W, DIAGONAL_SHARE, DOT_RADIUS, FIGURE_LABEL, GRID_COLUMNS, GRID_EDGE_MARGIN, GRID_LEFT, GRID_ROWS, GRID_TOP,
-  HEADER_COL_W, HEADER_ROW_H, LABEL_GAP, LABEL_RING_EXTRAS, OFF_GRID_COST,
+  CELL_CENTER,
+  CELL_H,
+  CELL_NAME_BOX,
+  CELL_W,
+  DIAGONAL_SHARE,
+  DOT_RADIUS,
+  FIGURE_LABEL,
+  GRID_COLUMNS,
+  GRID_EDGE_MARGIN,
+  GRID_LEFT,
+  GRID_ROWS,
+  GRID_TOP,
+  HEADER_COL_W,
+  HEADER_ROW_H,
+  LABEL_GAP,
+  LABEL_RING_EXTRAS,
+  OFF_GRID_COST,
 } from "./style";
 
-import type { LabelBox, EconomicSystemsData, Figure, PlacedLabel } from "./types";
+import type { EconomicSystemsData, Figure, LabelBox, PlacedLabel } from "./types";
 
 export const GRID_X0 = GRID_LEFT + HEADER_COL_W;
 export const GRID_Y0 = GRID_TOP + HEADER_ROW_H;
@@ -29,8 +44,12 @@ export const cellNameWidth = (text: string): number => text.length * CELL_NAME_B
 
 /** Area two boxes overlap, with a small padding so near-misses count too. */
 function overlapArea(first: LabelBox, second: LabelBox): number {
-  const overlapX = Math.min(first.cx + first.w / 2, second.cx + second.w / 2) - Math.max(first.cx - first.w / 2, second.cx - second.w / 2);
-  const overlapY = Math.min(first.cy + first.h / 2, second.cy + second.h / 2) - Math.max(first.cy - first.h / 2, second.cy - second.h / 2);
+  const overlapX =
+    Math.min(first.cx + first.w / 2, second.cx + second.w / 2) -
+    Math.max(first.cx - first.w / 2, second.cx - second.w / 2);
+  const overlapY =
+    Math.min(first.cy + first.h / 2, second.cy + second.h / 2) -
+    Math.max(first.cy - first.h / 2, second.cy - second.h / 2);
 
   return overlapX > -PADDING && overlapY > -PADDING ? (overlapX + PADDING) * (overlapY + PADDING) : 0;
 }
@@ -60,7 +79,16 @@ function candidates(width: number): Array<[number, number]> {
   for (const extra of LABEL_RING_EXTRAS) {
     const deltaY = DOT_R + LABEL_H / 2 + LABEL_GAP.vertical + extra;
     const deltaX = DOT_R + width / 2 + LABEL_GAP.horizontal + extra;
-    spots.push([0, deltaY], [0, -deltaY], [deltaX, 0], [-deltaX, 0], [deltaX * DIAGONAL_SHARE, deltaY], [-deltaX * DIAGONAL_SHARE, deltaY], [deltaX * DIAGONAL_SHARE, -deltaY], [-deltaX * DIAGONAL_SHARE, -deltaY]);
+    spots.push(
+      [0, deltaY],
+      [0, -deltaY],
+      [deltaX, 0],
+      [-deltaX, 0],
+      [deltaX * DIAGONAL_SHARE, deltaY],
+      [-deltaX * DIAGONAL_SHARE, deltaY],
+      [deltaX * DIAGONAL_SHARE, -deltaY],
+      [-deltaX * DIAGONAL_SHARE, -deltaY],
+    );
   }
 
   return spots;
@@ -68,7 +96,13 @@ function candidates(width: number): Array<[number, number]> {
 
 /** Greedy placement: each label takes the nearest spot that does not collide with anything placed so far. */
 export function placeLabels(data: EconomicSystemsData, figures: Figure[]): PlacedLabel[] {
-  const dots: LabelBox[] = figures.map((figure) => ({ cx: xToPixels(figure.x), cy: yToPixels(figure.y), w: DOT_R * 2, h: DOT_R * 2 }));
+  const dots: LabelBox[] = figures.map((figure) => ({
+    cx: xToPixels(figure.x),
+    cy: yToPixels(figure.y),
+    w: DOT_R * 2,
+    h: DOT_R * 2,
+  }));
+
   const fixed = fixedObstacles(data);
   const placed: PlacedLabel[] = [];
   const taken: LabelBox[] = [];
@@ -127,5 +161,7 @@ export function nearestCells(data: EconomicSystemsData, pixelX: number, pixelY: 
     }
   }
 
-  return data.cells.filter((cell) => best!.cols.includes(cell.col) && best!.rows.includes(cell.row)).map((cell) => cell.name);
+  return data.cells
+    .filter((cell) => best!.cols.includes(cell.col) && best!.rows.includes(cell.row))
+    .map((cell) => cell.name);
 }

@@ -1,9 +1,52 @@
 import type { ReactNode } from "react";
-import { MidnightRadio, MannequinButler, PossessedTypewriter, CursedHearse, WaxworkStalker, HauntedUmbrella, GraveShiftGurney } from "./Part1";
-import { VoidHound, LibrarySilverfish, CrowInformant, GraveyardHound, HellhoundStalker, OverdramaticRaven, BarghestWarden, RobedCultist } from "./Part2";
-import { CultMagister, EagerCultist, CurioDealer, TeaRoomMedium, CultInquisitor, MidnightKingpin, NosyLandlady, ParishExorcist } from "./Part3";
-import { BlackOozeMass, TentacledBellhop, WallpaperThing, DrainLeech, BasementElder, BatSwarmColossus, BrainDrinker } from "./Part4";
-import { BrinyKin, FacelessGaunt, PaleFungoid, StarWing, LampPostGhoul, SaloonSpirit, SunkenLighthouseKeeper, HollowMan } from "./Part5";
+import {
+  CursedHearse,
+  GraveShiftGurney,
+  HauntedUmbrella,
+  MannequinButler,
+  MidnightRadio,
+  PossessedTypewriter,
+  WaxworkStalker,
+} from "./Part1";
+import {
+  BarghestWarden,
+  CrowInformant,
+  GraveyardHound,
+  HellhoundStalker,
+  LibrarySilverfish,
+  OverdramaticRaven,
+  RobedCultist,
+  VoidHound,
+} from "./Part2";
+import {
+  CultInquisitor,
+  CultMagister,
+  CurioDealer,
+  EagerCultist,
+  MidnightKingpin,
+  NosyLandlady,
+  ParishExorcist,
+  TeaRoomMedium,
+} from "./Part3";
+import {
+  BasementElder,
+  BatSwarmColossus,
+  BlackOozeMass,
+  BrainDrinker,
+  DrainLeech,
+  TentacledBellhop,
+  WallpaperThing,
+} from "./Part4";
+import {
+  BrinyKin,
+  FacelessGaunt,
+  HollowMan,
+  LampPostGhoul,
+  PaleFungoid,
+  SaloonSpirit,
+  StarWing,
+  SunkenLighthouseKeeper,
+} from "./Part5";
 
 export const occultNoirArt: Record<string, () => ReactNode> = {
   "midnight-radio": MidnightRadio,

@@ -23,10 +23,29 @@ export function PreviewSection({ settings, set }: SectionProps) {
     <section className="astro-group">
       <h3>Hover preview</h3>
       <div className="astro-fields">
-        <ZoneSlider label="Eyepiece focal length" value={settings.eyepieceMm} min={2} max={100} log unit="mm" zones={EYEPIECE_MM_ZONES} onChange={(value) => set({ eyepieceMm: value })} />
-        <ZoneSlider label="Eyepiece apparent field" value={settings.eyepieceAfov} min={20} max={120} unit="°" zones={EYEPIECE_AFOV_ZONES} onChange={(value) => set({ eyepieceAfov: value })} />
+        <ZoneSlider
+          label="Eyepiece focal length"
+          value={settings.eyepieceMm}
+          min={2}
+          max={100}
+          log
+          unit="mm"
+          zones={EYEPIECE_MM_ZONES}
+          onChange={(value) => set({ eyepieceMm: value })}
+        />
+        <ZoneSlider
+          label="Eyepiece apparent field"
+          value={settings.eyepieceAfov}
+          min={20}
+          max={120}
+          unit="°"
+          zones={EYEPIECE_AFOV_ZONES}
+          onChange={(value) => set({ eyepieceAfov: value })}
+        />
         <p className="astro-note">
-          {optics.magnification.toFixed(0)}× magnification, true field {(optics.fov / 60).toFixed(2)}°. Shorter eyepiece = more zoom, bigger and dimmer. Only changes the hover preview, unless a preset or Manual telescope is on (then it also sets the field used in the table).
+          {optics.magnification.toFixed(0)}× magnification, true field {(optics.fov / 60).toFixed(2)}°. Shorter eyepiece
+          = more zoom, bigger and dimmer. Only changes the hover preview, unless a preset or Manual telescope is on
+          (then it also sets the field used in the table).
         </p>
       </div>
     </section>
@@ -41,8 +60,24 @@ export function ScoringSection({ settings, set }: SectionProps) {
     <section className="astro-group">
       <h3>Scoring and filters</h3>
       <div className="astro-fields">
-        <SliderField label={`Simulator adjustment applied (${settings.simWeight}%)`} value={settings.simWeight} min={0} max={100} step={5} onChange={(value) => set({ simWeight: value })} note={WEIGHT_NOTE} />
-        <SliderField label={`Author adjustment applied (${settings.authorWeight}%)`} value={settings.authorWeight} min={0} max={100} step={5} onChange={(value) => set({ authorWeight: value })} note={WEIGHT_NOTE} />
+        <SliderField
+          label={`Simulator adjustment applied (${settings.simWeight}%)`}
+          value={settings.simWeight}
+          min={0}
+          max={100}
+          step={5}
+          onChange={(value) => set({ simWeight: value })}
+          note={WEIGHT_NOTE}
+        />
+        <SliderField
+          label={`Author adjustment applied (${settings.authorWeight}%)`}
+          value={settings.authorWeight}
+          min={0}
+          max={100}
+          step={5}
+          onChange={(value) => set({ authorWeight: value })}
+          note={WEIGHT_NOTE}
+        />
       </div>
     </section>
   );

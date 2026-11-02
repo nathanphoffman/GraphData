@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { callApi } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { useAuth } from "../../../auth/useAuth";
-import { RankingEditor } from "../top-rankings/RankingEditor";
-import { RankingTable, type Sort, firstSort } from "../top-rankings/RankingTable";
 import { SCAFFOLDING_LINES, withQuality, withScaffolding, withStatus } from "../top-rankings/maintenance";
+import { RankingEditor } from "../top-rankings/RankingEditor";
+import { firstSort, RankingTable, type Sort } from "../top-rankings/RankingTable";
 import { PROJECT_PRIORITY_ID } from "../top-rankings/TopRankings";
 import "../top-rankings/styles.css";
-import { type Ranking, isText } from "../top-rankings/score";
+import { isText, type Ranking } from "../top-rankings/score";
 import { MaintenanceIndex } from "./MaintenanceIndex";
 
 /** Project priority page: the project ranking table with the code maintenance index above it. */
@@ -49,17 +49,50 @@ export default function ProjectPriority() {
       </EditGear>
       <MaintenanceIndex ranking={shown} />
       <p className="muted">
-        Score is each rating squared times its column's weight, added up. The weight is shown under each column name. Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
+        Score is each rating squared times its column's weight, added up. The weight is shown under each column name.
+        Grade is the score out of 100 on a curve that eases off near the top and drops faster further down.
       </p>
-      <p className="muted">Completed Lines includes {SCAFFOLDING_LINES} extra lines per project, a minimum scaffolding score that every project needs. It is added here on the page, not saved in the data or counted by the line count script.</p>
-      {isText(auth.user) && <Link to="/ralph-loops" className="ralph-link">RalphLoops status →</Link>}
+      <p className="muted">
+        Completed Lines includes {SCAFFOLDING_LINES} extra lines per project, a minimum scaffolding score that every
+        project needs. It is added here on the page, not saved in the data or counted by the line count script.
+      </p>
+      {isText(auth.user) && (
+        <Link to="/ralph-loops" className="ralph-link">
+          RalphLoops status →
+        </Link>
+      )}
+
       <label>
-        <input type="checkbox" checked={showScore} onChange={(changeEvent) => setShowScore(changeEvent.target.checked)} /> Show score
+        <input
+          type="checkbox"
+          checked={showScore}
+          onChange={(changeEvent) => setShowScore(changeEvent.target.checked)}
+        />{" "}
+        Show score
       </label>
-      <input type="search" className="rankings-search" placeholder="Search by name…" value={search} onChange={(changeEvent) => setSearch(changeEvent.target.value)} />
-      <RankingTable key={search} ranking={shown} source={ranking} showScore={showScore} showFeatures search={search}
-        sort={sort} canEdit={isText(auth.user)} onSaved={load}
-        onSort={(sortColumn) => setSort((prev) => (prev.key === sortColumn ? { key: sortColumn, descending: !prev.descending } : firstSort(sortColumn)))} /* Clicking the sorted column flips its direction; a new column starts in its first direction. */
+      <input
+        type="search"
+        className="rankings-search"
+        placeholder="Search by name…"
+        value={search}
+        onChange={(changeEvent) => setSearch(changeEvent.target.value)}
+      />
+      <RankingTable
+        key={search}
+        ranking={shown}
+        source={ranking}
+        showScore={showScore}
+        showFeatures
+        search={search}
+        sort={sort}
+        canEdit={isText(auth.user)}
+        onSaved={load}
+        onSort={(sortColumn) =>
+          setSort((prev) =>
+            prev.key === sortColumn ? { key: sortColumn, descending: !prev.descending } : firstSort(sortColumn),
+          )
+        } /* Clicking the sorted column flips its direction; a new column starts in its first direction. */
+
       />
     </div>
   );

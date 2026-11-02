@@ -14,10 +14,16 @@ export function dayOfYear(month: number, day: number): number {
 }
 
 /** Altitude in degrees of a point (ra hours, dec deg) at the given local sidereal time. */
-export function altitude(rightAscension: number, declination: number, localSiderealTime: number, latitude: number): number {
+export function altitude(
+  rightAscension: number,
+  declination: number,
+  localSiderealTime: number,
+  latitude: number,
+): number {
   const hourAngle = (localSiderealTime - rightAscension) * 15 * DEGREES_TO_RADIANS;
   const sinAlt =
-    Math.sin(latitude * DEGREES_TO_RADIANS) * Math.sin(declination * DEGREES_TO_RADIANS) + Math.cos(latitude * DEGREES_TO_RADIANS) * Math.cos(declination * DEGREES_TO_RADIANS) * Math.cos(hourAngle);
+    Math.sin(latitude * DEGREES_TO_RADIANS) * Math.sin(declination * DEGREES_TO_RADIANS) +
+    Math.cos(latitude * DEGREES_TO_RADIANS) * Math.cos(declination * DEGREES_TO_RADIANS) * Math.cos(hourAngle);
 
   return Math.asin(clamp(sinAlt, -1, 1)) / DEGREES_TO_RADIANS;
 }
@@ -49,7 +55,13 @@ export function sampleWindow(latitude: number, season: Season, start: number, en
     for (let t = start; t < end; t += STEP_HOURS) {
       const localSiderealTime = (sunRa + (t - 12) + 48) % 24;
       const sunAlt = altitude(sunRa, sunDec, localSiderealTime, latitude);
-      samples.push({ lst: localSiderealTime, hour: t, date, sunLon: (((doy - 79) * 360) / 365.2422 + 360) % 360, dark: sunAlt < -12 });
+      samples.push({
+        lst: localSiderealTime,
+        hour: t,
+        date,
+        sunLon: (((doy - 79) * 360) / 365.2422 + 360) % 360,
+        dark: sunAlt < -12,
+      });
     }
   });
 
@@ -84,7 +96,10 @@ export function positionsAt(target: Target, sample: Sample): Position[] {
   return planetOffsets(target.planet.maxElongation).map((offset) => {
     const lon = (sample.sunLon + offset) * DEGREES_TO_RADIANS;
     const declination = Math.asin(Math.sin(OBLIQUITY * DEGREES_TO_RADIANS) * Math.sin(lon)) / DEGREES_TO_RADIANS;
-    const rightAscension = (Math.atan2(Math.cos(OBLIQUITY * DEGREES_TO_RADIANS) * Math.sin(lon), Math.cos(lon)) / DEGREES_TO_RADIANS / 15 + 24) % 24;
+    const rightAscension =
+      (Math.atan2(Math.cos(OBLIQUITY * DEGREES_TO_RADIANS) * Math.sin(lon), Math.cos(lon)) / DEGREES_TO_RADIANS / 15 +
+        24) %
+      24;
 
     return { ra: rightAscension, dec: declination };
   });
@@ -119,7 +134,10 @@ export const UP_ALTITUDE = 25;
 /** Hours (0-23, local solar time) during the middle date of a season's dark night when a target is above 25 degrees, as first and last hour; null if it never is. */
 export function upWindow(target: Target, season: Season, latitude: number): [number, number] | null {
   const hours = sampleWindow(latitude, season, NIGHT_START, NIGHT_END)
-    .filter((sample) => sample.date === 1 && sample.dark && altitude(target.ra, target.dec, sample.lst, latitude) >= UP_ALTITUDE)
+    .filter(
+      (sample) =>
+        sample.date === 1 && sample.dark && altitude(target.ra, target.dec, sample.lst, latitude) >= UP_ALTITUDE,
+    )
     .map((sample) => sample.hour);
 
   return hours.length ? [Math.round(Math.min(...hours)) % 24, Math.round(Math.max(...hours)) % 24] : null;

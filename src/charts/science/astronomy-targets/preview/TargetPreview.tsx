@@ -1,10 +1,19 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
-import type { ScoredTarget, Settings, Target, TargetDetails } from "../model/types";
+import { type CSSProperties, useEffect, useLayoutEffect, useRef, useState } from "react";
 import details from "../../../../../data/astronomy/astronomy-target-details.json";
-import { difficulty, effectiveQuality, formatHour, formatSize, isNakedEye, previewOptics, surfaceBrightness, viewConditions } from "../model/calculate";
-import { TARGET_IMAGES, type TargetImage } from "./images";
+import {
+  difficulty,
+  effectiveQuality,
+  formatHour,
+  formatSize,
+  isNakedEye,
+  previewOptics,
+  surfaceBrightness,
+  viewConditions,
+} from "../model/calculate";
 import { guideStarsFor } from "../model/guideStars";
+import type { ScoredTarget, Settings, Target, TargetDetails } from "../model/types";
 import { FindingChart, GuideList } from "./FindingChart";
+import { TARGET_IMAGES, type TargetImage } from "./images";
 
 const VIEW_SIZE = 280;
 const SCALE = 2;
@@ -87,7 +96,13 @@ function TargetCircle({ target, info, img }: { target: Target; info: TargetImage
 
   return (
     <svg className="astro-circle" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" aria-hidden="true">
-      <ellipse cx={centerX} cy={centerY} rx={Math.max(target.major / 2, lowest)} ry={Math.max(target.minor / 2, lowest)} transform={`rotate(${f.angleDeg} ${centerX} ${centerY})`} />
+      <ellipse
+        cx={centerX}
+        cy={centerY}
+        rx={Math.max(target.major / 2, lowest)}
+        ry={Math.max(target.minor / 2, lowest)}
+        transform={`rotate(${f.angleDeg} ${centerX} ${centerY})`}
+      />
     </svg>
   );
 }
@@ -106,7 +121,13 @@ const BLOOM_RANGE = 6;
 const CYCLE_SECONDS = 8;
 
 /** Stars and planets are far smaller than a pixel of the field, so they are drawn as a glowing dot, not from the photo. */
-function preparePoint(context: CanvasRenderingContext2D, size: number, pointMargin: number, skyGlow: number, quality: number) {
+function preparePoint(
+  context: CanvasRenderingContext2D,
+  size: number,
+  pointMargin: number,
+  skyGlow: number,
+  quality: number,
+) {
   const frame = context.createImageData(size, size);
   const d = frame.data;
   const half = size / 2;
@@ -136,7 +157,11 @@ function preparePoint(context: CanvasRenderingContext2D, size: number, pointMarg
         continue;
       }
 
-      const level = Math.min(1, Math.exp(-((dist / (1.2 * SCALE * (1 + 0.5 * poor))) ** 2)) + bloom * (0.35 + 0.2 * poor) * Math.exp(-dist / glowRadius));
+      const level = Math.min(
+        1,
+        Math.exp(-((dist / (1.2 * SCALE * (1 + 0.5 * poor))) ** 2)) +
+          bloom * (0.35 + 0.2 * poor) * Math.exp(-dist / glowRadius),
+      );
       const vignette = 1 - 0.25 * (dist / half) ** 2;
 
       for (let c = 0; c < 3; c++) {
@@ -288,9 +313,14 @@ function PreviewHead({ row, settings }: { row: ScoredTarget; settings: Settings 
           {t.id}
           {t.nickname && <span> {t.nickname}</span>}
         </h4>
-        <div className="astro-preview-sub">{t.type} · {t.constellation}</div>
+        <div className="astro-preview-sub">
+          {t.type} · {t.constellation}
+        </div>
       </div>
-      <div className="astro-score-pill" style={{ "--tag": `hsl(${Math.round(level.level * 120)} 70% 45%)` } as CSSProperties}>
+      <div
+        className="astro-score-pill"
+        style={{ "--tag": `hsl(${Math.round(level.level * 120)} 70% 45%)` } as CSSProperties}
+      >
         {row.score.toFixed(0).replace("-", "−")} · {level.label}
       </div>
     </div>
@@ -306,14 +336,21 @@ function previewStats(scoredTarget: ScoredTarget) {
     ["Size", formatSize(t.major, t.minor)],
   ];
 
-  if (t.type !== "Star" && !t.planet && t.type !== "Moon") tiles.push(["Surface br.", `${surfaceBrightness(t).toFixed(1)}`]);
+  if (t.type !== "Star" && !t.planet && t.type !== "Moon")
+    tiles.push(["Surface br.", `${surfaceBrightness(t).toFixed(1)}`]);
 
   if (extra) tiles.push(["Distance", extra.distance]);
-  tiles.push(["Best time", `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${scoredTarget.bestHour === null ? "" : `, ${formatHour(scoredTarget.bestHour)}`}`]);
-  tiles.push(["Peak altitude", scoredTarget.peakAltitude > 0 ? `${scoredTarget.peakAltitude.toFixed(0)}°` : "below horizon"]);
+  tiles.push([
+    "Best time",
+    `${t.bestSeason === "any" ? "Any season" : t.bestSeason[0].toUpperCase() + t.bestSeason.slice(1)}${scoredTarget.bestHour === null ? "" : `, ${formatHour(scoredTarget.bestHour)}`}`,
+  ]);
+  tiles.push([
+    "Peak altitude",
+    scoredTarget.peakAltitude > 0 ? `${scoredTarget.peakAltitude.toFixed(0)}°` : "below horizon",
+  ]);
   const notes: { label: string; value: string }[] = [];
 
-  for (const f of extra?.facts ?? []) (f.value.length <= TILE_MAX ? tiles.push([f.label, f.value]) : notes.push(f));
+  for (const f of extra?.facts ?? []) f.value.length <= TILE_MAX ? tiles.push([f.label, f.value]) : notes.push(f);
 
   return { tiles, notes, extra };
 }
@@ -324,7 +361,17 @@ export function hasPreview(identifier: string): boolean {
 }
 
 /** Floating preview of what the target looks like through the chosen eyepiece, placed next to the mouse. */
-export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; settings: Settings; x: number; y: number }) {
+export function TargetPreview({
+  row,
+  settings,
+  x,
+  y,
+}: {
+  row: ScoredTarget;
+  settings: Settings;
+  x: number;
+  y: number;
+}) {
   const info = TARGET_IMAGES[row.target.id];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const thumbRef = useRef<HTMLSpanElement>(null);
@@ -344,11 +391,15 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
     let cancelled = false;
 
     // Measure the photo once loaded so it can be scaled to the eyepiece view.
-    loadImage(info.src).then((img) => {
-      if (!cancelled) setLoaded({ img, ...measurePhoto(img, info, row.target) });
-    }).catch((error) => console.warn(`Could not load image ${info.src}`, error));
+    loadImage(info.src)
+      .then((img) => {
+        if (!cancelled) setLoaded({ img, ...measurePhoto(img, info, row.target) });
+      })
+      .catch((error) => console.warn(`Could not load image ${info.src}`, error));
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [info, row.target]);
 
   // Draw the preview and animate the averted-vision effect; people who prefer reduced motion get a fixed middle setting.
@@ -358,7 +409,12 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
       canvas: canvasRef.current,
       img: loaded.img,
       photo: { widthArcmin: info.widthArcmin, mean: loaded.mean, bg: loaded.bg, center: info.footprint },
-      optics: { fov: fieldOfView, margin, pointMargin: view.pointMargin, quality: (effectiveQuality(settings) - 50) / 50 },
+      optics: {
+        fov: fieldOfView,
+        margin,
+        pointMargin: view.pointMargin,
+        quality: (effectiveQuality(settings) - 50) / 50,
+      },
       skyGlow,
       point: unresolved,
     });
@@ -406,7 +462,8 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
   useLayoutEffect(() => {
     const el = boxRef.current;
 
-    if (el && (el.offsetWidth !== box.w || el.offsetHeight !== box.h)) setBox({ w: el.offsetWidth, h: el.offsetHeight });
+    if (el && (el.offsetWidth !== box.w || el.offsetHeight !== box.h))
+      setBox({ w: el.offsetWidth, h: el.offsetHeight });
   });
 
   const GAP = 16;
@@ -434,7 +491,16 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
           <img src={info.src} alt={row.target.nickname || row.target.id} style={{ height: VIEW_SIZE }} />
           {loaded && <TargetCircle target={row.target} info={info} img={loaded.img} />}
         </div>
-        <figcaption>Photo{loaded && info.footprint && !info.noCircle && row.target.major > 0 && row.target.major / info.widthArcmin < CIRCLE_BELOW ? " (target circled)" : ""}</figcaption>
+        <figcaption>
+          Photo
+          {loaded &&
+          info.footprint &&
+          !info.noCircle &&
+          row.target.major > 0 &&
+          row.target.major / info.widthArcmin < CIRCLE_BELOW
+            ? " (target circled)"
+            : ""}
+        </figcaption>
       </figure>
       <figure>
         <canvas ref={canvasRef} style={{ width: VIEW_SIZE, height: VIEW_SIZE }} />
@@ -452,7 +518,15 @@ export function TargetPreview({ row, settings, x, y }: { row: ScoredTarget; sett
           <>
             <h5>About</h5>
             <p>{extra.about}</p>
-            {notes.length > 0 && <ul>{notes.map((note) => <li key={note.label}><strong>{note.label}:</strong> {note.value}</li>)}</ul>}
+            {notes.length > 0 && (
+              <ul>
+                {notes.map((note) => (
+                  <li key={note.label}>
+                    <strong>{note.label}:</strong> {note.value}
+                  </li>
+                ))}
+              </ul>
+            )}
             <h5>How to find it</h5>
             <p>{extra.howToFind}</p>
             {guideStars.length > 0 && (

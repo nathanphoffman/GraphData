@@ -14,6 +14,7 @@ const IMPORT = /(?:from|import)\s+["'](\.[^"']*)["']/g;
 /** The file a relative import points at, or undefined when it is not one of ours (for example a data file). */
 function resolveImport(from, specifier) {
   const base = resolve(dirname(from), specifier);
+
   return EXTENSIONS.map((extension) => base + extension).find((path) => existsSync(path) && /\.(tsx?|css)$/.test(path));
 }
 
@@ -21,27 +22,39 @@ function resolveImport(from, specifier) {
 function reachable(entry) {
   const seen = new Set();
   const queue = [entry];
+
   while (queue.length) {
     const file = queue.pop();
+
     if (seen.has(file)) continue;
     seen.add(file);
     const text = readFileSync(file, "utf8");
+
     for (const [, specifier] of text.matchAll(IMPORT)) {
       const next = resolveImport(file, specifier);
+
       if (next) queue.push(next);
     }
   }
+
   return seen;
 }
 
 const lineCount = (file) => readFileSync(file, "utf8").split("\n").length;
 
 const registry = readFileSync(REGISTRY, "utf8");
-const componentFiles = new Map([...registry.matchAll(/import (\w+) from "(\.[^"]+)"/g)].map(([, name, path]) => [name, resolveImport(REGISTRY, path)]));
+const componentFiles = new Map(
+  [...registry.matchAll(/import (\w+) from "(\.[^"]+)"/g)].map(([, name, path]) => [
+    name,
+    resolveImport(REGISTRY, path),
+  ]),
+);
 
 const sizes = {};
+
 for (const [, id, component] of registry.matchAll(/id: "([^"]+)"[\s\S]*?component: (\w+)/g)) {
   const entry = componentFiles.get(component);
+
   if (entry) sizes[id] = [...reachable(entry)].reduce((total, file) => total + lineCount(file), 0);
 }
 

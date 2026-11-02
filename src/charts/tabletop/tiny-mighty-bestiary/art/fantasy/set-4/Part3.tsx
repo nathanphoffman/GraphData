@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -29,7 +29,10 @@ export function StoneGazer() {
   return (
     <Drawing label="Drawing of a woman with living snakes for hair and a statue of a warrior at her feet">
       <Shape d="M156 100 C150 40 250 40 244 100 C240 128 160 128 156 100 Z" />
-      <Line d="M156 70 C120 70 110 40 130 28 C146 22 150 40 138 44 M244 70 C280 70 290 40 270 28 C254 22 250 40 262 44 M170 52 C160 20 190 8 196 28 M230 52 C240 20 210 8 204 28 M200 46 C190 20 210 14 212 0" w={5} />
+      <Line
+        d="M156 70 C120 70 110 40 130 28 C146 22 150 40 138 44 M244 70 C280 70 290 40 270 28 C254 22 250 40 262 44 M170 52 C160 20 190 8 196 28 M230 52 C240 20 210 8 204 28 M200 46 C190 20 210 14 212 0"
+        w={5}
+      />
       <Solid d="M122 30 l-6 -6 l10 -2 Z M278 30 l6 -6 l-10 -2 Z M190 24 l-6 -6 l10 0 Z M212 22 l6 -6 l-10 0 Z" />
       <circle cx="184" cy="88" r="12" fill={card} {...ink} strokeWidth={4} />
       <circle cx="216" cy="88" r="12" fill={card} {...ink} strokeWidth={4} />

@@ -52,13 +52,24 @@ export function ZoneSlider({ label, value, min, max, zones, log, unit, onChange 
 
   return (
     <label>
-      <span>{label} ({value} {unit})</span>
-      <input type="range" min={0} max={1000} step={1} value={Math.round(toPos(value) * 1000)} onChange={(event) => onChange(fromPos(Number(event.target.value) / 1000))} />
+      <span>
+        {label} ({value} {unit})
+      </span>
+      <input
+        type="range"
+        min={0}
+        max={1000}
+        step={1}
+        value={Math.round(toPos(value) * 1000)}
+        onChange={(event) => onChange(fromPos(Number(event.target.value) / 1000))}
+      />
       <div className="astro-zones" style={{ background: `linear-gradient(to right, ${bar})` }} aria-hidden="true" />
       <div className="astro-zone-labels">
         {/* Put each zone label in the middle of its stretch. */}
         {stops.map((stop) => (
-          <span key={stop.label} style={{ left: `${(stop.start + stop.end) / 2}%`, color: `hsl(${stop.hue} 65% 45%)` }}>{stop.label}</span>
+          <span key={stop.label} style={{ left: `${(stop.start + stop.end) / 2}%`, color: `hsl(${stop.hue} 65% 45%)` }}>
+            {stop.label}
+          </span>
         ))}
       </div>
     </label>

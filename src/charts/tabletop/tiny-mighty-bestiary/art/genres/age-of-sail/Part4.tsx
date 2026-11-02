@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Tricorn, Waves } from "./Part1";
 
 const card = CARD_COLOR;
@@ -32,7 +32,12 @@ export function PirateKing() {
       <path d="M46 72 L94 92 M94 72 L46 92" stroke={card} strokeWidth="3" />
       <Line d="M20 20 V224" w={5} />
       {/* Repeat the shape at each listed position. */}
-      {[[250, 60], [310, 50], [350, 70], [280, 80]].map(([x, y], index) => (
+      {[
+        [250, 60],
+        [310, 50],
+        [350, 70],
+        [280, 80],
+      ].map(([x, y], index) => (
         <g key={index} transform={`translate(${x} ${y})`}>
           <Line d="M0 0 V-18 M0 -18 L12 -8 L0 -4" w={2} />
           <Shape d="M-16 0 H16 L12 8 H-12 Z" w={2} />
@@ -141,7 +146,10 @@ export function MaelstromLeviathan() {
       <ellipse cx="200" cy="140" rx="40" ry="16" fill="currentColor" />
       <Shape d="M170 140 L176 126 H190 L194 140 Z" w={0} />
       <Solid d="M168 140 l8 -14 l8 14 Z M184 142 l8 -14 l8 14 Z M200 142 l8 -14 l8 14 Z M216 140 l8 -14 l8 14 Z" />
-      <Shape d="M60 100 L80 90 L92 100 L80 108 Z M300 80 L320 70 L332 80 L320 88 Z M300 190 L320 180 L332 190 L320 198 Z M80 180 L100 172 L110 180 L100 188 Z" w={3} />
+      <Shape
+        d="M60 100 L80 90 L92 100 L80 108 Z M300 80 L320 70 L332 80 L320 88 Z M300 190 L320 180 L332 190 L320 198 Z M80 180 L100 172 L110 180 L100 188 Z"
+        w={3}
+      />
       <Line d="M100 130 l-24 8 M290 150 l24 -8" w={3} dash="3 4" />
       <circle cx="200" cy="108" r="6" fill={card} {...ink} strokeWidth={3} />
       <circle cx="230" cy="112" r="6" fill={card} {...ink} strokeWidth={3} />

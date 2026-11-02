@@ -159,11 +159,11 @@
     {
       "name": "Housefly",
       "neuronsBillions": 0.0001,
-      "weightKg": 1.2e-05
+      "weightKg": 1.2e-5
     },
     {
       "name": "Oyster",
-      "neuronsBillions": 1e-08,
+      "neuronsBillions": 1e-8,
       "weightKg": 0.05
     }
   ]

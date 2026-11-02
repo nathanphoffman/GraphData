@@ -10,12 +10,14 @@ interface Area {
   open: number;
   blocked: number;
 }
+
 interface LoopEvent {
   at: number;
   kind: string;
   message: string;
   source: string;
 }
+
 interface Commit {
   at: number;
   source: string;
@@ -26,10 +28,12 @@ interface Commit {
   files: number;
   total: number;
 }
+
 interface LoopFile {
   name: string;
   updatedAt: number;
 }
+
 interface Loop {
   name: string;
   state: string;
@@ -47,6 +51,7 @@ type Entry = { at: number; source: string; text: string; commit?: Commit };
 
 const POLL_MS = 15_000;
 const STOP_POLLING_MS = 60 * 60 * 1000;
+
 const time = (ms: number) => new Date(ms).toLocaleString("sv");
 
 /** The part of a source before the colon: "worker:world" is a worker. */
@@ -89,7 +94,9 @@ function Timeline({ entries }: { entries: Entry[] }) {
           <span className="ralph-text">
             {entry.commit ? (
               <>
-                <code>{entry.commit.sha.slice(0, 7)}</code> {entry.text} <span className="ralph-added">+{entry.commit.added}</span> <span className="ralph-removed">−{entry.commit.removed}</span>{" "}
+                <code>{entry.commit.sha.slice(0, 7)}</code> {entry.text}{" "}
+                <span className="ralph-added">+{entry.commit.added}</span>{" "}
+                <span className="ralph-removed">−{entry.commit.removed}</span>{" "}
                 <span className="muted">
                   {entry.commit.files} {entry.commit.files === 1 ? "file" : "files"}
                 </span>
@@ -97,9 +104,11 @@ function Timeline({ entries }: { entries: Entry[] }) {
             ) : (
               entry.text
             )}
+
           </span>
         </li>
       ))}
+
     </ul>
   );
 }
@@ -113,7 +122,9 @@ function Files({ loop }: { loop: Loop }) {
 
   useEffect(() => {
     if (!selected) return;
-    callApi<{ content: string }>(`/api/ralph/files/${encodeURIComponent(loop.name)}/${encodeURIComponent(selected.name)}`)
+    callApi<{ content: string }>(
+      `/api/ralph/files/${encodeURIComponent(loop.name)}/${encodeURIComponent(selected.name)}`,
+    )
       .then((data) => {
         setContent(data.content);
         setError("");
@@ -121,7 +132,9 @@ function Files({ loop }: { loop: Loop }) {
       .catch((problem: Error) => setError(problem.message));
   }, [loop.name, selected?.name, selected?.updatedAt]);
 
-  if (!loop.files.length) return <p className="muted">The loop has not sent any files yet. It sends them when a round starts.</p>;
+  if (!loop.files.length)
+
+    return <p className="muted">The loop has not sent any files yet. It sends them when a round starts.</p>;
 
   return (
     <>
@@ -131,6 +144,7 @@ function Files({ loop }: { loop: Loop }) {
             {file.name}
           </button>
         ))}
+
       </div>
       {selected && <p className="muted">Sent {time(selected.updatedAt)}</p>}
       {error ? <p>Could not load the file: {error}</p> : selected && <pre className="ralph-file">{content}</pre>}
@@ -147,15 +161,27 @@ const CHART = { width: 600, height: 160, pad: 36 };
 function LinesChart({ commits }: { commits: Commit[] }) {
   const points = commits.filter((commit) => commit.total > 0).reverse();
   const merged = points.filter((commit) => role(commit.source) !== "worker");
+
   if (points.length < 2) return <p className="muted">The size graph appears once the loop has made a few commits.</p>;
 
   const [first, last] = [points[0]?.at ?? 0, points[points.length - 1]?.at ?? 1];
-  const [low, high] = [Math.min(...points.map((commit) => commit.total)), Math.max(...points.map((commit) => commit.total))];
+  const [low, high] = [
+    Math.min(...points.map((commit) => commit.total)),
+    Math.max(...points.map((commit) => commit.total)),
+  ];
+
   const x = (at: number) => CHART.pad + ((at - first) / Math.max(1, last - first)) * (CHART.width - 2 * CHART.pad);
-  const y = (total: number) => CHART.height - CHART.pad - ((total - low) / Math.max(1, high - low)) * (CHART.height - 2 * CHART.pad);
+
+  const y = (total: number) =>
+    CHART.height - CHART.pad - ((total - low) / Math.max(1, high - low)) * (CHART.height - 2 * CHART.pad);
 
   return (
-    <svg viewBox={`0 0 ${CHART.width} ${CHART.height}`} className="ralph-chart" role="img" aria-label="Lines in the project over time">
+    <svg
+      viewBox={`0 0 ${CHART.width} ${CHART.height}`}
+      className="ralph-chart"
+      role="img"
+      aria-label="Lines in the project over time"
+    >
       <text x={4} y={y(high) + 4} className="ralph-axis">
         {high.toLocaleString()}
       </text>
@@ -174,13 +200,32 @@ function LinesChart({ commits }: { commits: Commit[] }) {
           points={`${x(merged[0]?.at ?? first)},${CHART.height - CHART.pad} ${merged.map((commit) => `${x(commit.at)},${y(commit.total)}`).join(" ")} ${x(merged[merged.length - 1]?.at ?? last)},${CHART.height - CHART.pad}`}
         />
       )}
-      <line x1={CHART.pad} x2={CHART.width - CHART.pad} y1={CHART.height - CHART.pad} y2={CHART.height - CHART.pad} className="ralph-grid" />
-      <polyline fill="none" strokeWidth={2} className="ralph-line" points={merged.map((commit) => `${x(commit.at)},${y(commit.total)}`).join(" ")} />
+
+      <line
+        x1={CHART.pad}
+        x2={CHART.width - CHART.pad}
+        y1={CHART.height - CHART.pad}
+        y2={CHART.height - CHART.pad}
+        className="ralph-grid"
+      />
+      <polyline
+        fill="none"
+        strokeWidth={2}
+        className="ralph-line"
+        points={merged.map((commit) => `${x(commit.at)},${y(commit.total)}`).join(" ")}
+      />
       {points.map((commit) => (
-        <circle key={commit.sha} cx={x(commit.at)} cy={y(commit.total)} r={role(commit.source) === "worker" ? 2 : 3.5} className={role(commit.source) === "worker" ? "ralph-dot" : "ralph-line-dot"}>
+        <circle
+          key={commit.sha}
+          cx={x(commit.at)}
+          cy={y(commit.total)}
+          r={role(commit.source) === "worker" ? 2 : 3.5}
+          className={role(commit.source) === "worker" ? "ralph-dot" : "ralph-line-dot"}
+        >
           <title>{`${commit.message}: ${commit.total.toLocaleString()} lines (${commit.source})`}</title>
         </circle>
       ))}
+
     </svg>
   );
 }
@@ -188,7 +233,12 @@ function LinesChart({ commits }: { commits: Commit[] }) {
 function LoopView({ loop }: { loop: Loop }) {
   const [filter, setFilter] = useState("all");
   const entries = timeline(loop);
-  const shown = filter === "all" ? entries : filter === "commits" ? entries.filter((entry) => entry.commit) : entries.filter((entry) => role(entry.source) === filter);
+  const shown =
+    filter === "all"
+      ? entries
+      : filter === "commits"
+        ? entries.filter((entry) => entry.commit)
+        : entries.filter((entry) => role(entry.source) === filter);
 
   // Newest first, so the first commit on the merged result (or else any commit) that knows the size is the current one.
   const sized = loop.commits.filter((commit) => commit.total > 0);
@@ -211,7 +261,9 @@ function LoopView({ loop }: { loop: Loop }) {
         </div>
         <div className="ralph-tile">
           <span className="ralph-tile-label">Deor / Rust lines</span>
-          <strong>{loop.languages ? `${loop.languages.deor.toLocaleString()} / ${loop.languages.rust.toLocaleString()}` : "—"}</strong>
+          <strong>
+            {loop.languages ? `${loop.languages.deor.toLocaleString()} / ${loop.languages.rust.toLocaleString()}` : "—"}
+          </strong>
           <span className="muted">
             {loop.languages
               ? `${((loop.languages.deor / Math.max(1, loop.languages.deor + loop.languages.rust)) * 100).toFixed(1)}% Deor`
@@ -245,14 +297,21 @@ function LoopView({ loop }: { loop: Loop }) {
             </div>
           );
         })}
+
       </div>
       <LinesChart commits={loop.commits} />
       <div className="ralph-filters">
         {FILTERS.map((option) => (
-          <button key={option.id} type="button" aria-pressed={filter === option.id} onClick={() => setFilter(option.id)}>
+          <button
+            key={option.id}
+            type="button"
+            aria-pressed={filter === option.id}
+            onClick={() => setFilter(option.id)}
+          >
             {option.label}
           </button>
         ))}
+
       </div>
       {filter === "files" ? <Files loop={loop} /> : <Timeline entries={shown} />}
     </section>
@@ -268,6 +327,7 @@ function Loops() {
   // Load when the page opens, then every 15 seconds while the tab is visible, until an hour has passed (a refresh starts over).
   useEffect(() => {
     const started = Date.now();
+
     const load = () =>
       callApi<{ projects: Loop[] }>("/api/ralph")
         .then((data) => {
@@ -275,8 +335,10 @@ function Loops() {
           setError("");
         })
         .catch((problem: Error) => setError(problem.message));
+
     // Visible, not focused: a page open on a second screen keeps updating while you type somewhere else.
     const active = () => !document.hidden;
+
     const expired = () => Date.now() - started > STOP_POLLING_MS;
 
     load();
@@ -286,10 +348,12 @@ function Loops() {
         setStopped(true);
       } else if (active()) load();
     }, POLL_MS);
+
     // Catch up right away when coming back to the window (the server shares its answer, so this is cheap).
     const onFocus = () => {
       if (!expired()) load();
     };
+
     window.addEventListener("focus", onFocus);
     document.addEventListener("visibilitychange", onFocus);
 
@@ -310,6 +374,7 @@ function Loops() {
       {loops.map((loop) => (
         <LoopView key={loop.name} loop={loop} />
       ))}
+
     </>
   );
 }

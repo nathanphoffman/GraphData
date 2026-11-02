@@ -58,12 +58,30 @@ export default function DndSales() {
         {model.unit}. As of {model.asOf}. Bars are the best guess, whiskers are the low-high range, and fainter bars
         mean less reliable data.
       </p>
-      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label="D&D sales by edition" style={{ width: "100%", maxWidth: WIDTH }}>
+      <svg
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        role="img"
+        aria-label="D&D sales by edition"
+        style={{ width: "100%", maxWidth: WIDTH }}
+      >
         {/* One horizontal grid line per sales tick. */}
         {ticks.map((tick) => (
           <g key={tick}>
-            <line x1={MARGIN.left} x2={WIDTH - MARGIN.right} y1={yScale(tick)} y2={yScale(tick)} stroke="currentColor" opacity={GRID_OPACITY} />
-            <text x={MARGIN.left - TICK_LABEL_GAP} y={yScale(tick) + TICK_LABEL_BASELINE} textAnchor="end" fontSize={FONT_SIZE} fill="currentColor">
+            <line
+              x1={MARGIN.left}
+              x2={WIDTH - MARGIN.right}
+              y1={yScale(tick)}
+              y2={yScale(tick)}
+              stroke="currentColor"
+              opacity={GRID_OPACITY}
+            />
+            <text
+              x={MARGIN.left - TICK_LABEL_GAP}
+              y={yScale(tick) + TICK_LABEL_BASELINE}
+              textAnchor="end"
+              fontSize={FONT_SIZE}
+              fill="currentColor"
+            >
               {tick}M
             </text>
           </g>
@@ -80,16 +98,57 @@ export default function DndSales() {
               fill="#b45cff"
               opacity={CONFIDENCE_OPACITY[edition.confidence]}
             />
-            <line x1={xScale(index)} x2={xScale(index)} y1={yScale(edition.low)} y2={yScale(edition.high)} stroke="currentColor" strokeWidth={2} />
-            <line x1={xScale(index) - WHISKER_CAP} x2={xScale(index) + WHISKER_CAP} y1={yScale(edition.low)} y2={yScale(edition.low)} stroke="currentColor" strokeWidth={2} />
-            <line x1={xScale(index) - WHISKER_CAP} x2={xScale(index) + WHISKER_CAP} y1={yScale(edition.high)} y2={yScale(edition.high)} stroke="currentColor" strokeWidth={2} />
-            <text x={xScale(index)} y={yScale(edition.high) - HIGH_LABEL_GAP} textAnchor="middle" fontSize={FONT_SIZE} fill="currentColor">
+            <line
+              x1={xScale(index)}
+              x2={xScale(index)}
+              y1={yScale(edition.low)}
+              y2={yScale(edition.high)}
+              stroke="currentColor"
+              strokeWidth={2}
+            />
+            <line
+              x1={xScale(index) - WHISKER_CAP}
+              x2={xScale(index) + WHISKER_CAP}
+              y1={yScale(edition.low)}
+              y2={yScale(edition.low)}
+              stroke="currentColor"
+              strokeWidth={2}
+            />
+            <line
+              x1={xScale(index) - WHISKER_CAP}
+              x2={xScale(index) + WHISKER_CAP}
+              y1={yScale(edition.high)}
+              y2={yScale(edition.high)}
+              stroke="currentColor"
+              strokeWidth={2}
+            />
+            <text
+              x={xScale(index)}
+              y={yScale(edition.high) - HIGH_LABEL_GAP}
+              textAnchor="middle"
+              fontSize={FONT_SIZE}
+              fill="currentColor"
+            >
               {edition.best}M
             </text>
-            <text x={xScale(index)} y={yScale(0) + NAME_Y} textAnchor="middle" fontSize={FONT_SIZE} fontWeight={NAME_FONT_WEIGHT} fill="currentColor">
+            <text
+              x={xScale(index)}
+              y={yScale(0) + NAME_Y}
+              textAnchor="middle"
+              fontSize={FONT_SIZE}
+              fontWeight={NAME_FONT_WEIGHT}
+              fill="currentColor"
+            >
               {edition.name}
             </text>
-            <text x={xScale(index)} y={yScale(0) + YEAR_Y} textAnchor="middle" fontSize={YEAR_FONT_SIZE} fill="currentColor" opacity={YEAR_OPACITY}>
+            <text
+              x={xScale(index)}
+              y={yScale(0) + YEAR_Y}
+              textAnchor="middle"
+              fontSize={YEAR_FONT_SIZE}
+              fill="currentColor"
+              opacity={YEAR_OPACITY}
+            >
               {edition.year}
             </text>
           </g>
@@ -98,30 +157,32 @@ export default function DndSales() {
       </svg>
 
       <h2>How each number was reached</h2>
-      {model.editions.map((edition) => ( // One line of explanation per edition.
-        <div key={edition.id} style={{ marginBottom: "1rem" }}>
-          <strong>{edition.name}</strong> ({edition.year}): {edition.best}M best guess, range {edition.low}-{edition.high}M.{" "}
-          <span className="muted">{CONFIDENCE_LABEL[edition.confidence]}.</span>
-          <div>{edition.note}</div>
-          {edition.sources.length > 0 && (
-            <div className="muted">
-              Sources:{" "}
+      {model.editions.map(
+        (
+          edition, // One line of explanation per edition.
+        ) => (
+          <div key={edition.id} style={{ marginBottom: "1rem" }}>
+            <strong>{edition.name}</strong> ({edition.year}): {edition.best}M best guess, range {edition.low}-
+            {edition.high}M. <span className="muted">{CONFIDENCE_LABEL[edition.confidence]}.</span>
+            <div>{edition.note}</div>
+            {edition.sources.length > 0 && (
+              <div className="muted">
+                Sources: {/* List an edition's sources separated by commas. */}
+                {edition.sources.map((source, index) => (
+                  <span key={source}>
+                    {index > 0 && ", "}
+                    <a href={model.sources[source].url} target="_blank" rel="noreferrer">
+                      {model.sources[source].label}
+                    </a>
+                  </span>
+                ))}
 
-              {/* List an edition's sources separated by commas. */}
-              {edition.sources.map((source, index) => (
-                <span key={source}>
-                  {index > 0 && ", "}
-                  <a href={model.sources[source].url} target="_blank" rel="noreferrer">
-                    {model.sources[source].label}
-                  </a>
-                </span>
-              ))}
+              </div>
+            )}
 
-            </div>
-          )}
-
-        </div>
-      ))}
+          </div>
+        ),
+      )}
 
     </div>
   );

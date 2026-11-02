@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { bortleScale, difficulty, formatHour, formatSize } from "../../../src/charts/science/astronomy-targets/model/calculate";
+import {
+  bortleScale,
+  difficulty,
+  formatHour,
+  formatSize,
+} from "../../../src/charts/science/astronomy-targets/model/calculate";
 
 describe("bortleScale", () => {
   it("boosts positive adjustments under dark skies and fades them under bright ones", () => {

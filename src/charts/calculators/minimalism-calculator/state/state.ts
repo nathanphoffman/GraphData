@@ -4,7 +4,16 @@ import { OWNED_STOPS, PER_WEEK_MAX, PER_WEEK_MIN, PER_WEEK_STEP, PER_YEAR_STOPS 
 import { useStoredNumber, useStoredValue } from "./useStoredValue";
 
 /** What a new visitor starts with. */
-const DEFAULTS = { perWeek: 3, owned: 10, perYear: 52, sharePct: 100, buyPerYear: 2, price: 30, minPlays: 20, maxPlays: 100 };
+const DEFAULTS = {
+  perWeek: 3,
+  owned: 10,
+  perYear: 52,
+  sharePct: 100,
+  buyPerYear: 2,
+  price: 30,
+  minPlays: 20,
+  maxPlays: 100,
+};
 
 /** True for amounts the calculator can use: finite and not negative. */
 const isAmount = (value: number) => Number.isFinite(value) && value >= 0;
@@ -12,16 +21,28 @@ const isAmount = (value: number) => Number.isFinite(value) && value >= 0;
 /** Every input on the page, remembered in the browser and restorable from a shared link. */
 export function useCalculatorState() {
   const [title, setTitle] = useStoredValue("title", "", (rawValue) => rawValue.slice(0, MAX_TITLE_LENGTH));
-  const [typeId, setTypeId] = useStoredValue("type", DEFAULT_ITEM_TYPE.id, (rawValue) => (findItemType(rawValue) ? rawValue : null));
+  const [typeId, setTypeId] = useStoredValue("type", DEFAULT_ITEM_TYPE.id, (rawValue) =>
+    findItemType(rawValue) ? rawValue : null,
+  );
+
   const [perWeek, setPerWeek] = useStoredNumber(
     "per-week",
     DEFAULTS.perWeek,
-    (value) => value >= PER_WEEK_MIN && value <= PER_WEEK_MAX && value / PER_WEEK_STEP === Math.round(value / PER_WEEK_STEP),
+    (value) =>
+      value >= PER_WEEK_MIN && value <= PER_WEEK_MAX && value / PER_WEEK_STEP === Math.round(value / PER_WEEK_STEP),
   );
 
   const [owned, setOwned] = useStoredNumber("owned", DEFAULTS.owned, (value) => OWNED_STOPS.includes(value));
-  const [perYear, setPerYear] = useStoredNumber("per-year", DEFAULTS.perYear, (value) => PER_YEAR_STOPS.includes(value));
-  const [sharePct, setSharePct] = useStoredNumber("share-pct", DEFAULTS.sharePct, (value) => Number.isInteger(value) && value >= 1 && value <= PERCENT);
+  const [perYear, setPerYear] = useStoredNumber("per-year", DEFAULTS.perYear, (value) =>
+    PER_YEAR_STOPS.includes(value),
+  );
+
+  const [sharePct, setSharePct] = useStoredNumber(
+    "share-pct",
+    DEFAULTS.sharePct,
+    (value) => Number.isInteger(value) && value >= 1 && value <= PERCENT,
+  );
+
   const [buyPerYear, setBuyPerYear] = useStoredNumber("buy-per-year", DEFAULTS.buyPerYear, isAmount);
   const [price, setPrice] = useStoredNumber("price", DEFAULTS.price, isAmount);
   const [minPlays, setMinPlays] = useStoredNumber("min-plays", DEFAULTS.minPlays, isAmount);
@@ -42,8 +63,26 @@ export function useCalculatorState() {
   });
 
   return {
-    title, setTitle, typeId, setTypeId, perWeek, setPerWeek, owned, setOwned, perYear, setPerYear,
-    sharePct, setSharePct, buyPerYear, setBuyPerYear, price, setPrice, minPlays, setMinPlays,
-    maxPlays, setMaxPlays, shareParams,
+    title,
+    setTitle,
+    typeId,
+    setTypeId,
+    perWeek,
+    setPerWeek,
+    owned,
+    setOwned,
+    perYear,
+    setPerYear,
+    sharePct,
+    setSharePct,
+    buyPerYear,
+    setBuyPerYear,
+    price,
+    setPrice,
+    minPlays,
+    setMinPlays,
+    maxPlays,
+    setMaxPlays,
+    shareParams,
   };
 }

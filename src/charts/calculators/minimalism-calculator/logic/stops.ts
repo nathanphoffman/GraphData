@@ -10,10 +10,18 @@ function stopsBetween(from: number, last: number, step: number): number[] {
 const ROUND_DIGITS = 6;
 
 /** Slider stops for uses per year: 0.1 steps below 5, 1 steps to 100, then 5 steps to 365. */
-export const PER_YEAR_STOPS: number[] = [...stopsBetween(0.1, 4.9, 0.1), ...stopsBetween(5, 100, 1), ...stopsBetween(105, 365, 5)];
+export const PER_YEAR_STOPS: number[] = [
+  ...stopsBetween(0.1, 4.9, 0.1),
+  ...stopsBetween(5, 100, 1),
+  ...stopsBetween(105, 365, 5),
+];
 
 /** Slider stops for things owned: 1 steps to 30, 5 steps to 300, then 10 steps to 1000. */
-export const OWNED_STOPS: number[] = [...stopsBetween(1, 30, 1), ...stopsBetween(35, 300, 5), ...stopsBetween(310, 1000, 10)];
+export const OWNED_STOPS: number[] = [
+  ...stopsBetween(1, 30, 1),
+  ...stopsBetween(35, 300, 5),
+  ...stopsBetween(310, 1000, 10),
+];
 
 export const PER_WEEK_MIN = 0.25;
 export const PER_WEEK_MAX = 21;

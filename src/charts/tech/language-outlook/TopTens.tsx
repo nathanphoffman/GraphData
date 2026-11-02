@@ -12,7 +12,10 @@ const FADE_CURVE = 3;
 function Shift({ change }: { change: number | undefined }) {
   if (change === undefined) return null;
 
-  const label = change > 0 ? `${change} places higher here than in the other lists` : `${-change} places lower here than in the other lists`;
+  const label =
+    change > 0
+      ? `${change} places higher here than in the other lists`
+      : `${-change} places lower here than in the other lists`;
 
   return (
     <span className={change > 0 ? "top-ten-shift up" : "top-ten-shift down"} title={label}>
@@ -35,15 +38,26 @@ export default function TopTens({ model }: { model: LanguageOutlookData }) {
           </h3>
           <ol className="top-ten-tiles">
             {list.names.map((name, index) => (
-              <li key={name} className="top-ten-tile" style={{ opacity: 1 - (index / Math.max(1, list.names.length - 1)) ** FADE_CURVE * (1 - LAST_TILE_OPACITY) }}>
+              <li
+                key={name}
+                className="top-ten-tile"
+                style={{
+                  opacity: 1 - (index / Math.max(1, list.names.length - 1)) ** FADE_CURVE * (1 - LAST_TILE_OPACITY),
+                }}
+
+              >
                 <Shift change={list.shifts[name]} />
-                <span className="top-ten-rank" aria-hidden="true">{index + 1}</span>
+                <span className="top-ten-rank" aria-hidden="true">
+                  {index + 1}
+                </span>
                 <span className="top-ten-name">{name}</span>
               </li>
             ))}
+
           </ol>
         </section>
       ))}
+
     </div>
   );
 }

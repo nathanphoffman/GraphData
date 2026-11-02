@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape } from "../../core/artStyle";
 import { ghostBody } from "./Part1";
 
 const card = CARD_COLOR;
@@ -17,9 +17,16 @@ export function WarpJester() {
       <Line d="M150 120 L200 190 L250 120 M150 190 L200 120" w={3} />
       <Line d="M156 114 L110 80 M244 114 L290 80" w={7} />
       {/* Repeat the shape at each listed position. */}
-      {[[150, 30], [200, 12], [250, 30]].map(([x, y], index) => (
+      {[
+        [150, 30],
+        [200, 12],
+        [250, 30],
+      ].map(([x, y], index) => (
         <g key={index}>
-          <Shape d={`M${x - 14} ${y + 4} C${x - 14} ${y - 18} ${x + 14} ${y - 18} ${x + 14} ${y + 4} L${x + 8} ${y + 14} H${x - 8} Z`} w={3} />
+          <Shape
+            d={`M${x - 14} ${y + 4} C${x - 14} ${y - 18} ${x + 14} ${y - 18} ${x + 14} ${y + 4} L${x + 8} ${y + 14} H${x - 8} Z`}
+            w={3}
+          />
           <Dot x={x - 5} y={y - 2} r={2.5} />
           <Dot x={x + 5} y={y - 2} r={2.5} />
         </g>
@@ -58,7 +65,13 @@ export function TickTockWraith() {
       <circle cx="200" cy="82" r="44" fill={card} {...ink} strokeWidth={4} />
       <Line d="M200 46 V54 M200 110 V118 M164 82 H172 M228 82 H236" w={4} />
       <Line d="M200 82 V56 M200 82 L220 94" w={4} />
-      <path d={ghostBody(150, 250, 120, 214)} fill={card} stroke="currentColor" strokeWidth="5" strokeLinejoin="round" />
+      <path
+        d={ghostBody(150, 250, 120, 214)}
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeLinejoin="round"
+      />
       <Dot x={182} y={150} r={4} />
       <Dot x={218} y={150} r={4} />
       <Line d="M188 172 q12 8 24 0" w={3} />

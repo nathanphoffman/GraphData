@@ -1,8 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { CHART_HEIGHT, MARGIN, CHART_WIDTH, arrowPoints, buildYScale, lineSegments, makeXAt } from "../../../src/charts/tech/language-outlook/model/layout";
+import {
+  arrowPoints,
+  buildYScale,
+  CHART_HEIGHT,
+  CHART_WIDTH,
+  lineSegments,
+  MARGIN,
+  makeXAt,
+} from "../../../src/charts/tech/language-outlook/model/layout";
+
 import type { LanguageOutlookData, LanguageRecord } from "../../../src/charts/tech/language-outlook/model/types";
 
-const language = (name: string, values: Record<string, number | null>) => ({ name, values, tiobe: {}, pop: {} }) as LanguageRecord;
+const language = (name: string, values: Record<string, number | null>) =>
+  ({ name, values, tiobe: {}, pop: {} }) as LanguageRecord;
 
 describe("buildYScale", () => {
   const model = {

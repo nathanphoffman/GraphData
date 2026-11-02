@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
-import { NAME_KEY, useSort } from "../../useSort";
 import data from "../../../../data/intelligence/all-intelligence.json";
-import { MEASURED_KEY, OVERALL_KEY, type AllIntelligenceData, type ScoredSubject, type Settings } from "./types";
+import { NAME_KEY, useSort } from "../../useSort";
 import { DEFAULT_SETTINGS, scoreSubjects } from "./calculate";
 import { ResultsTable, type SortKey } from "./ResultsTable";
 import { SettingsPanel } from "./SettingsPanel";
+import { type AllIntelligenceData, MEASURED_KEY, OVERALL_KEY, type ScoredSubject, type Settings } from "./types";
 
 const model = data as AllIntelligenceData;
 
@@ -24,7 +24,10 @@ function sortValue(scoredSubject: ScoredSubject, sortKey: SortKey): number | str
 function compareRows(scoredSubject: ScoredSubject, second: ScoredSubject, sortKey: SortKey, ascending: boolean) {
   const leftValue = sortValue(scoredSubject, sortKey);
   const rightValue = sortValue(second, sortKey);
-  const comparison = typeof leftValue === "string" ? leftValue.localeCompare(rightValue as string) : (leftValue as number) - (rightValue as number);
+  const comparison =
+    typeof leftValue === "string"
+      ? leftValue.localeCompare(rightValue as string)
+      : (leftValue as number) - (rightValue as number);
 
   return ascending ? comparison : -comparison;
 }
@@ -36,7 +39,13 @@ export default function AllIntelligence() {
   const [open, setOpen] = useState<Set<string>>(new Set());
 
   // Score every subject, then sort the rows by the chosen column in the chosen direction.
-  const rows = useMemo(() => scoreSubjects(model, settings).sort((scoredSubject, second) => compareRows(scoredSubject, second, sortKey, ascending)), [settings, sortKey, ascending]);
+  const rows = useMemo(
+    () =>
+      scoreSubjects(model, settings).sort((scoredSubject, second) =>
+        compareRows(scoredSubject, second, sortKey, ascending),
+      ),
+    [settings, sortKey, ascending],
+  );
 
   // Flip one name in the set of open rows.
   const toggleOpen = (name: string) =>
@@ -51,8 +60,24 @@ export default function AllIntelligence() {
 
   return (
     <div className="allint">
-      <SettingsPanel settings={settings} set={(patch) => setSettings((prev) => ({ ...prev, ...patch }))} groupCount={model.groups.length} /* set merges a change into the settings, keeping the other settings the same. */ />
-      <ResultsTable model={model} rows={rows} settings={settings} open={open} onToggle={toggleOpen} sortKey={sortKey} ascending={ascending} onSort={sortBy} />
+      <SettingsPanel
+        settings={settings}
+        set={(patch) => setSettings((prev) => ({ ...prev, ...patch }))}
+        groupCount={
+          model.groups.length
+        } /* set merges a change into the settings, keeping the other settings the same. */
+
+      />
+      <ResultsTable
+        model={model}
+        rows={rows}
+        settings={settings}
+        open={open}
+        onToggle={toggleOpen}
+        sortKey={sortKey}
+        ascending={ascending}
+        onSort={sortBy}
+      />
       <p className="muted allint-source">{model.source}</p>
     </div>
   );

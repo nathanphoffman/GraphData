@@ -3,11 +3,7 @@
     "id": "dragon",
     "name": "Dragon",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "science-fantasy", "space-jammer"],
     "tone": 4,
     "tier": 6,
     "flying": true,
@@ -38,30 +34,17 @@
       }
     ],
     "tactics": "Opens with Fire Breath on a group, then picks off stragglers from the air. Offers a deal if losing.",
-    "aliases": [
-      "wyrm",
-      "red dragon",
-      "drake",
-      "wyvern"
-    ]
+    "aliases": ["wyrm", "red dragon", "drake", "wyvern"]
   },
   {
     "id": "owlbear",
     "name": "Owlbear",
     "type": "monster",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "owlbear",
-      "owl bear",
-      "bear",
-      "owl",
-      "monstrosity"
-    ],
+    "aliases": ["owlbear", "owl bear", "bear", "owl", "monstrosity"],
     "description": "A shaggy, feathered bear-thing with a beak like a hatchet and a terrible temper.",
     "attack": "Beak & claws",
     "skills": [
@@ -82,19 +65,11 @@
     "id": "chest-lurker",
     "name": "Chest Lurker",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "mimic",
-      "treasure chest",
-      "doppelganger chest",
-      "shapeshifter"
-    ],
+    "aliases": ["mimic", "treasure chest", "doppelganger chest", "shapeshifter"],
     "description": "A fat wooden chest that is, regrettably, mostly teeth and glue.",
     "attack": "Slam",
     "skills": [
@@ -122,21 +97,11 @@
     "id": "jelly-block",
     "name": "Jelly Block",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "scifi",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "scifi", "science-fantasy"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "gelatinous cube",
-      "cube",
-      "ooze",
-      "slime",
-      "jelly"
-    ],
+    "aliases": ["gelatinous cube", "cube", "ooze", "slime", "jelly"],
     "description": "A see-through wobbling cube that scours dungeon corridors clean, with bones and coins floating inside.",
     "attack": "Slap",
     "skills": [
@@ -164,20 +129,11 @@
     "id": "ore-muncher",
     "name": "Ore Muncher",
     "type": "monster",
-    "themes": [
-      "scifi",
-      "science-fantasy",
-      "fantasy"
-    ],
+    "themes": ["scifi", "science-fantasy", "fantasy"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "rust monster",
-      "rust",
-      "metal eater",
-      "armor eater"
-    ],
+    "aliases": ["rust monster", "rust", "metal eater", "armor eater"],
     "description": "A pink, armored bug-lizard with feathery antennae that adores iron.",
     "attack": "Bite",
     "skills": [
@@ -201,23 +157,11 @@
     "id": "stone-gazer",
     "name": "Stone Gazer",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "science-fantasy", "space-jammer"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "medusa",
-      "gorgon",
-      "basilisk",
-      "snake",
-      "petrify",
-      "snake hair",
-      "cockatrice"
-    ],
+    "aliases": ["medusa", "gorgon", "basilisk", "snake", "petrify", "snake hair", "cockatrice"],
     "description": "A hissing woman with a head of living snakes whose eyes turn warriors into statues.",
     "attack": "Dagger",
     "skills": [
@@ -245,10 +189,7 @@
     "id": "mountain-dinosaur",
     "name": "Mountain Dinosaur",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 4,
     "tier": 9,
     "flying": false,
@@ -304,18 +245,11 @@
     "id": "pit-gorger",
     "name": "Pit Gorger",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 4,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "pit monster",
-      "arena beast",
-      "gladiator beast"
-    ],
+    "aliases": ["pit monster", "arena beast", "gladiator beast"],
     "description": "A bellowing, long-armed brute kept in a dungeon pit and fed anything that falls in.",
     "attack": "Claw & jaws",
     "skills": [
@@ -335,18 +269,11 @@
     "id": "sand-maw",
     "name": "Sand Maw",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 4,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "sand pit",
-      "desert pit",
-      "great pit"
-    ],
+    "aliases": ["sand pit", "desert pit", "great pit"],
     "description": "A tooth-ringed pit in the desert sand hiding a creature that takes a thousand years to digest a meal.",
     "attack": "Tentacle lash",
     "skills": [
@@ -374,19 +301,11 @@
     "id": "dune-wyrm",
     "name": "Dune Wyrm",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 3,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "sandworm",
-      "desert dragon",
-      "worm",
-      "dune"
-    ],
+    "aliases": ["sandworm", "desert dragon", "worm", "dune"],
     "description": "A cliff-sized horned desert serpent whose belly is full of pearls and bones.",
     "attack": "Bite & tail",
     "skills": [
@@ -413,19 +332,11 @@
     "id": "slug-lord",
     "name": "Slug Lord",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 4,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "crime lord",
-      "crime boss",
-      "gangster",
-      "slug"
-    ],
+    "aliases": ["crime lord", "crime boss", "gangster", "slug"],
     "description": "A massive, slug-like crime boss who lounges on a dais surrounded by hired muscle.",
     "attack": "Tail slam",
     "skills": [
@@ -457,21 +368,11 @@
     "id": "bouncy-slime",
     "name": "Bouncy Slime",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "slime",
-      "blob",
-      "jelly",
-      "gooey",
-      "bouncing",
-      "pudding"
-    ],
+    "aliases": ["slime", "blob", "jelly", "gooey", "bouncing", "pudding"],
     "description": "A cheerful, wobbling blob that bounces off the walls and likes to be hugged.",
     "attack": "Bounce",
     "skills": [
@@ -492,22 +393,11 @@
     "id": "puff-dragon",
     "name": "Puff Dragon",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "science-fantasy", "space-jammer"],
     "tone": 1,
     "tier": 1,
     "flying": true,
-    "aliases": [
-      "pseudodragon",
-      "baby dragon",
-      "drake",
-      "whelp",
-      "hatchling",
-      "cute dragon"
-    ],
+    "aliases": ["pseudodragon", "baby dragon", "drake", "whelp", "hatchling", "cute dragon"],
     "description": "A cat-sized, sparkly dragon that sneezes small flames and curls up in your hat.",
     "attack": "Nip",
     "skills": [
@@ -538,23 +428,11 @@
     "id": "black-ooze-mass",
     "name": "Black Ooze Mass",
     "type": "monster",
-    "themes": [
-      "occult-noir",
-      "scifi",
-      "science-fantasy"
-    ],
+    "themes": ["occult-noir", "scifi", "science-fantasy"],
     "tone": 5,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "shoggoth",
-      "protoplasm",
-      "blob",
-      "amoeba",
-      "mass",
-      "black goo",
-      "tekeli-li"
-    ],
+    "aliases": ["shoggoth", "protoplasm", "blob", "amoeba", "mass", "black goo", "tekeli-li"],
     "description": "A bubbling, hundred-eyed, house-sized slick of black protoplasm that cries 'tekeli-li' from a thousand mouths.",
     "attack": "Pseudopod",
     "skills": [
@@ -585,23 +463,11 @@
     "id": "vat-horror",
     "name": "Vat Horror",
     "type": "monster",
-    "themes": [
-      "cyberpunk",
-      "scifi",
-      "post-apocalypse"
-    ],
+    "themes": ["cyberpunk", "scifi", "post-apocalypse"],
     "tone": 5,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "mutant",
-      "experiment",
-      "biohazard",
-      "abomination",
-      "frankenstein",
-      "lab accident",
-      "bioweapon"
-    ],
+    "aliases": ["mutant", "experiment", "biohazard", "abomination", "frankenstein", "lab accident", "bioweapon"],
     "description": "A lumpy, wet mass of failed corporate gene-splicing, growing every time someone feeds it.",
     "attack": "Pseudopod",
     "skills": [
@@ -632,20 +498,11 @@
     "id": "gila-giant",
     "name": "Gila Giant",
     "type": "monster",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "gila monster",
-      "lizard",
-      "giant lizard",
-      "desert beast",
-      "monitor lizard",
-      "horned lizard"
-    ],
+    "aliases": ["gila monster", "lizard", "giant lizard", "desert beast", "monitor lizard", "horned lizard"],
     "description": "A truck-sized, bead-skinned lizard that dozes in the sun and bites down like a vise.",
     "attack": "Locking bite",
     "skills": [
@@ -669,20 +526,11 @@
     "id": "goat-sucker",
     "name": "Goat Sucker",
     "type": "monster",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "chupacabra",
-      "cryptid",
-      "livestock killer",
-      "goat killer",
-      "night stalker",
-      "ranch beast"
-    ],
+    "aliases": ["chupacabra", "cryptid", "livestock killer", "goat killer", "night stalker", "ranch beast"],
     "description": "A hunched, spiny, red-eyed thing that leaves drained cattle and a very uneasy ranch hand behind.",
     "attack": "Claws",
     "skills": [
@@ -704,21 +552,11 @@
     "id": "spiked-hodag",
     "name": "Spiked Hodag",
     "type": "monster",
-    "themes": [
-      "western",
-      "fantasy"
-    ],
+    "themes": ["western", "fantasy"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "hodag",
-      "tall tale",
-      "cryptid",
-      "lumberjack legend",
-      "jackalope",
-      "folklore beast"
-    ],
+    "aliases": ["hodag", "tall tale", "cryptid", "lumberjack legend", "jackalope", "folklore beast"],
     "description": "A grinning, spike-backed, toad-headed monster invented by a lumberjack and, regrettably, now real.",
     "attack": "Tusk poke",
     "skills": [
@@ -739,22 +577,11 @@
     "id": "hive-lurker",
     "name": "Hive Lurker",
     "type": "monster",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "ambush predator",
-      "brood",
-      "stalker",
-      "genestealer",
-      "tyranid",
-      "lictor",
-      "hive fleet"
-    ],
+    "aliases": ["ambush predator", "brood", "stalker", "genestealer", "tyranid", "lictor", "hive fleet"],
     "description": "A four-armed, claw-fingered predator that hides in vents and ceilings and moves like a nightmare.",
     "attack": "Rending claws",
     "skills": [
@@ -775,24 +602,11 @@
     "id": "rot-colossus",
     "name": "Rot Colossus",
     "type": "monster",
-    "themes": [
-      "space-hammer",
-      "scifi",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "scifi", "science-fantasy"],
     "tone": 5,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "rot",
-      "plague",
-      "pestilence",
-      "festering",
-      "great unclean one",
-      "nurgle",
-      "chaos",
-      "greater daemon"
-    ],
+    "aliases": ["rot", "plague", "pestilence", "festering", "great unclean one", "nurgle", "chaos", "greater daemon"],
     "description": "A bloated, fly-ridden giant of green flesh with a smile of broken teeth and a stomach full of plague.",
     "attack": "Rusted blade",
     "skills": [
@@ -823,22 +637,11 @@
     "id": "void-serpent",
     "name": "Void Serpent",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "science-fantasy", "space-jammer"],
     "tone": 3,
     "tier": 6,
     "flying": true,
-    "aliases": [
-      "space worm",
-      "asteroid monster",
-      "space slug",
-      "star worm",
-      "asteroid worm",
-      "space snake"
-    ],
+    "aliases": ["space worm", "asteroid monster", "space slug", "star worm", "asteroid worm", "space snake"],
     "description": "A kilometer-long, rock-colored worm that lives in asteroid fields and swallows small ships whole.",
     "attack": "Bite",
     "skills": [
@@ -863,21 +666,11 @@
     "id": "sugar-wyrm",
     "name": "Sugar Wyrm",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 1,
     "tier": 4,
     "flying": true,
-    "aliases": [
-      "candy dragon",
-      "gingerbread dragon",
-      "dessert dragon",
-      "cake dragon",
-      "sweet dragon",
-      "confection"
-    ],
+    "aliases": ["candy dragon", "gingerbread dragon", "dessert dragon", "cake dragon", "sweet dragon", "confection"],
     "description": "A glittering, gumdrop-scaled dragon with a licorice tail, spun-sugar wings and a lair of frosting.",
     "attack": "Sugar snap",
     "skills": [
@@ -909,10 +702,7 @@
     "id": "vain-wyrm",
     "name": "Vain Wyrm",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 2,
     "tier": 5,
     "flying": true,
@@ -952,11 +742,7 @@
     "id": "maggot-swarm",
     "name": "Maggot Swarm",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "occult-noir",
-      "space-hammer"
-    ],
+    "themes": ["fantasy", "occult-noir", "space-hammer"],
     "tone": 5,
     "tier": 0.25,
     "flying": false,
@@ -991,22 +777,11 @@
     "id": "mountain-griffin",
     "name": "Mountain Griffin",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 3,
     "tier": 2,
     "flying": true,
-    "aliases": [
-      "griffin",
-      "gryphon",
-      "hippogriff",
-      "eagle lion",
-      "winged lion",
-      "sky hunter",
-      "nest"
-    ],
+    "aliases": ["griffin", "gryphon", "hippogriff", "eagle lion", "winged lion", "sky hunter", "nest"],
     "description": "A lion-bodied, eagle-headed, golden-winged creature that nests on cliff tops and hoards shiny things.",
     "attack": "Talons",
     "skills": [
@@ -1031,23 +806,11 @@
     "id": "great-roc",
     "name": "Great Roc",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "science-fantasy", "space-jammer"],
     "tone": 3,
     "tier": 4,
     "flying": true,
-    "aliases": [
-      "roc",
-      "giant eagle",
-      "giant bird",
-      "eagle",
-      "sky titan",
-      "sinbad",
-      "enormous bird"
-    ],
+    "aliases": ["roc", "giant eagle", "giant bird", "eagle", "sky titan", "sinbad", "enormous bird"],
     "description": "A house-sized bird with a wingspan that blots out the sun and talons that carry off elephants.",
     "attack": "Talons",
     "skills": [
@@ -1071,10 +834,7 @@
     "id": "cave-wurm",
     "name": "Cave Wurm",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -1115,23 +875,11 @@
     "id": "cloud-leviathan",
     "name": "Cloud Leviathan",
     "type": "monster",
-    "themes": [
-      "steampunk",
-      "fantasy",
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "fantasy", "science-fantasy", "space-jammer"],
     "tone": 3,
     "tier": 4,
     "flying": true,
-    "aliases": [
-      "sky whale",
-      "air whale",
-      "zeppelin whale",
-      "cloud whale",
-      "flying whale",
-      "sky leviathan"
-    ],
+    "aliases": ["sky whale", "air whale", "zeppelin whale", "cloud whale", "flying whale", "sky leviathan"],
     "description": "A balloon-bellied, whale-shaped sky creature that floats through the clouds and swallows airships whole.",
     "attack": "Tail slap",
     "skills": [
@@ -1155,10 +903,7 @@
     "id": "pipe-wyrm",
     "name": "Pipe Wyrm",
     "type": "monster",
-    "themes": [
-      "steampunk",
-      "fantasy"
-    ],
+    "themes": ["steampunk", "fantasy"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -1201,10 +946,7 @@
     "id": "dust-titan",
     "name": "Dust Titan",
     "type": "monster",
-    "themes": [
-      "post-apocalypse",
-      "science-fantasy"
-    ],
+    "themes": ["post-apocalypse", "science-fantasy"],
     "tone": 4,
     "tier": 6,
     "flying": false,
@@ -1247,11 +989,7 @@
     "id": "shellback",
     "name": "Shellback",
     "type": "monster",
-    "themes": [
-      "age-of-sail",
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "fantasy", "space-jammer"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -1288,23 +1026,11 @@
     "id": "stormbird",
     "name": "Stormbird",
     "type": "monster",
-    "themes": [
-      "age-of-sail",
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "fantasy", "space-jammer"],
     "tone": 3,
     "tier": 2,
     "flying": true,
-    "aliases": [
-      "albatross",
-      "giant bird",
-      "storm bird",
-      "sea eagle",
-      "omen bird",
-      "giant seabird",
-      "gull"
-    ],
+    "aliases": ["albatross", "giant bird", "storm bird", "sea eagle", "omen bird", "giant seabird", "gull"],
     "description": "A ship-sized, grey-winged seabird that rides storm fronts and follows doomed ships for days.",
     "attack": "Beak & talons",
     "skills": [
@@ -1329,23 +1055,11 @@
     "id": "hull-crusher",
     "name": "Hull-Crusher",
     "type": "monster",
-    "themes": [
-      "age-of-sail",
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "fantasy", "space-jammer"],
     "tone": 4,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "kraken",
-      "giant squid",
-      "squid",
-      "octopus",
-      "sea monster",
-      "tentacle beast",
-      "ship killer"
-    ],
+    "aliases": ["kraken", "giant squid", "squid", "octopus", "sea monster", "tentacle beast", "ship killer"],
     "description": "A cabin-sized, ten-armed sea monster that wraps a ship's hull and squeezes until it cracks.",
     "attack": "Tentacle",
     "skills": [
@@ -1376,18 +1090,11 @@
     "id": "vending-machine-mimic",
     "name": "Vending Machine Mimic",
     "type": "monster",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 1,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "mimic",
-      "vending machine",
-      "snack machine",
-      "ambush"
-    ],
+    "aliases": ["mimic", "vending machine", "snack machine", "ambush"],
     "description": "A street-corner snack dispenser with far too many teeth behind the coin slot.",
     "attack": "Chomp",
     "skills": [
@@ -1407,19 +1114,11 @@
     "id": "tentacled-bellhop",
     "name": "Tentacled Bellhop",
     "type": "monster",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 2,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "tentacle",
-      "squid man",
-      "cultist",
-      "octopus",
-      "servant"
-    ],
+    "aliases": ["tentacle", "squid man", "cultist", "octopus", "servant"],
     "description": "A nervous bellhop in a tight uniform whose coat is hiding too many arms.",
     "attack": "Bag Swing",
     "skills": [
@@ -1450,20 +1149,11 @@
     "id": "void-sultan",
     "name": "Void Sultan",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 5,
     "tier": 8,
     "flying": true,
-    "aliases": [
-      "space emperor",
-      "sith",
-      "dark lord",
-      "emperor",
-      "star tyrant"
-    ],
+    "aliases": ["space emperor", "sith", "dark lord", "emperor", "star tyrant"],
     "description": "A masked ruler of a hundred worlds who bends starlight into a throne and does not rise from it.",
     "attack": "Star Blade",
     "skills": [
@@ -1504,19 +1194,11 @@
     "id": "dune-gullet",
     "name": "Dune Gullet",
     "type": "monster",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 3,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "pit monster",
-      "sand pit",
-      "desert maw",
-      "sand worm",
-      "pit beast"
-    ],
+    "aliases": ["pit monster", "sand pit", "desert maw", "sand worm", "pit beast"],
     "description": "A huge sandy pit lined with teeth and one very patient tentacle.",
     "attack": "Tentacle Grab",
     "skills": [
@@ -1547,19 +1229,11 @@
     "id": "slug-boss",
     "name": "Slug Boss",
     "type": "monster",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 2,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "crime lord",
-      "gangster",
-      "big slug",
-      "crime boss",
-      "slug lord"
-    ],
+    "aliases": ["crime lord", "gangster", "big slug", "crime boss", "slug lord"],
     "description": "A very large, very sticky crime lord who lounges on a throne of stolen cushions.",
     "attack": "Tail Slap",
     "skills": [
@@ -1583,21 +1257,11 @@
     "id": "asteroid-leviathan",
     "name": "Asteroid Leviathan",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "scifi",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "scifi", "space-jammer"],
     "tone": 3,
     "tier": 8,
     "flying": false,
-    "aliases": [
-      "space worm",
-      "space whale",
-      "asteroid worm",
-      "void leviathan",
-      "giant worm"
-    ],
+    "aliases": ["space worm", "space whale", "asteroid worm", "void leviathan", "giant worm"],
     "description": "A mile-long worm that tunnels through asteroid fields and swallows small ships.",
     "attack": "Crushing Bite",
     "skills": [
@@ -1628,19 +1292,11 @@
     "id": "sewer-vat-horror",
     "name": "Sewer Vat Horror",
     "type": "monster",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 5,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "mutant",
-      "experiment",
-      "abomination",
-      "vat spawn",
-      "blob"
-    ],
+    "aliases": ["mutant", "experiment", "abomination", "vat spawn", "blob"],
     "description": "A failed gene experiment that has outgrown its tank and is still growing.",
     "attack": "Slam",
     "skills": [
@@ -1671,19 +1327,11 @@
     "id": "boilerback-wyrm",
     "name": "Boilerback Wyrm",
     "type": "monster",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "steam dragon",
-      "wyrm",
-      "drake",
-      "steam wyrm",
-      "iron dragon"
-    ],
+    "aliases": ["steam dragon", "wyrm", "drake", "steam wyrm", "iron dragon"],
     "description": "A coal-black wyrm with boiler plates on its back that hisses steam when it is angry.",
     "attack": "Bite",
     "skills": [
@@ -1714,19 +1362,11 @@
     "id": "highway-behemoth",
     "name": "Highway Behemoth",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "kaiju",
-      "giant bug",
-      "road beast",
-      "mutant",
-      "giant beetle"
-    ],
+    "aliases": ["kaiju", "giant bug", "road beast", "mutant", "giant beetle"],
     "description": "A beetle the size of a freight truck with a cracked windshield stuck in its shell.",
     "attack": "Crush",
     "skills": [
@@ -1757,19 +1397,11 @@
     "id": "wallpaper-thing",
     "name": "Wallpaper Thing",
     "type": "monster",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "mimic",
-      "wall creature",
-      "haunted house",
-      "ooze",
-      "lurker"
-    ],
+    "aliases": ["mimic", "wall creature", "haunted house", "ooze", "lurker"],
     "description": "A patch of floral wallpaper that peels off the wall to wrap around anyone who leans on it.",
     "attack": "Smother",
     "skills": [
@@ -1793,9 +1425,7 @@
     "id": "vent-crawler",
     "name": "Vent Crawler",
     "type": "monster",
-    "themes": [
-      "scifi"
-    ],
+    "themes": ["scifi"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
@@ -1813,20 +1443,13 @@
     ],
     "powers": [],
     "tactics": "Drops from a vent onto the last player in line.",
-    "aliases": [
-      "xenomorph",
-      "bug",
-      "alien",
-      "facehugger"
-    ]
+    "aliases": ["xenomorph", "bug", "alien", "facehugger"]
   },
   {
     "id": "hangar-grub",
     "name": "Hangar Grub",
     "type": "monster",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -1844,20 +1467,13 @@
     ],
     "powers": [],
     "tactics": "Bursts out of a crate. Swarms in threes if the GM wants a harder fight.",
-    "aliases": [
-      "grub",
-      "maggot",
-      "larva",
-      "pest"
-    ]
+    "aliases": ["grub", "maggot", "larva", "pest"]
   },
   {
     "id": "alley-slime",
     "name": "Alley Slime",
     "type": "monster",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
@@ -1875,20 +1491,13 @@
     ],
     "powers": [],
     "tactics": "Waits in a puddle. Grabs a boot and slowly climbs.",
-    "aliases": [
-      "ooze",
-      "blob",
-      "sludge",
-      "slime"
-    ]
+    "aliases": ["ooze", "blob", "sludge", "slime"]
   },
   {
     "id": "cactus-crawler",
     "name": "Cactus Crawler",
     "type": "monster",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -1906,21 +1515,13 @@
     ],
     "powers": [],
     "tactics": "Sits still among real cacti until someone gets close.",
-    "aliases": [
-      "cactus",
-      "plant",
-      "desert pest",
-      "tumbleweed"
-    ]
+    "aliases": ["cactus", "plant", "desert pest", "tumbleweed"]
   },
   {
     "id": "barnacle-biter",
     "name": "Barnacle Biter",
     "type": "monster",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
@@ -1938,20 +1539,13 @@
     ],
     "powers": [],
     "tactics": "Clamps onto the ship. Grabs an ankle if a player leans over the side.",
-    "aliases": [
-      "crab",
-      "sea creature",
-      "hull biter",
-      "lobster"
-    ]
+    "aliases": ["crab", "sea creature", "hull biter", "lobster"]
   },
   {
     "id": "boiler-newt",
     "name": "Boiler Newt",
     "type": "monster",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -1969,20 +1563,13 @@
     ],
     "powers": [],
     "tactics": "Hides in a pipe junction. Spits when someone opens the valve.",
-    "aliases": [
-      "salamander",
-      "lizard",
-      "pest",
-      "pipe dweller"
-    ]
+    "aliases": ["salamander", "lizard", "pest", "pipe dweller"]
   },
   {
     "id": "mutant-grub",
     "name": "Mutant Grub",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
@@ -2000,20 +1587,13 @@
     ],
     "powers": [],
     "tactics": "Mostly harmless alone. Draws more of its kind if it is hurt.",
-    "aliases": [
-      "maggot",
-      "larva",
-      "glow grub",
-      "pest"
-    ]
+    "aliases": ["maggot", "larva", "glow grub", "pest"]
   },
   {
     "id": "canyon-wurm",
     "name": "Canyon Wurm",
     "type": "monster",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -2038,20 +1618,13 @@
       }
     ],
     "tactics": "Burrows under the biggest group. Surfaces when the ground stops shaking.",
-    "aliases": [
-      "sandworm",
-      "sand wyrm",
-      "giant worm",
-      "dune worm"
-    ]
+    "aliases": ["sandworm", "sand wyrm", "giant worm", "dune worm"]
   },
   {
     "id": "tunnel-spawn",
     "name": "Tunnel Spawn",
     "type": "monster",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -2069,23 +1642,13 @@
     ],
     "powers": [],
     "tactics": "Pours out of a vent in groups. Always one behind the one you killed.",
-    "aliases": [
-      "genestealer",
-      "larva",
-      "bug",
-      "xenos spawn",
-      "tyranid",
-      "ripper",
-      "hive fleet"
-    ]
+    "aliases": ["genestealer", "larva", "bug", "xenos spawn", "tyranid", "ripper", "hive fleet"]
   },
   {
     "id": "warp-behemoth",
     "name": "Warp Behemoth",
     "type": "monster",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 5,
     "tier": 7,
     "flying": false,
@@ -2125,9 +1688,7 @@
     "id": "biolab-escapee",
     "name": "Biolab Escapee",
     "type": "monster",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -2145,20 +1706,13 @@
     ],
     "powers": [],
     "tactics": "Staggers through the lab and thrashes at anything that moves.",
-    "aliases": [
-      "experiment",
-      "abomination",
-      "mutant",
-      "clone gone wrong"
-    ]
+    "aliases": ["experiment", "abomination", "mutant", "clone gone wrong"]
   },
   {
     "id": "mesa-titan",
     "name": "Mesa Titan",
     "type": "monster",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 8,
     "flying": false,
@@ -2183,20 +1737,13 @@
       }
     ],
     "tactics": "Rises slowly from the cliff face. Throws boulders if it cannot reach the group.",
-    "aliases": [
-      "giant",
-      "stone giant",
-      "mountain giant",
-      "rock monster"
-    ]
+    "aliases": ["giant", "stone giant", "mountain giant", "rock monster"]
   },
   {
     "id": "drain-leech",
     "name": "Drain Leech",
     "type": "monster",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -2214,20 +1761,13 @@
     ],
     "powers": [],
     "tactics": "Slides up from a drain and latches on. Hates salt.",
-    "aliases": [
-      "leech",
-      "worm",
-      "sewer thing",
-      "parasite"
-    ]
+    "aliases": ["leech", "worm", "sewer thing", "parasite"]
   },
   {
     "id": "basement-elder",
     "name": "Basement Elder",
     "type": "monster",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 5,
     "tier": 6,
     "flying": false,
@@ -2252,21 +1792,13 @@
       }
     ],
     "tactics": "Does not move. Reaches up through the floor and pulls players down.",
-    "aliases": [
-      "elder thing",
-      "cosmic horror",
-      "many-eyed horror",
-      "unspeakable"
-    ]
+    "aliases": ["elder thing", "cosmic horror", "many-eyed horror", "unspeakable"]
   },
   {
     "id": "sea-serpent",
     "name": "Sea Serpent",
     "type": "monster",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -2291,20 +1823,13 @@
       }
     ],
     "tactics": "Coils around the hull and squeezes. Dives when badly hurt.",
-    "aliases": [
-      "serpent",
-      "leviathan",
-      "sea snake",
-      "sea monster"
-    ]
+    "aliases": ["serpent", "leviathan", "sea snake", "sea monster"]
   },
   {
     "id": "oil-slick-crawler",
     "name": "Oil Slick Crawler",
     "type": "monster",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -2322,20 +1847,13 @@
     ],
     "powers": [],
     "tactics": "Slides under the door and coats the floor. Catches fire if lit.",
-    "aliases": [
-      "ooze",
-      "slime",
-      "blob",
-      "oil monster"
-    ]
+    "aliases": ["ooze", "slime", "blob", "oil monster"]
   },
   {
     "id": "furnace-maw",
     "name": "Furnace Maw",
     "type": "monster",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -2353,20 +1871,13 @@
     ],
     "powers": [],
     "tactics": "Sits in the furnace door and spits. Dives in when hurt.",
-    "aliases": [
-      "worm",
-      "fire worm",
-      "furnace beast",
-      "slag worm"
-    ]
+    "aliases": ["worm", "fire worm", "furnace beast", "slag worm"]
   },
   {
     "id": "sump-leech",
     "name": "Sump Leech",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -2384,20 +1895,13 @@
     ],
     "powers": [],
     "tactics": "Slides out of the sludge and latches on. Salt makes it let go.",
-    "aliases": [
-      "leech",
-      "slug",
-      "mutant worm",
-      "parasite"
-    ]
+    "aliases": ["leech", "slug", "mutant worm", "parasite"]
   },
   {
     "id": "glow-troll",
     "name": "Glow Troll",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -2415,21 +1919,13 @@
     ],
     "powers": [],
     "tactics": "Smashes whatever is closest. Grows back anything cut off by morning.",
-    "aliases": [
-      "troll",
-      "mutant giant",
-      "radioactive brute",
-      "ghoul"
-    ]
+    "aliases": ["troll", "mutant giant", "radioactive brute", "ghoul"]
   },
   {
     "id": "asteroid-devourer",
     "name": "Asteroid Devourer",
     "type": "monster",
-    "themes": [
-      "space-wars",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "space-jammer"],
     "tone": 4,
     "tier": 6,
     "flying": false,
@@ -2447,20 +1943,13 @@
     ],
     "powers": [],
     "tactics": "Rams a hull from beneath. Retreats to an asteroid when hurt.",
-    "aliases": [
-      "space worm",
-      "giant worm",
-      "space monster",
-      "behemoth"
-    ]
+    "aliases": ["space worm", "giant worm", "space monster", "behemoth"]
   },
   {
     "id": "plague-mammoth",
     "name": "Plague Mammoth",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -2478,21 +1967,13 @@
     ],
     "powers": [],
     "tactics": "Charges through ruins. Spews flies that sting.",
-    "aliases": [
-      "mammoth",
-      "mutant elephant",
-      "behemoth",
-      "giant beast"
-    ]
+    "aliases": ["mammoth", "mutant elephant", "behemoth", "giant beast"]
   },
   {
     "id": "maelstrom-leviathan",
     "name": "Maelstrom Leviathan",
     "type": "monster",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 5,
     "tier": 10,
     "flying": false,
@@ -2523,20 +2004,13 @@
       }
     ],
     "tactics": "Pulls ships into a whirlpool. Surfaces to finish the survivors.",
-    "aliases": [
-      "leviathan",
-      "kraken",
-      "sea god",
-      "monster"
-    ]
+    "aliases": ["leviathan", "kraken", "sea god", "monster"]
   },
   {
     "id": "nuclear-colossus",
     "name": "Nuclear Colossus",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 5,
     "tier": 7,
     "flying": false,
@@ -2567,20 +2041,13 @@
       }
     ],
     "tactics": "Rises slowly from the crater. Glows hotter when hurt.",
-    "aliases": [
-      "giant",
-      "nuclear giant",
-      "colossus",
-      "kaiju"
-    ]
+    "aliases": ["giant", "nuclear giant", "colossus", "kaiju"]
   },
   {
     "id": "grot-gobbler",
     "name": "Grot Gobbler",
     "type": "monster",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -2598,24 +2065,13 @@
     ],
     "powers": [],
     "tactics": "Waddles toward the nearest gadget. Spits it back out when startled.",
-    "aliases": [
-      "ork squig",
-      "gobbler",
-      "bug",
-      "xenos pest",
-      "ork",
-      "grot",
-      "gretchin",
-      "snotling"
-    ]
+    "aliases": ["ork squig", "gobbler", "bug", "xenos pest", "ork", "grot", "gretchin", "snotling"]
   },
   {
     "id": "mutant-hedgehog",
     "name": "Mutant Hedgehog",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
@@ -2633,20 +2089,13 @@
     ],
     "powers": [],
     "tactics": "Rolls down hills and stairs. Curls up when frightened.",
-    "aliases": [
-      "hedgehog",
-      "mutant animal",
-      "rolling pest",
-      "spiky critter"
-    ]
+    "aliases": ["hedgehog", "mutant animal", "rolling pest", "spiky critter"]
   },
   {
     "id": "nova-slug",
     "name": "Nova Slug",
     "type": "monster",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -2664,20 +2113,13 @@
     ],
     "powers": [],
     "tactics": "Sits across the corridor and secretes slime. Eats the power cell of any device nearby.",
-    "aliases": [
-      "slug",
-      "space slug",
-      "blob",
-      "pest"
-    ]
+    "aliases": ["slug", "space slug", "blob", "pest"]
   },
   {
     "id": "bat-swarm-colossus",
     "name": "Bat-Swarm Colossus",
     "type": "monster",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 2,
     "flying": true,
@@ -2695,20 +2137,13 @@
     ],
     "powers": [],
     "tactics": "Pours out of the belfry as a tide. Breaks apart if hit by light.",
-    "aliases": [
-      "bats",
-      "swarm",
-      "bat cloud",
-      "colony"
-    ]
+    "aliases": ["bats", "swarm", "bat cloud", "colony"]
   },
   {
     "id": "sky-pike-brood",
     "name": "Sky-Pike Brood",
     "type": "monster",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 3,
     "tier": 4,
     "flying": true,
@@ -2726,23 +2161,13 @@
     ],
     "powers": [],
     "tactics": "Dives on the nearest hull. Retreats if the mother is hurt.",
-    "aliases": [
-      "sky fish",
-      "pike",
-      "sky monster",
-      "flock",
-      "tyranid",
-      "hive fleet",
-      "harridan"
-    ]
+    "aliases": ["sky fish", "pike", "sky monster", "flock", "tyranid", "hive fleet", "harridan"]
   },
   {
     "id": "smog-drake",
     "name": "Smog Drake",
     "type": "monster",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 3,
     "flying": true,
@@ -2767,20 +2192,13 @@
       }
     ],
     "tactics": "Hunts along the rooftops. Breathes a fog of smoke on a crowd.",
-    "aliases": [
-      "drake",
-      "dragon",
-      "wyvern",
-      "smog monster"
-    ]
+    "aliases": ["drake", "dragon", "wyvern", "smog monster"]
   },
   {
     "id": "sandstorm-roc",
     "name": "Sandstorm Roc",
     "type": "monster",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 4,
     "flying": true,
@@ -2798,20 +2216,13 @@
     ],
     "powers": [],
     "tactics": "Dives from the storm. Carries off a horse or a rider.",
-    "aliases": [
-      "roc",
-      "giant bird",
-      "thunderbird",
-      "storm bird"
-    ]
+    "aliases": ["roc", "giant bird", "thunderbird", "storm bird"]
   },
   {
     "id": "catacomb-crawler",
     "name": "Catacomb Crawler",
     "type": "monster",
-    "themes": [
-      "age-of-sail"
-    ],
+    "themes": ["age-of-sail"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -2829,20 +2240,13 @@
     ],
     "powers": [],
     "tactics": "Waits in the dark. Grabs the last sailor out of the hold.",
-    "aliases": [
-      "crawler",
-      "lurker",
-      "hold horror",
-      "sea horror"
-    ]
+    "aliases": ["crawler", "lurker", "hold horror", "sea horror"]
   },
   {
     "id": "gutter-hag",
     "name": "Gutter Hag",
     "type": "monster",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -2860,20 +2264,13 @@
     ],
     "powers": [],
     "tactics": "Waits in a storm drain. Grabs a leg and pulls.",
-    "aliases": [
-      "hag",
-      "sewer thing",
-      "drain horror",
-      "lurker"
-    ]
+    "aliases": ["hag", "sewer thing", "drain horror", "lurker"]
   },
   {
     "id": "vacuum-lurker",
     "name": "Vacuum Lurker",
     "type": "monster",
-    "themes": [
-      "scifi"
-    ],
+    "themes": ["scifi"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -2891,20 +2288,13 @@
     ],
     "powers": [],
     "tactics": "Waits outside the airlock. Wraps a player and tries to pull them out into space.",
-    "aliases": [
-      "lurker",
-      "space horror",
-      "airlock thing",
-      "tentacle"
-    ]
+    "aliases": ["lurker", "space horror", "airlock thing", "tentacle"]
   },
   {
     "id": "chrome-gargoyle",
     "name": "Chrome Gargoyle",
     "type": "monster",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 3,
     "flying": true,
@@ -2922,20 +2312,13 @@
     ],
     "powers": [],
     "tactics": "Perches on a ledge. Dives on whoever steps out of cover.",
-    "aliases": [
-      "gargoyle",
-      "guard beast",
-      "winged guard",
-      "statue"
-    ]
+    "aliases": ["gargoyle", "guard beast", "winged guard", "statue"]
   },
   {
     "id": "rad-moth-matriarch",
     "name": "Rad-Moth Matriarch",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 3,
     "flying": true,
@@ -2953,30 +2336,17 @@
     ],
     "powers": [],
     "tactics": "Drifts above the ruins. Dusts the players with glowing spores.",
-    "aliases": [
-      "moth",
-      "mutant moth",
-      "giant insect",
-      "mothman"
-    ]
+    "aliases": ["moth", "mutant moth", "giant insect", "mothman"]
   },
   {
     "id": "jolly-mimic-wagon",
     "name": "Jolly Mimic Wagon",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 2,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "mimic",
-      "treasure chest",
-      "cart",
-      "chest monster"
-    ],
+    "aliases": ["mimic", "treasure chest", "cart", "chest monster"],
     "description": "A cheerful traveling merchant cart with far too many teeth and a very good sale on right now.",
     "attack": "Chomp",
     "skills": [
@@ -3013,18 +2383,11 @@
     "id": "pillow-wyrm",
     "name": "Pillow Wyrm",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 1,
     "tier": 5,
     "flying": true,
-    "aliases": [
-      "dream dragon",
-      "sleeping dragon",
-      "cloud dragon"
-    ],
+    "aliases": ["dream dragon", "sleeping dragon", "cloud dragon"],
     "description": "An enormous, fluffy sleeping dragon whose snores are lullabies and whose dreams are weapons.",
     "attack": "Tail flop",
     "skills": [
@@ -3057,18 +2420,11 @@
     "id": "canyon-wyrm",
     "name": "Canyon Wyrm",
     "type": "monster",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 8,
     "flying": false,
-    "aliases": [
-      "sandworm",
-      "desert worm",
-      "giant worm",
-      "burrower"
-    ],
+    "aliases": ["sandworm", "desert worm", "giant worm", "burrower"],
     "description": "A mile-long sandworm that lives under the desert and swallows trains and towns whole.",
     "attack": "Burrow & bite",
     "skills": [
@@ -3111,18 +2467,11 @@
     "id": "aether-kraken",
     "name": "Aether Kraken",
     "type": "monster",
-    "themes": [
-      "steampunk",
-      "occult-noir"
-    ],
+    "themes": ["steampunk", "occult-noir"],
     "tone": 5,
     "tier": 8,
     "flying": true,
-    "aliases": [
-      "airship eater",
-      "sky kraken",
-      "aether squid"
-    ],
+    "aliases": ["airship eater", "sky kraken", "aether squid"],
     "description": "A giant glowing squid-beast that swims through the aether and drags airships down to feed.",
     "attack": "Tentacle crush",
     "skills": [
@@ -3165,18 +2514,11 @@
     "id": "stone-informant",
     "name": "Gargoyle Informant",
     "type": "monster",
-    "themes": [
-      "occult-noir",
-      "fantasy"
-    ],
+    "themes": ["occult-noir", "fantasy"],
     "tone": 3,
     "tier": 5,
     "flying": true,
-    "aliases": [
-      "gargoyle",
-      "stone watcher",
-      "informant"
-    ],
+    "aliases": ["gargoyle", "stone watcher", "informant"],
     "description": "A winged stone watcher who knows everyone's secrets and sells them to the highest bidder.",
     "attack": "Stone claws",
     "skills": [
@@ -3213,17 +2555,11 @@
     "id": "radiation-bloom",
     "name": "Radiation Bloom",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "glowing flower",
-      "mutant plant",
-      "spore monster"
-    ],
+    "aliases": ["glowing flower", "mutant plant", "spore monster"],
     "description": "A giant glowing flower that spreads spores and warps everything it touches.",
     "attack": "Vines",
     "skills": [
@@ -3256,19 +2592,11 @@
     "id": "elder-wyrm-sovereign",
     "name": "Elder Wyrm Sovereign",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "science-fantasy"
-    ],
+    "themes": ["fantasy", "science-fantasy"],
     "tone": 4,
     "tier": 8,
     "flying": true,
-    "aliases": [
-      "ancient dragon",
-      "elder dragon",
-      "wyrm king",
-      "great wyrm"
-    ],
+    "aliases": ["ancient dragon", "elder dragon", "wyrm king", "great wyrm"],
     "description": "A dragon so old its scales are mountains and its hoard is a kingdom.",
     "attack": "Bite & claws",
     "skills": [
@@ -3317,19 +2645,11 @@
     "id": "mountain-eater",
     "name": "Mountain Eater",
     "type": "monster",
-    "themes": [
-      "fantasy",
-      "post-apocalypse"
-    ],
+    "themes": ["fantasy", "post-apocalypse"],
     "tone": 5,
     "tier": 10,
     "flying": false,
-    "aliases": [
-      "tarrasque",
-      "kaiju",
-      "world eater",
-      "titan beast"
-    ],
+    "aliases": ["tarrasque", "kaiju", "world eater", "titan beast"],
     "description": "A walking apocalypse with a mouth like a canyon that eats mountains and rivers.",
     "attack": "Bite",
     "skills": [
@@ -3374,17 +2694,11 @@
     "id": "fallout-behemoth",
     "name": "Fallout Behemoth",
     "type": "monster",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 5,
     "tier": 8,
     "flying": false,
-    "aliases": [
-      "radiation titan",
-      "wasteland giant",
-      "mutant colossus"
-    ],
+    "aliases": ["radiation titan", "wasteland giant", "mutant colossus"],
     "description": "A radiation-glowing titan born from the old world's worst mistake.",
     "attack": "Crushing fists",
     "skills": [
@@ -3423,18 +2737,11 @@
     "id": "hive-queen",
     "name": "Hive Queen",
     "type": "monster",
-    "themes": [
-      "scifi",
-      "space-wars"
-    ],
+    "themes": ["scifi", "space-wars"],
     "tone": 4,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "alien queen",
-      "bug queen",
-      "swarm queen"
-    ],
+    "aliases": ["alien queen", "bug queen", "swarm queen"],
     "description": "A giant insectoid queen that commands the swarm and lays more with every breath.",
     "attack": "Claws & acid spit",
     "skills": [
@@ -3471,19 +2778,11 @@
     "id": "sphinx-ledger",
     "name": "Sphinx of the Ledger",
     "type": "monster",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "sphinx",
-      "riddle beast",
-      "debt collector",
-      "ledger monster",
-      "oracle"
-    ],
+    "aliases": ["sphinx", "riddle beast", "debt collector", "ledger monster", "oracle"],
     "description": "A winged-lion sphinx with a human face and a ledger of every debt, sin and secret in the city.",
     "attack": "Claws & riddle",
     "skills": [
@@ -3526,20 +2825,11 @@
     "id": "world-tree-guardian",
     "name": "World Tree Guardian",
     "type": "monster",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 9,
     "flying": false,
-    "aliases": [
-      "world tree",
-      "great tree",
-      "treant",
-      "ent",
-      "tree god",
-      "forest guardian"
-    ],
+    "aliases": ["world tree", "great tree", "treant", "ent", "tree god", "forest guardian"],
     "description": "A forest-sized, ancient tree with a face in its trunk and a root in every kingdom.",
     "attack": "Root slam",
     "skills": [
@@ -3588,10 +2878,7 @@
     "id": "cult-patriarch",
     "name": "Cult Patriarch",
     "type": "monster",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 5,
     "tier": 4,
     "flying": false,

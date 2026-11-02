@@ -223,11 +223,5 @@
       "label": "Post-Apocalypse"
     }
   ],
-  "toneScale": [
-    "Whimsy",
-    "Lean-Whimsy",
-    "Neutral",
-    "Lean-Dark",
-    "Dark"
-  ]
+  "toneScale": ["Whimsy", "Lean-Whimsy", "Neutral", "Lean-Dark", "Dark"]
 }

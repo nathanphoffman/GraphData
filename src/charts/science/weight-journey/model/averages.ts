@@ -2,11 +2,18 @@ import { type Averages, round1 } from "../calculate";
 import { DAYS_PER_MONTH, HALF_MONTH_DAYS, MONTHS_PER_YEAR } from "../constants";
 
 /** The blended average projected a year ahead, using the monthly change. */
-export const yearly = (blended: number, monthly: number | null) => (monthly === null ? null : blended + monthly * MONTHS_PER_YEAR);
+export const yearly = (blended: number, monthly: number | null) =>
+  monthly === null ? null : blended + monthly * MONTHS_PER_YEAR;
 
 /** Mean of the 3-day, 30-day, 365-day, blended and 1-year projected values (projection is missing for the first 30 days). */
 export function allAverage(averages: Averages): number {
-  const values = [averages.avg3, averages.avg30, averages.avg365, averages.blended, yearly(averages.blended, averages.monthly)].filter((value): value is number => value !== null);
+  const values = [
+    averages.avg3,
+    averages.avg30,
+    averages.avg365,
+    averages.blended,
+    yearly(averages.blended, averages.monthly),
+  ].filter((value): value is number => value !== null);
 
   // Sum all values, then divide for the mean.
   return values.reduce((total, value) => total + value, 0) / values.length;

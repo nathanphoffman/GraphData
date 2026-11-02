@@ -38,18 +38,21 @@ async function reconcile(label, local, remote, send, save) {
     else if (!mine) direction = "pull";
     else if (JSON.stringify(mine.value) === JSON.stringify(theirs.value)) {
       stats.same++;
+
       continue;
     } else if (mine.at !== theirs.at) direction = mine.at > theirs.at ? "push" : "pull";
     else if (prefer) direction = prefer === "local" ? "push" : "pull";
     else {
       stats.conflicts++;
       console.log(`CONFLICT (differs, same change time): ${label} ${key}`);
+
       continue;
     }
 
     const kind = direction === "push" ? "pushed" : "pulled";
     const row = direction === "push" ? mine : theirs;
     const target = (direction === "push" ? theirs : mine) ? "changed" : "new";
+
     try {
       if (!dryRun) await (direction === "push" ? send(key, row) : save(key, row));
       stats[kind]++;
@@ -64,6 +67,7 @@ async function reconcile(label, local, remote, send, save) {
 // Ranking items, matched by ranking and name.
 const { data: live } = await call("GET", "/api/rankings");
 const liveRankings = new Map(live.rankings.map((ranking) => [ranking.id, ranking.items]));
+
 if ([...liveRankings.values()].some((items) => items.some((item) => item.updatedAt === undefined))) {
   console.error("The live site does not track change times yet. Deploy this version first, then sync.");
   process.exit(1);
@@ -74,31 +78,61 @@ if ([...liveRankings.values()].some((items) => items.some((item) => item.feature
   process.exit(1);
 }
 
-const updateItem = db.prepare("UPDATE ranking_items SET values_json = ?, features_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?");
-const insertItem = db.prepare("INSERT INTO ranking_items (ranking_id, position, name, values_json, features_json, updated_at) VALUES (?, ?, ?, ?, ?, ?)");
+const updateItem = db.prepare(
+  "UPDATE ranking_items SET values_json = ?, features_json = ?, updated_at = ? WHERE ranking_id = ? AND name = ?",
+);
+
+const insertItem = db.prepare(
+  "INSERT INTO ranking_items (ranking_id, position, name, values_json, features_json, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+);
+
 const columnCount = db.prepare("SELECT COUNT(*) AS count FROM ranking_columns WHERE ranking_id = ?");
 
 for (const { id } of db.prepare("SELECT id FROM rankings").all()) {
   if (!liveRankings.has(id)) {
     console.error(`SKIPPED: ranking ${id} does not exist on the live site yet (deploy first)`);
+
     continue;
   }
 
   // An item's values and planned features change together, so they are compared and copied as one row.
-  const rows = (items) => new Map(items.map((item) => [item.name, { value: { values: item.values, features: item.features }, at: item.updatedAt }]));
-  const localItems = db.prepare("SELECT name, values_json, features_json, updated_at FROM ranking_items WHERE ranking_id = ?").all(id);
+  const rows = (items) =>
+    new Map(
+      items.map((item) => [item.name, { value: { values: item.values, features: item.features }, at: item.updatedAt }]),
+    );
+
+  const localItems = db
+    .prepare("SELECT name, values_json, features_json, updated_at FROM ranking_items WHERE ranking_id = ?")
+    .all(id);
 
   await reconcile(
     `${id} /`,
-    rows(localItems.map((item) => ({ name: item.name, values: JSON.parse(item.values_json), features: JSON.parse(item.features_json), updatedAt: item.updated_at }))),
+    rows(
+      localItems.map((item) => ({
+        name: item.name,
+        values: JSON.parse(item.values_json),
+        features: JSON.parse(item.features_json),
+        updatedAt: item.updated_at,
+      })),
+    ),
     rows(liveRankings.get(id)),
-    (name, row) => call("PUT", `/api/rankings/${id}/items/${encodeURIComponent(name)}`, { values: row.value.values, features: row.value.features, updatedAt: row.at }),
+    (name, row) =>
+      call("PUT", `/api/rankings/${id}/items/${encodeURIComponent(name)}`, {
+        values: row.value.values,
+        features: row.value.features,
+        updatedAt: row.at,
+      }),
     (name, row) => {
-      if (row.value.values.length !== columnCount.get(id).count) throw new Error("it has a different number of columns than the local ranking");
+      if (row.value.values.length !== columnCount.get(id).count)
+
+        throw new Error("it has a different number of columns than the local ranking");
       const [values, features] = [JSON.stringify(row.value.values), JSON.stringify(row.value.features)];
+
       if (updateItem.run(values, features, row.at, id, name).changes) return;
 
-      const { next } = db.prepare("SELECT COALESCE(MAX(position), -1) + 1 AS next FROM ranking_items WHERE ranking_id = ?").get(id);
+      const { next } = db
+        .prepare("SELECT COALESCE(MAX(position), -1) + 1 AS next FROM ranking_items WHERE ranking_id = ?")
+        .get(id);
       insertItem.run(id, next, name, values, features, row.at);
     },
   );
@@ -106,6 +140,7 @@ for (const { id } of db.prepare("SELECT id FROM rankings").all()) {
 
 // Weigh-ins, matched by date.
 const { data: liveWeights } = await call("GET", "/api/weights");
+
 if (liveWeights.updatedAt === undefined) {
   console.error("The live site does not track change times yet. Deploy this version first, then sync.");
   process.exit(1);
@@ -113,18 +148,30 @@ if (liveWeights.updatedAt === undefined) {
 
 await reconcile(
   "weight",
-  new Map(db.prepare("SELECT date, weight, updated_at FROM weights").all().map((row) => [row.date, { value: row.weight, at: row.updated_at }])),
+  new Map(
+    db
+      .prepare("SELECT date, weight, updated_at FROM weights")
+      .all()
+      .map((row) => [row.date, { value: row.weight, at: row.updated_at }]),
+  ),
   new Map(liveWeights.weights.map(([date, weight]) => [date, { value: weight, at: liveWeights.updatedAt[date] ?? 0 }])),
   (date, row) => call("PUT", `/api/weights/${date}`, { weight: row.value, updatedAt: row.at }),
-  (date, row) => db.prepare("INSERT OR REPLACE INTO weights (date, weight, updated_at) VALUES (?, ?, ?)").run(date, row.value, row.at),
+  (date, row) =>
+    db
+      .prepare("INSERT OR REPLACE INTO weights (date, weight, updated_at) VALUES (?, ?, ?)")
+      .run(date, row.value, row.at),
 );
 
 // Board games, matched by title and release year. There are thousands, so they go in batches and only a summary is printed.
 const GAME_BATCH = 500;
+
 const gameKey = (game) => `${game.title}|${game.releaseDate}`;
-const sameRatings = (first, second) => ["average", "weight", "num", "rank"].every((field) => first[field] === second[field]);
+
+const sameRatings = (first, second) =>
+  ["average", "weight", "num", "rank"].every((field) => first[field] === second[field]);
 
 let liveGames;
+
 try {
   ({ data: liveGames } = await call("GET", "/api/board-games/export"));
 } catch (error) {
@@ -134,7 +181,11 @@ try {
 
 if (liveGames) {
   const remoteGames = new Map(liveGames.games.map((game) => [gameKey(game), game]));
-  const localGames = db.prepare("SELECT title, release_date AS releaseDate, average, weight, num, rank, pulled_at AS pulledAt, updated_at AS updatedAt FROM board_games").all();
+  const localGames = db
+    .prepare(
+      "SELECT title, release_date AS releaseDate, average, weight, num, rank, pulled_at AS pulledAt, updated_at AS updatedAt FROM board_games",
+    )
+    .all();
   const [toSend, toSave] = [[], []];
 
   for (const mine of localGames) {
@@ -143,36 +194,63 @@ if (liveGames) {
 
     if (!theirs) toSend.push(mine);
     else if (sameRatings(mine, theirs)) stats.same++;
-    else if (mine.updatedAt !== theirs.updatedAt) (mine.updatedAt > theirs.updatedAt ? toSend : toSave).push(mine.updatedAt > theirs.updatedAt ? mine : theirs);
+    else if (mine.updatedAt !== theirs.updatedAt)
+      (mine.updatedAt > theirs.updatedAt ? toSend : toSave).push(mine.updatedAt > theirs.updatedAt ? mine : theirs);
     else if (prefer) (prefer === "local" ? toSend : toSave).push(prefer === "local" ? mine : theirs);
     else {
       stats.conflicts++;
       console.log(`CONFLICT (differs, same change time): board game ${gameKey(mine)}`);
     }
   }
+
   toSave.push(...remoteGames.values());
 
-  const saveGame = db.prepare("INSERT OR REPLACE INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  const saveGame = db.prepare(
+    "INSERT OR REPLACE INTO board_games (title, release_date, average, weight, num, rank, pulled_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  );
+
   for (let start = 0; start < toSend.length && !dryRun; start += GAME_BATCH) {
     const batch = toSend.slice(start, start + GAME_BATCH);
+
     try {
       await call("PUT", "/api/board-games/bulk", { games: batch });
     } catch (error) {
       stats.failed += batch.length;
       console.error(`FAILED: ${batch.length} board games from ${batch[0].title}: ${error.message}`);
       toSend.length = 0;
+
       break;
     }
   }
+
   if (!dryRun) {
     db.exec("BEGIN");
-    for (const game of toSave) saveGame.run(game.title, game.releaseDate, game.average, game.weight, game.num, game.rank, game.pulledAt, game.updatedAt);
+
+    for (const game of toSave)
+      saveGame.run(
+        game.title,
+        game.releaseDate,
+        game.average,
+        game.weight,
+        game.num,
+        game.rank,
+        game.pulledAt,
+        game.updatedAt,
+      );
+
     db.exec("COMMIT");
   }
+
   stats.pushed += toSend.length;
   stats.pulled += toSave.length;
   console.log(`${dryRun ? "would be " : ""}board games: ${toSend.length} sent, ${toSave.length} brought here`);
 }
 
-console.log(`${dryRun ? "Dry run: " : ""}${stats.pushed} sent to the live site, ${stats.pulled} brought here, ${stats.same} already the same, ${stats.conflicts} conflicts, ${stats.failed} failed.`);
-if (stats.conflicts) console.log("Conflicts have the same change time but different values. Run again with --prefer local or --prefer remote to settle them.");
+console.log(
+  `${dryRun ? "Dry run: " : ""}${stats.pushed} sent to the live site, ${stats.pulled} brought here, ${stats.same} already the same, ${stats.conflicts} conflicts, ${stats.failed} failed.`,
+);
+
+if (stats.conflicts)
+  console.log(
+    "Conflicts have the same change time but different values. Run again with --prefer local or --prefer remote to settle them.",
+  );

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { charts } from "../charts/registry";
 import sizes from "../charts/pageSizes.json";
+import { charts } from "../charts/registry";
 
 const sizeOf = (id: string): number => (sizes as Record<string, number>)[id] ?? 0;
 
@@ -36,6 +36,7 @@ export default function Home() {
               <td className="page-lines">{sizeOf(chart.id).toLocaleString()}</td>
             </tr>
           ))}
+
         </tbody>
       </table>
     </section>

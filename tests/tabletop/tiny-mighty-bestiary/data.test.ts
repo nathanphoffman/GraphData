@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { DIFFICULTY_BANDS, compareBy, difficultyOf, model, tierFor } from "../../../src/charts/tabletop/tiny-mighty-bestiary/model/data";
+import {
+  compareBy,
+  DIFFICULTY_BANDS,
+  difficultyOf,
+  model,
+  tierFor,
+} from "../../../src/charts/tabletop/tiny-mighty-bestiary/model/data";
+
 import { matches } from "../../../src/charts/tabletop/tiny-mighty-bestiary/model/search";
 import type { Creature } from "../../../src/charts/tabletop/tiny-mighty-bestiary/model/types";
 

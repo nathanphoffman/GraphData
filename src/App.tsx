@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import ChartPage from "./pages/ChartPage";
+import Home from "./pages/Home";
 
 // BrowserRouter needs the server to answer every path with index.html (sirv --single does).
 export default function Application() {

@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -31,7 +31,11 @@ export function SkyPikeBrood() {
       <Dot x={270} y={92} r={5} />
       <Shape d="M120 50 L150 10 L170 56 Z M120 150 L150 190 L170 146 Z" w={4} />
       {/* Repeat the shape at each listed position and scale. */}
-      {[[250, 190, 0.8], [310, 210, 0.6], [180, 214, 0.7]].map(([x, y, s], index) => (
+      {[
+        [250, 190, 0.8],
+        [310, 210, 0.6],
+        [180, 214, 0.7],
+      ].map(([x, y, s], index) => (
         <g key={index} transform={`translate(${x} ${y}) scale(${s})`}>
           <Shape d="M-30 0 C-20 -14 20 -14 36 0 C20 14 -20 14 -30 0 Z" w={5} />
           <Line d="M36 0 L70 0" w={4} />

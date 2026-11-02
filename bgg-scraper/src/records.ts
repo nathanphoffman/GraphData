@@ -1,26 +1,26 @@
-import { Game } from "./types/game";
 import { EXCLUDED_TITLE_PREFIXES } from "./config";
+import type { Game } from "./types/game";
 
 export function removeUnwantedRecords(records: Game[]): Game[] {
-    return records.filter(x => !EXCLUDED_TITLE_PREFIXES.some(prefix => x.title.toUpperCase().startsWith(prefix)));
+  return records.filter((x) => !EXCLUDED_TITLE_PREFIXES.some((prefix) => x.title.toUpperCase().startsWith(prefix)));
 }
 
 export function gameKey(game: Game): string {
-    return `${game.title}|${game.releaseDate}`;
+  return `${game.title}|${game.releaseDate}`;
 }
 
 export function mergeDuplicateRecords(arr: Game[]): Game[] {
+  // dups mean a game was caught on either end of the divide of pagination by weighting,
+  // so average all of their weights for a more accurate reading
+  const groups = new Map<string, Game[]>();
 
-    // dups mean a game was caught on either end of the divide of pagination by weighting,
-    // so average all of their weights for a more accurate reading
-    const groups = new Map<string, Game[]>();
-    for (const item of arr) {
-        const key = gameKey(item);
-        groups.set(key, [...(groups.get(key) ?? []), item]);
-    }
+  for (const item of arr) {
+    const key = gameKey(item);
+    groups.set(key, [...(groups.get(key) ?? []), item]);
+  }
 
-    return [...groups.values()].map(dups => ({
-        ...dups[0],
-        weight: dups.reduce((sum, dup) => sum + dup.weight, 0) / dups.length
-    }));
+  return [...groups.values()].map((dups) => ({
+    ...dups[0],
+    weight: dups.reduce((sum, dup) => sum + dup.weight, 0) / dups.length,
+  }));
 }

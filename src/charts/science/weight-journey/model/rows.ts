@@ -1,4 +1,14 @@
-import { type Averages, type DayWeight, type Muscle, type Projection, addAverages, addMuscle, fillDays, project } from "../calculate";
+import {
+  type Averages,
+  addAverages,
+  addMuscle,
+  type DayWeight,
+  fillDays,
+  type Muscle,
+  type Projection,
+  project,
+} from "../calculate";
+
 import { FIT_AHEAD_DAYS, FIT_DAYS, MONTHS_PER_YEAR, SMOOTHING_DAYS } from "../constants";
 import { allAverage, completeAverage, last3, projectAll, recentRate, weightedAverage, yearly } from "./averages";
 
@@ -34,14 +44,24 @@ export type Model = ReturnType<typeof setWeights>;
 const DAILY_WINDOWS = { short: 3, medium: 30, long: 365 };
 
 /** Add the averages, rates and projections to every day. */
-const weightColumns = (averages: Averages, allAverageValue: number, proj: number | null, proj3: number | null) =>
-  [averages.avg3, averages.avg30, averages.avg365, averages.blended, yearly(averages.blended, averages.monthly), allAverageValue, proj, proj3];
+const weightColumns = (averages: Averages, allAverageValue: number, proj: number | null, proj3: number | null) => [
+  averages.avg3,
+  averages.avg30,
+  averages.avg365,
+  averages.blended,
+  yearly(averages.blended, averages.monthly),
+  allAverageValue,
+  proj,
+  proj3,
+];
 
 /** Weight now plus 12 times the monthly change, i.e. where it lands in a year. */
-const project12 = (weight: number | null, monthly: number | null) => (weight === null || monthly === null ? null : weight + MONTHS_PER_YEAR * monthly);
+const project12 = (weight: number | null, monthly: number | null) =>
+  weight === null || monthly === null ? null : weight + MONTHS_PER_YEAR * monthly;
 
 /** Sum of two values, or null when either is missing. */
-const addOrNull = (first: number | null, second: number | null) => (first === null || second === null ? null : first + second);
+const addOrNull = (first: number | null, second: number | null) =>
+  first === null || second === null ? null : first + second;
 
 /** Half of a value, or null when it is missing. */
 const half = (value: number | null) => (value === null ? null : value / 2);
@@ -52,7 +72,12 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
   const smoothingRows = Math.round(SMOOTHING_DAYS / step);
 
   // Same averages again on weight minus the muscle gained so far.
-  const adjusted = addAverages(rows.map((dayRecord) => ({ ...dayRecord, weight: dayRecord.weight - dayRecord.muscleTotal })), windows, step);
+  const adjusted = addAverages(
+    rows.map((dayRecord) => ({ ...dayRecord, weight: dayRecord.weight - dayRecord.muscleTotal })),
+    windows,
+    step,
+  );
+
   const baseRows = actual.map((dayRecord, index) => ({ ...dayRecord, adj: adjusted[index] }));
   const allActual = baseRows.map((baseRow) => allAverage(baseRow));
   const allAdjusted = baseRows.map((baseRow) => allAverage(baseRow.adj));
@@ -64,10 +89,23 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
   const recentAdj = avg3Adj.map((_unused, index) => recentRate(avg3Adj, index, step));
 
   // Weighted moving average of the weight for each row, using the last few rows.
-  const weightWma = baseRows.map((_unused, index) => weightedAverage(baseRows.map((tableRow) => tableRow.weight), index, smoothingRows));
+  const weightWma = baseRows.map((_unused, index) =>
+    weightedAverage(
+      baseRows.map((tableRow) => tableRow.weight),
+      index,
+      smoothingRows,
+    ),
+  );
 
   // The same with the muscle gained so far taken off the weight.
-  const weightWmaAdj = baseRows.map((_unused, index) => weightedAverage(baseRows.map((tableRow) => tableRow.weight - tableRow.muscleTotal), index, smoothingRows));
+  const weightWmaAdj = baseRows.map((_unused, index) =>
+    weightedAverage(
+      baseRows.map((tableRow) => tableRow.weight - tableRow.muscleTotal),
+      index,
+      smoothingRows,
+    ),
+  );
+
   const recent3s = recent.map((_unused, index) => last3(recent, index));
   const recent3sAdj = recentAdj.map((_unused, index) => last3(recentAdj, index));
 
@@ -106,8 +144,14 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     allProjAdj: projAdjusted[index],
     allProj3: last3(projActual, index),
     allProj3Adj: last3(projAdjusted, index),
-    complete: completeAverage([baseRow.weight, ...weightColumns(baseRow, allActual[index], projActual[index], last3(projActual, index))]),
-    completeAdj: completeAverage([baseRow.weight - baseRow.muscleTotal, ...weightColumns(baseRow.adj, allAdjusted[index], projAdjusted[index], last3(projAdjusted, index))]),
+    complete: completeAverage([
+      baseRow.weight,
+      ...weightColumns(baseRow, allActual[index], projActual[index], last3(projActual, index)),
+    ]),
+    completeAdj: completeAverage([
+      baseRow.weight - baseRow.muscleTotal,
+      ...weightColumns(baseRow.adj, allAdjusted[index], projAdjusted[index], last3(projAdjusted, index)),
+    ]),
   }));
 
   // Last column: the complete average and the WMA Projection Projected, averaged together.
@@ -135,14 +179,22 @@ export type WeightRow = ReturnType<typeof buildRows>[number];
  * with the same averages, quadratic projection and 3 day projected all average as the other series.
  */
 export function buildFat(ratio: number, rows: typeof withMuscle) {
-  const series = rows.map((dayRecord) => ({ ...dayRecord, weight: dayRecord.weight - dayRecord.muscleTotal * (1 + ratio) }));
+  const series = rows.map((dayRecord) => ({
+    ...dayRecord,
+    weight: dayRecord.weight - dayRecord.muscleTotal * (1 + ratio),
+  }));
+
   const averages = addAverages(series, DAILY_WINDOWS, 1);
   const allAvg = averages.map((averageRow) => allAverage(averageRow));
   const projAll = allAvg.map((_unused, index) => projectAll(allAvg, index, DAILY_WINDOWS.medium, 1));
 
   return {
     ratio,
-    rows: averages.map((averageRow, index) => ({ date: averageRow.date, avg3: averageRow.avg3, allProj3: last3(projAll, index) })),
+    rows: averages.map((averageRow, index) => ({
+      date: averageRow.date,
+      avg3: averageRow.avg3,
+      allProj3: last3(projAll, index),
+    })),
     ...project(series, FIT_DAYS, FIT_AHEAD_DAYS),
   };
 }

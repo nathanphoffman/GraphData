@@ -1,6 +1,6 @@
 import { TENTH } from "../logic/constants";
-import { purchasePlan, yearsToReach } from "../logic/spending";
 import { capitalize, type ItemType } from "../logic/items";
+import { purchasePlan, yearsToReach } from "../logic/spending";
 
 interface Props {
   owned: number;
@@ -23,11 +23,28 @@ const YEARS = 10;
 const money = (value: number) => `$${Math.round(value).toLocaleString()}`;
 
 /** Number input that only accepts non-negative amounts. */
-function NumberField({ id: fieldId, label, value, onChange }: { id: string; label: string; value: number; onChange: (value: number) => void }) {
+function NumberField({
+  id: fieldId,
+  label,
+  value,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  value: number;
+  onChange: (value: number) => void;
+}) {
   return (
     <div>
       <label htmlFor={fieldId}>{label}</label>
-      <input id={fieldId} type="number" min={0} step="any" value={value} onChange={(event) => onChange(Math.max(0, Number(event.target.value) || 0))} />
+      <input
+        id={fieldId}
+        type="number"
+        min={0}
+        step="any"
+        value={value}
+        onChange={(event) => onChange(Math.max(0, Number(event.target.value) || 0))}
+      />
     </div>
   );
 }
@@ -71,10 +88,25 @@ export default function SavingsPanel({
     <details className="panel mini-savings">
       <summary>Savings (optional)</summary>
       <div className="mini-savings-inputs">
-        <NumberField id="buy-per-year" label={`How many ${item.many} were you buying per year?`} value={buyPerYear} onChange={onBuyPerYear} />
+        <NumberField
+          id="buy-per-year"
+          label={`How many ${item.many} were you buying per year?`}
+          value={buyPerYear}
+          onChange={onBuyPerYear}
+        />
         <NumberField id="price" label={`Average cost of one ${item.one} ($)`} value={price} onChange={onPrice} />
-        <NumberField id="min-plays" label={`Minimum ${item.uses} to make it worth it`} value={minPlays} onChange={onMinPlays} />
-        <NumberField id="max-plays" label={`Maximum ${item.uses} you can typically get`} value={maxPlays} onChange={onMaxPlays} />
+        <NumberField
+          id="min-plays"
+          label={`Minimum ${item.uses} to make it worth it`}
+          value={minPlays}
+          onChange={onMinPlays}
+        />
+        <NumberField
+          id="max-plays"
+          label={`Maximum ${item.uses} you can typically get`}
+          value={maxPlays}
+          onChange={onMaxPlays}
+        />
       </div>
       <table className="mini-savings-table">
         <thead>
@@ -92,7 +124,8 @@ export default function SavingsPanel({
               <td>{yearRow.label}</td>
               <td>{money(todayCost)}</td>
               <td>
-                {money(yearRow.cost)} <span className="muted">({Math.round(yearRow.bought * TENTH) / TENTH} bought)</span>
+                {money(yearRow.cost)}{" "}
+                <span className="muted">({Math.round(yearRow.bought * TENTH) / TENTH} bought)</span>
               </td>
               <td style={{ color: yearRow.saved >= 0 ? "#16a34a" : "#dc2626" }}>
                 <strong>
@@ -118,11 +151,13 @@ export default function SavingsPanel({
       </div>
       <p className="muted">
         {yearsToTarget === null && ` You would take over 100 years to reach ${target} ${item.many}.`}
-        {yearsToTarget !== null && yearsToTarget > 0 &&
+        {yearsToTarget !== null &&
+          yearsToTarget > 0 &&
           ` You would reach ${target} ${item.many} in about ${yearsToTarget} ${yearsToTarget === 1 ? "year" : "years"}.`}
       </p>
       <p className="muted">
-        Every {Math.max(1, minPlays)} {item.uses} earns you one purchase, so you only buy once what you own has paid off.
+        Every {Math.max(1, minPlays)} {item.uses} earns you one purchase, so you only buy once what you own has paid
+        off.
         {capitalize(item.many)} wear out after about {Math.max(minPlays, maxPlays)} {item.uses} and get replaced.
       </p>
     </details>

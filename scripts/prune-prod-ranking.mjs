@@ -18,16 +18,25 @@ if (!live) {
   process.exit(1);
 }
 
-const local = new Set(db.prepare("SELECT name FROM ranking_items WHERE ranking_id = ?").all(id).map((item) => item.name));
+const local = new Set(
+  db
+    .prepare("SELECT name FROM ranking_items WHERE ranking_id = ?")
+    .all(id)
+    .map((item) => item.name),
+);
+
 if (!local.size) {
   console.error(`The local database has no items for "${id}", so nothing is deleted.`);
   process.exit(1);
 }
 
 const extra = live.items.filter((item) => !local.has(item.name));
+
 for (const { name } of extra) {
   if (!dryRun) await call("DELETE", `/api/rankings/${id}/items/${encodeURIComponent(name)}`);
   console.log(`${dryRun ? "would delete" : "deleted"}: ${name}`);
 }
 
-console.log(`${extra.length} of ${live.items.length} live items ${dryRun ? "would be " : ""}deleted; ${local.size} local items kept.`);
+console.log(
+  `${extra.length} of ${live.items.length} live items ${dryRun ? "would be " : ""}deleted; ${local.size} local items kept.`,
+);

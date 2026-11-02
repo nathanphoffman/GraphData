@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, CARD_COLOR, Spokes } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Spokes } from "../../core/artStyle";
 import { ghostBody } from "./Part1";
 
 const card = CARD_COLOR;
@@ -9,13 +9,36 @@ export function GlitchGremlin() {
       <Shape d="M120 150 H280 V200 H120 Z" w={4} />
       <Line d="M140 150 V200 M180 150 V200 M220 150 V200 M260 150 V200" w={2} />
       {[
-        [170, 70], [190, 70], [210, 70], [230, 70],
-        [150, 90], [170, 90], [190, 90], [210, 90], [230, 90], [250, 90],
-        [150, 110], [170, 110], [210, 110], [250, 110],
-        [150, 130], [190, 130], [210, 130], [250, 130],
-      // Repeat the shape at each listed position; every fifth is filled with the card colour.
+        [170, 70],
+        [190, 70],
+        [210, 70],
+        [230, 70],
+        [150, 90],
+        [170, 90],
+        [190, 90],
+        [210, 90],
+        [230, 90],
+        [250, 90],
+        [150, 110],
+        [170, 110],
+        [210, 110],
+        [250, 110],
+        [150, 130],
+        [190, 130],
+        [210, 130],
+        [250, 130],
+        // Repeat the shape at each listed position; every fifth is filled with the card colour.
       ].map(([x, y], index) => (
-        <rect key={index} x={x - 9} y={y - 9} width="18" height="18" fill={index % 5 === 0 ? card : "currentColor"} stroke="currentColor" strokeWidth="3" />
+        <rect
+          key={index}
+          x={x - 9}
+          y={y - 9}
+          width="18"
+          height="18"
+          fill={index % 5 === 0 ? card : "currentColor"}
+          stroke="currentColor"
+          strokeWidth="3"
+        />
       ))}
       <rect x="184" y="84" width="10" height="10" fill={card} />
       <rect x="214" y="84" width="10" height="10" fill={card} />
@@ -77,9 +100,21 @@ export function DeepNetGod() {
       <circle cx="200" cy="120" r="44" fill="none" {...ink} strokeWidth={3} />
       <circle cx="200" cy="120" r="22" fill="currentColor" />
       <circle cx="200" cy="120" r="8" fill={card} />
-      <Line d="M200 56 V0 M200 184 V224 M136 120 H60 M264 120 H340 M154 74 L100 30 M246 74 L300 30 M154 166 L100 210 M246 166 L300 210" w={5} />
+      <Line
+        d="M200 56 V0 M200 184 V224 M136 120 H60 M264 120 H340 M154 74 L100 30 M246 74 L300 30 M154 166 L100 210 M246 166 L300 210"
+        w={5}
+      />
       {/* Repeat the shape at each listed position. */}
-      {[[200, 0], [60, 120], [340, 120], [100, 30], [300, 30], [100, 210], [300, 210], [200, 224]].map(([x, y], index) => (
+      {[
+        [200, 0],
+        [60, 120],
+        [340, 120],
+        [100, 30],
+        [300, 30],
+        [100, 210],
+        [300, 210],
+        [200, 224],
+      ].map(([x, y], index) => (
         <g key={index}>
           <circle cx={x} cy={y} r="12" fill={card} {...ink} strokeWidth={3} />
           <Dot x={x} y={y} r={4} />

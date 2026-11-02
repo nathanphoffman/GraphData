@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR, Spokes } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid, Spokes } from "../../core/artStyle";
 import { Glow } from "./Part1";
 
 const card = CARD_COLOR;
@@ -6,7 +6,10 @@ const card = CARD_COLOR;
 export function DustTitan() {
   return (
     <Drawing label="Drawing of a hundred-foot dust-colored giant walking through a ruined city, buildings at its knees">
-      <Shape d="M20 224 V150 H60 V224 Z M70 224 V120 H110 V224 Z M290 224 V140 H330 V224 Z M340 224 V160 H380 V224 Z" w={4} />
+      <Shape
+        d="M20 224 V150 H60 V224 Z M70 224 V120 H110 V224 Z M290 224 V140 H330 V224 Z M340 224 V160 H380 V224 Z"
+        w={4}
+      />
       <Line d="M30 170 h20 M30 190 h20 M80 140 h20 M80 160 h20 M80 180 h20 M300 160 h20 M300 180 h20" w={2} />
       <Shape d="M166 20 C160 -6 240 -6 234 20 C238 40 162 40 166 20 Z" />
       <Dot x={186} y={16} r={4} />
@@ -85,7 +88,13 @@ export function GlowTroll() {
       <Line d="M270 100 L294 130" w={13} />
       <Line d="M294 130 l14 6 M294 130 l16 -4 M294 130 l10 14" w={4} dash="2 3" />
       <Line d="M110 190 L70 224" w={5} />
-      <path d="M50 100 l18 -18 h26 l18 18 v26 l-18 18 h-26 l-18 -18 Z" fill={card} stroke="currentColor" strokeWidth="4" strokeLinejoin="round" />
+      <path
+        d="M50 100 l18 -18 h26 l18 18 v26 l-18 18 h-26 l-18 -18 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
       <Line d="M82 144 V224" w={5} />
       <Line d="M70 114 h24 M70 126 h16" w={3} />
       <Line d="M160 190 V226 M240 190 V226" w={13} />
@@ -109,7 +118,14 @@ export function PlagueMammoth() {
       <Dot x={230} y={100} r={4} />
       <Line d="M90 200 V226 M150 200 V226 M210 200 V226 M290 200 V226" w={12} />
       {/* Repeat the shape at each listed position. */}
-      {[[60, 40], [100, 24], [150, 40], [210, 30], [260, 44], [320, 30]].map(([x, y], index) => (
+      {[
+        [60, 40],
+        [100, 24],
+        [150, 40],
+        [210, 30],
+        [260, 44],
+        [320, 30],
+      ].map(([x, y], index) => (
         <path key={index} d={`M${x} ${y} q4 -6 8 0 q-4 6 -8 0 Z`} fill="currentColor" />
       ))}
     </Drawing>
@@ -151,7 +167,10 @@ export function MutantHedgehog() {
 export function RadMothMatriarch() {
   return (
     <Drawing label="Drawing of a bus-sized moth hovering above a ruined city, wings spraying glowing dust">
-      <Shape d="M20 224 V160 H50 V224 Z M60 224 V130 H100 V224 Z M310 224 V150 H350 V224 Z M360 224 V170 H390 V224 Z" w={3} />
+      <Shape
+        d="M20 224 V160 H50 V224 Z M60 224 V130 H100 V224 Z M310 224 V150 H350 V224 Z M360 224 V170 H390 V224 Z"
+        w={3}
+      />
       <Shape d="M200 90 C150 30 60 20 20 70 C40 100 90 120 190 116 Z" />
       <Shape d="M200 90 C250 30 340 20 380 70 C360 100 310 120 210 116 Z" />
       <Shape d="M196 110 C170 130 130 150 90 140 C130 110 170 110 196 110 Z" w={4} />

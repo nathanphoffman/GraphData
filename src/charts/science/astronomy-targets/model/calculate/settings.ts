@@ -2,10 +2,38 @@ import type { Aperture, FocalLength, Season, Settings } from "../types";
 
 /** Mid-month sample dates (month, day) for each season. Meteorological seasons. */
 export const SEASONS: Record<Season, { label: string; dates: [number, number][] }> = {
-  spring: { label: "Spring (Mar–May)", dates: [[3, 15], [4, 15], [5, 15]] },
-  summer: { label: "Summer (Jun–Aug)", dates: [[6, 15], [7, 15], [8, 15]] },
-  autumn: { label: "Autumn (Sep–Nov)", dates: [[9, 15], [10, 15], [11, 15]] },
-  winter: { label: "Winter (Dec–Feb)", dates: [[12, 15], [1, 15], [2, 15]] },
+  spring: {
+    label: "Spring (Mar–May)",
+    dates: [
+      [3, 15],
+      [4, 15],
+      [5, 15],
+    ],
+  },
+  summer: {
+    label: "Summer (Jun–Aug)",
+    dates: [
+      [6, 15],
+      [7, 15],
+      [8, 15],
+    ],
+  },
+  autumn: {
+    label: "Autumn (Sep–Nov)",
+    dates: [
+      [9, 15],
+      [10, 15],
+      [11, 15],
+    ],
+  },
+  winter: {
+    label: "Winter (Dec–Feb)",
+    dates: [
+      [12, 15],
+      [1, 15],
+      [2, 15],
+    ],
+  },
 };
 
 /** Typical true field of view in arcminutes for each focal length class. */

@@ -1,10 +1,11 @@
 import type { Target } from "../types";
 import { clamp } from "./sky";
+
+export * from "./brightness";
+export * from "./schedule";
+export * from "./scoring";
 export * from "./settings";
 export * from "./sky";
-export * from "./brightness";
-export * from "./scoring";
-export * from "./schedule";
 
 /** Apparent size as text: "point", arcseconds under 1′, or arcminutes. */
 export function formatSize(major: number, minor: number): string {
@@ -32,7 +33,8 @@ const NAKED_EYE_LIMIT = [7.6, 7.1, 6.6, 6.2, 5.6, 5.1, 4.6, 4.1, 4.0];
 export function isNakedEye(target: Target, bortle: number): boolean {
   const pos = clamp(bortle, 1, 9) - 1;
   const lowest = Math.floor(pos);
-  const limit = NAKED_EYE_LIMIT[lowest] + (NAKED_EYE_LIMIT[Math.min(8, lowest + 1)] - NAKED_EYE_LIMIT[lowest]) * (pos - lowest);
+  const limit =
+    NAKED_EYE_LIMIT[lowest] + (NAKED_EYE_LIMIT[Math.min(8, lowest + 1)] - NAKED_EYE_LIMIT[lowest]) * (pos - lowest);
 
   return target.type === "Star" && target.magnitude <= limit - 1.5;
 }

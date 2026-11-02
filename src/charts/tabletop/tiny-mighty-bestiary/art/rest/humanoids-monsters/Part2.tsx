@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -97,7 +97,10 @@ export function BrassWarlord() {
       <Line d="M376 140 L396 120" w={4} />
       {/* Repeat the shape at each listed position. */}
       {[26, 52].map((xPos) => (
-        <g key={xPos}><Shape d={`M${xPos} 170 h18 v30 h-18 Z`} w={3} /><Shape d={`M${xPos + 2} 150 h14 v20 h-14 Z`} w={3} /></g>
+        <g key={xPos}>
+          <Shape d={`M${xPos} 170 h18 v30 h-18 Z`} w={3} />
+          <Shape d={`M${xPos + 2} 150 h14 v20 h-14 Z`} w={3} />
+        </g>
       ))}
     </Drawing>
   );

@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { HoundBody } from "./Part1";
 
 const card = CARD_COLOR;
@@ -64,7 +64,10 @@ export function GraveyardHound() {
       <g transform="translate(-10 4)">
         <HoundBody eye="ring" />
       </g>
-      <Line d="M30 70 V224 M80 64 V224 M130 70 V224 M180 64 V224 M230 70 V224 M280 64 V224 M330 70 V224 M380 64 V224" w={4} />
+      <Line
+        d="M30 70 V224 M80 64 V224 M130 70 V224 M180 64 V224 M230 70 V224 M280 64 V224 M330 70 V224 M380 64 V224"
+        w={4}
+      />
       <Solid d="M30 70 l-5 -12 h10 Z M80 64 l-5 -12 h10 Z M130 70 l-5 -12 h10 Z M180 64 l-5 -12 h10 Z M230 70 l-5 -12 h10 Z M280 64 l-5 -12 h10 Z M330 70 l-5 -12 h10 Z M380 64 l-5 -12 h10 Z" />
       <Line d="M20 100 H390 M20 190 H390" w={4} />
     </Drawing>
@@ -77,7 +80,11 @@ export function HellhoundStalker() {
       <g transform="translate(-20 0)">
         <HoundBody eye="ring" />
       </g>
-      <Line d="M110 100 q10 -14 0 -26 q-8 -12 6 -24 M160 96 q12 -14 0 -28 M210 100 q10 -12 2 -26 M260 90 q8 -10 2 -20" w={3} dash="3 6" />
+      <Line
+        d="M110 100 q10 -14 0 -26 q-8 -12 6 -24 M160 96 q12 -14 0 -28 M210 100 q10 -12 2 -26 M260 90 q8 -10 2 -20"
+        w={3}
+        dash="3 6"
+      />
       <Line d="M280 106 L296 100 M296 114 L312 108" w={3} />
       <Shape d="M300 214 q-8 -4 -6 -12 q8 -6 14 2 q2 8 -8 10 Z" w={3} />
       <Shape d="M340 224 q-8 -4 -6 -12 q8 -6 14 2 q2 8 -8 10 Z" w={3} />

@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { averageNetN, burdenScore, formatTechLines, netN, parseTechLines } from "../../../src/charts/tech/top-rankings/languageBurden";
+import {
+  averageNetN,
+  burdenScore,
+  formatTechLines,
+  netN,
+  parseTechLines,
+} from "../../../src/charts/tech/top-rankings/languageBurden";
+
 import { maintenance, nFactor } from "../../../src/charts/tech/top-rankings/maintenance";
 
 describe("burdenScore", () => {
@@ -15,7 +22,7 @@ describe("burdenScore", () => {
 
 describe("netN", () => {
   it("is quality over the burden score, minus 0.25", () => {
-    expect(netN("Deor", 0.75)).toBeCloseTo(0.75 / (1.33 ** 0.8) - 0.25, 9);
+    expect(netN("Deor", 0.75)).toBeCloseTo(0.75 / 1.33 ** 0.8 - 0.25, 9);
   });
 });
 

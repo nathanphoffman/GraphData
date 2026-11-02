@@ -11,8 +11,26 @@ interface Props {
 }
 
 /** Slider for the divisor, disabled when the chosen mode does not use it. */
-function DivisorSlider({ value, disabled, onChange }: { value: number; disabled?: boolean; onChange: (value: number) => void }) {
-  return <input type="range" min={1} max={DIVISOR_MAX} step={DIVISOR_STEP} disabled={disabled} value={value} onChange={(event) => onChange(Number(event.target.value))} />;
+function DivisorSlider({
+  value,
+  disabled,
+  onChange,
+}: {
+  value: number;
+  disabled?: boolean;
+  onChange: (value: number) => void;
+}) {
+  return (
+    <input
+      type="range"
+      min={1}
+      max={DIVISOR_MAX}
+      step={DIVISOR_STEP}
+      disabled={disabled}
+      value={value}
+      onChange={(event) => onChange(Number(event.target.value))}
+    />
+  );
 }
 
 /** Choose how missing scores are treated: ignored, estimated or set to a floor. */
@@ -22,12 +40,19 @@ function MissingControl({ settings, set: updateSettings }: Pick<Props, "settings
   return (
     <div className="allint-slider">
       <span>Not measured:</span>
-      <select value={settings.missingMode} onChange={(event) => updateSettings({ missingMode: event.target.value as Settings["missingMode"] })}>
+      <select
+        value={settings.missingMode}
+        onChange={(event) => updateSettings({ missingMode: event.target.value as Settings["missingMode"] })}
+      >
         <option value="skip">Skip it (score only what was tested)</option>
         <option value="floor">Count as a low score</option>
         <option value="estimate">Guess from its other scores</option>
       </select>
-      <DivisorSlider value={settings.missingDivisor} disabled={!floor} onChange={(value) => updateSettings({ missingDivisor: value })} />
+      <DivisorSlider
+        value={settings.missingDivisor}
+        disabled={!floor}
+        onChange={(value) => updateSettings({ missingDivisor: value })}
+      />
       <strong>{floor ? `${settings.missingDivisor.toFixed(1)}×` : settings.missingMode}</strong>
     </div>
   );
@@ -44,8 +69,8 @@ export function SettingsPanel({ settings, set: updateSettings, groupCount }: Pro
       </label>
       <MissingControl settings={settings} set={updateSettings} />
       <p className="allint-formula">
-        Score = geometric mean of the {groupCount} group scores. Each group score is the geometric mean of its
-        columns. Click a row to see its columns.
+        Score = geometric mean of the {groupCount} group scores. Each group score is the geometric mean of its columns.
+        Click a row to see its columns.
       </p>
     </div>
   );

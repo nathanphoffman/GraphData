@@ -3,10 +3,7 @@
     "id": "goblin",
     "name": "Goblin",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 2,
     "tier": 0.5,
     "flying": false,
@@ -21,20 +18,13 @@
     ],
     "powers": [],
     "tactics": "Hides first, then jumps the weakest looking player. Flees at half health.",
-    "aliases": [
-      "kobold",
-      "imp",
-      "gremlin"
-    ]
+    "aliases": ["kobold", "imp", "gremlin"]
   },
   {
     "id": "orc",
     "name": "Orc Warrior",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -53,21 +43,13 @@
     ],
     "powers": [],
     "tactics": "Charges the biggest threat. Gets in the way of its friends.",
-    "aliases": [
-      "half-orc",
-      "hobgoblin",
-      "bugbear",
-      "gnoll"
-    ]
+    "aliases": ["half-orc", "hobgoblin", "bugbear", "gnoll"]
   },
   {
     "id": "ogre",
     "name": "Ogre",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -90,19 +72,13 @@
     ],
     "powers": [],
     "tactics": "Swings at whoever is closest. Easy to trick, hard to survive.",
-    "aliases": [
-      "giant",
-      "hill giant",
-      "ettin"
-    ]
+    "aliases": ["giant", "hill giant", "ettin"]
   },
   {
     "id": "troll",
     "name": "Cave Troll",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -131,29 +107,17 @@
       }
     ],
     "tactics": "Fights until hurt, regenerates, fights again. Best solved with fire.",
-    "aliases": [
-      "hill troll",
-      "regeneration",
-      "ogre"
-    ]
+    "aliases": ["hill troll", "regeneration", "ogre"]
   },
   {
     "id": "chrome-trooper",
     "name": "Chrome Trooper",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "trooper",
-      "clone",
-      "soldier",
-      "imperial"
-    ],
+    "aliases": ["trooper", "clone", "soldier", "imperial"],
     "description": "A white-armored soldier in a faceless helmet, bought by the thousand and trained to shoot just past you.",
     "attack": "Blaster rifle",
     "skills": [
@@ -170,19 +134,11 @@
     "id": "fuzz-warrior",
     "name": "Fuzz Warrior",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "teddy bear",
-      "forest",
-      "tribal",
-      "furry"
-    ],
+    "aliases": ["teddy bear", "forest", "tribal", "furry"],
     "description": "A knee-high, fuzzy forest dweller with a spear, a drum and fearsome traps.",
     "attack": "Spear",
     "skills": [
@@ -204,20 +160,11 @@
     "id": "mask-hunter",
     "name": "Mask Hunter",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi",
-      "cyberpunk",
-      "western"
-    ],
+    "themes": ["space-wars", "scifi", "cyberpunk", "western"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "bounty hunter",
-      "space cowboy",
-      "hunter"
-    ],
+    "aliases": ["bounty hunter", "space cowboy", "hunter"],
     "description": "A lone figure in battered armor and a mask, with a jetpack, a wrist rocket and a contract.",
     "attack": "Blaster pistol",
     "skills": [
@@ -250,21 +197,11 @@
     "id": "dusk-monk",
     "name": "Dusk Monk",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "dark lord",
-      "space wizard",
-      "psychic warrior",
-      "energy blade",
-      "dark knight",
-      "mystic warrior"
-    ],
+    "aliases": ["dark lord", "space wizard", "psychic warrior", "energy blade", "dark knight", "mystic warrior"],
     "description": "A hooded warrior in black robes with a humming blade of colored light and a magnetic grip on the world.",
     "attack": "Light-blade",
     "skills": [
@@ -301,17 +238,11 @@
     "id": "grandpa-giant",
     "name": "Grandpa Giant",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 1,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "friendly giant",
-      "hill giant",
-      "gentle giant"
-    ],
+    "aliases": ["friendly giant", "hill giant", "gentle giant"],
     "description": "A towering, bearded giant who bakes pies the size of wagon wheels and apologizes when he steps on things.",
     "attack": "Rolling pin",
     "skills": [
@@ -335,19 +266,11 @@
     "id": "dread-lord",
     "name": "Dread Lord",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 5,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "emperor",
-      "dark lord",
-      "dark side",
-      "space tyrant"
-    ],
+    "aliases": ["emperor", "dark lord", "dark side", "space tyrant"],
     "description": "A towering figure in black armor with a breath mask, a crimson blade and an army that fears him more than the enemy.",
     "attack": "Crimson blade",
     "skills": [
@@ -379,21 +302,11 @@
     "id": "laser-grunt",
     "name": "Laser Grunt",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "guardsman",
-      "conscript",
-      "fodder",
-      "astra militarum",
-      "imperial guard",
-      "lasgun trooper"
-    ],
+    "aliases": ["guardsman", "conscript", "fodder", "astra militarum", "imperial guard", "lasgun trooper"],
     "description": "A helmeted foot soldier in flak armor, one of ten billion, sent forward in waves on the Emperor's say-so.",
     "attack": "Laser rifle",
     "skills": [
@@ -410,10 +323,7 @@
     "id": "star-templar",
     "name": "Star Templar",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -458,10 +368,7 @@
     "id": "iron-marshal",
     "name": "Iron Marshal",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -502,10 +409,7 @@
     "id": "scrapjaw-brawler",
     "name": "Scrapjaw Brawler",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -553,11 +457,7 @@
     "id": "ruin-knight",
     "name": "Ruin Knight",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "scifi", "science-fantasy"],
     "tone": 5,
     "tier": 3,
     "flying": false,
@@ -600,11 +500,7 @@
     "id": "silver-seer",
     "name": "Silver Seer",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "scifi", "science-fantasy"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -657,22 +553,11 @@
     "id": "sky-coalition-warrior",
     "name": "Sky Coalition Warrior",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 2,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "pulse rifle",
-      "xenos",
-      "blue alien",
-      "tau",
-      "tau empire",
-      "fire warrior",
-      "fire caste"
-    ],
+    "aliases": ["pulse rifle", "xenos", "blue alien", "tau", "tau empire", "fire warrior", "fire caste"],
     "description": "A short, blue-skinned soldier in sleek armor who speaks of the greater good and shoots from behind a drone.",
     "attack": "Pulse rifle",
     "skills": [
@@ -698,10 +583,7 @@
     "id": "gear-priest",
     "name": "Gear Priest",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -745,22 +627,11 @@
     "id": "witch-hunter",
     "name": "Witch Hunter",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "scifi", "science-fantasy"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "inquisitor",
-      "witch finder",
-      "puritan",
-      "inquisition",
-      "ordo hereticus",
-      "acolyte"
-    ],
+    "aliases": ["inquisitor", "witch finder", "puritan", "inquisition", "ordo hereticus", "acolyte"],
     "description": "A grim, armored investigator with a flamer, a sealed warrant and the legal right to burn a whole planet.",
     "attack": "Plasma pistol",
     "skills": [
@@ -788,21 +659,11 @@
     "id": "suit-guard",
     "name": "Suit Guard",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 4,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "corpo",
-      "megacorp",
-      "security",
-      "corporate cop",
-      "rent-a-cop",
-      "private security"
-    ],
+    "aliases": ["corpo", "megacorp", "security", "corporate cop", "rent-a-cop", "private security"],
     "description": "A mirror-shaded security officer in a tailored suit who works for whoever signs the paychecks.",
     "attack": "Stun baton",
     "skills": [
@@ -823,22 +684,11 @@
     "id": "street-razor",
     "name": "Street Razor",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 4,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "street samurai",
-      "razorgirl",
-      "razor girl",
-      "cyborg",
-      "samurai",
-      "mercenary",
-      "chrome"
-    ],
+    "aliases": ["street samurai", "razorgirl", "razor girl", "cyborg", "samurai", "mercenary", "chrome"],
     "description": "A neon-lit mercenary with mantis blades, chrome reflexes and a debt to the wrong people.",
     "attack": "Mono-wire",
     "skills": [
@@ -866,21 +716,11 @@
     "id": "wire-jockey",
     "name": "Wire Jockey",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "netrunner",
-      "hacker",
-      "decker",
-      "console cowboy",
-      "cyber hacker",
-      "jack-in"
-    ],
+    "aliases": ["netrunner", "hacker", "decker", "console cowboy", "cyber hacker", "jack-in"],
     "description": "A hunched hacker with a datajack, a laptop on their knees and a smile like a keyboard.",
     "attack": "Taser knuckles",
     "skills": [
@@ -908,21 +748,11 @@
     "id": "chop-shop-doc",
     "name": "Chop-Shop Doc",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "ripperdoc",
-      "street doc",
-      "cyber surgeon",
-      "back-alley doctor",
-      "medic",
-      "implant doctor"
-    ],
+    "aliases": ["ripperdoc", "street doc", "cyber surgeon", "back-alley doctor", "medic", "implant doctor"],
     "description": "A one-eyed, tattooed surgeon who will install anything for cash, no questions, and warranty void if you ask.",
     "attack": "Scalpel",
     "skills": [
@@ -951,23 +781,11 @@
     "id": "chrome-psycho",
     "name": "Chrome Psycho",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "cyberpsycho",
-      "cyberpsychosis",
-      "borg",
-      "maniac",
-      "augmented",
-      "gang",
-      "implant junkie",
-      "berserker"
-    ],
+    "aliases": ["cyberpsycho", "cyberpsychosis", "borg", "maniac", "augmented", "gang", "implant junkie", "berserker"],
     "description": "A twitching, half-metal wreck of a person, drowned in implants and just barely conscious.",
     "attack": "Arm blade",
     "skills": [
@@ -998,21 +816,11 @@
     "id": "quickdraw-outlaw",
     "name": "Quickdraw Outlaw",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "gunslinger",
-      "gunfighter",
-      "cowboy",
-      "bandit",
-      "desperado",
-      "outlaw",
-      "pistolero"
-    ],
+    "aliases": ["gunslinger", "gunfighter", "cowboy", "bandit", "desperado", "outlaw", "pistolero"],
     "description": "A hat-wearing, spur-jingling stranger with two revolvers and a reputation to protect.",
     "attack": "Revolver",
     "skills": [
@@ -1040,21 +848,11 @@
     "id": "bandit-chief",
     "name": "Bandit Chief",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "desperado",
-      "gang leader",
-      "train robber",
-      "outlaw boss",
-      "warlord",
-      "gang",
-      "bandit king"
-    ],
+    "aliases": ["desperado", "gang leader", "train robber", "outlaw boss", "warlord", "gang", "bandit king"],
     "description": "A dust-coated, gold-toothed leader with a gang of ruffians, a fast horse and a train to rob.",
     "attack": "Shotgun",
     "skills": [
@@ -1082,20 +880,11 @@
     "id": "robed-cultist",
     "name": "Robed Cultist",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 4,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "cultist",
-      "acolyte",
-      "worshipper",
-      "follower",
-      "zealot",
-      "sacrificer"
-    ],
+    "aliases": ["cultist", "acolyte", "worshipper", "follower", "zealot", "sacrificer"],
     "description": "A sallow, hooded figure with a ritual knife and a wide, unfocused smile.",
     "attack": "Ritual dagger",
     "skills": [
@@ -1111,21 +900,11 @@
     "id": "cult-magister",
     "name": "Cult Magister",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 5,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "cult leader",
-      "high priest",
-      "occultist",
-      "sorcerer",
-      "summoner",
-      "magus",
-      "dark priest"
-    ],
+    "aliases": ["cult leader", "high priest", "occultist", "sorcerer", "summoner", "magus", "dark priest"],
     "description": "A bald, tattooed leader with hollow eyes who reads from a book that bleeds.",
     "attack": "Sacrificial knife",
     "skills": [
@@ -1152,22 +931,11 @@
     "id": "befuddled-wizard",
     "name": "Befuddled Wizard",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 1,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "wizard",
-      "mage",
-      "merlin",
-      "magic user",
-      "sorcerer",
-      "old wizard",
-      "hedge wizard"
-    ],
+    "aliases": ["wizard", "mage", "merlin", "magic user", "sorcerer", "old wizard", "hedge wizard"],
     "description": "A pointy-hatted, bearded wizard who has lost his glasses, his staff and the name of the spell he's casting.",
     "attack": "Staff whack",
     "skills": [
@@ -1194,22 +962,11 @@
     "id": "roaming-minstrel",
     "name": "Roaming Minstrel",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "bard",
-      "troubadour",
-      "jester",
-      "musician",
-      "singer",
-      "lute",
-      "fool"
-    ],
+    "aliases": ["bard", "troubadour", "jester", "musician", "singer", "lute", "fool"],
     "description": "A feather-hatted traveling singer with a lute, a bag of gossip and a song for every occasion.",
     "attack": "Lute smash",
     "skills": [
@@ -1236,22 +993,11 @@
     "id": "cave-dwarf",
     "name": "Cave Dwarf",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "dwarf",
-      "miner",
-      "forgefolk",
-      "mountain folk",
-      "smith",
-      "gnome",
-      "delver"
-    ],
+    "aliases": ["dwarf", "miner", "forgefolk", "mountain folk", "smith", "gnome", "delver"],
     "description": "A short, thick-bearded miner with a pickaxe, a bad attitude and a lantern that never goes out.",
     "attack": "Pickaxe",
     "skills": [
@@ -1276,21 +1022,11 @@
     "id": "braggart-knight",
     "name": "Braggart Knight",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "sir",
-      "knight errant",
-      "jouster",
-      "windbag",
-      "don quixote",
-      "pompous knight",
-      "tourney knight"
-    ],
+    "aliases": ["sir", "knight errant", "jouster", "windbag", "don quixote", "pompous knight", "tourney knight"],
     "description": "A shining, plumed knight who has never lost a duel, according to him.",
     "attack": "Lance",
     "skills": [
@@ -1311,22 +1047,11 @@
     "id": "errant-knight",
     "name": "Errant Knight",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "knight",
-      "lancelot",
-      "galahad",
-      "paladin",
-      "champion",
-      "questing knight",
-      "crusader"
-    ],
+    "aliases": ["knight", "lancelot", "galahad", "paladin", "champion", "questing knight", "crusader"],
     "description": "A battered, honest knight on a quest for a grail, a lost love or just a decent meal.",
     "attack": "Longsword",
     "skills": [
@@ -1351,21 +1076,11 @@
     "id": "greenwood-archer",
     "name": "Greenwood Archer",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "ranger",
-      "robin hood",
-      "archer",
-      "hunter",
-      "outlaw archer",
-      "woodsman",
-      "bowman"
-    ],
+    "aliases": ["ranger", "robin hood", "archer", "hunter", "outlaw archer", "woodsman", "bowman"],
     "description": "A hooded forest hunter with a longbow, a green cloak and a reputation for stealing from the rich.",
     "attack": "Longbow",
     "skills": [
@@ -1393,22 +1108,11 @@
     "id": "castle-guard",
     "name": "Castle Guard",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "soldier",
-      "guard",
-      "man at arms",
-      "footman",
-      "watchman",
-      "sentry",
-      "town guard",
-      "infantry"
-    ],
+    "aliases": ["soldier", "guard", "man at arms", "footman", "watchman", "sentry", "town guard", "infantry"],
     "description": "A helmeted soldier in a tabard, a spear and a bad feeling about the night shift.",
     "attack": "Spear",
     "skills": [
@@ -1424,22 +1128,11 @@
     "id": "cutpurse",
     "name": "Cutpurse",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "thief",
-      "rogue",
-      "pickpocket",
-      "bandit",
-      "robber",
-      "burglar",
-      "footpad",
-      "highwayman"
-    ],
+    "aliases": ["thief", "rogue", "pickpocket", "bandit", "robber", "burglar", "footpad", "highwayman"],
     "description": "A hooded, quick-fingered street thief who has already lifted your purse and your good mood.",
     "attack": "Dagger",
     "skills": [
@@ -1461,22 +1154,11 @@
     "id": "temple-healer",
     "name": "Temple Healer",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "cleric",
-      "priest",
-      "healer",
-      "monk",
-      "friar",
-      "nun",
-      "druid",
-      "herbalist"
-    ],
+    "aliases": ["cleric", "priest", "healer", "monk", "friar", "nun", "druid", "herbalist"],
     "description": "A robed, soft-spoken healer who keeps bandages in one pocket and a mace in the other.",
     "attack": "Mace",
     "skills": [
@@ -1504,20 +1186,11 @@
     "id": "black-knight",
     "name": "Black Knight",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "dark knight",
-      "mordred",
-      "evil knight",
-      "brigand knight",
-      "tyrant knight",
-      "rogue knight"
-    ],
+    "aliases": ["dark knight", "mordred", "evil knight", "brigand knight", "tyrant knight", "rogue knight"],
     "description": "A knight in black armor and a closed visor who blocks a bridge and challenges all comers.",
     "attack": "Black sword",
     "skills": [
@@ -1538,20 +1211,11 @@
     "id": "scheming-chancellor",
     "name": "Scheming Chancellor",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 4,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "vizier",
-      "advisor",
-      "courtier",
-      "schemer",
-      "royal advisor",
-      "poisoner"
-    ],
+    "aliases": ["vizier", "advisor", "courtier", "schemer", "royal advisor", "poisoner"],
     "description": "A smiling, slender royal advisor with ink-stained fingers and a cup of wine for everyone.",
     "attack": "Hidden knife",
     "skills": [
@@ -1583,22 +1247,11 @@
     "id": "sellsword-captain",
     "name": "Sellsword Captain",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "mercenary",
-      "soldier of fortune",
-      "condottiere",
-      "captain",
-      "hired sword",
-      "free company",
-      "hireling"
-    ],
+    "aliases": ["mercenary", "soldier of fortune", "condottiere", "captain", "hired sword", "free company", "hireling"],
     "description": "A scarred, tired veteran who leads a company of hired blades and fights for whoever pays best.",
     "attack": "Broadsword",
     "skills": [
@@ -1623,22 +1276,11 @@
     "id": "hexmaster",
     "name": "Hexmaster",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "warlock",
-      "dark wizard",
-      "necromancer",
-      "sorcerer",
-      "evil wizard",
-      "dark lord",
-      "hexer"
-    ],
+    "aliases": ["warlock", "dark wizard", "necromancer", "sorcerer", "evil wizard", "dark lord", "hexer"],
     "description": "A gaunt, black-robed sorcerer whose shadow moves a half-second too late.",
     "attack": "Dark staff",
     "skills": [
@@ -1676,22 +1318,11 @@
     "id": "dusk-enchantress",
     "name": "Dusk Enchantress",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "space-jammer"
-    ],
+    "themes": ["fantasy", "space-jammer"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "morgan le fay",
-      "morgana",
-      "sorceress",
-      "witch queen",
-      "enchantress",
-      "dark queen",
-      "evil queen"
-    ],
+    "aliases": ["morgan le fay", "morgana", "sorceress", "witch queen", "enchantress", "dark queen", "evil queen"],
     "description": "A beautiful, soft-voiced sorceress in a gown of shadows who whispers promises that always have a catch.",
     "attack": "Silver dagger",
     "skills": [
@@ -1728,21 +1359,11 @@
     "id": "hooded-headsman",
     "name": "Hooded Headsman",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 5,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "executioner",
-      "hangman",
-      "axeman",
-      "torturer",
-      "dungeon keeper",
-      "jailer",
-      "reaper"
-    ],
+    "aliases": ["executioner", "hangman", "axeman", "torturer", "dungeon keeper", "jailer", "reaper"],
     "description": "A masked, broad-shouldered executioner with a huge axe and an unnerving professional calm.",
     "attack": "Great axe",
     "skills": [
@@ -1774,22 +1395,11 @@
     "id": "iron-warlord",
     "name": "Iron Warlord",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 5,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "warlord",
-      "tyrant",
-      "conqueror",
-      "king",
-      "saxon",
-      "invader",
-      "raider king",
-      "dark king"
-    ],
+    "aliases": ["warlord", "tyrant", "conqueror", "king", "saxon", "invader", "raider king", "dark king"],
     "description": "A scar-faced conqueror in iron armor with a war band of thousands and not a hint of mercy.",
     "attack": "War axe",
     "skills": [
@@ -1821,22 +1431,11 @@
     "id": "neon-busker",
     "name": "Neon Busker",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "street musician",
-      "performer",
-      "dj",
-      "streamer",
-      "influencer",
-      "busker",
-      "street artist"
-    ],
+    "aliases": ["street musician", "performer", "dj", "streamer", "influencer", "busker", "street artist"],
     "description": "An LED-covered street performer with a glowing guitar and a thousand followers on the feed.",
     "attack": "Guitar swing",
     "skills": [
@@ -1856,22 +1455,11 @@
     "id": "gig-courier",
     "name": "Gig Courier",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 2,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "courier",
-      "delivery",
-      "skater",
-      "rollerblader",
-      "messenger",
-      "runner",
-      "delivery rider"
-    ],
+    "aliases": ["courier", "delivery", "skater", "rollerblader", "messenger", "runner", "delivery rider"],
     "description": "A hoverboard-riding delivery runner with a backpack of questionable parcels and no time for you.",
     "attack": "Parcel whack",
     "skills": [
@@ -1896,21 +1484,11 @@
     "id": "organ-broker",
     "name": "Organ Broker",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 5,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "harvester",
-      "black market",
-      "body snatcher",
-      "organ thief",
-      "ripper",
-      "flesh peddler"
-    ],
+    "aliases": ["harvester", "black market", "body snatcher", "organ thief", "ripper", "flesh peddler"],
     "description": "A smiling, immaculate dealer with a cooler, a scalpel and a long list of customers.",
     "attack": "Scalpel",
     "skills": [
@@ -1942,22 +1520,11 @@
     "id": "megacorp-chairman",
     "name": "Megacorp Chairman",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk",
-      "scifi"
-    ],
+    "themes": ["cyberpunk", "scifi"],
     "tone": 5,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "ceo",
-      "corporate overlord",
-      "executive",
-      "chairman",
-      "boss",
-      "board member",
-      "tycoon"
-    ],
+    "aliases": ["ceo", "corporate overlord", "executive", "chairman", "boss", "board member", "tycoon"],
     "description": "A pale, immaculate billionaire with a hundred floors, a thousand lawyers and an opinion about everything.",
     "attack": "Pen knife",
     "skills": [
@@ -1994,21 +1561,11 @@
     "id": "doomsday-preacher",
     "name": "Doomsday Preacher",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 5,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "preacher",
-      "cult leader",
-      "doomsday",
-      "reverend",
-      "tent revival",
-      "prophet",
-      "hellfire preacher"
-    ],
+    "aliases": ["preacher", "cult leader", "doomsday", "reverend", "tent revival", "prophet", "hellfire preacher"],
     "description": "A hollow-eyed revival preacher with a battered Bible, a cough and a very specific end date.",
     "attack": "Cane",
     "skills": [
@@ -2036,20 +1593,11 @@
     "id": "saloon-brawler",
     "name": "Saloon Brawler",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "drunk",
-      "cowboy brawler",
-      "barfly",
-      "ruffian",
-      "bar fighter",
-      "rowdy"
-    ],
+    "aliases": ["drunk", "cowboy brawler", "barfly", "ruffian", "bar fighter", "rowdy"],
     "description": "A bearded, hat-less drunk who got thrown out of three saloons this week and has his eye on your hat.",
     "attack": "Beer mug",
     "skills": [
@@ -2074,21 +1622,11 @@
     "id": "scrap-gremlin",
     "name": "Scrap Gremlin",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "gremlin",
-      "goblin",
-      "tinker",
-      "gretchin",
-      "grot",
-      "ork"
-    ],
+    "aliases": ["gremlin", "goblin", "tinker", "gretchin", "grot", "ork"],
     "description": "A knee-high, giggling, green runt with a wrench who 'fixes' things by hitting them.",
     "attack": "Wrench",
     "skills": [
@@ -2109,21 +1647,11 @@
     "id": "eager-cultist",
     "name": "Eager Cultist",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "new cultist",
-      "intern",
-      "cult gopher",
-      "cult newbie",
-      "volunteer",
-      "apprentice",
-      "initiate"
-    ],
+    "aliases": ["new cultist", "intern", "cult gopher", "cult newbie", "volunteer", "apprentice", "initiate"],
     "description": "A cheerful new cultist in an oversized robe with a clipboard, a nametag and a lot of enthusiasm.",
     "attack": "Clipboard",
     "skills": [
@@ -2144,21 +1672,11 @@
     "id": "curio-dealer",
     "name": "Curio Dealer",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "antiquarian",
-      "collector",
-      "shopkeeper",
-      "curio shop",
-      "pawnbroker",
-      "antique dealer",
-      "relic dealer"
-    ],
+    "aliases": ["antiquarian", "collector", "shopkeeper", "curio shop", "pawnbroker", "antique dealer", "relic dealer"],
     "description": "A quiet, bespectacled shopkeeper with a cluttered store, a wooden box and a suspiciously good price for you.",
     "attack": "Cane",
     "skills": [
@@ -2187,20 +1705,11 @@
     "id": "sand-raider",
     "name": "Sand Raider",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 3,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "desert raider",
-      "nomad",
-      "raider",
-      "bandit",
-      "desert warrior"
-    ],
+    "aliases": ["desert raider", "nomad", "raider", "bandit", "desert warrior"],
     "description": "A masked, robed desert nomad with a hooked staff, a rifle and a strong dislike for strangers.",
     "attack": "Hooked staff",
     "skills": [
@@ -2221,22 +1730,11 @@
     "id": "cantina-smuggler",
     "name": "Cantina Smuggler",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi",
-      "space-jammer"
-    ],
+    "themes": ["space-wars", "scifi", "space-jammer"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "smuggler",
-      "pirate",
-      "scoundrel",
-      "rogue",
-      "space pirate",
-      "cargo hauler"
-    ],
+    "aliases": ["smuggler", "pirate", "scoundrel", "rogue", "space pirate", "cargo hauler"],
     "description": "A smirking, vest-wearing pilot with a fast ship, a faster mouth and a very big debt.",
     "attack": "Blaster pistol",
     "skills": [
@@ -2264,22 +1762,11 @@
     "id": "arena-champion",
     "name": "Arena Champion",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 3,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "gladiator",
-      "champion",
-      "pit fighter",
-      "arena fighter",
-      "duelist",
-      "slave warrior",
-      "bounty brawler"
-    ],
+    "aliases": ["gladiator", "champion", "pit fighter", "arena fighter", "duelist", "slave warrior", "bounty brawler"],
     "description": "A scarred, undefeated pit fighter in armor made from the trophies of a hundred matches.",
     "attack": "Vibro-blade",
     "skills": [
@@ -2304,21 +1791,11 @@
     "id": "rogue-star-ace",
     "name": "Rogue Star Ace",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 2,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "pilot",
-      "starfighter",
-      "ace",
-      "fighter pilot",
-      "dogfighter",
-      "hotshot"
-    ],
+    "aliases": ["pilot", "starfighter", "ace", "fighter pilot", "dogfighter", "hotshot"],
     "description": "A cocky, orange-jumpsuited fighter pilot with a fast ship and a lot of kills.",
     "attack": "Pistol",
     "skills": [
@@ -2350,20 +1827,11 @@
     "id": "toll-troll",
     "name": "Toll Troll",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 2,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "bridge troll",
-      "toll keeper",
-      "troll",
-      "tollbooth",
-      "toll collector",
-      "gatekeeper"
-    ],
+    "aliases": ["bridge troll", "toll keeper", "troll", "tollbooth", "toll collector", "gatekeeper"],
     "description": "A lumpy, moss-bearded troll with a fancy hat, a ledger and a bridge that nobody crosses for free.",
     "attack": "Toll club",
     "skills": [
@@ -2388,22 +1856,11 @@
     "id": "hollow-thrall",
     "name": "Hollow Thrall",
     "type": "humanoid",
-    "themes": [
-      "fantasy",
-      "occult-noir"
-    ],
+    "themes": ["fantasy", "occult-noir"],
     "tone": 5,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "thrall",
-      "zombie",
-      "mindless servant",
-      "puppet",
-      "slave",
-      "mind controlled",
-      "husk"
-    ],
+    "aliases": ["thrall", "zombie", "mindless servant", "puppet", "slave", "mind controlled", "husk"],
     "description": "A pale, glassy-eyed servant who stumbles forward, mutters a name and never blinks.",
     "attack": "Fists",
     "skills": [
@@ -2423,9 +1880,7 @@
     "id": "legendary-champion",
     "name": "Legendary Champion",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 5,
     "flying": false,
@@ -2471,21 +1926,11 @@
     "id": "frost-king",
     "name": "Frost King",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 4,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "ice king",
-      "giant king",
-      "jotun",
-      "frost giant",
-      "winter lord",
-      "winter king",
-      "ice giant"
-    ],
+    "aliases": ["ice king", "giant king", "jotun", "frost giant", "winter lord", "winter king", "ice giant"],
     "description": "A fifteen-foot, ice-bearded giant on a throne of glaciers who rules a hall of frost and a feast that never ends.",
     "attack": "Ice axe",
     "skills": [
@@ -2517,22 +1962,11 @@
     "id": "deckhand-scallywag",
     "name": "Deckhand Scallywag",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "pirate",
-      "sailor",
-      "swabbie",
-      "deckhand",
-      "buccaneer",
-      "scallywag",
-      "crewman"
-    ],
+    "aliases": ["pirate", "sailor", "swabbie", "deckhand", "buccaneer", "scallywag", "crewman"],
     "description": "A barefoot, gap-toothed sailor with a mop, a cutlass and a lot of opinions about the cook.",
     "attack": "Cutlass",
     "skills": [
@@ -2552,21 +1986,11 @@
     "id": "press-ganger",
     "name": "Press Ganger",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 4,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "crimper",
-      "kidnapper",
-      "shanghai",
-      "recruiter",
-      "slaver",
-      "sailor snatcher"
-    ],
+    "aliases": ["crimper", "kidnapper", "shanghai", "recruiter", "slaver", "sailor snatcher"],
     "description": "A burly dockside thug with a club, a bag and a very friendly offer of a drink.",
     "attack": "Club",
     "skills": [
@@ -2587,22 +2011,11 @@
     "id": "cutlass-corsair",
     "name": "Cutlass Corsair",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "privateer",
-      "buccaneer",
-      "swashbuckler",
-      "pirate",
-      "corsair",
-      "sea raider",
-      "raider"
-    ],
+    "aliases": ["privateer", "buccaneer", "swashbuckler", "pirate", "corsair", "sea raider", "raider"],
     "description": "A coat-tailed, rope-swinging swashbuckler with a cutlass, a pistol and a jaunty red sash.",
     "attack": "Cutlass",
     "skills": [
@@ -2623,22 +2036,11 @@
     "id": "navy-lieutenant",
     "name": "Navy Lieutenant",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "naval officer",
-      "redcoat",
-      "marine",
-      "captain",
-      "royal navy",
-      "officer",
-      "admiral"
-    ],
+    "aliases": ["naval officer", "redcoat", "marine", "captain", "royal navy", "officer", "admiral"],
     "description": "A crisp, blue-coated naval officer with a sword, a spyglass and an utterly unshakable faith in regulations.",
     "attack": "Officer's sword",
     "skills": [
@@ -2667,10 +2069,7 @@
     "id": "pirate-captain",
     "name": "Pirate Captain",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -2710,22 +2109,11 @@
     "id": "goggled-inventor",
     "name": "Goggled Inventor",
     "type": "humanoid",
-    "themes": [
-      "steampunk",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "space-jammer"],
     "tone": 1,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "inventor",
-      "mad scientist",
-      "tinkerer",
-      "engineer",
-      "gizmo",
-      "crackpot",
-      "professor"
-    ],
+    "aliases": ["inventor", "mad scientist", "tinkerer", "engineer", "gizmo", "crackpot", "professor"],
     "description": "A soot-smeared, goggled inventor with a lab coat, a half-built machine and an enthusiastic, mildly dangerous plan.",
     "attack": "Spanner",
     "skills": [
@@ -2753,22 +2141,11 @@
     "id": "airship-pirate",
     "name": "Airship Pirate",
     "type": "humanoid",
-    "themes": [
-      "steampunk",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "sky pirate",
-      "air pirate",
-      "airship captain",
-      "corsair",
-      "cloud raider",
-      "balloon pirate",
-      "aeronaut"
-    ],
+    "aliases": ["sky pirate", "air pirate", "airship captain", "corsair", "cloud raider", "balloon pirate", "aeronaut"],
     "description": "A goggle-wearing, grapple-gun-swinging raider who boards airships from a patched balloon.",
     "attack": "Cutlass & flintlock",
     "skills": [
@@ -2789,21 +2166,11 @@
     "id": "smog-baron",
     "name": "Smog Baron",
     "type": "humanoid",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 5,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "industrialist",
-      "factory owner",
-      "robber baron",
-      "tycoon",
-      "mill owner",
-      "coal baron",
-      "capitalist"
-    ],
+    "aliases": ["industrialist", "factory owner", "robber baron", "tycoon", "mill owner", "coal baron", "capitalist"],
     "description": "A top-hatted, soot-grey mill owner with a cane, a cough and a factory that belches smoke over a whole town.",
     "attack": "Cane",
     "skills": [
@@ -2835,21 +2202,11 @@
     "id": "junk-scavenger",
     "name": "Junk Scavenger",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "scavenger",
-      "scrapper",
-      "junker",
-      "salvager",
-      "trash picker",
-      "scrap hunter",
-      "gleaner"
-    ],
+    "aliases": ["scavenger", "scrapper", "junker", "salvager", "trash picker", "scrap hunter", "gleaner"],
     "description": "A patched-leather, goggle-wearing scrapper with a pushcart of junk and a keen eye for anything useful.",
     "attack": "Pipe wrench",
     "skills": [
@@ -2870,21 +2227,11 @@
     "id": "wasteland-raider",
     "name": "Wasteland Raider",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "raider",
-      "marauder",
-      "road warrior",
-      "bandit",
-      "scavenger gang",
-      "biker",
-      "wasteland pirate"
-    ],
+    "aliases": ["raider", "marauder", "road warrior", "bandit", "scavenger gang", "biker", "wasteland pirate"],
     "description": "A spiked-armored, face-painted road thug on a patched-up motorbike with a crowbar and a grudge.",
     "attack": "Crowbar",
     "skills": [
@@ -2909,21 +2256,11 @@
     "id": "wasteland-merchant",
     "name": "Wasteland Merchant",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 2,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "trader",
-      "caravan",
-      "merchant",
-      "peddler",
-      "shopkeeper",
-      "scrap dealer",
-      "vendor"
-    ],
+    "aliases": ["trader", "caravan", "merchant", "peddler", "shopkeeper", "scrap dealer", "vendor"],
     "description": "A bundled-up trader with a pack-mule, a cart of wares and a firm 'no refunds' policy.",
     "attack": "Rusty pistol",
     "skills": [
@@ -2951,20 +2288,11 @@
     "id": "glow-husk",
     "name": "Glow Husk",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 5,
     "tier": 0.5,
     "flying": false,
-    "aliases": [
-      "feral ghoul",
-      "irradiated",
-      "zombie",
-      "glowing one",
-      "rad ghoul",
-      "irradiated husk"
-    ],
+    "aliases": ["feral ghoul", "irradiated", "zombie", "glowing one", "rad ghoul", "irradiated husk"],
     "description": "A bloated, sickly-green, once-human shambler that glows in the dark and groans for water.",
     "attack": "Claws",
     "skills": [
@@ -2988,21 +2316,11 @@
     "id": "mutant-brute",
     "name": "Mutant Brute",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "mutant",
-      "super mutant",
-      "hulk",
-      "freak",
-      "brute",
-      "big boy",
-      "twisted"
-    ],
+    "aliases": ["mutant", "super mutant", "hulk", "freak", "brute", "big boy", "twisted"],
     "description": "A green-gray, ten-foot, muscle-bound mutant dragging a street sign and screaming for a fight.",
     "attack": "Street sign",
     "skills": [
@@ -3026,21 +2344,11 @@
     "id": "wasteland-warlord",
     "name": "Wasteland Warlord",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 5,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "warlord",
-      "road king",
-      "boss",
-      "chieftain",
-      "road lord",
-      "bandit king",
-      "wasteland king"
-    ],
+    "aliases": ["warlord", "road king", "boss", "chieftain", "road lord", "bandit king", "wasteland king"],
     "description": "A scarred, skull-masked king of the wastes with a war-rig, a hundred raiders and a bad temper.",
     "attack": "Chain axe",
     "skills": [
@@ -3068,21 +2376,11 @@
     "id": "bottlecap-hermit",
     "name": "Bottlecap Hermit",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
-    "aliases": [
-      "hermit",
-      "cap collector",
-      "junk hoarder",
-      "crazy old man",
-      "bottlecap",
-      "wanderer",
-      "packrat"
-    ],
+    "aliases": ["hermit", "cap collector", "junk hoarder", "crazy old man", "bottlecap", "wanderer", "packrat"],
     "description": "A bearded, jingly old hermit in a coat of sewn-on bottle caps who is absolutely certain they are currency.",
     "attack": "Rusty fork",
     "skills": [
@@ -3103,19 +2401,11 @@
     "id": "back-alley-surgeon",
     "name": "Back Alley Surgeon",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 3,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "ripperdoc",
-      "street doc",
-      "cyber doctor",
-      "chop shop doc",
-      "mad doctor"
-    ],
+    "aliases": ["ripperdoc", "street doc", "cyber doctor", "chop shop doc", "mad doctor"],
     "description": "A cheerful street doctor with six arms, all of them borrowed.",
     "attack": "Scalpel",
     "skills": [
@@ -3146,20 +2436,11 @@
     "id": "tea-room-medium",
     "name": "Tea Room Medium",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 2,
     "tier": 1,
     "flying": false,
-    "aliases": [
-      "medium",
-      "seer",
-      "fortune teller",
-      "psychic",
-      "spiritualist",
-      "witch"
-    ],
+    "aliases": ["medium", "seer", "fortune teller", "psychic", "spiritualist", "witch"],
     "description": "A kindly widow who runs a seance on Thursdays and hosts something else on Fridays.",
     "attack": "Teacup Throw",
     "skills": [
@@ -3190,20 +2471,11 @@
     "id": "grave-clerk",
     "name": "Grave Clerk",
     "type": "humanoid",
-    "themes": [
-      "occult-noir",
-      "fantasy"
-    ],
+    "themes": ["occult-noir", "fantasy"],
     "tone": 4,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "undertaker",
-      "clerk",
-      "necromancer",
-      "mortician",
-      "death clerk"
-    ],
+    "aliases": ["undertaker", "clerk", "necromancer", "mortician", "death clerk"],
     "description": "A thin clerk who stamps death notices and has never been wrong about a date.",
     "attack": "Letter Opener",
     "skills": [
@@ -3234,9 +2506,7 @@
     "id": "fleet-admiral",
     "name": "Fleet Admiral",
     "type": "humanoid",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 4,
     "tier": 6,
     "flying": false,
@@ -3261,21 +2531,13 @@
       }
     ],
     "tactics": "Stays on the bridge or a command shuttle. Calls in reinforcements each turn.",
-    "aliases": [
-      "warlord",
-      "imperial officer",
-      "commander",
-      "emperor"
-    ]
+    "aliases": ["warlord", "imperial officer", "commander", "emperor"]
   },
   {
     "id": "apprentice-tinker",
     "name": "Apprentice Tinker",
     "type": "humanoid",
-    "themes": [
-      "steampunk",
-      "space-jammer"
-    ],
+    "themes": ["steampunk", "space-jammer"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
@@ -3293,20 +2555,13 @@
     ],
     "powers": [],
     "tactics": "Hides behind a half-built machine and throws spare parts.",
-    "aliases": [
-      "mechanic",
-      "engineer",
-      "inventor",
-      "kid"
-    ]
+    "aliases": ["mechanic", "engineer", "inventor", "kid"]
   },
   {
     "id": "industrial-magnate",
     "name": "Industrial Magnate",
     "type": "humanoid",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -3331,20 +2586,13 @@
       }
     ],
     "tactics": "Never fights alone. Offers a bribe, then calls the guards.",
-    "aliases": [
-      "tycoon",
-      "robber baron",
-      "industrialist",
-      "factory owner"
-    ]
+    "aliases": ["tycoon", "robber baron", "industrialist", "factory owner"]
   },
   {
     "id": "greenhorn-deputy",
     "name": "Greenhorn Deputy",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 1,
     "tier": 0.25,
     "flying": false,
@@ -3362,20 +2610,13 @@
     ],
     "powers": [],
     "tactics": "Shouts a lot. Shoots wild when startled.",
-    "aliases": [
-      "rookie",
-      "lawman",
-      "kid",
-      "sheriff's helper"
-    ]
+    "aliases": ["rookie", "lawman", "kid", "sheriff's helper"]
   },
   {
     "id": "railroad-baron",
     "name": "Railroad Baron",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -3400,20 +2641,13 @@
       }
     ],
     "tactics": "Stands behind his train. Offers a fortune to anyone who walks away.",
-    "aliases": [
-      "tycoon",
-      "cattle baron",
-      "land baron",
-      "mogul"
-    ]
+    "aliases": ["tycoon", "cattle baron", "land baron", "mogul"]
   },
   {
     "id": "syndicate-enforcer",
     "name": "Syndicate Enforcer",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -3431,21 +2665,13 @@
     ],
     "powers": [],
     "tactics": "Walks through the door and lets the crew work. Pulls his own iron only when threatened.",
-    "aliases": [
-      "gang boss",
-      "yakuza",
-      "street boss",
-      "cyber thug"
-    ]
+    "aliases": ["gang boss", "yakuza", "street boss", "cyber thug"]
   },
   {
     "id": "starforged-squire",
     "name": "Starforged Squire",
     "type": "humanoid",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -3463,21 +2689,13 @@
     ],
     "powers": [],
     "tactics": "Charges the first enemy it sees. Flinches if its knight is hurt.",
-    "aliases": [
-      "squire",
-      "padawan",
-      "apprentice",
-      "page"
-    ]
+    "aliases": ["squire", "padawan", "apprentice", "page"]
   },
   {
     "id": "astral-archmage",
     "name": "Astral Archmage",
     "type": "humanoid",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -3502,20 +2720,13 @@
       }
     ],
     "tactics": "Stays out of reach and casts from range. Tries to turn the players' own light against them.",
-    "aliases": [
-      "wizard",
-      "sorcerer",
-      "star mage",
-      "archmage"
-    ]
+    "aliases": ["wizard", "sorcerer", "star mage", "archmage"]
   },
   {
     "id": "iron-crusade-lord",
     "name": "Iron Crusade Lord",
     "type": "humanoid",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 5,
     "tier": 5,
     "flying": false,
@@ -3540,23 +2751,13 @@
       }
     ],
     "tactics": "Charges the leader of the group. Rallies lesser troops with a shout.",
-    "aliases": [
-      "space marine",
-      "chapter master",
-      "warlord",
-      "crusader",
-      "astartes",
-      "adeptus astartes",
-      "primarch"
-    ]
+    "aliases": ["space marine", "chapter master", "warlord", "crusader", "astartes", "adeptus astartes", "primarch"]
   },
   {
     "id": "outlaw-king",
     "name": "Outlaw King",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -3581,20 +2782,13 @@
       }
     ],
     "tactics": "Never fights alone. Sends his crew first and picks off the hurt.",
-    "aliases": [
-      "bandit king",
-      "gang boss",
-      "desperado",
-      "outlaw"
-    ]
+    "aliases": ["bandit king", "gang boss", "desperado", "outlaw"]
   },
   {
     "id": "cult-inquisitor",
     "name": "Cult Inquisitor",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -3612,20 +2806,13 @@
     ],
     "powers": [],
     "tactics": "Asks questions. Strikes when the answer is wrong.",
-    "aliases": [
-      "inquisitor",
-      "investigator",
-      "cultist",
-      "priest"
-    ]
+    "aliases": ["inquisitor", "investigator", "cultist", "priest"]
   },
   {
     "id": "midnight-kingpin",
     "name": "Midnight Kingpin",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -3650,21 +2837,13 @@
       }
     ],
     "tactics": "Sits at a long table with a dozen bodyguards. Offers a bargain with a price in blood.",
-    "aliases": [
-      "crime boss",
-      "don",
-      "occultist",
-      "kingpin"
-    ]
+    "aliases": ["crime boss", "don", "occultist", "kingpin"]
   },
   {
     "id": "royal-marine-sergeant",
     "name": "Royal Marine Sergeant",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -3682,21 +2861,13 @@
     ],
     "powers": [],
     "tactics": "Shouts orders. Forms a firing line, then a bayonet charge.",
-    "aliases": [
-      "marine",
-      "soldier",
-      "sergeant",
-      "redcoat"
-    ]
+    "aliases": ["marine", "soldier", "sergeant", "redcoat"]
   },
   {
     "id": "pirate-king",
     "name": "Pirate King",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -3721,20 +2892,13 @@
       }
     ],
     "tactics": "Boards last, after his crew has done the work. Offers a share for anyone who joins.",
-    "aliases": [
-      "pirate lord",
-      "corsair king",
-      "captain",
-      "buccaneer king"
-    ]
+    "aliases": ["pirate lord", "corsair king", "captain", "buccaneer king"]
   },
   {
     "id": "brass-warlord",
     "name": "Brass Warlord",
     "type": "humanoid",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -3759,20 +2923,13 @@
       }
     ],
     "tactics": "Marches with a squad of clockwork soldiers. Orders them to focus on the weakest.",
-    "aliases": [
-      "general",
-      "warlord",
-      "iron general",
-      "commander"
-    ]
+    "aliases": ["general", "warlord", "iron general", "commander"]
   },
   {
     "id": "vault-tyrant",
     "name": "Vault Tyrant",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -3797,20 +2954,13 @@
       }
     ],
     "tactics": "Sits at the vault door with a dozen guards. Offers safety for service.",
-    "aliases": [
-      "overseer",
-      "vault boss",
-      "tyrant",
-      "warden"
-    ]
+    "aliases": ["overseer", "vault boss", "tyrant", "warden"]
   },
   {
     "id": "rim-scrapper",
     "name": "Rim Scrapper",
     "type": "humanoid",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 3,
     "tier": 0.25,
     "flying": false,
@@ -3835,20 +2985,13 @@
       }
     ],
     "tactics": "Fires from behind cover and bolts for the nearest ship.",
-    "aliases": [
-      "scavenger",
-      "pilot",
-      "kid",
-      "smuggler"
-    ]
+    "aliases": ["scavenger", "pilot", "kid", "smuggler"]
   },
   {
     "id": "chimney-urchin",
     "name": "Chimney Urchin",
     "type": "humanoid",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -3873,20 +3016,13 @@
       }
     ],
     "tactics": "Hides in the flue and picks off items from afar.",
-    "aliases": [
-      "urchin",
-      "sweep",
-      "kid",
-      "thief"
-    ]
+    "aliases": ["urchin", "sweep", "kid", "thief"]
   },
   {
     "id": "scrap-kid",
     "name": "Scrap Kid",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -3911,20 +3047,13 @@
       }
     ],
     "tactics": "Hides on a roof and shoots from cover. Runs if hit.",
-    "aliases": [
-      "scavenger",
-      "kid",
-      "urchin",
-      "survivor"
-    ]
+    "aliases": ["scavenger", "kid", "urchin", "survivor"]
   },
   {
     "id": "shadow-emperor",
     "name": "Shadow Emperor",
     "type": "humanoid",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 5,
     "tier": 6,
     "flying": false,
@@ -3955,20 +3084,13 @@
       }
     ],
     "tactics": "Orders his guards first. Strikes from the shadows once they fall.",
-    "aliases": [
-      "emperor",
-      "dark lord",
-      "sith",
-      "tyrant"
-    ]
+    "aliases": ["emperor", "dark lord", "sith", "tyrant"]
   },
   {
     "id": "cyber-samurai-champion",
     "name": "Cyber-Samurai Champion",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 4,
     "tier": 4,
     "flying": false,
@@ -3999,20 +3121,13 @@
       }
     ],
     "tactics": "Dances through the crowd. Targets the one with the best gear.",
-    "aliases": [
-      "samurai",
-      "blade master",
-      "cyber duelist",
-      "assassin"
-    ]
+    "aliases": ["samurai", "blade master", "cyber duelist", "assassin"]
   },
   {
     "id": "bumbling-guardsman",
     "name": "Bumbling Guardsman",
     "type": "humanoid",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
@@ -4030,23 +3145,13 @@
     ],
     "powers": [],
     "tactics": "Shoots at the sky. Surrenders when asked politely.",
-    "aliases": [
-      "recruit",
-      "guardsman",
-      "trooper",
-      "grunt",
-      "astra militarum",
-      "imperial guard",
-      "conscript"
-    ]
+    "aliases": ["recruit", "guardsman", "trooper", "grunt", "astra militarum", "imperial guard", "conscript"]
   },
   {
     "id": "nosy-landlady",
     "name": "Nosy Landlady",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -4064,20 +3169,13 @@
     ],
     "powers": [],
     "tactics": "Asks questions at the door. Hits anyone sneaking out without paying rent.",
-    "aliases": [
-      "landlady",
-      "neighbor",
-      "busybody",
-      "old woman"
-    ]
+    "aliases": ["landlady", "neighbor", "busybody", "old woman"]
   },
   {
     "id": "tinkering-granny",
     "name": "Tinkering Granny",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 1,
     "tier": 0.5,
     "flying": false,
@@ -4095,20 +3193,13 @@
     ],
     "powers": [],
     "tactics": "Offers tea. Smacks players who touch her gadgets.",
-    "aliases": [
-      "granny",
-      "old woman",
-      "hermit",
-      "tinkerer"
-    ]
+    "aliases": ["granny", "old woman", "hermit", "tinkerer"]
   },
   {
     "id": "field-medic-droid",
     "name": "Field-Medic Droid",
     "type": "humanoid",
-    "themes": [
-      "space-wars"
-    ],
+    "themes": ["space-wars"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -4133,20 +3224,13 @@
       }
     ],
     "tactics": "Heals the toughest friend first, then flees.",
-    "aliases": [
-      "medic",
-      "droid",
-      "doc bot",
-      "medical droid"
-    ]
+    "aliases": ["medic", "droid", "doc bot", "medical droid"]
   },
   {
     "id": "frontier-doc",
     "name": "Frontier Doc",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -4171,20 +3255,13 @@
       }
     ],
     "tactics": "Patches up outlaws for a fee. Does not like to be shot.",
-    "aliases": [
-      "doctor",
-      "sawbones",
-      "medicine man",
-      "quack"
-    ]
+    "aliases": ["doctor", "sawbones", "medicine man", "quack"]
   },
   {
     "id": "parish-exorcist",
     "name": "Parish Exorcist",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 2,
     "flying": false,
@@ -4209,21 +3286,13 @@
       }
     ],
     "tactics": "Chants and sprinkles holy water. Heals the possessed.",
-    "aliases": [
-      "priest",
-      "exorcist",
-      "cleric",
-      "clergy"
-    ]
+    "aliases": ["priest", "exorcist", "cleric", "clergy"]
   },
   {
     "id": "ships-surgeon",
     "name": "Ship's Surgeon",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -4248,20 +3317,13 @@
       }
     ],
     "tactics": "Hides in the cockpit during battle. Patches up the wounded in the sick bay.",
-    "aliases": [
-      "surgeon",
-      "ship's doctor",
-      "sawbones",
-      "medic"
-    ]
+    "aliases": ["surgeon", "ship's doctor", "sawbones", "medic"]
   },
   {
     "id": "boilerhouse-mender",
     "name": "Boilerhouse Mender",
     "type": "humanoid",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -4286,21 +3348,13 @@
       }
     ],
     "tactics": "Fixes the biggest machine first, then the most broken person.",
-    "aliases": [
-      "mender",
-      "engineer",
-      "doctor",
-      "mechanic"
-    ]
+    "aliases": ["mender", "engineer", "doctor", "mechanic"]
   },
   {
     "id": "star-lantern-healer",
     "name": "Star Lantern Healer",
     "type": "humanoid",
-    "themes": [
-      "science-fantasy",
-      "space-jammer"
-    ],
+    "themes": ["science-fantasy", "space-jammer"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -4325,20 +3379,13 @@
       }
     ],
     "tactics": "Stands behind the front line and keeps the warriors going.",
-    "aliases": [
-      "healer",
-      "cleric",
-      "star priest",
-      "medic"
-    ]
+    "aliases": ["healer", "cleric", "star priest", "medic"]
   },
   {
     "id": "scrap-nurse",
     "name": "Scrap Nurse",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -4363,20 +3410,13 @@
       }
     ],
     "tactics": "Patches up anyone who pays. Gets mean if cheated.",
-    "aliases": [
-      "nurse",
-      "medic",
-      "healer",
-      "scavenger doc"
-    ]
+    "aliases": ["nurse", "medic", "healer", "scavenger doc"]
   },
   {
     "id": "ship-lord-regent",
     "name": "Ship-Lord Regent",
     "type": "humanoid",
-    "themes": [
-      "scifi"
-    ],
+    "themes": ["scifi"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -4407,20 +3447,13 @@
       }
     ],
     "tactics": "Sits above the combat and issues orders. Uses a captured player as a hostage.",
-    "aliases": [
-      "regent",
-      "ship lord",
-      "admiral",
-      "space noble"
-    ]
+    "aliases": ["regent", "ship lord", "admiral", "space noble"]
   },
   {
     "id": "hull-breaker-grunt",
     "name": "Hull-Breaker Grunt",
     "type": "humanoid",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -4438,24 +3471,13 @@
     ],
     "powers": [],
     "tactics": "Smashes whatever is in front of him. Can be bribed with a snack.",
-    "aliases": [
-      "grunt",
-      "brute",
-      "worker",
-      "ork",
-      "imperial navy",
-      "voidsman",
-      "imperium"
-    ]
+    "aliases": ["grunt", "brute", "worker", "ork", "imperial navy", "voidsman", "imperium"]
   },
   {
     "id": "ironclad-quartermaster",
     "name": "Ironclad Quartermaster",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "space-jammer"
-    ],
+    "themes": ["age-of-sail", "space-jammer"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -4480,20 +3502,13 @@
       }
     ],
     "tactics": "Barks orders. Never stands in front of the guns.",
-    "aliases": [
-      "quartermaster",
-      "first mate",
-      "officer",
-      "pirate"
-    ]
+    "aliases": ["quartermaster", "first mate", "officer", "pirate"]
   },
   {
     "id": "ash-road-preacher",
     "name": "Ash-Road Preacher",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -4518,20 +3533,13 @@
       }
     ],
     "tactics": "Speeds into a group. Calls the flock to attack.",
-    "aliases": [
-      "preacher",
-      "prophet",
-      "road priest",
-      "pilgrim leader"
-    ]
+    "aliases": ["preacher", "prophet", "road priest", "pilgrim leader"]
   },
   {
     "id": "smuggler-sparker",
     "name": "Smuggler Sparker",
     "type": "humanoid",
-    "themes": [
-      "space-hammer"
-    ],
+    "themes": ["space-hammer"],
     "tone": 2,
     "tier": 0.25,
     "flying": false,
@@ -4556,20 +3564,13 @@
       }
     ],
     "tactics": "Hides behind a crate. Swaps parts for favors.",
-    "aliases": [
-      "mechanic",
-      "smuggler",
-      "tinkerer",
-      "grunt"
-    ]
+    "aliases": ["mechanic", "smuggler", "tinkerer", "grunt"]
   },
   {
     "id": "wasteland-gunslinger",
     "name": "Wasteland Gunslinger",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 3,
     "flying": false,
@@ -4587,28 +3588,17 @@
     ],
     "powers": [],
     "tactics": "Calls a duel at dawn. Honors the terms.",
-    "aliases": [
-      "gunslinger",
-      "duelist",
-      "drifter",
-      "outlaw"
-    ]
+    "aliases": ["gunslinger", "duelist", "drifter", "outlaw"]
   },
   {
     "id": "cloud-giant-gourmand",
     "name": "Cloud Giant Gourmand",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 2,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "cloud giant",
-      "chef giant",
-      "ogre cook"
-    ],
+    "aliases": ["cloud giant", "chef giant", "ogre cook"],
     "description": "A towering, friendly chef-giant who is delighted to add the party to tonight's menu.",
     "attack": "Ladle & fist",
     "skills": [
@@ -4646,17 +3636,11 @@
     "id": "clockwork-ringmaster",
     "name": "Clockwork Ringmaster",
     "type": "humanoid",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 2,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "ringmaster",
-      "brass showman",
-      "circus master"
-    ],
+    "aliases": ["ringmaster", "brass showman", "circus master"],
     "description": "A brass showman in a tall hat who runs the greatest show on gears.",
     "attack": "Whip crack",
     "skills": [
@@ -4689,17 +3673,11 @@
     "id": "clockwork-emperor",
     "name": "Clockwork Emperor",
     "type": "humanoid",
-    "themes": [
-      "steampunk"
-    ],
+    "themes": ["steampunk"],
     "tone": 4,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "brass tyrant",
-      "clockwork king",
-      "automaton emperor"
-    ],
+    "aliases": ["brass tyrant", "clockwork king", "automaton emperor"],
     "description": "A tyrant in a brass body who rules an empire by clock and cannot be stopped.",
     "attack": "Gear sword",
     "skills": [
@@ -4736,17 +3714,11 @@
     "id": "cult-lawyer",
     "name": "Cult Lawyer",
     "type": "humanoid",
-    "themes": [
-      "occult-noir"
-    ],
+    "themes": ["occult-noir"],
     "tone": 3,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "occult attorney",
-      "devil's advocate",
-      "fixer"
-    ],
+    "aliases": ["occult attorney", "devil's advocate", "fixer"],
     "description": "A sharp-suited counselor whose contracts bind souls and whose objections cut deep.",
     "attack": "Briefcase",
     "skills": [
@@ -4783,18 +3755,11 @@
     "id": "scrap-queen",
     "name": "Scrap Queen",
     "type": "humanoid",
-    "themes": [
-      "post-apocalypse"
-    ],
+    "themes": ["post-apocalypse"],
     "tone": 3,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "warlord",
-      "junk queen",
-      "wasteland boss",
-      "road queen"
-    ],
+    "aliases": ["warlord", "junk queen", "wasteland boss", "road queen"],
     "description": "A wasteland boss who rules a junkyard fortress and rolls into battle on a throne of welded scrap.",
     "attack": "Spiked bat",
     "skills": [
@@ -4827,18 +3792,11 @@
     "id": "drowned-boarders",
     "name": "Drowned Boarding Party",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "occult-noir"
-    ],
+    "themes": ["age-of-sail", "occult-noir"],
     "tone": 5,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "ghost pirates",
-      "drowned crew",
-      "undead sailors"
-    ],
+    "aliases": ["ghost pirates", "drowned crew", "undead sailors"],
     "description": "A dripping crew of long-dead sailors that climbs over the rail in the fog.",
     "attack": "Rusty cutlasses",
     "skills": [
@@ -4865,19 +3823,11 @@
     "id": "black-sail-captain",
     "name": "Black Sail Captain",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail",
-      "occult-noir"
-    ],
+    "themes": ["age-of-sail", "occult-noir"],
     "tone": 5,
     "tier": 5,
     "flying": false,
-    "aliases": [
-      "ghost captain",
-      "pirate lord",
-      "skeleton captain",
-      "flying dutchman"
-    ],
+    "aliases": ["ghost captain", "pirate lord", "skeleton captain", "flying dutchman"],
     "description": "A skeletal captain whose ship sails without wind and whose curse follows any crew that sees it.",
     "attack": "Cursed cutlass",
     "skills": [
@@ -4914,18 +3864,11 @@
     "id": "dread-inquisitor",
     "name": "Dread Inquisitor",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 5,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "inquisitor",
-      "interrogator",
-      "imperial officer"
-    ],
+    "aliases": ["inquisitor", "interrogator", "imperial officer"],
     "description": "A black-cloaked officer of the empire who interrogates with drones and doom.",
     "attack": "Shock baton",
     "skills": [
@@ -4958,17 +3901,11 @@
     "id": "storm-giant-king",
     "name": "Storm Giant King",
     "type": "humanoid",
-    "themes": [
-      "fantasy"
-    ],
+    "themes": ["fantasy"],
     "tone": 3,
     "tier": 6,
     "flying": false,
-    "aliases": [
-      "storm giant",
-      "thunder king",
-      "cloud king"
-    ],
+    "aliases": ["storm giant", "thunder king", "cloud king"],
     "description": "A cloud-wreathed monarch in a thunder crown who judges all mortals as petitioners.",
     "attack": "Lightning hammer",
     "skills": [
@@ -5006,19 +3943,11 @@
     "id": "shag-giant",
     "name": "Shag Giant",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 2,
     "tier": 2,
     "flying": false,
-    "aliases": [
-      "wookiee",
-      "chewbacca",
-      "furry co-pilot",
-      "gentle giant"
-    ],
+    "aliases": ["wookiee", "chewbacca", "furry co-pilot", "gentle giant"],
     "description": "A seven-foot furry co-pilot with a bandolier, a loud roar and a famous temper when a friend gets hurt.",
     "attack": "Fists & bowcaster",
     "skills": [
@@ -5038,20 +3967,11 @@
     "id": "swamp-hermit-master",
     "name": "Swamp Hermit Master",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 1,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "yoda",
-      "jedi master",
-      "little green",
-      "force master",
-      "hermit"
-    ],
+    "aliases": ["yoda", "jedi master", "little green", "force master", "hermit"],
     "description": "A tiny, ancient green hermit with big ears and a walking stick who fights like a hurricane.",
     "attack": "Walking stick",
     "skills": [
@@ -5088,20 +4008,11 @@
     "id": "star-knight",
     "name": "Star Knight",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 2,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "jedi",
-      "jedi knight",
-      "lightsaber",
-      "light side",
-      "space wizard"
-    ],
+    "aliases": ["jedi", "jedi knight", "lightsaber", "light side", "space wizard"],
     "description": "A robed warrior-monk with a laser sword, a calm voice and a strong code of honor.",
     "attack": "Laser sword",
     "skills": [
@@ -5128,20 +4039,11 @@
     "id": "twin-blade-zealot",
     "name": "Twin-Blade Zealot",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "science-fantasy"
-    ],
+    "themes": ["space-wars", "science-fantasy"],
     "tone": 5,
     "tier": 4,
     "flying": false,
-    "aliases": [
-      "darth maul",
-      "sith assassin",
-      "double lightsaber",
-      "sith",
-      "horned warrior"
-    ],
+    "aliases": ["darth maul", "sith assassin", "double lightsaber", "sith", "horned warrior"],
     "description": "A horned acrobat in black with a double-bladed laser staff and a grudge.",
     "attack": "Double blade",
     "skills": [
@@ -5178,20 +4080,11 @@
     "id": "crimson-guard",
     "name": "Crimson Guard",
     "type": "humanoid",
-    "themes": [
-      "space-wars",
-      "scifi"
-    ],
+    "themes": ["space-wars", "scifi"],
     "tone": 3,
     "tier": 3,
     "flying": false,
-    "aliases": [
-      "royal guard",
-      "praetorian",
-      "red guard",
-      "emperor's guard",
-      "elite guard"
-    ],
+    "aliases": ["royal guard", "praetorian", "red guard", "emperor's guard", "elite guard"],
     "description": "A silent bodyguard in full red armor with a long force pike and a perfect record.",
     "attack": "Force pike",
     "skills": [
@@ -5222,20 +4115,11 @@
     "id": "cosmic-jester-emperor",
     "name": "Cosmic Jester Emperor",
     "type": "humanoid",
-    "themes": [
-      "space-jammer",
-      "science-fantasy"
-    ],
+    "themes": ["space-jammer", "science-fantasy"],
     "tone": 1,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "space jester",
-      "cosmic clown",
-      "star king",
-      "galactic fool",
-      "emperor of fools"
-    ],
+    "aliases": ["space jester", "cosmic clown", "star king", "galactic fool", "emperor of fools"],
     "description": "A cackling emperor of the stars in a comet-tail cape who rules three galaxies by prank.",
     "attack": "Joke scepter",
     "skills": [
@@ -5278,19 +4162,11 @@
     "id": "megacorp-ceo",
     "name": "Megacorp CEO",
     "type": "humanoid",
-    "themes": [
-      "cyberpunk"
-    ],
+    "themes": ["cyberpunk"],
     "tone": 3,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "ceo",
-      "corporate boss",
-      "executive",
-      "megacorp boss",
-      "corp president"
-    ],
+    "aliases": ["ceo", "corporate boss", "executive", "megacorp boss", "corp president"],
     "description": "A cybernetic executive in a golden suit who owns the city, the police and your debt.",
     "attack": "Gold arm",
     "skills": [
@@ -5333,19 +4209,11 @@
     "id": "dead-eye-legend",
     "name": "Dead-Eye Legend",
     "type": "humanoid",
-    "themes": [
-      "western"
-    ],
+    "themes": ["western"],
     "tone": 4,
     "tier": 7,
     "flying": false,
-    "aliases": [
-      "gunslinger",
-      "outlaw legend",
-      "legendary outlaw",
-      "gunfighter",
-      "deadeye"
-    ],
+    "aliases": ["gunslinger", "outlaw legend", "legendary outlaw", "gunfighter", "deadeye"],
     "description": "A near-mythical outlaw with a red bandana, twin pistols and a hundred tall tales, most of them true.",
     "attack": "Twin revolvers",
     "skills": [
@@ -5388,19 +4256,11 @@
     "id": "pirate-queen",
     "name": "Pirate Queen",
     "type": "humanoid",
-    "themes": [
-      "age-of-sail"
-    ],
+    "themes": ["age-of-sail"],
     "tone": 3,
     "tier": 8,
     "flying": false,
-    "aliases": [
-      "pirate king",
-      "pirate captain",
-      "sea queen",
-      "fleet admiral",
-      "pirate lord"
-    ],
+    "aliases": ["pirate king", "pirate captain", "sea queen", "fleet admiral", "pirate lord"],
     "description": "The ruler of a hundred ships who commands the seas with a cutlass, a brace of pistols and a single look.",
     "attack": "Cutlass",
     "skills": [
@@ -5443,10 +4303,7 @@
     "id": "silver-ranger",
     "name": "Silver Ranger",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 3,
     "tier": 1,
     "flying": false,
@@ -5485,10 +4342,7 @@
     "id": "razor-raider",
     "name": "Razor Raider",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 5,
     "tier": 1,
     "flying": false,
@@ -5526,10 +4380,7 @@
     "id": "pain-archon",
     "name": "Pain Archon",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 5,
     "tier": 4,
     "flying": false,
@@ -5579,10 +4430,7 @@
     "id": "mask-dancer",
     "name": "Mask Dancer",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "science-fantasy"],
     "tone": 2,
     "tier": 2,
     "flying": false,
@@ -5627,10 +4475,7 @@
     "id": "mask-troupe-master",
     "name": "Mask Troupe Master",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "science-fantasy"],
     "tone": 3,
     "tier": 4,
     "flying": false,
@@ -5681,10 +4526,7 @@
     "id": "scrap-warboss",
     "name": "Scrap Warboss",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 2,
     "tier": 4,
     "flying": false,
@@ -5735,10 +4577,7 @@
     "id": "greater-good-envoy",
     "name": "Greater Good Envoy",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 2,
     "tier": 2,
     "flying": false,
@@ -5778,10 +4617,7 @@
     "id": "chapter-librarian",
     "name": "Chapter Librarian",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 3,
     "flying": false,
@@ -5832,10 +4668,7 @@
     "id": "blood-zealot",
     "name": "Blood Zealot",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "science-fantasy"
-    ],
+    "themes": ["space-hammer", "science-fantasy"],
     "tone": 5,
     "tier": 3,
     "flying": false,
@@ -5880,10 +4713,7 @@
     "id": "inquisitor-lord",
     "name": "Inquisitor Lord",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 5,
     "flying": false,
@@ -5933,10 +4763,7 @@
     "id": "flame-sister",
     "name": "Flame Sister",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 2,
     "flying": false,
@@ -5977,10 +4804,7 @@
     "id": "golden-sentinel",
     "name": "Golden Sentinel",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 3,
     "tier": 5,
     "flying": false,
@@ -6029,10 +4853,7 @@
     "id": "throne-warden-captain",
     "name": "Throne Warden Captain",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 3,
     "tier": 6,
     "flying": false,
@@ -6089,10 +4910,7 @@
     "id": "hybrid-cultist",
     "name": "Hybrid Cultist",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 4,
     "tier": 1,
     "flying": false,
@@ -6130,10 +4948,7 @@
     "id": "hearth-miner",
     "name": "Hearth Miner",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 2,
     "tier": 1,
     "flying": false,
@@ -6170,10 +4985,7 @@
     "id": "ancestor-hold-lord",
     "name": "Ancestor Hold Lord",
     "type": "humanoid",
-    "themes": [
-      "space-hammer",
-      "scifi"
-    ],
+    "themes": ["space-hammer", "scifi"],
     "tone": 3,
     "tier": 3,
     "flying": false,

@@ -1,10 +1,7 @@
 {
   "combos": [
     {
-      "cells": [
-        "State Commune",
-        "Social Ownership"
-      ],
+      "cells": ["State Commune", "Social Ownership"],
       "name": "Planned Public Economy",
       "summary": "The state plans most of the economy, but ownership is shared with workers and public bodies instead of being fully centralized.",
       "views": {
@@ -37,10 +34,7 @@
       ]
     },
     {
-      "cells": [
-        "Social Ownership",
-        "New Deal Liberalism"
-      ],
+      "cells": ["Social Ownership", "New Deal Liberalism"],
       "name": "Mixed Public Economy",
       "summary": "Key industries and utilities are public or worker owned, while the rest of the economy is private but actively regulated.",
       "views": {
@@ -73,10 +67,7 @@
       ]
     },
     {
-      "cells": [
-        "New Deal Liberalism",
-        "Corporate Capitalism"
-      ],
+      "cells": ["New Deal Liberalism", "Corporate Capitalism"],
       "name": "Managed Capitalism",
       "summary": "Large corporations drive the economy, but government steers them through regulation, subsidies and public investment.",
       "views": {
@@ -109,10 +100,7 @@
       ]
     },
     {
-      "cells": [
-        "Guild System",
-        "Nordic Model"
-      ],
+      "cells": ["Guild System", "Nordic Model"],
       "name": "Social Partnership",
       "summary": "Unions, employer associations and the state bargain together over wages, benefits and economic policy.",
       "views": {
@@ -145,10 +133,7 @@
       ]
     },
     {
-      "cells": [
-        "Nordic Model",
-        "Social Market"
-      ],
+      "cells": ["Nordic Model", "Social Market"],
       "name": "Coordinated Market Economy",
       "summary": "Competitive private markets sit inside a network of strong social insurance, worker representation and long-term coordination.",
       "views": {
@@ -181,10 +166,7 @@
       ]
     },
     {
-      "cells": [
-        "Social Market",
-        "Regulated Capitalism"
-      ],
+      "cells": ["Social Market", "Regulated Capitalism"],
       "name": "Regulated Social Market",
       "summary": "A market economy with clear rules and social insurance, but a lighter touch and lower taxes than the European welfare model.",
       "views": {
@@ -217,10 +199,7 @@
       ]
     },
     {
-      "cells": [
-        "Mutualism",
-        "Left Libertarianism"
-      ],
+      "cells": ["Mutualism", "Left Libertarianism"],
       "name": "Cooperative Commons",
       "summary": "Voluntary cooperation: co-ops and mutual aid societies running on shared resources, with no central state.",
       "views": {
@@ -253,10 +232,7 @@
       ]
     },
     {
-      "cells": [
-        "Left Libertarianism",
-        "Classical Liberalism"
-      ],
+      "cells": ["Left Libertarianism", "Classical Liberalism"],
       "name": "Liberal Commons",
       "summary": "Free markets and civil liberties, with natural resources like land shared by everyone.",
       "views": {
@@ -289,10 +265,7 @@
       ]
     },
     {
-      "cells": [
-        "Classical Liberalism",
-        "Right Libertarianism"
-      ],
+      "cells": ["Classical Liberalism", "Right Libertarianism"],
       "name": "Minimal-State Liberalism",
       "summary": "A very small state limited to protecting rights and contracts, with nearly everything else left to private choice.",
       "views": {
@@ -325,10 +298,7 @@
       ]
     },
     {
-      "cells": [
-        "State Commune",
-        "Guild System"
-      ],
+      "cells": ["State Commune", "Guild System"],
       "name": "State-Run Guilds",
       "summary": "The state organizes each industry into official associations that run production under its direction.",
       "views": {
@@ -361,10 +331,7 @@
       ]
     },
     {
-      "cells": [
-        "Guild System",
-        "Mutualism"
-      ],
+      "cells": ["Guild System", "Mutualism"],
       "name": "Cooperative Guilds",
       "summary": "Trades and crafts organize themselves into member-owned guilds and co-ops that look after their own.",
       "views": {
@@ -397,10 +364,7 @@
       ]
     },
     {
-      "cells": [
-        "Social Ownership",
-        "Nordic Model"
-      ],
+      "cells": ["Social Ownership", "Nordic Model"],
       "name": "Democratic Socialism",
       "summary": "A strong welfare state and public ownership of key industries, kept in check by elections and open markets.",
       "views": {
@@ -433,10 +397,7 @@
       ]
     },
     {
-      "cells": [
-        "Nordic Model",
-        "Left Libertarianism"
-      ],
+      "cells": ["Nordic Model", "Left Libertarianism"],
       "name": "Libertarian Social Democracy",
       "summary": "Nordic-style social programs, delivered in decentralized, voluntary and cooperative ways instead of through large bureaucracies.",
       "views": {
@@ -469,10 +430,7 @@
       ]
     },
     {
-      "cells": [
-        "New Deal Liberalism",
-        "Social Market"
-      ],
+      "cells": ["New Deal Liberalism", "Social Market"],
       "name": "Progressive Mixed Economy",
       "summary": "Competitive markets with a strong regulatory state, broad social insurance and room for public investment.",
       "views": {
@@ -505,10 +463,7 @@
       ]
     },
     {
-      "cells": [
-        "Social Market",
-        "Classical Liberalism"
-      ],
+      "cells": ["Social Market", "Classical Liberalism"],
       "name": "Ordoliberalism",
       "summary": "A free market with strong rules that guard competition, and a limited but real social safety net.",
       "views": {
@@ -541,10 +496,7 @@
       ]
     },
     {
-      "cells": [
-        "Corporate Capitalism",
-        "Regulated Capitalism"
-      ],
+      "cells": ["Corporate Capitalism", "Regulated Capitalism"],
       "name": "Regulated Corporate Capitalism",
       "summary": "Large firms dominate the economy, with rules that limit abuse but largely leave them in charge.",
       "views": {
@@ -577,10 +529,7 @@
       ]
     },
     {
-      "cells": [
-        "Regulated Capitalism",
-        "Right Libertarianism"
-      ],
+      "cells": ["Regulated Capitalism", "Right Libertarianism"],
       "name": "Deregulated Capitalism",
       "summary": "Free enterprise as the main rule, with only a few basic regulations and low taxes.",
       "views": {
@@ -613,12 +562,7 @@
       ]
     },
     {
-      "cells": [
-        "State Commune",
-        "Social Ownership",
-        "Guild System",
-        "Nordic Model"
-      ],
+      "cells": ["State Commune", "Social Ownership", "Guild System", "Nordic Model"],
       "name": "Guild Socialism",
       "summary": "Large public and worker-owned sectors run alongside a strong welfare state, with guilds and unions sharing power over the economy.",
       "views": {
@@ -651,12 +595,7 @@
       ]
     },
     {
-      "cells": [
-        "Social Ownership",
-        "New Deal Liberalism",
-        "Nordic Model",
-        "Social Market"
-      ],
+      "cells": ["Social Ownership", "New Deal Liberalism", "Nordic Model", "Social Market"],
       "name": "Social Democracy",
       "summary": "A market economy with a large welfare state, strong unions, and some public ownership of key industries.",
       "views": {
@@ -689,12 +628,7 @@
       ]
     },
     {
-      "cells": [
-        "New Deal Liberalism",
-        "Corporate Capitalism",
-        "Social Market",
-        "Regulated Capitalism"
-      ],
+      "cells": ["New Deal Liberalism", "Corporate Capitalism", "Social Market", "Regulated Capitalism"],
       "name": "Welfare Capitalism",
       "summary": "Large private firms drive the economy, while government regulation, public insurance, and bargaining soften the risks.",
       "views": {
@@ -727,12 +661,7 @@
       ]
     },
     {
-      "cells": [
-        "Guild System",
-        "Nordic Model",
-        "Mutualism",
-        "Left Libertarianism"
-      ],
+      "cells": ["Guild System", "Nordic Model", "Mutualism", "Left Libertarianism"],
       "name": "Cooperative Commonwealth",
       "summary": "An economy of worker cooperatives, guilds, and mutual aid, backed by a welfare floor and strong personal freedom.",
       "views": {
@@ -765,12 +694,7 @@
       ]
     },
     {
-      "cells": [
-        "Nordic Model",
-        "Social Market",
-        "Left Libertarianism",
-        "Classical Liberalism"
-      ],
+      "cells": ["Nordic Model", "Social Market", "Left Libertarianism", "Classical Liberalism"],
       "name": "Inclusive Market Economy",
       "summary": "Open, competitive markets with a basic safety net and strong rights, but little central planning.",
       "views": {
@@ -803,12 +727,7 @@
       ]
     },
     {
-      "cells": [
-        "Social Market",
-        "Regulated Capitalism",
-        "Classical Liberalism",
-        "Right Libertarianism"
-      ],
+      "cells": ["Social Market", "Regulated Capitalism", "Classical Liberalism", "Right Libertarianism"],
       "name": "Free Enterprise Economy",
       "summary": "Private business and open competition lead the economy, with limited government rules and a small safety net.",
       "views": {

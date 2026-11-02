@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Figure } from "../../core/figure";
 import { Steam } from "./Part1";
 
@@ -133,7 +133,13 @@ export function SewerVatHorror() {
     <Drawing label="Drawing of a failed gene experiment outgrowing its tank and spilling over the sides">
       <Shape d="M120 60 H280 V224 H120 Z" w={5} />
       <Line d="M120 100 H280" w={3} />
-      <path d="M130 224 C110 160 150 110 190 130 C210 90 270 100 270 150 C300 170 310 224 300 224 Z" fill={card} stroke="currentColor" strokeWidth="5" strokeLinejoin="round" />
+      <path
+        d="M130 224 C110 160 150 110 190 130 C210 90 270 100 270 150 C300 170 310 224 300 224 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeLinejoin="round"
+      />
       <circle cx="180" cy="170" r="12" fill={card} {...ink} strokeWidth={3} />
       <Dot x={180} y={172} r={4} />
       <circle cx="236" cy="136" r="14" fill={card} {...ink} strokeWidth={3} />
@@ -150,7 +156,10 @@ export function BoilerbackWyrm() {
   return (
     <Drawing label="Drawing of a coal-black wyrm with boiler plates on its back hissing steam">
       <Shape d="M40 200 C40 130 130 100 200 106 C270 110 320 150 330 190 L384 196 L330 214 C280 226 100 230 40 200 Z" />
-      <Shape d="M90 124 H130 V146 H90 Z M150 112 H190 V134 H150 Z M210 112 H250 V134 H210 Z M266 124 H300 V146 H266 Z" w={4} />
+      <Shape
+        d="M90 124 H130 V146 H90 Z M150 112 H190 V134 H150 Z M210 112 H250 V134 H210 Z M266 124 H300 V146 H266 Z"
+        w={4}
+      />
       <Line d="M110 124 V104 M170 112 V90 M230 112 V90 M284 124 V104" w={4} />
       <Steam x={110} y={100} />
       <Steam x={230} y={86} />

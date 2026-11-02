@@ -15,7 +15,9 @@ const BORTLE_NOTES = [
 
 /** Short description of what a Bortle sky class looks like, shown under the slider. */
 const bortleNote = (b: number) =>
-  b % 1 === 0 ? BORTLE_NOTES[b - 1] : `Between ${BORTLE_NOTES[Math.floor(b) - 1].toLowerCase()} and ${BORTLE_NOTES[Math.ceil(b) - 1].toLowerCase()}`;
+  b % 1 === 0
+    ? BORTLE_NOTES[b - 1]
+    : `Between ${BORTLE_NOTES[Math.floor(b) - 1].toLowerCase()} and ${BORTLE_NOTES[Math.ceil(b) - 1].toLowerCase()}`;
 
 export interface SectionProps {
   settings: Settings;
@@ -30,9 +32,23 @@ export function SkySection({ settings, set }: SectionProps) {
       <div className="astro-fields">
         <label>
           <span>Latitude (°N)</span>
-          <input type="number" min={0} max={80} value={settings.latitude} onChange={(event) => set({ latitude: Math.min(80, Math.max(0, Number(event.target.value))) })} />
+          <input
+            type="number"
+            min={0}
+            max={80}
+            value={settings.latitude}
+            onChange={(event) => set({ latitude: Math.min(80, Math.max(0, Number(event.target.value))) })}
+          />
         </label>
-        <SliderField label={`Light pollution (Bortle ${settings.bortle})`} value={settings.bortle} min={1} max={9} step={0.5} onChange={(value) => set({ bortle: value })} note={bortleNote(settings.bortle)} />
+        <SliderField
+          label={`Light pollution (Bortle ${settings.bortle})`}
+          value={settings.bortle}
+          min={1}
+          max={9}
+          step={0.5}
+          onChange={(value) => set({ bortle: value })}
+          note={bortleNote(settings.bortle)}
+        />
       </div>
     </section>
   );

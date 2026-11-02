@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -26,7 +26,12 @@ export function EagerCultist() {
   return (
     <Drawing label="Drawing of a cheerful new cultist in an oversized robe holding a clipboard and wearing a nametag">
       <Shape d="M150 100 C140 30 260 30 250 100 L240 128 H160 Z" />
-      <path d="M170 100 C170 74 230 74 230 100 C230 116 170 116 170 100 Z" fill={card} stroke="currentColor" strokeWidth="4" />
+      <path
+        d="M170 100 C170 74 230 74 230 100 C230 116 170 116 170 100 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="4"
+      />
       <Dot x={188} y={96} r={3} />
       <Dot x={212} y={96} r={3} />
       <Line d="M184 106 Q200 118 216 106" w={3} />

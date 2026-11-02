@@ -1,9 +1,17 @@
 import type { ReactNode } from "react";
-import { ChromeTrooper, FuzzWarrior, DuskMonk, DreadLord, LaserGrunt, StarTempler, IronMarshal } from "./Part1";
-import { ScrapjawBrawler, RuinKnight, SilverSeer, SkyCoalitionWarrior, GearPriest, WitchHunter, SuitGuard } from "./Part2";
-import { StreetRazor, WireJockey, ChopShopDoc, ChromePsycho, NeonBusker, GigCourier, OrganBroker } from "./Part3";
-import { MegacorpChairman, ScrapGremlin, SandRaider, CantinaSmuggler, ArenaChampion, RogueStarAce } from "./Part4";
-import { FleetAdmiral, RimScrapper, ShadowEmperor, FieldMedicDroid, ShipLordRegent } from "./Part5";
+import { ChromeTrooper, DreadLord, DuskMonk, FuzzWarrior, IronMarshal, LaserGrunt, StarTempler } from "./Part1";
+import {
+  GearPriest,
+  RuinKnight,
+  ScrapjawBrawler,
+  SilverSeer,
+  SkyCoalitionWarrior,
+  SuitGuard,
+  WitchHunter,
+} from "./Part2";
+import { ChopShopDoc, ChromePsycho, GigCourier, NeonBusker, OrganBroker, StreetRazor, WireJockey } from "./Part3";
+import { ArenaChampion, CantinaSmuggler, MegacorpChairman, RogueStarAce, SandRaider, ScrapGremlin } from "./Part4";
+import { FieldMedicDroid, FleetAdmiral, RimScrapper, ShadowEmperor, ShipLordRegent } from "./Part5";
 
 export const sciFiHumanoidsArt: Record<string, () => ReactNode> = {
   "chrome-trooper": ChromeTrooper,

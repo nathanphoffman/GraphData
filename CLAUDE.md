@@ -14,7 +14,7 @@
    - Simple is less than 3x as long: use simple.
    - Simple is 3x to 6x as long: use your judgment.
    - Simple is over 6x as long: use clever.
-   Regex always counts as clever. Always add a comment explaining how clever code works.
+     Regex always counts as clever. Always add a comment explaining how clever code works.
 4. One job per function. Functions should avoid mutating or processing anything outside their core concern.
    - Nest blocks (if, loops, try, switch) at most 3 levels deep.
    - Avoid true/false flag parameters; write one function per behavior.
@@ -27,13 +27,16 @@
 11. Fail loudly but directedly. Never hide errors, don't over report or over-throw.
 12. Clean up. In code you touch, remove dead code, unused imports, and leftover variables, and exports nothing imports.
 13. Keep the project small. Judge size in powers of 6, a project of 6^x lines.
-   - Up to 6^4 (1,296 lines) is full marks.
-   - 6^6 (46,656 lines) is the most to aim for; past that, split it into separate projects.
+
+- Up to 6^4 (1,296 lines) is full marks.
+- 6^6 (46,656 lines) is the most to aim for; past that, split it into separate projects.
+
 14. Space it out. Blank lines separate ideas like paragraphs.
-   - Max 6 lines in a row without a blank line.
-   - A blank line before control statements, returns, line comments, and function/macro definitions, unless first in a block.
-   - A blank line after function/macro definitions, closing brackets or multi-line statements, unless followed by another closing bracket, else, catch, or finally.
-   - Never have two blank lines in a row (Python is exempt, as PEP 8 wants two between top-level definitions).
+
+- Max 6 lines in a row without a blank line.
+- A blank line before control statements, returns, line comments, and function/macro definitions, unless first in a block.
+- A blank line after function/macro definitions, closing brackets or multi-line statements, unless followed by another closing bracket, else, catch, or finally.
+- Never have two blank lines in a row (Python is exempt, as PEP 8 wants two between top-level definitions).
 
 Short version: Power of 6s. Clear names. Simple first. One job. Be secure. No repetition. Test what matters. Fail loud. Leave it cleaner.
 

@@ -5,59 +5,37 @@
     {
       "id": "thinking",
       "name": "Thinking",
-      "columns": [
-        "reasoning",
-        "math",
-        "coding"
-      ]
+      "columns": ["reasoning", "math", "coding"]
     },
     {
       "id": "knowledge",
       "name": "Knowledge & Language",
-      "columns": [
-        "knowledge",
-        "multilingual",
-        "instruction"
-      ]
+      "columns": ["knowledge", "multilingual", "instruction"]
     },
     {
       "id": "perception",
       "name": "Perception & Space",
-      "columns": [
-        "multimodal",
-        "spatial"
-      ]
+      "columns": ["multimodal", "spatial"]
     },
     {
       "id": "action",
       "name": "Action",
-      "columns": [
-        "agentic",
-        "embodied"
-      ]
+      "columns": ["agentic", "embodied"]
     },
     {
       "id": "learning",
       "name": "Learning & Memory",
-      "columns": [
-        "learning",
-        "continual"
-      ]
+      "columns": ["learning", "continual"]
     },
     {
       "id": "people",
       "name": "People & Creativity",
-      "columns": [
-        "social",
-        "creativity"
-      ]
+      "columns": ["social", "creativity"]
     },
     {
       "id": "efficiency",
       "name": "Efficiency",
-      "columns": [
-        "efficiency"
-      ]
+      "columns": ["efficiency"]
     }
   ],
   "columns": {

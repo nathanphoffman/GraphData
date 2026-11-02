@@ -1,9 +1,33 @@
 import type { ReactNode } from "react";
-import { GoggledInventor, AirshipPirate, SmogBaron, BackAlleySurgeon, ApprenticeTinker, IndustrialMagnate } from "./Part1";
-import { SyndicateEnforcer, StarforgedSquire, AstralArchmage, IronCrusadeLord, BrassWarlord, ChimneyUrchin, CyberSamuraiChampion } from "./Part2";
-import { BumblingGuardsman, BoilerhouseMender, StarLanternHealer, HullBreakerGrunt, SmugglerSparker, VendingMachineMimic, SewerVatHorror, BoilerbackWyrm } from "./Part3";
-import { AlleySlime, BoilerNewt, TunnelSpawn, WarpBehemoth, BiolabEscapee, OilSlickCrawler, FurnaceMaw } from "./Part4";
-import { GrotGobbler, SkyPikeBrood, SmogDrake, GutterHag, ChromeGargoyle } from "./Part5";
+import {
+  AirshipPirate,
+  ApprenticeTinker,
+  BackAlleySurgeon,
+  GoggledInventor,
+  IndustrialMagnate,
+  SmogBaron,
+} from "./Part1";
+import {
+  AstralArchmage,
+  BrassWarlord,
+  ChimneyUrchin,
+  CyberSamuraiChampion,
+  IronCrusadeLord,
+  StarforgedSquire,
+  SyndicateEnforcer,
+} from "./Part2";
+import {
+  BoilerbackWyrm,
+  BoilerhouseMender,
+  BumblingGuardsman,
+  HullBreakerGrunt,
+  SewerVatHorror,
+  SmugglerSparker,
+  StarLanternHealer,
+  VendingMachineMimic,
+} from "./Part3";
+import { AlleySlime, BiolabEscapee, BoilerNewt, FurnaceMaw, OilSlickCrawler, TunnelSpawn, WarpBehemoth } from "./Part4";
+import { ChromeGargoyle, GrotGobbler, GutterHag, SkyPikeBrood, SmogDrake } from "./Part5";
 
 export const restHumanoidsMonstersArt: Record<string, () => ReactNode> = {
   "goggled-inventor": GoggledInventor,

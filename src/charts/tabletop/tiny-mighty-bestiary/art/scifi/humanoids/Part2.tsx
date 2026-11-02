@@ -1,4 +1,4 @@
-import { Dot, Drawing, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, ink, Line, Shape, Solid } from "../../core/artStyle";
 import { Figure } from "../../core/figure";
 
 const card = CARD_COLOR;
@@ -89,7 +89,12 @@ export function GearPriest() {
   return (
     <Drawing label="Drawing of a red-robed priest with a mechanical arm, a third eye and cogs in the hood">
       <Shape d="M156 92 C150 30 250 30 244 92 L240 118 H160 Z" />
-      <path d="M174 92 C174 68 226 68 226 92 C226 110 174 110 174 92 Z" fill={card} stroke="currentColor" strokeWidth="4" />
+      <path
+        d="M174 92 C174 68 226 68 226 92 C226 110 174 110 174 92 Z"
+        fill={card}
+        stroke="currentColor"
+        strokeWidth="4"
+      />
       <circle cx="188" cy="92" r="5" fill="currentColor" />
       <circle cx="212" cy="92" r="5" fill="currentColor" />
       <circle cx="200" cy="76" r="5" fill="currentColor" />

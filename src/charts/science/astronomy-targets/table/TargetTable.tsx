@@ -11,7 +11,8 @@ export interface Hover {
   y: number;
 }
 
-const DIFFICULTY_TITLE = "How hard it is to see, from the score: Excellent 75+, Very easy 50+, Easy 35+, Moderate 20+, Hard 10+, Very hard above 0, Extreme at 0 or below.";
+const DIFFICULTY_TITLE =
+  "How hard it is to see, from the score: Excellent 75+, Very easy 50+, Easy 35+, Moderate 20+, Hard 10+, Very hard above 0, Extreme at 0 or below.";
 
 /** Score cell with a bar sized to the score and a difficulty label. */
 function ScoreCell({ row, settings }: { row: ScoredTarget; settings: Settings }) {
@@ -21,10 +22,15 @@ function ScoreCell({ row, settings }: { row: ScoredTarget; settings: Settings })
   return (
     <td className="astro-score">
       <div className="astro-difficulty">
-        <span className="astro-tag" style={{ "--tag": heat(level, 1) } as CSSProperties}>{label}</span>
+        <span className="astro-tag" style={{ "--tag": heat(level, 1) } as CSSProperties}>
+          {label}
+        </span>
       </div>
       <div className="astro-scorebar">
-        <span className="astro-bar" style={{ width: `${Math.max(0, row.score)}%`, background: heat(row.score / 100, 0.45) }} />
+        <span
+          className="astro-bar"
+          style={{ width: `${Math.max(0, row.score)}%`, background: heat(row.score / 100, 0.45) }}
+        />
         <span className="astro-score-text">{row.score.toFixed(0).replace("-", "−")}</span>
       </div>
     </td>
@@ -43,7 +49,8 @@ function TargetCell({ row, onHover }: { row: ScoredTarget; onHover: (height: Hov
       onMouseMove={preview ? (event) => onHover({ id: t.id, x: event.clientX, y: event.clientY }) : undefined}
       onMouseLeave={preview ? () => onHover(null) : undefined}
     >
-      <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong>{t.nickname && <div className="astro-nick">{t.nickname}</div>}
+      <span title={t.type}>{TYPE_SYMBOLS[t.type] ?? "•"}</span> <strong>{t.id}</strong>
+      {t.nickname && <div className="astro-nick">{t.nickname}</div>}
     </td>
   );
 }
@@ -66,7 +73,11 @@ export function TargetTable({ rows, settings, columns, onHover }: TableProps) {
             <th>#</th>
             <th>Target</th>
             <th title={DIFFICULTY_TITLE}>Difficulty / Score</th>
-            {columns.map((column) => <th key={column.id} title={column.title}>{column.label}</th>)}
+            {columns.map((column) => (
+              <th key={column.id} title={column.title}>
+                {column.label}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -76,7 +87,9 @@ export function TargetTable({ rows, settings, columns, onHover }: TableProps) {
               <td>{index + 1}</td>
               <TargetCell row={scoredTarget} onHover={onHover} />
               <ScoreCell row={scoredTarget} settings={settings} />
-              {columns.map((column) => <td key={column.id}>{column.cell(scoredTarget, settings)}</td>)}
+              {columns.map((column) => (
+                <td key={column.id}>{column.cell(scoredTarget, settings)}</td>
+              ))}
             </tr>
           ))}
         </tbody>

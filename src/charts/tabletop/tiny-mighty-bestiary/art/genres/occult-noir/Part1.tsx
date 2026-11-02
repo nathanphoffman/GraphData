@@ -1,4 +1,4 @@
-import { Dot, Drawing, Ground, ink, Line, Shape, Solid, CARD_COLOR } from "../../core/artStyle";
+import { CARD_COLOR, Dot, Drawing, Ground, ink, Line, Shape, Solid } from "../../core/artStyle";
 
 const card = CARD_COLOR;
 
@@ -8,7 +8,11 @@ export function HoundBody({ eye = "dot" }: { eye?: "dot" | "ring" }) {
     <>
       <Shape d="M90 160 C80 120 130 104 190 108 C240 110 266 128 262 160 L250 170 H110 Z" />
       <Shape d="M240 124 L246 88 L262 104 L296 104 L318 92 L322 128 C322 148 246 150 240 124 Z" />
-      {eye === "dot" ? <Dot x={282} y={116} r={4} /> : <circle cx="282" cy="116" r="7" fill={card} {...ink} strokeWidth={3} />}
+      {eye === "dot" ? (
+        <Dot x={282} y={116} r={4} />
+      ) : (
+        <circle cx="282" cy="116" r="7" fill={card} {...ink} strokeWidth={3} />
+      )}
       {eye === "ring" && <Dot x={282} y={116} r={3} />}
       <Solid d="M318 114 L334 120 L318 130 Z" />
       <Line d="M104 170 V214 M134 172 V214 M226 172 V214 M252 170 V214" w={6} />

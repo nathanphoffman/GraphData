@@ -32,6 +32,7 @@ export interface Projection {
 }
 
 const DAY_MS = 86_400_000;
+
 import { DAYS_PER_MONTH, DAYS_PER_YEAR, ISO_DATE_LENGTH, TENTH } from "./constants";
 
 const SHORT_WINDOW_DAYS = 3;
@@ -90,13 +91,16 @@ function solve3(matrix: number[][], value: number[]): number[] {
   for (let column = 0; column < QUADRATIC_TERMS; column++) {
     let pivot = column;
 
-    for (let rowIndex = column + 1; rowIndex < QUADRATIC_TERMS; rowIndex++) if (Math.abs(augmented[rowIndex][column]) > Math.abs(augmented[pivot][column])) pivot = rowIndex;
+    for (let rowIndex = column + 1; rowIndex < QUADRATIC_TERMS; rowIndex++)
+
+      if (Math.abs(augmented[rowIndex][column]) > Math.abs(augmented[pivot][column])) pivot = rowIndex;
     [augmented[column], augmented[pivot]] = [augmented[pivot], augmented[column]];
 
     for (let rowIndex = column + 1; rowIndex < QUADRATIC_TERMS; rowIndex++) {
       const factor = augmented[rowIndex][column] / augmented[column][column];
 
-      for (let columnIndex = column; columnIndex < AUGMENTED_COLUMNS; columnIndex++) augmented[rowIndex][columnIndex] -= factor * augmented[column][columnIndex];
+      for (let columnIndex = column; columnIndex < AUGMENTED_COLUMNS; columnIndex++)
+        augmented[rowIndex][columnIndex] -= factor * augmented[column][columnIndex];
     }
   }
 
@@ -105,7 +109,8 @@ function solve3(matrix: number[][], value: number[]): number[] {
   for (let rowIndex = 2; rowIndex >= 0; rowIndex--) {
     let total = augmented[rowIndex][QUADRATIC_TERMS];
 
-    for (let columnIndex = rowIndex + 1; columnIndex < QUADRATIC_TERMS; columnIndex++) total -= augmented[rowIndex][columnIndex] * xPos[columnIndex];
+    for (let columnIndex = rowIndex + 1; columnIndex < QUADRATIC_TERMS; columnIndex++)
+      total -= augmented[rowIndex][columnIndex] * xPos[columnIndex];
     xPos[rowIndex] = total / augmented[rowIndex][rowIndex];
   }
 
@@ -113,7 +118,11 @@ function solve3(matrix: number[][], value: number[]): number[] {
 }
 
 /** Quadratic least-squares curve through the last `fitDays` days, extended `aheadDays` into the future. */
-export function project(days: DayWeight[], fitDays: number, aheadDays: number): { fit: Projection[]; future: Projection[] } {
+export function project(
+  days: DayWeight[],
+  fitDays: number,
+  aheadDays: number,
+): { fit: Projection[]; future: Projection[] } {
   const recent = days.slice(-fitDays);
   const dayCount = recent.length;
 
@@ -121,10 +130,13 @@ export function project(days: DayWeight[], fitDays: number, aheadDays: number): 
   const power = (exponent: number) => recent.reduce((total, _unused, index) => total + index ** exponent, 0);
 
   // Weighted sum used by the curve fit: each day's weight times its index to the power k.
-  const weighted = (exponent: number) => recent.reduce((total, dayRecord, index) => total + dayRecord.weight * index ** exponent, 0);
+  const weighted = (exponent: number) =>
+    recent.reduce((total, dayRecord, index) => total + dayRecord.weight * index ** exponent, 0);
   const [c, b, a] = solve3(
     // Row i, column j of the normal equations is the sum of x to the power i + j (power 0 is just n).
-    Array.from({ length: QUADRATIC_TERMS }, (_equation, rowIndex) => Array.from({ length: QUADRATIC_TERMS }, (_column, column) => power(rowIndex + column))),
+    Array.from({ length: QUADRATIC_TERMS }, (_equation, rowIndex) =>
+      Array.from({ length: QUADRATIC_TERMS }, (_column, column) => power(rowIndex + column)),
+    ),
     Array.from({ length: QUADRATIC_TERMS }, (_term, exponent) => weighted(exponent)),
   );
 
@@ -159,7 +171,13 @@ export function addAverages<T extends DayWeight>(
     return (prefix[index + 1] - prefix[from]) / (index + 1 - from);
   };
 
-  const blended = days.map((_unused, index) => (BLEND_SHORT * trailing(index, windows.short) + BLEND_MEDIUM * trailing(index, windows.medium) + BLEND_LONG * trailing(index, windows.long)) / BLEND_TOTAL);
+  const blended = days.map(
+    (_unused, index) =>
+      (BLEND_SHORT * trailing(index, windows.short) +
+        BLEND_MEDIUM * trailing(index, windows.medium) +
+        BLEND_LONG * trailing(index, windows.long)) /
+      BLEND_TOTAL,
+  );
 
   // Attach every average to its day, plus the monthly change once there is enough history.
   return days.map((dayRecord, index) => ({
@@ -228,7 +246,12 @@ export function projectTapering(
     const factor = MONTHLY_KEEP ** (dayNumber / DAYS_PER_MONTH);
     weight -= (monthlyLoss / DAYS_PER_MONTH) * factor;
     muscle += muscleDaily * factor;
-    points.push({ date: format(start + dayNumber * DAY_MS), weight: round1(weight), adjusted: round1(weight - muscle), muscle });
+    points.push({
+      date: format(start + dayNumber * DAY_MS),
+      weight: round1(weight),
+      adjusted: round1(weight - muscle),
+      muscle,
+    });
   }
 
   return points;
@@ -238,7 +261,12 @@ export function projectTapering(
  * Curve that ends up `totalLoss` below `startWeight` once all time has passed: each month's loss is 11/12 of the
  * previous one, so the first month loses totalLoss / 12. Returns the weight on each of the next `aheadDays` days.
  */
-export function taperToTotal(startDate: string, startWeight: number, totalLoss: number, aheadDays: number): Projection[] {
+export function taperToTotal(
+  startDate: string,
+  startWeight: number,
+  totalLoss: number,
+  aheadDays: number,
+): Projection[] {
   const start = parse(startDate);
 
   // One point per future day on the tapering curve.

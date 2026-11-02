@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import "./styles.css";
 import data from "../../../../data/astronomy/astronomy-targets.json";
 import { ControlsPanel } from "./controls/ControlsPanel";
-import { buildSchedule, DEFAULT_SETTINGS, scoreTargets } from "./model/calculate";
 import type { Schedule } from "./model/calculate";
+import { buildSchedule, DEFAULT_SETTINGS, scoreTargets } from "./model/calculate";
 import { parseHidden, parseSeasonFilter, parseSettings, type SeasonFilter } from "./model/storage";
 import type { AstronomyTargetsData, ScoredTarget, Settings } from "./model/types";
 import { useStoredState } from "./model/useStoredState";
@@ -25,7 +25,13 @@ function filterRows(scored: ScoredTarget[], season: SeasonFilter | null, query: 
     // Match the season, and the search text against id, nickname, constellation and type.
     (scoredTarget) =>
       (!season || scoredTarget.target.bestSeason === season) &&
-      (!needle || [scoredTarget.target.id, scoredTarget.target.nickname, scoredTarget.target.constellation, scoredTarget.target.type].some((value) => value.toLowerCase().includes(needle))),
+      (!needle ||
+        [
+          scoredTarget.target.id,
+          scoredTarget.target.nickname,
+          scoredTarget.target.constellation,
+          scoredTarget.target.type,
+        ].some((value) => value.toLowerCase().includes(needle))),
   );
 }
 
@@ -33,10 +39,17 @@ function filterRows(scored: ScoredTarget[], season: SeasonFilter | null, query: 
 function useColumns() {
   const [hiddenList, setHiddenList] = useStoredState<string[]>("hidden-columns", defaultHidden, parseHidden);
   const hidden = useMemo(() => new Set(hiddenList), [hiddenList]);
-  const toggle = (identifier: string) => setHiddenList((prev) => (prev.includes(identifier) ? prev.filter((height) => height !== identifier) : [...prev, identifier]));
+  const toggle = (identifier: string) =>
+    setHiddenList((prev) =>
+      prev.includes(identifier) ? prev.filter((height) => height !== identifier) : [...prev, identifier],
+    );
   const visible = COLUMNS.filter((column) => !hidden.has(column.id));
 
-  return { hidden, toggle, columns: [...visible.filter((column) => column.afterScore), ...visible.filter((column) => !column.afterScore)] };
+  return {
+    hidden,
+    toggle,
+    columns: [...visible.filter((column) => column.afterScore), ...visible.filter((column) => !column.afterScore)],
+  };
 }
 
 /** The astronomy targets page: holds the settings, filters and hover state, and wires them to the table and previews. */
@@ -66,7 +79,16 @@ export default function AstronomyTargets() {
         count={`${rows.length} of ${model.targets.length} targets`}
       />
       <TargetTable rows={rows} settings={settings} columns={columns} onHover={setHover} />
-      {schedule && <ScheduleModal schedule={schedule} onClose={() => { setSchedule(null); setHover(null); }} onHover={setHover} />}
+      {schedule && (
+        <ScheduleModal
+          schedule={schedule}
+          onClose={() => {
+            setSchedule(null);
+            setHover(null);
+          }}
+          onHover={setHover}
+        />
+      )}
       {hover && hovered && <TargetPreview row={hovered} settings={settings} x={hover.x} y={hover.y} />}
       <Footnotes source={model.source} />
     </div>

@@ -26,6 +26,7 @@ export function unguidedness(intuition: number): number {
 export function entropyChance(params: Params, commit: number, quality: number): number {
   const growth = Math.log(params.baseCommits + commit + Math.E);
   const fragility = 1 / Math.max(quality, MIN_QUALITY);
+
   return Math.min(MAX_ENTROPY, growth * fragility * params.baseEntropy);
 }
 
@@ -45,6 +46,7 @@ export function simulateRun(params: Params, random: Random = Math.random): numbe
     quality = Math.min(1, Math.max(0, next));
     history.push(quality);
   }
+
   return history;
 }
 
@@ -63,14 +65,17 @@ export function summarize(runs: number[][]): { average: number[]; low: number[];
     let sum = 0;
     let min = Number.POSITIVE_INFINITY;
     let max = Number.NEGATIVE_INFINITY;
+
     for (const run of runs) {
       sum += run[commit];
       min = Math.min(min, run[commit]);
       max = Math.max(max, run[commit]);
     }
+
     average.push(sum / runs.length);
     low.push(min);
     high.push(max);
   }
+
   return { average, low, high };
 }

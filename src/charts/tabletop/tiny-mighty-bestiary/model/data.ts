@@ -1,9 +1,9 @@
-import meta from "../../../../../data/tiny-mighty-bestiary/meta.json";
+import animated from "../../../../../data/tiny-mighty-bestiary/animated.json";
 import beasts from "../../../../../data/tiny-mighty-bestiary/beast.json";
 import humanoids from "../../../../../data/tiny-mighty-bestiary/humanoid.json";
-import animated from "../../../../../data/tiny-mighty-bestiary/animated.json";
-import otherworldly from "../../../../../data/tiny-mighty-bestiary/otherworldly.json";
+import meta from "../../../../../data/tiny-mighty-bestiary/meta.json";
 import monsters from "../../../../../data/tiny-mighty-bestiary/monster.json";
+import otherworldly from "../../../../../data/tiny-mighty-bestiary/otherworldly.json";
 import type { BestiaryData, Creature } from "./types";
 
 export const model = {
@@ -64,7 +64,8 @@ const byDifficultyThenName = (creature: Creature, second: Creature) =>
 /** Sort function for the chosen sort name; ties fall back to difficulty and then name. */
 export function compareBy(sort: string): (creature: Creature, second: Creature) => number {
   // Where a creature's type sits in the list of types, so creatures can be grouped by type.
-  const typeOrder = (creature: Creature) => model.creatureTypes.findIndex((creatureType) => creatureType.id === creature.type);
+  const typeOrder = (creature: Creature) =>
+    model.creatureTypes.findIndex((creatureType) => creatureType.id === creature.type);
 
   switch (sort) {
     case "az":

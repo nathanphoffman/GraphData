@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { RunawayLocomotive, ClockworkGunslinger, IronHorseAutomaton, GallowsMarionette } from "./Part1";
-import { TumbleweedWarBot, DustRattler, ThunderHerd, GreatWhiteBuffalo, JackalopeGang, PrairieHawk } from "./Part2";
-import { PrairieSkyray, MaskHunter, QuickdrawOutlaw, BanditChief, DoomsdayPreacher, SaloonBrawler } from "./Part3";
-import { GreenhornDeputy, RailroadBaron, OutlawKing, FrontierDoc, GilaGiant, GoatSucker } from "./Part4";
-import { CactusCrawler, CanyonWurm, MesaTitan, SandstormRoc, BadlandsDevil, DustDevil } from "./Part5";
+import { ClockworkGunslinger, GallowsMarionette, IronHorseAutomaton, RunawayLocomotive } from "./Part1";
+import { DustRattler, GreatWhiteBuffalo, JackalopeGang, PrairieHawk, ThunderHerd, TumbleweedWarBot } from "./Part2";
+import { BanditChief, DoomsdayPreacher, MaskHunter, PrairieSkyray, QuickdrawOutlaw, SaloonBrawler } from "./Part3";
+import { FrontierDoc, GilaGiant, GoatSucker, GreenhornDeputy, OutlawKing, RailroadBaron } from "./Part4";
+import { BadlandsDevil, CactusCrawler, CanyonWurm, DustDevil, MesaTitan, SandstormRoc } from "./Part5";
 
 export const westernArt: Record<string, () => ReactNode> = {
   "runaway-locomotive": RunawayLocomotive,

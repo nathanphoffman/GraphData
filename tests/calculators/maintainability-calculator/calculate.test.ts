@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { aiName, formatCount, letterGrade, position, spans, tierFor } from "../../../src/charts/calculators/maintainability-calculator/calculate";
+import {
+  aiName,
+  formatCount,
+  letterGrade,
+  position,
+  spans,
+  tierFor,
+} from "../../../src/charts/calculators/maintainability-calculator/calculate";
 
 describe("spans", () => {
   it("uses n^n as the middle and (n-1)^(n-1) for the lower bound", () => {
