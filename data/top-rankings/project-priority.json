@@ -8,7 +8,7 @@
     { "label": "Job", "short": "Job", "weight": 1 },
     { "label": "Hard", "short": "Hard", "weight": 4, "best": 1 },
     { "label": "Logic : Assets", "short": "Logic", "weight": 2 },
-    { "label": "Completed Lines", "short": "Lines", "weight": 6, "curve": { "type": "log", "from": 40000, "to": 500 } },
+    { "label": "Completed Lines", "short": "Lines", "weight": 6, "curve": { "type": "log", "from": 200000, "to": 500 } },
     { "label": "Link", "short": "Link" },
     { "label": "Familiarity", "short": "Familiarity", "was": "Quality" },
     { "label": "xLines", "short": "xLines" },
