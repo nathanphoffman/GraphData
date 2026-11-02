@@ -173,7 +173,7 @@ export function addAverages<T extends DayWeight>(
 }
 
 const MUSCLE_START = "2024-06-20";
-const MUSCLE_TOTAL = 14.5;
+const MUSCLE_TOTAL = 18.5;
 
 /** How much the daily gain tapers by the end: 0 is a straight line, 0.5 means the last day gains 50% less than the first. */
 const MUSCLE_TAPER = 0.5;

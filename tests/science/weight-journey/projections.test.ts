@@ -31,8 +31,8 @@ describe("addMuscle", () => {
   });
 
   it("adds up to the full total by the last day, with gains that taper off", () => {
-    expect(result[result.length - 1].muscleTotal).toBeCloseTo(14.5);
-    expect(result.reduce((total, entry) => total + entry.muscleDaily, 0)).toBeCloseTo(14.5);
+    expect(result[result.length - 1].muscleTotal).toBeCloseTo(18.5);
+    expect(result.reduce((total, entry) => total + entry.muscleDaily, 0)).toBeCloseTo(18.5);
     expect(result[3].muscleDaily).toBeGreaterThan(result[5].muscleDaily);
   });
 });
