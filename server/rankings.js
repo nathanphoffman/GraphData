@@ -274,14 +274,12 @@ function getRankings() {
       title,
       ...(grade_curve === null ? {} : { gradeCurve: JSON.parse(grade_curve) }),
       columns: columns.all(id).map(rowToColumn),
-      items: items
-        .all(id)
-        .map(({ name, values_json, updated_at, features_json }) => ({
-          name,
-          values: JSON.parse(values_json),
-          updatedAt: updated_at,
-          features: JSON.parse(features_json),
-        })),
+      items: items.all(id).map(({ name, values_json, updated_at, features_json }) => ({
+        name,
+        values: JSON.parse(values_json),
+        updatedAt: updated_at,
+        features: JSON.parse(features_json),
+      })),
     }));
 
   return { rankings };
