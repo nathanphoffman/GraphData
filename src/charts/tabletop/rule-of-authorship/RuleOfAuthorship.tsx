@@ -167,8 +167,8 @@ function RuleBlock({ rule }: { rule: Rule }) {
         <Pill owner={rule.owner}>{rule.label}</Pill>
       </div>
       <p className="auth-verdict">{rule.verdict}</p>
-      {rule.body?.map((paragraph, index) => (
-        <p key={index}>{paragraph}</p>
+      {rule.body?.map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
       ))}
 
       {rule.exhibits?.map(
