@@ -55,7 +55,6 @@ const PROJECTS: Project[] = [
   { name: "Tzaar Net (AI)", folder: "TzaarNet" },
   { name: "Space Game (Ogame)", folder: "SpaceGame" },
   { name: "Contact App", folder: "ContactApp" },
-  { name: "Survive Game", folder: "SurviveGame" },
   { name: "Solar Bit Infrastructure", folder: "SolarBitInfrastructure" },
   { name: "Tiny Mighty", folder: "TinyMightyRPG" },
   {
@@ -71,10 +70,8 @@ const PROJECTS: Project[] = [
     exclude: ["static", "engine"],
   },
   { name: "Coding Astronomer", folder: "CodingAstronomer" },
-  { name: "BGG Scraper", folder: "BGGScraper" },
   { name: "Proton Drive Sync", folder: "ProtonDriveSync" },
   { name: "ValOutcast", folder: "ValOutcast" },
-  { name: "Space Viewer", folder: "SpaceViewer" },
   { name: "34004 Project", folder: "34004Project" },
   { name: "Family History Astro", folder: "FamilyHistoryAstro" },
 ];

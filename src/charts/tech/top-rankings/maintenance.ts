@@ -40,12 +40,8 @@ export const SCAFFOLDING_LINES = 256;
 /** Percent scale, used for qualities. */
 export const PERCENT = 100;
 
-/** How much AI use adds to the n-Factor a developer can hold together, by default. */
-export const DEFAULT_AI_USE = 0.75;
-
-/** The AI use the 67-68dn goal was set for. Every 0.1 of AI use below it adds 10dn (1n) to the n-Factors, and every 0.1 above it takes 10dn off. */
-const GOAL_AI_USE = 0.75;
-const N_PER_AI_USE = 10;
+/** The n-Factor taken off for the Manual Eq lines: how much AI help is assumed to add. */
+export const MANUAL_AI_N = 0.5;
 
 /** How many times nFactor halves its range, which is plenty to settle on the answer. */
 const HALVINGS = 60;
@@ -64,7 +60,7 @@ export interface NFactorResult {
   /** The n-Factor with the quality adjustment taken off. */
   graded: number;
 
-  /** The lines the graded n-Factor stands for (n^n), and the same with the extent of AI use taken off first. */
+  /** The lines the graded n-Factor stands for (n^n), and the same with MANUAL_AI_N taken off first. */
   equivalentLines: number;
   manualLines: number;
 
@@ -85,9 +81,9 @@ export interface Maintenance {
   projected: NFactorResult;
 }
 
-/** The lines a hand-written codebase would be equivalent to at this n-Factor: aiUse off it, raised to itself. */
-function manualLinesAt(n: number, aiUse: number): number {
-  return (n - aiUse) ** (n - aiUse);
+/** The lines a hand-written codebase would be equivalent to at this n-Factor: MANUAL_AI_N off it, raised to itself. */
+function manualLinesAt(n: number): number {
+  return (n - MANUAL_AI_N) ** (n - MANUAL_AI_N);
 }
 
 /** The n that makes n^n equal the total, found by halving a range until it is close enough. 1 for a total of 1 or less. */
@@ -126,12 +122,12 @@ export function qualityOf(values: Ranking["items"][number]["values"], familiarit
 }
 
 /** An n-Factor result for these (decommissioned-weighted) lines and the already adjusted n. */
-function resultFor(graded: number, decommissionedLines: number, aiUse: number): NFactorResult {
-  return { graded, equivalentLines: graded ** graded, manualLines: manualLinesAt(graded, aiUse), decommissionedLines };
+function resultFor(graded: number, decommissionedLines: number): NFactorResult {
+  return { graded, equivalentLines: graded ** graded, manualLines: manualLinesAt(graded), decommissionedLines };
 }
 
 /** The current, future and projected n-factors for a ranking with lines and quality columns, or null when it has neither or no lines. A qualityOverride replaces the average quality worked out from the projects. */
-export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: number): Maintenance | null {
+export function maintenance(ranking: Ranking, qualityOverride?: number): Maintenance | null {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
   const familiarity = ranking.columns.findIndex((column) => column.label === FAMILIARITY_LABEL);
   const computed = ranking.columns.findIndex((column) => column.label === COMPUTED_LABEL);
@@ -183,17 +179,16 @@ export function maintenance(ranking: Ranking, aiUse: number, qualityOverride?: n
   const averageQuality = qualityOverride ?? weighted / qualityLines;
   const languageAdjustment = averageNetN(languageLines, averageQuality / PERCENT);
   const adjustment = languageAdjustment ?? (averageQuality - NEUTRAL_QUALITY) / PERCENT;
-  const aiShift = (GOAL_AI_USE - aiUse) * N_PER_AI_USE;
-  const [graded, gradedFuture] = [nFactor(totalLines) - adjustment + aiShift, nFactor(futureLines) - adjustment + aiShift];
+  const [graded, gradedFuture] = [nFactor(totalLines) - adjustment, nFactor(futureLines) - adjustment];
   const projected = graded * (1 - FUTURE_WEIGHT) + gradedFuture * FUTURE_WEIGHT;
 
   return {
     averageQuality,
     adjustment,
     fromLanguages: languageAdjustment !== null,
-    current: resultFor(graded, decomLines, aiUse),
-    future: resultFor(gradedFuture, futureDecomLines, aiUse),
-    projected: resultFor(projected, decomLines * (1 - FUTURE_WEIGHT) + futureDecomLines * FUTURE_WEIGHT, aiUse),
+    current: resultFor(graded, decomLines),
+    future: resultFor(gradedFuture, futureDecomLines),
+    projected: resultFor(projected, decomLines * (1 - FUTURE_WEIGHT) + futureDecomLines * FUTURE_WEIGHT),
   };
 }
 

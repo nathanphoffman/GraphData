@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { heat } from "../top-rankings/RankingCells";
-import { DEFAULT_AI_USE, type NFactorResult, PERCENT, maintenance } from "../top-rankings/maintenance";
+import { MANUAL_AI_N, type NFactorResult, PERCENT, maintenance } from "../top-rankings/maintenance";
 import { type Ranking, fractionBetween } from "../top-rankings/score";
 
 /** An n-Factor is shown in deci-ns (dn): n x 10, to this many decimals. */
@@ -13,29 +13,30 @@ const LOWEST_QUALITY_HEAT = 50;
 /** The Average Quality slider moves in tenths of a percent. */
 const QUALITY_STEP = 0.1;
 
-/** The Extent of AI Use slider moves in hundredths. */
-const AI_USE_STEP = 0.01;
+/** The Target dn slider runs from 60 to 70 in quarter steps, and starts at 66.5. */
+const [TARGET_MIN, TARGET_MAX, TARGET_STEP, DEFAULT_TARGET] = [60, 70, 0.25, 66.5];
+
+/** The blue goal reaches this far (in dn) either side of the target; green, yellow and red follow at 1.5 and 2.5. */
+const [BLUE_REACH, GREEN_REACH, YELLOW_REACH] = [0.5, 1.5, 2.5];
 
 const lines = (count: number) => Math.round(count).toLocaleString();
 
 /** n-Factor as deci-ns, so 6.75n is 67.5. */
 const deciNs = (n: number) => Math.round(n * DECI * 10 ** DN_DIGITS) / 10 ** DN_DIGITS;
 
-/** The heat colour of a deci-n value: blue from 67 to 68, green 66-67 and 68-69, yellow 65-66 and 69-70, red outside 65-70. */
-export function deciNHeat(dn: number): { backgroundColor: string } {
-  const hue = dn >= GOAL_LOW && dn <= GOAL_HIGH ? 215 : dn >= 66 && dn <= 69 ? 120 : dn >= 65 && dn <= 70 ? 55 : 0;
+/** The heat colour of a deci-n value around the target: blue within 0.5 of it, green within 1.5, yellow within 2.5, red beyond. */
+export function deciNHeat(dn: number, target: number): { backgroundColor: string } {
+  const away = Math.abs(dn - target);
+  const hue = away <= BLUE_REACH ? 215 : away <= GREEN_REACH ? 120 : away <= YELLOW_REACH ? 55 : 0;
 
   return { backgroundColor: `hsl(${hue} 65% 45% / 0.35)` };
 }
 
-/** The blue goal, in deci-ns. */
-const [GOAL_LOW, GOAL_HIGH] = [67, 68];
-
-/** Which way a deci-n value has to move to reach the blue goal: up, down, or a checkmark when it is already there. */
-const goalMark = (dn: number) => (dn < GOAL_LOW ? "↑" : dn > GOAL_HIGH ? "↓" : "✓");
+/** Which way a deci-n value has to move to reach the target's blue goal: up, down, or a checkmark when it is already there. */
+const goalMark = (dn: number, target: number) => (dn < target - BLUE_REACH ? "↑" : dn > target + BLUE_REACH ? "↓" : "✓");
 
 /** How many deci-ns the value is from the nearest edge of the blue goal, 0 inside it. */
-const goalDistance = (dn: number) => Math.abs(dn < GOAL_LOW ? GOAL_LOW - dn : dn > GOAL_HIGH ? dn - GOAL_HIGH : 0);
+const goalDistance = (dn: number, target: number) => Math.max(0, Math.abs(dn - target) - BLUE_REACH);
 
 const FACTOR_DESCRIPTIONS = {
   Current: "The n-Factor of today's lines, minus the Avg n Adj",
@@ -44,15 +45,15 @@ const FACTOR_DESCRIPTIONS = {
 };
 
 /** One n-factor card: the centi-n value with its equivalent lines, manual equivalent lines and the lines in decommissioned projects. */
-function FactorCard({ name, result }: { name: keyof typeof FACTOR_DESCRIPTIONS; result: NFactorResult }) {
+function FactorCard({ name, result, target }: { name: keyof typeof FACTOR_DESCRIPTIONS; result: NFactorResult; target: number }) {
   const dn = deciNs(result.graded);
 
   return (
-    <div style={deciNHeat(dn)} title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Paused projects count at 1/6 of their lines. Manual takes the Extent of AI Use off the n-Factor first`}>
+    <div style={deciNHeat(dn, target)} title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Paused projects count at 1/6 of their lines. Manual Eq takes ${MANUAL_AI_N}n (AI) off the n-Factor first`}>
       <dt>{name}</dt>
-      <dd>{dn.toFixed(DN_DIGITS)}dn <span title="Which way, and how far, to move to reach the blue goal of 67-68dn">{goalMark(dn)}{dn < GOAL_LOW || dn > GOAL_HIGH ? <small className="rankings-index-delta"> Δ{dn < GOAL_LOW ? "+" : "-"}{goalDistance(dn).toFixed(DN_DIGITS)}</small> : null}</span></dd>
+      <dd>{dn.toFixed(DN_DIGITS)}dn <span title={`Which way, and how far, to move to reach the blue goal around ${target}dn`}>{goalMark(dn, target)}{goalDistance(dn, target) > 0 ? <small className="rankings-index-delta"> Δ{dn < target ? "+" : "-"}{goalDistance(dn, target).toFixed(DN_DIGITS)}</small> : null}</span></dd>
       <small>{lines(result.equivalentLines)} Lines eq.</small>
-      <small>{lines(result.manualLines)} Manual Lines eq.</small>
+      <small>{lines(result.manualLines)} Manual Eq @ -{MANUAL_AI_N}n</small>
       <small className="rankings-index-decom">({lines(result.decommissionedLines)} Lines Paused)</small>
     </div>
   );
@@ -61,9 +62,9 @@ function FactorCard({ name, result }: { name: keyof typeof FACTOR_DESCRIPTIONS; 
 /** The code maintenance summary for rankings that have lines and quality columns. */
 export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
   const [qualityOverride, setQualityOverride] = useState<number | null>(null);
-  const [aiUse, setAiUse] = useState(DEFAULT_AI_USE);
-  const actual = maintenance(ranking, aiUse);
-  const result = maintenance(ranking, aiUse, qualityOverride ?? undefined);
+  const [target, setTarget] = useState(DEFAULT_TARGET);
+  const actual = maintenance(ranking);
+  const result = maintenance(ranking, qualityOverride ?? undefined);
 
   if (!result || !actual) return null;
 
@@ -75,10 +76,10 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
         <input type="range" min={0} max={PERCENT} step={QUALITY_STEP} value={result.averageQuality} onChange={(changeEvent) => setQualityOverride(Number(changeEvent.target.value))} />
         {qualityOverride !== null && <button type="button" onClick={() => setQualityOverride(null)}>Reset to {actual.averageQuality.toFixed(1)}%</button>}
       </label>
-      <label title="Extent of AI Use: how much AI help adds to the n-Factor you can hold together. Only the Manual Lines eq. numbers use it, by taking it off the n-Factor first.">
-        Extent of AI Use: {aiUse.toFixed(2)}{" "}
-        <input type="range" min={0} max={1} step={AI_USE_STEP} value={aiUse} onChange={(changeEvent) => setAiUse(Number(changeEvent.target.value))} />
-        {aiUse !== DEFAULT_AI_USE && <button type="button" onClick={() => setAiUse(DEFAULT_AI_USE)}>Reset to {DEFAULT_AI_USE}</button>}
+      <label title="Target dn: the deci-n you are aiming for. The cards turn blue within 0.5dn of it, and the arrows show which way to move.">
+        Target dn: {target.toFixed(2)}{" "}
+        <input type="range" min={TARGET_MIN} max={TARGET_MAX} step={TARGET_STEP} value={target} onChange={(changeEvent) => setTarget(Number(changeEvent.target.value))} />
+        {target !== DEFAULT_TARGET && <button type="button" onClick={() => setTarget(DEFAULT_TARGET)}>Reset to {DEFAULT_TARGET}</button>}
       </label>
       <dl>
         <div style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))} title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines (paused projects at 1/6)">
@@ -89,9 +90,9 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
           <dt>Avg n Adj</dt>
           <dd>{deciNs(result.adjustment).toFixed(DN_DIGITS)}dn</dd>
         </div>
-        <FactorCard name="Current" result={result.current} />
-        <FactorCard name="Future" result={result.future} />
-        <FactorCard name="Projected" result={result.projected} />
+        <FactorCard name="Current" result={result.current} target={target} />
+        <FactorCard name="Future" result={result.future} target={target} />
+        <FactorCard name="Projected" result={result.projected} target={target} />
       </dl>
     </section>
   );

@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { DEFAULT_AI_USE, maintenance, nFactor, withQuality, withScaffolding } from "../../../src/charts/tech/top-rankings/maintenance";
+import { MANUAL_AI_N, maintenance, nFactor, withQuality, withScaffolding } from "../../../src/charts/tech/top-rankings/maintenance";
 
-const AI_USE = DEFAULT_AI_USE;
 const columns = [{ label: "Completed Lines" }, { label: "Familiarity" }, { label: "Computed Quality" }];
 
 describe("nFactor", () => {
@@ -19,27 +18,27 @@ describe("maintenance", () => {
   it("weights quality by lines", () => {
     const items = [...Array(10)].map((_, index) => ({ name: `s${index}`, values: [500, 3, 50] }));
     items.push({ name: "big", values: [5000, 5, 100] });
-    expect(maintenance({ id: "x", title: "x", columns, items }, AI_USE)?.averageQuality).toBe(75);
+    expect(maintenance({ id: "x", title: "x", columns, items })?.averageQuality).toBe(75);
   });
 
   it("averages familiarity with computed quality, or uses whichever one a project has", () => {
     const items = [{ name: "a", values: [10, 3, 90] }, { name: "b", values: [10, null, 90] }];
-    expect(maintenance({ id: "x", title: "x", columns, items }, AI_USE)?.averageQuality).toBe(80);
+    expect(maintenance({ id: "x", title: "x", columns, items })?.averageQuality).toBe(80);
   });
 
   it("subtracts (quality - 75) / 100 from the n-factor", () => {
-    const result = maintenance({ id: "x", title: "x", columns, items: [{ name: "a", values: [27, 5, 100] }] }, AI_USE);
+    const result = maintenance({ id: "x", title: "x", columns, items: [{ name: "a", values: [27, 5, 100] }] });
     expect(result?.current.graded).toBeCloseTo(3 - 0.25, 6);
   });
 
   it("is null without the columns", () => {
-    expect(maintenance({ id: "x", title: "x", columns: [{ label: "A" }], items: [] }, AI_USE)).toBeNull();
+    expect(maintenance({ id: "x", title: "x", columns: [{ label: "A" }], items: [] })).toBeNull();
   });
 });
 
 describe("maintenance growth", () => {
   it("multiplies each project's lines by its xLines for the future n-factor", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] }, AI_USE);
+    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
         expect(result?.future.graded).toBeCloseTo(3, 6);
   });
 });
@@ -48,7 +47,7 @@ describe("decommissioned projects", () => {
   const withDecom = [...columns, { label: "xLines" }, { label: "Decommissioned" }];
 
   it("count at 1/6 of their lines in all three n-factors", () => {
-    const result = maintenance({ id: "x", title: "x", columns: withDecom, items: [{ name: "a", values: [9, 4, 75, 3, 0] }, { name: "b", values: [60, 4, 75, 2, 1] }] }, AI_USE);
+    const result = maintenance({ id: "x", title: "x", columns: withDecom, items: [{ name: "a", values: [9, 4, 75, 3, 0] }, { name: "b", values: [60, 4, 75, 2, 1] }] });
     // 9 + 60/6 = 19 lines now, 27 + 120/6 = 47 after growth.
     expect(result?.current.graded).toBeCloseTo(nFactor(19), 6);
     expect(result?.future.graded).toBeCloseTo(nFactor(47), 6);
@@ -58,17 +57,17 @@ describe("decommissioned projects", () => {
   });
 
   it("projected is 25% current and 75% future", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] }, AI_USE);
+    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
     expect(result?.projected.graded).toBeCloseTo((result?.current.graded ?? 0) * 0.25 + (result?.future.graded ?? 0) * 0.75, 6);
   });
 });
 
 describe("lines equivalents", () => {
-  it("are the n-factor raised to itself, and with the AI use taken off first for manual", () => {
-    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] }, AI_USE);
+  it("are the n-factor raised to itself, and with the 0.5n taken off first for manual", () => {
+    const result = maintenance({ id: "x", title: "x", columns: [...columns, { label: "xLines" }], items: [{ name: "a", values: [9, 4, 75, 3] }] });
     const n = result?.projected.graded ?? 0;
     expect(result?.projected.equivalentLines).toBeCloseTo(n ** n, 6);
-    expect(result?.projected.manualLines).toBeCloseTo((n - 0.75) ** (n - 0.75), 6);
+    expect(result?.projected.manualLines).toBeCloseTo((n - MANUAL_AI_N) ** (n - MANUAL_AI_N), 6);
   });
 });
 

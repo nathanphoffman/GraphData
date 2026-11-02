@@ -43,7 +43,7 @@ describe("maintenance with Tech Lines", () => {
   const columns = [{ label: "Completed Lines" }, { label: "Computed Quality" }, { label: "Tech Lines" }];
 
   it("subtracts the lines-weighted language adjustment from the n-factor", () => {
-    const result = maintenance({ id: "x", title: "x", columns, items: [{ name: "a", values: [27, 80, "Deor 1"] }] }, 0);
+    const result = maintenance({ id: "x", title: "x", columns, items: [{ name: "a", values: [27, 80, "Deor 1"] }] });
     const adjustment = netN("Deor", 0.8) as number;
 
     expect(result?.adjustment).toBeCloseTo(adjustment, 9);
