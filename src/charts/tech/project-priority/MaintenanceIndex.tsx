@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MANUAL_AI_N, maintenance, type NFactorResult, PERCENT } from "../top-rankings/maintenance";
 import { heat } from "../top-rankings/RankingCells";
 import { fractionBetween, type Ranking } from "../top-rankings/score";
+import { LanguagePie } from "./LanguagePie";
 
 /** An n-Factor is shown in deci-ns (dn): n x 10, to this many decimals. */
 const DN_DIGITS = 1;
@@ -45,7 +46,7 @@ const FACTOR_DESCRIPTIONS = {
   Projected: "Current (25%) and Future (75%) n-Factors averaged",
 };
 
-/** One n-factor card: the centi-n value with its equivalent lines, manual equivalent lines and the lines in decommissioned projects. */
+/** One n-factor card: the centi-n value with its equivalent lines and manual equivalent lines. */
 function FactorCard({
   name,
   result,
@@ -60,7 +61,7 @@ function FactorCard({
   return (
     <div
       style={deciNHeat(dn, target)}
-      title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Paused projects count at 1/6 of their lines. Manual Eq takes ${MANUAL_AI_N}n (AI) off the n-Factor first`}
+      title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Manual Eq takes ${MANUAL_AI_N}n (AI) off the n-Factor first`}
     >
       <dt>{name}</dt>
       <dd>
@@ -74,14 +75,12 @@ function FactorCard({
               {goalDistance(dn, target).toFixed(DN_DIGITS)}
             </small>
           ) : null}
-
         </span>
       </dd>
       <small>{lines(result.equivalentLines)} Lines eq.</small>
       <small>
         {lines(result.manualLines)} Manual Eq @ -{MANUAL_AI_N}n
       </small>
-      <small className="rankings-index-decom">({lines(result.decommissionedLines)} Lines Paused)</small>
     </div>
   );
 }
@@ -97,45 +96,47 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
 
   return (
     <section className="rankings-index">
-      <h3>Code Maintenance Index</h3>
-      <label title="Average quality used in the numbers below. It starts at the real average; move it to see what the n-factors would be at a different quality.">
-        Average Quality: {result.averageQuality.toFixed(1)}%{" "}
-        <input
-          type="range"
-          min={0}
-          max={PERCENT}
-          step={QUALITY_STEP}
-          value={result.averageQuality}
-          onChange={(changeEvent) => setQualityOverride(Number(changeEvent.target.value))}
-        />
-        {qualityOverride !== null && (
-          <button type="button" onClick={() => setQualityOverride(null)}>
-            Reset to {actual.averageQuality.toFixed(1)}%
-          </button>
-        )}
-
-      </label>
-      <label title="Target dn: the deci-n you are aiming for. The cards turn blue within 0.5dn of it, and the arrows show which way to move.">
-        Target dn: {target.toFixed(2)}{" "}
-        <input
-          type="range"
-          min={TARGET_MIN}
-          max={TARGET_MAX}
-          step={TARGET_STEP}
-          value={target}
-          onChange={(changeEvent) => setTarget(Number(changeEvent.target.value))}
-        />
-        {target !== DEFAULT_TARGET && (
-          <button type="button" onClick={() => setTarget(DEFAULT_TARGET)}>
-            Reset to {DEFAULT_TARGET}
-          </button>
-        )}
-
-      </label>
+      <div className="rankings-index-top">
+        <LanguagePie ranking={ranking} />
+        <div className="rankings-index-sliders">
+          <label title="Average quality used in the numbers below. It starts at the real average; move it to see what the n-factors would be at a different quality.">
+            Average Quality: {result.averageQuality.toFixed(1)}%{" "}
+            <input
+              type="range"
+              min={0}
+              max={PERCENT}
+              step={QUALITY_STEP}
+              value={result.averageQuality}
+              onChange={(changeEvent) => setQualityOverride(Number(changeEvent.target.value))}
+            />
+            {qualityOverride !== null && (
+              <button type="button" onClick={() => setQualityOverride(null)}>
+                Reset to {actual.averageQuality.toFixed(1)}%
+              </button>
+            )}
+          </label>
+          <label title="Target dn: the deci-n you are aiming for. The cards turn blue within 0.5dn of it, and the arrows show which way to move.">
+            Target dn: {target.toFixed(2)}{" "}
+            <input
+              type="range"
+              min={TARGET_MIN}
+              max={TARGET_MAX}
+              step={TARGET_STEP}
+              value={target}
+              onChange={(changeEvent) => setTarget(Number(changeEvent.target.value))}
+            />
+            {target !== DEFAULT_TARGET && (
+              <button type="button" onClick={() => setTarget(DEFAULT_TARGET)}>
+                Reset to {DEFAULT_TARGET}
+              </button>
+            )}
+          </label>
+        </div>
+      </div>
       <dl>
         <div
           style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))}
-          title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines (paused projects at 1/6)"
+          title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines"
         >
           <dt>Average Quality</dt>
           <dd>{result.averageQuality.toFixed(1)}%</dd>
@@ -146,7 +147,6 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
               ? "Each language's net n (average quality out of 1, divided by the language's burden score, minus 0.25), averaged by lines across all projects. It is taken off the n-Factors. Shown in deci-ns (dn)."
               : "No project has language lines yet, so this is (average quality - 75) / 100. Shown in deci-ns (dn)."
           }
-
         >
           <dt>Avg n Adj</dt>
           <dd>{deciNs(result.adjustment).toFixed(DN_DIGITS)}dn</dd>

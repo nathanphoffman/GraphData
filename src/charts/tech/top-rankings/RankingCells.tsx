@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { InlineCell } from "./InlineCell";
 import { techShares } from "./languageBurden";
-import { DECOMMISSIONED_LABEL, LINES_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance";
+import { LINES_LABEL, QUALITY_LABEL, WISHLIST_LABEL } from "./maintenance";
 import {
   type Column,
   effectiveRating,
@@ -62,11 +62,10 @@ export interface CellProps {
 
 /** The columns shown as a checkbox, with the words the checkbox's label ends in. */
 const CHECKBOX_LABELS: Record<string, string> = {
-  [DECOMMISSIONED_LABEL]: "paused",
   [WISHLIST_LABEL]: "on the wishlist",
 };
 
-/** A plain information cell; the Decommissioned and Wishlist columns are checkboxes. */
+/** A plain information cell; the Wishlist column is a checkbox. */
 export function InfoCell({ item, column, index, canEdit, saveCell }: CellProps) {
   if (column.label in CHECKBOX_LABELS) {
     const checked = item.values[index] === 1;
@@ -117,7 +116,7 @@ export function RatedCell({
       column={column}
       itemName={item.name}
       value={rating}
-      canEdit={canEdit && column.label !== QUALITY_LABEL && column.label !== STATUS_LABEL}
+      canEdit={canEdit && column.label !== QUALITY_LABEL}
       onSave={saveCell(item, index)}
       style={colour}
     >

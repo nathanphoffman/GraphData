@@ -8,7 +8,6 @@ import {
   SCAFFOLDING_LINES,
   TECH_LINES_LABEL,
   withQuality,
-  withStatus,
 } from "./maintenance";
 
 import { heat, InfoCell, NameCell, RatedCell, type SaveCell } from "./RankingCells";
@@ -126,7 +125,7 @@ function cellSaver(ranking: Ranking, source: Ranking, onSaved: () => Promise<voi
     };
 
     // Quality and Status are worked out from the other values, so save them fresh along with the change.
-    const { values } = withStatus(withQuality({ ...source, items: [changed] })).items[0];
+    const { values } = withQuality({ ...source, items: [changed] }).items[0];
 
     // Save the whole item; the server adds it or changes it by name.
     await callApi(`/api/rankings/${ranking.id}/items/${encodeURIComponent(item.name)}`, "PUT", { values });
@@ -304,7 +303,7 @@ export function RankingTable({
   const [shown, setShown] = useState(PAGE_SIZE);
   const [featuresOf, setFeaturesOf] = useState<string | null>(null);
 
-  // Dimmed items (decommissioned or wishlist) sit where their score puts them, but only the others are numbered.
+  // Dimmed items (wishlist) sit where their score puts them, but only the others are numbered.
   const dimmed = (item: Item) => isDimmed(ranking, item);
   const numbers = new Map(
     rankItems({ ...ranking, items: ranking.items.filter((item) => !dimmed(item)) }).map((rankedRow) => [

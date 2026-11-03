@@ -59,28 +59,7 @@ describe("maintenance growth", () => {
   });
 });
 
-describe("decommissioned projects", () => {
-  const withDecom = [...columns, { label: "xLines" }, { label: "Decommissioned" }];
-
-  it("count at 1/6 of their lines in all three n-factors", () => {
-    const result = maintenance({
-      id: "x",
-      title: "x",
-      columns: withDecom,
-      items: [
-        { name: "a", values: [9, 4, 75, 3, 0] },
-        { name: "b", values: [60, 4, 75, 2, 1] },
-      ],
-    });
-
-    // 9 + 60/6 = 19 lines now, 27 + 120/6 = 47 after growth.
-    expect(result?.current.graded).toBeCloseTo(nFactor(19), 6);
-    expect(result?.future.graded).toBeCloseTo(nFactor(47), 6);
-    expect(result?.current.decommissionedLines).toBe(60);
-    expect(result?.future.decommissionedLines).toBe(120);
-    expect(result?.projected.decommissionedLines).toBeCloseTo(60 * 0.25 + 120 * 0.75, 6);
-  });
-
+describe("projected n-factor", () => {
   it("projected is 25% current and 75% future", () => {
     const result = maintenance({
       id: "x",
