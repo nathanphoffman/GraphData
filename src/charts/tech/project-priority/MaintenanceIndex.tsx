@@ -13,8 +13,8 @@ const LOWEST_QUALITY_HEAT = 50;
 /** The Average Quality slider moves in tenths of a percent. */
 const QUALITY_STEP = 0.1;
 
-/** The Target dn slider runs from 60 to 70 in quarter steps, and starts at 66.5. */
-const [TARGET_MIN, TARGET_MAX, TARGET_STEP, DEFAULT_TARGET] = [60, 70, 0.25, 66.5];
+/** The Target dn slider runs from 60 to 70 in quarter steps, and starts at 67.5. */
+const [TARGET_MIN, TARGET_MAX, TARGET_STEP, DEFAULT_TARGET] = [60, 70, 0.25, 67.5];
 
 /** The blue goal reaches this far (in dn) either side of the target; green, yellow and red follow at 1.5 and 2.5. */
 const [BLUE_REACH, GREEN_REACH, YELLOW_REACH] = [0.5, 1.5, 2.5];
