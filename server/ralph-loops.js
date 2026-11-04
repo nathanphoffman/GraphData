@@ -220,6 +220,23 @@ export const ralphRoutes = [
       sendJson(response, 200, { name, content: file.content, updatedAt: file.updated_at });
     },
   },
+  // Removes a loop from the page (for loops that were archived): its status, events, commits, languages and files.
+  {
+    method: "DELETE",
+    path: "/api/ralph/project/:project",
+    handler: (request, response, { project }) => {
+      requireUser(request);
+      db.exec("BEGIN");
+
+      for (const table of ["ralph_status", "ralph_events", "ralph_commits", "ralph_languages", "ralph_files"]) {
+        db.prepare(`DELETE FROM ${table} WHERE project = ?`).run(project);
+      }
+
+      db.exec("COMMIT");
+      cached = { at: 0, projects: [] };
+      sendJson(response, 200, { ok: true });
+    },
+  },
   // Everything the page shows. Answers are reused for CACHE_MS, so many open pages cost one set of queries.
   {
     method: "GET",
