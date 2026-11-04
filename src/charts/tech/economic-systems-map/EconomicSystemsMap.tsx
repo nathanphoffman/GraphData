@@ -14,6 +14,7 @@ const combos = (combosData as unknown as EconomicSystemsCombosData).combos;
 /** The economic systems grid: click a system, a line between two, or a corner shared by four to see the views of that system or blend. */
 export default function EconomicSystemsMap() {
   const [showExamples, setShowExamples] = useState(false);
+  const [showStability, setShowStability] = useState(false);
 
   /** Names of the chosen cells: one for a system, two for a 2-way blend, four for a 4-way blend. */
   const [selection, setSelection] = useState<string[]>([]);
@@ -49,22 +50,17 @@ export default function EconomicSystemsMap() {
 
   return (
     <div>
-      <section className="theory">
-        <h2>{model.theory.heading}</h2>
-        {/* One paragraph per theory note. */}
-        {model.theory.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-
-        <p className="views-note">{model.theory.caveat}</p>
-      </section>
-
       <label className="map-toggle">
         <input type="checkbox" checked={showExamples} onChange={(event) => setShowExamples(event.target.checked)} />
         Show historical examples instead of figures
       </label>
 
-      <MapSvg model={model} showExamples={showExamples} highlight={highlight} onSelect={setSelection} />
+      <label className="map-toggle">
+        <input type="checkbox" checked={showStability} onChange={(event) => setShowStability(event.target.checked)} />
+        Show Historical Stability
+      </label>
+
+      <MapSvg model={model} showExamples={showExamples} showStability={showStability} highlight={highlight} onSelect={setSelection} />
 
       {selectedCells.length ? (
         <ViewsPanel

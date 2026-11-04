@@ -26,6 +26,7 @@ const FONT = "system-ui, -apple-system, Segoe UI, sans-serif";
 interface Props {
   model: EconomicSystemsData;
   showExamples: boolean;
+  showStability: boolean;
 
   /** Grid position of the outline; fractional while a combo is shown. */
   highlight?: { col: number; row: number };
@@ -33,7 +34,7 @@ interface Props {
 }
 
 /** The map itself: stacks the layers from grid (bottom) to figures (top). */
-export default function MapSvg({ model, showExamples, highlight, onSelect }: Props) {
+export default function MapSvg({ model, showExamples, showStability, highlight, onSelect }: Props) {
   const labels = useMemo(() => placeLabels(model, model.figures), [model]);
 
   return (
@@ -64,7 +65,7 @@ export default function MapSvg({ model, showExamples, highlight, onSelect }: Pro
           />
         )}
 
-        <StabilityBand stability={model.stability} />
+        {showStability && <StabilityBand stability={model.stability} />}
         <UsOverlay overlay={model.overlay} />
         <CellNames cells={model.cells} showExamples={showExamples} />
         {!showExamples && <FigureLabels labels={labels} />}

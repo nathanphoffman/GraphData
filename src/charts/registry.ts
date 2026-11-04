@@ -90,7 +90,7 @@ export const charts: ChartEntry[] = [
     title: "Economic Systems Map",
     category: TECH_CATEGORY,
     description:
-      "A two-axis map of economic systems (orientation vs. size of power) with a band of historical stability, the U.S. 1865-present, and where well-known figures sit.",
+      "A two-axis map of economic systems (orientation vs. size of power) the U.S. 1865-present, and where well-known figures sit.",
     component: EconomicSystemsMap,
   },
   {
