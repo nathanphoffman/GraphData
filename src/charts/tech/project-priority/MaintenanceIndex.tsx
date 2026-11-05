@@ -46,7 +46,7 @@ const FACTOR_DESCRIPTIONS = {
   Projected: "Current (25%) and Future (75%) n-Factors averaged",
 };
 
-/** One n-factor card: the centi-n value with its equivalent lines and manual equivalent lines. */
+/** One n-factor card: the centi-n value with its equivalent lines, manual equivalent lines and the lines in paused projects. */
 function FactorCard({
   name,
   result,
@@ -61,7 +61,7 @@ function FactorCard({
   return (
     <div
       style={deciNHeat(dn, target)}
-      title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Manual Eq takes ${MANUAL_AI_N}n (AI) off the n-Factor first`}
+      title={`${FACTOR_DESCRIPTIONS[name]}. Shown in deci-ns (dn): 67.5dn is 6.75n. Paused projects count at 1/6 of their lines. Manual Eq takes ${MANUAL_AI_N}n (AI) off the n-Factor first`}
     >
       <dt>{name}</dt>
       <dd>
@@ -81,6 +81,7 @@ function FactorCard({
       <small>
         {lines(result.manualLines)} Manual Eq @ -{MANUAL_AI_N}n
       </small>
+      <small className="rankings-index-decom">({lines(result.decommissionedLines)} Lines Paused)</small>
     </div>
   );
 }
@@ -136,7 +137,7 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
       <dl>
         <div
           style={heat(fractionBetween(result.averageQuality, LOWEST_QUALITY_HEAT, PERCENT))}
-          title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines"
+          title="Each project's Familiarity and Computed Quality averaged, then averaged across projects weighted by their lines (paused projects at 1/6)"
         >
           <dt>Average Quality</dt>
           <dd>{result.averageQuality.toFixed(1)}%</dd>

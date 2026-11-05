@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { formatContribution } from "./dnContribution";
 import { InlineCell } from "./InlineCell";
 import { techShares } from "./languageBurden";
-import { LINES_LABEL, QUALITY_LABEL, WISHLIST_LABEL } from "./maintenance";
+import { DECOMMISSIONED_LABEL, LINES_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance";
 import {
   type Column,
-  effectiveRating,
   fractionBetween,
   HIGHEST_RATING,
   type Item,
   isNumber,
   isText,
   LOWEST_RATING,
+  ratingOf,
 } from "./score";
 
 import { TechLinesModal } from "./TechLinesModal";
@@ -35,7 +36,7 @@ type CellValue = number | string | null;
 export type SaveCell = (item: Item, index: number) => (value: CellValue) => Promise<void>;
 
 /** The item's name, linking to its web address when it has one. */
-export function NameCell({ item, linkIndex }: { item: Item; linkIndex: number }) {
+export function NameCell({ item, linkIndex, dn }: { item: Item; linkIndex: number; dn?: number }) {
   const link = item.values[linkIndex];
 
   return (
@@ -48,6 +49,11 @@ export function NameCell({ item, linkIndex }: { item: Item; linkIndex: number })
         item.name
       )}
 
+      {dn !== undefined && (
+        <small className="rankings-dn" title="How much this project adds to the current n-Factor, in deci-ns">
+          {` (${formatContribution(dn)})`}
+        </small>
+      )}
     </td>
   );
 }
@@ -62,10 +68,11 @@ export interface CellProps {
 
 /** The columns shown as a checkbox, with the words the checkbox's label ends in. */
 const CHECKBOX_LABELS: Record<string, string> = {
+  [DECOMMISSIONED_LABEL]: "paused",
   [WISHLIST_LABEL]: "on the wishlist",
 };
 
-/** A plain information cell; the Wishlist column is a checkbox. */
+/** A plain information cell; the Decommissioned and Wishlist columns are checkboxes. */
 export function InfoCell({ item, column, index, canEdit, saveCell }: CellProps) {
   if (column.label in CHECKBOX_LABELS) {
     const checked = item.values[index] === 1;
@@ -105,10 +112,11 @@ export function RatedCell({
   saveCell,
   episodic,
   techLines,
-}: CellProps & { episodic: unknown; techLines?: unknown }) {
+  growth,
+}: CellProps & { episodic: unknown; techLines?: unknown; growth?: unknown }) {
   const [showTech, setShowTech] = useState(false);
   const rating = item.values[index];
-  const used = isNumber(rating) ? effectiveRating(column, rating) : null;
+  const used = isNumber(rating) ? ratingOf(column, rating, growth) : null;
   const colour = used === null ? undefined : heat(fractionBetween(used, LOWEST_RATING, HIGHEST_RATING));
 
   return (
@@ -116,7 +124,7 @@ export function RatedCell({
       column={column}
       itemName={item.name}
       value={rating}
-      canEdit={canEdit && column.label !== QUALITY_LABEL}
+      canEdit={canEdit && column.label !== QUALITY_LABEL && column.label !== STATUS_LABEL}
       onSave={saveCell(item, index)}
       style={colour}
     >
@@ -135,6 +143,10 @@ export function RatedCell({
         </button>
       ) : (
         show(rating)
+      )}
+
+      {column.label === LINES_LABEL && isNumber(rating) && isNumber(growth) && (
+        <small title="Expected lines after growth (lines x xLines)"> → {Math.round(rating * growth)}</small>
       )}
 
       {showTech && (

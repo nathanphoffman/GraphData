@@ -8,13 +8,15 @@
     { "label": "Job", "short": "Job", "weight": 1 },
     { "label": "Hard", "short": "Hard", "weight": 4, "best": 1 },
     { "label": "Logic : Assets", "short": "Logic", "weight": 2 },
-    { "label": "Completed Lines", "short": "Lines", "weight": 6, "curve": { "type": "log", "from": 200000, "to": 500 } },
+    { "label": "Completed Lines", "short": "Lines", "weight": 6, "curve": { "type": "log", "from": 150000, "to": 500 } },
     { "label": "Link", "short": "Link" },
     { "label": "Familiarity", "short": "Famil.", "was": "Quality" },
     { "label": "xLines", "short": "xLines" },
     { "label": "Computed Quality", "short": "Computed", "was": "Quality" },
     { "label": "Quality", "short": "Quality", "weight": 3, "curve": { "type": "linear", "from": 60, "to": 95 } },
-    { "label": "Tech Lines", "short": "Tech" }
+    { "label": "Tech Lines", "short": "Tech" },
+    { "label": "Decommissioned", "short": "Paused" },
+    { "label": "Status", "short": "Status", "weight": 3 }
   ],
   "items": [
     {
@@ -158,7 +160,7 @@
       ]
     },
     {
-      "name": "Space Game (Ogame)",
+      "name": "Digital Space Board Game",
       "values": [
         "Next.js, React. Three.js, Postgres, Docker",
         5,

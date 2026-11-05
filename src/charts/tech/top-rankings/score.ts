@@ -161,15 +161,33 @@ export function effectiveRating(column: Column, rating: number): number {
   return HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * Math.abs(rating - column.best)) / furthest;
 }
 
+/** The column holding each project's lines, and the one holding how many times bigger it is expected to grow. */
+export const LINES_LABEL = "Completed Lines";
+export const GROWTH_LABEL = "xLines";
+
+/** A project's lines are rated twice, as they are and as they are expected to grow, and the two ratings are averaged. */
+export function linesRating(column: Column, lines: number, growth: unknown): number {
+  const grown = isNumber(growth) ? lines * growth : lines;
+
+  return (effectiveRating(column, lines) + effectiveRating(column, grown)) / 2;
+}
+
+/** The rating a cell counts as: the column's effective rating, with the lines column also taking its growth into account. */
+export function ratingOf(column: Column, rating: number, growth: unknown): number {
+  return column.label === LINES_LABEL ? linesRating(column, rating, growth) : effectiveRating(column, rating);
+}
+
 /** Sum of rating squared times the column's weight, over the rated columns. */
 export function score(columns: Column[], item: Item): number {
+  const growth = item.values[columns.findIndex((column) => column.label === GROWTH_LABEL)];
+
   // Add up each rated column's squared rating times its weight, skipping missing values.
   return columns.reduce((total, column, index) => {
     const rating = item.values[index];
 
     return column.weight === undefined || !isNumber(rating)
       ? total
-      : total + effectiveRating(column, rating) ** 2 * column.weight;
+      : total + ratingOf(column, rating, growth) ** 2 * column.weight;
   }, 0);
 }
 

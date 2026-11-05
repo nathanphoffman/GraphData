@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { callApi } from "../../../api";
 import { EditGear } from "../../../auth/EditGear";
 import { useAuth } from "../../../auth/useAuth";
-import { SCAFFOLDING_LINES, withQuality, withScaffolding } from "../top-rankings/maintenance";
+import { SCAFFOLDING_LINES, withQuality, withScaffolding, withStatus } from "../top-rankings/maintenance";
 import { RankingEditor } from "../top-rankings/RankingEditor";
 import { firstSort, RankingTable, type Sort } from "../top-rankings/RankingTable";
 import { PROJECT_PRIORITY_ID } from "../top-rankings/TopRankings";
@@ -27,7 +27,7 @@ export default function ProjectPriority() {
     const found = data.rankings.find((candidate) => candidate.id === PROJECT_PRIORITY_ID);
 
     if (!found) throw new Error("Project priority ranking is missing");
-    setRanking(withQuality(found));
+    setRanking(withStatus(withQuality(found)));
   }, []);
 
   // Load the ranking once when the page opens, and show an error if that fails.

@@ -54,7 +54,7 @@ const PROJECTS: Project[] = [
   { name: "Weather", folder: "WeatherSite" },
   { name: "Fairy Tale: An Adventure", folder: "FairyTaleAnAdventure" },
   { name: "Tzaar Net (AI)", folder: "TzaarNet" },
-  { name: "Space Game (Ogame)", folder: "SpaceGame" },
+  { name: "Digital Space Board Game", folder: "SpaceGame" },
   { name: "Contact App", folder: "ContactApp" },
   { name: "Solar Bit Infrastructure", folder: "SolarBitInfrastructure" },
   { name: "Tiny Mighty", folder: "TinyMightyRPG" },

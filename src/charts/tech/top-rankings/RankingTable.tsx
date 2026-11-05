@@ -8,10 +8,21 @@ import {
   SCAFFOLDING_LINES,
   TECH_LINES_LABEL,
   withQuality,
+  withStatus,
 } from "./maintenance";
 
+import { dnContributions } from "./dnContribution";
 import { heat, InfoCell, NameCell, RatedCell, type SaveCell } from "./RankingCells";
-import { type Column, fractionBetween, type Item, isNumber, letterGrade, type Ranking, rankItems } from "./score";
+import {
+  type Column,
+  fractionBetween,
+  GROWTH_LABEL,
+  type Item,
+  isNumber,
+  letterGrade,
+  type Ranking,
+  rankItems,
+} from "./score";
 
 const PAGE_SIZE = 100;
 
@@ -42,6 +53,7 @@ interface TableColumns {
   linkIndex: number;
   episodicIndex: number;
   techIndex: number;
+  growthIndex: number;
   info: IndexedColumn[];
   rated: IndexedColumn[];
 }
@@ -89,6 +101,7 @@ function splitColumns(ranking: Ranking): TableColumns {
     linkIndex: ranking.columns.findIndex((column) => column.label === LINK_LABEL),
     episodicIndex: ranking.columns.findIndex((column) => column.label === EPISODIC_LABEL),
     techIndex: ranking.columns.findIndex((column) => column.label === TECH_LINES_LABEL),
+    growthIndex: ranking.columns.findIndex((column) => column.label === GROWTH_LABEL),
     info: indexed.filter(({ column }) => column.weight === undefined && !hiddenLabels.includes(column.label)),
     rated: indexed
       .filter(({ column }) => column.weight !== undefined)
@@ -125,7 +138,7 @@ function cellSaver(ranking: Ranking, source: Ranking, onSaved: () => Promise<voi
     };
 
     // Quality and Status are worked out from the other values, so save them fresh along with the change.
-    const { values } = withQuality({ ...source, items: [changed] }).items[0];
+    const { values } = withStatus(withQuality({ ...source, items: [changed] })).items[0];
 
     // Save the whole item; the server adds it or changes it by name.
     await callApi(`/api/rankings/${ranking.id}/items/${encodeURIComponent(item.name)}`, "PUT", { values });
@@ -207,6 +220,7 @@ interface RowProps {
   canEdit: boolean;
   saveCell: SaveCell;
   dimmed: boolean;
+  dn?: number;
   onFeatures?: (item: Item) => void;
 }
 
@@ -219,6 +233,7 @@ function RankingRow({
   canEdit,
   saveCell,
   dimmed,
+  dn,
   onFeatures,
 }: RowProps) {
   const { item, score, grade, rank } = rankedRow;
@@ -227,7 +242,7 @@ function RankingRow({
   return (
     <tr className={dimmed ? "rankings-dimmed" : undefined}>
       <td>{dimmed ? "" : rank}</td>
-      <NameCell item={item} linkIndex={columns.linkIndex} />
+      <NameCell item={item} linkIndex={columns.linkIndex} dn={dn} />
       {columns.info.map(({ column, index }) => (
         <InfoCell key={column.label} {...cell} column={column} index={index} />
       ))}
@@ -248,6 +263,7 @@ function RankingRow({
           index={index}
           episodic={item.values[columns.episodicIndex]}
           techLines={item.values[columns.techIndex]}
+          growth={item.values[columns.growthIndex]}
         />
       ))}
 
@@ -300,10 +316,11 @@ export function RankingTable({
   showFeatures = false,
 }: TableProps) {
   const columns = splitColumns(ranking);
+  const contributions = dnContributions(ranking);
   const [shown, setShown] = useState(PAGE_SIZE);
   const [featuresOf, setFeaturesOf] = useState<string | null>(null);
 
-  // Dimmed items (wishlist) sit where their score puts them, but only the others are numbered.
+  // Dimmed items (decommissioned or wishlist) sit where their score puts them, but only the others are numbered.
   const dimmed = (item: Item) => isDimmed(ranking, item);
   const numbers = new Map(
     rankItems({ ...ranking, items: ranking.items.filter((item) => !dimmed(item)) }).map((rankedRow) => [
@@ -353,6 +370,7 @@ export function RankingTable({
               row={rankedRow}
               {...context}
               dimmed={dimmed(rankedRow.item)}
+              dn={contributions.get(rankedRow.item.name)}
               onFeatures={showFeatures ? (item) => setFeaturesOf(item.name) : undefined}
             />
           ))}
