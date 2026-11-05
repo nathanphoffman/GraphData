@@ -109,15 +109,12 @@ export function averageNetN(linesByLanguage: Record<string, number>, quality: nu
   return total === 0 ? null : weighted / total;
 }
 
-/** The biggest language has to hold less than this share of a project's lines for the breakdown to be worth showing. */
-const SINGLE_LANGUAGE_SHARE = 0.95;
-
-/** Each language's lines and share of the project's rated lines, biggest first, or null when one language holds SINGLE_LANGUAGE_SHARE or more (or there is nothing to show). */
+/** Each language's lines and share of the project's rated lines, biggest first, or null when there is nothing to show. */
 export function techShares(text: unknown): { language: string; lines: number; share: number }[] | null {
   const entries = Object.entries(parseTechLines(text)).sort((first, second) => second[1] - first[1]);
   const total = entries.reduce((runningTotal, [, count]) => runningTotal + count, 0);
 
-  if (entries.length < 2 || entries[0][1] / total >= SINGLE_LANGUAGE_SHARE) return null;
+  if (entries.length === 0 || total === 0) return null;
 
   return entries.map(([language, lines]) => ({ language, lines, share: lines / total }));
 }
