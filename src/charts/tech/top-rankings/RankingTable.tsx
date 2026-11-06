@@ -221,6 +221,7 @@ interface RowProps {
   saveCell: SaveCell;
   dimmed: boolean;
   dn?: number;
+  languageColors?: Map<string, string>;
   onFeatures?: (item: Item) => void;
 }
 
@@ -234,6 +235,7 @@ function RankingRow({
   saveCell,
   dimmed,
   dn,
+  languageColors,
   onFeatures,
 }: RowProps) {
   const { item, score, grade, rank } = rankedRow;
@@ -242,7 +244,13 @@ function RankingRow({
   return (
     <tr className={dimmed ? "rankings-dimmed" : undefined}>
       <td>{dimmed ? "" : rank}</td>
-      <NameCell item={item} linkIndex={columns.linkIndex} dn={dn} />
+      <NameCell
+        item={item}
+        linkIndex={columns.linkIndex}
+        dn={dn}
+        techLines={item.values[columns.techIndex]}
+        languageColors={languageColors}
+      />
       {columns.info.map(({ column, index }) => (
         <InfoCell key={column.label} {...cell} column={column} index={index} />
       ))}
@@ -301,6 +309,9 @@ interface TableProps {
 
   /** Adds a Features column with each item's number of planned features, which opens a pop-up to edit them when `canEdit`. */
   showFeatures?: boolean;
+
+  /** Shows a colored square per language before each name (sized by the language's share of the project), using these colors. */
+  languageColors?: Map<string, string>;
 }
 
 /** One ranking as a table: rank, name, information columns, score, then the rated columns heaviest first. `ranking` is what is shown; `source` is the same data as saved, which edits start from. */
@@ -314,6 +325,7 @@ export function RankingTable({
   canEdit,
   onSaved,
   showFeatures = false,
+  languageColors,
 }: TableProps) {
   const columns = splitColumns(ranking);
   const contributions = dnContributions(ranking);
@@ -371,6 +383,7 @@ export function RankingTable({
               {...context}
               dimmed={dimmed(rankedRow.item)}
               dn={contributions.get(rankedRow.item.name)}
+              languageColors={languageColors}
               onFeatures={showFeatures ? (item) => setFeaturesOf(item.name) : undefined}
             />
           ))}

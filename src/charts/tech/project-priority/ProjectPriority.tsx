@@ -9,6 +9,7 @@ import { firstSort, RankingTable, type Sort } from "../top-rankings/RankingTable
 import { PROJECT_PRIORITY_ID } from "../top-rankings/TopRankings";
 import "../top-rankings/styles.css";
 import { isText, type Ranking } from "../top-rankings/score";
+import { languageColors } from "./languageTotals";
 import { MaintenanceIndex } from "./MaintenanceIndex";
 
 /** Project priority page: the project ranking table with the code maintenance index above it. */
@@ -83,6 +84,7 @@ export default function ProjectPriority() {
         source={ranking}
         showScore={showScore}
         showFeatures
+        languageColors={languageColors(shown)}
         search={search}
         sort={sort}
         canEdit={isText(auth.user)}

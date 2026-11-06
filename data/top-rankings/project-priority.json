@@ -88,7 +88,7 @@
       ]
     },
     {
-      "name": "3d Space Game (Descent)",
+      "name": "3d Space Game",
       "values": [
         "Rust, macroquad, zig",
         5,

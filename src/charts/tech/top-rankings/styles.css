@@ -323,3 +323,17 @@
 .rankings-dn {
   color: var(--muted);
 }
+
+/* Squares fill a column top to bottom, then wrap to the next column, so small ones stack beside the biggest instead of making one long row. The height is set to the biggest square's side. */
+.language-squares {
+  display: inline-flex;
+  flex-flow: column wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  gap: 1px;
+  margin-right: 0.4em;
+}
+
+.language-squares span {
+  display: inline-block;
+}

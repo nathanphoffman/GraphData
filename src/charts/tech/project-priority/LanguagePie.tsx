@@ -1,11 +1,10 @@
 import type { Ranking } from "../top-rankings/score";
-import { type LanguageSlice, languageSlices } from "./languageTotals";
+import { type LanguageSlice, languageSlices, sliceColor } from "./languageTotals";
 
 const PERCENT = 100;
 const SIZE = 160;
 const RADIUS = SIZE / 2;
 const FULL_TURN = Math.PI * 2;
-const SLICE_HUES = [215, 120, 35, 285, 175, 0];
 
 /** The point on the circle at this fraction of a full turn, starting at 12 o'clock. */
 function pointAt(fraction: number): [number, number] {
@@ -23,18 +22,16 @@ function wedgePath(start: number, end: number): string {
   return `M ${RADIUS} ${RADIUS} L ${startX} ${startY} A ${RADIUS} ${RADIUS} 0 ${longWay} 1 ${endX} ${endY} Z`;
 }
 
-const colorOf = (index: number) => `hsl(${SLICE_HUES[index]} 60% 50%)`;
-
 /** A pie of each language's share of all lines, with a legend beside it. */
 function Pie({ slices }: { slices: LanguageSlice[] }) {
   let start = 0;
 
   return (
     <svg width={SIZE} height={SIZE} role="img" aria-label="Share of lines by language">
-      {slices.map((slice, index) => {
+      {slices.map((slice) => {
         const end = start + slice.share;
         const wedge = (
-          <path key={slice.language} d={wedgePath(start, end)} fill={colorOf(index)}>
+          <path key={slice.language} d={wedgePath(start, end)} fill={sliceColor(slice.language)}>
             <title>{slice.language}</title>
           </path>
         );
@@ -43,7 +40,7 @@ function Pie({ slices }: { slices: LanguageSlice[] }) {
 
         // A single language fills the whole circle, which a wedge path cannot draw.
         return slice.share >= 1 ? (
-          <circle key={slice.language} cx={RADIUS} cy={RADIUS} r={RADIUS} fill={colorOf(index)} />
+          <circle key={slice.language} cx={RADIUS} cy={RADIUS} r={RADIUS} fill={sliceColor(slice.language)} />
         ) : (
           wedge
         );
@@ -63,9 +60,9 @@ export function LanguagePie({ ranking }: { ranking: Ranking }) {
       <div className="language-pie-body">
         <Pie slices={slices} />
         <ul>
-          {slices.map((slice, index) => (
+          {slices.map((slice) => (
             <li key={slice.language}>
-              <span className="language-pie-swatch" style={{ backgroundColor: colorOf(index) }} />
+              <span className="language-pie-swatch" style={{ backgroundColor: sliceColor(slice.language) }} />
               {slice.language} {(slice.share * PERCENT).toFixed(1)}% ({slice.lines.toLocaleString("en-US")})
             </li>
           ))}

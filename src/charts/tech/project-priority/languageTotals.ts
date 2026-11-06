@@ -36,3 +36,39 @@ export function languageSlices(ranking: Ranking): LanguageSlice[] {
 
   return slices.map(([language, lines]) => ({ language, lines, share: lines / total }));
 }
+
+/** Each language's own hue, so a language keeps its colour whatever its rank. */
+const LANGUAGE_HUES: Record<string, number> = {
+  Rust: 20,
+  TypeScript: 215,
+  "C#": 120,
+  Deor: 285,
+  Python: 50,
+  JavaScript: 65,
+  Go: 190,
+  "C++": 330,
+  C: 240,
+  Java: 10,
+  PHP: 260,
+  Assembly: 90,
+};
+
+/** The colour of "Other", grey so it never looks like a language. */
+const OTHER_COLOR = "hsl(0 0% 55%)";
+
+/** The colour of a pie slice: the language's own colour, or grey for "Other". Languages without a hue of their own are grey too. */
+export const sliceColor = (language: string) => {
+  const hue = LANGUAGE_HUES[language];
+
+  return hue === undefined ? OTHER_COLOR : `hsl(${hue} 60% 50%)`;
+};
+
+/** The colour of every language in the pie, so the pie and the squares beside the names match; languages in "Other" share its colour. */
+export function languageColors(ranking: Ranking): Map<string, string> {
+  const colors = new Map<string, string>();
+  const entries = totalLinesByLanguage(ranking);
+
+  entries.forEach(([language], index) => colors.set(language, index < NAMED_SLICE_COUNT ? sliceColor(language) : OTHER_COLOR));
+
+  return colors;
+}

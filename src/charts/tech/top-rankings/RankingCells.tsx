@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { formatContribution } from "./dnContribution";
 import { InlineCell } from "./InlineCell";
+import { LanguageSquares } from "./LanguageSquares";
 import { techShares } from "./languageBurden";
 import { DECOMMISSIONED_LABEL, LINES_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance";
 import {
@@ -36,11 +37,24 @@ type CellValue = number | string | null;
 export type SaveCell = (item: Item, index: number) => (value: CellValue) => Promise<void>;
 
 /** The item's name, linking to its web address when it has one. */
-export function NameCell({ item, linkIndex, dn }: { item: Item; linkIndex: number; dn?: number }) {
+export function NameCell({
+  item,
+  linkIndex,
+  dn,
+  techLines,
+  languageColors,
+}: {
+  item: Item;
+  linkIndex: number;
+  dn?: number;
+  techLines?: unknown;
+  languageColors?: Map<string, string>;
+}) {
   const link = item.values[linkIndex];
 
   return (
     <td>
+      {languageColors && <LanguageSquares techLines={techLines} colors={languageColors} />}
       {isText(link) && link !== "" ? (
         <a href={link} target="_blank" rel="noreferrer">
           {item.name}
