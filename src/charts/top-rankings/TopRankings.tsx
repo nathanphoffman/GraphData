@@ -5,7 +5,9 @@ import { EditGear } from "../../auth/EditGear";
 import { useAuth } from "../../auth/useAuth";
 import { ACTIVE_CLASS } from "../classNames";
 import { RankingEditor } from "./RankingEditor";
-import { EPISODIC_LABEL, firstSort, RankingTable, type Sort } from "./RankingTable";
+import { RankingTable } from "./RankingTable";
+import { EPISODIC_LABEL } from "./RankingTable/model/columns";
+import { firstSort, type Sort } from "./RankingTable/model/sorting";
 import "./styles.css";
 import { isText, type Ranking } from "./score";
 

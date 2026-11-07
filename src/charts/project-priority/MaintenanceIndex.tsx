@@ -1,10 +1,10 @@
 import { useState } from "react";
+import NumberSlider from "../../components/NumberSlider";
 import { MANUAL_AI_N, maintenance, type NFactorResult, PERCENT } from "../top-rankings/maintenance";
 import { heat } from "../top-rankings/RankingCells";
 import { fractionBetween, type Ranking } from "../top-rankings/score";
 import { deciNHeat } from "./deciNHeat";
 import { LanguagePie } from "./LanguagePie";
-import NumberSlider from "../../components/NumberSlider";
 
 /** An n-Factor is shown in deci-ns (dn): n x 10, to this many decimals. */
 const DN_DIGITS = 1;

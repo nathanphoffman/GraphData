@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
+import NumberSlider from "../../components/NumberSlider";
+import { useDebounced } from "../../hooks/useDebounced";
 import "./styles.css";
 import { EntropyChart } from "./EntropyChart";
 import { entropyChance, type Params, simulate, summarize } from "./simulate";
-import NumberSlider from "../../components/NumberSlider";
 
 const PERCENT = 100;
 
@@ -70,12 +71,15 @@ const START: Values = {
 export default function CodeQualityEntropy() {
   const [values, setValues] = useState<Values>(START);
 
+  // The sliders move at once, but the simulation only reruns once they stop, so dragging stays smooth.
+  const [settled] = useDebounced(values);
+
   const { runs, summary, firstEntropy } = useMemo(() => {
-    const { samples, ...params } = values;
+    const { samples, ...params } = settled;
     const runs = simulate(params, samples);
 
     return { runs, summary: summarize(runs), firstEntropy: entropyChance(params, 0, params.startingQuality) };
-  }, [values]);
+  }, [settled]);
 
   const last = summary.average.length - 1;
   const stats = [
@@ -143,7 +147,7 @@ export default function CodeQualityEntropy() {
           ))}
 
         </div>
-        <p className="muted entropy-footnote">{values.samples} samples completed</p>
+        <p className="muted entropy-footnote">{settled.samples} samples completed</p>
       </div>
     </div>
   );

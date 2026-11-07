@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
+import NumberSlider from "../../components/NumberSlider";
 import { formatCount, position, spans, tierFor } from "./calculate";
 import { TIERS } from "./style";
 import type { MaintainabilityData, Tier } from "./types";
-import NumberSlider from "../../components/NumberSlider";
 
 /** Coloured label for a stability tier, so the tier reads the same everywhere it appears. */
 function Badge({ tier }: { tier: Tier }) {

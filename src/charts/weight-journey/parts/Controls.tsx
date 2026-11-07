@@ -1,8 +1,8 @@
+import NumberSlider from "../../../components/NumberSlider";
 import { ACTIVE_CLASS } from "../../classNames";
 import type { Tapered } from "../model/chart";
 import type { Format, Unit } from "../model/units";
 import type { Lines, ProjectionTool } from "../useProjections";
-import NumberSlider from "../../../components/NumberSlider";
 
 const FAT_RATIO_RANGE = { min: 0, max: 2, step: 0.1 };
 

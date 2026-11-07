@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
 import data from "../../../data/neuron-intelligence/neuron-intelligence.json";
+import NumberSlider from "../../components/NumberSlider";
+import SortHeader from "../../components/SortHeader";
 import { NAME_KEY, useSort } from "../useSort";
 import { DEFAULT_EXPONENTS, formatNeurons, PLAUSIBLE_X, scoreAnimals, sortAnimals } from "./calculate";
 import type { Exponents, NeuronIntelligenceData, SortKey } from "./types";
-import NumberSlider from "../../components/NumberSlider";
-import SortHeader from "../../components/SortHeader";
 
 const model = data as NeuronIntelligenceData;
 

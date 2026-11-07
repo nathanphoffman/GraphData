@@ -1,5 +1,5 @@
-import type { Settings } from "./types";
 import NumberSlider from "../../components/NumberSlider";
+import type { Settings } from "./types";
 
 /** The divisor slider goes up to this, in steps of this. */
 const DIVISOR_MAX = 20;
