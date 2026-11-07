@@ -15,6 +15,13 @@ export function Legend({ lines, tapered, fatRatio }: { lines: Lines; tapered: bo
         </>
       )}
 
+      {lines.health && (
+        <>
+          <span className="key health" /> Health: (half the pulse pressure + avg BP top + avg BP bottom + weight WMA
+          in lb) / 2 − muscle gained, on the weight axis
+        </>
+      )}
+
       {lines.spread && (
         <>
           <span className="key spread-key" /> last week of projections: shaded range (darker where they bunch up), solid

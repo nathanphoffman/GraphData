@@ -104,6 +104,7 @@ const LINE_LABELS: [keyof Lines, string][] = [
   ["general", "General Projection"],
   ["allTrend", "Future trend lines (all average projection)"],
   ["spread", "Best / worst range (last week)"],
+  ["health", "Health"],
 ];
 
 /** Checkboxes for switching optional chart lines on and off. */

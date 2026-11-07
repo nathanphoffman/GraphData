@@ -11,6 +11,8 @@ import {
 
 import { FIT_AHEAD_DAYS, FIT_DAYS, MONTHS_PER_YEAR, SMOOTHING_DAYS } from "../constants";
 import { allAverage, completeAverage, last3, projectAll, recentRate, weightedAverage, yearly } from "./averages";
+import { addBloodPressure, healthOf, type Pressure_Reading } from "./bloodPressure";
+import { todayIso } from "./units";
 
 // Everything below is filled in by setWeights once the weights have been fetched from the API.
 export let days: DayWeight[] = [];
@@ -19,10 +21,12 @@ export let projectedAdjusted: { fit: Projection[]; future: Projection[] } = { fi
 export let fittedCurve: Projection[] = [];
 export let future: Projection[] = [];
 export let dailyRows: WeightRow[] = [];
+export let pressureReadings: Pressure_Reading[] = [];
 
-/** Build the days, muscle, projections and daily rows from the weigh-ins; returns the parts the hooks depend on. */
-export function setWeights(weights: [string, number][]) {
-  const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
+/** Build the days, muscle, projections and daily rows from the weigh-ins and blood pressure readings; returns the parts the hooks depend on. */
+export function setWeights(weights: [string, number][], readings: Pressure_Reading[] = []) {
+  const today = todayIso();
+  pressureReadings = readings;
 
   // Placeholder rows (weight 0) and future dates are skipped.
   days = fillDays(weights.filter(([date, weight]) => weight > 0 && date <= today));
@@ -34,7 +38,7 @@ export function setWeights(weights: [string, number][]) {
   );
 
   ({ fit: fittedCurve, future } = project(days, FIT_DAYS, FIT_AHEAD_DAYS));
-  dailyRows = buildRows(withMuscle, DAILY_WINDOWS, 1);
+  dailyRows = buildRows(addBloodPressure(withMuscle, readings), DAILY_WINDOWS, 1);
 
   return { dailyRows, fit: fittedCurve, future, withMuscle };
 }
@@ -66,8 +70,8 @@ const addOrNull = (first: number | null, second: number | null) =>
 /** Half of a value, or null when it is missing. */
 const half = (value: number | null) => (value === null ? null : value / 2);
 
-/** The weight columns that are averaged into the complete average. */
-function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step: number) {
+/** Every column of the daily table, built from the days with their muscle gain and blood pressure. */
+function buildRows(rows: ReturnType<typeof addBloodPressure<(typeof withMuscle)[number]>>, windows: typeof DAILY_WINDOWS, step: number) {
   const actual = addAverages(rows, windows, step);
   const smoothingRows = Math.round(SMOOTHING_DAYS / step);
 
@@ -161,7 +165,7 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     finalAvgAdj: half(addOrNull(tableRow.completeAdj, tableRow.wmaAvgAdj)),
   }));
 
-  // 3-day average of the last column.
+  // 3-day average of the last column, and the Health score from the blood pressure.
   const finalAvgs = withFinal.map((tableRow) => tableRow.finalAvg);
   const finalAvgsAdj = withFinal.map((tableRow) => tableRow.finalAvgAdj);
 
@@ -169,6 +173,7 @@ function buildRows(rows: typeof withMuscle, windows: typeof DAILY_WINDOWS, step:
     ...tableRow,
     finalAvg3: last3(finalAvgs, index),
     finalAvg3Adj: last3(finalAvgsAdj, index),
+    health: healthOf(tableRow.weightWma, tableRow.muscleTotal, tableRow.pressure),
   }));
 }
 

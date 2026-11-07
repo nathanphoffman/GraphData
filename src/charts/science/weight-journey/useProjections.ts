@@ -9,6 +9,7 @@ export interface Lines {
   general: boolean;
   allTrend: boolean;
   spread: boolean;
+  health: boolean;
 }
 
 export interface ProjectionTool {

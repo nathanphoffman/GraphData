@@ -1,4 +1,4 @@
-// Syncs ranking items (values and planned features) and weigh-ins between the local database and the live site, in both directions.
+// Syncs ranking items (values and planned features), weigh-ins and blood pressure readings between the local database and the live site, in both directions.
 // For a row on both sides with different values, the one changed most recently wins. A row only on one side is copied to the other.
 // Nothing is ever deleted, so a row you deleted on one side comes back from the other.
 //
@@ -7,6 +7,7 @@
 // Needs PROD_URL, PROD_USERNAME and PROD_PASSWORD (just reads them from .env). --prefer settles rows that differ but have the same
 // change time, which is every difference the first time you sync (older rows have no time yet).
 import { db } from "../server/db.js";
+import "../server/blood-pressure.js";
 import "../server/board-games.js";
 import "../server/rankings.js";
 import "../server/weights.js";
@@ -138,6 +139,30 @@ for (const { id } of db.prepare("SELECT id FROM rankings").all()) {
   );
 }
 
+/** The labels of a ranking's rated columns, heaviest first; this order is the header order on the page. */
+const headerOrder = (columns) =>
+  columns
+    .filter((column) => column.weight !== null && column.weight !== undefined)
+    .sort((first, second) => second.weight - first.weight)
+    .map((column) => column.label);
+
+// Header order is not timestamped, so the local order always replaces the live one (reordering on the live site is overwritten).
+for (const liveRanking of live.rankings) {
+  const localColumns = db.prepare("SELECT label, weight FROM ranking_columns WHERE ranking_id = ?").all(liveRanking.id);
+  const order = headerOrder(localColumns);
+
+  if (JSON.stringify(order) === JSON.stringify(headerOrder(liveRanking.columns))) continue;
+
+  try {
+    if (!dryRun) await call("PUT", `/api/rankings/${liveRanking.id}/weights`, { order });
+    stats.pushed++;
+    console.log(`${dryRun ? "would be " : ""}pushed (header order): ${liveRanking.id}`);
+  } catch (error) {
+    stats.failed++;
+    console.error(`FAILED: header order ${liveRanking.id}: ${error.message}`);
+  }
+}
+
 // Weigh-ins, matched by date.
 const { data: liveWeights } = await call("GET", "/api/weights");
 
@@ -161,6 +186,37 @@ await reconcile(
       .prepare("INSERT OR REPLACE INTO weights (date, weight, updated_at) VALUES (?, ?, ?)")
       .run(date, row.value, row.at),
 );
+
+// Blood pressure readings, matched by date. Skipped until the live site has the blood pressure routes.
+const PRESSURE_FIELDS = ["firstTop", "firstBottom", "secondTop", "secondBottom"];
+const livePressure = await call("GET", "/api/blood-pressure").catch(() => null);
+
+if (!livePressure) console.error("The live site has no blood pressure yet. Deploy this version first, then sync again.");
+else
+
+  await reconcile(
+    "blood pressure",
+    new Map(
+      db
+        .prepare("SELECT date, first_top, first_bottom, second_top, second_bottom, updated_at FROM blood_pressure")
+        .all()
+        .map((row) => [row.date, { value: [row.first_top, row.first_bottom, row.second_top, row.second_bottom], at: row.updated_at }]),
+    ),
+    new Map(
+      livePressure.data.readings.map(([date, ...values]) => [date, { value: values, at: livePressure.data.updatedAt[date] ?? 0 }]),
+    ),
+    (date, row) =>
+      call("PUT", `/api/blood-pressure/${date}`, {
+        ...Object.fromEntries(PRESSURE_FIELDS.map((field, index) => [field, row.value[index]])),
+        updatedAt: row.at,
+      }),
+    (date, row) =>
+      db
+        .prepare(
+          "INSERT OR REPLACE INTO blood_pressure (date, first_top, first_bottom, second_top, second_bottom, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+        )
+        .run(date, ...row.value, row.at),
+  );
 
 // Board games, matched by title and release year. There are thousands, so they go in batches and only a summary is printed.
 const GAME_BATCH = 500;

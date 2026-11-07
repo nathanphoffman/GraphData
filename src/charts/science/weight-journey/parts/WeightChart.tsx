@@ -90,8 +90,12 @@ function AllTrends({ trends }: { trends: Chart["allTrends"] }) {
 
 /** The weight chart; recalculated only when the chart inputs change, since it is a lot of drawing. */
 export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines }) {
-  const { rangeDays, k, tapered, allTrend, spread, general, fat } = input;
-  const chart = useMemo(() => buildChart(input), [rangeDays, k, tapered, allTrend, spread, general, fat]);
+  const { rangeDays, k, tapered, allTrend, spread, general, fat, showHealth } = input;
+  const chart = useMemo(
+    () => buildChart(input),
+    // Listed one by one so a new `input` object with the same parts does not redraw the chart.
+    [rangeDays, k, tapered, allTrend, spread, general, fat, showHealth],
+  );
 
   return (
     <svg
@@ -110,6 +114,7 @@ export function WeightChart({ input, lines }: { input: ChartInput; lines: Lines 
       <path d={chart.avg3Fat} className="line-avg3-fat" />
       <path d={chart.avg3Adjusted} className="line-avg3-adjusted" />
       <path d={chart.avg3} className="line-avg3" />
+      {lines.health && <path d={chart.health} className="line-health" />}
       <path d={chart.fitAdjusted} className="line-fit-adjusted" />
       {lines.quadratic && <path d={chart.futureAdjusted} className="line-future-adjusted" />}
       <path d={chart.fitFat} className="line-fit-fat" />

@@ -20,3 +20,6 @@ export const SMOOTHING_DAYS = 14;
 
 /** How many of the latest rows the spread and general curves use. */
 export const SPREAD_ROWS = 7;
+
+/** Milliseconds in a day. */
+export const DAY_MS = 86_400_000;

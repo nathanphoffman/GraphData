@@ -6,22 +6,27 @@
 //
 //   data/top-rankings/<id>.json         only the "items" are rewritten; the title, columns and grade curve stay as written in the file
 //   data/weight-journey/weight-journey.json   the unit and weigh-ins; the 0 placeholder days stay until a real weigh-in replaces them
+//   data/weight-journey/blood-pressure.json   the blood pressure readings
 //
 // Needs PROD_URL, PROD_USERNAME and PROD_PASSWORD (just reads them from .env) unless --local-only is given.
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { db } from "../server/db.js";
+import "../server/blood-pressure.js";
 import "../server/rankings.js";
 import "../server/weights.js";
 import { connectToProd } from "./prod.mjs";
 
 const RANKINGS_DIR = "data/top-rankings";
 const WEIGHTS_PATH = "data/weight-journey/weight-journey.json";
+const PRESSURE_PATH = "data/weight-journey/blood-pressure.json";
 
 const localOnly = process.argv.includes("--local-only");
 const call = localOnly ? undefined : await connectToProd();
 const live = call && {
   rankings: new Map((await call("GET", "/api/rankings")).data.rankings.map((ranking) => [ranking.id, ranking.items])),
   weights: (await call("GET", "/api/weights")).data,
+  // Missing until the live site has the blood pressure routes.
+  pressure: (await call("GET", "/api/blood-pressure").catch(() => null))?.data,
 };
 
 /** The row with the later change time; the first one when they match. */
@@ -122,5 +127,21 @@ const sorted = [...days].sort(([a], [b]) => a.localeCompare(b));
 const localUnit = db.prepare("SELECT value FROM settings WHERE key = 'unit'").get()?.value ?? unit;
 const weightText = `{"unit": ${JSON.stringify(localUnit)}, "weights": [${sorted.map(([date, weight]) => `["${date}", ${weight === 0 ? 0 : Number.isInteger(weight) ? weight.toFixed(1) : weight}]`).join(", ")}]}`;
 save(WEIGHTS_PATH, weightText, `${rows.size} weigh-ins`);
+
+// Blood pressure readings: the newer copy of each date wins, like the weigh-ins.
+const pressureRows = new Map(
+  db
+    .prepare("SELECT date, first_top, first_bottom, second_top, second_bottom, updated_at FROM blood_pressure")
+    .all()
+    .map((row) => [row.date, { values: [row.first_top, row.first_bottom, row.second_top, row.second_bottom], at: row.updated_at }]),
+);
+
+for (const [date, ...values] of live?.pressure?.readings ?? [])
+  pressureRows.set(date, newer(pressureRows.get(date), { values, at: live.pressure.updatedAt[date] ?? 0 }));
+
+const pressureLines = [...pressureRows]
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([date, { values }]) => `    ["${date}", ${values.join(", ")}]`);
+save(PRESSURE_PATH, `{\n  "readings": [\n${pressureLines.join(",\n")}\n  ]\n}\n`, `${pressureRows.size} readings`);
 
 console.log(`${changedFiles} file(s) updated${localOnly ? " (local data only)" : ""}. Review with git diff.`);

@@ -20,3 +20,6 @@ export function makeFormat(unit: Unit) {
 }
 
 export type Format = ReturnType<typeof makeFormat>;
+
+/** Today as YYYY-MM-DD in the viewer's own time zone. */
+export const todayIso = () => new Date().toLocaleDateString("en-CA");

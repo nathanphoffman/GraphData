@@ -1,12 +1,23 @@
-import { useMemo, useState } from "react";
+import { type ReactNode, useMemo, useState } from "react";
 import { ACTIVE_CLASS } from "../../../classNames";
-import { ISO_DATE_LENGTH } from "../constants";
+import { DAY_MS, ISO_DATE_LENGTH } from "../constants";
 import { yearly } from "../model/averages";
-import { averageTint, band, deltaBand } from "../model/bands";
+import { averageTint, band, deltaBand, healthBand, type Rgb, rgbCss } from "../model/bands";
 import type { WeightRow } from "../model/rows";
 import { type Format, pretty, toDate, type Unit } from "../model/units";
 
-type BandOf = (pounds: number | null, adjusted: boolean) => string;
+type BandOf = (pounds: number | null, adjusted: boolean) => Rgb | null;
+
+/** A value on its band colour (plain text when it has no colour); muted when it is the muscle-adjusted one. */
+function Banded({ color, muted = false, children }: { color: Rgb | null; muted?: boolean; children: ReactNode }) {
+  const classes = [color ? "band" : "", muted ? "adjusted" : ""].join(" ").trim();
+
+  return (
+    <span className={classes} style={color ? { background: rgbCss(color) } : undefined}>
+      {children}
+    </span>
+  );
+}
 
 /** Actual value on top, muscle-adjusted value underneath, each highlighted by its target band. */
 function ActualAndAdjusted({
@@ -24,9 +35,11 @@ function ActualAndAdjusted({
 
   return (
     <>
-      <span className={bandOf(actual, false)}>{show(actual)}</span>
+      <Banded color={bandOf(actual, false)}>{show(actual)}</Banded>
       <br />
-      <span className={`adjusted ${bandOf(adjusted, true)}`}>{show(adjusted)}</span>
+      <Banded color={bandOf(adjusted, true)} muted>
+        {show(adjusted)}
+      </Banded>
     </>
   );
 }
@@ -63,6 +76,8 @@ type Show = {
   weightLoss: boolean;
   allAverages: boolean;
   wma: boolean;
+  bloodPressure: boolean;
+  bloodPressureAverage: boolean;
 };
 
 const GROUPS: { key: keyof Show; label: string }[] = [
@@ -72,10 +87,12 @@ const GROUPS: { key: keyof Show; label: string }[] = [
   { key: "allAverages", label: "All Averages" },
   { key: "muscleDaily", label: "Muscle gain" },
   { key: "muscleTotal", label: "Muscle gained so far" },
+  { key: "bloodPressure", label: "Blood pressure" },
+  { key: "bloodPressureAverage", label: "Avg blood pressure" },
 ];
 
-/** How a column's numbers are written and coloured: weights by target band, changes by delta band, muscle with 2 or 3 decimals. */
-type Kind = "weight" | "change" | "muscle2" | "muscle3";
+/** How a column's numbers are written and coloured: weights by target band, changes by delta band, muscle with 2 or 3 decimals, pressure in mmHg, Health by its own band. */
+type Kind = "weight" | "change" | "muscle2" | "muscle3" | "pressure" | "health";
 
 type Column = {
   /** Group that switches the column on; always shown when missing. */
@@ -89,6 +106,9 @@ type Column = {
   adjusted?: (tableRow: WeightRow) => number | null;
 };
 
+/** Hover text shared by the four blood pressure reading columns. */
+const PRESSURE_NOTE = "mmHg; days without a reading are estimated in a straight line between readings";
+
 const COLUMNS: Column[] = [
   { title: (unit) => `Weight (${unit})`, kind: "weight", actual: (tableRow) => tableRow.weight },
   {
@@ -98,6 +118,54 @@ const COLUMNS: Column[] = [
     kind: "weight",
     actual: (tableRow) => tableRow.weightWma,
     adjusted: (tableRow) => tableRow.weightWmaAdj,
+  },
+  {
+    group: "bloodPressure",
+    title: () => "BP 1st top",
+    note: PRESSURE_NOTE,
+    kind: "pressure",
+    actual: (tableRow) => tableRow.pressure?.firstTop ?? null,
+  },
+  {
+    group: "bloodPressure",
+    title: () => "BP 1st bottom",
+    note: PRESSURE_NOTE,
+    kind: "pressure",
+    actual: (tableRow) => tableRow.pressure?.firstBottom ?? null,
+  },
+  {
+    group: "bloodPressure",
+    title: () => "BP 2nd top",
+    note: PRESSURE_NOTE,
+    kind: "pressure",
+    actual: (tableRow) => tableRow.pressure?.secondTop ?? null,
+  },
+  {
+    group: "bloodPressure",
+    title: () => "BP 2nd bottom",
+    note: PRESSURE_NOTE,
+    kind: "pressure",
+    actual: (tableRow) => tableRow.pressure?.secondBottom ?? null,
+  },
+  {
+    group: "bloodPressureAverage",
+    title: () => "Avg BP top",
+    note: "average of the two top readings",
+    kind: "pressure",
+    actual: (tableRow) => tableRow.pressure?.avgTop ?? null,
+  },
+  {
+    group: "bloodPressureAverage",
+    title: () => "Avg BP bottom",
+    note: "average of the two bottom readings",
+    kind: "pressure",
+    actual: (tableRow) => tableRow.pressure?.avgBottom ?? null,
+  },
+  {
+    title: () => "Health",
+    note: "((avg top − avg bottom) × 0.5 + avg top + avg bottom + weight WMA in lb) / 2 − muscle gained so far",
+    kind: "health",
+    actual: (tableRow) => tableRow.health,
   },
   {
     group: "muscleDaily",
@@ -250,14 +318,15 @@ const MONTHS_PER_QUARTER = 3;
 
 /** The table shows this many days by default. */
 const DEFAULT_PERIOD_DAYS = 90;
-const DAY_MS = 86_400_000;
 
 /** Decimal places shown for the muscle columns. */
 const MUSCLE3_DIGITS = 3;
 
-/** Writes a number the way its column shows it. */
+/** Writes a number the way its column shows it. Blood pressure and Health are not weights, so the unit does not change them. */
 const formatter = (kind: Kind, unitFormat: Format) => {
   if (kind === "change") return unitFormat.signed;
+
+  if (kind === "pressure" || kind === "health") return (value: number) => value.toFixed(1);
 
   if (kind === "muscle2") return (pounds: number) => unitFormat.w(pounds, 2);
 
@@ -340,8 +409,8 @@ function Head({
   );
 }
 
-/** Bands of the values in the columns on screen (actual and muscle-adjusted); the weight is always shown. */
-function bandClasses(tableRow: WeightRow, show: Show) {
+/** Band colours of the values in the columns on screen (actual and muscle-adjusted); the weight is always shown. */
+function bandColors(tableRow: WeightRow, show: Show) {
   // The colour band of each weight in the actual list, then in the muscle-adjusted list.
   const weightClasses = (actual: (number | null)[], adjusted: (number | null)[]) => [
     ...actual.map((weight) => band(weight, false)),
@@ -352,6 +421,7 @@ function bandClasses(tableRow: WeightRow, show: Show) {
 
   return [
     band(tableRow.weight, false),
+    healthBand(tableRow.health),
     band(tableRow.finalAvg, false),
     band(tableRow.finalAvgAdj, true),
     band(tableRow.finalAvg3, false),
@@ -402,9 +472,24 @@ function bandClasses(tableRow: WeightRow, show: Show) {
   ];
 }
 
+/** A blood pressure or Health value: a dash when there is none, and estimated blood pressure in muted italics. */
+function OptionalCell({ column, d: tableRow, fmt }: { column: Column; d: WeightRow; fmt: (value: number) => string }) {
+  const value = column.actual(tableRow);
+
+  if (value === null) return <>—</>;
+
+  if (column.kind === "health") return <Banded color={healthBand(value)}>{fmt(value)}</Banded>;
+
+  return <span className={tableRow.pressure?.pressureEstimated ? "estimated-value" : ""}>{fmt(value)}</span>;
+}
+
 /** One cell: actual value with the muscle-adjusted one under it when the column has one. */
 function Cell({ column, d: tableRow, f: unitFormat }: { column: Column; d: WeightRow; f: Format }) {
   const formatWeight = formatter(column.kind, unitFormat);
+
+  if (column.kind === "pressure" || column.kind === "health")
+
+    return <OptionalCell column={column} d={tableRow} fmt={formatWeight} />;
 
   if (column.adjusted)
 
@@ -419,7 +504,7 @@ function Cell({ column, d: tableRow, f: unitFormat }: { column: Column; d: Weigh
 
   if (column.kind === "weight")
 
-    return <span className={band(tableRow.weight, false)}>{formatWeight(tableRow.weight)}</span>;
+    return <Banded color={band(tableRow.weight, false)}>{formatWeight(tableRow.weight)}</Banded>;
 
   return <>{formatWeight(column.actual(tableRow) ?? 0)}</>;
 }
@@ -436,7 +521,7 @@ function DayRow({
   show: Show;
   columns: Column[];
 }) {
-  const tint = averageTint(bandClasses(tableRow, show));
+  const tint = averageTint(bandColors(tableRow, show));
 
   return (
     <tr className={tableRow.estimated ? "estimated" : ""} style={{ backgroundColor: tint }}>
@@ -513,6 +598,8 @@ export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f:
     weightLoss: false,
     allAverages: true,
     wma: true,
+    bloodPressure: false,
+    bloodPressureAverage: false,
   });
 
   const { newestFirst, rows, quarters } = useTableRows(period, dailyRows);
@@ -533,7 +620,7 @@ export function WeightTable({ unit, f: unitFormat, dailyRows }: { unit: Unit; f:
   ].map((option) => ({
     ...option,
     color: averageTint(
-      periodRows(newestFirst, option.value).flatMap((tableRow) => bandClasses(tableRow, show)),
+      periodRows(newestFirst, option.value).flatMap((tableRow) => bandColors(tableRow, show)),
       1,
     ),
   }));

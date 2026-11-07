@@ -31,9 +31,7 @@ export interface Projection {
   weight: number;
 }
 
-const DAY_MS = 86_400_000;
-
-import { DAYS_PER_MONTH, DAYS_PER_YEAR, ISO_DATE_LENGTH, TENTH } from "./constants";
+import { DAY_MS, DAYS_PER_MONTH, DAYS_PER_YEAR, ISO_DATE_LENGTH, TENTH } from "./constants";
 
 const SHORT_WINDOW_DAYS = 3;
 

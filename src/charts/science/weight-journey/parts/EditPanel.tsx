@@ -4,15 +4,15 @@ import { EditButtons } from "../../../../auth/EditButtons";
 import { EditGear } from "../../../../auth/EditGear";
 import { useEditor } from "../../../../auth/useEditor";
 import { days } from "../model/rows";
+import { todayIso } from "../model/units";
+import { BloodPressureForm } from "./BloodPressureForm";
 
 /** The name the weight is kept under while it is edited. */
 const WEIGHT_FIELD = "weight";
 
-const todayDate = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
-
 /** Pick a date and add, change or remove its weigh-in. */
 function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
-  const [date, setDate] = useState(todayDate);
+  const [date, setDate] = useState(todayIso);
 
   // Estimated days have no real weigh-in, so only real ones count as existing.
   const existing = days.find((dayRecord) => dayRecord.date === date && !dayRecord.estimated)?.weight;
@@ -30,7 +30,7 @@ function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
       <input
         type="date"
         value={date}
-        max={todayDate()}
+        max={todayIso()}
         onChange={(changeEvent) => {
           setDate(changeEvent.target.value);
           editor.reset();
@@ -55,11 +55,12 @@ function EditForm({ onSaved }: { onSaved: () => Promise<void> }) {
   );
 }
 
-/** Gear in the top right corner of the page for adding, changing and removing weigh-ins. */
+/** Gear in the top right corner of the page for adding, changing and removing weigh-ins and blood pressure readings. */
 export function EditPanel({ onSaved }: { onSaved: () => Promise<void> }) {
   return (
-    <EditGear label="Edit weights">
+    <EditGear label="Edit weights and blood pressure">
       <EditForm onSaved={onSaved} />
+      <BloodPressureForm onSaved={onSaved} />
     </EditGear>
   );
 }

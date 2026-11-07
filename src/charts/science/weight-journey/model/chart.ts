@@ -13,6 +13,9 @@ export type Tapered = ReturnType<typeof projectTapering>;
 export interface ChartInput {
   rangeDays: number;
   k: number;
+
+  /** whether the Health line is drawn, so the y axis only makes room for it when it is */
+  showHealth: boolean;
   tapered: Tapered | null;
   allTrend: AllTrend | null;
   spread: Spread | null;
@@ -29,7 +32,7 @@ export function line(points: { x: number; y: number }[]): string {
 function allWeights(
   shown: Point[],
   shownFuture: Point[],
-  { tapered, allTrend, spread, fat: fatProjection }: ChartInput,
+  { tapered, allTrend, spread, fat: fatProjection, showHealth }: ChartInput,
 ) {
   const spreadEnds = spread
     ? [spread.actual, spread.adjusted].flatMap((spreadSide) => [
@@ -64,6 +67,7 @@ function allWeights(
       : []),
     ...(allTrend ? allTrend.trends.flatMap((trend) => trend.fat ?? []) : []),
     ...shownAvg,
+    ...(showHealth ? healthPoints(shown[0].date) : []),
   ].map((point) => point.weight);
 }
 
@@ -120,6 +124,12 @@ function shade(spreadSide: Spread["actual"], point: PointMapper) {
   };
 }
 
+/** The Health score of each shown day that has one, as a point on the weight axis. */
+const healthPoints = (firstShown: string): Point[] =>
+  dailyRows
+    .filter((dailyRow) => dailyRow.date >= firstShown)
+    .flatMap((dailyRow) => (dailyRow.health === null ? [] : [{ date: dailyRow.date, weight: dailyRow.health }]));
+
 /** Paths for the lines that follow the weight data itself (not the projections). */
 function actualLines(shown: DayWeight[], point: PointMapper) {
   const shownAvg = dailyRows.filter((dailyRow) => dailyRow.date >= shown[0].date);
@@ -127,6 +137,7 @@ function actualLines(shown: DayWeight[], point: PointMapper) {
 
   return {
     actual: line(shown.map(point)),
+    health: line(healthPoints(firstShown).map(point)),
     avg3: line(shownAvg.map((averageRow) => point({ date: averageRow.date, weight: averageRow.avg3 }))),
     avg3Adjusted: line(shownAvg.map((averageRow) => point({ date: averageRow.date, weight: averageRow.adj.avg3 }))),
     fitAdjusted: line(projectedAdjusted.fit.filter((projection) => projection.date >= firstShown).map(point)),

@@ -82,6 +82,15 @@
   stroke-width: 2.5;
 }
 
+.weight-chart .line-health {
+  stroke: #c2185b;
+  stroke-width: 2.5;
+}
+
+.weight-legend .key.health {
+  border-color: #c2185b;
+}
+
 .weight-chart .dot {
   fill: var(--link);
 }
@@ -188,35 +197,23 @@
   color: var(--muted);
 }
 
+/* Blood pressure estimated between readings, like an estimated weigh-in day. */
+.weight td .estimated-value {
+  color: var(--muted);
+  font-style: italic;
+}
+
 .weight-gap {
   width: 16px;
 }
 
-.weight td span[class*="band-"] {
+/* A value on its band colour; the colour itself is set inline from the gradient in model/bands.ts. */
+.weight td .band {
   display: inline-block;
   padding: 0 6px;
   border-radius: 4px;
   color: #111;
   font-style: normal;
-}
-
-.weight .band-orange {
-  background: #f4a259;
-}
-.weight .band-yellow {
-  background: #f2d95c;
-}
-.weight .band-green {
-  background: #7bc97b;
-}
-.weight .band-violet {
-  background: #b48be0;
-}
-.weight .band-blue {
-  background: #7fb2f0;
-}
-.weight .band-red {
-  background: #e5675f;
 }
 
 .weight-projection {

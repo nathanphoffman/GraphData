@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MANUAL_AI_N, maintenance, type NFactorResult, PERCENT } from "../top-rankings/maintenance";
 import { heat } from "../top-rankings/RankingCells";
 import { fractionBetween, type Ranking } from "../top-rankings/score";
+import { deciNHeat } from "./deciNHeat";
 import { LanguagePie } from "./LanguagePie";
 
 /** An n-Factor is shown in deci-ns (dn): n x 10, to this many decimals. */
@@ -17,28 +18,20 @@ const QUALITY_STEP = 0.1;
 /** The Target dn slider runs from 60 to 70 in quarter steps, and starts at 67.5. */
 const [TARGET_MIN, TARGET_MAX, TARGET_STEP, DEFAULT_TARGET] = [60, 70, 0.25, 67.5];
 
-/** The blue goal reaches this far (in dn) either side of the target; green, yellow and red follow at 1.5 and 2.5. */
-const [BLUE_REACH, GREEN_REACH, YELLOW_REACH] = [0.5, 1.5, 2.5];
+/** The goal reaches this far (in dn) either side of the target; the arrows point at it and the checkmark shows inside it. */
+const GOAL_REACH = 0.5;
 
 const lines = (count: number) => Math.round(count).toLocaleString();
 
 /** n-Factor as deci-ns, so 6.75n is 67.5. */
 const deciNs = (n: number) => Math.round(n * DECI * 10 ** DN_DIGITS) / 10 ** DN_DIGITS;
 
-/** The heat colour of a deci-n value around the target: blue within 0.5 of it, green within 1.5, yellow within 2.5, red beyond. */
-export function deciNHeat(dn: number, target: number): { backgroundColor: string } {
-  const away = Math.abs(dn - target);
-  const hue = away <= BLUE_REACH ? 215 : away <= GREEN_REACH ? 120 : away <= YELLOW_REACH ? 55 : 0;
-
-  return { backgroundColor: `hsl(${hue} 65% 45% / 0.35)` };
-}
-
-/** Which way a deci-n value has to move to reach the target's blue goal: up, down, or a checkmark when it is already there. */
+/** Which way a deci-n value has to move to reach the target's goal: up, down, or a checkmark when it is already there. */
 const goalMark = (dn: number, target: number) =>
-  dn < target - BLUE_REACH ? "↑" : dn > target + BLUE_REACH ? "↓" : "✓";
+  dn < target - GOAL_REACH ? "↑" : dn > target + GOAL_REACH ? "↓" : "✓";
 
-/** How many deci-ns the value is from the nearest edge of the blue goal, 0 inside it. */
-const goalDistance = (dn: number, target: number) => Math.max(0, Math.abs(dn - target) - BLUE_REACH);
+/** How many deci-ns the value is from the nearest edge of the goal, 0 inside it. */
+const goalDistance = (dn: number, target: number) => Math.max(0, Math.abs(dn - target) - GOAL_REACH);
 
 const FACTOR_DESCRIPTIONS = {
   Current: "The n-Factor of today's lines, minus the Avg n Adj",
@@ -66,7 +59,7 @@ function FactorCard({
       <dt>{name}</dt>
       <dd>
         {dn.toFixed(DN_DIGITS)}dn{" "}
-        <span title={`Which way, and how far, to move to reach the blue goal around ${target}dn`}>
+        <span title={`Which way, and how far, to move to reach the goal around ${target}dn`}>
           {goalMark(dn, target)}
           {goalDistance(dn, target) > 0 ? (
             <small className="rankings-index-delta">
@@ -116,7 +109,7 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
               </button>
             )}
           </label>
-          <label title="Target dn: the deci-n you are aiming for. The cards turn blue within 0.5dn of it, and the arrows show which way to move.">
+          <label title="Target dn: the deci-n you are aiming for. The cards are richest green at it, fading to yellow past 1dn, orange past 1.5dn and deep red past 2.5dn; the arrows show which way to move.">
             Target dn: {target.toFixed(2)}{" "}
             <input
               type="range"

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { callApi } from "../../../api";
 import "./styles.css";
+import type { Pressure_Reading } from "./model/bloodPressure";
 import { type Model, setWeights } from "./model/rows";
 import { makeFormat, type Unit } from "./model/units";
 import { Controls, RANGES } from "./parts/Controls";
@@ -11,7 +12,7 @@ import { WeightChart } from "./parts/WeightChart";
 import { WeightTable } from "./parts/WeightTable";
 import { type Lines, type ProjectionTool, useProjections } from "./useProjections";
 
-const ALL_LINES: Lines = { quadratic: true, general: true, allTrend: true, spread: true };
+const ALL_LINES: Lines = { quadratic: true, general: true, allTrend: true, spread: true, health: true };
 
 /** Weight journey page: units, chart, table and projections. */
 function Journey({ model }: { model: Model }) {
@@ -42,14 +43,14 @@ function Journey({ model }: { model: Model }) {
         fatRatio={fatRatio}
         onFatRatio={setFatRatio}
       />
-      <WeightChart input={{ rangeDays: range.days, k: unitFormat.k, ...proj }} lines={lines} />
+      <WeightChart input={{ rangeDays: range.days, k: unitFormat.k, showHealth: lines.health, ...proj }} lines={lines} />
       <Legend lines={lines} tapered={proj.tapered !== null} fatRatio={ratio} />
       <WeightTable unit={unit} f={unitFormat} dailyRows={model.dailyRows} />
     </div>
   );
 }
 
-/** Fetches the weigh-ins from the API, then shows the journey and the editor. */
+/** Fetches the weigh-ins and blood pressure readings from the API, then shows the journey and the editor. */
 export default function WeightJourney() {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
 
@@ -57,8 +58,12 @@ export default function WeightJourney() {
   const [model, setModel] = useState<Model | null>(null);
 
   const load = useCallback(async () => {
-    const data = await callApi<{ weights: [string, number][] }>("/api/weights");
-    setModel(setWeights(data.weights));
+    const [weightData, pressureData] = await Promise.all([
+      callApi<{ weights: [string, number][] }>("/api/weights"),
+      callApi<{ readings: Pressure_Reading[] }>("/api/blood-pressure"),
+    ]);
+
+    setModel(setWeights(weightData.weights, pressureData.readings));
   }, []);
 
   // Load the weigh-ins once; show the page when it works and an error message when it does not.

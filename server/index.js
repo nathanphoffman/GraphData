@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import sirv from "sirv";
 import { authRoutes } from "./auth.js";
+import { bloodPressureRoutes } from "./blood-pressure.js";
 import { boardGameRoutes } from "./board-games.js";
 import { HttpError, sendJson } from "./http.js";
 import { ralphRoutes } from "./ralph-loops.js";
@@ -11,7 +12,7 @@ const PORT = process.env.PORT ?? 3000;
 const serveSite = sirv("dist", { single: true });
 
 // To add a feature, give it a routes file like weights.js and list it here. Protect a route with `requireUser(request)`.
-const routes = [...authRoutes, ...weightRoutes, ...rankingRoutes, ...boardGameRoutes, ...ralphRoutes].map((route) => ({
+const routes = [...authRoutes, ...weightRoutes, ...bloodPressureRoutes, ...rankingRoutes, ...boardGameRoutes, ...ralphRoutes].map((route) => ({
   ...route,
   pattern: new RegExp(`^${route.path.replace(/:(\w+)/g, "(?<$1>[^/]+)")}$`),
 }));
