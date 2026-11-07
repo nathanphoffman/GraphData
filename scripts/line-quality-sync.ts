@@ -75,6 +75,10 @@ const PROJECTS: Project[] = [
   { name: "ValOutcast", folder: "ValOutcast" },
   { name: "34004 Project", folder: "34004Project" },
   { name: "Family History Astro", folder: "FamilyHistoryAstro" },
+  // lib/ is Deor's standard library copied in from the Deor install
+  { name: "Admin Panel", folder: "AdminPanel", exclude: ["lib"] },
+  // archive/ and reference/ are old or copied loop setups, not the engine
+  { name: "Ralph Loops", folder: "RalphLoops", exclude: ["archive", "reference"] },
 ];
 
 const GLOBAL_EXCLUDE = ["vendor", "third_party", "*.min.js", "*.min.css", "*-lock.json", "*.lock"];
