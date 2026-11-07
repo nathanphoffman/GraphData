@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { gapLabel, goalColor, waitBuckets } from "../../../src/charts/calculators/minimalism-calculator/logic/waiting";
+import { gapLabel, goalColor, waitBuckets } from "../../../src/charts/minimalism-calculator/logic/waiting";
 
 describe("waitBuckets", () => {
   it("has probabilities that add up to 1", () => {

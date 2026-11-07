@@ -4,7 +4,7 @@ import {
   last3,
   projectAll,
   recentRate,
-} from "../../../src/charts/science/weight-journey/model/averages";
+} from "../../../src/charts/weight-journey/model/averages";
 
 describe("completeAverage", () => {
   it("skips missing values", () => {

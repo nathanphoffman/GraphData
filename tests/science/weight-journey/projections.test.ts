@@ -4,10 +4,10 @@ import {
   addMuscle,
   projectTapering,
   taperToTotal,
-} from "../../../src/charts/science/weight-journey/calculate";
+} from "../../../src/charts/weight-journey/calculate";
 
-import { buildAllTrend, buildSpread, taperCurve } from "../../../src/charts/science/weight-journey/model/curves";
-import type { WeightRow } from "../../../src/charts/science/weight-journey/model/rows";
+import { buildAllTrend, buildSpread, taperCurve } from "../../../src/charts/weight-journey/model/curves";
+import type { WeightRow } from "../../../src/charts/weight-journey/model/rows";
 
 describe("addAverages", () => {
   const days = [10, 20, 30].map((weight, index) => ({ date: `2024-01-0${index + 1}`, weight, estimated: false }));

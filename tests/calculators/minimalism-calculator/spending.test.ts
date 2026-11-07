@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { purchasePlan, yearsToReach } from "../../../src/charts/calculators/minimalism-calculator/logic/spending";
+import { purchasePlan, yearsToReach } from "../../../src/charts/minimalism-calculator/logic/spending";
 
 describe("purchasePlan", () => {
   it("buys nothing when you already own the target and nothing wears out", () => {

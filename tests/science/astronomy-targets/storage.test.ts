@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { DEFAULT_SETTINGS } from "../../../src/charts/science/astronomy-targets/model/calculate";
+import { DEFAULT_SETTINGS } from "../../../src/charts/astronomy-targets/model/calculate";
 import {
   parseHidden,
   parseSeasonFilter,
   parseSettings,
-} from "../../../src/charts/science/astronomy-targets/model/storage";
+} from "../../../src/charts/astronomy-targets/model/storage";
 
 describe("parseSettings", () => {
   it("rejects anything that is not an object", () => {

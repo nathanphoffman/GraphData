@@ -3,7 +3,7 @@ import {
   addBloodPressure,
   healthOf,
   type Pressure_Reading,
-} from "../../../src/charts/science/weight-journey/model/bloodPressure";
+} from "../../../src/charts/weight-journey/model/bloodPressure";
 
 const READINGS: Pressure_Reading[] = [
   ["2024-01-01", 140, 90, 130, 80],

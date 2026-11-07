@@ -4,13 +4,13 @@ import {
   DEFAULT_ITEM_TYPE,
   findItemType,
   ITEM_TYPES,
-} from "../../../src/charts/calculators/minimalism-calculator/logic/items";
+} from "../../../src/charts/minimalism-calculator/logic/items";
 
 import {
   OWNED_STOPS,
   PER_YEAR_BENCHMARKS,
   PER_YEAR_STOPS,
-} from "../../../src/charts/calculators/minimalism-calculator/logic/stops";
+} from "../../../src/charts/minimalism-calculator/logic/stops";
 
 const strictlyIncreasing = (list: number[]) => list.every((value, index) => index === 0 || value > list[index - 1]);
 

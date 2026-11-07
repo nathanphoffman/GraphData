@@ -5,7 +5,7 @@ import {
   nFactor,
   withQuality,
   withScaffolding,
-} from "../../../src/charts/tech/top-rankings/maintenance";
+} from "../../../src/charts/top-rankings/maintenance";
 
 const columns = [{ label: "Completed Lines" }, { label: "Familiarity" }, { label: "Computed Quality" }];
 

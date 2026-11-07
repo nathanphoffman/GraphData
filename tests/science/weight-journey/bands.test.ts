@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { averageTint, band, deltaBand, healthBand, PALETTE } from "../../../src/charts/science/weight-journey/model/bands";
-import { KG_PER_LB } from "../../../src/charts/science/weight-journey/model/units";
+import { averageTint, band, deltaBand, healthBand, PALETTE } from "../../../src/charts/weight-journey/model/bands";
+import { KG_PER_LB } from "../../../src/charts/weight-journey/model/units";
 
 const pounds = (kilograms: number) => kilograms / KG_PER_LB;
 

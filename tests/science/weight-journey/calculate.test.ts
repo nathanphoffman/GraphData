@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fillDays, project } from "../../../src/charts/science/weight-journey/calculate";
+import { fillDays, project } from "../../../src/charts/weight-journey/calculate";
 
 describe("fillDays", () => {
   it("fills gaps in a straight line and marks them estimated", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatNeurons, scoreAnimals, sortAnimals } from "../../../src/charts/science/neuron-intelligence/calculate";
+import { formatNeurons, scoreAnimals, sortAnimals } from "../../../src/charts/neuron-intelligence/calculate";
 
 const human = { name: "Human", neuronsBillions: 86, weightKg: 70 };
 const mouse = { name: "Mouse", neuronsBillions: 0.07, weightKg: 0.02 };

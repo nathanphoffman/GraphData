@@ -9,7 +9,7 @@ import {
   type Ranking,
   rankItems,
   score,
-} from "../../../src/charts/tech/top-rankings/score";
+} from "../../../src/charts/top-rankings/score";
 
 const columns = [{ label: "Year" }, { label: "Syntax", weight: 10 }, { label: "Skill", weight: 1 }];
 

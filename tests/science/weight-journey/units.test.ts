@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { makeFormat } from "../../../src/charts/science/weight-journey/model/units";
+import { makeFormat } from "../../../src/charts/weight-journey/model/units";
 
 describe("makeFormat", () => {
   it("shows pounds as stored", () => {

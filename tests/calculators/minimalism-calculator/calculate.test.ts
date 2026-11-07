@@ -4,7 +4,7 @@ import {
   averageUses,
   recommended,
   recommendedCount,
-} from "../../../src/charts/calculators/minimalism-calculator/logic/calculate";
+} from "../../../src/charts/minimalism-calculator/logic/calculate";
 
 describe("recommended", () => {
   it("scales yearly use by your share", () => {

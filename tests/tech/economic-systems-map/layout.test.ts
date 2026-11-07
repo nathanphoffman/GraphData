@@ -10,9 +10,9 @@ import {
   placeLabels,
   xToPixels,
   yToPixels,
-} from "../../../src/charts/tech/economic-systems-map/model/layout";
+} from "../../../src/charts/economic-systems-map/model/layout";
 
-import type { EconomicSystemsData, Figure } from "../../../src/charts/tech/economic-systems-map/model/types";
+import type { EconomicSystemsData, Figure } from "../../../src/charts/economic-systems-map/model/types";
 
 const model = data as unknown as EconomicSystemsData;
 

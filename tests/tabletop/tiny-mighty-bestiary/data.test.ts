@@ -5,10 +5,10 @@ import {
   difficultyOf,
   model,
   tierFor,
-} from "../../../src/charts/tabletop/tiny-mighty-bestiary/model/data";
+} from "../../../src/charts/tiny-mighty-bestiary/model/data";
 
-import { matches } from "../../../src/charts/tabletop/tiny-mighty-bestiary/model/search";
-import type { Creature } from "../../../src/charts/tabletop/tiny-mighty-bestiary/model/types";
+import { matches } from "../../../src/charts/tiny-mighty-bestiary/model/search";
+import type { Creature } from "../../../src/charts/tiny-mighty-bestiary/model/types";
 
 const creature = (overrides: Partial<Creature>): Creature => ({
   id: "x",

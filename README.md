@@ -16,7 +16,7 @@ npm run build      # type-check + production build into dist/
 data/                  JSON data sets used by the charts
   sources/             Hand-collected inputs (e.g. TIOBE 2019 ratings)
 scripts/               Scripts that build the JSON files
-src/charts/            Charts grouped by category (calculators, science, tabletop, tech), one folder per chart
+src/charts/            One folder per chart
 tests/                Unit tests, mirroring src/charts
 src/charts/registry.ts The list of all charts (home page is built from this)
 src/pages/             Home page and the chart page wrapper

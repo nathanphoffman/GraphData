@@ -10,9 +10,9 @@ import {
   scopeFocalLength,
   scoreTargets,
   WINDOW_HOURS,
-} from "../../../src/charts/science/astronomy-targets/model/calculate";
+} from "../../../src/charts/astronomy-targets/model/calculate";
 
-import type { AstronomyTargetsData, Settings, Target } from "../../../src/charts/science/astronomy-targets/model/types";
+import type { AstronomyTargetsData, Settings, Target } from "../../../src/charts/astronomy-targets/model/types";
 
 const targets = (data as AstronomyTargetsData).targets;
 const settings: Settings = { ...DEFAULT_SETTINGS, preset: "" };

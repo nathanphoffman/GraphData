@@ -5,7 +5,7 @@ import {
   simulateRun,
   summarize,
   unguidedness,
-} from "../../../src/charts/tech/code-quality-entropy/simulate";
+} from "../../../src/charts/code-quality-entropy/simulate";
 
 const params: Params = {
   commits: 50,

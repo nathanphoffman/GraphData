@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { estimateScore, knownScore } from "../../../src/charts/science/all-intelligence/calculate";
-import type { AllIntelligenceData, Subject } from "../../../src/charts/science/all-intelligence/types";
+import { estimateScore, knownScore } from "../../../src/charts/all-intelligence/calculate";
+import type { AllIntelligenceData, Subject } from "../../../src/charts/all-intelligence/types";
 
 const subject = (scores: Record<string, number>, outputPrice?: number) =>
   ({ scores, outputPrice }) as unknown as Subject;

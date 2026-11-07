@@ -7,9 +7,9 @@ import {
   lineSegments,
   MARGIN,
   makeXAt,
-} from "../../../src/charts/tech/language-outlook/model/layout";
+} from "../../../src/charts/language-outlook/model/layout";
 
-import type { LanguageOutlookData, LanguageRecord } from "../../../src/charts/tech/language-outlook/model/types";
+import type { LanguageOutlookData, LanguageRecord } from "../../../src/charts/language-outlook/model/types";
 
 const language = (name: string, values: Record<string, number | null>) =>
   ({ name, values, tiobe: {}, pop: {} }) as LanguageRecord;

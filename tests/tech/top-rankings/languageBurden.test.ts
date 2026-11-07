@@ -5,9 +5,9 @@ import {
   formatTechLines,
   netN,
   parseTechLines,
-} from "../../../src/charts/tech/top-rankings/languageBurden";
+} from "../../../src/charts/top-rankings/languageBurden";
 
-import { maintenance, nFactor } from "../../../src/charts/tech/top-rankings/maintenance";
+import { maintenance, nFactor } from "../../../src/charts/top-rankings/maintenance";
 
 describe("burdenScore", () => {
   it("raises each burden to (sensitivity + unfamiliarity) and multiplies them", () => {

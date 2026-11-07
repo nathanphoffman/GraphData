@@ -6,7 +6,7 @@ import {
   position,
   spans,
   tierFor,
-} from "../../../src/charts/calculators/maintainability-calculator/calculate";
+} from "../../../src/charts/maintainability-calculator/calculate";
 
 describe("spans", () => {
   it("uses n^n as the middle and (n-1)^(n-1) for the lower bound", () => {

@@ -1,20 +1,20 @@
 import type { ComponentType } from "react";
-import MaintainabilityCalculator from "./calculators/maintainability-calculator/MaintainabilityCalculator";
-import MinimalismCalculator from "./calculators/minimalism-calculator/MinimalismCalculator";
-import AllIntelligence from "./science/all-intelligence/AllIntelligence";
-import AstronomyTargets from "./science/astronomy-targets/AstronomyTargets";
-import NeuronIntelligence from "./science/neuron-intelligence/NeuronIntelligence";
-import WeightJourney from "./science/weight-journey/WeightJourney";
-import DndSales from "./tabletop/dnd-sales/DndSales";
-import RuleOfAuthorship from "./tabletop/rule-of-authorship/RuleOfAuthorship";
-import TinyMightyBestiary from "./tabletop/tiny-mighty-bestiary/TinyMightyBestiary";
-import BoardGames from "./tech/board-games/BoardGames";
-import CodeQualityEntropy from "./tech/code-quality-entropy/CodeQualityEntropy";
-import EconomicSystemsMap from "./tech/economic-systems-map/EconomicSystemsMap";
-import LanguageOutlook from "./tech/language-outlook/LanguageOutlook";
-import ProjectPriority from "./tech/project-priority/ProjectPriority";
-import RalphLoops from "./tech/ralph-loops/RalphLoops";
-import TopRankings from "./tech/top-rankings/TopRankings";
+import MaintainabilityCalculator from "./maintainability-calculator/MaintainabilityCalculator";
+import MinimalismCalculator from "./minimalism-calculator/MinimalismCalculator";
+import AllIntelligence from "./all-intelligence/AllIntelligence";
+import AstronomyTargets from "./astronomy-targets/AstronomyTargets";
+import NeuronIntelligence from "./neuron-intelligence/NeuronIntelligence";
+import WeightJourney from "./weight-journey/WeightJourney";
+import DndSales from "./dnd-sales/DndSales";
+import RuleOfAuthorship from "./rule-of-authorship/RuleOfAuthorship";
+import TinyMightyBestiary from "./tiny-mighty-bestiary/TinyMightyBestiary";
+import BoardGames from "./board-games/BoardGames";
+import CodeQualityEntropy from "./code-quality-entropy/CodeQualityEntropy";
+import EconomicSystemsMap from "./economic-systems-map/EconomicSystemsMap";
+import LanguageOutlook from "./language-outlook/LanguageOutlook";
+import ProjectPriority from "./project-priority/ProjectPriority";
+import RalphLoops from "./ralph-loops/RalphLoops";
+import TopRankings from "./top-rankings/TopRankings";
 
 /** Home page sections, in display order. */
 const SCIENCE_CATEGORY = "Science";
@@ -41,7 +41,7 @@ export interface ChartEntry {
 
 /**
  * Every chart in the project is listed here.
- * To add a chart: create a component under src/charts/<category>/<name>/, import it, and add one entry below.
+ * To add a chart: create a component under src/charts/<name>/, import it, and add one entry below.
  */
 export const charts: ChartEntry[] = [
   {

@@ -18,7 +18,7 @@ import { promisify } from "node:util";
 const execFileAsync = promisify(execFile);
 
 import { fileURLToPath } from "node:url";
-import { formatTechLines } from "../src/charts/tech/top-rankings/languageBurden.ts";
+import { formatTechLines } from "../src/charts/top-rankings/languageBurden.ts";
 
 // projects live two levels up from this script (the Code folder)
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -41,7 +41,7 @@ const TENTH = 10;
 const QUALITY_WIDTH = 8;
 const MIN_LINES_WIDTH = 5;
 
-// the Status rating of an active and a decommissioned project, the same as in src/charts/tech/top-rankings/maintenance.ts
+// the Status rating of an active and a decommissioned project, the same as in src/charts/top-rankings/maintenance.ts
 const ACTIVE_STATUS = 5;
 const DECOMMISSIONED_STATUS = 1;
 
@@ -108,7 +108,7 @@ const NOT_CODE = new Set([
   "ReStructuredText",
 ]);
 
-// tokei language names that count as one of the rated languages in src/charts/tech/top-rankings/languageBurden.ts; languages not listed here (HTML, CSS, shell ...) are not rated
+// tokei language names that count as one of the rated languages in src/charts/top-rankings/languageBurden.ts; languages not listed here (HTML, CSS, shell ...) are not rated
 const RATED_AS: Record<string, string> = {
   TypeScript: "TypeScript",
   TSX: "TypeScript",
