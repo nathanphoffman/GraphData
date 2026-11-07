@@ -597,25 +597,20 @@
   white-space: nowrap;
 }
 
-.astro-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 24px 12px;
-  overflow-y: auto;
-  background: rgb(0 0 0 / 0.55);
-}
-
 .astro-modal {
-  width: min(720px, 100%);
+  width: min(720px, calc(100% - 24px));
+  max-height: calc(100vh - 48px);
+  margin-block: 24px;
   padding: 16px 20px;
+  color: var(--fg);
   background: var(--bg);
   border: 1px solid color-mix(in srgb, var(--fg) 25%, transparent);
   border-radius: 8px;
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+.astro-modal::backdrop {
+  background: rgb(0 0 0 / 0.55);
 }
 
 .astro-modal-head {

@@ -1,8 +1,10 @@
 import type { Settings } from "./types";
+import NumberSlider from "../../components/NumberSlider";
 
 /** The divisor slider goes up to this, in steps of this. */
 const DIVISOR_MAX = 20;
 const DIVISOR_STEP = 0.5;
+const DIVISOR_RANGE = { min: 1, max: DIVISOR_MAX, step: DIVISOR_STEP };
 
 interface Props {
   settings: Settings;
@@ -21,15 +23,7 @@ function DivisorSlider({
   onChange: (value: number) => void;
 }) {
   return (
-    <input
-      type="range"
-      min={1}
-      max={DIVISOR_MAX}
-      step={DIVISOR_STEP}
-      disabled={disabled}
-      value={value}
-      onChange={(event) => onChange(Number(event.target.value))}
-    />
+    <NumberSlider range={DIVISOR_RANGE} value={value} disabled={disabled} onChange={onChange} />
   );
 }
 

@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import "./styles.css";
 import { EntropyChart } from "./EntropyChart";
 import { entropyChance, type Params, simulate, summarize } from "./simulate";
+import NumberSlider from "../../components/NumberSlider";
 
 const PERCENT = 100;
 
@@ -95,13 +96,10 @@ export default function CodeQualityEntropy() {
         <strong>{values[control.key].toFixed(control.digits)}</strong>
       </span>
       <span className="muted entropy-math">{control.math}</span>
-      <input
-        type="range"
-        min={control.min}
-        max={control.max}
-        step={control.step}
+      <NumberSlider
+        range={{ min: control.min, max: control.max, step: control.step }}
         value={values[control.key]}
-        onChange={(event) => setValues({ ...values, [control.key]: Number(event.target.value) })}
+        onChange={(value) => setValues({ ...values, [control.key]: value })}
       />
     </label>
   );

@@ -2,6 +2,9 @@ import { ACTIVE_CLASS } from "../../classNames";
 import type { Tapered } from "../model/chart";
 import type { Format, Unit } from "../model/units";
 import type { Lines, ProjectionTool } from "../useProjections";
+import NumberSlider from "../../../components/NumberSlider";
+
+const FAT_RATIO_RANGE = { min: 0, max: 2, step: 0.1 };
 
 export const RANGES = [
   { label: "All", days: Infinity },
@@ -154,14 +157,11 @@ function FatRatioBox({ fatRatio, onFatRatio }: { fatRatio: FatRatio; onFatRatio:
         </label>
         <label className="field">
           Ratio: {Number(fatRatio.value).toFixed(1)}x
-          <input
-            type="range"
-            min="0"
-            max="2"
-            step="0.1"
-            value={fatRatio.value}
+          <NumberSlider
+            range={FAT_RATIO_RANGE}
+            value={Number(fatRatio.value)}
             disabled={!fatRatio.enabled}
-            onChange={(event) => onFatRatio({ ...fatRatio, value: event.target.value })}
+            onChange={(ratio) => onFatRatio({ ...fatRatio, value: String(ratio) })}
           />
         </label>
       </div>

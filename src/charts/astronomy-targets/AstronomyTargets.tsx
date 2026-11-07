@@ -64,6 +64,7 @@ export default function AstronomyTargets() {
   const scored = useMemo(() => scoreTargets(model.targets, settings), [settings]);
   const rows = filterRows(scored, seasonFilter, query);
   const hovered = hover && rows.find((scoredTarget) => scoredTarget.target.id === hover.id);
+  const preview = hover && hovered && <TargetPreview row={hovered} settings={settings} x={hover.x} y={hover.y} />;
 
   return (
     <div className="astro">
@@ -87,9 +88,10 @@ export default function AstronomyTargets() {
             setHover(null);
           }}
           onHover={setHover}
+          preview={preview}
         />
       )}
-      {hover && hovered && <TargetPreview row={hovered} settings={settings} x={hover.x} y={hover.y} />}
+      {!schedule && preview}
       <Footnotes source={model.source} />
     </div>
   );

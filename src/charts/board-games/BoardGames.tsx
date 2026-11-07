@@ -2,6 +2,7 @@ import { type CSSProperties, useEffect, useState } from "react";
 import { callApi } from "../../api";
 import { heat } from "../top-rankings/RankingCells";
 import "./styles.css";
+import NumberSlider from "../../components/NumberSlider";
 
 /** The weight slider runs over BGG's weights; the server reads a preference of 0 as no preference. */
 const MIN_WEIGHT = 1;
@@ -322,27 +323,17 @@ export default function BoardGames() {
         {preferWeight && (
           <label>
             Weight preference: {weight.toFixed(2)}{" "}
-            <input
-              type="range"
-              min={MIN_WEIGHT}
-              max={MAX_WEIGHT}
-              step={WEIGHT_STEP}
+            <NumberSlider
+              range={{ min: MIN_WEIGHT, max: MAX_WEIGHT, step: WEIGHT_STEP }}
               value={weight}
-              onChange={(changeEvent) => setWeight(Number(changeEvent.target.value))}
+              onChange={setWeight}
             />
           </label>
         )}
 
         <label>
           Released: {YEAR_STEPS[yearStep].label}{" "}
-          <input
-            type="range"
-            min={0}
-            max={YEAR_STEPS.length - 1}
-            step={1}
-            value={yearStep}
-            onChange={(changeEvent) => setYearStep(Number(changeEvent.target.value))}
-          />
+          <NumberSlider range={{ min: 0, max: YEAR_STEPS.length - 1, step: 1 }} value={yearStep} onChange={setYearStep} />
         </label>
         <label>
           <input

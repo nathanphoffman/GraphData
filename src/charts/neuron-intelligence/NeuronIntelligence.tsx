@@ -4,6 +4,7 @@ import data from "../../../data/neuron-intelligence/neuron-intelligence.json";
 import { NAME_KEY, useSort } from "../useSort";
 import { DEFAULT_EXPONENTS, formatNeurons, PLAUSIBLE_X, scoreAnimals, sortAnimals } from "./calculate";
 import type { Exponents, NeuronIntelligenceData, SortKey } from "./types";
+import NumberSlider from "../../components/NumberSlider";
 
 const model = data as NeuronIntelligenceData;
 
@@ -29,14 +30,7 @@ function Slider({ label, value, min: minValue, max: maxValue, onChange }: Slider
   return (
     <label className="neuron-slider">
       <span>{label}</span>
-      <input
-        type="range"
-        min={minValue}
-        max={maxValue}
-        step={SLIDER_STEP}
-        value={value}
-        onChange={(event) => onChange(Number(event.target.value))}
-      />
+      <NumberSlider range={{ min: minValue, max: maxValue, step: SLIDER_STEP }} value={value} onChange={onChange} />
       <strong>{value.toFixed(2)}</strong>
     </label>
   );

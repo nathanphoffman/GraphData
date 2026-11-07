@@ -4,6 +4,7 @@ import { heat } from "../top-rankings/RankingCells";
 import { fractionBetween, type Ranking } from "../top-rankings/score";
 import { deciNHeat } from "./deciNHeat";
 import { LanguagePie } from "./LanguagePie";
+import NumberSlider from "../../components/NumberSlider";
 
 /** An n-Factor is shown in deci-ns (dn): n x 10, to this many decimals. */
 const DN_DIGITS = 1;
@@ -95,13 +96,10 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
         <div className="rankings-index-sliders">
           <label title="Average quality used in the numbers below. It starts at the real average; move it to see what the n-factors would be at a different quality.">
             Average Quality: {result.averageQuality.toFixed(1)}%{" "}
-            <input
-              type="range"
-              min={0}
-              max={PERCENT}
-              step={QUALITY_STEP}
+            <NumberSlider
+              range={{ min: 0, max: PERCENT, step: QUALITY_STEP }}
               value={result.averageQuality}
-              onChange={(changeEvent) => setQualityOverride(Number(changeEvent.target.value))}
+              onChange={setQualityOverride}
             />
             {qualityOverride !== null && (
               <button type="button" onClick={() => setQualityOverride(null)}>
@@ -111,13 +109,10 @@ export function MaintenanceIndex({ ranking }: { ranking: Ranking }) {
           </label>
           <label title="Target dn: the deci-n you are aiming for. The cards are richest green at it, fading to yellow past 1dn, orange past 1.5dn and deep red past 2.5dn; the arrows show which way to move.">
             Target dn: {target.toFixed(2)}{" "}
-            <input
-              type="range"
-              min={TARGET_MIN}
-              max={TARGET_MAX}
-              step={TARGET_STEP}
+            <NumberSlider
+              range={{ min: TARGET_MIN, max: TARGET_MAX, step: TARGET_STEP }}
               value={target}
-              onChange={(changeEvent) => setTarget(Number(changeEvent.target.value))}
+              onChange={setTarget}
             />
             {target !== DEFAULT_TARGET && (
               <button type="button" onClick={() => setTarget(DEFAULT_TARGET)}>

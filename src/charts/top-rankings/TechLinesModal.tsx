@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import Modal from "../../components/Modal";
 
 const PERCENT = 100;
 
@@ -12,26 +12,8 @@ export function TechLinesModal({
   shares: { language: string; lines: number; share: number }[];
   onClose: () => void;
 }) {
-  const dialog = useRef<HTMLDialogElement>(null);
-
-  // Open as a modal when it appears; the browser then handles Escape and keeps focus inside.
-  useEffect(() => {
-    dialog.current?.showModal();
-  }, []);
-
   return (
-    // Clicks inside must not reach the cell underneath, which would start editing it.
-    <dialog
-      ref={dialog}
-      className="rankings-modal"
-      onClose={onClose}
-      onClick={(clickEvent) => {
-        clickEvent.stopPropagation();
-
-        if (clickEvent.target === dialog.current) onClose();
-      }}
-
-    >
+    <Modal className="rankings-modal" onClose={onClose}>
       <h3>{itemName} · lines by language</h3>
       <table>
         <tbody>
@@ -49,6 +31,6 @@ export function TechLinesModal({
       <button type="button" onClick={onClose}>
         Close
       </button>
-    </dialog>
+    </Modal>
   );
 }

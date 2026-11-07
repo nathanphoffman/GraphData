@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import type { ReactNode } from "react";
+import Modal from "../../../components/Modal";
 import {
   formatHour,
   type Schedule,
@@ -43,98 +44,86 @@ export function ScheduleModal({
   schedule,
   onClose,
   onHover,
+  preview,
 }: {
   schedule: Schedule;
   onClose: () => void;
   onHover: OnHover;
+
+  /** The hover photo. It must be drawn inside the popup, because a modal covers everything outside it. */
+  preview: ReactNode;
 }) {
-  // Close the schedule when Escape is pressed, and stop listening when it is hidden.
-  useEffect(() => {
-    const onKey = (keyboardEvent: KeyboardEvent) => keyboardEvent.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  // Clicks inside the popup are stopped so only the backdrop closes it.
   return (
-    <div className="astro-modal-backdrop" onClick={onClose}>
-      <div
-        className="astro-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Observing schedule"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="astro-modal-head">
-          <h2>{SEASONS[schedule.season].label.split(" ")[0]} night schedule</h2>
-          <button type="button" onClick={onClose} aria-label="Close">
-            ✕
-          </button>
-        </div>
-        <p className="astro-note">
-          Each object is listed in the two-hour window containing the hour it is best placed (local solar time), best
-          score first. Times after "up" are when it is above 25° in the dark.
-        </p>
-        {schedule.slots.length === 0 && <p>Nothing scores well enough for this season with your settings.</p>}
-
-        {/* One section per two-hour window of the night. */}
-        {schedule.slots.map((slot) => (
-          <section key={slot.hour} className="astro-slot">
-            <h3>
-              {formatHour(slot.hour)} – {formatHour((slot.hour + WINDOW_HOURS) % 24)}
-            </h3>
-            {/* Only show the difficulty levels that have something in this window. */}
-            {LEVELS.filter((l) => slot.items[l.level].length > 0).map((l) => (
-              <div key={l.level}>
-                <span className="astro-tag" style={{ "--tag": `hsl(${l.hue} 70% 45%)` } as React.CSSProperties}>
-                  {l.label}
-                </span>
-                <ul>
-                  {slot.items[l.level].map((item) => (
-                    <Item key={item.row.target.id} item={item} onHover={onHover} />
-                  ))}
-                </ul>
-              </div>
-            ))}
-            {slot.more > 0 && <small className="astro-nick">+{slot.more} more in this window</small>}
-          </section>
-        ))}
-        {schedule.reach && (
-          <section className="astro-slot">
-            <h3>Reach</h3>
-            <p className="astro-note">
-              One very hard object for the adventurous, picked at random (best around{" "}
-              {formatHour(schedule.reach.row.bestHour ?? 0)}).
-            </p>
-            <ul>
-              <Item item={schedule.reach} onHover={onHover} />
-            </ul>
-          </section>
-        )}
-        {schedule.stars.length > 0 && (
-          <section className="astro-slot">
-            <h3>Notable stars out</h3>
-            <p>
-              {/* One entry per star that is well placed this season. */}
-              {schedule.stars.map((scoredTarget, index) => (
-                <span
-                  key={scoredTarget.target.id}
-                  onMouseMove={
-                    hasPreview(scoredTarget.target.id)
-                      ? (event) => onHover({ id: scoredTarget.target.id, x: event.clientX, y: event.clientY })
-                      : undefined
-                  }
-                  onMouseLeave={hasPreview(scoredTarget.target.id) ? () => onHover(null) : undefined}
-                >
-                  {scoredTarget.target.id}
-                  {index < schedule.stars.length - 1 ? ", " : ""}
-                </span>
-              ))}
-            </p>
-          </section>
-        )}
+    <Modal className="astro-modal" ariaLabel="Observing schedule" onClose={onClose}>
+      <div className="astro-modal-head">
+        <h2>{SEASONS[schedule.season].label.split(" ")[0]} night schedule</h2>
+        <button type="button" onClick={onClose} aria-label="Close">
+          ✕
+        </button>
       </div>
-    </div>
+      <p className="astro-note">
+        Each object is listed in the two-hour window containing the hour it is best placed (local solar time), best
+        score first. Times after "up" are when it is above 25° in the dark.
+      </p>
+      {schedule.slots.length === 0 && <p>Nothing scores well enough for this season with your settings.</p>}
+
+      {/* One section per two-hour window of the night. */}
+      {schedule.slots.map((slot) => (
+        <section key={slot.hour} className="astro-slot">
+          <h3>
+            {formatHour(slot.hour)} – {formatHour((slot.hour + WINDOW_HOURS) % 24)}
+          </h3>
+          {/* Only show the difficulty levels that have something in this window. */}
+          {LEVELS.filter((l) => slot.items[l.level].length > 0).map((l) => (
+            <div key={l.level}>
+              <span className="astro-tag" style={{ "--tag": `hsl(${l.hue} 70% 45%)` } as React.CSSProperties}>
+                {l.label}
+              </span>
+              <ul>
+                {slot.items[l.level].map((item) => (
+                  <Item key={item.row.target.id} item={item} onHover={onHover} />
+                ))}
+              </ul>
+            </div>
+          ))}
+          {slot.more > 0 && <small className="astro-nick">+{slot.more} more in this window</small>}
+        </section>
+      ))}
+      {schedule.reach && (
+        <section className="astro-slot">
+          <h3>Reach</h3>
+          <p className="astro-note">
+            One very hard object for the adventurous, picked at random (best around{" "}
+            {formatHour(schedule.reach.row.bestHour ?? 0)}).
+          </p>
+          <ul>
+            <Item item={schedule.reach} onHover={onHover} />
+          </ul>
+        </section>
+      )}
+      {schedule.stars.length > 0 && (
+        <section className="astro-slot">
+          <h3>Notable stars out</h3>
+          <p>
+            {/* One entry per star that is well placed this season. */}
+            {schedule.stars.map((scoredTarget, index) => (
+              <span
+                key={scoredTarget.target.id}
+                onMouseMove={
+                  hasPreview(scoredTarget.target.id)
+                    ? (event) => onHover({ id: scoredTarget.target.id, x: event.clientX, y: event.clientY })
+                    : undefined
+                }
+                onMouseLeave={hasPreview(scoredTarget.target.id) ? () => onHover(null) : undefined}
+              >
+                {scoredTarget.target.id}
+                {index < schedule.stars.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </p>
+        </section>
+      )}
+      {preview}
+    </Modal>
   );
 }

@@ -1,5 +1,6 @@
-import { type KeyboardEvent, useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useRef, useState } from "react";
 import { callApi } from "../../api";
+import Modal from "../../components/Modal";
 import type { Item } from "./score";
 
 /** The key that adds the next feature row. */
@@ -19,13 +20,7 @@ export function FeaturesModal({
 }) {
   const [rows, setRows] = useState<string[]>(item.features?.length ? item.features : [""]);
   const [message, setMessage] = useState("");
-  const dialog = useRef<HTMLDialogElement>(null);
   const focusLast = useRef(false);
-
-  // Open as a modal when it appears; the browser then handles Escape and keeps focus inside.
-  useEffect(() => {
-    dialog.current?.showModal();
-  }, []);
 
   const change = (index: number, text: string) =>
     setRows(rows.map((row, rowIndex) => (rowIndex === index ? text : row)));
@@ -55,12 +50,7 @@ export function FeaturesModal({
   };
 
   return (
-    <dialog
-      ref={dialog}
-      className="rankings-modal"
-      onClose={onClose}
-      onClick={(clickEvent) => clickEvent.target === dialog.current && onClose()}
-    >
+    <Modal className="rankings-modal" onClose={onClose}>
       <h3>{item.name} · planned features</h3>
       <ul>
         {rows.map((row, index) => (
@@ -104,6 +94,6 @@ export function FeaturesModal({
         </button>
         {message && <span role="alert">{message}</span>}
       </div>
-    </dialog>
+    </Modal>
   );
 }

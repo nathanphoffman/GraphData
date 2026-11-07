@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NumberSlider from "../../../components/NumberSlider";
 
 /** Plain-words rating for an optical quality percentage. */
 export function opticalQualityLabel(value: number): string {
@@ -69,15 +70,7 @@ export function SliderField({ label, value, min, max, step, onChange, note, disa
   return (
     <label>
       <span>{label}</span>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        disabled={disabled}
-        onChange={(event) => onChange(Number(event.target.value))}
-      />
+      <NumberSlider range={{ min, max, step }} value={value} disabled={disabled} onChange={onChange} />
       {note && <small>{note}</small>}
     </label>
   );

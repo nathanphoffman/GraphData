@@ -1,3 +1,5 @@
+import NumberSlider from "../../../components/NumberSlider";
+
 export interface Zone {
   /** Upper end of the zone, in the slider's own units. */
   to: number;
@@ -44,6 +46,10 @@ function zoneStops(zones: Zone[], toPos: (value: number) => number) {
   });
 }
 
+/** The slider moves along 0 to 1 in this many steps, so log and linear scales both feel smooth. */
+const POSITION_STEPS = 1000;
+const POSITION_RANGE = { min: 0, max: POSITION_STEPS, step: 1 };
+
 /** A range slider with coloured stretches under it marking what is typical, e.g. narrow, normal and wide eyepieces. */
 export function ZoneSlider({ label, value, min, max, zones, log, unit, onChange }: ZoneSliderProps) {
   const { toPos, fromPos } = scale({ min, max, log });
@@ -55,13 +61,10 @@ export function ZoneSlider({ label, value, min, max, zones, log, unit, onChange 
       <span>
         {label} ({value} {unit})
       </span>
-      <input
-        type="range"
-        min={0}
-        max={1000}
-        step={1}
-        value={Math.round(toPos(value) * 1000)}
-        onChange={(event) => onChange(fromPos(Number(event.target.value) / 1000))}
+      <NumberSlider
+        range={POSITION_RANGE}
+        value={Math.round(toPos(value) * POSITION_STEPS)}
+        onChange={(position) => onChange(fromPos(position / POSITION_STEPS))}
       />
       <div className="astro-zones" style={{ background: `linear-gradient(to right, ${bar})` }} aria-hidden="true" />
       <div className="astro-zone-labels">

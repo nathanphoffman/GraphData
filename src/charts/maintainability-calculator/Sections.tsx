@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { formatCount, position, spans, tierFor } from "./calculate";
 import { TIERS } from "./style";
 import type { MaintainabilityData, Tier } from "./types";
+import NumberSlider from "../../components/NumberSlider";
 
 /** Coloured label for a stability tier, so the tier reads the same everywhere it appears. */
 function Badge({ tier }: { tier: Tier }) {
@@ -42,15 +43,7 @@ export function SliderPanel({
         <label htmlFor={sliderId}>{label}</label>
         <strong>{value}</strong>
       </div>
-      <input
-        id={sliderId}
-        type="range"
-        min={minValue}
-        max={maxValue}
-        step={step}
-        value={current}
-        onChange={(event) => onChange(Number(event.target.value))}
-      />
+      <NumberSlider id={sliderId} range={{ min: minValue, max: maxValue, step }} value={current} onChange={onChange} />
       <div className="calc-ticks">
         {ticks.map((tick) => (
           <span key={tick}>{tick}</span>
