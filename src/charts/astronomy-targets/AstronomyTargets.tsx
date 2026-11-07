@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
-import data from "../../../data/astronomy/astronomy-targets.json";
+import data from "../../../data/astronomy-targets/astronomy-targets.json";
 import { ControlsPanel } from "./controls/ControlsPanel";
 import type { Schedule } from "./model/calculate";
 import { buildSchedule, DEFAULT_SETTINGS, scoreTargets } from "./model/calculate";

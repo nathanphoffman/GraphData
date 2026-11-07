@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import "./styles.css";
-import GoalCurve from "./graphs/GoalCurve";
-import SharingCurve from "./graphs/SharingCurve";
-import WaitChart from "./graphs/WaitChart";
+import FriendSharingCurve from "./graphs/FriendSharingCurve";
+import OwnershipGoalCurve from "./graphs/OwnershipGoalCurve";
+import TimeUnusedChart from "./graphs/TimeUnusedChart";
 import { averageUses, recommended, recommendedCount } from "./logic/calculate";
 import { PERCENT, WEEKS_PER_YEAR } from "./logic/constants";
 import type { ItemType } from "./logic/items";
@@ -40,13 +40,13 @@ function Results({
     <div className="mini-results">
       <h2>Results</h2>
       <RecommendationPanel owned={calculator.owned} needed={needed} />
-      <WaitChart
+      <TimeUnusedChart
         owned={calculator.owned}
         avgUses={averageUses(calculator.perWeek, calculator.sharePct, calculator.owned)}
         goal={calculator.perYear}
         item={item}
       />
-      <SharingCurve
+      <FriendSharingCurve
         soloNeeded={recommended(calculator.perWeek, calculator.perYear, PERCENT)}
         people={people}
         item={item}
@@ -114,7 +114,7 @@ export default function MinimalismCalculator() {
         <div className="mini-inputs">
           <h2>Your numbers</h2>
           <InputDials calculator={calculator} item={item} people={people} />
-          <GoalCurve yearlyUses={yearlyUses} goal={calculator.perYear} item={item} onGoal={calculator.setPerYear} />
+          <OwnershipGoalCurve yearlyUses={yearlyUses} goal={calculator.perYear} item={item} onGoal={calculator.setPerYear} />
         </div>
         <Results calculator={calculator} item={item} people={people} needed={needed} />
       </div>

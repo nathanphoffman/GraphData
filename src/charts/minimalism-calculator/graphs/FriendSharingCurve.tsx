@@ -20,7 +20,7 @@ interface Props {
 const SAMPLES_PER_PERSON = 4;
 
 /** Curve of how many you should own as more people share the load. */
-export default function SharingCurve({ soloNeeded, people, item, onPeople }: Props) {
+export default function FriendSharingCurve({ soloNeeded, people, item, onPeople }: Props) {
   // The right edge of the axis is held still while dragging so the chart doesn't rescale under the pointer.
   const [frozenMax, setFrozenMax] = useState<number | null>(null);
   const xMax = frozenMax ?? Math.min(SHARING_MAX_PEOPLE, Math.max(SHARING_MIN_PEOPLE, Math.ceil(people)));

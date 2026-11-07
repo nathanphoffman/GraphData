@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import data from "../../../data/astronomy/astronomy-targets.json";
+import data from "../../../data/astronomy-targets/astronomy-targets.json";
 import {
   buildSchedule,
   DEFAULT_SETTINGS,

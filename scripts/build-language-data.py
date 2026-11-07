@@ -6,10 +6,10 @@ Usage (from the GraphData folder):
     python3 scripts/build-language-data.py [path/to/Programming\\ Languages.ods]
 
 Needs LibreOffice (soffice) on the PATH to read the .ods file.
-TIOBE ratings come from data/sources/tiobe-september.json (September of every year, 2019-2026).
+TIOBE ratings come from data/language-outlook/tiobe-september.json (September of every year, 2019-2026).
 Raw Stack Overflow usage comes from the sheet's "<year> Pop" columns.
 Languages missing there (TypeScript, Zig) fall back to the spreadsheet's TIOBE columns and, for 2019,
-data/sources/tiobe-2019.json.
+data/language-outlook/tiobe-2019.json.
 """
 
 import csv
@@ -22,8 +22,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_ODS = ROOT.parent / "Programming Languages.ods"
 OUTPUT_PATH = ROOT / "data" / "language-outlook" / "language-outlook.json"
-TIOBE_2019 = ROOT / "data" / "language-outlook" / "sources" / "tiobe-2019.json"
-TIOBE_SEPT = ROOT / "data" / "language-outlook" / "sources" / "tiobe-september.json"
+TIOBE_2019 = ROOT / "data" / "language-outlook" / "tiobe-2019.json"
+TIOBE_SEPT = ROOT / "data" / "language-outlook" / "tiobe-september.json"
 
 YEARS = list(range(2019, 2027))
 RECENT, PRIOR = (2024, 2026), (2021, 2023)  # inclusive windows

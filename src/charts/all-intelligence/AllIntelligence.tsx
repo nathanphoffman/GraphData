@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import "./styles.css";
-import data from "../../../data/intelligence/all-intelligence.json";
+import data from "../../../data/all-intelligence/all-intelligence.json";
 import { NAME_KEY, useSort } from "../useSort";
 import { DEFAULT_SETTINGS, scoreSubjects } from "./calculate";
 import { ResultsTable, type SortKey } from "./ResultsTable";

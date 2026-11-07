@@ -1,4 +1,4 @@
-/** Shape of data/intelligence/neuron-intelligence.json. */
+/** Shape of data/neuron-intelligence/neuron-intelligence.json. */
 export interface Animal {
   name: string;
 

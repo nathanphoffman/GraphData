@@ -1,4 +1,4 @@
-/** Shape of data/economic-systems/economic-systems-map.json. Positions are in "cell units": x 0-4, y 0-3 (0 = bottom). */
+/** Shape of data/economic-systems-map/economic-systems-map.json. Positions are in "cell units": x 0-4, y 0-3 (0 = bottom). */
 export type Point = [number, number];
 
 export interface Cell {
@@ -56,7 +56,7 @@ export interface PlacedLabel {
   box: LabelBox;
 }
 
-/** Shape of data/economic-systems/economic-systems-views.json: common views per cell, by policy category. */
+/** Shape of data/economic-systems-map/economic-systems-views.json: common views per cell, by policy category. */
 export interface CellViews {
   summary: string;
 
@@ -70,7 +70,7 @@ export interface EconomicSystemsViewsData {
   cells: Record<string, CellViews>;
 }
 
-/** Shape of data/economic-systems/economic-systems-combos.json: one blend per pair of orthogonally adjacent cells, plus one per 2x2 block of cells. */
+/** Shape of data/economic-systems-map/economic-systems-combos.json: one blend per pair of orthogonally adjacent cells, plus one per 2x2 block of cells. */
 export interface Combo {
   /** The cell names being blended: two neighbors, or the four cells of a 2x2 block. */
   cells: string[];

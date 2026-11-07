@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./styles.css";
-import combosData from "../../../data/economic-systems/economic-systems-combos.json";
-import data from "../../../data/economic-systems/economic-systems-map.json";
-import views from "../../../data/economic-systems/economic-systems-views.json";
+import combosData from "../../../data/economic-systems-map/economic-systems-combos.json";
+import data from "../../../data/economic-systems-map/economic-systems-map.json";
+import views from "../../../data/economic-systems-map/economic-systems-views.json";
 import MapSvg from "./map/MapSvg";
 import type { Combo, EconomicSystemsCombosData, EconomicSystemsData, EconomicSystemsViewsData } from "./model/types";
 import ViewsPanel from "./panels/ViewsPanel";

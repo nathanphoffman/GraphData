@@ -1,5 +1,5 @@
 import { type CSSProperties, useEffect, useLayoutEffect, useRef, useState } from "react";
-import details from "../../../../data/astronomy/astronomy-target-details.json";
+import details from "../../../../data/astronomy-targets/astronomy-target-details.json";
 import {
   difficulty,
   effectiveQuality,

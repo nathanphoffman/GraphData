@@ -21,7 +21,7 @@ const MARKS = [0.1, 0.25, 0.5, 1, 2, 5, 10, 25, 52, 100, 365];
 const SAMPLES = 120;
 
 /** Curve of how many you should own for each uses-per-year expectation, with your setting marked. */
-export default function GoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
+export default function OwnershipGoalCurve({ yearlyUses, goal, item, onGoal }: Props) {
   // The left edge of the axis is held still while dragging so the chart doesn't rescale under the pointer.
   const [frozenMin, setFrozenMin] = useState<number | null>(null);
   const xMin = frozenMin ?? Math.min(1, goal);

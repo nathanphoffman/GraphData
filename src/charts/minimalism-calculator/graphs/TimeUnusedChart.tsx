@@ -16,7 +16,7 @@ interface Props {
 }
 
 /** Bar chart of how many items wait how long between plays, colored by closeness to the goal. */
-export default function WaitChart({ owned, avgUses, goal, item }: Props) {
+export default function TimeUnusedChart({ owned, avgUses, goal, item }: Props) {
   // Neighboring buckets that round to the same wait label (e.g. "Every ~2 months") become one bar.
   const merged = waitBuckets(avgUses).reduce<Bucket[]>((bucket, second) => {
     const last = bucket[bucket.length - 1];

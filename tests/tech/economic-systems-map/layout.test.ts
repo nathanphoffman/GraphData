@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import data from "../../../data/economic-systems/economic-systems-map.json";
+import data from "../../../data/economic-systems-map/economic-systems-map.json";
 import {
   cellNameWidth,
   fixedObstacles,
