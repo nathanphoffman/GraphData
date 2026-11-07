@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import SortHeader from "../../components/SortHeader";
 import { NAME_KEY } from "../useSort";
 import { estimateScore, knownScore } from "./calculate";
 import { type AllIntelligenceData, MEASURED_KEY, OVERALL_KEY, type ScoredSubject, type Settings } from "./types";
@@ -29,33 +30,28 @@ function formatScore(value: number | null | undefined): string {
 
 /** Table header with one sortable column per group of scores. */
 function Header({ model, sortKey, ascending, onSort }: SortProps & { model: AllIntelligenceData }) {
-  // Show an arrow on the sorted column only: up when ascending, down when descending, nothing on the others.
-  const arrow = (columnKey: SortKey) => (columnKey === sortKey ? (ascending ? " ▲" : " ▼") : "");
+  const sorted = { sortKey, ascending, onSort };
 
   return (
     <thead>
       <tr>
         <th>#</th>
-        <th className="sortable" onClick={() => onSort(NAME_KEY)}>
-          Name{arrow(NAME_KEY)}
-        </th>
-        <th className="sortable" onClick={() => onSort(OVERALL_KEY)}>
-          Score{arrow(OVERALL_KEY)}
-        </th>
-        {model.groups.map(
-          (
-            group, // One sortable header cell per group of columns.
-          ) => (
-            <th key={group.id} className="sortable allint-group-th" onClick={() => onSort(group.id)}>
-              {group.name.replace("& ", "&\n")}
-              {arrow(group.id)}
-            </th>
-          ),
-        )}
+        <SortHeader columnKey={NAME_KEY} {...sorted}>
+          Name
+        </SortHeader>
+        <SortHeader columnKey={OVERALL_KEY} {...sorted}>
+          Score
+        </SortHeader>
+        {/* One sortable header cell per group of columns. */}
+        {model.groups.map((group) => (
+          <SortHeader key={group.id} columnKey={group.id} className="allint-group-th" {...sorted}>
+            {group.name.replace("& ", "&\n")}
+          </SortHeader>
+        ))}
 
-        <th className="sortable" onClick={() => onSort(MEASURED_KEY)}>
-          Measured{arrow(MEASURED_KEY)}
-        </th>
+        <SortHeader columnKey={MEASURED_KEY} {...sorted}>
+          Measured
+        </SortHeader>
       </tr>
     </thead>
   );

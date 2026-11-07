@@ -5,6 +5,7 @@ import { NAME_KEY, useSort } from "../useSort";
 import { DEFAULT_EXPONENTS, formatNeurons, PLAUSIBLE_X, scoreAnimals, sortAnimals } from "./calculate";
 import type { Exponents, NeuronIntelligenceData, SortKey } from "./types";
 import NumberSlider from "../../components/NumberSlider";
+import SortHeader from "../../components/SortHeader";
 
 const model = data as NeuronIntelligenceData;
 
@@ -40,6 +41,7 @@ function Slider({ label, value, min: minValue, max: maxValue, onChange }: Slider
 export default function NeuronIntelligence() {
   const [exponents, setExponents] = useState<Exponents>(DEFAULT_EXPONENTS);
   const { sortKey, ascending, sortBy } = useSort<SortKey>(SCORE_KEY);
+  const sorted = { sortKey, ascending, onSort: sortBy };
 
   const rows = useMemo(
     () => sortAnimals(scoreAnimals(model.animals, exponents), sortKey, ascending),
@@ -97,25 +99,25 @@ export default function NeuronIntelligence() {
         <table>
           <thead>
             <tr>
-              <th className="sortable" onClick={() => sortBy(SCORE_KEY)}>
+              <SortHeader columnKey={SCORE_KEY} {...sorted}>
                 #
-              </th>
-              <th className="sortable" onClick={() => sortBy(NAME_KEY)}>
+              </SortHeader>
+              <SortHeader columnKey={NAME_KEY} {...sorted}>
                 Animal
-              </th>
-              <th className="sortable" onClick={() => sortBy("neuronsBillions")}>
+              </SortHeader>
+              <SortHeader columnKey="neuronsBillions" {...sorted}>
                 Neurons (B)
-              </th>
-              <th className="sortable" onClick={() => sortBy("weightKg")}>
+              </SortHeader>
+              <SortHeader columnKey="weightKg" {...sorted}>
                 Weight (kg)
-              </th>
+              </SortHeader>
               <th>Relative Score</th>
-              <th className="sortable" onClick={() => sortBy(SCORE_KEY)}>
+              <SortHeader columnKey={SCORE_KEY} {...sorted}>
                 Score
-              </th>
-              <th className="sortable" onClick={() => sortBy("humanPercent")}>
+              </SortHeader>
+              <SortHeader columnKey="humanPercent" {...sorted}>
                 % of Human
-              </th>
+              </SortHeader>
             </tr>
           </thead>
           <tbody>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { callApi } from "../../api";
+import SortHeader from "../../components/SortHeader";
 import { FeaturesModal } from "./FeaturesModal";
 import {
   isDimmed,
@@ -64,33 +65,6 @@ const COMPARE: Record<SortKey, (first: RankedRow, second: RankedRow) => number> 
   name: (first, second) => first.item.name.localeCompare(second.item.name),
   grade: (first, second) => first.grade - second.grade,
 };
-
-/** A header cell that sorts the table by its column when clicked; a second click reverses it. */
-function SortHeader({
-  label,
-  sortKey,
-  sort,
-  onSort,
-  title,
-}: {
-  label: string;
-  sortKey: SortKey;
-  sort: Sort;
-  onSort: (sortColumn: SortKey) => void;
-  title?: string;
-}) {
-  const active = sort.key === sortKey;
-
-  return (
-    // aria-sort tells screen readers the direction: ascending or descending on the sorted column, none on the rest.
-    <th title={title} aria-sort={active ? (sort.descending ? "descending" : "ascending") : "none"}>
-      <button type="button" className="rankings-sort" onClick={() => onSort(sortKey)}>
-        {label}
-        {active && (sort.descending ? " ▼" : " ▲")}
-      </button>
-    </th>
-  );
-}
 
 /** Sort the columns into those shown as plain information and those that are rated (heaviest first); the link and episodic columns are not shown. */
 function splitColumns(ranking: Ranking): TableColumns {
@@ -184,12 +158,14 @@ function TableHead({ columns, showScore, showFeatures, sort, onSort, onReorder }
 
         {showScore && <th title="Each rating squared times its weight, added up">Score</th>}
         <SortHeader
-          label="Grade"
-          sortKey="grade"
-          sort={sort}
+          columnKey="grade"
+          sortKey={sort.key}
+          ascending={!sort.descending}
           onSort={onSort}
           title="The score as a grade out of 100 on a curve: it eases off near the top and drops faster further down"
-        />
+        >
+          Grade
+        </SortHeader>
         {columns.rated.map(({ column }) => (
           <th
             key={column.label}

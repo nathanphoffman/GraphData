@@ -1,5 +1,6 @@
 import { type CSSProperties, useEffect, useState } from "react";
 import { callApi } from "../../api";
+import { useStoredJson } from "../../hooks/useStoredState";
 import { heat } from "../top-rankings/RankingCells";
 import "./styles.css";
 import NumberSlider from "../../components/NumberSlider";
@@ -49,15 +50,8 @@ interface BestWeight {
 
 const gameKey = (game: OwnedGame) => `${game.title}|${game.releaseDate}`;
 
-function loadOwned(): OwnedGame[] {
-  try {
-    const saved = JSON.parse(localStorage.getItem(OWNED_STORAGE_KEY) ?? "[]");
-
-    return Array.isArray(saved) ? saved : [];
-  } catch {
-    return [];
-  }
-}
+/** Anything saved that is not a list is dropped, so a damaged save starts the list empty. */
+const parseOwned = (saved: unknown) => (Array.isArray(saved) ? (saved as OwnedGame[]) : null);
 
 /** The release year slider's steps: how many years back it shows (this year counting as the first), or null for every year. */
 const YEAR_STEPS: { label: string; years: number | null }[] = [
@@ -152,7 +146,7 @@ export default function BoardGames() {
   const [page, setPage] = useState(1);
   const [data, setData] = useState<Page | null>(null);
   const [error, setError] = useState(false);
-  const [owned, setOwned] = useState<OwnedGame[]>(loadOwned);
+  const [owned, setOwned] = useStoredJson<OwnedGame[]>(OWNED_STORAGE_KEY, [], parseOwned);
   const [found, setFound] = useState<BestWeight | null>(null);
   const [finding, setFinding] = useState(false);
   const [findError, setFindError] = useState("");
@@ -217,15 +211,6 @@ export default function BoardGames() {
       current = false;
     };
   }, [preference, search, page, minYear, onlyMine, mineToShow]);
-
-  // Keep the owned list in the browser; a browser that blocks storage just forgets it.
-  useEffect(() => {
-    try {
-      localStorage.setItem(OWNED_STORAGE_KEY, JSON.stringify(owned));
-    } catch {
-      // Storage can be blocked; the list still works until the page closes.
-    }
-  }, [owned]);
 
   // Keep the controls in the browser the same way, once the visitor has answered the first question.
   useEffect(() => {

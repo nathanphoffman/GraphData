@@ -56,10 +56,6 @@
   user-select: none;
 }
 
-.neuron th.sortable {
-  cursor: pointer;
-}
-
 .neuron-rank,
 .neuron-name {
   font-weight: 600;

@@ -49,10 +49,6 @@
   user-select: none;
 }
 
-.allint th.sortable {
-  cursor: pointer;
-}
-
 .allint-row {
   cursor: pointer;
 }

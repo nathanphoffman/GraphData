@@ -86,20 +86,6 @@
   color: var(--link);
 }
 
-.rankings-sort {
-  padding: 0;
-  border: none;
-  background: none;
-  color: inherit;
-  font: inherit;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.rankings-sort:hover {
-  color: var(--link);
-}
-
 .rankings-index h3 {
   margin: 12px 0 8px;
 }

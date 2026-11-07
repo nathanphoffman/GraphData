@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { type TextCodec, useStoredState } from "../../../hooks/useStoredState";
 
 /** A value from a shared link's query (the part after "?"), if the link has one. */
 function sharedParam(storageKey: string): string | null {
@@ -6,42 +6,19 @@ function sharedParam(storageKey: string): string | null {
 }
 
 /**
- * useState that starts from a shared link, else localStorage, else the fallback, and remembers
- * changes in localStorage. `parse` turns saved text back into a value, or null if it is not valid.
+ * useStoredState that also starts from a shared link first, with values saved as plain text under this chart's own
+ * "minimalism-calculator:" names. `parse` turns saved text back into a value, or null if it is not valid.
  */
 export function useStoredValue<T>(settingKey: string, fallback: T, parse: (rawValue: string) => T | null) {
-  const storageKey = `minimalism-calculator:${settingKey}`;
+  const codec: TextCodec<T> = { parse, serialize: String };
 
-  // Start from a value in the shared link, else the saved one, else the default.
-  const [value, setValue] = useState<T>(() => {
+  const fromLink = () => {
     const shared = sharedParam(settingKey);
-    const fromLink = shared === null ? null : parse(shared);
 
-    if (fromLink !== null) return fromLink;
+    return shared === null ? null : parse(shared);
+  };
 
-    try {
-      const stored = localStorage.getItem(storageKey);
-      const fromStorage = stored === null ? null : parse(stored);
-
-      return fromStorage ?? fallback;
-    } catch (error) {
-      console.warn(`Could not read saved ${storageKey}, using default`, error);
-
-      return fallback;
-    }
-  });
-
-  // Remember the value so it is still there after a reload.
-  useEffect(() => {
-    try {
-      localStorage.setItem(storageKey, String(value));
-    } catch (error) {
-      // storage unavailable (private mode, blocked): it still works, it just won't be remembered
-      console.warn(`Could not save ${storageKey}`, error);
-    }
-  }, [storageKey, value]);
-
-  return [value, setValue] as const;
+  return useStoredState(`minimalism-calculator:${settingKey}`, fallback, codec, fromLink);
 }
 
 /** Like useStoredValue but for numbers. Saved and shared values arrive as text, so anything that is not a valid number is dropped instead of showing NaN. */
