@@ -1,6 +1,7 @@
 // Syncs ranking items (values and planned features), weigh-ins and blood pressure readings between the local database and the live site, in both directions.
 // For a row on both sides with different values, the one changed most recently wins. A row only on one side is copied to the other.
-// Nothing is ever deleted, so a row you deleted on one side comes back from the other.
+// Nothing is ever deleted, so a row you deleted on one side comes back from the other. A renamed ranking item is the exception:
+// the rename is recorded and carried across, so the item is renamed on the other side instead of coming back under its old name.
 //
 //   node scripts/sync-to-production.mjs [--dry-run] [--prefer local|remote]
 //
@@ -9,7 +10,7 @@
 import { db } from "../server/db.js";
 import "../server/blood-pressure.js";
 import "../server/board-games.js";
-import "../server/rankings.js";
+import { renameRankingItem } from "../server/rankings.js";
 import "../server/weights.js";
 import { connectToProd } from "./prod.mjs";
 
@@ -24,7 +25,7 @@ if (prefer !== undefined && prefer !== "local" && prefer !== "remote") {
 
 const call = await connectToProd();
 
-const stats = { pushed: 0, pulled: 0, same: 0, conflicts: 0, failed: 0 };
+const stats = { pushed: 0, pulled: 0, same: 0, conflicts: 0, failed: 0, renamed: 0 };
 
 /**
  * Compare two sets of rows, each a Map of key to { value, at }, and bring the older or missing side up to date.
@@ -66,8 +67,8 @@ async function reconcile(label, local, remote, send, save) {
 }
 
 // Ranking items, matched by ranking and name.
-const { data: live } = await call("GET", "/api/rankings");
-const liveRankings = new Map(live.rankings.map((ranking) => [ranking.id, ranking.items]));
+let { data: live } = await call("GET", "/api/rankings");
+let liveRankings = new Map(live.rankings.map((ranking) => [ranking.id, ranking.items]));
 
 if ([...liveRankings.values()].some((items) => items.some((item) => item.updatedAt === undefined))) {
   console.error("The live site does not track change times yet. Deploy this version first, then sync.");
@@ -77,6 +78,69 @@ if ([...liveRankings.values()].some((items) => items.some((item) => item.updated
 if ([...liveRankings.values()].some((items) => items.some((item) => item.features === undefined))) {
   console.error("The live site does not track planned features yet. Deploy this version first, then sync.");
   process.exit(1);
+}
+
+if (live.rankings.some((ranking) => ranking.renames === undefined)) {
+  console.error("The live site does not track renames yet. Deploy this version first, then sync.");
+  process.exit(1);
+}
+
+/**
+ * Carry one rename to the other side. An item still under the old name there, last changed before the rename, is renamed;
+ * when the new name already exists there too, the old one is removed instead. Anything newer than the rename is left alone.
+ */
+async function applyRename(label, rename, items, renameThere, removeThere) {
+  const old = items.get(rename.oldName);
+
+  if (!old || old.at >= rename.at) return;
+  const action = items.has(rename.newName) ? "removed (renamed earlier)" : "renamed";
+
+  try {
+    if (!dryRun) await (items.has(rename.newName) ? removeThere(rename.oldName) : renameThere(rename));
+    stats.renamed++;
+    console.log(`${dryRun ? "would be " : ""}${action}: ${label} ${rename.oldName} -> ${rename.newName}`);
+  } catch (error) {
+    stats.failed++;
+    console.error(`FAILED: rename ${label} ${rename.oldName}: ${error.message}`);
+  }
+}
+
+const localRenames = db.prepare(
+  "SELECT old_name AS oldName, new_name AS newName, renamed_at AS at FROM ranking_renames WHERE ranking_id = ? ORDER BY renamed_at",
+);
+
+const localItemTimes = db.prepare("SELECT name, updated_at AS at FROM ranking_items WHERE ranking_id = ?");
+
+// Renames first, in both directions, so the item comparison below sees the same names on both sides.
+for (const liveRanking of live.rankings) {
+  const { id } = liveRanking;
+  const liveTimes = new Map(liveRanking.items.map((item) => [item.name, { at: item.updatedAt }]));
+  const localTimes = new Map(localItemTimes.all(id).map((item) => [item.name, item]));
+
+  for (const rename of localRenames.all(id))
+    await applyRename(
+      `${id} /`,
+      rename,
+      liveTimes,
+      ({ oldName, newName, at }) =>
+        call("PUT", `/api/rankings/${id}/items/${encodeURIComponent(oldName)}/name`, { name: newName, updatedAt: at }),
+      (oldName) => call("DELETE", `/api/rankings/${id}/items/${encodeURIComponent(oldName)}`),
+    );
+
+  for (const rename of liveRanking.renames)
+    await applyRename(
+      `${id} /`,
+      rename,
+      localTimes,
+      ({ oldName, newName, at }) => renameRankingItem(id, oldName, newName, at),
+      (oldName) => db.prepare("DELETE FROM ranking_items WHERE ranking_id = ? AND name = ?").run(id, oldName),
+    );
+}
+
+// The names may have changed on both sides, so fetch the live items again before comparing.
+if (stats.renamed && !dryRun) {
+  ({ data: live } = await call("GET", "/api/rankings"));
+  liveRankings = new Map(live.rankings.map((ranking) => [ranking.id, ranking.items]));
 }
 
 const updateItem = db.prepare(
@@ -303,7 +367,7 @@ if (liveGames) {
 }
 
 console.log(
-  `${dryRun ? "Dry run: " : ""}${stats.pushed} sent to the live site, ${stats.pulled} brought here, ${stats.same} already the same, ${stats.conflicts} conflicts, ${stats.failed} failed.`,
+  `${dryRun ? "Dry run: " : ""}${stats.pushed} sent to the live site, ${stats.pulled} brought here, ${stats.renamed} renamed, ${stats.same} already the same, ${stats.conflicts} conflicts, ${stats.failed} failed.`,
 );
 
 if (stats.conflicts)

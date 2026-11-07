@@ -52,6 +52,10 @@ db.exec(`
     ranking_id TEXT NOT NULL, position INTEGER NOT NULL, name TEXT NOT NULL, values_json TEXT NOT NULL, updated_at INTEGER NOT NULL DEFAULT 0, features_json TEXT NOT NULL DEFAULT '[]',
     PRIMARY KEY (ranking_id, position)
   );
+  CREATE TABLE IF NOT EXISTS ranking_renames (
+    ranking_id TEXT NOT NULL, old_name TEXT NOT NULL, new_name TEXT NOT NULL, renamed_at INTEGER NOT NULL,
+    PRIMARY KEY (ranking_id, old_name, renamed_at)
+  );
 
 `);
 
@@ -266,6 +270,10 @@ function getRankings() {
     "SELECT name, values_json, updated_at, features_json FROM ranking_items WHERE ranking_id = ? ORDER BY position",
   );
 
+  const renames = db.prepare(
+    "SELECT old_name, new_name, renamed_at FROM ranking_renames WHERE ranking_id = ? ORDER BY renamed_at",
+  );
+
   const rankings = db
     .prepare("SELECT id, title, grade_curve FROM rankings ORDER BY position")
     .all()
@@ -280,9 +288,46 @@ function getRankings() {
         updatedAt: updated_at,
         features: JSON.parse(features_json),
       })),
+      // Every rename ever made, so a sync can rename the same item on the other side instead of duplicating it.
+      renames: renames.all(id).map(({ old_name, new_name, renamed_at }) => ({
+        oldName: old_name,
+        newName: new_name,
+        at: renamed_at,
+      })),
     }));
 
   return { rankings };
+}
+
+/**
+ * Rename an item, keeping its values, planned features and place in the list, and record the rename (with its time)
+ * so syncing can carry it to the other side. Throws when the item is missing or the new name is already used.
+ */
+export function renameRankingItem(rankingId, oldName, newName, stamp) {
+  checkName(newName);
+  const trimmed = newName.trim();
+  const taken = db.prepare("SELECT 1 FROM ranking_items WHERE ranking_id = ? AND name = ?").get(rankingId, trimmed);
+
+  if (taken && trimmed !== oldName) throw new HttpError(409, "The ranking already has an item with that name");
+
+  const { changes } = db
+    .prepare("UPDATE ranking_items SET name = ?, updated_at = ? WHERE ranking_id = ? AND name = ?")
+    .run(trimmed, stamp, rankingId, oldName);
+
+  if (!changes) throw new HttpError(404, "No such item in that ranking");
+
+  db.prepare(
+    "INSERT OR REPLACE INTO ranking_renames (ranking_id, old_name, new_name, renamed_at) VALUES (?, ?, ?, ?)",
+  ).run(rankingId, oldName, trimmed, stamp);
+
+  return trimmed;
+}
+
+/** An item's name is text of 1 to MAX_TEXT characters. */
+function checkName(name) {
+  if (typeof name !== "string" || !name.trim() || name.length > MAX_TEXT)
+
+    throw new HttpError(400, `Name must be 1 to ${MAX_TEXT} characters`);
 }
 
 /** Check an item's values against the ranking's columns: ratings are numbers from 0 to 5, information is a number, text or empty. */
@@ -292,10 +337,7 @@ function checkValues(rankingId, name, values) {
     .all(rankingId);
 
   if (!columns.length) throw new HttpError(404, "No such ranking");
-
-  if (typeof name !== "string" || !name.trim() || name.length > MAX_TEXT)
-
-    throw new HttpError(400, `Name must be 1 to ${MAX_TEXT} characters`);
+  checkName(name);
 
   if (!Array.isArray(values) || values.length !== columns.length)
 
@@ -388,6 +430,17 @@ export const rankingRoutes = [
       if (!changes) throw new HttpError(404, "No such item in that ranking");
 
       sendJson(response, 200, { name, features });
+    },
+  },
+  // Renames an item, keeping its values, planned features and place in the list. Syncing carries the rename to the other side.
+  {
+    method: "PUT",
+    path: "/api/rankings/:id/items/:name/name",
+    handler: async (request, response, { id, name }) => {
+      requireUser(request);
+      const { name: newName, updatedAt } = await readJson(request);
+      const renamed = renameRankingItem(id, name, newName, readStamp(updatedAt));
+      sendJson(response, 200, { name: renamed });
     },
   },
   // Sets the weights of the rated columns from their order, heaviest first: the first label gets xN and the last x1.
