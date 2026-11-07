@@ -41,6 +41,10 @@ const TENTH = 10;
 const QUALITY_WIDTH = 8;
 const MIN_LINES_WIDTH = 5;
 
+// the Status rating of an active and a decommissioned project, the same as in src/charts/tech/top-rankings/maintenance.ts
+const ACTIVE_STATUS = 5;
+const DECOMMISSIONED_STATUS = 1;
+
 type Project = { name: string; folder: string; exclude?: string[] };
 
 const PROJECTS: Project[] = [
@@ -275,6 +279,8 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality; 
   const familiarityAt = labels.findIndex((column) => column.label === "Familiarity");
   const techAt = labels.findIndex((column) => column.label === "Tech Lines"); // lines per rated language, which weights the n-Factor adjustment
   const finalAt = labels.findIndex((column) => column.label === "Quality"); // the average of familiarity and computed quality
+  const statusAt = labels.findIndex((column) => column.label === "Status"); // 5 for an active project, 1 for a decommissioned one
+  const decommissionedAt = labels.findIndex((column) => column.label === "Decommissioned");
 
   if (linesAt < 0 || qualityAt < 0)
 
@@ -299,6 +305,9 @@ async function writeToDb(rows: { name: string; lines: number; quality: Quality; 
 
     // keep the old quality when the checker failed
     if (projectRow.quality) values[qualityAt] = Math.round(projectRow.quality.score * TENTH) / TENTH;
+
+    // the server refuses an empty Status, so store what the page would show
+    if (statusAt >= 0) values[statusAt] = values[decommissionedAt] === 1 ? DECOMMISSIONED_STATUS : ACTIVE_STATUS;
 
     // the page works this out itself; storing it keeps the saved copy from going stale
     const [rating, computed] = [values[familiarityAt], values[qualityAt]];
