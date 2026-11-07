@@ -14,6 +14,6 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 COPY --from=build /app/dist ./dist
 COPY server ./server
-COPY data/weight-journey/weight-journey.json ./data/weight-journey/weight-journey.json
+COPY data/weight-journey ./data/weight-journey
 COPY data/top-rankings ./data/top-rankings
 CMD ["node", "server/index.js"]
