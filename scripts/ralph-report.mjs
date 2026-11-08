@@ -64,11 +64,11 @@ if (state && route === "/api/ralph/report") {
 
 // Projects whose Deor/Rust line counts are watched: the folder tokei counts. Counted when a round starts, on each commit and when the loop stops.
 const HOME_DIR = process.env.RALPH_HOST_HOME ?? homedir();
-const CODE_FOLDERS = { "3dspacegame-deor": join(HOME_DIR, "Code/3dSpaceGameWT/3dSpaceGame/src") };
+const CODE_FOLDERS = { "3dspacegame-deor-rewrite": join(HOME_DIR, "Code/3dSpaceGameWT/3dSpaceGame-deor/src") };
 
 // Where each project's workers commit. The main checkout only changes when a round merges, so a running tally adds each
 // worktree's change since the main checkout to the main checkout's own count.
-const WORKTREE_ROOTS = { "3dspacegame-deor": join(HOME_DIR, "Code/RalphLoops/runs/3dspacegame-deor/worktrees") };
+const WORKTREE_ROOTS = { "3dspacegame-deor-rewrite": join(HOME_DIR, "Code/RalphLoops/runs/3dspacegame-deor-rewrite/worktrees") };
 
 /** Hand-written Rust and Deor lines from the game's own counter (generated Rust and tests left out), or undefined when it cannot run. */
 function countWithGameScript(folder) {
