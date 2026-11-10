@@ -76,9 +76,9 @@ export function addBloodPressure<T extends { date: string }>(days: T[], readings
 const PULSE_PRESSURE_SHARE = 0.5;
 
 /** Health: the pressure score (half the pulse pressure, plus top, plus bottom) averaged with the weight WMA in lb, minus the muscle gained so far. */
-export function healthOf(weightWma: number | null, muscleTotal: number, pressure: Blood_Pressure | null): number | null {
+export function healthOf(weightWma: number | null, muscleTotal: number, pressure: Blood_Pressure | null, recentWma: number): number | null {
   if (!pressure || weightWma === null) return null;
   const pressureScore = (pressure.avgTop - pressure.avgBottom) * PULSE_PRESSURE_SHARE + pressure.avgTop + pressure.avgBottom;
 
-  return (pressureScore + weightWma) / 2 - muscleTotal;
+  return (pressureScore + weightWma) / 2 - muscleTotal + recentWma;
 }
