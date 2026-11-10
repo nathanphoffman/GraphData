@@ -42,12 +42,21 @@ describe("addBloodPressure", () => {
 });
 
 describe("healthOf", () => {
-  it("averages the pressure score with the weight WMA and takes off the muscle", () => {
+  it("averages the pressure score with the weight WMA, takes off the muscle and adds both weight losses", () => {
     const [{ pressure }] = addBloodPressure([day("2024-01-01")], READINGS);
+    const inputs = { weightWma: 250, muscleTotal: 10, pressure, recentWma: 1, recent: 2 };
 
-    // ((135 - 85) * 0.5 + 135 + 85 + 250) / 2 - 10 = 237.5
-    expect(healthOf(250, 10, pressure)).toBeCloseTo(237.5);
-    expect(healthOf(250, 10, null)).toBeNull();
-    expect(healthOf(null, 10, pressure)).toBeNull();
+    // ((135 - 85) * 0.5 + 135 + 85 + 250) / 2 - 10 + 1 + 2 = 240.5
+    expect(healthOf(inputs)).toBeCloseTo(240.5);
+  });
+
+  it("is null when the pressure, the weight WMA or either weight loss is missing", () => {
+    const [{ pressure }] = addBloodPressure([day("2024-01-01")], READINGS);
+    const inputs = { weightWma: 250, muscleTotal: 10, pressure, recentWma: 1, recent: 2 };
+
+    expect(healthOf({ ...inputs, pressure: null })).toBeNull();
+    expect(healthOf({ ...inputs, weightWma: null })).toBeNull();
+    expect(healthOf({ ...inputs, recentWma: null })).toBeNull();
+    expect(healthOf({ ...inputs, recent: null })).toBeNull();
   });
 });

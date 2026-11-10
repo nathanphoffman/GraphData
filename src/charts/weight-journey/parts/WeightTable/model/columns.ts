@@ -1,5 +1,6 @@
 import { yearly } from "../../../model/averages";
 import type { WeightRow } from "../../../model/rows";
+import { superAverageAdjustedOf, superAverageOf } from "../../../model/superAverage";
 import type { Unit } from "../../../model/units";
 import type { Show } from "./showGroups";
 
@@ -75,7 +76,7 @@ export const COLUMNS: Column[] = [
   },
   {
     title: () => "Health",
-    note: "((avg top − avg bottom) × 0.5 + avg top + avg bottom + weight WMA in lb) / 2 − muscle gained so far",
+    note: "((avg top − avg bottom) × 0.5 + avg top + avg bottom + weight WMA in lb) / 2 − muscle gained so far + weight loss WMA + recent weight loss",
     kind: "health",
     actual: (tableRow) => tableRow.health,
   },
@@ -216,5 +217,12 @@ export const COLUMNS: Column[] = [
     kind: "weight",
     actual: (tableRow) => tableRow.finalAvg3,
     adjusted: (tableRow) => tableRow.finalAvg3Adj,
+  },
+  {
+    title: () => "Super Weight Average",
+    note: "average of every weight column and Health (not weight loss, blood pressure or muscle gain)",
+    kind: "weight",
+    actual: superAverageOf,
+    adjusted: superAverageAdjustedOf,
   },
 ];

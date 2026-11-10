@@ -173,7 +173,7 @@ function buildRows(rows: ReturnType<typeof addBloodPressure<(typeof withMuscle)[
     ...tableRow,
     finalAvg3: last3(finalAvgs, index),
     finalAvg3Adj: last3(finalAvgsAdj, index),
-    health: healthOf(tableRow.weightWma, tableRow.muscleTotal, tableRow.pressure, tableRow.recentWma),
+    health: healthOf(tableRow),
   }));
 }
 

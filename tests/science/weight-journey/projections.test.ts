@@ -27,6 +27,8 @@ describe("addAverages", () => {
   });
 });
 
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
 describe("addMuscle", () => {
   const dates = ["2024-06-18", "2024-06-19", "2024-06-20", "2024-06-21", "2024-06-22", "2024-06-23"];
   const result = addMuscle(dates.map((date) => ({ date, weight: 200, estimated: false })));
@@ -36,10 +38,22 @@ describe("addMuscle", () => {
     expect(result[1].muscleTotal).toBe(0);
   });
 
-  it("adds up to the full total by the last day, with gains that taper off", () => {
-    expect(result[result.length - 1].muscleTotal).toBeCloseTo(18.5);
-    expect(result.reduce((total, entry) => total + entry.muscleDaily, 0)).toBeCloseTo(18.5);
+  it("gains less each day and the daily gains add up to the total", () => {
     expect(result[3].muscleDaily).toBeGreaterThan(result[5].muscleDaily);
+    expect(result.reduce((total, entry) => total + entry.muscleDaily, 0)).toBeCloseTo(result[5].muscleTotal);
+  });
+
+  it("is about 20 lb on 2026-11-10 and stays under the 35 lb maximum", () => {
+    const first = Date.UTC(2024, 5, 20);
+    const days = Array.from({ length: 1500 }, (_unused, index) => ({
+      date: new Date(first + index * MS_PER_DAY).toISOString().slice(0, 10),
+      weight: 200,
+      estimated: false,
+    }));
+    const long = addMuscle(days);
+
+    expect(long.find((entry) => entry.date === "2026-11-10")?.muscleTotal).toBeCloseTo(20, 0);
+    expect(long[long.length - 1].muscleTotal).toBeLessThan(35);
   });
 });
 

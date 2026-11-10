@@ -189,23 +189,31 @@ export function addAverages<T extends DayWeight>(
 }
 
 const MUSCLE_START = "2024-06-20";
-const MUSCLE_TOTAL = 18.5;
 
-/** How much the daily gain tapers by the end: 0 is a straight line, 0.5 means the last day gains 50% less than the first. */
-const MUSCLE_TAPER = 0.5;
+/** The muscle gain levels off at this many lb and never goes past it. */
+const MUSCLE_MAX = 35;
 
-/** Estimated muscle gain: a nearly straight line from MUSCLE_START to the last day that adds up to MUSCLE_TOTAL lb. */
+/**
+ * Days for the muscle still to gain to shrink to about 37% (1/e) of itself. 1030 puts the total at 20 lb on
+ * 2026-11-10 and keeps the Oct 2024 numbers close to the old straight-ish line.
+ */
+const MUSCLE_TIME_CONSTANT_DAYS = 1030;
+
+/** Total muscle gained `daysSinceStart` days after MUSCLE_START: climbs fastest at first, then flattens toward MUSCLE_MAX. */
+const muscleTotalAfter = (daysSinceStart: number) =>
+  MUSCLE_MAX * (1 - Math.exp(-daysSinceStart / MUSCLE_TIME_CONSTANT_DAYS));
+
+/** Estimated muscle gain: a curve that starts at MUSCLE_START and levels off at MUSCLE_MAX lb in the future. */
 export function addMuscle<T extends DayWeight>(days: T[]): (T & Muscle)[] {
-  const start = days.findIndex((dayRecord) => dayRecord.date >= MUSCLE_START);
-  const span = days.length - 1 - start;
+  const found = days.findIndex((dayRecord) => dayRecord.date >= MUSCLE_START);
 
-  // Cumulative share of the total at position u (0..1): a line bent slightly flat toward the end.
-  const share = (progress: number) => (progress - (MUSCLE_TAPER * progress * progress) / 2) / (1 - MUSCLE_TAPER / 2);
+  // No day on or after the start date yet means no muscle gained yet.
+  const start = found === -1 ? days.length : found;
 
-  // Split the muscle total across the days so the daily gain tapers off.
+  // Each day gains the difference between its total and the day before's.
   return days.map((dayRecord, index) => {
-    const total = index < start ? 0 : MUSCLE_TOTAL * share((index - start) / span);
-    const before = index <= start ? 0 : MUSCLE_TOTAL * share((index - 1 - start) / span);
+    const total = index < start ? 0 : muscleTotalAfter(index - start);
+    const before = index <= start ? 0 : muscleTotalAfter(index - 1 - start);
 
     return { ...dayRecord, muscleDaily: total - before, muscleTotal: total };
   });
