@@ -1,6 +1,6 @@
 import NumberSlider from "../../../components/NumberSlider";
 import { ACTIVE_CLASS } from "../../classNames";
-import type { Tapered } from "../model/chart";
+import type { Tapered } from "../model/chart/chart_types";
 import type { Format, Unit } from "../model/units";
 import type { Lines, ProjectionTool } from "../useProjections";
 

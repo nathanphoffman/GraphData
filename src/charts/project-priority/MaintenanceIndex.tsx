@@ -1,8 +1,11 @@
 import { useState } from "react";
 import NumberSlider from "../../components/NumberSlider";
-import { MANUAL_AI_N, maintenance, type NFactorResult, PERCENT } from "../top-rankings/maintenance";
+import { maintenance } from "../top-rankings/maintenance/maintenance";
+import { MANUAL_AI_N, type NFactorResult } from "../top-rankings/maintenance/n_factor";
+import { PERCENT } from "../top-rankings/maintenance/quality";
 import { heat } from "../top-rankings/RankingCells";
-import { fractionBetween, type Ranking } from "../top-rankings/score";
+import { fractionBetween } from "../top-rankings/score/grade";
+import type { Ranking } from "../top-rankings/score/ranking_types";
 import { deciNHeat } from "./deciNHeat";
 import { LanguagePie } from "./LanguagePie";
 

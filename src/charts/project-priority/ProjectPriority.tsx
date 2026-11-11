@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { callApi } from "../../api";
 import { EditGear } from "../../auth/EditGear";
 import { useAuth } from "../../auth/useAuth";
-import { SCAFFOLDING_LINES, withQuality, withScaffolding, withStatus } from "../top-rankings/maintenance";
+import { withQuality } from "../top-rankings/maintenance/quality";
+import { SCAFFOLDING_LINES, withScaffolding, withStatus } from "../top-rankings/maintenance/row_adjustments";
 import { RankingEditor } from "../top-rankings/RankingEditor";
 import { RankingTable } from "../top-rankings/RankingTable";
 import { firstSort, type Sort } from "../top-rankings/RankingTable/model/sorting";
 import { PROJECT_PRIORITY_ID } from "../top-rankings/TopRankings";
 import "../top-rankings/styles.css";
-import { isText, type Ranking } from "../top-rankings/score";
+import { isText, type Ranking } from "../top-rankings/score/ranking_types";
 import { languageColors } from "./languageTotals";
 import { MaintenanceIndex } from "./MaintenanceIndex";
 

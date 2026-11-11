@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { callApi } from "../../api";
-import "./styles.css";
+import "./styles/styles.css";
 import type { Pressure_Reading } from "./model/bloodPressure";
 import { type Model, setWeights } from "./model/rows";
 import { makeFormat, type Unit } from "./model/units";

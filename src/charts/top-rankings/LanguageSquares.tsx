@@ -1,5 +1,5 @@
 import { techShares } from "./languageBurden";
-import { PERCENT } from "./maintenance";
+import { PERCENT } from "./maintenance/quality";
 
 /** The side of a square for a language that is all of a project's code, in em: about the height of a capital letter. */
 const FULL_SQUARE_EM = 0.7;

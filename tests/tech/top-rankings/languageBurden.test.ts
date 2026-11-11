@@ -7,7 +7,8 @@ import {
   parseTechLines,
 } from "../../../src/charts/top-rankings/languageBurden";
 
-import { maintenance, nFactor } from "../../../src/charts/top-rankings/maintenance";
+import { maintenance } from "../../../src/charts/top-rankings/maintenance/maintenance";
+import { nFactor } from "../../../src/charts/top-rankings/maintenance/n_factor";
 
 describe("burdenScore", () => {
   it("raises each burden to (sensitivity + unfamiliarity) and multiplies them", () => {

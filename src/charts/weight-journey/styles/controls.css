@@ -1,0 +1,192 @@
+.weight-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  margin: 0 0 12px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+
+.weight-controls .control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.weight-controls .control-wide {
+  flex-basis: 100%;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.weight-controls .control-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.weight-controls .segmented {
+  display: inline-flex;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.weight-controls .segmented button {
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.weight-controls .segmented button + button {
+  border-left: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+}
+
+.weight-controls .segmented button.active {
+  background: var(--link);
+  color: var(--bg);
+}
+
+.weight-controls .field-row {
+  display: flex;
+  gap: 12px;
+}
+
+.weight-controls .field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.weight-controls input[type="number"],
+.weight-controls select {
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+}
+
+.weight-controls input[type="number"] {
+  width: 130px;
+}
+
+.weight-controls select {
+  min-width: 190px;
+  cursor: pointer;
+}
+
+.weight-controls .period-picker {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 190px;
+}
+
+.weight-controls .period-button,
+.weight-controls .period-list button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.weight-controls .period-list {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 4px 0 0;
+  padding: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.weight-controls .period-list button {
+  border-color: transparent;
+}
+
+.weight-controls .period-list button:hover,
+.weight-controls .period-list button.active {
+  background: color-mix(in srgb, var(--link) 12%, var(--bg));
+}
+
+.weight-controls .period-square {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.weight-controls .toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weight-controls .toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.weight-controls .toggle:has(input:checked) {
+  border-color: var(--link);
+  background: color-mix(in srgb, var(--link) 12%, var(--bg));
+}
+
+.weight-controls .table-controls {
+  margin-top: 0;
+}
+
+.weight-chart .line-avg3-fat,
+.weight-chart .line-fit-fat,
+.weight-chart .line-future-fat,
+.weight-chart .line-taper-fat,
+.weight-chart .line-all-trend-fat {
+  stroke: #8e5bd6;
+  stroke-width: 2.5;
+}
+
+.weight-chart .line-future-fat,
+.weight-chart .line-taper-fat,
+.weight-chart .line-all-trend-fat {
+  stroke-dasharray: 6 5;
+}
+
+.weight-legend .key.avg3-fat {
+  border-color: #8e5bd6;
+}

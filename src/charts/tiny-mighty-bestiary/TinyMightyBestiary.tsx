@@ -6,7 +6,7 @@ import type { Creature } from "./model/types";
 import CreatureCard from "./ui/cards/CreatureCard";
 import Credits from "./ui/cards/Credits";
 import FilterBar, { type Filters } from "./ui/filters/FilterBar";
-import "./styles.css";
+import "./styles/styles.css";
 
 const DEFAULT_FILTERS: Filters = {
   query: "",

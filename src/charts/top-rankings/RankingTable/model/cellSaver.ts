@@ -1,7 +1,8 @@
 import { callApi } from "../../../../api";
-import { LINES_LABEL, SCAFFOLDING_LINES, withQuality, withStatus } from "../../maintenance";
+import { withQuality } from "../../maintenance/quality";
+import { SCAFFOLDING_LINES, withStatus } from "../../maintenance/row_adjustments";
+import { isNumber, LINES_LABEL, type Ranking } from "../../score/ranking_types";
 import type { SaveCell } from "../../RankingCells";
-import { isNumber, type Ranking } from "../../score";
 
 /**
  * Returns a function that saves one changed value of an item, keeping the rest of its saved values (`source`).

@@ -1,6 +1,7 @@
-import { PERCENT } from "../../maintenance";
+import { PERCENT } from "../../maintenance/quality";
 import { heat, InfoCell, NameCell, RatedCell, type SaveCell } from "../../RankingCells";
-import { fractionBetween, type Item, letterGrade } from "../../score";
+import { fractionBetween, letterGrade } from "../../score/grade";
+import type { Item } from "../../score/ranking_types";
 import type { TableColumns } from "../model/columns";
 import type { RankedRow } from "../model/rankedRows";
 import FeaturesCell from "./FeaturesCell";

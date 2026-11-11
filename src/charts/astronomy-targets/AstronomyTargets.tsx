@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import "./styles.css";
+import "./styles/styles.css";
 import data from "../../../data/astronomy-targets/astronomy-targets.json";
 import { ControlsPanel } from "./controls/ControlsPanel";
 import type { Schedule } from "./model/calculate";

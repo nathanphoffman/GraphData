@@ -1,15 +1,8 @@
 import { describe, expect, it } from "vitest";
-import {
-  effectiveRating,
-  fractionBetween,
-  grade,
-  letterGrade,
-  maxScore,
-  minScore,
-  type Ranking,
-  rankItems,
-  score,
-} from "../../../src/charts/top-rankings/score";
+import { fractionBetween, grade, letterGrade, rankItems } from "../../../src/charts/top-rankings/score/grade";
+import type { Ranking } from "../../../src/charts/top-rankings/score/ranking_types";
+import { effectiveRating } from "../../../src/charts/top-rankings/score/rating";
+import { maxScore, minScore, score } from "../../../src/charts/top-rankings/score/score";
 
 const columns = [{ label: "Year" }, { label: "Syntax", weight: 10 }, { label: "Skill", weight: 1 }];
 

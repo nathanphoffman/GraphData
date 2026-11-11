@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { DAYS_PER_YEAR } from "../constants";
-import { buildChart, CHART_HEIGHT, CHART_MARGIN, CHART_WIDTH, type ChartInput } from "../model/chart";
+import { buildChart } from "../model/chart/chart";
+import { CHART_HEIGHT, CHART_MARGIN, CHART_WIDTH, type ChartInput } from "../model/chart/chart_types";
 import type { Lines } from "../useProjections";
 
 type Chart = ReturnType<typeof buildChart>;

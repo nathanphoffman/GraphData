@@ -1,28 +1,34 @@
-import { maintenance } from "./maintenance";
-import type { Ranking } from "./score";
+import { maintenance } from "./maintenance/maintenance";
+import { nFactor } from "./maintenance/n_factor";
+import type { Ranking } from "./score/ranking_types";
 
 /** An n-Factor is shown in deci-ns (dn): n x 10. */
 const DECI = 10;
 
-/** How much the current n-Factor drops, in dn, when this one item is left out; null when nothing would be left to compare. */
-function dropWithout(ranking: Ranking, item: Ranking["items"][number], whole: number): number | null {
+/**
+ * How much the lines of this one item add to the n-Factor, in dn: the n-Factor of all the lines minus the n-Factor of the lines without it.
+ * Only the lines count here, never the language mix, so code in an easy language still adds to the n-Factor instead of lowering it.
+ * Null when nothing would be left to compare.
+ */
+function linesAddedBy(ranking: Ranking, item: Ranking["items"][number], wholeLines: number): number | null {
   const without = maintenance({ ...ranking, items: ranking.items.filter((other) => other !== item) });
 
-  return without ? (whole - without.current.graded) * DECI : null;
+  return without ? (nFactor(wholeLines) - nFactor(without.totalLines)) * DECI : null;
 }
 
 /**
- * Each item's share of the current n-Factor in dn. The n-Factor does not grow in a straight line with lines, so the single-item
- * drops do not add up to it; they are scaled so that the shares always total the current dn shown on the card.
+ * Each item's share of the current n-Factor in dn. Every item's lines add to it, so no share is below zero. The n-Factor does not grow
+ * in a straight line with lines, so the single-item amounts do not add up to it; they are scaled so that the shares always total the
+ * current dn shown on the card.
  */
 export function dnContributions(ranking: Ranking): Map<string, number> {
-  const whole = maintenance(ranking)?.current.graded;
+  const whole = maintenance(ranking);
   const drops = new Map<string, number>();
 
-  if (whole === undefined) return drops;
+  if (!whole) return drops;
 
   for (const item of ranking.items) {
-    const drop = dropWithout(ranking, item, whole);
+    const drop = linesAddedBy(ranking, item, whole.totalLines);
 
     if (drop !== null) drops.set(item.name, drop);
   }
@@ -32,7 +38,7 @@ export function dnContributions(ranking: Ranking): Map<string, number> {
   if (dropTotal === 0) return drops;
 
   // Multiply every drop by the same number so that they add up to the whole.
-  return new Map([...drops].map(([name, drop]) => [name, (drop * whole * DECI) / dropTotal]));
+  return new Map([...drops].map(([name, drop]) => [name, (drop * whole.current.graded * DECI) / dropTotal]));
 }
 
 /** A contribution as text like "+0.5dn", or "-0.5dn" when it lowers the n-Factor. */

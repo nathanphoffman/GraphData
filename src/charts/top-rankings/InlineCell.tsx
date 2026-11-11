@@ -1,5 +1,5 @@
 import { type CSSProperties, type KeyboardEvent, type ReactNode, useState } from "react";
-import { type Column, HIGHEST_RATING } from "./score";
+import { type Column, HIGHEST_RATING } from "./score/ranking_types";
 
 /** The key that saves an edit or starts one. */
 const ENTER_KEY = "Enter";

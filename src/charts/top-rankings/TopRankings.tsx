@@ -9,7 +9,7 @@ import { RankingTable } from "./RankingTable";
 import { EPISODIC_LABEL } from "./RankingTable/model/columns";
 import { firstSort, type Sort } from "./RankingTable/model/sorting";
 import "./styles.css";
-import { isText, type Ranking } from "./score";
+import { isText, type Ranking } from "./score/ranking_types";
 
 /** The ranking that has its own page, so it is left out of the tabs here. */
 export const PROJECT_PRIORITY_ID = "project-priority";

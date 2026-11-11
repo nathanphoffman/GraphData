@@ -86,3 +86,6 @@ export function useCalculatorState() {
     shareParams,
   };
 }
+
+/** Everything the calculator page keeps in state, with the functions that change it. */
+export type Calculator = ReturnType<typeof useCalculatorState>;

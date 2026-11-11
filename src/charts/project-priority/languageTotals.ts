@@ -1,6 +1,6 @@
 import { parseTechLines } from "../top-rankings/languageBurden";
-import { TECH_LINES_LABEL } from "../top-rankings/maintenance";
-import type { Ranking } from "../top-rankings/score";
+import { TECH_LINES_LABEL } from "../top-rankings/maintenance/maintenance_labels";
+import type { Ranking } from "../top-rankings/score/ranking_types";
 
 /** One pie slice: a language (or "Other") with its lines and its share of all lines. */
 export type LanguageSlice = { language: string; lines: number; share: number };

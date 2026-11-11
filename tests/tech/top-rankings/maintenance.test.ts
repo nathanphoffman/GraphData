@@ -1,11 +1,8 @@
 import { describe, expect, it } from "vitest";
-import {
-  MANUAL_AI_N,
-  maintenance,
-  nFactor,
-  withQuality,
-  withScaffolding,
-} from "../../../src/charts/top-rankings/maintenance";
+import { maintenance } from "../../../src/charts/top-rankings/maintenance/maintenance";
+import { MANUAL_AI_N, nFactor } from "../../../src/charts/top-rankings/maintenance/n_factor";
+import { withQuality } from "../../../src/charts/top-rankings/maintenance/quality";
+import { withScaffolding } from "../../../src/charts/top-rankings/maintenance/row_adjustments";
 
 const columns = [{ label: "Completed Lines" }, { label: "Familiarity" }, { label: "Computed Quality" }];
 

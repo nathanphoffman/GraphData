@@ -1,4 +1,4 @@
-import type { Ranking } from "../top-rankings/score";
+import type { Ranking } from "../top-rankings/score/ranking_types";
 import { type LanguageSlice, languageSlices, sliceColor } from "./languageTotals";
 
 const PERCENT = 100;

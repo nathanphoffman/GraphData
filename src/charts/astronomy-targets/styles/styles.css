@@ -1,0 +1,5 @@
+/* One file per area; the order here is the order the rules apply in. */
+@import "./controls_and_table.css";
+@import "./preview.css";
+@import "./toolbar_and_modals.css";
+@import "./finding_guide.css";

@@ -1,0 +1,75 @@
+.astro-guide-list {
+  margin: 4px 0 6px;
+  padding-left: 16px;
+  font-size: 12px;
+}
+
+.astro-guide {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  background: color-mix(in srgb, var(--fg) 5%, transparent);
+  border-radius: 8px;
+}
+
+.astro-guide-ring {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 4;
+  opacity: 0.6;
+}
+
+.astro-guide-tri {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 0.75;
+  stroke-dasharray: 4 3;
+  opacity: 0.5;
+}
+
+.astro-guide-line {
+  stroke: var(--link);
+  stroke-width: 1.25;
+}
+
+.astro-guide-star {
+  fill: var(--fg);
+}
+
+.astro-guide-target {
+  fill: none;
+  stroke: #e5484d;
+  stroke-width: 1.75;
+}
+
+.astro-guide-name {
+  fill: var(--fg);
+  font-size: 11px;
+}
+
+.astro-guide-dist {
+  fill: var(--muted);
+  font-size: 10px;
+}
+
+.astro-guide-bar {
+  stroke: var(--fg);
+  stroke-width: 1.5;
+}
+
+.astro-guide-constellation {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+.astro-guide-constellation-name {
+  fill: var(--muted);
+  font-size: 9px;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}

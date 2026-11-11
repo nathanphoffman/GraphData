@@ -1,5 +1,5 @@
-import { TECH_LINES_LABEL } from "../../maintenance";
-import { type Column, GROWTH_LABEL, type Ranking } from "../../score";
+import { TECH_LINES_LABEL } from "../../maintenance/maintenance_labels";
+import { type Column, GROWTH_LABEL, type Ranking } from "../../score/ranking_types";
 
 /** A column with this label holds each item's web address: it is not shown, and the item's name links to it instead. */
 const LINK_LABEL = "Link";

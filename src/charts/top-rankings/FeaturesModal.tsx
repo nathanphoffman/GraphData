@@ -1,7 +1,7 @@
 import { type KeyboardEvent, useRef, useState } from "react";
 import { callApi } from "../../api";
 import Modal from "../../components/Modal";
-import type { Item } from "./score";
+import type { Item } from "./score/ranking_types";
 
 /** The key that adds the next feature row. */
 const ENTER_KEY = "Enter";

@@ -44,6 +44,9 @@ export const LINE_LABELS: Record<string, string> = {
   "Backtest projection 2026": "Backtest: 2026 projected from 2019-2024 data",
 };
 
+/** The name shown for a series or line: its label when it has one, else the key itself. */
+export const seriesLabel = (seriesKey: string) => LINE_LABELS[seriesKey] ?? seriesKey;
+
 /** Lines and dots that start unchecked. */
 export const HIDDEN_BY_DEFAULT_PREFIXES = ["Backtest", "Healthiness backtest", "Popularity avg", "Projection ("];
 

@@ -1,0 +1,162 @@
+.astro-controls .astro-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.astro-controls .astro-check input {
+  padding: 0;
+}
+
+.astro-gaze {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.astro-gaze-track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  background: color-mix(in srgb, var(--fg) 25%, transparent);
+  border-radius: 2px;
+}
+
+.astro-gaze-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--link);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.astro-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-bottom: 8px;
+}
+
+.astro-toolbar input[type="search"] {
+  flex: 1 1 260px;
+  padding: 7px 10px;
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+  border-radius: 8px;
+}
+
+.astro-seasons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.astro-seasons .astro-tag {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.astro-button {
+  padding: 4px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--link);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.astro-columns-menu {
+  position: relative;
+  font-size: 13px;
+}
+
+.astro-columns-menu summary {
+  cursor: pointer;
+  color: var(--link);
+}
+
+.astro-columns-menu > div {
+  position: absolute;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 220px;
+  margin-top: 6px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--fg) 25%, transparent);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.25);
+}
+
+.astro-columns-menu label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.astro-toolbar > small {
+  margin-left: auto;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.astro-modal {
+  width: min(720px, calc(100% - 24px));
+  max-height: calc(100vh - 48px);
+  margin-block: 24px;
+  padding: 16px 20px;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--fg) 25%, transparent);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+.astro-modal::backdrop {
+  background: rgb(0 0 0 / 0.55);
+}
+
+.astro-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.astro-modal-head h2 {
+  margin: 0;
+}
+
+.astro-slot {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.astro-slot h3 {
+  margin: 0 0 6px;
+}
+
+.astro-slot ul {
+  margin: 4px 0 8px;
+  padding-left: 20px;
+}

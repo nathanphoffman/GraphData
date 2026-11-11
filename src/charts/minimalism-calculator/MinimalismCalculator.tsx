@@ -11,9 +11,7 @@ import InputDials from "./panels/InputDials";
 import RecommendationPanel from "./panels/RecommendationPanel";
 import SavingsPanel from "./panels/SavingsPanel";
 import ShareBar from "./panels/ShareBar";
-import { useCalculatorState } from "./state/state";
-
-type Calculator = ReturnType<typeof useCalculatorState>;
+import { type Calculator, useCalculatorState } from "./state/state";
 
 /** Once a shared link has been read, drop its values from the address so later changes win on reload. */
 function useClearSharedLink() {
@@ -72,20 +70,7 @@ function Savings({
   yearlyUses: number;
 }) {
   return (
-    <SavingsPanel
-      owned={calculator.owned}
-      target={target}
-      yearlyUses={yearlyUses}
-      item={item}
-      buyPerYear={calculator.buyPerYear}
-      onBuyPerYear={calculator.setBuyPerYear}
-      price={calculator.price}
-      onPrice={calculator.setPrice}
-      minPlays={calculator.minPlays}
-      onMinPlays={calculator.setMinPlays}
-      maxPlays={calculator.maxPlays}
-      onMaxPlays={calculator.setMaxPlays}
-    />
+    <SavingsPanel calculator={calculator} target={target} yearlyUses={yearlyUses} item={item} />
   );
 }
 

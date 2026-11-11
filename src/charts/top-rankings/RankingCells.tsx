@@ -3,17 +3,10 @@ import { formatContribution } from "./dnContribution";
 import { InlineCell } from "./InlineCell";
 import { LanguageSquares } from "./LanguageSquares";
 import { techShares } from "./languageBurden";
-import { DECOMMISSIONED_LABEL, LINES_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance";
-import {
-  type Column,
-  fractionBetween,
-  HIGHEST_RATING,
-  type Item,
-  isNumber,
-  isText,
-  LOWEST_RATING,
-  ratingOf,
-} from "./score";
+import { DECOMMISSIONED_LABEL, QUALITY_LABEL, STATUS_LABEL, WISHLIST_LABEL } from "./maintenance/maintenance_labels";
+import { type Column, HIGHEST_RATING, isNumber, isText, type Item, LINES_LABEL, LOWEST_RATING } from "./score/ranking_types";
+import { fractionBetween } from "./score/grade";
+import { ratingOf } from "./score/rating";
 
 import { TechLinesModal } from "./TechLinesModal";
 

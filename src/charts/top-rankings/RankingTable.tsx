@@ -2,14 +2,14 @@ import { useState } from "react";
 import { callApi } from "../../api";
 import { dnContributions } from "./dnContribution";
 import { FeaturesModal } from "./FeaturesModal";
-import { isDimmed } from "./maintenance";
+import { isDimmed } from "./maintenance/maintenance_labels";
 import { cellSaver } from "./RankingTable/model/cellSaver";
 import { splitColumns } from "./RankingTable/model/columns";
 import { rankedRows, scoreRange } from "./RankingTable/model/rankedRows";
 import { matchingRows, type Sort, type SortKey } from "./RankingTable/model/sorting";
 import { RankingRow } from "./RankingTable/parts/RankingRow";
 import { TableHead } from "./RankingTable/parts/TableHead";
-import type { Ranking } from "./score";
+import type { Ranking } from "./score/ranking_types";
 
 const PAGE_SIZE = 100;
 

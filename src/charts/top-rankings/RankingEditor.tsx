@@ -3,7 +3,7 @@ import { callApi } from "../../api";
 import { EditButtons } from "../../auth/EditButtons";
 import { useEditor } from "../../auth/useEditor";
 import { infoValue } from "./InlineCell";
-import type { Ranking } from "./score";
+import type { Ranking } from "./score/ranking_types";
 
 /** Rated columns use a number box so letters cannot be typed, while information columns need free text for values like "2027?". */
 const INPUT_TYPES = { rated: "number", info: "text" };

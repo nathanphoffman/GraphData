@@ -1,0 +1,5 @@
+/* One file per area; the order here is the order the rules apply in. */
+@import "./layout_and_filters.css";
+@import "./card_details.css";
+@import "./difficulty_slider.css";
+@import "./encounters_and_credits.css";

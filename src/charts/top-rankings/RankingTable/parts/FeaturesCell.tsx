@@ -1,4 +1,4 @@
-import type { Item } from "../../score";
+import type { Item } from "../../score/ranking_types";
 
 interface Props {
   item: Item;

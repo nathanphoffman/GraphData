@@ -32,3 +32,10 @@ export interface Exponents {
   /** Functional exponent applied to the score. */
   k: number;
 }
+
+/** What a sortable table header needs to know about the current sort. */
+export interface SortState {
+  sortKey: SortKey;
+  ascending: boolean;
+  onSort: (columnKey: SortKey) => void;
+}

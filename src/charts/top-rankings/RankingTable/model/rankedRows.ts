@@ -1,5 +1,6 @@
-import { isDimmed } from "../../maintenance";
-import { type Ranking, rankItems } from "../../score";
+import { isDimmed } from "../../maintenance/maintenance_labels";
+import { rankItems } from "../../score/grade";
+import type { Ranking } from "../../score/ranking_types";
 
 /** A ranked item; the rank is null for a dimmed item, which keeps its score and grade but has no place in the numbering. */
 export type RankedRow = Omit<ReturnType<typeof rankItems>[number], "rank"> & { rank: number | null };
