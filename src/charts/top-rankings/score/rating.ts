@@ -1,4 +1,4 @@
-import { ageRating, halvingRating, linearRating, log1pRating, logRating, peakRating } from "./curves";
+import { ageRating, anchoredRating, halvingRating, linearRating, log1pRating, logRating, peakRating } from "./curves";
 import { type Column, type Curve, HIGHEST_RATING, isNumber, LINES_LABEL, LOWEST_RATING } from "./ranking_types";
 
 /** Raw value to a rating from 1 to 5 by the given curve. */
@@ -8,6 +8,8 @@ function applyCurve(curve: Curve, value: number): number {
       return peakRating(curve, value);
     case "log":
       return logRating(curve, value);
+    case "anchored":
+      return anchoredRating(curve, value);
     case "linear":
       return linearRating(curve, value);
     case "log1p":

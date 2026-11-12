@@ -198,6 +198,16 @@ describe("peak curve with a knee", () => {
   });
 });
 
+describe("anchored curve", () => {
+  it("runs 1 at low, 3 at middle and 5 at high, and stays inside", () => {
+    const column = { label: "L", weight: 1, curve: { type: "anchored" as const, low: 0, middle: 10, high: 50 } };
+    expect(effectiveRating(column, 0)).toBe(1);
+    expect(effectiveRating(column, 10)).toBe(3);
+    expect(effectiveRating(column, 30)).toBe(4);
+    expect(effectiveRating(column, 60)).toBe(5);
+  });
+});
+
 describe("linear curve", () => {
   it("runs from 1 at from to 5 at to, and stays inside", () => {
     const column = { label: "Q", weight: 1, curve: { type: "linear" as const, from: 60, to: 100 } };

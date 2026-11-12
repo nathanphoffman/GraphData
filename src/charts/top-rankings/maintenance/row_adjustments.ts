@@ -54,17 +54,24 @@ function highestProjectedLines(ranking: Ranking, lines: number): number {
   return Math.max(0, ...projected);
 }
 
+/** The line counts of the projects that have one. */
+function lineCounts(ranking: Ranking, lines: number): number[] {
+  return ranking.items.map((item) => item.values[lines]).filter(isNumber);
+}
+
 /**
- * The ranking with its Completed Lines rated in a straight line: 5 at the most lines any project is expected to reach, down to 1 at no lines.
- * Left as it is when the ranking has no Completed Lines column or no lines.
+ * The ranking with its Completed Lines rated on three points: 1 at the fewest lines any project has, 3 at the average, and 5 at the most any project is expected to reach.
+ * Left as it is when the ranking has no Completed Lines column, or the three points do not rise (so the curve would divide by zero).
  */
 export function withLinesCurve(ranking: Ranking): Ranking {
   const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
-  const highest = lines < 0 ? 0 : highestProjectedLines(ranking, lines);
+  const counts = lines < 0 ? [] : lineCounts(ranking, lines);
+  const [low, high] = [Math.min(...counts), lines < 0 ? 0 : highestProjectedLines(ranking, lines)];
+  const middle = counts.reduce((total, count) => total + count, 0) / counts.length;
 
-  if (highest === 0) return ranking;
+  if (!(low < middle && middle < high)) return ranking;
 
-  const curve = { type: "linear", from: 0, to: highest } as const;
+  const curve = { type: "anchored", low, middle, high } as const;
   const columns = ranking.columns.map((column, index) => (index === lines ? { ...column, curve } : column));
 
   return { ...ranking, columns };

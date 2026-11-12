@@ -35,6 +35,17 @@ export function linearRating(curve: CurveOf<"linear">, value: number): number {
   return clamp(LOWEST_RATING + ((HIGHEST_RATING - LOWEST_RATING) * (value - curve.from)) / (curve.to - curve.from));
 }
 
+/** The rating halfway between the lowest and highest, where an anchored curve's middle value lands. */
+const MIDDLE_RATING = (HIGHEST_RATING + LOWEST_RATING) / 2;
+
+export function anchoredRating(curve: CurveOf<"anchored">, value: number): number {
+  if (value <= curve.middle) {
+    return clamp(LOWEST_RATING + ((MIDDLE_RATING - LOWEST_RATING) * (value - curve.low)) / (curve.middle - curve.low));
+  }
+
+  return clamp(MIDDLE_RATING + ((HIGHEST_RATING - MIDDLE_RATING) * (value - curve.middle)) / (curve.high - curve.middle));
+}
+
 export function log1pRating(curve: CurveOf<"log1p">, value: number): number {
   return clamp(HIGHEST_RATING - ((HIGHEST_RATING - LOWEST_RATING) * Math.log1p(value)) / Math.log1p(curve.to));
 }

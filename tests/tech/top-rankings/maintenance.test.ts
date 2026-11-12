@@ -152,17 +152,20 @@ describe("withLinesCurve", () => {
     items: [
       { name: "Growing", values: [1000, 4] },
       { name: "Steady", values: [2000, null] },
+      { name: "Big", values: [3000, null] },
     ],
   };
   const [linesColumn] = withLinesCurve(ranking).columns;
 
-  it("rates the most lines any project is expected to reach as 5", () => {
+  it("rates the fewest lines as 1, the average as 3 and the most expected as 5", () => {
+    expect(ratingOf(linesColumn, 1000, 1)).toBe(1);
+    expect(ratingOf(linesColumn, 2000, 1)).toBe(3);
     expect(ratingOf(linesColumn, 4000, 1)).toBe(5);
   });
 
-  it("rates fewer lines in a straight line down to 1 at none", () => {
-    expect(ratingOf(linesColumn, 2000, 1)).toBe(3);
-    expect(ratingOf(linesColumn, 0, 1)).toBe(1);
+  it("rates in straight lines between those points", () => {
+    expect(ratingOf(linesColumn, 1500, 1)).toBe(2);
+    expect(ratingOf(linesColumn, 3000, 1)).toBe(4);
   });
 
   it("leaves a ranking with no lines as it is", () => {
