@@ -4,7 +4,12 @@ import { callApi } from "../../api";
 import { EditGear } from "../../auth/EditGear";
 import { useAuth } from "../../auth/useAuth";
 import { withQuality } from "../top-rankings/maintenance/quality";
-import { SCAFFOLDING_LINES, withScaffolding, withStatus } from "../top-rankings/maintenance/row_adjustments";
+import {
+  SCAFFOLDING_LINES,
+  withLinesCurve,
+  withScaffolding,
+  withStatus,
+} from "../top-rankings/maintenance/row_adjustments";
 import { RankingEditor } from "../top-rankings/RankingEditor";
 import { RankingTable } from "../top-rankings/RankingTable";
 import { firstSort, type Sort } from "../top-rankings/RankingTable/model/sorting";
@@ -42,8 +47,8 @@ export default function ProjectPriority() {
 
   if (!ranking) return <p>Loading ranking…</p>;
 
-  // What the page shows and scores has the scaffolding lines added; the editor works on the saved ranking.
-  const shown = withScaffolding(ranking);
+  // What the page shows and scores has the scaffolding lines added and the lines rated against the biggest project; the editor works on the saved ranking.
+  const shown = withLinesCurve(withScaffolding(ranking));
 
   return (
     <div className="rankings">

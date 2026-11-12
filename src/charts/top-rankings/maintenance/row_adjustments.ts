@@ -1,4 +1,4 @@
-import { isNumber, LINES_LABEL, type Ranking } from "../score/ranking_types";
+import { GROWTH_LABEL, isNumber, LINES_LABEL, type Ranking } from "../score/ranking_types";
 import { isDecommissioned, STATUS_LABEL } from "./maintenance_labels";
 
 /** Lines added to every project's Completed Lines when the page shows and scores them, as the minimum scaffolding any project needs. Never saved. */
@@ -38,4 +38,34 @@ export function withScaffolding(ranking: Ranking): Ranking {
   }));
 
   return { ...ranking, items };
+}
+
+/** The most lines any project is expected to reach: its Completed Lines times its xLines (1 when it has none). 0 when no project has lines. */
+function highestProjectedLines(ranking: Ranking, lines: number): number {
+  const growth = ranking.columns.findIndex((column) => column.label === GROWTH_LABEL);
+
+  // Work out each project's expected lines, leaving out the ones with no line count.
+  const projected = ranking.items.map((item) => {
+    const [count, times] = [item.values[lines], item.values[growth]];
+
+    return isNumber(count) ? count * (isNumber(times) ? times : 1) : 0;
+  });
+
+  return Math.max(0, ...projected);
+}
+
+/**
+ * The ranking with its Completed Lines rated in a straight line: 5 at the most lines any project is expected to reach, down to 1 at no lines.
+ * Left as it is when the ranking has no Completed Lines column or no lines.
+ */
+export function withLinesCurve(ranking: Ranking): Ranking {
+  const lines = ranking.columns.findIndex((column) => column.label === LINES_LABEL);
+  const highest = lines < 0 ? 0 : highestProjectedLines(ranking, lines);
+
+  if (highest === 0) return ranking;
+
+  const curve = { type: "linear", from: 0, to: highest } as const;
+  const columns = ranking.columns.map((column, index) => (index === lines ? { ...column, curve } : column));
+
+  return { ...ranking, columns };
 }

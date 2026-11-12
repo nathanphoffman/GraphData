@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { maintenance } from "../../../src/charts/top-rankings/maintenance/maintenance";
 import { MANUAL_AI_N, nFactor } from "../../../src/charts/top-rankings/maintenance/n_factor";
 import { withQuality } from "../../../src/charts/top-rankings/maintenance/quality";
-import { withScaffolding } from "../../../src/charts/top-rankings/maintenance/row_adjustments";
+import { withLinesCurve, withScaffolding } from "../../../src/charts/top-rankings/maintenance/row_adjustments";
+import { ratingOf } from "../../../src/charts/top-rankings/score/rating";
 
 const columns = [{ label: "Completed Lines" }, { label: "Familiarity" }, { label: "Computed Quality" }];
 
@@ -140,5 +141,31 @@ describe("withScaffolding", () => {
     ]);
 
     expect(ranking.items[0].values[0]).toBe(100);
+  });
+});
+
+describe("withLinesCurve", () => {
+  const ranking = {
+    id: "x",
+    title: "x",
+    columns: [{ label: "Completed Lines", weight: 6 }, { label: "xLines" }],
+    items: [
+      { name: "Growing", values: [1000, 4] },
+      { name: "Steady", values: [2000, null] },
+    ],
+  };
+  const [linesColumn] = withLinesCurve(ranking).columns;
+
+  it("rates the most lines any project is expected to reach as 5", () => {
+    expect(ratingOf(linesColumn, 4000, 1)).toBe(5);
+  });
+
+  it("rates fewer lines in a straight line down to 1 at none", () => {
+    expect(ratingOf(linesColumn, 2000, 1)).toBe(3);
+    expect(ratingOf(linesColumn, 0, 1)).toBe(1);
+  });
+
+  it("leaves a ranking with no lines as it is", () => {
+    expect(withLinesCurve({ ...ranking, items: [] })).toEqual({ ...ranking, items: [] });
   });
 });

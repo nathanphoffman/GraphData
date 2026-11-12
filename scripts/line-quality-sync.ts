@@ -52,7 +52,8 @@ const PROJECTS: Project[] = [
   { name: "Code Quality Script", folder: "CodeQuality" },
   { name: "GraphData", folder: "GraphData" },
   { name: "Food Comparison", folder: "FoodComparisonMicroServices" },
-  { name: "3d Space Game", folder: "3dSpaceGameWT/3dSpaceGame" },
+  // the -deor worktree is the main branch; the plain 3dSpaceGame folder is the old rust-main branch
+  { name: "3d Space Game", folder: "3dSpaceGameWT/3dSpaceGame-deor" },
   { name: "Deor Pico", folder: "DeorPico" },
   { name: "DeorPi", folder: "DeorPi" },
   { name: "Weather", folder: "WeatherSite" },

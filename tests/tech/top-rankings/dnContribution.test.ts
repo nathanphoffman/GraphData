@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { dnContributions } from "../../../src/charts/top-rankings/dnContribution";
+import { maintenance } from "../../../src/charts/top-rankings/maintenance/maintenance";
 
 const columns = [
   { label: "Completed Lines" },
@@ -9,22 +10,27 @@ const columns = [
 ];
 
 describe("dnContributions", () => {
-  // Deor is rated much easier than Rust, so a lot of Deor lines pulls the language average (and the n-Factor) down.
+  // Deor is rated much easier than Rust, so the same lines in Deor add less to the n-Factor.
   const items = [
     { name: "Deor project", values: [20000, 5, 90, "Deor 20000"] },
     { name: "Rust project", values: [20000, 5, 90, "Rust 20000"] },
-    { name: "Small project", values: [500, 5, 90, "Python 500"] },
+    { name: "Poor Rust project", values: [20000, 5, 40, "Rust 20000"] },
   ];
-  const contributions = dnContributions({ id: "x", title: "x", columns, items });
+  const ranking = { id: "x", title: "x", columns, items };
+  const contributions = dnContributions(ranking);
 
-  it("gives every item's code a share above zero, even in an easy language", () => {
-    expect(contributions.get("Deor project")).toBeGreaterThan(0);
-    expect(contributions.get("Rust project")).toBeGreaterThan(0);
-    expect(contributions.get("Small project")).toBeGreaterThan(0);
+  it("gives the same lines a smaller share in an easier language", () => {
+    expect(contributions.get("Deor project")).toBeLessThan(contributions.get("Rust project") ?? 0);
   });
 
-  it("gives the same lines the same share whatever the language", () => {
-    expect(contributions.get("Deor project")).toBeCloseTo(contributions.get("Rust project") ?? 0, 6);
+  it("gives the same lines a bigger share at a lower quality", () => {
+    expect(contributions.get("Poor Rust project")).toBeGreaterThan(contributions.get("Rust project") ?? 0);
+  });
+
+  it("adds up to the current n-Factor in dn", () => {
+    const total = [...contributions.values()].reduce((runningTotal, share) => runningTotal + share, 0);
+
+    expect(total).toBeCloseTo((maintenance(ranking)?.current.graded ?? 0) * 10, 6);
   });
 
   it("is empty when there are no lines", () => {
