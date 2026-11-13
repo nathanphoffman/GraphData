@@ -1,8 +1,14 @@
 import { AuthGate } from "../../auth/AuthGate";
 import { useAuth } from "../../auth/useAuth";
 import "./styles.css";
+import type { Loop } from "./model/types";
 import LoopView from "./parts/LoopView";
 import { useLoops } from "./state/useLoops";
+
+/** The loop that reported most recently goes first, so the one running now is at the top. */
+function newestReportFirst(loops: Loop[]) {
+  return [...loops].sort((first, second) => second.updatedAt - first.updatedAt);
+}
 
 /** Shows every loop that has reported in: state, round, items per area, and a filterable timeline of log lines and commits. */
 function Loops() {
@@ -15,7 +21,7 @@ function Loops() {
       {error && <p>Could not refresh: {error}</p>}
       {stopped && <p className="muted">Live updates stopped after an hour. Refresh the page to start them again.</p>}
       {!loops.length && <p className="muted">No loop has reported yet.</p>}
-      {loops.map((loop) => (
+      {newestReportFirst(loops).map((loop) => (
         <LoopView key={loop.name} loop={loop} />
       ))}
     </>
